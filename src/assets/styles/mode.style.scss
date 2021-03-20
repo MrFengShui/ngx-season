@@ -1,0 +1,134 @@
+@mixin mode-match($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .mat-drawer-content,
+    .mat-drawer-inner-container {
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+        &:hover {
+            &::-webkit-scrollbar-thumb {
+                background-color: mat-color($primary, 300);
+            }
+        }
+    }
+
+    .mat-menu-item {
+        img {
+            background-color: mat-color($primary);
+        }
+    }
+
+    .mat-dialog {
+        .mat-dialog-container {
+            .mat-dialog-title {
+                background-color: mat-color($primary);
+                color: white;
+
+                .mat-icon {
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .mat-dialog-mask {
+        background: radial-gradient(ellipse at center, mat-color($primary, 900), mat-color($accent, 600)),
+            radial-gradient(ellipse at center, mat-color($accent, 900), mat-color($primary, 600));
+    }
+
+    .signup {
+        .signup-title {
+            background-color: mat-color($primary);
+            color: white;
+
+            .mat-icon {
+                color: white;
+            }
+        }
+    }
+
+    .video-player {
+        background-color: black;
+
+        .player-wrapper {
+            .player-board {
+                .player-control {
+                    background-color: rgba($color: black, $alpha: 0.5);
+                    color: mat-color($primary, 100);
+                }
+            }
+
+            .player-overlay {
+                background-color: mat-color($primary, 900) !important;
+            }
+        }
+    }
+
+    .video-layout {
+        .section-title {
+            background-color: mat-color($primary);
+        }
+
+        .video-listview {
+            .list-head {
+                background-color: mat-color($primary);
+            }
+
+            .list-body {
+                .mat-list {
+                    &::-webkit-scrollbar-thumb {
+                        background-color: transparent;
+                    }
+
+                    &:hover {
+                        &::-webkit-scrollbar-thumb {
+                            background-color: mat-color($primary, 300);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .link-active {
+        background-color: mat-color($primary);
+    }
+
+    .bg-error {
+        background: linear-gradient(to right bottom, mat-color($primary, 900), mat-color($accent, 900));
+
+        .mat-card {
+            background-color: mat-color($primary, 800);
+            color: white;
+        }
+    }
+
+    .bg-signup {
+        background: linear-gradient(to right bottom, mat-color($primary, 900), mat-color($accent, 900));
+
+        .mat-card {
+            .signup-scroll {
+                background-color: mat-color($primary, 800);
+                color: white;
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: transparent;
+                }
+
+                &:hover {
+                    &::-webkit-scrollbar-thumb {
+                        background-color: mat-color($primary, 300);
+                    }
+                }
+            }
+        }
+    }
+
+    .bg-tooltip {
+        background-color: mat-color($primary);
+    }
+}

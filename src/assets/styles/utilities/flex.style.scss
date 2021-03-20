@@ -1,0 +1,62 @@
+$wrap-list: wrap nowrap wrap-reverse;
+$direction-list: row row-reverse column column-reverse;
+$content-list: center start end space-around space-between space-evenly stretch;
+$items-list: center start end stretch baseline;
+$self-list: center start end stretch baseline;
+$fill-list: 1 0;
+
+@each $item in $wrap-list {
+    .flex-#{$item} {
+        flex-wrap: $item !important;
+    }
+}
+
+@each $item in $direction-list {
+    .flex-#{$item} {
+        flex-direction: $item !important;
+    }
+}
+
+@each $item in $content-list {
+    .justify-content-#{$item} {
+        justify-content: $item !important;
+    }
+
+    .align-content-#{$item} {
+        align-content: $item !important;
+    }
+}
+
+@each $item in $items-list {
+    .justify-items-#{$item} {
+        justify-items: $item !important;
+    }
+
+    .align-items-#{$item} {
+        align-items: $item !important;
+    }
+}
+
+@each $item in $self-list {
+    .justify-self-#{$item} {
+        justify-items: $item !important;
+    }
+
+    .align-self-#{$item} {
+        align-self: $item !important;
+    }
+}
+
+@each $item in $fill-list {
+    .flex-grow-#{$item} {
+        flex-grow: $item;
+    }
+
+    .flex-shrink-#{$item} {
+        flex-shrink: $item;
+    }
+}
+
+.flex-basis-auto {
+    flex-basis: auto;
+}

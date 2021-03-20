@@ -1,0 +1,14 @@
+<div class="bg-error display-flex justify-content-center align-items-center w-100 h-100">
+    <mat-card class="mat-elevation-z4 display-flex flex-nowrap">
+        <mat-card-content class="mr-100">
+            <div class="mat-display-4 my-50" [style.text-align]="'center'">{{error.title}}</div>
+            <div class="mat-display-2 my-50" [style.text-align]="'center'">{{error.subtitle}}</div>
+            <mat-divider class="my-50" [style.position]="'inherit'"></mat-divider>
+            <div class="mat-headline my-50" [style.text-align]="'justify'">{{error.description}}</div>
+        </mat-card-content>
+        <mat-card-content class="display-flex justify-content-center flex-column ml-100">
+            <img [src]="'../../../assets/images/logo-short.png'" alt="" width="256" height="256">
+            <a mat-raised-button color="accent" class="mt-100" [routerLink]="['/']">Go Back to Home</a>
+        </mat-card-content>
+    </mat-card>
+</div>

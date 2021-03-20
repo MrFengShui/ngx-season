@@ -1,0 +1,161 @@
+<div class="audio-layout display-grid p-50" #layout>
+    <div class="display-flex" [style.grid-column]="'1 / 3'">
+        <mat-card class="flex-grow-1 flex-shrink-1 flex-basis-auto p-0" [style.background-color]="'black'"
+            [style.border-radius]="'0'">
+            <app-widgets-aplayer [source]="'../../../assets/test_audio.mp3'" [append]="append" [(size)]="fitSize"
+                [(opened)]="opened">
+            </app-widgets-aplayer>
+        </mat-card>
+        <mat-card class="audio-listview mat-elevation-z0 p-0" [style.display]="opened && append ? 'initial' : 'none'">
+            <mat-card-content class="list-head display-flex align-items-center p-50 mb-0">
+                <span class="flex-grow-1 flex-shrink-1 flex-basis-auto">Audio List Title</span>
+                <button mat-icon-button>
+                    <mat-icon>tune</mat-icon>
+                </button>
+            </mat-card-content>
+            <mat-card-content class="list-body">
+                <mat-list role="list" [style.overflow]="'auto'" [style.height]="fitSize - 54 - 8 + 'px'">
+                    <mat-list-item role="listitem">Item 1</mat-list-item>
+                    <mat-list-item role="listitem">Item 2</mat-list-item>
+                    <mat-list-item role="listitem">Item 3</mat-list-item>
+                    <mat-list-item role="listitem">Item 4</mat-list-item>
+                    <mat-list-item role="listitem">Item 5</mat-list-item>
+                    <mat-list-item role="listitem">Item 6</mat-list-item>
+                    <mat-list-item role="listitem">Item 7</mat-list-item>
+                    <mat-list-item role="listitem">Item 8</mat-list-item>
+                    <mat-list-item role="listitem">Item 9</mat-list-item>
+                    <mat-list-item role="listitem">Item 1</mat-list-item>
+                    <mat-list-item role="listitem">Item 2</mat-list-item>
+                    <mat-list-item role="listitem">Item 3</mat-list-item>
+                    <mat-list-item role="listitem">Item 4</mat-list-item>
+                    <mat-list-item role="listitem">Item 5</mat-list-item>
+                    <mat-list-item role="listitem">Item 6</mat-list-item>
+                    <mat-list-item role="listitem">Item 7</mat-list-item>
+                    <mat-list-item role="listitem">Item 8</mat-list-item>
+                    <mat-list-item role="listitem">Item 9</mat-list-item>
+                    <mat-list-item role="listitem">Item 1</mat-list-item>
+                    <mat-list-item role="listitem">Item 2</mat-list-item>
+                    <mat-list-item role="listitem">Item 3</mat-list-item>
+                    <mat-list-item role="listitem">Item 4</mat-list-item>
+                    <mat-list-item role="listitem">Item 5</mat-list-item>
+                    <mat-list-item role="listitem">Item 6</mat-list-item>
+                    <mat-list-item role="listitem">Item 7</mat-list-item>
+                    <mat-list-item role="listitem">Item 8</mat-list-item>
+                    <mat-list-item role="listitem">Item 9</mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-card class="mat-elevation-z0 p-0" [style.grid-row]="'2 / 2'">
+        <mat-card-content class="section-title display-flex align-items-center p-50 mb-0">
+            <h3 class="text-overflow mat-subheading-2 flex-grow-1 flex-shrink-1 flex-basis-auto m-0 mr-50" [matTooltip]="'Audio Title Audio Title Audio Title Audio Title Audio Title Audio Title Audio Title Audio Title Audio
+            Title Audio Title Audio Title'" [matTooltipClass]="'bg-tooltip'">
+                Audio Title Audio Title Audio Title Audio Title Audio Title Audio Title Audio Title Audio Title Audio
+                Title Audio Title Audio Title
+            </h3>
+            <span class="mat-caption ml-50" [style.white-space]="'nowrap'">yyyy-mm-dd</span>
+        </mat-card-content>
+        <mat-card-content class="p-50 mb-0">Audio Description</mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-content class="display-flex justify-content-space-around align-items-center p-50 mb-0">
+            <button mat-button [matTooltip]="'Like'" [matTooltipClass]="'bg-tooltip'" [style.width]="'84px'"
+                [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>thumb_up</mat-icon>
+                    <span>xxxx</span>
+                </div>
+            </button>
+            <button mat-button [matTooltip]="'Hate'" [matTooltipClass]="'bg-tooltip'" [style.width]="'84px'"
+                [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>thumb_down</mat-icon>
+                    <span>xxxx</span>
+                </div>
+            </button>
+            <button mat-button [style.width]="'84px'" [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>share</mat-icon>
+                    <span>Share</span>
+                </div>
+            </button>
+            <button mat-button [style.width]="'84px'" [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>library_add</mat-icon>
+                    <span>Store</span>
+                </div>
+            </button>
+            <button mat-button [style.width]="'84px'" [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>download</mat-icon>
+                    <span>Download</span>
+                </div>
+            </button>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-content class="p-50">
+            <mat-chip-list aria-label="Fish selection">
+                <mat-chip color="accent" selected>Tag One</mat-chip>
+                <mat-chip color="accent" selected>Tag Two</mat-chip>
+                <mat-chip color="accent" selected>Tag Three</mat-chip>
+                <mat-chip color="accent" selected>Tag Four</mat-chip>
+                <mat-chip color="accent" selected>Tag Five</mat-chip>
+                <mat-chip color="accent" selected>Tag Six</mat-chip>
+                <mat-chip color="accent" selected>Tag Seven</mat-chip>
+                <mat-chip color="accent" selected>Tag Eight</mat-chip>
+                <mat-chip color="accent" selected>Tag Nine</mat-chip>
+                <mat-chip color="accent" selected>Tag Ten</mat-chip>
+            </mat-chip-list>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="mat-elevation-z0 p-0" [style.grid-row]="'3 / 3'">
+        <mat-card-content class="section-title display-flex align-items-center p-50 mb-0">
+            <img [src]="'../../../assets/images/logo-short.png'" alt="" width="24" height="24">
+            <h3 class="mat-subheading-2 flex-grow-1 flex-shrink-1 flex-basis-auto m-0 ml-100">Brand Name</h3>
+            <button mat-mini-fab color="accent">
+                <mat-icon>notifications</mat-icon>
+            </button>
+        </mat-card-content>
+        <mat-card-content class="p-50">Brand Description</mat-card-content>
+    </mat-card>
+    <mat-card class="mat-elevation-z0 p-0" [style.grid-row]="'4 / 4'">
+        <mat-card-content class="section-title display-flex align-items-center p-50 mb-0">
+            <mat-icon>comments</mat-icon>
+            <h3 class="mat-subheading-2 flex-grow-1 flex-shrink-1 flex-basis-auto m-0 ml-100">Comments</h3>
+        </mat-card-content>
+        <mat-card-content class="p-50 mb-0">
+            <mat-form-field class="w-100" [floatLabel]="'never'" [hintLabel]="'Comments Content'"
+                [appearance]="'outline'">
+                <textarea matInput maxlength="400" placeholder="Enter your comment." cdkTextareaAutosize
+                    cdkAutosizeMinRows="6" cdkAutosizeMaxRows="6" #comments></textarea>
+                <mat-hint align="end">{{comments.value?.length || 0}}/400</mat-hint>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-content class="display-flex align-items-center p-50 mb-0">
+            <a href="javascript:void(0)" mat-icon-button>
+                <mat-icon>account_circle</mat-icon>
+            </a>
+            <span>Brand Name</span>
+            <span class="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+            <button mat-icon-button class="mx-50">
+                <mat-icon>mood</mat-icon>
+            </button>
+            <button mat-raised-button color="primary">Submit</button>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-content class="p-50">Comments Tree Heap</mat-card-content>
+    </mat-card>
+    <mat-tab-group mat-stretch-tabs color="primary" backgroundColor="primary" class="mat-elevation-z0"
+        [style.grid-row]="'2 / 5'">
+        <mat-tab label="Audio">
+            <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+            </mat-list>
+        </mat-tab>
+        <mat-tab label="Video"> Content 2 </mat-tab>
+        <mat-tab label="Article"> Content 3 </mat-tab>
+        <mat-tab label="Blog"> Content 4 </mat-tab>
+        <mat-tab label="Gallery"> Content 4 </mat-tab>
+    </mat-tab-group>
+</div>

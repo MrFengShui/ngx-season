@@ -1,0 +1,7 @@
+$list: inherit initial unset block inline inline-block flex inline-flex grid inline-grid none;
+
+@each $item in $list {
+    .display-#{$item} {
+        display: $item !important;
+    }
+}

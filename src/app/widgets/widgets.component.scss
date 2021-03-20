@@ -1,0 +1,50 @@
+.audio-player,
+.video-player {
+    .player-wrapper {
+        .player-placeholder {
+            .mat-icon {
+                font-size: 128px;
+                width: 128px;
+                height: 128px;
+            }
+        }
+
+        .player-control {
+            .mat-icon-button {
+                .mat-button-wrapper {
+                    width: 40px;
+                }
+            }
+        }
+
+        .player-board {
+            .player-view {
+                width: 100%;
+                height: 100%;
+            }
+
+            .player-control {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+            }
+
+            .hidden {
+                display: none;
+            }
+        }
+
+        .player-overlay {
+            padding: 0.5em;
+            position: fixed;
+            left: 1em;
+            bottom: 1em;
+            z-index: 1000;
+            width: 480px;
+            height: 270px;
+        }
+    }
+}

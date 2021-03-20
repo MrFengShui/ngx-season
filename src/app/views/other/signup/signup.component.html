@@ -1,0 +1,123 @@
+<div class="bg-signup flex-align flex-content-center flex-items-center w-100 h-100">
+    <mat-card class="mat-elevation-z4 flex-align p-0">
+        <mat-card-content class="mb-0" [style.min-width]="'360px'">
+            <div class="signup-title flex-align flex-items-center p-100">
+                <mat-icon class="mr-25">badge</mat-icon>
+                <span class="mat-title mb-0">Sign Up for Free</span>
+            </div>
+            <form class="signup-content p-100" [formGroup]="group">
+                <mat-form-field class="w-100" [floatLabel]="'never'" [hintLabel]="'Brand'" [appearance]="'outline'">
+                    <mat-icon class="mr-50" matPrefix>workspaces</mat-icon>
+                    <input matInput type="text" maxlength="10" placeholder="Enter your brand" #brand>
+                    <mat-hint align="end">{{brand.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="w-100" [floatLabel]="'never'" [hintLabel]="'Username'" [appearance]="'outline'">
+                    <mat-icon class="mr-50" matPrefix>person</mat-icon>
+                    <input matInput type="text" maxlength="10" placeholder="Enter your username" #username>
+                    <mat-hint align="end">{{username.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="w-100 my-100" [floatLabel]="'never'" [hintLabel]="'Password'"
+                    [appearance]="'outline'">
+                    <mat-icon class="mr-50" matPrefix>lock</mat-icon>
+                    <input matInput [type]="visible ? 'text' : 'password'" maxlength="10"
+                        placeholder="Enter your password" #password>
+                    <mat-hint align="end">{{password.value?.length || 0}}/10</mat-hint>
+                    <button mat-icon-button color="accent" (click)="visible = !visible" matSuffix>
+                        <mat-icon>{{visible ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field class="w-100" [floatLabel]="'never'" [hintLabel]="'Email'" [appearance]="'outline'">
+                    <mat-icon class="mr-50" matPrefix>email</mat-icon>
+                    <input matInput type="email" maxlength="10" placeholder="Enter your Email" #email>
+                    <mat-hint align="end">{{email.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+                <div class="signup-content p-100">
+                    <mat-checkbox>I have read and agree.</mat-checkbox>
+                </div>
+            </form>
+            <div class="signup-content flex-align p-100">
+                <button class="w-100 mr-50" mat-raised-button color="primary">
+                    Sign Up
+                </button>
+                <a class="w-100 ml-50" mat-raised-button color="accent" [routerLink]="['/']">
+                    Sign In
+                </a>
+            </div>
+            <div class="flex-align flex-items-center">
+                <mat-divider [style.position]="'inherit'"></mat-divider>
+                <span class="mx-100">OR</span>
+                <mat-divider [style.position]="'inherit'"></mat-divider>
+            </div>
+            <div class="flex-align flex-content-around flex-items-center p-100">
+                <button mat-fab color="accent">
+                    <mat-icon svgIcon="google_logo" [style.transform]="'scale(1.5)'"></mat-icon>
+                </button>
+                <button mat-fab color="accent">
+                    <mat-icon svgIcon="facebook_logo" [style.transform]="'scale(1.5)'"></mat-icon>
+                </button>
+                <button mat-fab color="accent">
+                    <mat-icon svgIcon="twitter_logo" [style.transform]="'scale(1.5)'"></mat-icon>
+                </button>
+            </div>
+        </mat-card-content>
+        <mat-card-content class="mat-typography signup-scroll p-100">
+            <h3>Develop across all platforms</h3>
+            <p>Learn one way to build applications with Angular and reuse your code and abilities to build
+                apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+
+            <h3>Speed &amp; Performance</h3>
+            <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web
+                Workers and server-side rendering. Angular puts you in control over scalability. Meet huge
+                data requirements by building data models on RxJS, Immutable.js or another push-model.</p>
+
+            <h3>Incredible tooling</h3>
+            <p>Build features quickly with simple, declarative templates. Extend the template language with
+                your own components and use a wide array of existing components. Get immediate Angular-specific
+                help and feedback with nearly every IDE and editor. All this comes together so you can focus
+                on building amazing apps rather than trying to make the code work.</p>
+
+            <h3>Loved by millions</h3>
+            <p>From prototype through global deployment, Angular delivers the productivity and scalable
+                infrastructure that supports Google's largest applications.</p>
+
+            <h3>What is Angular?</h3>
+
+            <p>Angular is a platform that makes it easy to build applications with the web. Angular
+                combines declarative templates, dependency injection, end to end tooling, and integrated
+                best practices to solve development challenges. Angular empowers developers to build
+                applications that live on the web, mobile, or the desktop</p>
+
+            <h3>Architecture overview</h3>
+
+            <p>Angular is a platform and framework for building client applications in HTML and TypeScript.
+                Angular is itself written in TypeScript. It implements core and optional functionality as a
+                set of TypeScript libraries that you import into your apps.</p>
+
+            <p>The basic building blocks of an Angular application are NgModules, which provide a compilation
+                context for components. NgModules collect related code into functional sets; an Angular app is
+                defined by a set of NgModules. An app always has at least a root module that enables
+                bootstrapping, and typically has many more feature modules.</p>
+
+            <p>Components define views, which are sets of screen elements that Angular can choose among and
+                modify according to your program logic and data. Every app has at least a root component.</p>
+
+            <p>Components use services, which provide specific functionality not directly related to views.
+                Service providers can be injected into components as dependencies, making your code modular,
+                reusable, and efficient.</p>
+
+            <p>Both components and services are simply classes, with decorators that mark their type and
+                provide metadata that tells Angular how to use them.</p>
+
+            <p>The metadata for a component class associates it with a template that defines a view. A
+                template combines ordinary HTML with Angular directives and binding markup that allow Angular
+                to modify the HTML before rendering it for display.</p>
+
+            <p>The metadata for a service class provides the information Angular needs to make it available
+                to components through Dependency Injection (DI).</p>
+
+            <p>An app's components typically define many views, arranged hierarchically. Angular provides
+                the Router service to help you define navigation paths among views. The router provides
+                sophisticated in-browser navigational capabilities.</p>
+        </mat-card-content>
+    </mat-card>
+</div>

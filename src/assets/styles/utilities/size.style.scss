@@ -1,0 +1,19 @@
+$size-list: auto 25 50 75 100;
+
+@each $item in $size-list {
+    .w-#{$item} {
+        @if $item == auto {
+            width: auto;
+        } @else {
+            width: percentage($item / 100) !important;
+        }
+    }
+
+    .h-#{$item} {
+        @if $item == auto {
+            height: auto;
+        } @else {
+            height: percentage($item / 100) !important;
+        }
+    }
+}

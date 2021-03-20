@@ -1,0 +1,104 @@
+<mat-toolbar [class.mat-elevation-z4]="true" color="primary">
+    <button mat-icon-button (click)="checked ? overlay.toggle() : flag = !flag" #toggleButton>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <a mat-button [routerLink]="['/']">
+        <img src="../assets/images/logo-long.png" height="32.0" />
+    </a>
+    <span class="flex-basis-auto flex-grow-1 flex-shrink-1"></span>
+    <mat-form-field [floatLabel]="'never'" [style.width]="'360px'">
+        <mat-label>Search</mat-label>
+        <button mat-icon-button matPrefix [style.margin-right]="'0.25em'">
+            <mat-icon>search</mat-icon>
+        </button>
+        <input matInput type="text" [(ngModel)]="searchInput">
+        <button mat-icon-button matSuffix (click)="searchInput = ''" *ngIf="searchInput">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <span class="flex-basis-auto flex-grow-1 flex-shrink-1"></span>
+    <button mat-icon-button class="mx-50" [matTooltip]="'Mobile'" [matTooltipPosition]="'below'"
+        [matTooltipClass]="'bg-tooltip'" [matMenuTriggerFor]="tabletMenu">
+        <mat-icon>tablets</mat-icon>
+    </button>
+    <button mat-icon-button class="mx-50" [matTooltip]="'Enjoyment'" [matTooltipPosition]="'below'"
+        [matTooltipClass]="'bg-tooltip'">
+        <mat-icon>videogame_asset</mat-icon>
+    </button>
+    <button mat-icon-button class="mx-50" [matTooltip]="'Notifications'" [matTooltipPosition]="'below'"
+        [matTooltipClass]="'bg-tooltip'">
+        <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button class="ml-50" [matTooltip]="'Account'" [matTooltipPosition]="'below'"
+        [matTooltipClass]="'bg-tooltip'" (click)="handleSigninEvent($event)">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-sidenav-container autosize class="v-fill" #container>
+    <mat-sidenav [mode]="checked ? 'over' : 'side'" [opened]="!checked"
+        [style.min-width]="checked ? '240px' : flag ? '240px' : 'auto'"
+        [style.max-width]="checked ? '240px' : flag ? '240px' : 'auto'" #overlay>
+        <mat-nav-list>
+            <ng-container [ngTemplateOutlet]="checked ? openedTemplate : flag ? openedTemplate : closedTemplate"
+                [ngTemplateOutletContext]="checked ? { $implicit: longList} : flag ? { $implicit: longList} : { $implicit: shortList}">
+            </ng-container>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content [style.height]="height + 'px'" #content>
+        <router-outlet></router-outlet>
+        <div class="float-box display-flex flex-column justify-content-center">
+            <button mat-fab color="accent" class="mb-50">
+                <mat-icon [style.transform]="'scale(1.5)'">support_agent</mat-icon>
+            </button>
+            <button mat-fab color="accent" class="mt-50" (click)="handleScrollEvent($event)">
+                <mat-icon [style.transform]="'scale(1.5)'">upgrade</mat-icon>
+            </button>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<ng-template #openedTemplate let-entities>
+    <ng-container *ngFor="let entity of entities">
+        <h3 matSubheader *ngIf="!entity.flag">{{entity.name}}</h3>
+        <a mat-list-item [routerLink]="link.link" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:
+            true}" *ngFor="let link of entity.list">
+            <mat-icon matListIcon [style.margin-right]="'0.5em'">{{link.icon}}</mat-icon>
+            {{link.name}}
+        </a>
+        <mat-divider *ngIf="entity.flag"></mat-divider>
+    </ng-container>
+    <mat-divider></mat-divider>
+    <a mat-list-item href="https://angular.io/" target="_blank">
+        <img [src]="'../../assets/images/logo-short.png'" alt="" width="24">
+        <span class="ml-50">Angular Website</span>
+    </a>
+    <a mat-list-item href="https://material.angular.io/" target="_blank">
+        <img [src]="'../../assets/images/logo-short.png'" alt="" width="24">
+        <span class="ml-50">Material Website</span>
+    </a>
+    <p class="mat-body-2 px-150">&copy;2021&nbsp;&nbsp;MrFengShui&nbsp;&nbsp;Copyright All Reserved</p>
+</ng-template>
+<ng-template #closedTemplate let-entities>
+    <ng-container *ngFor="let entity of entities">
+        <a mat-list-item [matTooltip]="link.name" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:
+            true}" [matTooltipPosition]="'right'" [matTooltipClass]="'bg-tooltip'" [routerLink]="link.link"
+            *ngFor="let link of entity.list">
+            <mat-icon matListIcon>{{link.icon}}</mat-icon>
+        </a>
+        <mat-divider *ngIf="entity.flag"></mat-divider>
+    </ng-container>
+</ng-template>
+<mat-menu #tabletMenu="matMenu">
+    <a mat-menu-item>
+        <div class="flex-align flex-column flex-items-center p-50">
+            <img [src]="'../assets/images/qr-code.png'" alt="" width="128" height="128" />
+            <mat-label class="mt-50">iOS Platform</mat-label>
+        </div>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-menu-item>
+        <div class="flex-align flex-column flex-items-center p-50">
+            <img [src]="'../assets/images/qr-code.png'" alt="" width="128" height="128" />
+            <mat-label class="mt-50">Android Platform</mat-label>
+        </div>
+    </a>
+</mat-menu>

@@ -1,0 +1,130 @@
+[
+    {
+        "flag": false,
+        "name": "Public",
+        "list": [
+            {
+                "icon": "headset",
+                "name": "Audio",
+                "link": [
+                    "/home",
+                    "ahome"
+                ]
+            },
+            {
+                "icon": "tv",
+                "name": "Video",
+                "link": [
+                    "/home",
+                    "vhome"
+                ]
+            },
+            {
+                "icon": "article",
+                "name": "Article",
+                "link": [
+                    "/home",
+                    "arhome"
+                ]
+            },
+            {
+                "icon": "edit",
+                "name": "Blog",
+                "link": [
+                    "/home",
+                    "bhome"
+                ]
+            },
+            {
+                "icon": "image",
+                "name": "Gallery",
+                "link": [
+                    "/home",
+                    "ghome"
+                ]
+            }
+        ]
+    },
+    {
+        "flag": true
+    },
+    {
+        "flag": false,
+        "name": "Library",
+        "list": [
+            {
+                "icon": "history",
+                "name": "History",
+                "link": [
+                    "/"
+                ]
+            },
+            {
+                "icon": "watch_later",
+                "name": "Watch Later",
+                "link": [
+                    "/"
+                ]
+            },
+            {
+                "icon": "favorite",
+                "name": "Favorite",
+                "link": [
+                    "/"
+                ]
+            },
+            {
+                "icon": "workspaces",
+                "name": "Workspace",
+                "link": [
+                    "/"
+                ]
+            }
+        ]
+    },
+    {
+        "flag": true
+    },
+    {
+        "flag": false,
+        "name": "Subscription",
+        "list": []
+    },
+    {
+        "flag": true
+    },
+    {
+        "flag": false,
+        "name": "Preference",
+        "list": [
+            {
+                "icon": "settings",
+                "name": "Settings",
+                "link": [
+                    "/"
+                ]
+            },
+            {
+                "icon": "support",
+                "name": "Support",
+                "link": [
+                    "/"
+                ]
+            },
+            {
+                "icon": "bug_report",
+                "name": "Bug Report",
+                "link": [
+                    "/"
+                ]
+            },
+            {
+                "icon": "feedback",
+                "name": "Feedback",
+                "link": [
+                    "/"
+                ]
+            }
+        ]
+    }
+]

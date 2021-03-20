@@ -1,0 +1,101 @@
+<div class="player-wrapper display-flex justify-content-center" #container>
+    <div class="player-placeholder display-none display-flex flex-column justify-content-center align-items-center"
+        [style.width]="width + 'px'" [style.height]="height + 'px'" #placeholder>
+        <mat-icon>devices</mat-icon>
+        <span>Video Placeholder</span>
+    </div>
+    <div class="player-board" #playerBox>
+        <video class="player-view" [width]="width" (timeupdate)="listenCurrentTimeChange($event)" #player>
+            <source [src]="source" type="video/mp4">
+        </video>
+        <div class="player-control display-flex flex-column hidden" #controller>
+            <div class="display-flex align-items-center">
+                <button mat-icon-button (click)="handleDownVolumeEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>volume_down</mat-icon>
+                </button>
+                <mat-slider color="primary" min="0.0" max="1.0" step="0.05" [(ngModel)]="player.volume"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                </mat-slider>
+                <button mat-icon-button (click)="handleUpVolumeEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>volume_up</mat-icon>
+                </button>
+                <span class="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                <button mat-icon-button [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>closed_caption_off</mat-icon>
+                </button>
+                <button mat-icon-button [matMenuTriggerFor]="settings" (click)="handleStopPropagationEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <span class="h-100"></span>
+            <div class="display-flex align-items-center">
+                <button mat-icon-button (click)="handleDownTimeEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>replay_30</mat-icon>
+                </button>
+                <button mat-icon-button (click)="handlePlayPauseEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>{{isPaused ? 'play_circle' : 'pause_circle'}}</mat-icon>
+                </button>
+                <button mat-icon-button (click)="handleUpTimeEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>forward_30</mat-icon>
+                </button>
+                <span class="mx-75" [style.white-space]="'nowrap'">{{currentTime | duration}}</span>
+                <mat-slider class="w-100" color="primary" min="0.0" [max]="player.duration" [value]="currentTime"
+                    (input)="handleDragTimeEvent($event)">
+                </mat-slider>
+                <span class="mx-75" [style.white-space]="'nowrap'">{{player.duration | duration}}</span>
+                <button mat-icon-button (click)="handleOverlayEvent($event)">
+                    <mat-icon>picture_in_picture</mat-icon>
+                </button>
+                <button mat-icon-button (click)="handleFullscreenEvent($event)"
+                    [style.display]="overlay ? 'none' : 'inherit'">
+                    <mat-icon>{{isFullscreen ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon>
+                </button>
+                <button mat-icon-button (click)="handleListOpenEvent($event)"
+                    [style.display]="append && !overlay ? 'inherit' : 'none'">
+                    <mat-icon [style.transform]="opened ? 'rotate(180deg)' : 'rotate(0deg)'">menu_open</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<mat-menu #settings="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="playSpeed">
+        <mat-icon>speed</mat-icon>
+        <span>Playing Rate</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="playQuality">
+        <mat-icon>high_quality</mat-icon>
+        <span>HD Quality</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="playCaption">
+        <mat-icon>closed_caption</mat-icon>
+        <span>Caption</span>
+    </button>
+</mat-menu>
+<mat-menu #playSpeed="matMenu">
+    <mat-radio-group [(ngModel)]="player.playbackRate">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of speedList">
+            <mat-radio-button color="primary" [value]="item">{{item + 'x'}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #playQuality="matMenu">
+    <mat-radio-group [(ngModel)]="qualitySelected">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of qualityList">
+            <mat-radio-button color="primary" [value]="item">{{item + 'p'}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #playCaption="matMenu">
+    <mat-radio-group [(ngModel)]="captionSelected">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of captionList">
+            <mat-radio-button color="primary" [value]="item.code">{{item.text}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>

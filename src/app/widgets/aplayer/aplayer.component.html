@@ -1,0 +1,78 @@
+<div class="player-wrapper display-flex flex-column h-100" #container>
+    <div class="display-flex align-items-center">
+        <button mat-icon-button (click)="handleDownVolumeEvent($event)">
+            <mat-icon>volume_down</mat-icon>
+        </button>
+        <mat-slider color="primary" min="0.0" max="1.0" step="0.05" [(ngModel)]="player.volume">
+        </mat-slider>
+        <button mat-icon-button (click)="handleUpVolumeEvent($event)">
+            <mat-icon>volume_up</mat-icon>
+        </button>
+        <span class="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+        <button mat-icon-button>
+            <mat-icon>closed_caption_off</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="settings" (click)="handleStopPropagationEvent($event)">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <button mat-icon-button (click)="handleListOpenEvent($event)" [style.display]="append ? 'inherit' : 'none'">
+            <mat-icon [style.transform]="opened ? 'rotate(180deg)' : 'rotate(0deg)'">menu_open</mat-icon>
+        </button>
+    </div>
+    <div class="player-view flex-grow-1 flex-shrink-1 flex-basis-auto" [style.height]="size - 96 + 'px'">
+        <audio class="player-view" (timeupdate)="listenCurrentTimeChange($event)" #player>
+            <source [src]="source" type="video/mp4">
+        </audio>
+    </div>
+    <div class="display-flex align-items-center">
+        <button mat-icon-button (click)="handleDownTimeEvent($event)">
+            <mat-icon>replay_30</mat-icon>
+        </button>
+        <button mat-icon-button (click)="handlePlayPauseEvent($event)">
+            <mat-icon>{{isPaused ? 'play_circle' : 'pause_circle'}}</mat-icon>
+        </button>
+        <button mat-icon-button (click)="handleUpTimeEvent($event)">
+            <mat-icon>forward_30</mat-icon>
+        </button>
+        <span class="mx-75" [style.white-space]="'nowrap'">{{currentTime | duration}}</span>
+        <mat-slider class="w-100" color="primary" min="0.0" [max]="player.duration" [value]="currentTime"
+            (input)="handleDragTimeEvent($event)">
+        </mat-slider>
+        <span class="mx-75" [style.white-space]="'nowrap'">{{player.duration | duration}}</span>
+    </div>
+</div>
+<mat-menu #settings="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="playSpeed">
+        <mat-icon>speed</mat-icon>
+        <span>Playing Rate</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="playQuality">
+        <mat-icon>high_quality</mat-icon>
+        <span>HD Quality</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="playCaption">
+        <mat-icon>closed_caption</mat-icon>
+        <span>Caption</span>
+    </button>
+</mat-menu>
+<mat-menu #playSpeed="matMenu">
+    <mat-radio-group [(ngModel)]="player.playbackRate">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of speedList">
+            <mat-radio-button color="primary" [value]="item">{{item + 'x'}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #playQuality="matMenu">
+    <mat-radio-group [(ngModel)]="qualitySelected">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of qualityList">
+            <mat-radio-button color="primary" [value]="item">{{item + 'p'}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #playCaption="matMenu">
+    <mat-radio-group [(ngModel)]="captionSelected">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of captionList">
+            <mat-radio-button color="primary" [value]="item.code">{{item.text}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>

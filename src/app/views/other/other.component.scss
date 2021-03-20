@@ -1,0 +1,29 @@
+.bg-signup {
+    .mat-card {
+        width: 1000px;
+        height: 650px;
+
+        .signup-scroll {
+            border-radius: 0 4px 4px 0;
+            overflow: auto;
+        }
+
+        .mat-card-content {
+            .signup-title {
+                border-radius: 4px 4px 0 0;
+
+                .mat-icon {
+                    font-size: 36px;
+                    width: 36px;
+                    height: 36px;
+                }
+            }
+        }
+    }
+}
+
+.bg-error {
+    .mat-card {
+        width: 960px;
+    }
+}
