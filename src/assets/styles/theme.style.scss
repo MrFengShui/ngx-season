@@ -4,6 +4,30 @@
 @import "mode.style.scss";
 
 .theme {
+    &.amber-light {
+        @import "themes/amber.theme.scss";
+        @include angular-material-theme($amber-light-theme);
+        @include mode-match($amber-light-theme);
+    }
+
+    &.amber-dark {
+        @import "themes/amber.theme.scss";
+        @include angular-material-theme($amber-dark-theme);
+        @include mode-match($amber-dark-theme);
+    }
+
+    &.green-light {
+        @import "themes/green.theme.scss";
+        @include angular-material-theme($green-light-theme);
+        @include mode-match($green-light-theme);
+    }
+
+    &.green-dark {
+        @import "themes/green.theme.scss";
+        @include angular-material-theme($green-dark-theme);
+        @include mode-match($green-dark-theme);
+    }
+
     &.indigo-light {
         @import "themes/indigo.theme.scss";
         @include angular-material-theme($indigo-light-theme);
@@ -14,5 +38,53 @@
         @import "themes/indigo.theme.scss";
         @include angular-material-theme($indigo-dark-theme);
         @include mode-match($indigo-dark-theme);
+    }
+
+    &.orange-light {
+        @import "themes/orange.theme.scss";
+        @include angular-material-theme($orange-light-theme);
+        @include mode-match($orange-light-theme);
+    }
+
+    &.orange-dark {
+        @import "themes/orange.theme.scss";
+        @include angular-material-theme($orange-dark-theme);
+        @include mode-match($orange-dark-theme);
+    }
+
+    &.red-light {
+        @import "themes/red.theme.scss";
+        @include angular-material-theme($red-light-theme);
+        @include mode-match($red-light-theme);
+    }
+
+    &.red-dark {
+        @import "themes/red.theme.scss";
+        @include angular-material-theme($red-dark-theme);
+        @include mode-match($red-dark-theme);
+    }
+
+    &.violet-light {
+        @import "themes/violet.theme.scss";
+        @include angular-material-theme($violet-light-theme);
+        @include mode-match($violet-light-theme);
+    }
+
+    &.violet-dark {
+        @import "themes/violet.theme.scss";
+        @include angular-material-theme($violet-dark-theme);
+        @include mode-match($violet-dark-theme);
+    }
+}
+
+$theme-code-list: #ffc107 #4caf50 #3f51b5 #ff5722 #673ab7 #f44336;
+$theme-name-list: amber green indigo orange violet red;
+
+@for $i from 1 through 6 {
+    $code: nth($theme-code-list, $i);
+    $name: nth($theme-name-list, $i);
+
+    .bg-theme-#{$name} {
+        background-color: $code !important;
     }
 }

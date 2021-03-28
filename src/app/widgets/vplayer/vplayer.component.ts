@@ -6,8 +6,6 @@ import { take } from 'rxjs/operators';
 @Component({
     selector: 'app-widgets-vplayer',
     templateUrl: './vplayer.component.html',
-    styleUrls: ['../widgets.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoPlayerComponent implements OnChanges, OnInit, OnDestroy, AfterViewInit, AfterViewChecked {

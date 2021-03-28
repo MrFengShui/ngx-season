@@ -18,21 +18,15 @@
     </mat-form-field>
     <span class="flex-basis-auto flex-grow-1 flex-shrink-1"></span>
     <button mat-icon-button class="mx-50" [matTooltip]="'Mobile'" [matTooltipPosition]="'below'"
-        [matTooltipClass]="'bg-tooltip'" [matMenuTriggerFor]="tabletMenu">
-        <mat-icon>tablets</mat-icon>
+        [matTooltipClass]="'bg-share'" [matMenuTriggerFor]="qrcodeMenu">
+        <mat-icon>device_hub</mat-icon>
     </button>
-    <button mat-icon-button class="mx-50" [matTooltip]="'Enjoyment'" [matTooltipPosition]="'below'"
-        [matTooltipClass]="'bg-tooltip'">
-        <mat-icon>videogame_asset</mat-icon>
+    <button mat-icon-button class="mx-50" [matTooltip]="'Livestream'" [matTooltipPosition]="'below'"
+        [matTooltipClass]="'bg-share'" [matMenuTriggerFor]="streamMenu">
+        <mat-icon>stream</mat-icon>
     </button>
-    <button mat-icon-button class="mx-50" [matTooltip]="'Notifications'" [matTooltipPosition]="'below'"
-        [matTooltipClass]="'bg-tooltip'">
-        <mat-icon>notifications</mat-icon>
-    </button>
-    <button mat-icon-button class="ml-50" [matTooltip]="'Account'" [matTooltipPosition]="'below'"
-        [matTooltipClass]="'bg-tooltip'" (click)="handleSigninEvent($event)">
-        <mat-icon>account_circle</mat-icon>
-    </button>
+    <app-widgets-notice></app-widgets-notice>
+    <app-widgets-avatar></app-widgets-avatar>
 </mat-toolbar>
 <mat-sidenav-container autosize class="v-fill" #container>
     <mat-sidenav [mode]="checked ? 'over' : 'side'" [opened]="!checked"
@@ -47,11 +41,17 @@
     <mat-sidenav-content [style.height]="height + 'px'" #content>
         <router-outlet></router-outlet>
         <div class="float-box display-flex flex-column justify-content-center">
-            <button mat-fab color="accent" class="mb-50">
+            <button mat-fab color="accent" [matTooltip]="'Online Service'" [matTooltipPosition]="'left'"
+                [matTooltipClass]="'bg-share'" (click)="handleChatServiceEvent($event)">
                 <mat-icon [style.transform]="'scale(1.5)'">support_agent</mat-icon>
             </button>
-            <button mat-fab color="accent" class="mt-50" (click)="handleScrollEvent($event)">
-                <mat-icon [style.transform]="'scale(1.5)'">upgrade</mat-icon>
+            <button mat-fab color="accent" class="my-100" [matTooltip]="'Scroll to Top'" [matTooltipClass]="'bg-share'"
+                [matTooltipPosition]="'left'" (click)="handleScrollTopEvent($event)">
+                <mat-icon [style.transform]="'scale(1.5)'">vertical_align_top</mat-icon>
+            </button>
+            <button mat-fab color="accent" [matTooltip]="'Scroll to Bottom'" [matTooltipClass]="'bg-share'"
+                [matTooltipPosition]="'left'" (click)="handleScrollBottomEvent($event)">
+                <mat-icon [style.transform]="'scale(1.5)'">vertical_align_bottom</mat-icon>
             </button>
         </div>
     </mat-sidenav-content>
@@ -80,25 +80,63 @@
 <ng-template #closedTemplate let-entities>
     <ng-container *ngFor="let entity of entities">
         <a mat-list-item [matTooltip]="link.name" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:
-            true}" [matTooltipPosition]="'right'" [matTooltipClass]="'bg-tooltip'" [routerLink]="link.link"
+            true}" [matTooltipPosition]="'right'" [matTooltipClass]="'bg-share'" [routerLink]="link.link"
             *ngFor="let link of entity.list">
             <mat-icon matListIcon>{{link.icon}}</mat-icon>
         </a>
         <mat-divider *ngIf="entity.flag"></mat-divider>
     </ng-container>
 </ng-template>
-<mat-menu #tabletMenu="matMenu">
-    <a mat-menu-item>
-        <div class="flex-align flex-column flex-items-center p-50">
-            <img [src]="'../assets/images/qr-code.png'" alt="" width="128" height="128" />
-            <mat-label class="mt-50">iOS Platform</mat-label>
-        </div>
-    </a>
+<mat-menu class="popup-menu-auto" #qrcodeMenu="matMenu">
+    <div class="display-flex">
+        <mat-card class="mat-elevation-z0">
+            <mat-card-title-group>
+                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+            </mat-card-title-group>
+            <mat-card-content class="display-flex justify-content-center align-items-center my-50">
+                <mat-icon class="mr-50">tablet_mac</mat-icon>
+                iPad
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-title-group>
+                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+            </mat-card-title-group>
+            <mat-card-content class="display-flex justify-content-center align-items-center my-50">
+                <mat-icon class="mr-50">phone_iphone</mat-icon>
+                iPhone
+            </mat-card-content>
+        </mat-card>
+    </div>
     <mat-divider></mat-divider>
-    <a mat-menu-item>
-        <div class="flex-align flex-column flex-items-center p-50">
-            <img [src]="'../assets/images/qr-code.png'" alt="" width="128" height="128" />
-            <mat-label class="mt-50">Android Platform</mat-label>
-        </div>
+    <div class="display-flex">
+        <mat-card class="mat-elevation-z0">
+            <mat-card-title-group>
+                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+            </mat-card-title-group>
+            <mat-card-content class="display-flex justify-content-center align-items-center my-50">
+                <mat-icon class="mr-50">tablet_android</mat-icon>
+                Android Tablet
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-title-group>
+                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+            </mat-card-title-group>
+            <mat-card-content class="display-flex justify-content-center align-items-center my-50">
+                <mat-icon class="mr-50">phone_android</mat-icon>
+                Android Phone
+            </mat-card-content>
+        </mat-card>
+    </div>
+</mat-menu>
+<mat-menu #streamMenu="matMenu">
+    <a mat-menu-item [routerLink]="['/home', 'live', 'audio']">
+        <mat-icon>album</mat-icon>
+        Create Audio Live
+    </a>
+    <a mat-menu-item [routerLink]="['/home', 'live', 'video']">
+        <mat-icon>video_call</mat-icon>
+        Create Video Live
     </a>
 </mat-menu>

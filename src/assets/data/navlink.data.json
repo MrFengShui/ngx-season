@@ -101,21 +101,24 @@
                 "icon": "settings",
                 "name": "Settings",
                 "link": [
-                    "/"
+                    "/home",
+                    "setting"
                 ]
             },
             {
                 "icon": "support",
                 "name": "Support",
                 "link": [
-                    "/"
+                    "/home",
+                    "support"
                 ]
             },
             {
                 "icon": "bug_report",
                 "name": "Bug Report",
                 "link": [
-                    "/"
+                    "/home",
+                    "report"
                 ]
             },
             {

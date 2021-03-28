@@ -3,6 +3,8 @@
     $accent: map-get($theme, accent);
     $warn: map-get($theme, warn);
 
+    .chat-content,
+    .scroll-share,
     .mat-drawer-content,
     .mat-drawer-inner-container {
         &::-webkit-scrollbar-thumb {
@@ -15,14 +17,21 @@
             }
         }
     }
+    /**************************************************************************************************************************************
+     * Popup Style: Alert, Dialog, Menu
+     * Alert Class: popup-alert
+     * Dialog Class: popup-dialog
+     * Menu Class: popup-menu
+     **************************************************************************************************************************************/
+    .popup-alert {
+        background-color: mat-color($warn);
 
-    .mat-menu-item {
-        img {
-            background-color: mat-color($primary);
+        .alert-wrapper {
+            color: mat-color($accent);
         }
     }
 
-    .mat-dialog {
+    .popup-dialog {
         .mat-dialog-container {
             .mat-dialog-title {
                 background-color: mat-color($primary);
@@ -35,7 +44,7 @@
         }
     }
 
-    .mat-dialog-mask {
+    .popup-dialog-mask {
         background: radial-gradient(ellipse at center, mat-color($primary, 900), mat-color($accent, 600)),
             radial-gradient(ellipse at center, mat-color($accent, 900), mat-color($primary, 600));
     }
@@ -98,6 +107,129 @@
         background-color: mat-color($primary);
     }
 
+    .notice-list {
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+        &:hover {
+            &::-webkit-scrollbar-thumb {
+                background-color: mat-color($primary, 300);
+            }
+        }
+    }
+
+    .section-account-avatar {
+        .metadata {
+            border-color: mat-color($accent, 100);
+
+            th {
+                background-color: mat-color($accent);
+            }
+
+            td {
+                background-color: mat-color($accent, 300);
+            }
+
+            th,
+            td {
+                border-color: mat-color($accent, 100);
+                color: white;
+            }
+        }
+    }
+
+    // .welcome {
+    //     .welcome-wrapper {
+    //         .block-box {
+    //             .block {
+    //                 background-color: mat-color($primary, A100);
+    //             }
+    //         }
+    //     }
+    // }
+
+    .welcome,
+    .audio,
+    .video {
+        .welcome-wrapper,
+        .audio-wrapper,
+        .video-wrapper {
+            .section-brand {
+                .avatar {
+                    background-color: mat-color($primary);
+                }
+            }
+        }
+    }
+
+    .holder {
+        .holder-wrapper {
+            .holder-box,
+            .holder-pie,
+            .holder-bar,
+            .holder-half-bar {
+                animation: color-change 2.5s infinite;
+            }
+        }
+
+        @keyframes color-change {
+            0% {
+                background-color: mat-color($primary, 300);
+            }
+            25% {
+                background-color: mat-color($primary, 100);
+            }
+            50% {
+                background-color: mat-color($primary, 300);
+            }
+            75% {
+                background-color: mat-color($primary, 100);
+            }
+            100% {
+                background-color: mat-color($primary, 300);
+            }
+        }
+    }
+
+    .carousel {
+        .carousel-wrapper {
+            .orbit-bar {
+                .orbit {
+                    background-color: mat-color($primary);
+
+                    &.active {
+                        background-color: mat-color($accent);
+                    }
+                }
+            }
+        }
+    }
+
+    .chat-list {
+        .ltr {
+            .mat-list-item-content {
+                .avatar,
+                .content {
+                    background-color: mat-color($primary);
+                }
+            }
+        }
+
+        .rtl {
+            .mat-list-item-content {
+                .avatar,
+                .content {
+                    background-color: mat-color($accent);
+                }
+            }
+        }
+    }
+
+    .bg-theme-lang {
+        background-color: mat-color($primary);
+    }
+
     .bg-error {
         background: linear-gradient(to right bottom, mat-color($primary, 900), mat-color($accent, 900));
 
@@ -128,7 +260,8 @@
         }
     }
 
-    .bg-tooltip {
+    .bg-share {
         background-color: mat-color($primary);
+        color: white;
     }
 }

@@ -1,8 +1,8 @@
 $wrap-list: wrap nowrap wrap-reverse;
 $direction-list: row row-reverse column column-reverse;
-$content-list: center start end space-around space-between space-evenly stretch;
-$items-list: center start end stretch baseline;
-$self-list: center start end stretch baseline;
+$content-list: center flex-start flex-end space-around space-between space-evenly stretch;
+$items-list: center flex-start flex-end stretch baseline;
+$self-list: center flex-start flex-end stretch baseline;
 $fill-list: 1 0;
 
 @each $item in $wrap-list {

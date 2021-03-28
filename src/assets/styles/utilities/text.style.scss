@@ -1,0 +1,28 @@
+$font-weight-list: 100 200 300 400 500 600 700 800 900 lighter normal bold bolder;
+$font-size-list: 6 8 10 12 14 16 18 20 24 28 32 36 42 48 56 64 72 96;
+
+@each $item in $font-weight-list {
+    .font-weight-#{$item} {
+        font-weight: $item !important;
+    }
+}
+
+@each $item in $font-size-list {
+    .font-size-#{$item} {
+        font-size: #{$item}px !important;
+    }
+}
+
+$align-list: left center right justify justify-all start end match-parent;
+
+@each $item in $align-list {
+    .text-align-#{$item} {
+        text-align: $item !important;
+    }
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

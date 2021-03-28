@@ -1,0 +1,7 @@
+<div class="alert-wrapper display-flex align-items-center">
+    <mat-icon *ngIf="inputData.status === 'success'">verified</mat-icon>
+    <mat-icon *ngIf="inputData.status === 'warning'">warning</mat-icon>
+    <mat-icon *ngIf="inputData.status === 'error'">error</mat-icon>
+    <mat-icon *ngIf="inputData.status === 'info'">info</mat-icon>
+    <span class="mat-body-2 my-0 ml-50">{{inputData.message}}</span>
+</div>

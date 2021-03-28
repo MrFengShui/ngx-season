@@ -7,7 +7,6 @@ import { VideoPlayerComponent } from "src/app/widgets/vplayer/vplayer.component"
 @Component({
     selector: 'app-home-audio',
     templateUrl: './audio.component.html',
-    styleUrls: ['../home.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AudioComponent implements OnInit, AfterViewInit {

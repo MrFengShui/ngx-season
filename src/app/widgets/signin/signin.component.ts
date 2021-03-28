@@ -3,7 +3,7 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
-    selector: 'app-component-signin',
+    selector: 'app-widgets-signin',
     templateUrl: './signin.component.html'
 })
 export class SigninComponent implements OnInit, AfterViewInit {

@@ -5,17 +5,14 @@ import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@
 import { Subscription } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
-import { SigninComponent } from "src/app/widgets/signin/signin.component";
-
 import { SidenavRouterEntity } from "src/app/models/sidenav.model";
 
 import { HomeSidenavService } from "src/app/services/home.service";
+import { WidgetsChatServiceComponent } from "src/app/widgets/chat/service.component";
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    encapsulation: ViewEncapsulation.Emulated,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
@@ -34,12 +31,13 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
     shortList!: SidenavRouterEntity[];
 
     serviceSub!: Subscription;
+    dialogSub!: Subscription;
 
     constructor(
         private cdr: ChangeDetectorRef,
+        private dialog: MatDialog,
         private route: ActivatedRoute,
         private router: Router,
-        private dialog: MatDialog,
         private sidenavService: HomeSidenavService
     ) {
         this.router.events.pipe(
@@ -79,22 +77,9 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
         if (this.serviceSub !== undefined) {
             this.serviceSub.unsubscribe();
         }
-    }
 
-    handleSigninEvent(event: MouseEvent): void {
-        let mdr: MatDialogRef<SigninComponent, any> = this.dialog.open(SigninComponent, {
-            backdropClass: ['mat-dialog-mask'],
-            disableClose: true,
-            width: '800px'
-        });
-        mdr.addPanelClass(['mat-dialog']);
-    }
-
-    handleScrollEvent(event: MouseEvent): void {
-        let offset = this.content.nativeElement.scrollTop;
-
-        if (offset > this.container.nativeElement.clientHeight / 3) {
-            this.content.nativeElement.scrollTop = 0;
+        if (this.dialogSub !== undefined) {
+            this.dialogSub.unsubscribe();
         }
     }
 
@@ -104,6 +89,36 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
         entities.push(new SidenavRouterEntity(true));
         entities.push(list[6]);
         return entities;
+    }
+
+    handleScrollTopEvent(event: MouseEvent): void {
+        let offset = this.content.nativeElement.scrollTop;
+
+        if (offset > 0) {
+            this.content.nativeElement.scrollTop = 0;
+        }
+    }
+
+    handleScrollBottomEvent(event: MouseEvent): void {
+        let offset = this.content.nativeElement.scrollTop;
+        let delta = this.content.nativeElement.scrollHeight - this.content.nativeElement.clientHeight;
+
+        if (offset < delta) {
+            this.content.nativeElement.scrollTop = delta;
+        }
+    }
+
+    handleChatServiceEvent(event: MouseEvent): void {
+        let cdr: MatDialogRef<WidgetsChatServiceComponent> = this.dialog.open(WidgetsChatServiceComponent, {
+            hasBackdrop: false,
+            position: {
+                bottom: '0',
+                right: '0'
+            },
+            width: '480px'
+        });
+        cdr.addPanelClass(['popup-dialog']);
+        this.dialogSub = cdr.afterClosed().subscribe(flag => console.log('Online Service Closed'));
     }
 
 }

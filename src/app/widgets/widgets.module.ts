@@ -9,12 +9,26 @@ import { PipeModule } from "../pipes/pipe.module";
 import { SigninComponent } from "./signin/signin.component";
 import { AudioPlayerComponent } from "./aplayer/aplayer.component";
 import { VideoPlayerComponent } from "./vplayer/vplayer.component";
+import { AvatarComponent } from "./avatar/avatar.component";
+import { WidgetsAlertComponent } from "./alert/alert.component";
+import { NoticeComponent } from "./notice/notice.component";
+import { WidgetsParagraphHolderComponent } from "./holder/pholder.component";
+import { WidgetsUnitHolderComponent } from "./holder/uholder.component";
+import { WidgetsChatServiceComponent } from "./chat/service.component";
+import { WidgetsCarouselComponent } from "./carousel/carousel.component";
 
 @NgModule({
     declarations: [
+        AvatarComponent,
+        WidgetsAlertComponent,
+        WidgetsChatServiceComponent,
+        NoticeComponent,
         SigninComponent,
         AudioPlayerComponent,
-        VideoPlayerComponent
+        VideoPlayerComponent,
+        WidgetsParagraphHolderComponent,
+        WidgetsUnitHolderComponent,
+        WidgetsCarouselComponent
     ],
     imports: [
         CommonModule,
@@ -24,9 +38,16 @@ import { VideoPlayerComponent } from "./vplayer/vplayer.component";
         PipeModule
     ],
     exports: [
+        AvatarComponent,
+        WidgetsAlertComponent,
+        WidgetsChatServiceComponent,
+        NoticeComponent,
         SigninComponent,
         AudioPlayerComponent,
-        VideoPlayerComponent
+        VideoPlayerComponent,
+        WidgetsParagraphHolderComponent,
+        WidgetsUnitHolderComponent,
+        WidgetsCarouselComponent
     ]
 })
 export class WidgetsModule { }

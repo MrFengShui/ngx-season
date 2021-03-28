@@ -1,0 +1,127 @@
+<div class="p-50">
+    <div class="display-flex align-items-center mb-100">
+        <button mat-raised-button color="primary" class="w-20 mr-50" (click)="expanded = !expanded"
+            [disabled]="!multiple">Toggle All</button>
+        <span class="w-100"></span>
+        <mat-checkbox color="primary" [(ngModel)]="multiple" (change)="listenMultipleChange($event)">Multiple Expansion
+        </mat-checkbox>
+    </div>
+    <mat-accordion [multi]="multiple">
+        <mat-expansion-panel [expanded]="multiple ? expanded : expandFlag === 0" (opened)="expandFlag = 0" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center">
+                    <mat-icon class="mr-50">badge</mat-icon>
+                    Account
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-home-setting-account></app-home-setting-account>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="multiple ? expanded : expandFlag === 1" (opened)="expandFlag = 1" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center">
+                    <mat-icon class="mr-50">security</mat-icon>
+                    Security
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-home-setting-security></app-home-setting-security>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="multiple ? expanded : expandFlag === 2" (opened)="expandFlag = 2" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center">
+                    <mat-icon class="mr-50">notifications</mat-icon>
+                    Notification
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-home-setting-notice></app-home-setting-notice>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="multiple ? expanded : expandFlag === 3" (opened)="expandFlag = 3" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center">
+                    <mat-icon class="mr-50">tungsten</mat-icon>
+                    Mode
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-card class="mat-elevation-z0">
+                <mat-card-title-group>
+                    <span mat-card-sm-image class="bg-share mat-elevation-z8 border-radius-circle p-100">
+                        <img [src]="'../../../../assets/images/logo-short.png'" alt="" width="100%">
+                    </span>
+                    <mat-card-title>Mode Change Title</mat-card-title>
+                    <mat-card-subtitle class="mt-100">Mode Change Subtitle</mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card>
+            <mat-divider class="my-100"></mat-divider>
+            <mat-radio-group>
+                <div class="display-flex justify-content-space-between align-items-center">
+                    <mat-radio-button class="mr-150" color="primary" [value]="'dark'">
+                        <mat-card class="bg-share mat-elevation-z4">
+                            <img mat-card-image [src]="'../../../assets/images/dark.png'" alt="">
+                            <mat-card-content [style.text-align]="'center'">Dark Theme</mat-card-content>
+                        </mat-card>
+                    </mat-radio-button>
+                    <mat-radio-button class="ml-150" color="primary" [value]="'light'">
+                        <mat-card class="bg-share mat-elevation-z4">
+                            <img mat-card-image [src]="'../../../assets/images/light.png'" alt="">
+                            <mat-card-content [style.text-align]="'center'">Light Theme</mat-card-content>
+                        </mat-card>
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="multiple ? expanded : expandFlag === 4" (opened)="expandFlag = 4" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center">
+                    <mat-icon class="mr-50">palette</mat-icon>
+                    Theme
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-card class="mat-elevation-z0">
+                <mat-card-title-group>
+                    <span mat-card-sm-image class="bg-share mat-elevation-z8 border-radius-circle p-100">
+                        <img [src]="'../../../../assets/images/logo-short.png'" alt="" width="100%">
+                    </span>
+                    <mat-card-title>Theme Change Title</mat-card-title>
+                    <mat-card-subtitle class="mt-100">Theme Change Subtitle</mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card>
+            <mat-divider class="my-100"></mat-divider>
+            <mat-radio-group>
+                <div class="display-grid grid-col-auto g-100">
+                    <mat-radio-button color="primary" [value]="item.name" *ngFor="let item of themeList">
+                        <mat-card
+                            class="{{'bg-theme-' + item.name}} mat-elevation-z4 display-flex justify-content-center align-items-center"
+                            [style.width]="'128px'" [style.height]="'80px'">{{item.text}}</mat-card>
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="multiple ? expanded : expandFlag === 5" (opened)="expandFlag = 5" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="align-items-center">
+                    <mat-icon class="mr-50">translate</mat-icon>
+                    Language
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-card class="mat-elevation-z0">
+                <mat-card-title-group>
+                    <span mat-card-sm-image class="bg-share mat-elevation-z8 border-radius-circle p-100">
+                        <img [src]="'../../../../assets/images/logo-short.png'" alt="" width="100%">
+                    </span>
+                    <mat-card-title>Language Change Title</mat-card-title>
+                    <mat-card-subtitle class="mt-100">Language Change Subtitle</mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card>
+            <mat-divider class="my-100"></mat-divider>
+            <mat-radio-group>
+                <div class="display-grid grid-col-auto g-100">
+                    <mat-radio-button color="primary" [value]="item.code" *ngFor="let item of langList">
+                        <mat-card
+                            class="bg-theme-lang mat-elevation-z4 display-flex justify-content-center align-items-center"
+                            [style.text-align]="'center'" [style.width]="'128px'" [style.height]="'80px'">
+                            {{item.text}}</mat-card>
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

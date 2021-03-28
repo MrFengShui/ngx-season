@@ -1,0 +1,53 @@
+<div mat-dialog-title class="pr-25">
+    <mat-icon class="scale-icon">chat</mat-icon>
+    <span class="flex-grow-1 flex-shrink-1 flex-basis-auto ml-50">Online Service</span>
+    <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="chat-content px-0" [style.height]="'480px'" #content>
+    <mat-list class="chat-list p-0" disableRipple>
+        <ng-container *ngFor="let item of array">
+            <mat-list-item class="ltr my-50" *ngIf="item.messageRole === 1">
+                <div class="display-flex flex-row w-100">
+                    <span class="avatar mat-elevation-z8 border-radius-circle mr-25 p-50" [style.width]="'32px'"
+                        [style.height]="'32px'">
+                        <img [src]="item.messageAvatar" alt="" width="100%">
+                    </span>
+                    <mat-card class="content mat-elevation-z8 p-50 ml-25 w-50">
+                        <h4 class="font-size-8 text-align-left my-0 mb-75" matLine>{{item.messageDatetime | date:
+                            'yyyy-MM-dd hh:mm:ss'}}</h4>
+                        <p class="font-size-8 text-align-left my-0 mt-75" matLine [style.white-space]="'normal'">
+                            {{item.messageContent}}</p>
+                    </mat-card>
+                </div>
+            </mat-list-item>
+            <mat-list-item class="rtl my-50" *ngIf="item.messageRole === -1">
+                <div class="display-flex flex-row-reverse w-100">
+                    <span class="avatar mat-elevation-z8 border-radius-circle ml-25 p-50" [style.width]="'32px'"
+                        [style.height]="'32px'">
+                        <img [src]="item.messageAvatar" alt="" width="100%">
+                    </span>
+                    <mat-card class="content mat-elevation-z8 p-50 mr-25 w-50">
+                        <h4 class="font-size-8 text-align-right my-0 mb-75" matLine>{{item.messageDatetime | date:
+                            'yyyy-MM-dd hh:mm:ss'}}</h4>
+                        <p class="font-size-8 text-align-right my-0 mt-75" matLine [style.white-space]="'normal'">
+                            {{item.messageContent}}</p>
+                    </mat-card>
+                </div>
+            </mat-list-item>
+        </ng-container>
+    </mat-list>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions>
+    <mat-form-field class="flex-grow-1 flex-shrink-1 flex-basis-auto mr-50">
+        <mat-label>Text & Emoji</mat-label>
+        <input matInput type="text" maxlength="100" placeholder="Enter your text and emoji" #text>
+        <button mat-icon-button matSuffix>
+            <mat-icon>emoji_emotions</mat-icon>
+        </button>
+        <mat-hint align="end">{{text.value?.length || 0}}/100</mat-hint>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="ml-50">Send</button>
+</mat-dialog-actions>

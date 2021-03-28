@@ -1,13 +1,10 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, ViewEncapsulation } from "@angular/core";
 import { MatSliderChange } from "@angular/material/slider";
 import { interval, Subscription } from "rxjs";
-import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'app-widgets-aplayer',
     templateUrl: './aplayer.component.html',
-    styleUrls: ['../widgets.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {

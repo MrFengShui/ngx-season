@@ -8,7 +8,9 @@
         </mat-card-content>
         <mat-card-content class="display-flex justify-content-center flex-column ml-100">
             <img [src]="'../../../assets/images/logo-short.png'" alt="" width="256" height="256">
-            <a mat-raised-button color="accent" class="mt-100" [routerLink]="['/']">Go Back to Home</a>
+            <a mat-raised-button color="accent" class="mt-100" [routerLink]="['/']">Go Back to Home {{flag ? '(' + count
+                + ')' :
+                ''}}</a>
         </mat-card-content>
     </mat-card>
 </div>

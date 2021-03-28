@@ -5,9 +5,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
     selector: 'app-signup',
-    templateUrl: './signup.component.html',
-    styleUrls: ['../other.component.scss'],
-    encapsulation: ViewEncapsulation.Emulated
+    templateUrl: './signup.component.html'
 })
 export class SignupComponent implements OnInit {
 

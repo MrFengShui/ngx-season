@@ -6,9 +6,7 @@ import { VideoPlayerComponent } from "src/app/widgets/vplayer/vplayer.component"
 
 @Component({
     selector: 'app-home-video',
-    templateUrl: './video.component.html',
-    styleUrls: ['../home.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './video.component.html'
 })
 export class VideoComponent implements OnInit, AfterViewInit {
 

@@ -1,0 +1,12 @@
+<div class="carousel-wrapper">
+    <div class="image-list display-flex flex-row align-items-center">
+        <a matRipple [routerLink]="item === undefined ? ['/'] : item.link" *ngFor="let item of images; index as i">
+            <img class="image-item" [src]="item === undefined ? '' : item.source" alt="" [style.width]="fitWidth"
+                [style.height]="fitHeight" #imageItem>
+        </a>
+    </div>
+    <div class="orbit-bar display-flex flex-row justify-content-center">
+        <div class="orbit mx-50" (mouseenter)="handleSelectEnterEvent($event, i)"
+            (mouseleave)="handleSelectExitEvent($event, i)" #imageOrbit *ngFor="let item of images; index as i"></div>
+    </div>
+</div>

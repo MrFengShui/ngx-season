@@ -1,0 +1,6 @@
+$primary: mat-palette($mat-amber, 500, 100, 900);
+$accent: mat-palette($mat-blue, 500, 100, 900);
+$warn: mat-palette($mat-purple, A400, A100, A700);
+
+$amber-dark-theme: mat-dark-theme($primary, $accent, $warn);
+$amber-light-theme: mat-light-theme($primary, $accent, $warn);

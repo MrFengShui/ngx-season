@@ -1,9 +1,15 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+@import "./utilities/border.style.scss";
 @import "./utilities/display.style.scss";
 @import "./utilities/flex.style.scss";
 @import "./utilities/gap.style.scss";
+@import "./utilities/popup.style.scss";
 @import "./utilities/size.style.scss";
+@import "./utilities/text.style.scss";
+
+@import "./global/views.style.scss";
+@import "./global/widgets.style.scss";
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -20,47 +26,19 @@ body {
     overflow: hidden;
 }
 
-.text-overflow {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+.rotate-icon {
+    animation-name: rotate;
+    animation-duration: 2.5s;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 
-.mat-dialog-mask {
-    opacity: 0.75 !important;
-}
-
-.mat-dialog {
-    max-width: 100% !important;
-    max-height: 100% !important;
-
-    .mat-dialog-container {
-        padding: 0;
-        overflow: hidden;
-
-        .mat-dialog-title {
-            display: flex;
-            place-items: center;
-            margin: 0;
-            padding: 1em;
-
-            .mat-icon {
-                margin-right: 0.5em;
-                transform: scale(1.5);
-            }
+    @keyframes rotate {
+        from {
+            transform: rotate(0);
         }
-
-        .mat-dialog-content {
-            height: calc(100% - 72px - 68px);
-            max-height: 100vh;
-            padding: 0.5em 1em;
-            margin: 0;
-        }
-
-        .mat-dialog-actions {
-            min-height: auto;
-            padding: 1em 0;
-            margin: 0;
+        to {
+            transform: rotate(360deg);
         }
     }
 }

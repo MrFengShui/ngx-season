@@ -1,0 +1,124 @@
+<button mat-icon-button class="ml-50" [matTooltip]="'Account'" [matTooltipPosition]="'below'"
+    [matTooltipClass]="'bg-share'" (click)="handleSigninEvent($event)" *ngIf="!logged">
+    <mat-icon>account_circle</mat-icon>
+</button>
+<button mat-mini-fab color="accent" [matMenuTriggerFor]="profileMenu" *ngIf="logged">
+    <img [src]="'../../../assets/images/logo-short.png'" alt="" width="24" height="24">
+</button>
+<mat-menu class="popup-menu" #profileMenu="matMenu">
+    <mat-card class="bg-share mat-elevation-z0 border-radius-none">
+        <mat-card-title-group>
+            <mat-card-title>Angular</mat-card-title>
+            <mat-card-subtitle>Membership</mat-card-subtitle>
+            <img mat-card-sm-image class="ml-250" [src]="'../../../assets/images/logo-short.png'" alt="">
+        </mat-card-title-group>
+        <mat-card-content>Enter something here...</mat-card-content>
+        <mat-card-actions class="display-grid" [style.grid-template-columns]="'1fr 1fr 1fr'" [style.gap]="'0.5em'">
+            <a mat-button [routerLink]="['/']" [matTooltip]="'Subscriptions'" [matTooltipPosition]="'below'"
+                [matTooltipClass]="'bg-share'">
+                <span class="display-flex flex-column align-items-center pb-25">
+                    <span class="mat-body-2 mb-0">0</span>
+                    <mat-icon>subscriptions</mat-icon>
+                </span>
+            </a>
+            <a mat-button [routerLink]="['/']" [matTooltip]="'Audio Owned'" [matTooltipPosition]="'below'"
+                [matTooltipClass]="'bg-share'">
+                <span class="display-flex flex-column align-items-center pb-25">
+                    <span class="mat-body-2 mb-0">0</span>
+                    <mat-icon>headset</mat-icon>
+                </span>
+            </a>
+            <a mat-button [routerLink]="['/']" [matTooltip]="'Video Owned'" [matTooltipPosition]="'below'"
+                [matTooltipClass]="'bg-share'">
+                <span class="display-flex flex-column align-items-center pb-25">
+                    <span class="mat-body-2 mb-0">0</span>
+                    <mat-icon>tv</mat-icon>
+                </span>
+            </a>
+            <a mat-button [routerLink]="['/']" [matTooltip]="'Article Owned'" [matTooltipPosition]="'below'"
+                [matTooltipClass]="'bg-share'">
+                <span class="display-flex flex-column align-items-center pb-25">
+                    <span class="mat-body-2 mb-0">0</span>
+                    <mat-icon>article</mat-icon>
+                </span>
+            </a>
+            <a mat-button [routerLink]="['/']" [matTooltip]="'Blog Owned'" [matTooltipPosition]="'below'"
+                [matTooltipClass]="'bg-share'">
+                <span class="display-flex flex-column align-items-center pb-25">
+                    <span class="mat-body-2 mb-0">0</span>
+                    <mat-icon>edit</mat-icon>
+                </span>
+            </a>
+            <a mat-button [routerLink]="['/']" [matTooltip]="'Gallery Owned'" [matTooltipPosition]="'below'"
+                [matTooltipClass]="'bg-share'">
+                <span class="display-flex flex-column align-items-center pb-25">
+                    <span class="mat-body-2 mb-0">0</span>
+                    <mat-icon>image</mat-icon>
+                </span>
+            </a>
+        </mat-card-actions>
+    </mat-card>
+    <a mat-menu-item [routerLink]="['/']">
+        <mat-icon>credit_card</mat-icon>
+        Membership
+    </a>
+    <button mat-menu-item [matMenuTriggerFor]="libMenu">
+        <mat-icon>store</mat-icon>
+        Library
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="preferMenu">
+        <mat-icon>handyman</mat-icon>
+        Preference
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item [matMenuTriggerFor]="modeMenu">
+        <mat-icon>tungsten</mat-icon>
+        Mode: {{modeSelectText}}
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="themeMenu">
+        <mat-icon>palette</mat-icon>
+        Theme: {{themeSelectText}}
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="langMenu">
+        <mat-icon>translate</mat-icon>
+        Language: {{langSelectText}}
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logged = false">
+        <mat-icon>logout</mat-icon>
+        Sign Out
+    </button>
+</mat-menu>
+<mat-menu #libMenu="matMenu">
+    <a mat-menu-item [routerLink]="item.link" *ngFor="let item of libList">
+        <mat-icon>{{item.icon}}</mat-icon>
+        {{item.name}}
+    </a>
+</mat-menu>
+<mat-menu #preferMenu="matMenu">
+    <a mat-menu-item [routerLink]="item.link" *ngFor="let item of preferList">
+        <mat-icon>{{item.icon}}</mat-icon>
+        {{item.name}}
+    </a>
+</mat-menu>
+<mat-menu #modeMenu="matMenu">
+    <mat-radio-group [(ngModel)]="modeSelectCode" (change)="listenModeChange($event)">
+        <span mat-menu-item (click)="$event.stopPropagation()" *ngFor="let item of modeList">
+            <mat-radio-button [value]="item.mode">{{item.text}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #themeMenu="matMenu">
+    <mat-radio-group [(ngModel)]="themeSelectCode" (change)="listenThemeChange($event)">
+        <span mat-menu-item (click)="$event.stopPropagation()" *ngFor="let item of themeList">
+            <mat-radio-button [value]="item.name">{{item.text}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #langMenu="matMenu">
+    <mat-radio-group [(ngModel)]="langSelectCode" (change)="listenLanguageChange($event)">
+        <span mat-menu-item (click)="$event.stopPropagation()" *ngFor="let item of langList">
+            <mat-radio-button [value]="item.code">{{item.text}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>

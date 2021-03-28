@@ -1,1 +1,70 @@
-<div [style.height]="'2160px'">Welcome Page</div>
+<div class="welcome-wrapper display-flex flex-column p-50">
+    <section class="mb-100">
+        <div class="display-flex align-items-center">
+            <mat-icon class="title-icon mr-25">{{recommend.icon}}</mat-icon>
+            <div class="display-flex flex-column flex-grow-1 flex-shrink-1 flex-basis-auto">
+                <h1 class="font-size-16 my-0">{{recommend.name}}</h1>
+                <p class="font-size-8 my-0">Total: {{recommend.total}}</p>
+            </div>
+            <button mat-raised-button color="primary">
+                <mat-icon class="rotate-icon">autorenew</mat-icon>
+                Refresh
+            </button>
+        </div>
+        <mat-divider class="my-100"></mat-divider>
+        <div class="block-box display-grid g-100">
+            <mat-card class="block-main mat-elevation-z0 p-50">
+                <mat-card-content class="mb-50">
+                    <app-widgets-carousel [images]="recommend.carousel" [fitWidth]="'100%'"
+                        (subject)="listenSubjectChange($event)"></app-widgets-carousel>
+                </mat-card-content>
+                <mat-card-content class="font-size-12 font-weight-bold text-align-center">{{subject}}</mat-card-content>
+            </mat-card>
+            <a matRipple class="block" [routerLink]="item.link" *ngFor="let item of recommend.units">
+                <mat-card class="mat-elevation-z0 display-flex p-50">
+                    <img [src]="item.source" alt="" width="100%">
+                </mat-card>
+            </a>
+        </div>
+    </section>
+    <section class="category display-flex flex-row {{i === sections.length - 1 ? 'mt-100' : 'my-100'}}"
+        *ngFor="let section of sections; index as i">
+        <div class="flex-grow-1 flex-shrink-1 flex-basis-auto mr-50" [style.height]="'fit-content'" #categoryMain>
+            <div class="display-flex align-items-center">
+                <mat-icon class="title-icon mr-25">{{section.icon}}</mat-icon>
+                <div class="display-flex flex-column flex-grow-1 flex-shrink-1 flex-basis-auto">
+                    <h1 class="font-size-16 my-0">{{section.name}}</h1>
+                    <p class="font-size-8 my-0">Total: {{section.total}}</p>
+                </div>
+                <button mat-raised-button color="primary">
+                    <mat-icon class="rotate-icon">autorenew</mat-icon>
+                    Refresh
+                </button>
+            </div>
+            <mat-divider class="my-100"></mat-divider>
+            <div class="unit-box display-grid g-100">
+                <a matRipple [routerLink]="['/']" *ngFor="let unit of section.units">
+                    <mat-card class="mat-elevation-z0 p-50">
+                        <app-widgets-unit-holder></app-widgets-unit-holder>
+                    </mat-card>
+                </a>
+            </div>
+        </div>
+        <mat-card class="rank mat-elevation-z0 ml-50" [style.height]="categoryMain.clientHeight - 32 + 'px'">
+            <mat-card-header>
+                <span mat-card-avatar class="bg-share display-flex justify-content-center align-items-center">
+                    <mat-icon>sort</mat-icon>
+                </span>
+                <mat-card-title class="font-size-16">Rank of {{section.name}}</mat-card-title>
+                <mat-card-subtitle class="font-size-8">Update: {{update | date: 'yyyy-MM-dd'}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content class="content scroll-share">
+                <mat-nav-list>
+                    <a mat-list-item [routerLink]="['/']" *ngFor="let rank of section.ranks; index as j">List Item {{j +
+                        1}}</a>
+                </mat-nav-list>
+            </mat-card-content>
+        </mat-card>
+    </section>
+</div>

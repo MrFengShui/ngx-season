@@ -1,6 +1,6 @@
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-pink, A200, A100, A400);
-$warn: mat-palette($mat-orange);
+$primary: mat-palette($mat-indigo, 500, 100, 900);
+$accent: mat-palette($mat-pink, 500, 100, 900);
+$warn: mat-palette($mat-yellow, A400, A200, A700);
 
 $indigo-dark-theme: mat-dark-theme($primary, $accent, $warn);
 $indigo-light-theme: mat-light-theme($primary, $accent, $warn);

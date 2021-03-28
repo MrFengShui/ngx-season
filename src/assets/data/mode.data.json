@@ -1,0 +1,10 @@
+[
+    {
+        "mode": "dark",
+        "text": "Dark Mode"
+    },
+    {
+        "mode": "light",
+        "text": "Light Mode"
+    }
+]

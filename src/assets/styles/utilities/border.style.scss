@@ -1,0 +1,15 @@
+$radius-list: 0 4 8 12 16 20;
+
+@each $item in $radius-list {
+    .border-radius-#{$item} {
+        border-radius: #{$item}px !important;
+    }
+}
+
+.border-radius-none {
+    border-radius: 0 !important;
+}
+
+.border-radius-circle {
+    border-radius: 50% !important;
+}
