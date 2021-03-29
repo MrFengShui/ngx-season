@@ -25,4 +25,4 @@ jobs:
     - run: npm install -g @angular/cli
     - run: npm install
     - run: npm ci
-    - run: npm run build --base-href="/"
+    - run: npm run build --base-href="https://mrfengshui.github.io/angular-project"
