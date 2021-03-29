@@ -25,6 +25,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: npm install -g @angular/cli
+    - run: npm install
     - run: npm ci
-    - run: npm run build --if-present
+    - run: npm run build --base-href="/angular-project/"
     - run: npm test
