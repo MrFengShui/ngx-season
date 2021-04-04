@@ -4,6 +4,26 @@ $radius-list: 0 4 8 12 16 20;
     .border-radius-#{$item} {
         border-radius: #{$item}px !important;
     }
+
+    .bt-radius-#{$item} {
+        border-top-left-radius: #{$item}px !important;
+        border-top-right-radius: #{$item}px !important;
+    }
+
+    .bb-radius-#{$item} {
+        border-bottom-left-radius: #{$item}px !important;
+        border-bottom-right-radius: #{$item}px !important;
+    }
+
+    .bl-radius-#{$item} {
+        border-top-left-radius: #{$item}px !important;
+        border-bottom-left-radius: #{$item}px !important;
+    }
+
+    .br-radius-#{$item} {
+        border-top-right-radius: #{$item}px !important;
+        border-bottom-right-radius: #{$item}px !important;
+    }
 }
 
 .border-radius-none {

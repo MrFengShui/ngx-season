@@ -6,7 +6,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "vata": {
+        "angular-project": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -23,15 +23,18 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/vata",
+                        "baseHref": "/app/",
+                        "outputPath": "dist/angular-project",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/cache",
+                            "src/locales",
+                            "src/tests"
                         ],
                         "styles": [
                             "src/assets/styles/global.style.scss",
@@ -69,25 +72,32 @@
                         }
                     }
                 },
+                "deploy": {
+                    "builder": "angular-cli-ghpages:deploy",
+                    "options": {
+                        "base-href": "/angular-project/"
+                    }
+                },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "vata:build",
+                        "browserTarget": "angular-project:build",
                         "disableHostCheck": true,
                         "host": "0.0.0.0",
                         "port": 8080,
-                        "verbose": true
+                        "verbose": true,
+                        "proxyConfig": "src/proxy.config.json"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "vata:build:production"
+                            "browserTarget": "angular-project:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "vata:build"
+                        "browserTarget": "angular-project:build"
                     }
                 },
                 "test": {
@@ -98,11 +108,14 @@
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/cache",
+                            "src/locales",
+                            "src/tests"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/assets/styles/global.style.scss",
+                            "src/assets/styles/theme.style.scss"
                         ],
                         "scripts": []
                     }
@@ -124,16 +137,16 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "vata:serve"
+                        "devServerTarget": "angular-project:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "vata:serve:production"
+                            "devServerTarget": "angular-project:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "vata"
+    "defaultProject": "angular-project"
 }

@@ -1,0 +1,97 @@
+{
+    "10": [
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 10s"
+        }
+    ],
+    "30": [
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 30s"
+        }
+    ],
+    "60": [
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 60s - 1"
+        },
+        {
+            "messageRole": -1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 60s - 2"
+        }
+    ],
+    "120": [
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 120s - 1"
+        },
+        {
+            "messageRole": -1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 120s - 2"
+        },
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 120s - 3"
+        },
+        {
+            "messageRole": -1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 120s - 4"
+        }
+    ],
+    "240": [
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 240s - 1"
+        },
+        {
+            "messageRole": -1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 240s - 2"
+        },
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 240s - 3"
+        },
+        {
+            "messageRole": -1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 240s - 4"
+        },
+        {
+            "messageRole": 1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 240s - 5"
+        },
+        {
+            "messageRole": -1,
+            "messageAvatar": "assets/images/profile.png",
+            "messageDatetime": "April 1, 2021",
+            "messageContent": "Message Content 240s - 6"
+        }
+    ],
+    "480": []
+}

@@ -1,0 +1,57 @@
+<div mat-dialog-title>
+    <mat-icon class="scale-icon">login</mat-icon>
+    <span class="ml-50">Sign In</span>
+</div>
+<mat-dialog-content>
+    <div class="display-flex flex-nowrap">
+        <div class="display-flex flex-column justify-content-center align-items-center w-100">
+            <img [src]="'assets/images/qr-code.png'" alt="" width="256" height="256">
+            <span class="mat-heading mb-0 mt-100">Scan this QR-Code to sign in</span>
+        </div>
+        <div class="w-100">
+            <form>
+                <mat-form-field class="w-100" [floatLabel]="'never'" [hintLabel]="'Username'" [appearance]="'outline'">
+                    <mat-icon class="mr-50" matPrefix>person</mat-icon>
+                    <input matInput type="text" maxlength="10" placeholder="Enter your username" #username>
+                    <mat-hint align="end">{{username.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="w-100 my-100" [floatLabel]="'never'" [hintLabel]="'Password'"
+                    [appearance]="'outline'">
+                    <mat-icon class="mr-50" matPrefix>lock</mat-icon>
+                    <input matInput [type]="visible ? 'text' : 'password'" maxlength="10"
+                        placeholder="Enter your password" #password>
+                    <mat-hint align="end">{{password.value?.length || 0}}/10</mat-hint>
+                    <button mat-icon-button color="accent" (click)="visible = !visible" matSuffix>
+                        <mat-icon>{{visible ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div class="display-flex justify-content-space-between align-items-center">
+                    <mat-checkbox>Remember me</mat-checkbox>
+                    <a mat-button color="accent" [routerLink]="['/other/signup']" mat-dialog-close>Create a new
+                        account</a>
+                </div>
+            </form>
+            <div class="display-flex flex-items-center my-100">
+                <mat-divider class="w-100" [style.position]="'inherit'"></mat-divider>
+                <span class="mx-100">OR</span>
+                <mat-divider class="w-100" [style.position]="'inherit'"></mat-divider>
+            </div>
+            <div class="display-flex justify-content-space-around flex-items-center">
+                <button mat-fab color="accent">
+                    <mat-icon svgIcon="google_logo" [style.transform]="'scale(1.5)'"></mat-icon>
+                </button>
+                <button mat-fab color="accent">
+                    <mat-icon svgIcon="facebook_logo" [style.transform]="'scale(1.5)'"></mat-icon>
+                </button>
+                <button mat-fab color="accent">
+                    <mat-icon svgIcon="twitter_logo" [style.transform]="'scale(1.5)'"></mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-divider class="mt-100"></mat-divider>
+<mat-dialog-actions class="justify-content-space-around">
+    <button mat-raised-button color="primary" class="w-25" [mat-dialog-close]="true">Login</button>
+    <button mat-raised-button color="accent" class="w-25" [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>

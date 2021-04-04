@@ -1,3 +1,8 @@
-<div class="app-widget-tracker-wrapper">
-
+<div class="tracker-wrapper display-flex flex-column justify-content-center">
+    <mat-slider class="slider w-100" color="primary" [min]="minValue" [max]="maxValue" [value]="value"
+        (input)="listenValueChange($event)" #slider></mat-slider>
+    <div class="progress">
+        <mat-progress-bar color="primary" [mode]="'buffer'" [value]="slider.percent * 100" [bufferValue]="bufferValue">
+        </mat-progress-bar>
+    </div>
 </div>

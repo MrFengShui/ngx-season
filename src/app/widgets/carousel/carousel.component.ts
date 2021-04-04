@@ -80,7 +80,7 @@ export class WidgetsCarouselComponent implements OnInit, OnDestroy, AfterViewIni
     private select(index: number): void {
         this.items.forEach(item => this.render.setAttribute(item.nativeElement, 'class', 'image-item'));
         this.orbits.forEach(item => this.render.setAttribute(item.nativeElement, 'class', 'orbit mx-50'));
-        index = index % 4;
+        index = index % this.images.length;
         this.render.setAttribute(this.items.get(index)?.nativeElement, 'class', 'image-fade');
         this.render.setAttribute(this.orbits.get(index)?.nativeElement, 'class', 'orbit mx-50 active');
         this.subjectChange.emit(this.images[index]?.subject);

@@ -1,46 +1,40 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild, ViewEncapsulation } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
 import { MatSliderChange } from "@angular/material/slider";
-import { interval, Subscription } from "rxjs";
-import { take } from 'rxjs/operators';
+
+import { ROTATE_180 } from "src/app/animations/rotate.animation";
+
+import { VideoPlayerStreamService } from "src/app/services/player.service";
+
+import { detectMouseState } from "src/app/utils/cursor.utils";
 
 @Component({
     selector: 'app-widgets-vplayer',
     templateUrl: './vplayer.component.html',
+    animations: [ROTATE_180],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoPlayerComponent implements OnChanges, OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+export class VideoPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
+    @Input('poster') poster!: string;
     @Input('source') source!: string;
-    @Input('overlay') overlay!: boolean;
-    @Input('append') append!: boolean;
-    @Input() size!: number;
-    @Input() opened!: boolean;
+    @Input('overlap') overlap: boolean = false;
 
-    @Output() sizeChange: EventEmitter<number> = new EventEmitter();
-    @Output() openedChange: EventEmitter<boolean> = new EventEmitter();
+    @Output('current') currentTimeChange: EventEmitter<number> = new EventEmitter();
 
     @ViewChild('container', { read: ElementRef, static: true })
     container!: ElementRef<HTMLDivElement>;
 
-    @ViewChild('placeholder', { read: ElementRef, static: true })
-    placeholder!: ElementRef<HTMLDivElement>;
-
-    @ViewChild('playerBox', { read: ElementRef, static: true })
-    playerBox!: ElementRef<HTMLDivElement>;
-
     @ViewChild('player', { read: ElementRef, static: true })
     player!: ElementRef<HTMLVideoElement>;
 
-    @ViewChild('controller', { read: ElementRef, static: true })
-    controller!: ElementRef<HTMLVideoElement>;
+    @HostBinding('class') class: string = 'video-player';
 
-    @HostBinding('class') class!: string;
+    buffer!: number;
+    isFullscreen: boolean = false;
+    isOpened: boolean = false;
+    isHidden: boolean = true;
+    isMaximum: boolean = false;
 
-    isFullscreen!: boolean;
-    isPaused!: boolean;
-    currentTime!: number;
-
-    timer!: Subscription;
     speedSelected!: number;
     qualitySelected!: number;
     captionSelected!: string;
@@ -49,28 +43,12 @@ export class VideoPlayerComponent implements OnChanges, OnInit, OnDestroy, After
     qualityList!: number[];
     captionList!: any[];
 
-    width!: number;
-    height!: number;
-
     constructor(
         private cdr: ChangeDetectorRef,
-        private render: Renderer2
+        private vpsService: VideoPlayerStreamService
     ) { }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.overlay !== undefined && !changes.overlay.firstChange) {
-            this.overlay = changes.overlay.currentValue;
-            this.overlayAction(this.overlay);
-        }
-    }
-
     ngOnInit() {
-        this.class = 'video-player';
-
-        this.isFullscreen = false;
-        this.isPaused = true;
-        this.currentTime = 0.0;
-
         this.speedSelected = 1.0;
         this.speedList = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
         this.qualitySelected = 1080;
@@ -82,60 +60,20 @@ export class VideoPlayerComponent implements OnChanges, OnInit, OnDestroy, After
     }
 
     ngAfterViewInit() {
-        this.width = this.container.nativeElement.clientWidth - 8;
-        this.height = this.width * 9 / 16;
-    }
-
-    ngAfterViewChecked() {
-        let tempSize: number = this.container.nativeElement.clientWidth - 8;
-
-        if (tempSize !== this.width) {
-            this.width = tempSize;
-            this.height = this.width * 9 / 16;
-            this.cdr.detectChanges();
-            this.size = this.height;
-            this.sizeChange.emit(this.size);
-        }
-
-        this.cdr.markForCheck();
+        // this.vpsService.open('tests/media/test_video.mp4', this.player.nativeElement);
+        detectMouseState(document.body, 3000, (flag: boolean) => {
+            if (flag) {
+                this.isHidden = false;
+            } else {
+                this.isHidden = true;
+                this.cdr.detectChanges();
+                this.cdr.markForCheck();
+            }
+        });
     }
 
     ngOnDestroy() {
-        if (this.timer !== undefined) {
-            this.timer.unsubscribe();
-        }
-    }
-
-    @HostListener('mouseenter', ['$event'])
-    handleEnterEvent(event: MouseEvent): void {
-        event.preventDefault();
-        this.render.removeClass(this.controller.nativeElement, 'hidden');
-    }
-
-    @HostListener('mouseleave', ['$event'])
-    handleLeaveEvent(event: MouseEvent): void {
-        event.preventDefault();
-        let count: number = 3;
-
-        if (!this.controller.nativeElement.classList.contains('hidden')) {
-            this.timer = interval(1000).pipe(take(count)).subscribe(value => {
-                if (value === count - 1) {
-                    this.render.addClass(this.controller.nativeElement, 'hidden');
-                    this.timer.unsubscribe();
-                }
-            });
-        }
-    }
-
-    @HostListener('mousemove', ['$event'])
-    handleMoveEvent(event: MouseEvent): void {
-        this.handleEnterEvent(event);
-    }
-
-    @HostListener('click', ['$event'])
-    handleClickEvent(event: MouseEvent): void {
-        event.preventDefault();
-        this.render.addClass(this.controller.nativeElement, 'hidden');
+        // this.vpsService.close();
     }
 
     @HostListener('document:fullscreenchange', ['$event'])
@@ -146,107 +84,68 @@ export class VideoPlayerComponent implements OnChanges, OnInit, OnDestroy, After
         this.isFullscreen = !this.isFullscreen;
     }
 
-    listenCurrentTimeChange(event: Event): void {
-        this.currentTime = this.player.nativeElement.currentTime;
+    listenLoadedDataChange(event: Event): void {
+        let ranges: TimeRanges = this.player.nativeElement.buffered;
+        console.log('Loaded Data');
     }
 
-    handlePlayPauseEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
+    listenLoadedMetadataChange(event: Event): void {
+        let ranges: TimeRanges = this.player.nativeElement.buffered;
+        console.log('Loaded Metadata');
+    }
 
-        if (this.isPaused) {
-            this.player.nativeElement.play();
-        } else {
-            this.player.nativeElement.pause();
+    listenLoadStartChange(event: Event): void {
+        let ranges: TimeRanges = this.player.nativeElement.buffered;
+        this.cdr.detectChanges();
+        this.cdr.markForCheck();
+
+    }
+
+    listenProgressChange(event: Event): void {
+        let ranges: TimeRanges = this.player.nativeElement.buffered;
+
+        if (ranges.length !== 0) {
+            this.buffer = (ranges.end(ranges.length - 1) - ranges.start(0)) * 100.0 / this.player.nativeElement.duration;
         }
-
-        this.isPaused = !this.isPaused;
     }
 
-    handleUpVolumeEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
+    listenCurrentTimeChange(event: Event): void {
+        this.currentTimeChange.emit(this.player.nativeElement.currentTime);
+    }
+
+    handleVolumeUpEvent(event: MouseEvent): void {
         let volume: number = this.player.nativeElement.volume;
         let predict: number = parseFloat((volume + 0.05).toFixed(2));
-
-        if (predict <= 1.0) {
-            volume = parseFloat((volume + 0.05).toFixed(2));
-        }
-
-        this.player.nativeElement.volume = volume;
+        this.player.nativeElement.volume = predict <= 1.0
+            ? parseFloat((volume + 0.05).toFixed(2)) : 1.0;
     }
 
-    handleDownVolumeEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
+    handleVolumeDownEvent(event: MouseEvent): void {
         let volume: number = this.player.nativeElement.volume;
         let predict: number = parseFloat((volume - 0.05).toFixed(2));
-
-        if (predict >= 0.0) {
-            volume = parseFloat((volume - 0.05).toFixed(2));
-        }
-
-        this.player.nativeElement.volume = volume;
+        this.player.nativeElement.volume = predict >= 0.0
+            ? parseFloat((volume - 0.05).toFixed(2)) : 0.0;
     }
 
     handleDragTimeEvent(change: MatSliderChange): void {
-        this.currentTime = change.value || this.currentTime;
-        this.player.nativeElement.currentTime = this.currentTime;
+        this.player.nativeElement.currentTime = change.value || 0.0;
     }
 
-    handleUpTimeEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
+    handleForwardEvent(event: MouseEvent): void {
         let time: number = this.player.nativeElement.currentTime;
         let predict: number = parseFloat((time + 30.0).toFixed(9));
-
-        if (predict <= this.player.nativeElement.duration) {
-            time = parseFloat((time + 30.0).toFixed(9));
-        }
-
-        this.player.nativeElement.currentTime = time;
+        this.player.nativeElement.currentTime = predict <= this.player.nativeElement.duration
+            ? parseFloat((time + 30.0).toFixed(9)) : this.player.nativeElement.duration;
     }
 
-    handleDownTimeEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
+    handleBackwardEvent(event: MouseEvent): void {
         let time: number = this.player.nativeElement.currentTime;
         let predict: number = parseFloat((time - 30.0).toFixed(9));
-
-        if (predict >= 0.0) {
-            time = parseFloat((time - 30.0).toFixed(9));
-        }
-
-        this.player.nativeElement.currentTime = time;
-    }
-
-    handleStopPropagationEvent(event: MouseEvent): void {
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-    }
-
-    handleOverlayEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
-        this.overlay = !this.overlay;
-        this.overlayAction(this.overlay);
-    }
-
-    private overlayAction(flag: boolean): void {
-        if (flag) {
-            this.render.addClass(this.playerBox.nativeElement, 'player-overlay');
-            this.render.addClass(this.playerBox.nativeElement, 'mat-elevation-z4');
-            this.render.removeClass(this.placeholder.nativeElement, 'display-none');
-        } else {
-            this.render.removeClass(this.playerBox.nativeElement, 'player-overlay');
-            this.render.removeClass(this.playerBox.nativeElement, 'mat-elevation-z4');
-            this.render.addClass(this.placeholder.nativeElement, 'display-none');
-        }
-    }
-
-    handleListOpenEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
-        this.opened = !this.opened;
-        this.openedChange.emit(this.opened);
+        this.player.nativeElement.currentTime = predict >= 0.0
+            ? parseFloat((time - 30.0).toFixed(9)) : 0.0;
     }
 
     handleFullscreenEvent(event: MouseEvent): void {
-        this.handleStopPropagationEvent(event);
-
         if (this.isFullscreen) {
             this.exitFullscreen();
         } else {

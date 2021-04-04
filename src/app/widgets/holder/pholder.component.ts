@@ -9,7 +9,7 @@ export class WidgetsParagraphHolderComponent implements OnChanges, OnInit {
 
     @Input('lines') lines!: number;
 
-    @HostBinding('class') class: string = 'holder paragraph-holder';
+    @HostBinding('class') class: string = 'holder paragraph-holder w-100';
 
     array!: number[];
 

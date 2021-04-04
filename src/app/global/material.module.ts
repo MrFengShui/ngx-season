@@ -34,6 +34,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatRippleModule } from '@angular/material/core';
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { OverlayContainer, FullscreenOverlayContainer } from "@angular/cdk/overlay";
+
 import { CustomPaginator } from "./custom.paginator";
 
 @NgModule({
@@ -111,7 +113,8 @@ import { CustomPaginator } from "./custom.paginator";
         MatTreeModule
     ],
     providers: [
-        { provide: MatPaginatorIntl, useClass: CustomPaginator }
+        { provide: MatPaginatorIntl, useClass: CustomPaginator },
+        { provide: OverlayContainer, useClass: FullscreenOverlayContainer }
     ]
 })
 export class MaterialModule { }

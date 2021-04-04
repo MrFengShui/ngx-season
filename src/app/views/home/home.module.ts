@@ -10,11 +10,11 @@ import { PipeModule } from "src/app/pipes/pipe.module";
 import { HomeSidenavService } from "src/app/services/home.service";
 
 import { HomeComponent } from "./home.component";
-import { WelcomeComponent } from "./welcome/welcome.component";
+import { PlazzaComponent } from "./index/plazza.component";
+import { WelcomeComponent } from "./index/welcome.component";
 import { AudioComponent } from "./audio/audio.component";
 import { AudioHomeComponent } from "./audio/ahome.component";
 import { VideoComponent } from "./video/video.component";
-import { VideoHomeComponent } from "./video/vhome.component";
 import { LiveComponent } from "./live/live.component";
 import { SettingComponent } from "./setting/setting.component";
 import { SettingAccountComponent } from "./setting/account/account.component";
@@ -31,7 +31,7 @@ import { HOME_ROUTER } from "src/app/routers/home.routing";
         WelcomeComponent,
         AudioHomeComponent,
         AudioComponent,
-        VideoHomeComponent,
+        PlazzaComponent,
         VideoComponent,
         LiveComponent,
         SettingComponent,
@@ -54,7 +54,7 @@ import { HOME_ROUTER } from "src/app/routers/home.routing";
         WelcomeComponent,
         AudioHomeComponent,
         AudioComponent,
-        VideoHomeComponent,
+        PlazzaComponent,
         VideoComponent,
         LiveComponent,
         SettingComponent,

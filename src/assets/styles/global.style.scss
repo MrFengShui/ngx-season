@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap");
 
 @import "./utilities/border.style.scss";
 @import "./utilities/display.style.scss";
@@ -18,6 +19,7 @@
 
 html,
 body {
+    font-family: "Noto Sans SC", sans-serif;
     height: 100%;
 }
 

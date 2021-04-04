@@ -3,14 +3,14 @@
     <mat-icon>account_circle</mat-icon>
 </button>
 <button mat-mini-fab color="accent" [matMenuTriggerFor]="profileMenu" *ngIf="logged">
-    <img [src]="'../../../assets/images/logo-short.png'" alt="" width="24" height="24">
+    <img [src]="'assets/images/logo-short.png'" alt="" width="24" height="24">
 </button>
 <mat-menu class="popup-menu" #profileMenu="matMenu">
     <mat-card class="bg-share mat-elevation-z0 border-radius-none">
         <mat-card-title-group>
             <mat-card-title>Angular</mat-card-title>
             <mat-card-subtitle>Membership</mat-card-subtitle>
-            <img mat-card-sm-image class="ml-250" [src]="'../../../assets/images/logo-short.png'" alt="">
+            <img mat-card-sm-image class="ml-250" [src]="'assets/images/logo-short.png'" alt="">
         </mat-card-title-group>
         <mat-card-content>Enter something here...</mat-card-content>
         <mat-card-actions class="display-grid" [style.grid-template-columns]="'1fr 1fr 1fr'" [style.gap]="'0.5em'">

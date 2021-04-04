@@ -3,7 +3,7 @@
         <mat-icon>menu</mat-icon>
     </button>
     <a mat-button [routerLink]="['/']">
-        <img src="../assets/images/logo-long.png" height="32.0" />
+        <img src="assets/images/logo-long.png" height="32.0" />
     </a>
     <span class="flex-basis-auto flex-grow-1 flex-shrink-1"></span>
     <mat-form-field [floatLabel]="'never'" [style.width]="'360px'">
@@ -38,7 +38,7 @@
             </ng-container>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content [style.height]="height + 'px'" #content>
+    <mat-sidenav-content class="scroll-share" [style.height]="height + 'px'" #content>
         <router-outlet></router-outlet>
         <div class="float-box display-flex flex-column justify-content-center">
             <button mat-fab color="accent" [matTooltip]="'Online Service'" [matTooltipPosition]="'left'"
@@ -59,7 +59,7 @@
 <ng-template #openedTemplate let-entities>
     <ng-container *ngFor="let entity of entities">
         <h3 matSubheader *ngIf="!entity.flag">{{entity.name}}</h3>
-        <a mat-list-item [routerLink]="link.link" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:
+        <a mat-list-item [routerLink]="link.link" [routerLinkActive]="['bg-pshare']" [routerLinkActiveOptions]="{exact:
             true}" *ngFor="let link of entity.list">
             <mat-icon matListIcon [style.margin-right]="'0.5em'">{{link.icon}}</mat-icon>
             {{link.name}}
@@ -68,18 +68,18 @@
     </ng-container>
     <mat-divider></mat-divider>
     <a mat-list-item href="https://angular.io/" target="_blank">
-        <img [src]="'../../assets/images/logo-short.png'" alt="" width="24">
+        <img [src]="'assets/images/logo-short.png'" alt="" width="24">
         <span class="ml-50">Angular Website</span>
     </a>
     <a mat-list-item href="https://material.angular.io/" target="_blank">
-        <img [src]="'../../assets/images/logo-short.png'" alt="" width="24">
+        <img [src]="'assets/images/logo-short.png'" alt="" width="24">
         <span class="ml-50">Material Website</span>
     </a>
     <p class="mat-body-2 px-150">&copy;2021&nbsp;&nbsp;MrFengShui&nbsp;&nbsp;Copyright All Reserved</p>
 </ng-template>
 <ng-template #closedTemplate let-entities>
     <ng-container *ngFor="let entity of entities">
-        <a mat-list-item [matTooltip]="link.name" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:
+        <a mat-list-item [matTooltip]="link.name" [routerLinkActive]="['bg-pshare']" [routerLinkActiveOptions]="{exact:
             true}" [matTooltipPosition]="'right'" [matTooltipClass]="'bg-share'" [routerLink]="link.link"
             *ngFor="let link of entity.list">
             <mat-icon matListIcon>{{link.icon}}</mat-icon>
@@ -91,7 +91,7 @@
     <div class="display-flex">
         <mat-card class="mat-elevation-z0">
             <mat-card-title-group>
-                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+                <img mat-card-lg-image [src]="'assets/images/qr-code.png'" alt="" />
             </mat-card-title-group>
             <mat-card-content class="display-flex justify-content-center align-items-center my-50">
                 <mat-icon class="mr-50">tablet_mac</mat-icon>
@@ -100,7 +100,7 @@
         </mat-card>
         <mat-card class="mat-elevation-z0">
             <mat-card-title-group>
-                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+                <img mat-card-lg-image [src]="'assets/images/qr-code.png'" alt="" />
             </mat-card-title-group>
             <mat-card-content class="display-flex justify-content-center align-items-center my-50">
                 <mat-icon class="mr-50">phone_iphone</mat-icon>
@@ -112,7 +112,7 @@
     <div class="display-flex">
         <mat-card class="mat-elevation-z0">
             <mat-card-title-group>
-                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+                <img mat-card-lg-image [src]="'assets/images/qr-code.png'" alt="" />
             </mat-card-title-group>
             <mat-card-content class="display-flex justify-content-center align-items-center my-50">
                 <mat-icon class="mr-50">tablet_android</mat-icon>
@@ -121,7 +121,7 @@
         </mat-card>
         <mat-card class="mat-elevation-z0">
             <mat-card-title-group>
-                <img mat-card-lg-image [src]="'../assets/images/qr-code.png'" alt="" />
+                <img mat-card-lg-image [src]="'assets/images/qr-code.png'" alt="" />
             </mat-card-title-group>
             <mat-card-content class="display-flex justify-content-center align-items-center my-50">
                 <mat-icon class="mr-50">phone_android</mat-icon>

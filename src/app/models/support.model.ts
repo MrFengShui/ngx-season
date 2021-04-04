@@ -8,10 +8,10 @@ export class ChatMessageModel {
 
     messageRole!: MessageRole;
     messageAvatar!: string;
-    messageDatetime!: Date;
-    messageContent!: string;
+    messageDatetime!: Date | undefined;
+    messageContent!: string | undefined;
 
-    constructor(messageRole: MessageRole, messageAvatar: string, messageDatetime: Date, messageContent: string) {
+    constructor(messageRole: MessageRole, messageAvatar: string, messageDatetime: Date | undefined, messageContent: string | undefined) {
         this.messageRole = messageRole;
         this.messageAvatar = messageAvatar;
         this.messageDatetime = messageDatetime;

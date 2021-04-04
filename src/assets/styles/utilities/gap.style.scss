@@ -51,10 +51,10 @@ $pm-tag-list: "p" "m";
     }
 
     .gx-#{$item * 100} {
-        row-gap: 1em * $item !important;
+        column-gap: 1em * $item !important;
     }
 
     .gy-#{$item * 100} {
-        column-gap: 1em * $item !important;
+        row-gap: 1em * $item !important;
     }
 }

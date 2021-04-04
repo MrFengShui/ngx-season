@@ -8,7 +8,8 @@
                 "name": "Audio",
                 "link": [
                     "/home",
-                    "ahome"
+                    "plazza",
+                    "audio"
                 ]
             },
             {
@@ -16,7 +17,8 @@
                 "name": "Video",
                 "link": [
                     "/home",
-                    "vhome"
+                    "plazza",
+                    "video"
                 ]
             },
             {
@@ -24,15 +26,8 @@
                 "name": "Article",
                 "link": [
                     "/home",
-                    "arhome"
-                ]
-            },
-            {
-                "icon": "edit",
-                "name": "Blog",
-                "link": [
-                    "/home",
-                    "bhome"
+                    "plazza",
+                    "article"
                 ]
             },
             {
@@ -40,7 +35,8 @@
                 "name": "Gallery",
                 "link": [
                     "/home",
-                    "ghome"
+                    "plazza",
+                    "gallery"
                 ]
             }
         ]

@@ -8,7 +8,7 @@ import { RouterLinkEntity } from "src/app/models/sidenav.model";
 
 import { HomeLanguageService, HomeModeService, HomeSidenavService, HomeThemeService } from "src/app/services/home.service";
 
-import { SigninComponent } from "../signin/signin.component";
+import { SigninComponent } from "../../overlay/signin/signin.component";
 
 @Component({
     selector: 'app-widgets-avatar',

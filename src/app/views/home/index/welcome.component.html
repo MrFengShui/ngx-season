@@ -1,0 +1,105 @@
+<div class="welcome-wrapper display-flex flex-column p-50">
+    <section class="mb-100">
+        <div class="display-flex align-items-center">
+            <mat-icon class="title-icon mr-25">{{recommend.icon}}</mat-icon>
+            <div class="display-flex flex-column flex-grow-1 flex-shrink-1 flex-basis-auto">
+                <h1 class="font-size-16 my-0">{{recommend.name}}</h1>
+                <p class="font-size-10 my-0">Total: {{recommend.total}}</p>
+            </div>
+            <button mat-raised-button color="primary">
+                <mat-icon class="rotate-icon">autorenew</mat-icon>
+                Refresh
+            </button>
+        </div>
+        <mat-divider class="my-100"></mat-divider>
+        <div class="block-box display-grid g-50">
+            <mat-card class="block-main mat-elevation-z0 p-50" [class.await]="recommend.carousel.length === 0"
+                [class.display-flex]="recommend.carousel.length !== 0"
+                [class.flex-column]="recommend.carousel.length !== 0"
+                [class.justify-content-center]="recommend.carousel.length !== 0">
+                <app-widgets-carousel [images]="recommend.carousel" [fitWidth]="'100%'"
+                    *ngIf="recommend.carousel.length !== 0"></app-widgets-carousel>
+                <app-widgets-block-holder class="h-100" *ngIf="recommend.carousel.length === 0">
+                </app-widgets-block-holder>
+            </mat-card>
+            <a matRipple class="block" [routerLink]="item === undefined ? ['/'] : item.link"
+                *ngFor="let item of recommend.units">
+                <mat-card class="mat-elevation-z0 display-flex p-50">
+                    <img [src]="item.source" alt="" width="100%" *ngIf="item !== undefined">
+                    <app-widgets-unit-holder *ngIf="item === undefined"></app-widgets-unit-holder>
+                </mat-card>
+            </a>
+        </div>
+    </section>
+    <section class="category display-flex flex-column {{i === sections.length - 1 ? 'mt-100' : 'my-100'}}"
+        *ngFor="let section of sections; index as i">
+        <div class="flex-grow-1 flex-shrink-1 flex-basis-auto mb-25">
+            <div class="display-flex align-items-center">
+                <mat-icon class="title-icon mr-25">{{section.icon}}</mat-icon>
+                <div class="display-flex flex-column flex-grow-1 flex-shrink-1 flex-basis-auto">
+                    <h1 class="font-size-16 my-0">{{section.name}}</h1>
+                    <p class="font-size-10 my-0">Total: {{section.total}}</p>
+                </div>
+                <button mat-raised-button color="primary">
+                    <mat-icon class="rotate-icon">autorenew</mat-icon>
+                    Refresh
+                </button>
+            </div>
+            <mat-divider class="my-100"></mat-divider>
+            <div class="unit-box display-grid g-50">
+                <a matRipple [routerLink]="['/']" *ngFor="let unit of section.units">
+                    <mat-card class="card mat-elevation-z0 p-50">
+                        <app-widgets-unit-holder *ngIf="unit === undefined"></app-widgets-unit-holder>
+                        <ng-container *ngIf="unit !== undefined">
+                            <mat-card-header>
+                                <span mat-card-avatar
+                                    class="bg-share display-flex justify-content-center align-items-center">
+                                    <img class="border-radius-circle" [src]="unit.avatar" alt="" width="32">
+                                </span>
+                                <mat-card-title class="font-size-16 mb-50">{{unit.name}}</mat-card-title>
+                                <mat-card-subtitle
+                                    class="font-size-10 display-flex justify-content-space-between my-50">
+                                    <span>View: {{unit.view | count}}</span>
+                                    <span>Upload: {{calcTimeSpan(unit.upload) | span}}</span>
+                                </mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image class="mb-50" [src]="unit.capture" alt="">
+                            <mat-card-content class="font-size-12">{{unit.subject}}</mat-card-content>
+                        </ng-container>
+                    </mat-card>
+                </a>
+            </div>
+        </div>
+        <mat-card class="rank mat-elevation-z0 mt-25">
+            <mat-card-header>
+                <span mat-card-avatar class="bg-share display-flex justify-content-center align-items-center">
+                    <mat-icon>sort</mat-icon>
+                </span>
+                <mat-card-title class="font-size-16">Rank of {{section.name}}</mat-card-title>
+                <mat-card-subtitle class="font-size-10">Update: {{today | date: 'yyyy-MM-dd'}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content class="rank-box display-grid g-50">
+                <mat-nav-list class="content scroll-share flex-grow-1 flex-shrink-1 flex-basis-auto"
+                    *ngFor="let rank of formatRanks(section); index as j">
+                    <h1 matSubheader>{{rankNames[j]}}</h1>
+                    <ng-container *ngFor="let item of rank">
+                        <a mat-list-item class="rank-item" [routerLink]="['/home', item.rankCategory, 'unit']"
+                            [queryParams]="{_id: item.rankID}" *ngIf="item !== undefined">
+                            <img matListAvatar [src]="item.rankCapture" alt="">
+                            <h1 class="font-size-12 font-weight-bold my-0" matLine>{{item.rankSubject}}</h1>
+                            <p class="font-size-10 my-0 my-25" matLine>{{item.rankName}}</p>
+                            <p class="font-size-10 my-0 display-flex justify-content-space-between" matLine>
+                                <span>Score: {{item.rankPoint}} / 10.0</span>
+                                <span>Upload: {{item.rankCreateTime | date: 'yyy-MM-dd'}}</span>
+                            </p>
+                        </a>
+                        <mat-list-item class="rank-item" *ngIf="item === undefined">
+                            <app-widgets-item-holder></app-widgets-item-holder>
+                        </mat-list-item>
+                    </ng-container>
+                </mat-nav-list>
+            </mat-card-content>
+        </mat-card>
+    </section>
+</div>

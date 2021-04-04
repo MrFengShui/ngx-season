@@ -1,0 +1,34 @@
+<div class="queue-wrapper scroll-share" [style.height]="size + 'px'" #content>
+    <mat-list class="chat-list p-0" disableRipple>
+        <ng-container *ngFor="let item of queue">
+            <mat-list-item class="ltr my-50" *ngIf="item !== undefined && item.messageRole === 1">
+                <div class="display-flex flex-row w-100">
+                    <span class="avatar mat-elevation-z8 border-radius-circle mr-25 p-25" [style.width]="'32px'"
+                        [style.height]="'32px'">
+                        <img [src]="item.messageAvatar" alt="" width="100%">
+                    </span>
+                    <mat-card class="content mat-elevation-z8 p-50 ml-25 w-50">
+                        <h4 class="font-size-10 text-align-left my-0 mb-75" matLine>{{item.messageDatetime | date:
+                            'yyyy-MM-dd hh:mm:ss'}}</h4>
+                        <p class="font-size-10 text-align-left my-0 mt-75" matLine [style.white-space]="'normal'">
+                            {{item.messageContent}}</p>
+                    </mat-card>
+                </div>
+            </mat-list-item>
+            <mat-list-item class="rtl my-50" *ngIf="item !== undefined && item.messageRole === -1">
+                <div class="display-flex flex-row-reverse w-100">
+                    <span class="avatar mat-elevation-z8 border-radius-circle ml-25 p-25" [style.width]="'32px'"
+                        [style.height]="'32px'">
+                        <img [src]="item.messageAvatar" alt="" width="100%">
+                    </span>
+                    <mat-card class="content mat-elevation-z8 p-50 mr-25 w-50">
+                        <h4 class="font-size-10 text-align-right my-0 mb-75" matLine>{{item.messageDatetime | date:
+                            'yyyy-MM-dd hh:mm:ss'}}</h4>
+                        <p class="font-size-10 text-align-right my-0 mt-75" matLine [style.white-space]="'normal'">
+                            {{item.messageContent}}</p>
+                    </mat-card>
+                </div>
+            </mat-list-item>
+        </ng-container>
+    </mat-list>
+</div>

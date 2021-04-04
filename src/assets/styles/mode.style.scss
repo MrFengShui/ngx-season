@@ -3,10 +3,9 @@
     $accent: map-get($theme, accent);
     $warn: map-get($theme, warn);
 
-    .chat-content,
-    .scroll-share,
-    .mat-drawer-content,
-    .mat-drawer-inner-container {
+    .mat-drawer-inner-container,
+    .scroll-share {
+        &::-webkit-scrollbar-corner,
         &::-webkit-scrollbar-thumb {
             background-color: transparent;
         }
@@ -74,37 +73,71 @@
             .player-overlay {
                 background-color: mat-color($primary, 900) !important;
             }
+
+            // .container {
+            //     .drawer {
+            //         .mat-drawer-inner-container {
+            //             .player-list {
+            //                 .list-head {
+            //                     background-color: mat-color($primary);
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 
-    .video-layout {
-        .section-title {
-            background-color: mat-color($primary);
-        }
+    // .video-layout {
+    //     .section-title {
+    //         background-color: mat-color($primary);
+    //     }
 
-        .video-listview {
-            .list-head {
-                background-color: mat-color($primary);
-            }
+    //     .video-listview {
+    //         .list-head {
+    //             background-color: mat-color($primary);
+    //         }
 
-            .list-body {
-                .mat-list {
-                    &::-webkit-scrollbar-thumb {
-                        background-color: transparent;
-                    }
+    //         .list-body {
+    //             .mat-list {
+    //                 &::-webkit-scrollbar-thumb {
+    //                     background-color: transparent;
+    //                 }
 
-                    &:hover {
-                        &::-webkit-scrollbar-thumb {
-                            background-color: mat-color($primary, 300);
-                        }
-                    }
+    //                 &:hover {
+    //                     &::-webkit-scrollbar-thumb {
+    //                         background-color: mat-color($primary, 300);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    .video {
+        .video-wrapper {
+            .meta {
+                .header {
+                    background-color: mat-color($primary);
                 }
             }
         }
     }
 
-    .link-active {
-        background-color: mat-color($primary);
+    .media-tracker {
+        .tracker-wrapper {
+            .slider {
+                &.mat-slider-min-value:not(.mat-slider-thumb-label-showing) {
+                    .mat-slider-wrapper {
+                        .mat-slider-thumb-container {
+                            .mat-slider-thumb {
+                                border-color: mat-color($primary);
+                                background-color: mat-color($primary);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .notice-list {
@@ -139,16 +172,6 @@
         }
     }
 
-    // .welcome {
-    //     .welcome-wrapper {
-    //         .block-box {
-    //             .block {
-    //                 background-color: mat-color($primary, A100);
-    //             }
-    //         }
-    //     }
-    // }
-
     .welcome,
     .audio,
     .video {
@@ -165,6 +188,10 @@
 
     .holder {
         .holder-wrapper {
+            &.root-box {
+                animation: color-change 2.5s infinite;
+            }
+
             .holder-box,
             .holder-pie,
             .holder-bar,
@@ -262,6 +289,21 @@
 
     .bg-share {
         background-color: mat-color($primary);
+        color: white;
+    }
+
+    .bg-pshare {
+        background-color: mat-color($primary);
+        color: white;
+    }
+
+    .bg-ashare {
+        background-color: mat-color($accent);
+        color: white;
+    }
+
+    .bg-wshare {
+        background-color: mat-color($warn);
         color: white;
     }
 }

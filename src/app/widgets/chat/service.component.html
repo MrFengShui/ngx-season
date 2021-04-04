@@ -10,7 +10,7 @@
         <ng-container *ngFor="let item of array">
             <mat-list-item class="ltr my-50" *ngIf="item.messageRole === 1">
                 <div class="display-flex flex-row w-100">
-                    <span class="avatar mat-elevation-z8 border-radius-circle mr-25 p-50" [style.width]="'32px'"
+                    <span class="avatar mat-elevation-z8 border-radius-circle mr-25 p-25" [style.width]="'32px'"
                         [style.height]="'32px'">
                         <img [src]="item.messageAvatar" alt="" width="100%">
                     </span>
@@ -24,7 +24,7 @@
             </mat-list-item>
             <mat-list-item class="rtl my-50" *ngIf="item.messageRole === -1">
                 <div class="display-flex flex-row-reverse w-100">
-                    <span class="avatar mat-elevation-z8 border-radius-circle ml-25 p-50" [style.width]="'32px'"
+                    <span class="avatar mat-elevation-z8 border-radius-circle ml-25 p-25" [style.width]="'32px'"
                         [style.height]="'32px'">
                         <img [src]="item.messageAvatar" alt="" width="100%">
                     </span>

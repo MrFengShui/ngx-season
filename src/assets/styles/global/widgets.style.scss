@@ -1,50 +1,164 @@
 .audio-player,
 .video-player {
     .player-wrapper {
-        .player-placeholder {
-            .mat-icon {
-                font-size: 128px;
-                width: 128px;
-                height: 128px;
+        .container {
+            &.active {
+                max-height: 100%;
+            }
+
+            min-height: 75vh;
+            max-height: 75vh;
+
+            .drawer {
+                .mat-drawer-inner-container {
+                    overflow: hidden;
+
+                    .player-list {
+                        min-width: 320px;
+                        max-width: 360px;
+
+                        .list-head {
+                            .mat-card-subtitle {
+                                max-width: calc(360px - 16px);
+                            }
+                        }
+
+                        .list-body {
+                            height: calc(100% - 56px - 56px);
+                            overflow-x: hidden;
+                            overflow-y: auto;
+                        }
+                    }
+                }
+            }
+
+            .content {
+                &.active {
+                    height: 100vh;
+                }
+
+                height: 75vh;
+                overflow: hidden;
+
+                .player-root {
+                    .player-holder {
+                        .mat-icon {
+                            $size: 256;
+                            font-size: #{$size}px;
+                            line-height: #{$size}px;
+                            width: #{$size}px;
+                            height: #{$size}px;
+                        }
+                    }
+
+                    .player-pane {
+                        &.overlay {
+                            position: fixed;
+                            left: 1em;
+                            bottom: 1em;
+                            z-index: 1000;
+                            width: 480px;
+                            height: 270px;
+                        }
+
+                        &.maximum {
+                            position: fixed;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            z-index: 1000;
+                        }
+
+                        .player-control {
+                            background-color: rgba($color: #000000, $alpha: 0.85);
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            z-index: 5;
+
+                            .tune-control {
+                                &.col-more {
+                                    grid-template-columns: repeat(3, auto) 1fr repeat(4, auto);
+                                }
+
+                                &.col-less {
+                                    grid-template-columns: repeat(3, auto) 1fr;
+                                }
+                            }
+
+                            .main-control {
+                                &.col-more {
+                                    grid-template-columns: repeat(3, auto) 1fr repeat(4, auto);
+                                }
+
+                                &.col-less {
+                                    grid-template-columns: auto 1fr auto;
+                                }
+                            }
+
+                            .main-button {
+                                $size: 48;
+
+                                &.active {
+                                    line-height: #{$size}px;
+                                    width: #{$size}px;
+                                    height: #{$size}px;
+
+                                    .mat-icon {
+                                        font-size: #{$size}px;
+                                        line-height: inherit;
+                                        width: inherit;
+                                        height: inherit;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+}
 
-        .player-control {
-            .mat-icon-button {
-                .mat-button-wrapper {
-                    width: 40px;
+.media-tracker {
+    .tracker-wrapper {
+        position: relative;
+
+        .slider {
+            .mat-slider-wrapper {
+                .mat-slider-track-wrapper,
+                .mat-slider-ticks-container {
+                    visibility: hidden;
+                }
+            }
+
+            &.mat-slider-min-value:not(.mat-slider-thumb-label-showing) {
+                .mat-slider-wrapper {
+                    .mat-slider-thumb-container {
+                        .mat-slider-thumb {
+                            border-color: lawngreen;
+                            background-color: lawngreen;
+                        }
+                    }
                 }
             }
         }
 
-        .player-board {
-            .player-view {
-                width: 100%;
-                height: 100%;
-            }
+        .progress {
+            width: calc(100% - 16px);
+            padding: 8px 0;
+            position: absolute;
+            left: 8px;
+            z-index: -10;
 
-            .player-control {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
+            .mat-progress-bar {
+                .mat-progress-bar-fill {
+                    transition: none;
+                }
             }
-
-            .hidden {
-                display: none;
-            }
-        }
-
-        .player-overlay {
-            padding: 0.5em;
-            position: fixed;
-            left: 1em;
-            bottom: 1em;
-            z-index: 1000;
-            width: 480px;
-            height: 270px;
         }
     }
 }
@@ -98,16 +212,41 @@
     }
 }
 
-.chat-list {
-    .ltr {
-        .mat-list-item-content {
-            justify-content: flex-start;
+.item-holder {
+    .holder-wrapper {
+        display: flex;
+
+        .holder-box {
+            width: 72px;
+        }
+
+        .holder-bars {
+            flex: 1 1 auto;
+
+            .holder-bar {
+                width: 100%;
+                height: 0.5em;
+            }
         }
     }
+}
 
-    .rtl {
-        .mat-list-item-content {
-            justify-content: flex-end;
+.chat-queue {
+    .queue-wrapper {
+        overflow: auto;
+
+        .chat-list {
+            .ltr {
+                .mat-list-item-content {
+                    justify-content: flex-start;
+                }
+            }
+
+            .rtl {
+                .mat-list-item-content {
+                    justify-content: flex-end;
+                }
+            }
         }
     }
 }

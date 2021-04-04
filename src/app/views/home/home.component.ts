@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav";
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
@@ -8,6 +8,7 @@ import { filter, map } from "rxjs/operators";
 import { SidenavRouterEntity } from "src/app/models/sidenav.model";
 
 import { HomeSidenavService } from "src/app/services/home.service";
+
 import { WidgetsChatServiceComponent } from "src/app/widgets/chat/service.component";
 
 @Component({

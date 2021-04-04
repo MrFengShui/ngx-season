@@ -7,6 +7,6 @@ import { Component, ViewEncapsulation } from "@angular/core";
 })
 export class WidgetsUnitHolderComponent {
 
-    @HostBinding('class') class: string = 'holder unit-holder';
+    @HostBinding('class') class: string = 'holder unit-holder w-100';
 
 }

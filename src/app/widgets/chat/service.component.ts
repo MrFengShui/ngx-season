@@ -23,9 +23,9 @@ export class WidgetsChatServiceComponent implements OnInit, AfterViewInit, After
         let subscription: Subscription = interval(2500).pipe(take(16)).subscribe(value => {
             this.array.push(
                 value % 2 === 0
-                    ? new ChatMessageModel(MessageRole.MESSAGE_ROLE_REQUEST, '../../../assets/images/logo-short.png',
+                    ? new ChatMessageModel(MessageRole.MESSAGE_ROLE_REQUEST, 'assets/images/profile.png',
                         new Date(), 'Hello, my name is Angular. I have a lot of issues in my code. I need your help.')
-                    : new ChatMessageModel(MessageRole.MESSAGE_ROLE_RESPONSE, '../../../assets/images/logo-short.png',
+                    : new ChatMessageModel(MessageRole.MESSAGE_ROLE_RESPONSE, 'assets/images/profile.png',
                         new Date(), 'Okay! I wash I could help you.')
             );
 
