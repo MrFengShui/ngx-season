@@ -1,22 +1,24 @@
 export class SimpleMessageModel {
 
-    subject!: string;
-    datetime!: Date;
+    messageID!: string;
+    messageSubject!: string;
+    messageCreateTime!: Date;
 
-    constructor(subject: string, datetime: Date) {
-        this.subject = subject;
-        this.datetime = datetime;
+    constructor(messageID: string, messageSubject: string, messageCreateTime: Date) {
+        this.messageID = messageID;
+        this.messageSubject = messageSubject;
+        this.messageCreateTime = messageCreateTime;
     }
 
 }
 
 export class ComplexMessageModel extends SimpleMessageModel {
 
-    contents!: string[];
+    messageContents!: string[];
 
-    constructor(subject: string, datetime: Date, contents: string[]) {
-        super(subject, datetime);
-        this.contents = contents;
+    constructor(messageID: string, messageSubject: string, messageCreateTime: Date, messageContents: string[]) {
+        super(messageID, messageSubject, messageCreateTime);
+        this.messageContents = messageContents;
     }
 
 }
@@ -43,14 +45,16 @@ export class SimpleUnitModel {
     upload!: Date;
     capture!: string;
     subject!: string;
+    link!: string[];
 
-    constructor(avatar: string, name: string, view: number, upload: Date, capture: string, subject: string) {
+    constructor(avatar: string, name: string, view: number, upload: Date, capture: string, subject: string, link: string[]) {
         this.avatar = avatar;
         this.name = name;
         this.view = view;
         this.upload = upload;
         this.capture = capture;
         this.subject = subject;
+        this.link = link;
     }
 
 }
@@ -86,6 +90,16 @@ export class SimpleRankModel {
 
 }
 
+export const createMessages = (count: number): SimpleMessageModel[] => {
+    let list: SimpleMessageModel[] = [];
+
+    for (let i = 0; i < count; i++) {
+        list.push(new SimpleMessageModel('MESSAGE_ID_' + (i + 1), 'Message Subject ' + (i + 1), new Date()));
+    }
+
+    return list;
+}
+
 export const selectImages = (count: number, min: number, max: number): SimpleImageLinkModel[] => {
     let list: SimpleImageLinkModel[] = [];
 
@@ -104,7 +118,7 @@ export const selectUnits = (count: number, min: number, max: number): SimpleUnit
         let index: number = Math.floor(Math.random() * (max - min) + min);
         let random: number = Math.floor(Math.random() * 100000000);
         list.push(new SimpleUnitModel('assets/images/profile.png', 'Angular', random, new Date('January ' + (i + 1) + ', 2021'),
-            'tests/image/img-8k-' + index + '.jpg', 'Carousel Picture ' + index));
+            'tests/image/img-8k-' + index + '.jpg', 'Carousel Picture ' + index, []));
     }
 
     return list;

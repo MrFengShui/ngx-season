@@ -1,0 +1,32 @@
+<div class="chat-wrapper">
+    <mat-card class="mat-elevation-z0 bg-texture p-0" *ngIf="model !== undefined">
+        <div
+            class="font-size-16 bg-pshare bt-radius-4 display-flex justify-content-space-between align-items-center p-100">
+            <span>Chat Replay</span>
+            <button mat-icon-button>
+                <mat-icon>tune</mat-icon>
+            </button>
+        </div>
+        <app-widgets-chat-queue [size]="480" [message]="model.message" [(queue)]="model.messages">
+        </app-widgets-chat-queue>
+        <ng-container *ngIf="model.type === 1">
+            <mat-divider></mat-divider>
+            <div class="display-flex align-items-center px-100 py-50 m-0">
+                <mat-form-field class="flex-grow-1 flex-shrink-1 flex-basis-auto mr-50">
+                    <mat-label>Text & Emoji</mat-label>
+                    <input matInput [(ngModel)]="content" type="text" maxlength="100"
+                        placeholder="Enter your text and emoji" #text>
+                    <button mat-icon-button matSuffix (click)="content" *ngIf="content">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{text.value?.length || 0}}/100</mat-hint>
+                </mat-form-field>
+                <button mat-icon-button class="mr-50">
+                    <mat-icon>emoji_emotions</mat-icon>
+                </button>
+                <button mat-raised-button color="primary" class="mx-0"
+                    (click)="handleSendMessageAction($event)">Send</button>
+            </div>
+        </ng-container>
+    </mat-card>
+</div>

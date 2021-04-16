@@ -2,5 +2,9 @@
     "/api/*": {
         "target": "http://localhost:8585",
         "secure": false
+    },
+    "https://ipapi.co/json": {
+        "target": "https://ipapi.co/json",
+        "secure": false
     }
 }

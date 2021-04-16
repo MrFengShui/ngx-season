@@ -28,8 +28,8 @@
     <app-widgets-notice></app-widgets-notice>
     <app-widgets-avatar></app-widgets-avatar>
 </mat-toolbar>
-<mat-sidenav-container autosize class="v-fill" #container>
-    <mat-sidenav [mode]="checked ? 'over' : 'side'" [opened]="!checked"
+<mat-sidenav-container autosize class="container" #container>
+    <mat-sidenav class="aside" [mode]="checked ? 'over' : 'side'" [opened]="!checked"
         [style.min-width]="checked ? '240px' : flag ? '240px' : 'auto'"
         [style.max-width]="checked ? '240px' : flag ? '240px' : 'auto'" #overlay>
         <mat-nav-list>
@@ -61,21 +61,13 @@
         <h3 matSubheader *ngIf="!entity.flag">{{entity.name}}</h3>
         <a mat-list-item [routerLink]="link.link" [routerLinkActive]="['bg-pshare']" [routerLinkActiveOptions]="{exact:
             true}" *ngFor="let link of entity.list">
-            <mat-icon matListIcon [style.margin-right]="'0.5em'">{{link.icon}}</mat-icon>
-            {{link.name}}
+            <mat-icon matListIcon>{{link.icon}}</mat-icon>
+            <span matLine>{{link.name}}</span>
         </a>
         <mat-divider *ngIf="entity.flag"></mat-divider>
     </ng-container>
     <mat-divider></mat-divider>
-    <a mat-list-item href="https://angular.io/" target="_blank">
-        <img [src]="'assets/images/logo-short.png'" alt="" width="24">
-        <span class="ml-50">Angular Website</span>
-    </a>
-    <a mat-list-item href="https://material.angular.io/" target="_blank">
-        <img [src]="'assets/images/logo-short.png'" alt="" width="24">
-        <span class="ml-50">Material Website</span>
-    </a>
-    <p class="mat-body-2 px-150">&copy;2021&nbsp;&nbsp;MrFengShui&nbsp;&nbsp;Copyright All Reserved</p>
+    <mat-list-item class="font-size-12" disableRipple>&copy;2021 MrFengShui Copyright All Reserved</mat-list-item>
 </ng-template>
 <ng-template #closedTemplate let-entities>
     <ng-container *ngFor="let entity of entities">

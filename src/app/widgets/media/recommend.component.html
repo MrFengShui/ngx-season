@@ -1,0 +1,15 @@
+<div class="recommend-wrapper">
+    <mat-card class="mat-elevation-z0 bg-texture display-flex flex-column p-0">
+        <div class="bg-pshare bt-radius-4 font-size-16 p-100 m-0">Recommendation</div>
+        <div class="m-0" [style.height]="'calc(100% - 51px)'">
+            <mat-list class="list p-0 py-100">
+                <ng-container *ngFor="let item of list; index as i">
+                    <mat-list-item class="item">
+                        <app-widgets-unit-anchor class="w-100" [unit]="item"></app-widgets-unit-anchor>
+                    </mat-list-item>
+                    <mat-divider class="my-100" [style.position]="'static'" *ngIf="i !== list.length - 1"></mat-divider>
+                </ng-container>
+            </mat-list>
+        </div>
+    </mat-card>
+</div>

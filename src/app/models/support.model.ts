@@ -6,12 +6,15 @@ export enum MessageRole {
 
 export class ChatMessageModel {
 
-    messageRole!: MessageRole;
+    public static MESSAGE_ROLE_REQUEST: number = 1;
+    public static MESSAGE_ROLE_RESPONSE: number = -1;
+
+    messageRole!: number;
     messageAvatar!: string;
     messageDatetime!: Date | undefined;
     messageContent!: string | undefined;
 
-    constructor(messageRole: MessageRole, messageAvatar: string, messageDatetime: Date | undefined, messageContent: string | undefined) {
+    constructor(messageRole: number, messageAvatar: string, messageDatetime: Date | undefined, messageContent: string | undefined) {
         this.messageRole = messageRole;
         this.messageAvatar = messageAvatar;
         this.messageDatetime = messageDatetime;

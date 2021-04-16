@@ -1,0 +1,11 @@
+<div class="orbit-wrapper">
+    <div class="container display-flex flex-nowrap" #container>
+        <app-widgets-unit-anchor class="item" [unit]="unit" *ngFor="let unit of units"></app-widgets-unit-anchor>
+    </div>
+    <button mat-fab color="accent" class="left-btn" (click)="handleScrollLeftEvent($event, container)">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-fab color="accent" class="right-btn" (click)="handleScrollRightEvent($event, container)">
+        <mat-icon>arrow_forward</mat-icon>
+    </button>
+</div>

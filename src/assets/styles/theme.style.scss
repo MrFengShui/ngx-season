@@ -78,7 +78,7 @@
 }
 
 $theme-code-list: #ffc107 #4caf50 #3f51b5 #ff5722 #673ab7 #f44336;
-$theme-name-list: amber green indigo orange violet red;
+$theme-name-list: "amber" "green" "indigo" "orange" "violet" "red";
 
 @for $i from 1 through 6 {
     $code: nth($theme-code-list, $i);

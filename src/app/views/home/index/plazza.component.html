@@ -18,38 +18,97 @@
             </button>
         </div>
         <mat-divider class="my-100"></mat-divider>
-        <div class="section-body display-grid g-50 mb-25">
-            <mat-card class="mat-elevation-z0 p-50">
-                <app-widgets-block-holder class="h-100"></app-widgets-block-holder>
+        <div class="section-body display-grid justify-items-stretch align-items-stretch g-50 mb-25"
+            [style.grid-template-rows]="rows">
+            <mat-card class="item fit-height bg-pshare-700 bg-texture mat-elevation-z0"
+                [class.await]="model.recommend.audioGroup === undefined" #item>
+                <mat-card-title-group>
+                    <mat-card-title class="font-size-16 font-weight-bold">Audio Express Title</mat-card-title>
+                </mat-card-title-group>
+                <mat-card-content class="none my-0">
+                    <app-widgets-carousel [sources]="model.recommend.audioGroup.cgmGroup" [duration]="2500"
+                        [(index)]="model.recommend.audioGroup.cgmIndex"
+                        (source)="model.recommend.audioGroup.cgmSelect = $event">
+                    </app-widgets-carousel>
+                </mat-card-content>
+                <mat-card-content class="font-size-12 text-align-center">
+                    {{model.recommend.audioGroup.cgmSelect === undefined ? '' :
+                    model.recommend.audioGroup.cgmSelect.cumSubject}}
+                </mat-card-content>
             </mat-card>
-            <mat-card class="mat-elevation-z0 p-50">
-                <app-widgets-block-holder class="h-100"></app-widgets-block-holder>
+            <mat-card class="item fit-height bg-pshare-700 bg-texture mat-elevation-z0"
+                [class.await]="model.recommend.videoGroup === undefined">
+                <mat-card-title-group>
+                    <mat-card-title class="font-size-16 font-weight-bold">Video Express Title</mat-card-title>
+                </mat-card-title-group>
+                <mat-card-content class="none my-0">
+                    <app-widgets-carousel [sources]="model.recommend.videoGroup.cgmGroup" [duration]="2500"
+                        [(index)]="model.recommend.videoGroup.cgmIndex"
+                        (source)="model.recommend.videoGroup.cgmSelect = $event">
+                    </app-widgets-carousel>
+                </mat-card-content>
+                <mat-card-content class="font-size-12 text-align-center">
+                    {{model.recommend.videoGroup.cgmSelect === undefined ? '' :
+                    model.recommend.videoGroup.cgmSelect.cumSubject}}
+                </mat-card-content>
             </mat-card>
-            <mat-card class="mat-elevation-z0 p-50">
-                <app-widgets-block-holder class="h-100"></app-widgets-block-holder>
+            <mat-card class="item fit-height bg-pshare-700 bg-texture mat-elevation-z0"
+                [class.await]="model.recommend.articleGroup === undefined">
+                <mat-card-title-group>
+                    <mat-card-title class="font-size-16 font-weight-bold">Article Express Title</mat-card-title>
+                </mat-card-title-group>
+                <mat-card-content class="none my-0">
+                    <app-widgets-carousel [sources]="model.recommend.articleGroup.cgmGroup" [duration]="2500"
+                        [(index)]="model.recommend.articleGroup.cgmIndex"
+                        (source)="model.recommend.articleGroup.cgmSelect = $event">
+                    </app-widgets-carousel>
+                </mat-card-content>
+                <mat-card-content class="font-size-12 text-align-center">
+                    {{model.recommend.articleGroup.cgmSelect === undefined ? '' :
+                    model.recommend.articleGroup.cgmSelect.cumSubject}}
+                </mat-card-content>
             </mat-card>
-            <mat-card class="mat-elevation-z0 p-50">
-                <app-widgets-block-holder class="h-100"></app-widgets-block-holder>
+            <mat-card class="item fit-height bg-pshare-700 bg-texture mat-elevation-z0"
+                [class.await]="model.recommend.galleryGroup === undefined">
+                <mat-card-title-group>
+                    <mat-card-title class="font-size-16 font-weight-bold">Gallery Express Title</mat-card-title>
+                </mat-card-title-group>
+                <mat-card-content class="none my-0">
+                    <app-widgets-carousel [sources]="model.recommend.galleryGroup.cgmGroup" [duration]="2500"
+                        [(index)]="model.recommend.galleryGroup.cgmIndex"
+                        (source)="model.recommend.galleryGroup.cgmSelect = $event">
+                    </app-widgets-carousel>
+                </mat-card-content>
+                <mat-card-content class="font-size-12 text-align-center">
+                    {{model.recommend.galleryGroup.cgmSelect === undefined ? '' :
+                    model.recommend.galleryGroup.cgmSelect.cumSubject}}
+                </mat-card-content>
             </mat-card>
-            <mat-card class="mat-elevation-z0 p-50" [style.grid-column]="'3 / 3'" [style.grid-row]="'1 / 3'">
-                <mat-nav-list class="message scroll-share h-100 p-0">
-                    <h1 matSubheader>Message Update</h1>
-                    <ng-container *ngFor="let message of model.messages">
-                        <a mat-list-item class="rank-item" [routerLink]="['/']" *ngIf="message !== undefined">
-                            <h1 class="font-size-12 font-weight-bold my-0" matLine>{{message.subject}}</h1>
-                            <p class="font-size-10 my-0 my-25" matLine>{{message.datetime | date: 'yyy-MM-dd'}}</p>
-                        </a>
-                        <mat-list-item class="rank-item" *ngIf="message === undefined">
-                            <app-widgets-item-holder></app-widgets-item-holder>
-                        </mat-list-item>
-                    </ng-container>
-                </mat-nav-list>
+            <mat-card class="item item-list bg-pshare-700 bg-texture mat-elevation-z0">
+                <mat-card-title-group>
+                    <mat-card-title class="font-size-16 font-weight-bold">Events Express</mat-card-title>
+                </mat-card-title-group>
+                <mat-divider></mat-divider>
+                <mat-card-content class="none event scroll-share">
+                    <mat-nav-list class="p-0 my-50">
+                        <ng-container *ngFor="let message of model.events">
+                            <a mat-list-item class="item py-25" [routerLink]="['/']" *ngIf="message !== undefined">
+                                <h1 class="font-size-12 font-weight-bold my-25" matLine>{{message.messageSubject}}</h1>
+                                <p class="font-size-10 text-overflow my-0 my-25" matLine>{{message.messageCreateTime |
+                                    date:
+                                    'yyy-MM-dd'}}
+                                </p>
+                            </a>
+                            <mat-list-item class="py-25" *ngIf="message === undefined">
+                                <app-widgets-item-holder></app-widgets-item-holder>
+                            </mat-list-item>
+                        </ng-container>
+                    </mat-nav-list>
+                </mat-card-content>
             </mat-card>
         </div>
-        <div class="section-foot display-grid g-50 mt-25">
-            <mat-card class="mat-elevation-z0 p-50" [style.height]="'240px'" *ngFor="let data of model.dataset">
-                <app-widgets-block-holder class="h-100"></app-widgets-block-holder>
-            </mat-card>
+        <div class="section-foot mt-25">
+            <app-widgets-orbit [units]="model.dataset"></app-widgets-orbit>
         </div>
     </section>
 </div>

@@ -1,0 +1,118 @@
+<div class="security-wrapper display-flex flex-column">
+    <section>
+        <h1 class="font-size-16 my-0">Password Subject</h1>
+        <p class="font-size-12 my-100">Password Description</p>
+        <mat-card class="display-flex bg-texture bg-pshare">
+            <mat-card-content class="display-flex flex-column justify-content-space-between w-100 my-0">
+                <form [formGroup]="cpFormGroup">
+                    <mat-form-field class="w-100" color="accent" [hintLabel]="'Hint: Current password is required.'"
+                        [appearance]="'outline'">
+                        <mat-label>Current Password</mat-label>
+                        <input matInput [(ngModel)]="cpValue" [type]="oldVisible ? 'text' : 'password'"
+                            placeholder="Enter your current password" formControlName="cpInput" required #cpInput>
+                        <mat-icon color="accent" matSuffix (click)="oldVisible = !oldVisible"
+                            [style.cursor]="'pointer'">
+                            {{oldVisible ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-hint align="end">Word Count: {{cpInput.value.length}}</mat-hint>
+                        <mat-error *ngIf="cpFormGroup.invalid">{{getErrorMessage(cpFormGroup.controls.cpInput)}}
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+                <div class="display-flex justify-content-flex-end mt-100">
+                    <button mat-raised-button color="accent" class="w-20">Validate</button>
+                </div>
+            </mat-card-content>
+            <mat-divider vertical="true" class="mx-100"></mat-divider>
+            <mat-card-content class="display-flex flex-column justify-content-space-between w-100 my-0">
+                <form [formGroup]="npFormGroup">
+                    <mat-form-field class="w-100 mb-50" color="accent" [hintLabel]="'Hint: New password is required.'"
+                        [appearance]="'outline'">
+                        <mat-label>New Password</mat-label>
+                        <input matInput [(ngModel)]="npValue" [type]="newVisible ? 'text' : 'password'"
+                            placeholder="Enter your new password" formControlName="npInput" required #npInput>
+                        <mat-icon color="accent" matSuffix (click)="newVisible = !newVisible"
+                            [style.cursor]="'pointer'">
+                            {{newVisible ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-hint align="end">Word Count: {{npInput.value.length}}</mat-hint>
+                        <mat-error *ngIf="npFormGroup.invalid">{{getErrorMessage(npFormGroup.controls.npInput)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 mt-50" color="accent" [hintLabel]="''" [appearance]="'outline'">
+                        <mat-label>Re-Enter Password</mat-label>
+                        <input matInput [(ngModel)]="napValue" [type]="safeVisible ? 'text' : 'password'"
+                            placeholder="Enter your password again" formControlName="napInput" required #napInput>
+                        <mat-icon color="accent" matSuffix (click)="safeVisible = !safeVisible"
+                            [style.cursor]="'pointer'">
+                            {{safeVisible ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-hint align="end">Word Count: {{napInput.value.length}}</mat-hint>
+                        <mat-error *ngIf="npFormGroup.invalid">{{getErrorMessage(npFormGroup.controls.napInput)}}
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+                <div class="display-flex justify-content-flex-end mt-100">
+                    <button mat-raised-button color="accent" class="w-20">Update</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </section>
+    <mat-divider class="my-100"></mat-divider>
+    <section>
+        <h1 class="font-size-16 my-0">Email Subject</h1>
+        <p class="font-size-12 my-100">Email Description</p>
+        <mat-card class="display-flex bg-texture bg-pshare">
+            <mat-card-content class="display-flex flex-column justify-content-space-between w-100 my-0">
+                <form [formGroup]="ceFormGroup">
+                    <mat-form-field class="w-100" color="accent" [hintLabel]="'Hint: Current password is required.'"
+                        [appearance]="'outline'">
+                        <mat-label>Current Password</mat-label>
+                        <input matInput [(ngModel)]="ceValue" type="email" placeholder="Enter your current email"
+                            formControlName="ceInput" required #ceInput>
+                        <mat-hint align="end">Word Count: {{ceInput.value.length}}</mat-hint>
+                        <mat-error *ngIf="ceFormGroup.controls.ceInput.hasError('required')">Error: Current email is
+                            required.</mat-error>
+                        <mat-error *ngIf="ceFormGroup.controls.ceInput.hasError('minlength')">Error: Email must have
+                            more than 6 charactors.</mat-error>
+                        <mat-error *ngIf="ceFormGroup.controls.ceInput.hasError('email')">Error: Email must have
+                            an symbol of "@".</mat-error>
+                    </mat-form-field>
+                </form>
+                <div class="display-flex justify-content-flex-end mt-100">
+                    <button mat-raised-button color="accent" class="w-20">Validate</button>
+                </div>
+            </mat-card-content>
+            <mat-divider vertical="true" class="mx-100"></mat-divider>
+            <mat-card-content class="display-flex flex-column justify-content-space-between w-100 my-0">
+                <form [formGroup]="neFormGroup">
+                    <mat-form-field class="w-100 mb-50" color="accent" [hintLabel]="'Hint: New email is required.'"
+                        [appearance]="'outline'">
+                        <mat-label>New Email</mat-label>
+                        <input matInput [(ngModel)]="neValue" type="email" placeholder="Enter your new email"
+                            formControlName="neInput" required #neInput>
+                        <mat-hint align="end">Word Count: {{neInput.value.length}}</mat-hint>
+                        <mat-error *ngIf="neFormGroup.controls.neInput.hasError('required')">Error: Current email is
+                            required.</mat-error>
+                        <mat-error *ngIf="neFormGroup.controls.neInput.hasError('minlength')">Error: Email must have
+                            more than 6 charactors.</mat-error>
+                        <mat-error *ngIf="neFormGroup.controls.neInput.hasError('email')">Error: Email must have
+                            an symbol of "@".</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100 mt-50" color="accent" [hintLabel]="''" [appearance]="'outline'">
+                        <mat-label>Re-Enter Email</mat-label>
+                        <input matInput [(ngModel)]="naeValue" type="email" placeholder="Enter your email again"
+                            formControlName="naeInput" required #naeInput>
+                        <mat-hint align="end">Word Count: {{naeInput.value.length}}</mat-hint>
+                        <mat-error *ngIf="neFormGroup.controls.naeInput.hasError('required')">Error: Current email is
+                            required.</mat-error>
+                        <mat-error *ngIf="neFormGroup.controls.naeInput.hasError('minlength')">Error: Email must have
+                            more than 6 charactors.</mat-error>
+                        <mat-error *ngIf="neFormGroup.controls.naeInput.hasError('email')">Error: Email must have
+                            an symbol of "@".</mat-error>
+                    </mat-form-field>
+                </form>
+                <div class="display-flex justify-content-flex-end mt-100">
+                    <button mat-raised-button color="accent" class="w-20">Update</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </section>
+</div>

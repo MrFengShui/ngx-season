@@ -1,0 +1,55 @@
+<div class="notice-wrapper display-flex flex-column">
+    <section>
+        <h1 class="font-size-16 my-0">Platform Notification Subject</h1>
+        <p class="font-size-12 my-100">Platform Notification Description</p>
+        <mat-action-list>
+            <button mat-list-item (click)="model.snmPlatform.snumRecommend = !model.snmPlatform.snumRecommend">
+                <span class="font-size-12" matLine>Enable send notifications of recommendations</span>
+                <mat-slide-toggle color="accent" [(ngModel)]="model.snmPlatform.snumRecommend"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+            <button mat-list-item (click)="model.snmPlatform.snumSubscribe = !model.snmPlatform.snumSubscribe">
+                <span class="font-size-12" matLine>Enable send notifications of subscriptions</span>
+                <mat-slide-toggle color="accent" [(ngModel)]="model.snmPlatform.snumSubscribe"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+            <button mat-list-item (click)="model.snmPlatform.snumComment = !model.snmPlatform.snumComment">
+                <span class="font-size-12" matLine>Enable send notifications of new comments</span>
+                <mat-slide-toggle color="aceent" [(ngModel)]="model.snmPlatform.snumComment"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+            <button mat-list-item (click)="model.snmPlatform.snumReply = !model.snmPlatform.snumReply">
+                <span class="font-size-12" matLine>Enable send notifications of new replies</span>
+                <mat-slide-toggle color="accent" [(ngModel)]="model.snmPlatform.snumReply"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+        </mat-action-list>
+    </section>
+    <mat-divider class="my-100"></mat-divider>
+    <section>
+        <h1 class="font-size-16 my-0">Email Notification Subject</h1>
+        <p class="font-size-12 my-100">Email Notification Description</p>
+        <mat-action-list>
+            <button mat-list-item (click)="model.snmEmail.snumRecommend = !model.snmEmail.snumRecommend">
+                <span class="font-size-12" matLine>Enable send notifications of recommendations</span>
+                <mat-slide-toggle color="accent" [(ngModel)]="model.snmEmail.snumRecommend"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+            <button mat-list-item (click)="model.snmEmail.snumSubscribe = !model.snmEmail.snumSubscribe">
+                <span class="font-size-12" matLine>Enable send notifications of subscriptions</span>
+                <mat-slide-toggle color="accent" [(ngModel)]="model.snmEmail.snumSubscribe"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+            <button mat-list-item (click)="model.snmEmail.snumComment = !model.snmEmail.snumComment">
+                <span class="font-size-12" matLine>Enable send notifications of new comments</span>
+                <mat-slide-toggle color="aceent" [(ngModel)]="model.snmEmail.snumComment"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+            <button mat-list-item (click)="model.snmEmail.snumReply = !model.snmEmail.snumReply">
+                <span class="font-size-12" matLine>Enable send notifications of new replies</span>
+                <mat-slide-toggle color="accent" [(ngModel)]="model.snmEmail.snumReply"
+                    (click)="$event.stopPropagation()"></mat-slide-toggle>
+            </button>
+        </mat-action-list>
+    </section>
+</div>

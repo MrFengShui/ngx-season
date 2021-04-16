@@ -1,0 +1,47 @@
+<div class="account-wrapper display-flex flex-column">
+    <section>
+        <h1 class="font-size-16 my-0">Channel Name Subject</h1>
+        <p class="font-size-12 my-100">Channel Name Description</p>
+        <mat-form-field class="w-100" [hintLabel]="''" [appearance]="'outline'">
+            <mat-label>Channel Name</mat-label>
+            <input matInput [type]="'text'" placeholder="Enter new brand name" [disabled]="!locked">
+            <mat-icon matSuffix>{{locked ? 'lock_open' : 'lock'}}</mat-icon>
+            <mat-hint align="end">Hint: .</mat-hint>
+        </mat-form-field>
+        <div class="display-flex justify-content-space-between mt-100">
+            <button mat-raised-button color="accent" (click)="locked = !locked" [style.width]="'128px'">{{locked ?
+                'Lock'
+                : 'Unlock'}}</button>
+            <button mat-raised-button color="primary" [style.width]="'128px'">Update</button>
+        </div>
+    </section>
+    <mat-divider class="my-100"></mat-divider>
+    <section>
+        <h1 class="font-size-16 my-0">Channel Avatar Subject</h1>
+        <p class="font-size-12 my-100">Channel Avatar Description</p>
+        <mat-grid-list cols="7" gutterSize="0.25em" rowHeight="3em">
+            <mat-grid-tile class="bg-pshare-700" [colspan]="1" [rowspan]="1">File Path</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-300" [colspan]="5" [rowspan]="1">{{avatarPath}}</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-500" [colspan]="1" [rowspan]="2">
+                <span matRipple class="avatar circle hand mat-elevation-z4 bg-ashare" (click)="chooser.click()"
+                    [style.width]="'72px'" [style.height]="'72px'">
+                    <input class="display-none" type="file" accept="image/png" (change)="listenAvatarUploadChange()"
+                        #chooser>
+                    <img class="border-radius-circle" [src]="avatarSource" alt="" width="100%">
+                </span>
+            </mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-700" [colspan]="1" [rowspan]="1">File Name</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-300" [colspan]="2" [rowspan]="1">{{avatarName}}</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-700" [colspan]="1" [rowspan]="1">File Size</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-300" [colspan]="2" [rowspan]="1">{{avatarSize | size}}</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-700" [colspan]="1" [rowspan]="1">File Type</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-300" [colspan]="2" [rowspan]="1">{{avatarType}}</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-700" [colspan]="1" [rowspan]="1">Last Modify</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-300" [colspan]="2" [rowspan]="1">{{avatarModify | date: 'yyyy-MM-dd
+                hh:mm:ss'}}</mat-grid-tile>
+            <mat-grid-tile class="bg-pshare-500" [colspan]="1" [rowspan]="1">
+                <button mat-raised-button color="accent">Update</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </section>
+</div>

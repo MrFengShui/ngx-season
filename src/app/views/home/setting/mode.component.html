@@ -1,0 +1,15 @@
+<mat-radio-group class="display-grid g-100" [(ngModel)]="select" (change)="listenModeChange($event)"
+    [style.grid-template-columns]="'repeat(auto-fill, minmax(calc(50% - 0.5em), 1fr))'">
+    <mat-radio-button color="primary" [value]="'dark'">
+        <mat-card class="bg-pshare bg-texture mat-elevation-z0">
+            <img mat-card-image [src]="'assets/images/dark.png'" alt="">
+            <mat-card-content class="font-size-12 text-align-center">Dark Theme</mat-card-content>
+        </mat-card>
+    </mat-radio-button>
+    <mat-radio-button color="primary" [value]="'light'">
+        <mat-card class="bg-pshare bg-texture mat-elevation-z0">
+            <img mat-card-image [src]="'assets/images/light.png'" alt="">
+            <mat-card-content class="font-size-12 text-align-center">Light Theme</mat-card-content>
+        </mat-card>
+    </mat-radio-button>
+</mat-radio-group>

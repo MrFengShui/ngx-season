@@ -1,0 +1,222 @@
+<div class="player-wrapper" #container>
+    <mat-drawer-container class="container" [class.active]="isFullscreen" [hasBackdrop]="false" autosize>
+        <mat-drawer class="drawer" [mode]="'push'" [position]="'end'" [(opened)]="isOpened" #drawer>
+            <mat-card class="player-list mat-elevation-z0 h-100 p-0">
+                <mat-card-title-group class="list-head bg-share p-50 m-0">
+                    <mat-card-title class="font-size-16 mb-50">Player List Title</mat-card-title>
+                    <mat-card-subtitle class="font-size-10 text-overflow mt-50 mb-0"
+                        [matTooltip]="'Player List Subtitle'" [matTooltipPosition]="'below'"
+                        [matTooltipClass]="['bg-share']">Player List Subtitle</mat-card-subtitle>
+                </mat-card-title-group>
+                <mat-card-content class="list-body scroll-share m-0">
+                    <mat-nav-list class="py-0 my-0">
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146961 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-1.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 001</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146962 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-2.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 002</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146963 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-3.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 003</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146964 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-4.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 004</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146965 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-5.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 005</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146966 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-6.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 006</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146967 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-7.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 007</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146968 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-1.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 008</h1>
+                            </div>
+                        </a>
+                        <a mat-list-item class="py-50" [routerLink]="['/home', 'video', 'unit']"
+                            [routerLinkActive]="['bg-ashare']" [routerLinkActiveOptions]="{ exact: true }"
+                            [queryParams]="{ _id: 1617247146969 }">
+                            <div class="display-flex align-items-center w-100">
+                                <img [src]="'tests/image/img-8k-9.jpg'" alt="" height="48">
+                                <h1 class="font-size-12 ml-100">Episode 009</h1>
+                            </div>
+                        </a>
+                    </mat-nav-list>
+                </mat-card-content>
+                <mat-card-actions class="bg-share display-flex align-items-center p-50 m-0">
+                    <button mat-icon-button>
+                        <mat-icon>skip_previous</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>skip_next</mat-icon>
+                    </button>
+                    <span class="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                    <mat-slide-toggle class="font-size-12" color="accent" labelPosition="before">Auto Play
+                    </mat-slide-toggle>
+                </mat-card-actions>
+            </mat-card>
+        </mat-drawer>
+        <mat-drawer-content class="content" [class.active]="isFullscreen">
+            <div class="player-root h-100" (mouseenter)="isHidden = false" (mouseleave)="isHidden = true"
+                (mousemove)="isHidden = false">
+                <mat-card
+                    class="player-holder border-radius-none flex-column justify-content-center align-items-center h-100"
+                    [class.display-flex]="overlap" [class.display-none]="!overlap">
+                    <mat-icon>devices</mat-icon>
+                    <h1 class="font-size-24 mt-100">Video player is overlapping</h1>
+                </mat-card>
+                <mat-card class="player-pane" [class.border-radius-none]="!overlap" [class.p-0]="!overlap"
+                    [class.p-50]="overlap" [class.h-100]="!overlap" [class.maximum]="isMaximum"
+                    [class.overlay]="overlap" [class.mat-elevation-z8]="overlap" #box>
+                    <video preload="load" [poster]="poster" width="100%" height="100%"
+                        (loadeddata)="listenLoadedDataChange($event)"
+                        (loadedmetadata)="listenLoadedMetadataChange($event)"
+                        (loadstart)="listenLoadStartChange($event)" (progress)="listenProgressChange($event)"
+                        (timeupdate)="listenCurrentTimeChange($event)" [style.background-color]="'#000000'" #player>
+                        <source [src]="source" type="video/mp4">
+                    </video>
+                    <div class="player-control flex-column p-25" [class.display-flex]="!isHidden"
+                        [class.display-none]="isHidden">
+                        <div class="tune-control display-grid g-50" [class.col-less]="overlap"
+                            [class.col-more]="!overlap" [class.display-none]="overlap">
+                            <button mat-icon-button class="align-self-center" [matTooltip]="'Volume Down'"
+                                [matTooltipClass]="['bg-ashare']" (click)="handleVolumeDownEvent($event)">
+                                <mat-icon>volume_down</mat-icon>
+                            </button>
+                            <mat-slider class="align-self-center" color="primary" min="0.0" max="1.0" step="0.05"
+                                [(ngModel)]="player.volume">
+                            </mat-slider>
+                            <button mat-icon-button class="align-self-center" [matTooltip]="'Volume Up'"
+                                [matTooltipClass]="['bg-ashare']" (click)="handleVolumeUpEvent($event)">
+                                <mat-icon>volume_up</mat-icon>
+                            </button>
+                            <span class="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                            <button mat-icon-button class="align-self-center" [matTooltip]="'Caption On/Off'"
+                                [matTooltipClass]="['bg-ashare']" [matMenuTriggerFor]="caption">
+                                <mat-icon>closed_caption</mat-icon>
+                            </button>
+                            <button mat-icon-button class="align-self-center" [matTooltip]="'Playback Rate'"
+                                [matTooltipClass]="['bg-ashare']" [matMenuTriggerFor]="rate">
+                                <mat-icon>speed</mat-icon>
+                            </button>
+                            <button mat-icon-button class="align-self-center" [matTooltip]="'HD Quality'"
+                                [matTooltipClass]="['bg-ashare']" [matMenuTriggerFor]="quality">
+                                <mat-icon>high_quality</mat-icon>
+                            </button>
+                            <button mat-icon-button class="align-self-center"
+                                [class.display-none]="overlap || isFullscreen" [matTooltip]="'Menu On/Off'"
+                                [matTooltipClass]="['bg-ashare']" (click)="drawer.toggle()">
+                                <mat-icon [@rotate180]="isOpened ? 'start' : 'end'">menu_open</mat-icon>
+                            </button>
+                        </div>
+                        <span class="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                        <div class="display-flex align-items-center">
+                            <span class="mx-75" [style.white-space]="'nowrap'">{{player.currentTime | duration}}</span>
+                            <app-widgets-tracker class="flex-grow-1 flex-shrink-1 flex-basis-auto" [minValue]="0.0"
+                                [maxValue]="player.duration" [(value)]="player.currentTime" [bufferValue]="buffer">
+                            </app-widgets-tracker>
+                            <span class="mx-75" [style.white-space]="'nowrap'">{{player.duration | duration}}</span>
+                        </div>
+                        <div class="main-control display-grid g-50" [class.col-less]="overlap"
+                            [class.col-more]="!overlap">
+                            <button mat-icon-button class="align-self-center" [class.display-none]="overlap"
+                                [matTooltip]="'Rewind 30s'" [matTooltipClass]="['bg-ashare']"
+                                (click)="handleBackwardEvent($event)">
+                                <mat-icon>replay_30</mat-icon>
+                            </button>
+                            <button mat-icon-button class="main-button" [class.active]="!overlap"
+                                [matTooltip]="'Play/Pause'" [matTooltipClass]="['bg-ashare']"
+                                (click)="player.paused ? player.play() : player.pause()">
+                                <mat-icon>{{player.paused ? 'play_circle' : 'pause_circle'}}
+                                </mat-icon>
+                            </button>
+                            <button mat-icon-button class="align-self-center" [class.display-none]="overlap"
+                                [matTooltip]="'Forward 30s'" [matTooltipClass]="['bg-ashare']"
+                                (click)="handleForwardEvent($event)">
+                                <mat-icon>forward_30</mat-icon>
+                            </button>
+                            <span></span>
+                            <button mat-icon-button class="align-self-center"
+                                [class.display-none]="isMaximum || isFullscreen" [matTooltip]="'Overlap'"
+                                [matTooltipClass]="['bg-ashare']" (click)="overlap = !overlap">
+                                <mat-icon>picture_in_picture</mat-icon>
+                            </button>
+                            <button mat-icon-button class="align-self-center"
+                                [class.display-none]="overlap || isFullscreen" [matTooltip]="'Maximum'"
+                                [matTooltipClass]="['bg-ashare']" (click)="isMaximum = !isMaximum">
+                                <mat-icon>settings_overscan</mat-icon>
+                            </button>
+                            <button mat-icon-button class="align-self-center"
+                                [class.display-none]="overlap || isMaximum" [matTooltip]="'Fullscreen'"
+                                [matTooltipClass]="['bg-ashare']" (click)="handleFullscreenEvent($event)">
+                                <mat-icon>{{isFullscreen ? 'fullscreen_exit' : 'fullscreen'}}</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>
+<mat-menu #rate="matMenu">
+    <mat-radio-group [(ngModel)]="player.playbackRate">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of speedList">
+            <mat-radio-button color="primary" [value]="item">{{item + 'x'}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #quality="matMenu">
+    <mat-radio-group [(ngModel)]="qualitySelected">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of qualityList">
+            <mat-radio-button color="primary" [value]="item">{{item + 'p'}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>
+<mat-menu #caption="matMenu">
+    <mat-radio-group [(ngModel)]="captionSelected">
+        <span mat-menu-item [role]="'menuitemradio'" *ngFor="let item of captionList">
+            <mat-radio-button color="primary" [value]="item.code">{{item.text}}</mat-radio-button>
+        </span>
+    </mat-radio-group>
+</mat-menu>

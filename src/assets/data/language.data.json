@@ -1,58 +1,67 @@
 [
     {
-        "code": "en_AU",
-        "text": "English (AU)"
+        "lumCode": "de",
+        "lumFlag": "de_flag",
+        "lumText": "Deutsche"
     },
     {
-        "code": "en_UK",
-        "text": "English (UK)"
+        "lumCode": "en_AU",
+        "lumFlag": "au_flag",
+        "lumText": "English (AU)"
     },
     {
-        "code": "en_US",
-        "text": "English (US)"
+        "lumCode": "en_UK",
+        "lumFlag": "gb_flag",
+        "lumText": "English (UK)"
     },
     {
-        "code": "es",
-        "text": "Español"
+        "lumCode": "en_US",
+        "lumFlag": "us_flag",
+        "lumText": "English (US)"
     },
     {
-        "code": "fr",
-        "text": "français"
+        "lumCode": "es",
+        "lumFlag": "es_flag",
+        "lumText": "Español"
     },
     {
-        "code": "fr_CA",
-        "text": "français canadien"
+        "lumCode": "fr",
+        "lumFlag": "fr_flag",
+        "lumText": "français"
     },
     {
-        "code": "gr",
-        "text": "Deutsche"
+        "lumCode": "fr_CA",
+        "lumFlag": "ca_flag",
+        "lumText": "français canadien"
     },
     {
-        "code": "it",
-        "text": "italiano"
+        "lumCode": "it",
+        "lumFlag": "it_flag",
+        "lumText": "italiano"
     },
     {
-        "code": "jp",
-        "text": "日本語"
+        "lumCode": "jp",
+        "lumFlag": "jp_flag",
+        "lumText": "日本語"
     },
     {
-        "code": "kr",
-        "text": "한국어"
+        "lumCode": "kr",
+        "lumFlag": "kr_flag",
+        "lumText": "한국어"
     },
     {
-        "code": "po",
-        "text": "Português"
+        "lumCode": "ru",
+        "lumFlag": "ru_flag",
+        "lumText": "русский"
     },
     {
-        "code": "ru",
-        "text": "русский"
+        "lumCode": "zh_CN",
+        "lumFlag": "cn_flag",
+        "lumText": "中文（简体）"
     },
     {
-        "code": "zh_CN",
-        "text": "中文（简体）"
-    },
-    {
-        "code": "zh_TW",
-        "text": "中文（繁體）"
+        "lumCode": "zh_TW",
+        "lumFlag": "tw_flag",
+        "lumText": "中文（繁體）"
     }
 ]

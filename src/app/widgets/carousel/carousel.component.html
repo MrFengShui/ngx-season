@@ -1,12 +1,22 @@
-<div class="carousel-wrapper">
-    <div class="image-list display-flex flex-row align-items-center">
-        <a matRipple [routerLink]="item === undefined ? ['/'] : item.link" *ngFor="let item of images; index as i">
-            <img class="image-item" [src]="item === undefined ? '' : item.source" alt="" [style.width]="fitWidth"
-                [style.height]="fitHeight" #imageItem>
-        </a>
-    </div>
-    <div class="orbit-bar display-flex flex-row justify-content-center">
-        <div class="orbit mx-50" (mouseenter)="handleSelectEnterEvent($event, i)"
-            (mouseleave)="handleSelectExitEvent($event, i)" #imageOrbit *ngFor="let item of images; index as i"></div>
+<div class="carousel-wrapper w-100" #container>
+    <ng-container *ngIf="sources !== undefined">
+        <div class="image-box w-100" [style.height]="(container.clientWidth * 9 / 16) + 'px'">
+            <a matRipple class="item display-flex flex-column" [@scaleSwitch]="index === i ? 'active' : 'inactive'"
+                [routerLink]="['/home', CM_TYPE[source.cumType], 'unit']" [queryParams]="{ _id: source.cumTarget }"
+                #item *ngFor="let source of sources; index as i">
+                <img [src]="source.cumSource" alt="" width="100%">
+                <!-- <span class="tc-white" [style.position]="'absolute'" [style.z-index]="'100'">{{index + ' = ' +
+                    i}}</span> -->
+            </a>
+        </div>
+        <div class="orbit-box display-flex justify-content-center">
+            <div class="display-flex" [style.width]="'fit-content'">
+                <div class="orbit bg-pshare mx-25" [class.bg-ashare]="i === index"
+                    (click)="handleSelectEvent($event, i)" *ngFor="let source of sources; index as i"></div>
+            </div>
+        </div>
+    </ng-container>
+    <div [style.height]="(container.clientWidth * 9 / 16) + 'px'" *ngIf="sources === undefined">
+        <app-widgets-block-holder class="h-100"></app-widgets-block-holder>
     </div>
 </div>

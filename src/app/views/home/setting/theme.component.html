@@ -1,0 +1,11 @@
+<mat-radio-group class="display-grid g-100" [(ngModel)]="select" (change)="listenThemeChange($event)"
+    [style.grid-template-columns]="'repeat(auto-fill, minmax(25%, 1fr))'">
+    <mat-radio-button color="primary" [value]="item === undefined ? '' : item.tumName" [disabled]="item === undefined"
+        *ngFor="let item of list">
+        <mat-card
+            class="item mat-elevation-z0 bg-theme-{{item.tumName}} bg-texture font-size-16 display-flex justify-content-center align-items-center"
+            [style.height]="'64px'" *ngIf="item !== undefined">
+            {{item.tumText}}
+        </mat-card>
+    </mat-radio-button>
+</mat-radio-group>

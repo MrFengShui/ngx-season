@@ -1,26 +1,26 @@
 [
     {
-        "name": "amber",
-        "text": "Ancient Amber"
+        "tumName": "amber",
+        "tumText": "Ancient Amber"
     },
     {
-        "name": "green",
-        "text": "Grass Green"
+        "tumName": "green",
+        "tumText": "Grass Green"
     },
     {
-        "name": "indigo",
-        "text": "Calm Indigo"
+        "tumName": "indigo",
+        "tumText": "Calm Indigo"
     },
     {
-        "name": "orange",
-        "text": "Vigor Orange"
+        "tumName": "orange",
+        "tumText": "Vigor Orange"
     },
     {
-        "name": "violet",
-        "text": "Noble Violet"
+        "tumName": "violet",
+        "tumText": "Noble Violet"
     },
     {
-        "name": "red",
-        "text": "Zeal Red"
+        "tumName": "red",
+        "tumText": "Zeal Red"
     }
 ]

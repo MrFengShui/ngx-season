@@ -1,3 +1,44 @@
-<div class="p-50">
-
+<div class="support-wrapper display-flex p-50">
+    <div class="left content flex">
+        <router-outlet></router-outlet>
+    </div>
+    <mat-divider class="bc-pshare mx-50" [vertical]="true" [style.border-width]="'0.25em'"></mat-divider>
+    <mat-nav-list class="right py-0">
+        <!-- <a mat-list-item [routerLink]="['/home', 'setting', 'account']" [routerLinkActive]="['bg-pshare']"
+            [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon matListIcon>badge</mat-icon>
+            <span matLine>Account</span>
+        </a>
+        <a mat-list-item [routerLink]="['/home', 'setting', 'security']" [routerLinkActive]="['bg-pshare']"
+            [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon matListIcon>security</mat-icon>
+            <span matLine>Security</span>
+        </a>
+        <a mat-list-item [routerLink]="['/home', 'setting', 'notice']" [routerLinkActive]="['bg-pshare']"
+            [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon matListIcon>notifications</mat-icon>
+            <span matLine>Notification</span>
+        </a>
+        <a mat-list-item [routerLink]="['/home', 'setting', 'mode']" [routerLinkActive]="['bg-pshare']"
+            [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon matListIcon>tungsten</mat-icon>
+            <span matLine>Mode</span>
+        </a>
+        <a mat-list-item [routerLink]="['/home', 'support', 'bug']" [routerLinkActive]="['bg-pshare']"
+            [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon matListIcon>bug_report</mat-icon>
+            <span matLine>Bug Support</span>
+        </a> -->
+        <a mat-list-item [routerLink]="['/home', 'support', 'about']" [routerLinkActive]="['bg-pshare']"
+            [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon matListIcon>info</mat-icon>
+            <span matLine>About</span>
+        </a>
+    </mat-nav-list>
 </div>

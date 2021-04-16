@@ -8,7 +8,7 @@ import { RouterLinkEntity } from "src/app/models/sidenav.model";
 
 import { HomeLanguageService, HomeModeService, HomeSidenavService, HomeThemeService } from "src/app/services/home.service";
 
-import { SigninComponent } from "../../overlay/signin/signin.component";
+import { LoginComponent } from "../../overlap/login/login.component";
 
 @Component({
     selector: 'app-widgets-avatar',
@@ -106,7 +106,7 @@ export class AvatarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     handleSigninEvent(event: MouseEvent): void {
-        let mdr: MatDialogRef<SigninComponent, any> = this.dialog.open(SigninComponent, {
+        let mdr: MatDialogRef<LoginComponent, any> = this.dialog.open(LoginComponent, {
             backdropClass: ['popup-dialog-mask'],
             disableClose: true,
             width: '800px'

@@ -10,7 +10,7 @@ import { ChatMessageModel, MessageRole } from "src/app/models/support.model";
 export class WidgetsChatQueueComponent implements OnChanges, OnInit, DoCheck {
 
     @Input('size') size!: string | number;
-    @Input('message') message!: ChatMessageModel;
+    @Input('message') message: ChatMessageModel | undefined;
     @Input() queue!: ChatMessageModel[];
 
     @Output() queueChange: EventEmitter<ChatMessageModel[]> = new EventEmitter();

@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { LanguageEntity, ModeEntity, ThemeEntity } from "../models/avatar.model";
+import { LanguageUnitModel, ThemeUnitModel } from "../models/service/local.model";
 
 import { SidenavRouterEntity } from "../models/sidenav.model";
 
@@ -29,6 +30,10 @@ export class HomeLanguageService {
         return this.http.get<LanguageEntity[]>(url, { responseType: 'json' });
     }
 
+    fetch(): Observable<LanguageUnitModel[]> {
+        return this.http.get<LanguageUnitModel[]>('assets/data/language.data.json', { responseType: 'json' });
+    }
+
 }
 
 @Injectable({
@@ -53,6 +58,10 @@ export class HomeThemeService {
 
     getTheme(url: string): Observable<ThemeEntity[]> {
         return this.http.get<ThemeEntity[]>(url, { responseType: 'json' });
+    }
+
+    fetch(): Observable<ThemeUnitModel[]> {
+        return this.http.get<ThemeUnitModel[]>('assets/data/theme.data.json', { responseType: 'json' });
     }
 
 }

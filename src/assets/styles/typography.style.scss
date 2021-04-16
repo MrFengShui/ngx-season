@@ -1,0 +1,35 @@
+@import "~@angular/material/theming";
+
+$article-typography: mat-typography-config(
+    $font-family: '"Noto Sans SC", sans-serif',
+    $display-4: mat-typography-level(96px, 150%, bold),
+    $display-3: mat-typography-level(80px, 150%, bold),
+    $display-2: mat-typography-level(64px, 150%, bold),
+    $display-1: mat-typography-level(48px, 150%, bold),
+    $headline: mat-typography-level(36px, 150%, bold),
+    $title: mat-typography-level(30px, 150%, bold),
+    $subheading-2: mat-typography-level(24px, 150%, bold),
+    $subheading-1: mat-typography-level(20px, 150%, bold),
+    $body-1: mat-typography-level(16px, 150%, normal),
+    $body-2: mat-typography-level(16px, 150%, bold),
+    $caption: mat-typography-level(12px, 150%, normal),
+);
+
+$material-typography: mat-typography-config(
+    $font-family: '"Noto Sans SC", sans-serif',
+    $display-4: mat-typography-level(96px, 150%, bold),
+    $display-3: mat-typography-level(80px, 150%, bold),
+    $display-2: mat-typography-level(64px, 150%, bold),
+    $display-1: mat-typography-level(48px, 150%, bold),
+    $headline: mat-typography-level(16px, 150%, bold),
+    $title: mat-typography-level(16px, 150%, bold),
+    $subheading-2: mat-typography-level(16px, 150%, bold),
+    $subheading-1: mat-typography-level(16px, 150%, bold),
+    $body-1: mat-typography-level(14px, 150%, normal),
+    $body-2: mat-typography-level(14px, 150%, bold),
+    $caption: mat-typography-level(12px, 150%, normal),
+);
+
+@include mat-base-typography($article-typography);
+// @include angular-material-typography($material-typography);
+// @include mat-core($article-typography);

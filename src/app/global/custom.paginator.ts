@@ -18,11 +18,10 @@ export class CustomPaginator extends MatPaginatorIntl {
         }
 
         length = Math.max(length, 0);
-        const startIndex = page * pageSize;
-        const endIndex = startIndex < length ?
-            Math.min(startIndex + pageSize, length) :
-            startIndex + pageSize;
-        return 'From ' + (startIndex + 1) + ' to ' + endIndex + ', Total ' + length + ' Pages';
+        const pages: number = length % pageSize === 0 ? Math.floor(length / pageSize) : Math.floor(length / pageSize) + 1;
+        const startIndex: number = page * pageSize;
+        const endIndex: number = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+        return `Page: ${page + 1} of ${pages}, Items: ${startIndex + 1} - ${endIndex} of ${length}`;
     }
 
 }

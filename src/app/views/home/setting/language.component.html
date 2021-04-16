@@ -1,0 +1,11 @@
+<mat-radio-group class="display-grid g-100" [(ngModel)]="select" (change)="listenLanguageChange($event)"
+    [style.grid-template-columns]="'repeat(auto-fill, minmax(20%, 1fr))'">
+    <mat-radio-button color="primary" [value]="item === undefined ? '' : item.lumCode" [disabled]="item === undefined"
+        *ngFor="let item of list">
+        <div class="display-flex align-items-center p-50">
+            <img class="mat-elevation-z8 border-radius-circle mr-25" [src]="'assets/flags/' + item.lumFlag + '.png'"
+                alt="" width="36" height="36">
+            <span class="font-size-12 ml-25">{{item.lumText}}</span>
+        </div>
+    </mat-radio-button>
+</mat-radio-group>

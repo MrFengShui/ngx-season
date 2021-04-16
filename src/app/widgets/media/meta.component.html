@@ -1,0 +1,88 @@
+<div class="meta-wrapper">
+    <mat-card class="container mat-elevation-z0 bg-texture display-grid g-50 p-0" *ngIf="model !== undefined">
+        <div class="colspan-2 bg-pshare bt-radius-4 display-flex flex-column p-100">
+            <h1 class=" font-size-16 text-align-justify text-overflow my-0 mb-50">{{model.title}}</h1>
+            <h2 class="font-size-12 text-align-justify text-overflow my-0 mt-50">{{model.subtitle}}</h2>
+        </div>
+        <p class="colspan-2 font-size-12 text-align-justify px-100 my-0">{{model.description}}</p>
+        <mat-divider class="colspan-2" [style.position]="'static'"></mat-divider>
+        <div class="display-flex justify-content-space-between px-100 my-0">
+            <p class="display-flex flex-column justify-content-center align-items-center flex mr-50 my-0">
+                <span class="font-size-18 font-weight-bold">{{model.view | count}}</span>
+                <mat-divider class="bc-pshare my-50" [style.border-width]="'0.25em'" [style.position]="'static'">
+                </mat-divider>
+                <span class="font-size-12">View</span>
+            </p>
+            <p class="display-flex flex-column justify-content-center align-items-center flex ml-50 my-0">
+                <span class="font-size-18 font-weight-bold">{{model.upload | date: 'yyyy-MM-dd'}}</span>
+                <mat-divider class="bc-pshare my-50" [style.border-width]="'0.25em'" [style.position]="'static'">
+                </mat-divider>
+                <span class="font-size-12">Upload</span>
+            </p>
+        </div>
+        <div class="display-flex justify-content-space-around">
+            <button mat-button [matTooltip]="'Like'" [matTooltipClass]="'bg-share'" [style.width]="'84px'"
+                [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>thumb_up</mat-icon>
+                    <span>{{model.like === 0 ? 'Like' : (model.like | count)}}</span>
+                </div>
+            </button>
+            <button mat-button [matTooltip]="'Hate'" [matTooltipClass]="'bg-share'" [style.width]="'84px'"
+                [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>thumb_down</mat-icon>
+                    <span>{{model.dislike === 0 ? 'Dislike' : (model.dislike | count)}}</span>
+                </div>
+            </button>
+            <button mat-button [style.width]="'84px'" [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>share</mat-icon>
+                    <span>Share</span>
+                </div>
+            </button>
+            <button mat-button [style.width]="'84px'" [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>library_add</mat-icon>
+                    <span>Store</span>
+                </div>
+            </button>
+            <button mat-button [style.width]="'84px'" [style.height]="'84px'">
+                <div class="display-flex flex-column justify-content-center align-items-center pt-100">
+                    <mat-icon>download</mat-icon>
+                    <span>Download</span>
+                </div>
+            </button>
+        </div>
+        <mat-divider class="colspan-2" [style.position]="'static'"></mat-divider>
+        <mat-chip-list class="colspan-2 px-100">
+            <mat-chip color="accent" selected *ngFor="let tag of model.tags">{{tag.name}}</mat-chip>
+            <mat-chip color="accent" *ngIf="model.tags.length === 0">No Tags</mat-chip>
+        </mat-chip-list>
+        <mat-divider class="colspan-2" [style.position]="'static'"></mat-divider>
+        <div class="colspan-2 display-flex align-items-center px-100 pb-50">
+            <a matRipple class="channel display-grid gx-50 flex p-50">
+                <span class="avatar circle mat-elevation-z4 bg-pshare">
+                    <img [src]="model.icon" alt="">
+                </span>
+                <span class="font-size-14">{{model.name}}</span>
+                <span class="font-size-10">Subscribed: {{model.subscribed}}</span>
+            </a>
+            <button mat-raised-button color="primary" class="mx-100">Subscribe</button>
+            <button mat-icon-button>
+                <mat-icon>notifications</mat-icon>
+            </button>
+        </div>
+    </mat-card>
+    <mat-card class="container mat-elevation-z0 bg-texture display-flex flex-column" *ngIf="model === undefined">
+        <div app-tsholder class="mb-50"></div>
+        <mat-divider class="my-50" [style.position]="'static'"></mat-divider>
+        <div app-pholder lines="8" class="my-50"></div>
+        <div class="display-flex justify-content-space-between my-50">
+            <div app-tbholder count="2"></div>
+            <div app-tbholder count="5"></div>
+        </div>
+        <mat-divider class="my-50" [style.position]="'static'"></mat-divider>
+        <div app-ansbholder class="mt-50"></div>
+    </mat-card>
+</div>

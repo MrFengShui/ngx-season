@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav";
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
 
     @ViewChild('content', { read: ElementRef, static: true })
     content!: ElementRef<MatSidenavContent | any>;
+
+    @HostBinding('class') class: string = 'home';
 
     checked!: boolean;
     flag!: boolean;

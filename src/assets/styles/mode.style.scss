@@ -3,6 +3,20 @@
     $accent: map-get($theme, accent);
     $warn: map-get($theme, warn);
 
+    body {
+        background-color: mat-color($primary);
+
+        &:-webkit-full-screen {
+            .scroll-share {
+                &:hover {
+                    &::-webkit-scrollbar-thumb {
+                        background-color: transparent !important;
+                    }
+                }
+            }
+        }
+    }
+
     .mat-drawer-inner-container,
     .scroll-share {
         &::-webkit-scrollbar-corner,
@@ -88,31 +102,6 @@
         }
     }
 
-    // .video-layout {
-    //     .section-title {
-    //         background-color: mat-color($primary);
-    //     }
-
-    //     .video-listview {
-    //         .list-head {
-    //             background-color: mat-color($primary);
-    //         }
-
-    //         .list-body {
-    //             .mat-list {
-    //                 &::-webkit-scrollbar-thumb {
-    //                     background-color: transparent;
-    //                 }
-
-    //                 &:hover {
-    //                     &::-webkit-scrollbar-thumb {
-    //                         background-color: mat-color($primary, 300);
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
     .video {
         .video-wrapper {
             .meta {
@@ -200,21 +189,22 @@
             }
         }
 
+        .holder-unit {
+            animation-name: color-change;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
         @keyframes color-change {
             0% {
-                background-color: mat-color($primary, 300);
-            }
-            25% {
                 background-color: mat-color($primary, 100);
             }
             50% {
-                background-color: mat-color($primary, 300);
-            }
-            75% {
-                background-color: mat-color($primary, 100);
+                background-color: mat-color($primary, 200);
             }
             100% {
-                background-color: mat-color($primary, 300);
+                background-color: mat-color($primary, 100);
             }
         }
     }
@@ -287,9 +277,35 @@
         }
     }
 
-    .bg-share {
-        background-color: mat-color($primary);
-        color: white;
+    $code-list: 100 200 300 400 500 600 700 800 900;
+
+    @each $item in $code-list {
+        .bg-pshare-#{$item} {
+            background-color: mat-color($primary, $item);
+            color: white;
+        }
+
+        .bg-ashare-#{$item} {
+            background-color: mat-color($accent, $item);
+            color: white;
+        }
+
+        .bg-wshare-#{$item} {
+            background-color: mat-color($warn, $item);
+            color: white;
+        }
+
+        .bc-pshare-#{$item} {
+            border-color: mat-color($primary, $item);
+        }
+
+        .bc-ashare-#{$item} {
+            border-color: mat-color($accent, $item);
+        }
+
+        .bc-wshare-#{$item} {
+            border-color: mat-color($warn, $item);
+        }
     }
 
     .bg-pshare {
@@ -304,6 +320,30 @@
 
     .bg-wshare {
         background-color: mat-color($warn);
+        color: white;
+    }
+
+    .bg-none {
+        background-color: transparent;
+    }
+
+    .bc-pshare {
+        border-color: mat-color($primary);
+    }
+
+    .bc-ashare {
+        border-color: mat-color($accent);
+    }
+
+    .bc-wshare {
+        border-color: mat-color($warn);
+    }
+
+    .tc-black {
+        color: black;
+    }
+
+    .tc-white {
         color: white;
     }
 }

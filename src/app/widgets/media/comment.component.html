@@ -1,0 +1,100 @@
+<div class="comment-wrapper">
+    <mat-card class="mat-elevation-z0 bg-texture display-flex flex-column p-0" *ngIf="model !== undefined">
+        <h1 class="bg-pshare bt-radius-4 font-size-16 p-100 m-0">Comments</h1>
+        <form class="p-100" [formGroup]="group">
+            <mat-form-field class="w-100" [floatLabel]="'never'" [appearance]="'outline'">
+                <textarea matInput [(ngModel)]="model.content" placeholder="Enter your comment."
+                    formControlName="commentInput" cdkTextareaAutosize cdkAutosizeMinRows="6" cdkAutosizeMaxRows="6"
+                    #commentInput></textarea>
+                <mat-hint align="end">{{commentInput.value?.length || 0}}/{{count}}</mat-hint>
+                <mat-error *ngIf="group.invalid">{{getErrorMessage(group.controls.commentInput)}}</mat-error>
+            </mat-form-field>
+        </form>
+        <div class="display-flex align-items-center px-100">
+            <span class="avatar circle bg-pshare">
+                <img [src]="model.icon" alt="">
+            </span>
+            <span class="font-size-14 font-weight-bold flex mx-100">{{model.name}}</span>
+            <button mat-icon-button class="mx-50">
+                <mat-icon>mood</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" class="mx-0">Submit</button>
+        </div>
+        <mat-divider class="my-100" [style.position]="'static'"></mat-divider>
+        <mat-list class="list">
+            <h1 class="font-size-16 font-weight-bold" matSubheader>List of Comments</h1>
+            <ng-container [ngTemplateOutlet]="commentTemplate"
+                [ngTemplateOutletContext]="{ $implicit: model.comments }">
+            </ng-container>
+        </mat-list>
+        <mat-paginator class="bg-pshare bb-radius-4" [length]="120" [pageSize]="10" [pageSizeOptions]="[10, 15, 20]"
+            showFirstLastButtons>
+        </mat-paginator>
+    </mat-card>
+    <mat-card class="mat-elevation-z0 bg-texture display-flex flex-column" *ngIf="model === undefined">
+        <div app-bholder [ratio]="'6:1'" class="mb-50"></div>
+        <div app-ansbholder class="my-50"></div>
+        <ng-container *ngFor="let item of list; index as i">
+            <mat-divider class="my-50" [style.position]="'static'"></mat-divider>
+            <div class="display-flex flex-column" [class.my-50]="i !== list.length - 1"
+                [class.mt-50]="i === list.length - 1">
+                <div app-ansbholder class="mb-50"></div>
+                <div app-bholder [ratio]="'8:1'" class="mt-50"></div>
+            </div>
+        </ng-container>
+    </mat-card>
+</div>
+<ng-template #commentTemplate let-comments>
+    <mat-list-item class="hold" *ngIf="comments.length === 0">
+        <span class="font-size-16 font-weight-bold bc-pshare display-flex justify-content-center align-items-center">No
+            Comments Available</span>
+    </mat-list-item>
+    <ng-container *ngFor="let comment of comments; index as i">
+        <mat-list-item class="item">
+            <span class="avatar bg-pshare" matListAvatar>
+                <img [src]="comment.cmAvatar" alt="">
+            </span>
+            <h1 class="font-size-12 font-weight-bold display-flex justify-content-space-between mb-50" matLine>
+                <span>{{comment.cmName}}</span>
+                <span>{{comment.cmCommit | date: 'yyyy-MM-dd'}}</span>
+            </h1>
+            <p class="content font-size-12 text-align-justify mt-50 mb-0" [class.collapse]="!comment.cmExpanded" matLine
+                [style.white-space]="'normal'">{{comment.cmContent}}</p>
+            <mat-divider class="my-100" matLine [style.position]="'static'"></mat-divider>
+            <div class="action display-grid g-100" matLine>
+                <button mat-icon-button>
+                    <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon>thumb_down</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon>reply</mat-icon>
+                </button>
+                <button mat-button>
+                    <mat-icon>remove_red_eye</mat-icon>
+                    View All Replies (8)
+                </button>
+                <span></span>
+                <button mat-button (click)="comment.cmExpanded = !comment.cmExpanded">
+                    <mat-icon>{{comment.cmExpanded ? 'unfold_less' : 'unfold_more'}}</mat-icon>
+                    {{comment.cmExpanded ? 'Shrink' : 'Expand'}}
+                </button>
+                <button mat-icon-button [matMenuTriggerFor]="more">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #more="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>report</mat-icon>
+                        <span>Report</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>block</mat-icon>
+                        <span>Block</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </mat-list-item>
+        <mat-divider *ngIf="i !== comments.length - 1"></mat-divider>
+    </ng-container>
+</ng-template>

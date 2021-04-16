@@ -1,5 +1,8 @@
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap");
+// @import url(https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone);
+@import "./icons/full.scss";
+// @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap);
+@import "./fonts/noto-sans-sc.scss";
+@import "~@angular/cdk/overlay-prebuilt.css";
 
 @import "./utilities/border.style.scss";
 @import "./utilities/display.style.scss";
@@ -19,13 +22,27 @@
 
 html,
 body {
-    font-family: "Noto Sans SC", sans-serif;
+    // font-family: "Noto Sans SC", sans-serif;
+    // font-size: 100%;
     height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 body {
-    margin: 0;
     overflow: hidden;
+
+    .wrapper {
+        min-width: 1440px;
+        max-width: 1920px;
+        width: 100%;
+    }
+}
+
+a {
+    &.none {
+        text-decoration: none;
+    }
 }
 
 .rotate-icon {
@@ -43,4 +60,12 @@ body {
             transform: rotate(360deg);
         }
     }
+}
+
+.bg-texture {
+    background-image: url(/app/assets/images/texture.png) !important;
+    background-position: center !important;
+    background-repeat: repeat !important;
+    background-size: contain !important;
+    background-origin: content-box !important;
 }
