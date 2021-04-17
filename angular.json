@@ -76,7 +76,7 @@
                 "deploy": {
                     "builder": "angular-cli-ghpages:deploy",
                     "options": {
-                        "base-href": "https://mrfengshui.github.io/angular-project/",
+                        "baseHref": "https://mrfengshui.github.io/angular-project/",
                         "branch": "master",
                         "name": "MrFengShui",
                         "email": "luansongjian@gmail.com",
