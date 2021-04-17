@@ -22,11 +22,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm install -g @angular/cli > /dev/null
     - run: npm build --prod --output-path=dist --base-href="https://mrfengshui.github.io/angular-project/"
     - name: Publish generated content to GitHub Pages
       uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
       with:
-          dir: dist/angular-project
+          dir: dist
           branch: gh-pages
           token: ${{ secrets.ACCESS_TOKEN }}
