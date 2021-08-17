@@ -1,0 +1,79 @@
+$list: auto, hidden;
+
+@each $item in $list {
+    .overflow-#{$item} {
+        overflow: $item;
+    }
+
+    .overflow-x-#{$item} {
+        overflow-x: $item;
+    }
+
+    .overflow-y-#{$item} {
+        overflow-y: $item;
+    }
+}
+
+.overflow {
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+.octopus-dialog {
+    .octopus-dialog-content {
+        .octopus-dialog-content-wrapper {
+            &::-webkit-scrollbar {
+                width: 0.5rem;
+                height: 0.5rem;
+            }
+
+            &::-webkit-scrollbar-corner {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+@mixin overflow-mixin($foreground, $background) {
+    .overflow {
+        $color: map-get($background, "overflow");
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba($color, 0.25);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: lighten($color, 12.5%);
+
+            &:hover {
+                background-color: lighten($color, 25%);
+            }
+        }
+    }
+
+    .octopus-dialog {
+        .octopus-dialog-content {
+            .octopus-dialog-content-wrapper {
+                $color: map-get($background, "overflow");
+
+                &::-webkit-scrollbar-track {
+                    background-color: rgba($color, 0.25);
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: lighten($color, 12.5%);
+
+                    &:hover {
+                        background-color: lighten($color, 25%);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<div class="octopus-form-field-wrapper h-100" [class.outline-form-field-wrapper]="appearance === 'outline'"
+    [class.standard-form-field-wrapper]="appearance === 'standard'"
+    [class.success-form-field-wrapper]="validState === 'success'"
+    [class.warning-form-field-wrapper]="validState === 'warning'"
+    [class.failure-form-field-wrapper]="validState === 'failure'">
+    <div class="container-wrapper h-100 mb-25">
+        <div class="frame">
+            <div class="left" [class.active]="state$ | async"></div>
+            <div class="center" [class.active]="state$ | async">
+                <ng-content select="[octopus-form-label]"></ng-content>
+            </div>
+            <div class="right" [class.active]="state$ | async"></div>
+        </div>
+        <div class="body">
+            <ng-content select="[octopus-form-prefix]"></ng-content>
+            <ng-content select="[octopus-form-input]"></ng-content>
+            <ng-content select="[octopus-form-postfix]"></ng-content>
+        </div>
+    </div>
+    <div class="validation-wrapper mt-25">
+        <ng-content select="[octopus-form-valid]"></ng-content>
+    </div>
+</div>

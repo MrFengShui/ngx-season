@@ -1,0 +1,12 @@
+<div class="octopus-expansion-panel-wrapper" #wrapper>
+    <div class="octopus-expansion-panel-control" (click)="toggle()">
+        <ng-content select="octopus-icon"></ng-content>
+        <span class="octopus-expansion-subject">{{subject}}</span>
+        <span class="octopus-expansion-description flex-fill">{{description}}</span>
+        <span class="material-icons" [@ICON_ROTATE]="expanded ? 'up' : 'down'" #control>expand_circle_down</span>
+    </div>
+    <div class="octopus-expansion-panel-content" [@CONTENT_COLLAPSE]="expanded ? 'show' : 'hide'">
+        <ng-content></ng-content>
+        <ng-content select="octopus-expansion-action"></ng-content>
+    </div>
+</div>

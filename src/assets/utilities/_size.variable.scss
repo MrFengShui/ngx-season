@@ -1,0 +1,18 @@
+$size-list: (
+    auto: auto,
+    fit: fit-content,
+    25: 25%,
+    50: 50%,
+    75: 75%,
+    100: 100%,
+);
+
+@each $name, $value in $size-list {
+    .w-#{$name} {
+        width: $value !important;
+    }
+
+    .h-#{$name} {
+        height: $value !important;
+    }
+}

@@ -1,0 +1,58 @@
+.octopus-divider {
+    .octopus-divider-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        hr {
+            border-style: solid;
+            border-width: 1px;
+            margin: 0;
+        }
+
+        span {
+            text-orientation: mixed;
+            white-space: nowrap;
+        }
+
+        &.horizontal {
+            flex-direction: row;
+            width: 100%;
+
+            hr {
+                width: 100%;
+            }
+
+            span {
+                margin: 0 1rem;
+                writing-mode: rl-tb;
+            }
+        }
+
+        &.vertical {
+            flex-direction: column;
+            height: 100%;
+
+            hr {
+                height: 100%;
+            }
+
+            span {
+                margin: 1rem 0;
+                writing-mode: vertical-lr;
+            }
+        }
+    }
+}
+
+@mixin divider-mixin($foreground) {
+    .octopus-divider {
+        hr {
+            border-color: $foreground;
+        }
+
+        span {
+            color: $foreground;
+        }
+    }
+}

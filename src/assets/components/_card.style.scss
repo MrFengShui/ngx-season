@@ -1,0 +1,162 @@
+.octopus-card {
+    border-radius: 3px;
+    width: 100%;
+
+    .octopus-card-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+
+        hr {
+            background: none;
+            border-style: solid;
+            margin: 0.25rem -0.5rem;
+        }
+
+        .octopus-button {
+            height: 2rem;
+            padding: 0.25rem 0.75rem;
+
+            &.octopus-icon-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 2rem;
+                width: 2rem;
+            }
+        }
+
+        .octopus-card-attach {
+            margin: 0.25rem -0.5rem;
+
+            .octopus-card-attach-wrapper {
+                display: flex;
+            }
+        }
+
+        .octopus-card-header {
+            margin-bottom: 0.25rem;
+
+            .octopus-card-header-wrapper {
+                display: flex;
+                align-items: center;
+
+                .octopus-card-avatar {
+                    border-style: solid;
+                    border-radius: 50%;
+                    border-width: 1px;
+                    box-sizing: border-box;
+                    padding: 1px;
+                    width: 2rem;
+                    height: 2rem;
+                }
+
+                .octopus-card-title {
+                    margin-bottom: 0.125rem;
+                }
+
+                .octopus-card-subtitle {
+                    margin-top: 0.125rem;
+                }
+            }
+        }
+
+        .octopus-card-content {
+            margin: 0.25rem 0;
+        }
+
+        .octopus-card-footer {
+            margin-top: 0.25rem;
+
+            .octopus-card-footer-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@mixin card-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    .octopus-card {
+        box-shadow: 0px 0px 4px 1px rgba($foreground, 0.5);
+        color: $foreground;
+
+        .octopus-button {
+            color: $foreground;
+        }
+
+        .octopus-card-avatar {
+            border-color: $foreground;
+        }
+
+        &.octopus-base-card {
+            $bg-color: map-get($background, "base");
+            background-color: lighten($bg-color, 5%);
+
+            hr {
+                border-color: rgba($foreground, 0.15);
+            }
+        }
+
+        &.octopus-primary-card {
+            $bg-color: map-get($primary, "value");
+            background-color: $bg-color;
+            color: map-get($primary, "text") !important;
+
+            hr {
+                border-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-secondary-card {
+            $bg-color: map-get($secondary, "value");
+            background-color: $bg-color;
+            color: map-get($secondary, "text") !important;
+
+            hr {
+                border-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-success-card {
+            $bg-color: map-get($success, "value");
+            background-color: $bg-color;
+            color: map-get($success, "text") !important;
+
+            hr {
+                border-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-warning-card {
+            $bg-color: map-get($warning, "value");
+            background-color: $bg-color;
+            color: map-get($warning, "text") !important;
+
+            hr {
+                border-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-failure-card {
+            $bg-color: map-get($failure, "value");
+            background-color: $bg-color;
+            color: map-get($failure, "text") !important;
+
+            hr {
+                border-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-info-card {
+            $bg-color: map-get($info, "value");
+            background-color: $bg-color;
+            color: map-get($info, "text") !important;
+
+            hr {
+                border-color: lighten($bg-color, 5%);
+            }
+        }
+    }
+}

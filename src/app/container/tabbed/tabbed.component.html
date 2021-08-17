@@ -1,0 +1,28 @@
+<div class="octopus-tabbed-wrapper">
+    <div class="octopus-tabbed-control">
+        <button octopus-ripple class="octopus-tabbed-control-action left" [class.d-none]="hidden$ | async"
+            (click)="handleScrollActionEvent(content, -1)">
+            <octopus-icon>navigate_before</octopus-icon>
+        </button>
+        <div class="octopus-tabbed-control-tabs justify-content-{{(hidden$ | async) ? position : 'start'}}" #content>
+            <ng-container *ngFor="let unit of units; index as i">
+                <button class="octopus-tabbed-control-tab text-truncate" [class.active]="i === select"
+                    (click)="select = i" #tab>
+                    <span class="material-icons icon"
+                        *ngIf="unit.icon !== undefined || unit.icon !== ''">{{unit.icon}}</span>
+                    <span *ngIf="unit.text !== undefined || unit.text !== ''">{{unit.text}}</span>
+                </button>
+            </ng-container>
+        </div>
+        <button octopus-ripple class="octopus-tabbed-control-action right" [class.d-none]="hidden$ | async"
+            (click)="handleScrollActionEvent(content, 1)">
+            <octopus-icon>navigate_next</octopus-icon>
+        </button>
+    </div>
+    <div class="octopus-tabbed-content">
+        <div class="content" [@CONTENT_SELECT]="i === select ? 'show' : 'hide'" *ngFor="let unit of units; index as i">
+            <ng-template [cdkPortalOutlet]="unit.contentPortal"></ng-template>
+        </div>
+    </div>
+</div>
+<ng-template octopus-tabbed-unit></ng-template>

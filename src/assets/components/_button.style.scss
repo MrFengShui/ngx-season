@@ -1,0 +1,497 @@
+.octopus-button {
+    background: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 0.75rem;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    width: 100%;
+
+    &.octopus-outline-button {
+        border-width: 3px;
+        border-style: solid;
+        box-sizing: border-box;
+    }
+
+    &.octopus-mix-button {
+        $size: calc(3rem + 1rem + 1.5rem * 2 + 2px);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: $size;
+        height: $size;
+
+        .icon {
+            font-size: 3rem;
+        }
+
+        hr {
+            border-style: solid;
+            margin: auto 0;
+            width: 100%;
+        }
+
+        .text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+    }
+
+    &.octopus-icon-button {
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+
+        .icon {
+            font-size: calc(4rem - 0.75rem * 2);
+        }
+    }
+}
+
+@mixin button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    .octopus-button {
+        &.octopus-ripple {
+            .octopus-ripple-wrapper {
+                background-color: rgba($foreground, 0.25);
+            }
+        }
+
+        &.octopus-primary-button {
+            $color: map-get($primary, "value");
+            color: $color;
+
+            &:hover {
+                background-color: rgba($color, 0.15);
+            }
+
+            &:active {
+                background-color: rgba($color, 0.05);
+            }
+        }
+
+        &.octopus-primary-fill-button {
+            $bg-color: map-get($primary, "value");
+            background-color: $bg-color;
+            color: map-get($primary, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-primary-outline-button {
+            $bg-color: map-get($primary, "value");
+            border-color: $bg-color;
+            color: $bg-color;
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($primary, "text");
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($primary, "text");
+            }
+        }
+
+        &.octopus-primary-mix-button,
+        &.octopus-primary-icon-button {
+            $bg-color: map-get($primary, "value");
+            background-color: rgba($bg-color, 0.025);
+            color: $bg-color;
+
+            hr {
+                border-color: $bg-color;
+            }
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($primary, "text");
+
+                hr {
+                    border-color: map-get($primary, "text");
+                }
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($primary, "text");
+
+                hr {
+                    border-color: map-get($primary, "text");
+                }
+            }
+        }
+
+        &.octopus-secondary-button {
+            $color: map-get($secondary, "value");
+            color: $color;
+
+            &:hover {
+                background-color: rgba($color, 0.15);
+            }
+
+            &:active {
+                background-color: rgba($color, 0.05);
+            }
+        }
+
+        &.octopus-secondary-fill-button {
+            $bg-color: map-get($secondary, "value");
+            background-color: $bg-color;
+            color: map-get($secondary, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-secondary-outline-button {
+            $bg-color: map-get($secondary, "value");
+            border-color: $bg-color;
+            color: $bg-color;
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($secondary, "text");
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($secondary, "text");
+            }
+        }
+
+        &.octopus-secondary-mix-button,
+        &.octopus-secondary-icon-button {
+            $bg-color: map-get($secondary, "value");
+            background-color: rgba($bg-color, 0.025);
+            color: $bg-color;
+
+            hr {
+                border-color: $bg-color;
+            }
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($secondary, "text");
+
+                hr {
+                    border-color: map-get($secondary, "text");
+                }
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($secondary, "text");
+
+                hr {
+                    border-color: map-get($secondary, "text");
+                }
+            }
+        }
+
+        &.octopus-success-button {
+            $color: map-get($success, "value");
+            color: $color;
+
+            &:hover {
+                background-color: rgba($color, 0.15);
+            }
+
+            &:active {
+                background-color: rgba($color, 0.05);
+            }
+        }
+
+        &.octopus-success-fill-button {
+            $bg-color: map-get($success, "value");
+            background-color: $bg-color;
+            color: map-get($success, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-success-outline-button {
+            $bg-color: map-get($success, "value");
+            border-color: $bg-color;
+            color: $bg-color;
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($success, "text");
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($success, "text");
+            }
+        }
+
+        &.octopus-success-mix-button,
+        &.octopus-success-icon-button {
+            $bg-color: map-get($success, "value");
+            background-color: rgba($bg-color, 0.025);
+            color: $bg-color;
+
+            hr {
+                border-color: $bg-color;
+            }
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($success, "text");
+
+                hr {
+                    border-color: map-get($success, "text");
+                }
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($success, "text");
+
+                hr {
+                    border-color: map-get($success, "text");
+                }
+            }
+        }
+
+        &.octopus-warning-button {
+            $color: map-get($warning, "value");
+            color: $color;
+
+            &:hover {
+                background-color: rgba($color, 0.15);
+            }
+
+            &:active {
+                background-color: rgba($color, 0.05);
+            }
+        }
+
+        &.octopus-warning-fill-button {
+            $bg-color: map-get($warning, "value");
+            background-color: $bg-color;
+            color: map-get($warning, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-warning-outline-button {
+            $bg-color: map-get($warning, "value");
+            border-color: $bg-color;
+            color: $bg-color;
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($warning, "text");
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($warning, "text");
+            }
+        }
+
+        &.octopus-warning-mix-button,
+        &.octopus-warning-icon-button {
+            $bg-color: map-get($warning, "value");
+            background-color: rgba($bg-color, 0.025);
+            color: $bg-color;
+
+            hr {
+                border-color: $bg-color;
+            }
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($warning, "text");
+
+                hr {
+                    border-color: map-get($warning, "text");
+                }
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($warning, "text");
+
+                hr {
+                    border-color: map-get($warning, "text");
+                }
+            }
+        }
+
+        &.octopus-failure-button {
+            $color: map-get($failure, "value");
+            color: $color;
+
+            &:hover {
+                background-color: rgba($color, 0.15);
+            }
+
+            &:active {
+                background-color: rgba($color, 0.05);
+            }
+        }
+
+        &.octopus-failure-fill-button {
+            $bg-color: map-get($failure, "value");
+            background-color: $bg-color;
+            color: map-get($failure, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-failure-outline-button {
+            $bg-color: map-get($failure, "value");
+            border-color: $bg-color;
+            color: $bg-color;
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($failure, "text");
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($failure, "text");
+            }
+        }
+
+        &.octopus-failure-mix-button,
+        &.octopus-failure-icon-button {
+            $bg-color: map-get($failure, "value");
+            background-color: rgba($bg-color, 0.025);
+            color: $bg-color;
+
+            hr {
+                border-color: $bg-color;
+            }
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($failure, "text");
+
+                hr {
+                    border-color: map-get($failure, "text");
+                }
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($failure, "text");
+
+                hr {
+                    border-color: map-get($failure, "text");
+                }
+            }
+        }
+
+        &.octopus-info-button {
+            $color: map-get($info, "value");
+            color: $color;
+
+            &:hover {
+                background-color: rgba($color, 0.15);
+            }
+
+            &:active {
+                background-color: rgba($color, 0.05);
+            }
+        }
+
+        &.octopus-info-fill-button {
+            $bg-color: map-get($info, "value");
+            background-color: $bg-color;
+            color: map-get($info, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+            }
+        }
+
+        &.octopus-info-outline-button {
+            $bg-color: map-get($info, "value");
+            border-color: $bg-color;
+            color: $bg-color;
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($info, "text");
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($info, "text");
+            }
+        }
+
+        &.octopus-info-mix-button,
+        &.octopus-info-icon-button {
+            $bg-color: map-get($info, "value");
+            background-color: rgba($bg-color, 0.025);
+            color: $bg-color;
+
+            hr {
+                border-color: $bg-color;
+            }
+
+            &:hover {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($info, "text");
+
+                hr {
+                    border-color: map-get($info, "text");
+                }
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 5%);
+                color: map-get($info, "text");
+
+                hr {
+                    border-color: map-get($info, "text");
+                }
+            }
+        }
+    }
+}

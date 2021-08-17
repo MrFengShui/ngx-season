@@ -1,0 +1,268 @@
+$size: 1px;
+$active-size: 2px;
+
+.octopus-form-field {
+    .octopus-form-field-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-width: 16rem;
+
+        .container-wrapper {
+            display: flex;
+            position: relative;
+
+            .frame {
+                display: flex;
+                position: absolute;
+                inset: 0%;
+
+                .left {
+                    border-style: solid;
+                    box-sizing: border-box;
+                    height: 100%;
+                    transition: 250ms;
+
+                    &.active {
+                        border-width: $active-size 0 $active-size $active-size;
+                    }
+                }
+
+                .center {
+                    border-style: solid;
+                    box-sizing: border-box;
+                    display: flex;
+                    height: 100%;
+                    transition: 250ms;
+
+                    .octopus-form-label {
+                        height: fit-content;
+                        position: relative;
+                        padding: 0 0.25rem;
+                        white-space: nowrap;
+                        transform: translateY(-50%);
+                        transition: 250ms;
+                    }
+                }
+
+                .right {
+                    border-style: solid;
+                    box-sizing: border-box;
+                    height: 100%;
+                    transition: 250ms;
+
+                    &.active {
+                        border-width: $active-size $active-size $active-size 0;
+                    }
+                }
+            }
+
+            .body {
+                display: flex;
+                align-items: center;
+                flex: auto;
+                position: relative;
+
+                .octopus-form-prefix,
+                .octopus-form-postfix {
+                    user-select: none;
+
+                    &.octopus-button {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 2rem !important;
+                        height: 2rem !important;
+                    }
+                }
+
+                .octopus-form-input {
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    flex: auto;
+                }
+
+                :nth-child(n) {
+                    margin: 0 0.25rem;
+                }
+
+                :first-child {
+                    margin-left: 0;
+                }
+
+                :last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .validation-wrapper {
+            .valid-hint {
+                float: right;
+            }
+
+            .valid-error {
+                float: left;
+            }
+        }
+
+        &.standard-form-field-wrapper {
+            .container-wrapper {
+                .frame {
+                    .left {
+                        border-width: 0 0 $size 0;
+                        width: auto;
+                    }
+
+                    .center {
+                        border-width: 0 0 $size 0;
+                        width: 100%;
+                    }
+
+                    .right {
+                        border-width: 0 0 $size 0;
+                        width: auto;
+                    }
+                }
+
+                .body {
+                    padding: 1rem 0 0.75rem;
+                }
+            }
+
+            &:hover {
+                .container-wrapper {
+                    .frame {
+                        .left,
+                        .center,
+                        .right {
+                            border-width: 0 0 $active-size 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.outline-form-field-wrapper {
+            .container-wrapper {
+                .frame {
+                    .left {
+                        border-radius: 0.25rem 0 0 0.25rem;
+                        border-width: $size 0 $size $size;
+                        width: 1rem;
+                    }
+
+                    .center {
+                        border-width: 0 0 $size 0;
+                        width: fit-content;
+                    }
+
+                    .right {
+                        border-radius: 0 0.25rem 0.25rem 0;
+                        border-width: $size $size $size 0;
+                        width: 100%;
+                    }
+                }
+
+                .body {
+                    padding: 1rem 0.5rem 0.75rem;
+                }
+            }
+
+            &:hover {
+                .container-wrapper {
+                    .frame {
+                        .left {
+                            border-width: $active-size 0 $active-size $active-size;
+                        }
+
+                        .center {
+                            border-width: 0 0 $active-size 0;
+                        }
+
+                        .right {
+                            border-width: $active-size $active-size $active-size 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background) {
+    .octopus-form-field {
+        .octopus-form-field-wrapper {
+            .container-wrapper {
+                .frame {
+                    .left,
+                    .center,
+                    .right {
+                        border-color: $foreground;
+
+                        .octopus-form-label {
+                            color: $foreground;
+                        }
+
+                        &.active {
+                            $bg-color: map-get($primary, "value");
+                            border-color: $bg-color;
+
+                            .octopus-form-label {
+                                color: $bg-color;
+                            }
+                        }
+                    }
+                }
+
+                .body {
+                    .octopus-form-prefix,
+                    .octopus-form-postfix,
+                    .octopus-form-input {
+                        color: $foreground;
+                    }
+                }
+            }
+
+            .validation-wrapper {
+                .valid-hint {
+                    color: $foreground;
+                }
+
+                .valid-error {
+                    color: map-get($success, "value");
+                }
+            }
+
+            $state-list: (
+                "success": $success,
+                "warning": $warning,
+                "failure": $failure,
+            );
+
+            @each $name, $value in $state-list {
+                &.#{$name}-form-field-wrapper {
+                    .container-wrapper {
+                        .frame {
+                            .left,
+                            .center,
+                            .right {
+                                border-color: map-get($value, "value") !important;
+
+                                .octopus-form-label {
+                                    color: map-get($value, "value") !important;
+                                }
+                            }
+                        }
+                    }
+
+                    .validation-wrapper {
+                        .valid-error {
+                            color: map-get($value, "value") !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

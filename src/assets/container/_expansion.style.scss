@@ -1,0 +1,114 @@
+.octopus-expansion {
+    .octopus-expansion-wrapper {
+        .octopus-expansion-panel {
+            box-sizing: border-box;
+            cursor: pointer;
+            user-select: none;
+
+            .octopus-expansion-panel-wrapper {
+                .octopus-expansion-panel-control {
+                    border-radius: 0;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    padding: 0.5rem;
+                    transition: border-radius 1000ms ease-in-out;
+
+                    > :nth-child(n) {
+                        margin: 0 1rem;
+                    }
+
+                    > :first-child {
+                        margin-left: 0;
+                    }
+
+                    > :last-child {
+                        margin-right: 0;
+                    }
+
+                    .octopus-icon {
+                        border-radius: 50%;
+                        margin-right: 0;
+                    }
+
+                    &.active {
+                        border-radius: 3px 3px 0 0;
+                    }
+                }
+
+                .octopus-expansion-panel-content {
+                    border-radius: 0 0 3px 3px;
+                    overflow: hidden;
+                }
+
+                .octopus-expansion-action {
+                    .octopus-expansion-action-wrapper {
+                        border-style: solid;
+                        border-width: 1px 0 0 0;
+                        display: flex;
+                        padding: 0.5rem;
+
+                        .octopus-button {
+                            width: auto;
+
+                            &:nth-child(n) {
+                                margin: 0 0.25rem;
+                            }
+
+                            &:first-child {
+                                margin-left: 0;
+                            }
+
+                            &:last-child {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin expansion-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+    );
+
+    .octopus-expansion {
+        .octopus-expansion-panel {
+            .octopus-expansion-panel-content {
+                background-color: darken(map-get($background, "expansion"), 5%);
+                color: $foreground;
+            }
+        }
+
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-expansion {
+                $color: map-get($value, "value");
+
+                .octopus-expansion-panel {
+                    .octopus-expansion-panel-control {
+                        background-color: $color;
+                        color: map-get($value, "text");
+
+                        .octopus-icon {
+                            background-color: lighten($color, 7.5%);
+                        }
+                    }
+
+                    .octopus-expansion-action {
+                        .octopus-expansion-action-wrapper {
+                            border-color: rgba($foreground, 0.25);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

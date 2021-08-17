@@ -1,0 +1,229 @@
+.octopus-progress {
+    border-radius: 2px;
+    width: 100%;
+    height: 0.75rem;
+
+    .octopus-progress-bar {
+        border-radius: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: inherit;
+        overflow: hidden;
+        text-align: center;
+        transition: width 1000ms ease-in-out;
+
+        &.stripe {
+            background-size: 1rem 1rem;
+        }
+
+        &.animate {
+            animation-name: stripe-animate;
+            animation-duration: 1000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+
+            @keyframes stripe-animate {
+                0% {
+                    background-position-x: 1rem;
+                }
+            }
+        }
+    }
+
+    .octopus-progress-pie {
+        position: relative;
+
+        .svg {
+            transform: rotate(-90deg);
+
+            .track {
+                transition: stroke-dasharray 1000ms ease-in-out;
+            }
+
+            .thumb {
+                transition: stroke-dasharray 1000ms ease-in-out, stroke-dashoffset 1000ms ease-in-out;
+            }
+        }
+
+        .text {
+            position: absolute;
+            inset: 25%;
+        }
+    }
+}
+
+@mixin progress-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    .octopus-progress {
+        .octopus-progress-bar {
+            &.stripe {
+                background-image: linear-gradient(
+                    45deg,
+                    rgba($foreground, 0.15) 25%,
+                    transparent 25%,
+                    transparent 50%,
+                    rgba($foreground, 0.15) 50%,
+                    rgba($foreground, 0.15) 75%,
+                    transparent 75%,
+                    transparent
+                );
+            }
+        }
+
+        &.octopus-primary-progress {
+            $color: map-get($primary, "value");
+            background-color: rgba($color, 0.125);
+
+            .octopus-progress-bar {
+                background-color: $color;
+                color: map-get($primary, "text");
+            }
+
+            .octopus-progress-pie {
+                .svg {
+                    .track {
+                        stroke: rgba($color, 0.125);
+                    }
+
+                    .thumb {
+                        stroke: $color;
+                    }
+                }
+
+                .text {
+                    color: map-get($primary, "text");
+                }
+            }
+        }
+
+        &.octopus-secondary-progress {
+            $color: map-get($secondary, "value");
+            background-color: rgba($color, 0.125);
+
+            .octopus-progress-bar {
+                background-color: $color;
+                color: map-get($secondary, "text");
+            }
+
+            .octopus-progress-pie {
+                .svg {
+                    .track {
+                        stroke: rgba($color, 0.125);
+                    }
+
+                    .thumb {
+                        stroke: $color;
+                    }
+                }
+
+                .text {
+                    color: map-get($secondary, "text");
+                }
+            }
+        }
+
+        &.octopus-success-progress {
+            $color: map-get($success, "value");
+            background-color: rgba($color, 0.125);
+
+            .octopus-progress-bar {
+                background-color: $color;
+                color: map-get($success, "text");
+            }
+
+            .octopus-progress-pie {
+                .svg {
+                    .track {
+                        stroke: rgba($color, 0.125);
+                    }
+
+                    .thumb {
+                        stroke: $color;
+                    }
+                }
+
+                .text {
+                    color: map-get($success, "text");
+                }
+            }
+        }
+
+        &.octopus-warning-progress {
+            $color: map-get($warning, "value");
+            background-color: rgba($color, 0.125);
+
+            .octopus-progress-bar {
+                background-color: $color;
+                color: map-get($warning, "text");
+            }
+
+            .octopus-progress-pie {
+                .svg {
+                    .track {
+                        stroke: rgba($color, 0.125);
+                    }
+
+                    .thumb {
+                        stroke: $color;
+                    }
+                }
+
+                .text {
+                    color: map-get($warning, "text");
+                }
+            }
+        }
+
+        &.octopus-failure-progress {
+            $color: map-get($failure, "value");
+            background-color: rgba($color, 0.125);
+
+            .octopus-progress-bar {
+                background-color: $color;
+                color: map-get($failure, "text");
+            }
+
+            .octopus-progress-pie {
+                .svg {
+                    .track {
+                        stroke: rgba($color, 0.125);
+                    }
+
+                    .thumb {
+                        stroke: $color;
+                    }
+                }
+
+                .text {
+                    color: map-get($failure, "text");
+                }
+            }
+        }
+
+        &.octopus-info-progress {
+            $color: map-get($info, "value");
+            background-color: rgba($color, 0.125);
+
+            .octopus-progress-bar {
+                background-color: $color;
+                color: map-get($info, "text");
+            }
+
+            .octopus-progress-pie {
+                .svg {
+                    .track {
+                        stroke: rgba($color, 0.125);
+                    }
+
+                    .thumb {
+                        stroke: $color;
+                    }
+                }
+
+                .text {
+                    color: map-get($info, "text");
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,180 @@
+.octopus-list {
+    height: fit-content;
+
+    .octopus-list-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octopus-list-headline {
+            box-sizing: border-box;
+            padding: 0.5rem;
+            user-select: none;
+
+            &:nth-child(n) {
+                margin: 0.5rem 0;
+            }
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .octopus-list-item {
+            .octopus-list-item-wrapper {
+                box-sizing: border-box;
+                padding: 1rem 0.5rem;
+                user-select: none;
+            }
+        }
+    }
+
+    &.octopus-list-number {
+        counter-reset: number;
+
+        .octopus-list-item {
+            display: flex;
+            align-items: center;
+
+            &::before {
+                content: counter(number) ".";
+                counter-increment: number;
+            }
+        }
+    }
+}
+
+.octopus-nav-list {
+    height: fit-content;
+
+    .octopus-nav-list-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octopus-list-headline {
+            box-sizing: border-box;
+            padding: 0.5rem;
+            user-select: none;
+
+            &:nth-child(n) {
+                margin: 0.5rem 0;
+            }
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .octopus-nav-list-item {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            text-decoration: none;
+            user-select: none;
+
+            &.free {
+                padding: 1rem 0.5rem;
+            }
+
+            .octopus-list-icon {
+                border-radius: 50%;
+                box-sizing: border-box;
+                margin-left: 0.25rem;
+                padding: 0.25rem;
+            }
+
+            .octopus-list-text {
+                flex: auto;
+                margin-right: 0.25rem;
+            }
+        }
+    }
+}
+
+.octopus-select-list {
+    height: fit-content;
+
+    .octopus-select-list-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octopus-select-list-item {
+            cursor: pointer;
+
+            .octopus-select-list-item-wrapper {
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                padding: 1rem 0.5rem;
+                user-select: none;
+
+                .content {
+                    flex: auto;
+                }
+            }
+
+            &.ltr {
+                .octopus-select-list-item-wrapper {
+                    flex-direction: row;
+                }
+            }
+
+            &.rtl {
+                .octopus-select-list-item-wrapper {
+                    flex-direction: row-reverse;
+                }
+            }
+        }
+    }
+}
+
+@mixin list-mixin($foreground, $background) {
+    .octopus-list {
+        .octopus-list-headline,
+        .octopus-list-item {
+            color: $foreground;
+        }
+    }
+
+    .octopus-nav-list {
+        .octopus-list-headline,
+        .octopus-nav-list-item {
+            color: $foreground;
+        }
+
+        .octopus-nav-list-item {
+            &.octopus-ripple {
+                .octopus-ripple-wrapper {
+                    background-color: rgba($foreground, 0.25);
+                }
+            }
+
+            .octopus-list-icon {
+                background-color: rgba($foreground, 0.15);
+            }
+        }
+    }
+
+    .octopus-select-list {
+        .octopus-list-headline,
+        .octopus-select-list-item {
+            color: $foreground;
+        }
+
+        .octopus-select-list-item {
+            &.octopus-ripple {
+                .octopus-ripple-wrapper {
+                    background-color: rgba($foreground, 0.25);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+.octopus-dialog {
+    .octopus-dialog-header {
+        .octopus-dialog-header-wrapper {
+            border-radius: 3px 3px 0 0;
+            box-sizing: border-box;
+            padding: 0.75rem;
+        }
+    }
+
+    .octopus-dialog-content {
+        .octopus-dialog-content-wrapper {
+            box-sizing: border-box;
+            height: inherit;
+            padding: 0.75rem;
+            overflow: auto;
+        }
+    }
+
+    .octopus-dialog-footer {
+        .octopus-dialog-footer-wrapper {
+            border-radius: 0 0 3px 3px;
+            box-sizing: border-box;
+            padding: 0.75rem;
+        }
+    }
+}
+
+@mixin dialog-mixin($primary, $secondary, $foreground) {
+    .octopus-dialog {
+        &.octopus-primary-dialog {
+            $color: map-get($primary, "value");
+
+            .octopus-dialog-header {
+                .octopus-dialog-header-wrapper {
+                    background-color: $color;
+                    color: map-get($primary, "text");
+                }
+            }
+
+            .octopus-dialog-footer {
+                .octopus-dialog-footer-wrapper {
+                    background-color: rgba($color, 0.5);
+                    color: map-get($primary, "text");
+                }
+            }
+        }
+
+        &.octopus-secondary-dialog {
+            $color: map-get($secondary, "value");
+
+            .octopus-dialog-header {
+                .octopus-dialog-header-wrapper {
+                    background-color: $color;
+                    color: map-get($secondary, "text");
+                }
+            }
+
+            .octopus-dialog-footer {
+                .octopus-dialog-footer-wrapper {
+                    background-color: rgba($color, 0.5);
+                    color: map-get($secondary, "text");
+                }
+            }
+        }
+    }
+}

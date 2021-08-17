@@ -1,0 +1,258 @@
+.octopus-chip {
+    .octopus-chip-wrapper {
+        border-radius: 9999rem;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        user-select: none;
+        white-space: nowrap;
+
+        .octopus-chip-icon {
+            .octopus-chip-icon-wrapper {
+                border-radius: 50%;
+                padding: 0.125rem;
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+        }
+
+        .close-button {
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: none;
+            width: 1.25rem;
+            height: 1.25rem;
+
+            .material-icons {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+.octopus-chip-list {
+    .octopus-chip-list-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+
+        .octopus-chip {
+            margin: 0.25rem;
+        }
+    }
+}
+
+@mixin chip-mixin($primary, $secondary, $success, $warning, $failure, $info) {
+    .octopus-primary-chip {
+        .octopus-chip-wrapper {
+            $bg-color: map-get($primary, "value");
+            background-color: $bg-color;
+            color: map-get($primary, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 5%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            .octopus-chip-icon {
+                .octopus-chip-icon-wrapper {
+                    background-color: lighten($bg-color, 15%);
+                }
+            }
+
+            .close-button {
+                background-color: darken($bg-color, 15%);
+                color: map-get($primary, "text");
+
+                &:hover {
+                    background-color: darken($bg-color, 5%);
+                }
+
+                &:active {
+                    background-color: darken($bg-color, 10%);
+                }
+            }
+        }
+    }
+
+    .octopus-secondary-chip {
+        .octopus-chip-wrapper {
+            $bg-color: map-get($secondary, "value");
+            background-color: $bg-color;
+            color: map-get($secondary, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 5%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            .octopus-chip-icon {
+                .octopus-chip-icon-wrapper {
+                    background-color: lighten($bg-color, 15%);
+                }
+            }
+
+            .close-button {
+                background-color: darken($bg-color, 15%);
+                color: map-get($secondary, "text");
+
+                &:hover {
+                    background-color: darken($bg-color, 5%);
+                }
+
+                &:active {
+                    background-color: darken($bg-color, 10%);
+                }
+            }
+        }
+    }
+
+    .octopus-success-chip {
+        .octopus-chip-wrapper {
+            $bg-color: map-get($success, "value");
+            background-color: $bg-color;
+            color: map-get($success, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 5%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            .octopus-chip-icon {
+                .octopus-chip-icon-wrapper {
+                    background-color: lighten($bg-color, 15%);
+                }
+            }
+
+            .close-button {
+                background-color: darken($bg-color, 15%);
+                color: map-get($success, "text");
+
+                &:hover {
+                    background-color: darken($bg-color, 5%);
+                }
+
+                &:active {
+                    background-color: darken($bg-color, 10%);
+                }
+            }
+        }
+    }
+
+    .octopus-warning-chip {
+        .octopus-chip-wrapper {
+            $bg-color: map-get($warning, "value");
+            background-color: $bg-color;
+            color: map-get($warning, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 5%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            .octopus-chip-icon {
+                .octopus-chip-icon-wrapper {
+                    background-color: lighten($bg-color, 15%);
+                }
+            }
+
+            .close-button {
+                background-color: darken($bg-color, 15%);
+                color: map-get($warning, "text");
+
+                &:hover {
+                    background-color: darken($bg-color, 5%);
+                }
+
+                &:active {
+                    background-color: darken($bg-color, 10%);
+                }
+            }
+        }
+    }
+
+    .octopus-failure-chip {
+        .octopus-chip-wrapper {
+            $bg-color: map-get($failure, "value");
+            background-color: $bg-color;
+            color: map-get($failure, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 5%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            .octopus-chip-icon {
+                .octopus-chip-icon-wrapper {
+                    background-color: lighten($bg-color, 15%);
+                }
+            }
+
+            .close-button {
+                background-color: darken($bg-color, 15%);
+                color: map-get($failure, "text");
+
+                &:hover {
+                    background-color: darken($bg-color, 5%);
+                }
+
+                &:active {
+                    background-color: darken($bg-color, 10%);
+                }
+            }
+        }
+    }
+
+    .octopus-info-chip {
+        .octopus-chip-wrapper {
+            $bg-color: map-get($info, "value");
+            background-color: $bg-color;
+            color: map-get($info, "text");
+
+            &:hover {
+                background-color: lighten($bg-color, 5%);
+            }
+
+            &:active {
+                background-color: lighten($bg-color, 10%);
+            }
+
+            .octopus-chip-icon {
+                .octopus-chip-icon-wrapper {
+                    background-color: lighten($bg-color, 15%);
+                }
+            }
+
+            .close-button {
+                background-color: darken($bg-color, 15%);
+                color: map-get($info, "text");
+
+                &:hover {
+                    background-color: darken($bg-color, 5%);
+                }
+
+                &:active {
+                    background-color: darken($bg-color, 10%);
+                }
+            }
+        }
+    }
+}

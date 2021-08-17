@@ -1,0 +1,53 @@
+<div class="d-flex flex-column">
+    <h1 class="text-base">Badge</h1>
+    <div class="demo-list mb-50">
+        <div class="demo-list-item w-100" octopus-dot-badge [octopusBadgeHidden]="item.hidden"
+            [octopusBadgePosition]="item.position" *ngFor="let item of buttonList$ | async">
+            <button octopus-fill-button [color]="item.color" (click)="item.hidden = !item.hidden">{{item.text}}</button>
+        </div>
+    </div>
+    <div class="demo-list my-50">
+        <div class="demo-list-item w-100" octopus-dot-badge [octopusBadgeHidden]="item.hidden"
+            [octopusBadgePosition]="item.position" *ngFor="let item of buttonList$ | async">
+            <button octopus-outline-button [color]="item.color"
+                (click)="item.hidden = !item.hidden">{{item.text}}</button>
+        </div>
+    </div>
+    <div class="demo-list my-50">
+        <div class="demo-list-item w-100" octopus-text-badge [octopusBadgeText]="item.badge"
+            [octopusBadgeHidden]="item.hidden" [octopusBadgePosition]="item.position"
+            *ngFor="let item of buttonList$ | async">
+            <button octopus-fill-button [color]="item.color" (click)="item.hidden = !item.hidden">{{item.text}}</button>
+        </div>
+    </div>
+    <div class="demo-list my-50">
+        <div class="demo-list-item w-100" octopus-text-badge [octopusBadgeText]="item.badge"
+            [octopusBadgeHidden]="item.hidden" [octopusBadgePosition]="item.position"
+            *ngFor="let item of buttonList$ | async">
+            <button octopus-outline-button [color]="item.color" (click)="item.hidden = !item.hidden"
+                style="width: 100%;">{{item.text}}</button>
+        </div>
+    </div>
+    <div class="demo-list justify-content-between mt-100">
+        <div class="demo-list-item" octopus-dot-badge octopusBadgePosition="top center">
+            <button octopus-icon-button color="primary" rounded="true">
+                <span class="icon material-icons">home</span>
+            </button>
+        </div>
+        <div class="demo-list-item" octopus-dot-badge octopusBadgePosition="bottom center">
+            <button octopus-icon-button color="primary" rounded="true">
+                <span class="icon material-icons">home</span>
+            </button>
+        </div>
+        <div class="demo-list-item" octopus-text-badge octopusBadgeText="999+" octopusBadgePosition="top center">
+            <button octopus-icon-button color="primary" rounded="true">
+                <span class="icon material-icons">home</span>
+            </button>
+        </div>
+        <div class="demo-list-item" octopus-text-badge octopusBadgeText="999+" octopusBadgePosition="bottom center">
+            <button octopus-icon-button color="primary" rounded="true">
+                <span class="icon material-icons">home</span>
+            </button>
+        </div>
+    </div>
+</div>

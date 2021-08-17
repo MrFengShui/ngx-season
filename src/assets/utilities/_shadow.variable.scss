@@ -1,0 +1,7 @@
+@mixin shadow-mixin($foreground) {
+    @for $i from 0 to 9 {
+        .octopus-shadow-z#{$i} {
+            box-shadow: 0px 0px #{$i * 2}px #{$i}px rgba($foreground, 0.5) !important;
+        }
+    }
+}

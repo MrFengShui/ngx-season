@@ -1,0 +1,49 @@
+<div class="d-flex flex-column">
+    <h1 class="text-base">Progress</h1>
+    <div class="demo-list mb-50">
+        <div octopus-progress-bar color="primary" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="secondary" [value]="value$ | async" class="demo-list-item"></div>
+    </div>
+    <div class="demo-list my-50">
+        <div octopus-progress-bar color="success" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="warning" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="failure" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="info" [value]="value$ | async" class="demo-list-item"></div>
+    </div>
+    <div class="demo-list my-50">
+        <div octopus-progress-bar color="primary" striped="true" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="secondary" striped="true" [value]="value$ | async" class="demo-list-item">
+        </div>
+    </div>
+    <div class="demo-list my-50">
+        <div octopus-progress-bar color="success" striped="true" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="warning" striped="true" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="failure" striped="true" [value]="value$ | async" class="demo-list-item"></div>
+        <div octopus-progress-bar color="info" striped="true" [value]="value$ | async" class="demo-list-item"></div>
+    </div>
+    <div class="demo-list my-50">
+        <div octopus-progress-bar color="primary" striped="true" animated="true" [value]="value$ | async"
+            class="demo-list-item"></div>
+        <div octopus-progress-bar color="secondary" striped="true" animated="true" [value]="value$ | async"
+            class="demo-list-item">
+        </div>
+    </div>
+    <div class="demo-list my-50">
+        <div octopus-progress-bar color="success" striped="true" animated="true" [value]="value$ | async"
+            class="demo-list-item"></div>
+        <div octopus-progress-bar color="warning" striped="true" animated="true" [value]="value$ | async"
+            class="demo-list-item"></div>
+        <div octopus-progress-bar color="failure" striped="true" animated="true" [value]="value$ | async"
+            class="demo-list-item"></div>
+        <div octopus-progress-bar color="info" striped="true" animated="true" [value]="value$ | async"
+            class="demo-list-item"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-50">
+        <div octopus-progress-pie color="primary" [value]="value$ | async"></div>
+        <div octopus-progress-pie color="secondary" [value]="value$ | async"></div>
+        <div octopus-progress-pie color="success" [value]="value$ | async"></div>
+        <div octopus-progress-pie color="warning" [value]="value$ | async"></div>
+        <div octopus-progress-pie color="failure" [value]="value$ | async"></div>
+        <div octopus-progress-pie color="info" [value]="value$ | async"></div>
+    </div>
+</div>

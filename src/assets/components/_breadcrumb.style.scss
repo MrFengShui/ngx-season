@@ -1,0 +1,75 @@
+.octopus-breadcrumb {
+    .octopus-breadcrumb-wrapper {
+        display: flex;
+        align-items: center;
+
+        $size: calc(24px + 0.25rem * 2);
+
+        .octopus-breadcrumb-label,
+        .octopus-breadcrumb-action {
+            .octopus-breadcrumb-label-wrapper,
+            .octopus-breadcrumb-action-wrapper {
+                border-radius: 3px;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem;
+                text-decoration: none;
+
+                > :nth-child(n) {
+                    margin: 0 0.25rem;
+                }
+
+                > :first-child {
+                    margin-left: 0;
+                }
+
+                > :last-child {
+                    margin-right: 0;
+                }
+
+                .icon {
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    padding: 0.25rem;
+                    width: $size;
+                    height: $size;
+                }
+            }
+        }
+
+        .octopus-breadcrumb-split {
+            height: $size;
+
+            .material-icons {
+                font-size: inherit;
+            }
+        }
+    }
+}
+
+@mixin breadcrumb-mixin($foreground) {
+    .octopus-breadcrumb {
+        .octopus-breadcrumb-label,
+        .octopus-breadcrumb-action {
+            color: $foreground;
+
+            .octopus-breadcrumb-action-wrapper {
+                color: inherit;
+
+                &.octopus-ripple {
+                    .octopus-ripple-wrapper {
+                        background-color: rgba($foreground, 0.25);
+                    }
+                }
+            }
+
+            .icon {
+                background-color: rgba($foreground, 0.15);
+            }
+        }
+
+        .octopus-breadcrumb-split {
+            color: $foreground;
+        }
+    }
+}

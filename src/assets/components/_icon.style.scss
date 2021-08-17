@@ -1,0 +1,36 @@
+.octopus-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+
+    &.rounded {
+        border-radius: 50%;
+    }
+}
+
+@mixin icon-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $foreground,
+    );
+
+    .octopus-icon {
+        @each $name, $value in $color-list {
+            @if $name == "base" {
+                &.octopus-#{$name}-icon {
+                    color: $value;
+                }
+            } @else {
+                &.octopus-#{$name}-icon {
+                    color: map-get($value, "value");
+                }
+            }
+        }
+    }
+}

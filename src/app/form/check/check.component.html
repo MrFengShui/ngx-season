@@ -1,0 +1,8 @@
+<div class="octopus-checkbox-wrapper">
+    <input type="checkbox">
+    <label>
+        <span class="material-icons {{align}}" [class.active]="selected || indeterminated">{{matchState(selected,
+            indeterminated)}}</span>
+        <ng-content></ng-content>
+    </label>
+</div>

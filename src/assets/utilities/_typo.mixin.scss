@@ -1,0 +1,56 @@
+@mixin octopus-typography-mixin($typography) {
+    $text-list: "display-1", "display-2", "display-3", "display-4", "display-5", "display-6", "headline", "title",
+        "subtitle", "heading-1", "heading-2", "heading-3", "heading-4", "heading-5", "heading-6", "paragraph", "caption";
+
+    @each $item in $text-list {
+        $target-list: ("heading-1", "heading-2", "heading-3", "heading-4", "heading-5", "heading-6");
+        @each $target in $target-list {
+            @if str-index($item, $target) == 1 {
+                $index: index($target-list, $target);
+                h#{$index} {
+                    $property: map-get($typography, $target);
+                    font-family: map-get($property, "family");
+                    font-size: map-get($property, "size");
+                    font-weight: map-get($property, "weight");
+                    line-height: map-get($property, "height");
+                    letter-spacing: map-get($property, "space");
+                }
+            }
+        }
+
+        .#{$item} {
+            $property: map-get($typography, $item);
+            font-family: map-get($property, "family");
+            font-size: map-get($property, "size");
+            font-weight: map-get($property, "weight");
+            line-height: map-get($property, "height");
+            letter-spacing: map-get($property, "space");
+
+            @if str-index($item, "display") == 1 {
+                margin: 1.5rem 0;
+            } @else if str-index($item, "heading") == 1 {
+                margin: 1rem 0;
+            } @else {
+                margin: 0;
+                margin-bottom: 0.75rem;
+            }
+        }
+    }
+
+    $component-list: "badge", "breadcrumb-action", "breadcrumb-label", "breadcrumb-split", "button", "card",
+        "card-title", "card-subtitle", "carousel", "carousel-subject", "carousel-description", "checkbox", "chip",
+        "dialog-title", "dialog-subtitle", "divider", "expansion-subject", "expansion-description",
+        "expansion-panel-content", "form-input", "form-label", "form-valid", "select-list-item", "list-item",
+        "nav-list-item", "list-headline", "progress", "tabbed-control-tab", "tabbed-content";
+
+    @each $item in $component-list {
+        .octopus-#{$item} {
+            $property: map-get($typography, $item);
+            font-family: map-get($property, "family");
+            font-size: map-get($property, "size");
+            font-weight: map-get($property, "weight");
+            line-height: map-get($property, "height");
+            letter-spacing: map-get($property, "space");
+        }
+    }
+}

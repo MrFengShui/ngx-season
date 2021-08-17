@@ -1,0 +1,79 @@
+$align-list: (
+    "left": left,
+    "right": right,
+    "center": center,
+    "justify": justify,
+);
+
+@each $name, $value in $align-list {
+    .text-#{$name} {
+        text-align: $value !important;
+    }
+}
+
+$color-list: (
+    "primary": primary,
+    "secondary": secondary,
+    "success": success,
+    "warning": warning,
+    "failure": failure,
+    "info": info,
+);
+
+@each $name, $value in $color-list {
+    .text-#{$name} {
+        color: $value !important;
+    }
+}
+
+$weight-list: (
+    "lighter": 100,
+    "light": 300,
+    "normal": 400,
+    "bold": 700,
+    "bolder": 900,
+);
+
+@each $name, $value in $weight-list {
+    .fw-#{$name} {
+        color: $value !important;
+    }
+}
+
+.fst-italic {
+    font-style: italic !important;
+}
+
+.fst-normal {
+    font-style: normal !important;
+}
+
+.text-wrap {
+    white-space: normal !important;
+}
+
+.text-nowrap {
+    white-space: nowrap !important;
+}
+
+.text-break {
+    white-space: break-word !important;
+}
+
+.text-underline {
+    text-decoration: underline !important;
+}
+
+.text-through {
+    text-decoration: line-through !important;
+}
+
+.text-none {
+    text-decoration: none !important;
+}
+
+.text-truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}

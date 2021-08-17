@@ -1,0 +1,47 @@
+@mixin octopus-theme-color-mixin($theme) {
+    $primary: map-get($theme, "primary");
+    $secondary: map-get($theme, "secondary");
+    $success: map-get($theme, "success");
+    $warning: map-get($theme, "warning");
+    $failure: map-get($theme, "failure");
+    $info: map-get($theme, "info");
+    $foreground: map-get($theme, "foreground");
+    $background: map-get($theme, "background");
+
+    body {
+        background-color: map-get($background, "base");
+    }
+
+    .bg-color {
+        background-color: map-get($background, "base");
+    }
+
+    .text-base {
+        color: $foreground;
+    }
+
+    @include avatar-mixin($foreground);
+    @include badge-mixin($failure);
+    @include breadcrumb-mixin($foreground);
+    @include button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include card-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include carousel-mixin($primary, $foreground);
+    @include chip-mixin($primary, $secondary, $success, $warning, $failure, $info);
+    @include divider-mixin($foreground);
+    @include icon-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include list-mixin($foreground, $background);
+    @include progress-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include ripple-mixin($foreground);
+
+    @include expansion-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include tabbed-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+
+    @include checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background);
+
+    @include popup-mixin($foreground, $background);
+    @include dialog-mixin($primary, $secondary, $foreground);
+
+    @include shadow-mixin($foreground);
+    @include overflow-mixin($foreground, $background);
+}

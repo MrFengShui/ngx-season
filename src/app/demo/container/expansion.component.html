@@ -1,0 +1,71 @@
+<div class="d-flex flex-column">
+    <h1 class="text-base">Expansion</h1>
+    <div class="demo-list mb-25">
+        <octopus-expansion color="primary" class="demo-list-item">
+            <octopus-expansion-panel [subject]="item.subject" [description]="item.description"
+                *ngFor="let item of list">
+                <octopus-icon>home</octopus-icon>
+                <div class="p-50">
+                    <div class="py-50" *ngFor="let child of item.children">{{child.text}}</div>
+                </div>
+                <octopus-expansion-action>
+                    <button octopus-button color="primary">Primary Button</button>
+                    <button octopus-button color="secondary">Secondary Button</button>
+                </octopus-expansion-action>
+            </octopus-expansion-panel>
+        </octopus-expansion>
+        <octopus-expansion color="secondary" class="demo-list-item">
+            <octopus-expansion-panel [subject]="item.subject" [description]="item.description"
+                *ngFor="let item of list">
+                <octopus-icon>home</octopus-icon>
+                <div class="p-50">
+                    <div class="py-50" *ngFor="let child of item.children">{{child.text}}</div>
+                </div>
+                <octopus-expansion-action>
+                    <button octopus-fill-button color="primary">Primary Button</button>
+                    <button octopus-fill-button color="secondary">Secondary Button</button>
+                </octopus-expansion-action>
+            </octopus-expansion-panel>
+        </octopus-expansion>
+    </div>
+    <div class="demo-list my-25">
+        <octopus-expansion color="success" class="demo-list-item">
+            <octopus-expansion-panel [subject]="item.subject" [description]="item.description"
+                *ngFor="let item of list">
+                <octopus-icon>home</octopus-icon>
+                <div class="p-50">
+                    <div class="py-50" *ngFor="let child of item.children">{{child.text}}</div>
+                </div>
+            </octopus-expansion-panel>
+        </octopus-expansion>
+        <octopus-expansion color="warning" class="demo-list-item">
+            <octopus-expansion-panel [subject]="item.subject" [description]="item.description"
+                *ngFor="let item of list">
+                <octopus-icon>home</octopus-icon>
+                <div class="p-50">
+                    <div class="py-50" *ngFor="let child of item.children">{{child.text}}</div>
+                </div>
+            </octopus-expansion-panel>
+        </octopus-expansion>
+    </div>
+    <div class="demo-list mt-25">
+        <octopus-expansion color="failure" class="demo-list-item">
+            <octopus-expansion-panel [subject]="item.subject" [description]="item.description"
+                *ngFor="let item of list">
+                <octopus-icon>home</octopus-icon>
+                <div class="p-50">
+                    <div class="py-50" *ngFor="let child of item.children">{{child.text}}</div>
+                </div>
+            </octopus-expansion-panel>
+        </octopus-expansion>
+        <octopus-expansion color="info" class="demo-list-item">
+            <octopus-expansion-panel [subject]="item.subject" [description]="item.description"
+                *ngFor="let item of list">
+                <octopus-icon>home</octopus-icon>
+                <div class="p-50">
+                    <div class="py-50" *ngFor="let child of item.children">{{child.text}}</div>
+                </div>
+            </octopus-expansion-panel>
+        </octopus-expansion>
+    </div>
+</div>

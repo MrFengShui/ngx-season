@@ -1,0 +1,35 @@
+@function octopus-typography-level(
+    $font-size,
+    $font-weight,
+    $line-height,
+    $letter-spacing: normal,
+    $font-family: system-ui
+) {
+    @return (
+        "family": $font-family,
+        "size": $font-size,
+        "weight": $font-weight,
+        "height": $line-height,
+        "space": $letter-spacing
+    );
+}
+
+@function octopus-font-family($typography, $name) {
+    $property: map-get($typography, $name);
+    @return map-get($property, "family");
+}
+
+@function octopus-font-size($typography, $name) {
+    $property: map-get($typography, $name);
+    @return map-get($property, "size");
+}
+
+@function octopus-font-weight($typography, $name) {
+    $property: map-get($typography, $name);
+    @return map-get($property, "weight");
+}
+
+@function octopus-font-height($typography, $name) {
+    $property: map-get($typography, $name);
+    @return map-get($property, "height");
+}

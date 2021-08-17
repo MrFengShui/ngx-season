@@ -1,0 +1,156 @@
+.octopus-tabbed {
+    .octopus-tabbed-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octopus-tabbed-control {
+            border-style: solid;
+            border-width: 0 0 1px 0;
+            box-sizing: border-box;
+            display: flex;
+
+            .octopus-tabbed-control-tabs {
+                display: flex;
+                flex: auto;
+                overflow: auto;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .octopus-tabbed-control-tab {
+                    appearance: none;
+                    background: none;
+                    border-color: transparent;
+                    border-style: solid;
+                    border-width: 0 0 2px 0;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    outline: none;
+                    padding: 0.75rem 1.5rem;
+                    min-width: 12rem;
+                    max-width: 15rem;
+                    transition: border-color 1000ms linear;
+
+                    .icon {
+                        border-radius: 50%;
+                        box-sizing: border-box;
+                        margin-right: 0.5rem;
+                        padding: 0.25rem;
+                    }
+                }
+            }
+
+            .octopus-tabbed-control-action {
+                appearance: none;
+                background: none;
+                border: none;
+                box-sizing: border-box;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                outline: none;
+                padding: 0.75rem;
+                min-width: 3rem;
+                max-width: 3rem;
+            }
+        }
+
+        .octopus-tabbed-content {
+            padding: 0.5rem;
+        }
+    }
+}
+
+@mixin tabbed-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $foreground,
+    );
+    .octopus-tabbed {
+        .octopus-tabbed-wrapper {
+            background-color: lighten(map-get($background, "panel"), 5%);
+
+            .octopus-tabbed-control {
+                .octopus-tabbed-control-tabs {
+                    .octopus-tabbed-control-tab {
+                        &.octopus-ripple {
+                            .octopus-ripple-wrapper {
+                                background-color: rgba($foreground, 0.25);
+                            }
+                        }
+
+                        color: $foreground;
+                    }
+                }
+
+                .octopus-tabbed-control-action {
+                    &.left {
+                        box-shadow: 4px 0 2px -2px rgba($foreground, 0.25);
+                    }
+
+                    &.right {
+                        box-shadow: -4px 0 2px -2px rgba($foreground, 0.25);
+                    }
+                }
+            }
+
+            .octopus-tabbed-content {
+                color: $foreground;
+            }
+        }
+
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-tabbed {
+                .octopus-tabbed-control {
+                    @if $name == "base" {
+                        border-color: rgba($value, 0.25);
+                    } @else {
+                        border-color: rgba(map-get($value, "value"), 0.25);
+                    }
+
+                    .octopus-tabbed-control-tab {
+                        &:hover {
+                            @if $name == "base" {
+                                background-color: rgba($value, 0.05) !important;
+                            } @else {
+                                background-color: rgba(map-get($value, "value"), 0.05) !important;
+                            }
+                        }
+
+                        &.active {
+                            @if $name == "base" {
+                                border-color: $value !important;
+                            } @else {
+                                border-color: map-get($value, "value") !important;
+                            }
+                        }
+
+                        @if $name == "base" {
+                            color: $value;
+
+                            .icon {
+                                background-color: rgba($value, 0.15);
+                            }
+                        } @else {
+                            color: map-get($value, "text");
+
+                            .icon {
+                                background-color: rgba(map-get($value, "value"), 0.15);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

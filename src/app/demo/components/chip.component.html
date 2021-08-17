@@ -1,0 +1,26 @@
+<div class="d-flex flex-column">
+    <h1 class="text-base">Chip</h1>
+    <octopus-chip-list class="mb-50">
+        <octopus-chip [color]="item.color" *ngFor="let item of chipList$ | async">{{item.text}}</octopus-chip>
+    </octopus-chip-list>
+    <octopus-chip-list class="my-50">
+        <octopus-chip [color]="item.color" *ngFor="let item of chipList$ | async">
+            <octopus-chip-icon icon="https://angular.cn/assets/images/logos/angular/angular_solidBlack.svg">
+            </octopus-chip-icon>
+            {{item.text}}
+        </octopus-chip>
+    </octopus-chip-list>
+    <octopus-chip-list class="my-50">
+        <octopus-chip [color]="item.color" removable="true" (removed)="handleTextChipRemoveActionEvent(i)"
+            *ngFor="let item of chipList$ | async; index as i">{{item.text}}
+        </octopus-chip>
+    </octopus-chip-list>
+    <octopus-chip-list class="mt-50">
+        <octopus-chip [color]="item.color" removable="true" (removed)="handleTextChipRemoveActionEvent(i)"
+            *ngFor="let item of chipList$ | async; index as i">
+            <octopus-chip-icon icon="https://angular.cn/assets/images/logos/angular/angular_solidBlack.svg">
+            </octopus-chip-icon>
+            {{item.text}}
+        </octopus-chip>
+    </octopus-chip-list>
+</div>

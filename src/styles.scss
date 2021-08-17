@@ -1,0 +1,104 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone);
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+@import "./assets/components/avatar.style";
+@import "./assets/components/badge.style";
+@import "./assets/components/breadcrumb.style";
+@import "./assets/components/button.style";
+@import "./assets/components/card.style";
+@import "./assets/components/carousel.style";
+@import "./assets/components/chip.style";
+@import "./assets/components/divider.style";
+@import "./assets/components/icon.style";
+@import "./assets/components/list.style";
+@import "./assets/components/progress.style";
+@import "./assets/components/ripple.style";
+
+@import "./assets/container/expansion.style";
+@import "./assets/container/tabbed.style";
+
+@import "./assets/form/check.style";
+@import "./assets/form/field.style";
+
+@import "./assets/layout/border.style";
+
+@import "./assets/popup/popup.style";
+@import "./assets/popup/dialog.style";
+
+@import "./assets/utilities/color.mixin";
+@import "./assets/utilities/typo.mixin";
+@import "./assets/utilities/display.variable";
+@import "./assets/utilities/overflow.variable";
+@import "./assets/utilities/palette.variable";
+@import "./assets/utilities/shadow.variable";
+@import "./assets/utilities/size.variable";
+@import "./assets/utilities/space.variable";
+@import "./assets/utilities/theme.variable";
+@import "./assets/utilities/text.variable";
+@import "./assets/utilities/typography.variable";
+
+html {
+    $primary: octopus-palette($purple, 500);
+    $secondary: octopus-palette($orange, 500);
+    $success: octopus-palette($green, 500);
+    $warning: octopus-palette($yellow, 500);
+    $failure: octopus-palette($red, 500);
+    $info: octopus-palette($blue, 500);
+    $theme: octopus-theme($primary, $secondary, $success, $warning, $failure, $info, "dark");
+    @include octopus-theme-color-mixin($theme);
+
+    $typography: (
+        "display-1": octopus-typography-level(5.5rem, bolder, normal),
+        "display-2": octopus-typography-level(5rem, bolder, normal),
+        "display-3": octopus-typography-level(4.5rem, bolder, normal),
+        "display-4": octopus-typography-level(4rem, bold, normal),
+        "display-5": octopus-typography-level(3.5rem, bold, normal),
+        "display-6": octopus-typography-level(3rem, bold, normal),
+        "headline": octopus-typography-level(2rem, bold, normal),
+        "title": octopus-typography-level(1.8rem, bold, normal),
+        "subtitle": octopus-typography-level(1.4rem, bold, normal),
+        "heading-1": octopus-typography-level(1.6rem, bold, normal),
+        "heading-2": octopus-typography-level(1.5rem, bold, normal),
+        "heading-3": octopus-typography-level(1.4rem, bold, normal),
+        "heading-4": octopus-typography-level(1.3rem, bold, normal),
+        "heading-5": octopus-typography-level(1.2rem, bold, normal),
+        "heading-6": octopus-typography-level(1.1rem, bold, normal),
+        "paragraph": octopus-typography-level(1rem, normal, normal),
+        "caption": octopus-typography-level(0.75rem, lighter, normal),
+        "badge": octopus-typography-level(0.5rem, normal, normal),
+        "breadcrumb-action": octopus-typography-level(1rem, bold, normal),
+        "breadcrumb-label": octopus-typography-level(1rem, bold, normal),
+        "breadcrumb-split": octopus-typography-level(2rem, normal, normal),
+        "button": octopus-typography-level(0.75rem, normal, normal),
+        "card": octopus-typography-level(0.75rem, normal, normal),
+        "card-title": octopus-typography-level(0.75rem, bold, normal),
+        "card-subtitle": octopus-typography-level(0.5rem, normal, normal),
+        "carousel": octopus-typography-level(0.75rem, normal, normal),
+        "carousel-subject": octopus-typography-level(0.75rem, bold, normal),
+        "carousel-description": octopus-typography-level(0.5rem, normal, normal),
+        "checkbox": octopus-typography-level(0.75rem, normal, normal),
+        "chip": octopus-typography-level(0.75rem, normal, normal),
+        "dialog-title": octopus-typography-level(1rem, bold, normal),
+        "dialog-subtitle": octopus-typography-level(0.75rem, bold, normal),
+        "divider": octopus-typography-level(0.75rem, normal, normal),
+        "expansion-subject": octopus-typography-level(0.75rem, bold, normal),
+        "expansion-description": octopus-typography-level(0.75rem, normal, normal),
+        "expansion-panel-content": octopus-typography-level(0.75rem, normal, normal),
+        "form-input": octopus-typography-level(1rem, normal, normal),
+        "form-label": octopus-typography-level(0.75rem, normal, normal),
+        "form-valid": octopus-typography-level(0.75rem, normal, normal),
+        "select-list-item": octopus-typography-level(0.75rem, normal, normal),
+        "list-item": octopus-typography-level(0.75rem, normal, normal),
+        "nav-list-item": octopus-typography-level(0.75rem, bold, normal),
+        "list-headline": octopus-typography-level(1rem, bold, normal),
+        "progress": octopus-typography-level(0.5rem, normal, normal),
+        "tabbed-control-tab": octopus-typography-level(0.75rem, bold, normal),
+        "tabbed-content": octopus-typography-level(0.75rem, normal, normal),
+    );
+    @include octopus-typography-mixin($typography);
+
+    body {
+        margin: 0;
+    }
+}

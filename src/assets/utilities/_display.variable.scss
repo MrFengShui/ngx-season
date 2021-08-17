@@ -1,0 +1,53 @@
+$d-list: block, flex, grid, inline, none, table;
+
+@each $item in $d-list {
+    .d-#{$item} {
+        display: $item !important;
+    }
+}
+
+$flex-dir-list: row, column, row-reverse, column-reverse;
+
+@each $item in $flex-dir-list {
+    .flex-#{$item} {
+        flex-direction: $item !important;
+    }
+}
+
+.flex-fill {
+    flex: auto;
+}
+
+$align-map: (
+    "start": flex-start,
+    "end": flex-end,
+    "center": center,
+    "between": space-between,
+    "around": space-around,
+);
+
+@each $name, $value in $align-map {
+    .justify-content-#{$name} {
+        justify-content: $value !important;
+    }
+
+    .align-content-#{$name} {
+        align-content: $value !important;
+    }
+
+    .justify-items-#{$name} {
+        justify-items: $value !important;
+    }
+
+    .align-items-#{$name} {
+        align-items: $value !important;
+    }
+
+    .justify-self-#{$name} {
+        justify-self: $value !important;
+    }
+
+    .align-self-#{$name} {
+        align-self: $value !important;
+    }
+}
