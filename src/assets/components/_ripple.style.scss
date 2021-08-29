@@ -10,16 +10,8 @@
 
         &.active {
             opacity: 0;
-            transform: scale(2);
+            transform: scale(1.5);
             transition: transform 1000ms, opacity 1000ms;
-        }
-    }
-}
-
-@mixin ripple-mixin($foreground) {
-    .octopus-ripple {
-        .ocotpus-ripple-wrapper {
-            background-color: $foreground;
         }
     }
 }

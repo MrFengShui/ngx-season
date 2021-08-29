@@ -3,7 +3,7 @@ import { OctopusSelectList } from "./list.component";
 
 export class OctopusSelectListChange {
 
-    items: OctopusSelectListItem[];
-    source: OctopusSelectList;
+    items: OctopusSelectListItem[] = [];
+    source!: OctopusSelectList;
 
 }

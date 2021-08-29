@@ -1,35 +1,34 @@
 .octopus-layout-border {
-    height: 100%;
-
     .octopus-layout-border-wrapper {
         display: grid;
         grid-template-columns: auto 1fr auto;
         grid-template-rows: auto 1fr auto;
+        width: inherit;
         height: inherit;
 
-        .octopus-border-top,
-        .octopus-border-bottom,
-        .octopus-border-left,
-        .octopus-border-right,
-        .octopus-border-center {
-            .octopus-border-top-wrapper,
-            .octopus-border-bottom-wrapper,
-            .octopus-border-left-wrapper,
-            .octopus-border-right-wrapper,
-            .octopus-border-center-wrapper {
-                width: inherit;
-                height: inherit;
-            }
+        .north {
+            grid-column: 1 / 4;
+            grid-row: 1 / 2;
         }
 
-        .octopus-border-left,
-        .octopus-border-right,
-        .octopus-border-center {
-            .octopus-border-left-wrapper,
-            .octopus-border-right-wrapper,
-            .octopus-border-center-wrapper {
-                overflow: auto;
-            }
+        .south {
+            grid-column: 1 / 4;
+            grid-row: 3 / 4;
+        }
+
+        .east {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+
+        .center {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .west {
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
         }
     }
 }

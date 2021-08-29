@@ -1,11 +1,3 @@
-export enum OctopusAvatarShape {
+export type OctopusAvatarShape = 'square' | 'circle';
 
-    square = 'square', circle = 'circle'
-
-}
-
-export enum OctopusAvatarSize {
-
-    large = 'large', medium = 'medium', small = 'small'
-
-}
+export type OctopusAvatarSize = 'large' | 'medium' | 'small';

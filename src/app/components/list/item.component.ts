@@ -1,7 +1,7 @@
 import { Direction } from "@angular/cdk/bidi";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { Component, HostBinding, Input, HostListener, ElementRef, Renderer2, OnInit, OnChanges, SimpleChanges, OnDestroy, ViewChild } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { BOOLEAN_ADAPTOR } from "src/app/global/boolean.utils";
 
 @Component({
     exportAs: 'octopusListItem',
@@ -22,7 +22,9 @@ export class OctopusListItem {
     exportAs: 'octopusNavListItem',
     selector: 'a[octopus-nav-list-item]',
     template: `
-        <div class="octopus-ripple-wrapper" #ripple></div>
+        <div style="position: absolute;inset: 0;">
+            <div octopus-ripple class="h-100" style="z-index: 5;"></div>
+        </div>
         <ng-content select="span[octopus-list-text]"></ng-content>
         <ng-content select="span[octopus-list-icon],img[octopus-list-icon]"></ng-content>
         <ng-content></ng-content>
@@ -30,37 +32,36 @@ export class OctopusListItem {
 })
 export class OctopusNavListItem implements OnChanges, OnInit {
 
-    @Input('free') free: boolean = true;
-
+    @Input('free') free: boolean = false;
     @ViewChild('ripple', { read: ElementRef, static: true })
-    protected ripple: ElementRef<HTMLElement>;
+    protected ripple!: ElementRef<HTMLElement>;
 
     @HostBinding('class') class: string = 'octopus-nav-list-item octopus-ripple';
 
     @HostListener('click', ['$event'])
     protected listenHostClick(event: MouseEvent): void {
-        setTimeout(() => this._render.addClass(this.ripple.nativeElement, 'active'));
-        setTimeout(() => this.locate(event));
-        setTimeout(() => this._render.removeClass(this.ripple.nativeElement, 'active'), 500);
+        // setTimeout(() => this._render.addClass(this.ripple.nativeElement, 'active'));
+        // setTimeout(() => this.locate(event));
+        // setTimeout(() => this._render.removeClass(this.ripple.nativeElement, 'active'), 500);
     }
 
     constructor(
-        protected _ref: ElementRef,
+        protected _ref: ElementRef<HTMLElement>,
         protected _render: Renderer2
     ) { }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.free) {
-            setTimeout(() => this.build(changes.free.currentValue));
+            setTimeout(() => this.build(coerceBooleanProperty(changes.free.currentValue)));
         }
     }
 
     ngOnInit() {
-        setTimeout(() => this.build(this.free));
+        setTimeout(() => this.build(coerceBooleanProperty(this.free)));
     }
 
-    private build(free: boolean | string): void {
-        if (BOOLEAN_ADAPTOR(free)) {
+    private build(free: boolean): void {
+        if (free) {
             this._render.addClass(this._ref.nativeElement, 'free');
         } else {
             this._render.removeClass(this._ref.nativeElement, 'free');
@@ -68,7 +69,7 @@ export class OctopusNavListItem implements OnChanges, OnInit {
     }
 
     private locate(event: MouseEvent): void {
-        let radius: number = this._ref.nativeElement.clientWidth;
+        let radius: number = Math.max(this._ref.nativeElement.clientWidth, this._ref.nativeElement.clientHeight);
         this._render.setStyle(this.ripple.nativeElement, 'width', `${radius * 2}px`);
         this._render.setStyle(this.ripple.nativeElement, 'height', `${radius * 2}px`);
         this._render.setStyle(this.ripple.nativeElement, 'top', `${event.pageY - this._ref.nativeElement.offsetTop - radius}px`);
@@ -94,7 +95,7 @@ export class OctopusSelectListItem implements OnChanges, OnInit, OnDestroy {
     @Input('selected') selected: boolean = false;
 
     @ViewChild('ripple', { read: ElementRef, static: true })
-    protected ripple: ElementRef<HTMLElement>;
+    protected ripple!: ElementRef<HTMLElement>;
 
     @HostBinding('class') class: string = 'octopus-select-list-item octopus-ripple';
 
@@ -115,7 +116,7 @@ export class OctopusSelectListItem implements OnChanges, OnInit, OnDestroy {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.direction !== undefined) {
-            this.build(changes.direction.previousValue, changes.direction.currentValue);
+            setTimeout(() => this.renderDirection(changes.direction.previousValue, changes.direction.currentValue));
         }
 
         if (changes.selected !== undefined) {
@@ -125,7 +126,7 @@ export class OctopusSelectListItem implements OnChanges, OnInit, OnDestroy {
 
     ngOnInit() {
         this.selected$.next(this.selected);
-        this.build(undefined, this.direction);
+        setTimeout(() => this.renderDirection(undefined, this.direction));
     }
 
     ngOnDestroy() {
@@ -141,11 +142,9 @@ export class OctopusSelectListItem implements OnChanges, OnInit, OnDestroy {
         return this.selected$.asObservable();
     }
 
-    private build(prevDir: Direction, currDir: Direction): void {
-        setTimeout(() => {
-            this._render.removeClass(this._ref.nativeElement, prevDir === undefined ? 'rtl' : prevDir);
-            this._render.addClass(this._ref.nativeElement, currDir);
-        });
+    private renderDirection(prevDir: Direction | undefined, currDir: Direction): void {
+        this._render.removeClass(this._ref.nativeElement, prevDir === undefined ? 'rtl' : prevDir);
+        this._render.addClass(this._ref.nativeElement, currDir);
     }
 
     private locate(event: MouseEvent): void {
@@ -175,19 +174,17 @@ export class OctopusListIcon implements OnChanges, OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.shadow !== undefined) {
-            this.build(changes.shadow.previousValue, changes.shadow.currentValue);
+            setTimeout(() => this.renderShadow(changes.shadow.previousValue, changes.shadow.currentValue));
         }
     }
 
     ngOnInit() {
-        this.build(undefined, this.shadow);
+        setTimeout(() => this.renderShadow(undefined, this.shadow));
     }
 
-    private build(prevShadow: number, currShadow: number): void {
-        setTimeout(() => {
-            this._render.removeClass(this._ref.nativeElement, `octopus-shadow-z${prevShadow}`);
-            this._render.addClass(this._ref.nativeElement, `octopus-shadow-z${currShadow}`);
-        });
+    private renderShadow(prevShadow: number | undefined, currShadow: number): void {
+        this._render.removeClass(this._ref.nativeElement, prevShadow === undefined ? 'octopus-shadow-z0' : `octopus-shadow-z${prevShadow}`);
+        this._render.addClass(this._ref.nativeElement, `octopus-shadow-z${currShadow}`);
     }
 
 }

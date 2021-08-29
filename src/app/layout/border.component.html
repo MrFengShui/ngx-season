@@ -1,17 +1,3 @@
 <div class="octopus-layout-border-wrapper" [style.gap]="gutter + 'px'">
-    <div style="grid-column: 1 / 4;grid-row: 1 / 2;">
-        <ng-content select="octopus-border-top"></ng-content>
-    </div>
-    <div style="grid-column: 1 / 2;grid-row: 2 / 3;">
-        <ng-content select="octopus-border-left"></ng-content>
-    </div>
-    <div style="grid-column: 2 / 3;grid-row: 2 / 3;">
-        <ng-content select="octopus-border-center"></ng-content>
-    </div>
-    <div style="grid-column: 3 / 4;grid-row: 2 / 3;">
-        <ng-content select="octopus-border-right"></ng-content>
-    </div>
-    <div style="grid-column: 1 / 4;grid-row: 3 / 4;">
-        <ng-content select="octopus-border-bottom"></ng-content>
-    </div>
+    <ng-content select="[octopus-border-cell]"></ng-content>
 </div>

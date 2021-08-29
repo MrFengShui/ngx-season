@@ -1,0 +1,12 @@
+<div class="demo-section-wrapper">
+    <div class="section-head">
+        <h6 class="flex-fill my-0">{{label}}</h6>
+        <a octopus-ripple class="control" (click)="toggled = !toggled">
+            <span class="material-icons">{{toggled ? 'code' : 'code_off'}}</span>
+        </a>
+    </div>
+    <div class="section-body" [@CODE_COLLAPSE]="toggled ? 'show' : 'hide'">
+        <ng-content select="[section-code]"></ng-content>
+    </div>
+    <ng-content select="[section-foot]"></ng-content>
+</div>

@@ -15,9 +15,9 @@ export class OctopusTabbedUnit implements OnInit {
     @Input('text') text: string = '';
 
     @ViewChild(TemplateRef, { static: true })
-    private template: TemplateRef<any>;
+    private template!: TemplateRef<any>;
 
-    contentPortal: TemplatePortal<any>;
+    contentPortal!: TemplatePortal<any>;
 
     constructor(private _vcr: ViewContainerRef) { }
 
@@ -38,14 +38,13 @@ export class OctopusTabbed implements OnChanges, OnInit, AfterViewInit {
     @Input('position') position: Alignment = 'start';
     @Input('select') select: number = 0;
 
-    @ContentChildren(OctopusTabbedUnit, { descendants: true })
-    units: QueryList<OctopusTabbedUnit>;
+    @ContentChildren(OctopusTabbedUnit) units!: QueryList<OctopusTabbedUnit>;
 
     @ViewChild('content', { read: ElementRef, static: true })
-    private content: ElementRef<HTMLElement>;
+    private content!: ElementRef<HTMLElement>;
 
-    @ViewChildren('tab', { read: ElementRef, emitDistinctChangesOnly: true })
-    private tabs: QueryList<ElementRef<HTMLElement>>;
+    @ViewChildren('tab', { read: ElementRef })
+    private tabs!: QueryList<ElementRef<HTMLElement>>;
 
     @HostBinding('class') class: string = 'octopus-tabbed';
 
@@ -97,7 +96,7 @@ export class OctopusTabbed implements OnChanges, OnInit, AfterViewInit {
         }
     }
 
-    private renderColor(prevColor: ColorPalette, currColor: ColorPalette): void {
+    private renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
         this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-tabbed' : `octopus-${prevColor}-tabbed`);
         this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-tabbed`);
     }

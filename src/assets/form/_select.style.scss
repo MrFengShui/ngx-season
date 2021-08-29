@@ -1,0 +1,14 @@
+.octopus-select {
+    appearance: none;
+
+    .octopus-select-option {
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@mixin select-mixin($foreground, $background) {
+    .octopus-select {
+        .octopus-select-option {
+        }
+    }
+}

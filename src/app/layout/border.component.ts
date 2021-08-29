@@ -1,4 +1,6 @@
-import { Component, HostBinding, Input } from "@angular/core";
+import { Component, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from "@angular/core";
+
+import { BorderPosition } from "./layout.utils";
 
 @Component({
     selector: 'octopus-layout-border',
@@ -13,71 +15,33 @@ export class OctopusLayoutBorder {
 }
 
 @Component({
-    selector: 'octopus-border-top',
-    template: `
-        <div class="octopus-border-top-wrapper overflow">
-            <ng-content></ng-content>
-        </div>
-    `
+    selector: '[octopus-border-cell]',
+    template: `<ng-content></ng-content>`
 })
-export class OctopusBorderTop {
+export class OctopusBorderCell implements OnChanges, OnInit {
 
-    @HostBinding('class') class: string = 'octopus-border-top';
+    @Input('position') position: BorderPosition = 'center';
 
-}
+    @HostBinding('class') class: string = 'octopus-border-cell';
 
-@Component({
-    selector: 'octopus-border-bottom',
-    template: `
-        <div class="octopus-border-bottom-wrapper overflow">
-            <ng-content></ng-content>
-        </div>
-    `
-})
-export class OctopusBorderBottom {
+    constructor(
+        private _ref: ElementRef,
+        private _render: Renderer2
+    ) { }
 
-    @HostBinding('class') class: string = 'octopus-border-bottom';
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.position !== undefined) {
+            setTimeout(() => this.renderPosition(changes.position.previousValue, changes.position.currentValue));
+        }
+    }
 
-}
+    ngOnInit() {
+        setTimeout(() => this.renderPosition(undefined, this.position));
+    }
 
-@Component({
-    selector: 'octopus-border-left',
-    template: `
-        <div class="octopus-border-left-wrapper overflow">
-            <ng-content></ng-content>
-        </div>
-    `
-})
-export class OctopusBorderLeft {
-
-    @HostBinding('class') class: string = 'octopus-border-left';
-
-}
-
-@Component({
-    selector: 'octopus-border-center',
-    template: `
-        <div class="octopus-border-center-wrapper overflow">
-            <ng-content></ng-content>
-        </div>
-    `
-})
-export class OctopusBorderCenter {
-
-    @HostBinding('class') class: string = 'octopus-border-center';
-
-}
-
-@Component({
-    selector: 'octopus-border-right',
-    template: `
-        <div class="octopus-border-right-wrapper overflow">
-            <ng-content></ng-content>
-        </div>
-    `
-})
-export class OctopusBorderRight {
-
-    @HostBinding('class') class: string = 'octopus-border-right';
+    private renderPosition(prevPos: BorderPosition | undefined, currPos: BorderPosition): void {
+        this._render.removeClass(this._ref.nativeElement, prevPos === undefined ? 'center' : prevPos);
+        this._render.addClass(this._ref.nativeElement, currPos);
+    }
 
 }

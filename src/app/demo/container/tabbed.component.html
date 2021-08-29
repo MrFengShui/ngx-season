@@ -1,9 +1,0 @@
-<div class="d-flex flex-column">
-    <h1 class="text-base">Tabbed</h1>
-    <div class="demo-grid" style="grid-template-columns: 1fr;">
-        <octopus-tabbed [color]="item.color" *ngFor="let item of list">
-            <octopus-tabbed-unit [icon]="child.icon" [text]="child.text" *ngFor="let child of item.children">
-                {{child.content}}</octopus-tabbed-unit>
-        </octopus-tabbed>
-    </div>
-</div>

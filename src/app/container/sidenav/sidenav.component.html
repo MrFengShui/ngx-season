@@ -1,0 +1,10 @@
+<div class="octopus-sidenav-wrapper">
+    <ng-template [cdkPortalOutlet]="controlPortal"></ng-template>
+    <ng-template [cdkPortalOutlet]="contentPortal"></ng-template>
+</div>
+<ng-template #controlTemplate>
+    <ng-content select="octopus-sidenav-control"></ng-content>
+</ng-template>
+<ng-template #contentTemplate>
+    <ng-content select="octopus-sidenav-content"></ng-content>
+</ng-template>

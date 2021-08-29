@@ -1,9 +1,10 @@
 import { SelectionModel } from "@angular/cdk/collections";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges } from "@angular/core";
-import { Subject, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 
-import { BOOLEAN_ADAPTOR } from "src/app/global/boolean.utils";
 import { OctopusSelectListChange } from "./list.utils";
+import { ColorPalette } from "src/app/global/enum.utils";
 
 import { OctopusSelectListItem } from "./item.component";
 
@@ -28,16 +29,16 @@ export class OctopusList implements OnChanges, OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.ordered !== undefined) {
-            setTimeout(() => this.build(changes.ordered.currentValue));
+            setTimeout(() => this.build(coerceBooleanProperty(changes.ordered.currentValue)));
         }
     }
 
     ngOnInit() {
-        setTimeout(() => this.build(this.ordered));
+        setTimeout(() => this.build(coerceBooleanProperty(this.ordered)));
     }
 
-    private build(ordered: boolean | string): void {
-        if (BOOLEAN_ADAPTOR(ordered)) {
+    private build(ordered: boolean): void {
+        if (ordered) {
             this._render.addClass(this._ref.nativeElement, 'octopus-list-number');
         } else {
             this._render.removeClass(this._ref.nativeElement, 'octopus-list-number');
@@ -70,18 +71,17 @@ export class OctopusNavList {
 })
 export class OctopusSelectList extends OctopusList implements OnChanges, OnInit, OnDestroy, AfterContentInit {
 
-    @Input('color') color: string;
+    @Input('color') color: ColorPalette = 'base';
     @Input('multiple') multiple: boolean = true;
 
     @Output('change') selectChange: EventEmitter<OctopusSelectListChange> = new EventEmitter();
 
-    @ContentChildren(OctopusSelectListItem) items: QueryList<OctopusSelectListItem>;
+    @ContentChildren(OctopusSelectListItem) items!: QueryList<OctopusSelectListItem>;
 
     @HostBinding('class') class: string = 'octopus-select-list';
 
-    selection: SelectionModel<OctopusSelectListItem> = new SelectionModel(this.multiple, []);
-
-    private subscription: Subscription;
+    private selection: SelectionModel<OctopusSelectListItem> = new SelectionModel<OctopusSelectListItem>(this.multiple, []);
+    private subscription!: Subscription;
 
     constructor(
         protected _ref: ElementRef,
@@ -94,17 +94,17 @@ export class OctopusSelectList extends OctopusList implements OnChanges, OnInit,
         super.ngOnChanges(changes);
 
         if (changes.color !== undefined) {
-            this.buildColor(changes.color.currentValue);
+            setTimeout(() => this.items.forEach(item => item.color = changes.color.currentValue));
         }
 
         if (changes.multiple !== undefined) {
-            this.selection = new SelectionModel(BOOLEAN_ADAPTOR(changes.multiple.currentValue), this.selection.selected);
+            this.selection = new SelectionModel(coerceBooleanProperty(changes.multiple.currentValue), this.selection.selected);
         }
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.buildColor(this.color);
+        setTimeout(() => this.items.forEach(item => item.color = this.color));
     }
 
     ngAfterContentInit() {
@@ -143,12 +143,6 @@ export class OctopusSelectList extends OctopusList implements OnChanges, OnInit,
     private update(selected: OctopusSelectListItem[], deselected: OctopusSelectListItem[]): void {
         this.selection.select(...selected);
         this.selection.deselect(...deselected);
-    }
-
-    private buildColor(color: string | undefined): void {
-        if (color !== undefined) {
-            setTimeout(() => this.items.forEach(item => item.color = color));
-        }
     }
 
 }

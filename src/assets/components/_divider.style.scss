@@ -6,8 +6,9 @@
 
         hr {
             border-style: solid;
-            border-width: 1px;
+            border-width: 1px 0 0 0;
             margin: 0;
+            margin-block: 0;
         }
 
         span {
@@ -48,11 +49,11 @@
 @mixin divider-mixin($foreground) {
     .octopus-divider {
         hr {
-            border-color: $foreground;
+            border-color: rgba($foreground, 0.25);
         }
 
         span {
-            color: $foreground;
+            color: rgba($foreground, 0.25);
         }
     }
 }

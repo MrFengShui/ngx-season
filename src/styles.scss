@@ -12,14 +12,18 @@
 @import "./assets/components/divider.style";
 @import "./assets/components/icon.style";
 @import "./assets/components/list.style";
+@import "./assets/components/placeholder.style";
 @import "./assets/components/progress.style";
 @import "./assets/components/ripple.style";
 
 @import "./assets/container/expansion.style";
+@import "./assets/container/navbar.style";
+@import "./assets/container/sidenav.style";
 @import "./assets/container/tabbed.style";
 
 @import "./assets/form/check.style";
 @import "./assets/form/field.style";
+@import "./assets/form/select.style";
 
 @import "./assets/layout/border.style";
 
@@ -31,12 +35,15 @@
 @import "./assets/utilities/display.variable";
 @import "./assets/utilities/overflow.variable";
 @import "./assets/utilities/palette.variable";
+@import "./assets/utilities/router.mixin";
 @import "./assets/utilities/shadow.variable";
 @import "./assets/utilities/size.variable";
 @import "./assets/utilities/space.variable";
 @import "./assets/utilities/theme.variable";
 @import "./assets/utilities/text.variable";
 @import "./assets/utilities/typography.variable";
+
+@import "./app/demo/demo.component.scss";
 
 html {
     $primary: octopus-palette($purple, 500);

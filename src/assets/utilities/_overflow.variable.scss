@@ -16,8 +16,19 @@ $list: auto, hidden;
 
 .overflow {
     &::-webkit-scrollbar {
-        width: 0.5rem;
-        height: 0.5rem;
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 0.25rem;
+        visibility: hidden;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            visibility: visible;
+        }
     }
 
     &::-webkit-scrollbar-corner {
@@ -29,8 +40,8 @@ $list: auto, hidden;
     .octopus-dialog-content {
         .octopus-dialog-content-wrapper {
             &::-webkit-scrollbar {
-                width: 0.5rem;
-                height: 0.5rem;
+                width: 0.75rem;
+                height: 0.75rem;
             }
 
             &::-webkit-scrollbar-corner {
@@ -44,15 +55,11 @@ $list: auto, hidden;
     .overflow {
         $color: map-get($background, "overflow");
 
-        &::-webkit-scrollbar-track {
-            background-color: rgba($color, 0.25);
-        }
-
         &::-webkit-scrollbar-thumb {
-            background-color: lighten($color, 12.5%);
+            background-color: lighten($color, 25%);
 
             &:hover {
-                background-color: lighten($color, 25%);
+                background-color: lighten($color, 12.5%);
             }
         }
     }
@@ -62,15 +69,11 @@ $list: auto, hidden;
             .octopus-dialog-content-wrapper {
                 $color: map-get($background, "overflow");
 
-                &::-webkit-scrollbar-track {
-                    background-color: rgba($color, 0.25);
-                }
-
                 &::-webkit-scrollbar-thumb {
-                    background-color: lighten($color, 12.5%);
+                    background-color: lighten($color, 25%);
 
                     &:hover {
-                        background-color: lighten($color, 25%);
+                        background-color: lighten($color, 12.5%);
                     }
                 }
             }

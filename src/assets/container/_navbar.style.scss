@@ -1,0 +1,80 @@
+.octopus-navbar {
+    .octopus-navbar-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+
+        > :nth-child(n) {
+            margin: 0 0.5rem;
+        }
+
+        > :first-child {
+            margin-left: 0;
+        }
+
+        > :last-child {
+            margin-right: 0;
+        }
+
+        $size: 2.5rem;
+
+        .octopus-button {
+            width: auto;
+            height: $size;
+
+            &.octopus-icon-button {
+                width: $size;
+                height: $size;
+
+                .icon {
+                    width: calc(#{$size} - 0.125rem);
+                    height: calc(#{$size} - 0.25rem);
+                }
+            }
+        }
+
+        .octopus-navbar-brand {
+            cursor: pointer;
+            display: flex;
+            height: $size;
+
+            img {
+                height: inherit;
+            }
+        }
+    }
+}
+
+@mixin navbar-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+
+    .octopus-navbar {
+        .octopus-navbar-brand {
+            &.octopus-ripple {
+                .octopus-ripple-wrapper {
+                    background-color: rgba($foreground, 0.25);
+                }
+            }
+        }
+
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-navbar {
+                .octopus-navbar-wrapper {
+                    @if $name == "base" {
+                        background-color: map-get($value, "navbar");
+                    } @else {
+                        background-color: map-get($value, "value");
+                    }
+                }
+            }
+        }
+    }
+}

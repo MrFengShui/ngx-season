@@ -1,9 +1,18 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Input, Output, Renderer2, SimpleChanges } from "@angular/core";
-import { CheckboxControlValueAccessor, ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
     selector: 'octopus-checkbox',
-    templateUrl: './check.component.html',
+    template: `
+        <div class="octopus-checkbox-wrapper">
+            <input type="checkbox">
+            <label>
+                <span class="material-icons {{align}}" [class.active]="selected || indeterminated">{{matchState(selected,
+                    indeterminated)}}</span>
+                <ng-content></ng-content>
+            </label>
+        </div>
+    `,
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => OctopusCheckbox),
@@ -40,12 +49,12 @@ export class OctopusCheckbox extends CheckboxControlValueAccessor {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.color !== undefined) {
-            this.build(changes.color.previousValue, changes.color.currentValue);
+            setTimeout(() => this.renderColor(changes.color.previousValue, changes.color.currentValue));
         }
     }
 
     ngOnInit() {
-        this.build(undefined, this.color);
+        setTimeout(() => this.renderColor(undefined, this.color));
     }
 
     writeValue(value: any): void {
@@ -69,8 +78,8 @@ export class OctopusCheckbox extends CheckboxControlValueAccessor {
 
     }
 
-    onChange: (_: any) => void;
-    onTouched: () => void;
+    onChange!: (_: any) => void;
+    onTouched!: () => void;
 
     matchState(selected: boolean, indeterminated: boolean): string {
         if (indeterminated) {
@@ -80,7 +89,7 @@ export class OctopusCheckbox extends CheckboxControlValueAccessor {
         }
     }
 
-    private build(prevColor: string, currColor: string): void {
+    private renderColor(prevColor: string | undefined, currColor: string): void {
         this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-checkbox' : `octopus-${prevColor}-checkbox`);
         this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-checkbox`);
     }

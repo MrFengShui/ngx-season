@@ -6,7 +6,7 @@ import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, OnI
 })
 export class OctopusRipple implements OnChanges, OnInit {
 
-    @Input('rippleCenter') center: boolean = false;
+    @Input('rippleCenter') center: boolean | string = false;
     @Input('rippleColor') color: string = '#9e9e9e';
     @Input('rippleRadius') radius: number | string = 0;
 
@@ -28,28 +28,29 @@ export class OctopusRipple implements OnChanges, OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.color !== undefined) {
-            this.build(changes.color.currentValue, coerceNumberProperty(this.radius));
+            this.renderColor(changes.color.currentValue, coerceNumberProperty(this.radius));
         }
 
         if (changes.radius !== undefined) {
-            this.build(this.color, coerceNumberProperty(changes.color.currentValue));
+            this.renderColor(this.color, coerceNumberProperty(changes.radius.currentValue));
         }
     }
 
     ngOnInit() {
         setTimeout(() => {
             this._render.appendChild(this._ref.nativeElement, this.element);
-            this.build(this.color, coerceNumberProperty(this.radius));
+            this.renderColor(this.color, coerceNumberProperty(this.radius));
         });
     }
 
-    private build(color: string, radius: number): void {
+    private renderColor(color: string, radius: number): void {
         if (radius === 0) {
             radius = Math.max(this._ref.nativeElement.clientWidth, this._ref.nativeElement.clientHeight);
         }
 
         this._render.addClass(this.element, 'octopus-ripple-wrapper');
         this._render.setStyle(this.element, 'background-color', color);
+        this._render.setStyle(this.element, 'opacity', 0.25);
         this._render.setStyle(this.element, 'width', `${radius * 2}px`);
         this._render.setStyle(this.element, 'height', `${radius * 2}px`);
     }
@@ -63,8 +64,8 @@ export class OctopusRipple implements OnChanges, OnInit {
             this._render.setStyle(this.element, 'top', `${this._ref.nativeElement.clientHeight * 0.5 - radius}px`);
             this._render.setStyle(this.element, 'left', `${this._ref.nativeElement.clientWidth * 0.5 - radius}px`);
         } else {
-            this._render.setStyle(this.element, 'top', `${event.pageY - this._ref.nativeElement.offsetTop - radius}px`);
-            this._render.setStyle(this.element, 'left', `${event.pageX - this._ref.nativeElement.offsetLeft - radius}px`);
+            this._render.setStyle(this.element, 'top', `${event.offsetY - radius}px`);
+            this._render.setStyle(this.element, 'left', `${event.offsetX - radius}px`);
         }
     }
 

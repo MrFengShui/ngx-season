@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { OctopusDotBadge } from './dot-bdg.directive';
-import { OctopusTextBadge } from './text-bdg.directive';
+import { OctopusDotBadge } from './dot.component';
+import { OctopusTextBadge } from './text.component';
 
 @NgModule({
     declarations: [

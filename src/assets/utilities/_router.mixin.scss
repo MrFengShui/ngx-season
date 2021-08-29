@@ -1,0 +1,21 @@
+@mixin router-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $foreground,
+    );
+
+    @each $name, $value in $color-list {
+        .router-#{$name}-link {
+            @if $name == "base" {
+                background-color: rgba($value, 0.05);
+            } @else {
+                background-color: rgba(map-get($value, "value"), 0.95);
+            }
+        }
+    }
+}

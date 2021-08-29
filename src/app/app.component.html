@@ -1,37 +1,68 @@
-<div class="d-flex flex-column h-100">
-    <!-- <app-demo-expansion-view></app-demo-expansion-view> -->
-    <!-- <app-demo-icon-view></app-demo-icon-view> -->
-    <!-- <app-demo-list-view></app-demo-list-view> -->
-    <app-demo-tabbed-view></app-demo-tabbed-view>
-    <!-- <octopus-layout-border>
-        <octopus-border-top>TOP</octopus-border-top>
-        <octopus-border-left style="width: 240px;height: calc(100vh - 18px * 2);">
-            <octopus-list>
-                <octopus-list-section headline="Components">
-                    <a octopus-link-list-item icon="home" text="Badge" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Breadcrumb" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Button" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Card" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Carousel" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Chip" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Divider" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="List" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Progress" [routerLink]="[]"></a>
-                </octopus-list-section>
-                <octopus-list-section headline="Container"></octopus-list-section>
-                <octopus-list-section headline="Form"></octopus-list-section>
-                <octopus-list-section headline="Layout"></octopus-list-section>
-                <octopus-list-section headline="Popup">
-                    <a octopus-link-list-item icon="home" text="Dialog" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Menu" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Sheet" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Toast" [routerLink]="[]"></a>
-                    <a octopus-link-list-item icon="home" text="Tooltip" [routerLink]="[]"></a>
-                </octopus-list-section>
-            </octopus-list>
-        </octopus-border-left>
-        <octopus-border-center>CENTER</octopus-border-center>
-        <octopus-border-right>RIGHT</octopus-border-right>
-        <octopus-border-bottom>BOTTOM</octopus-border-bottom>
-    </octopus-layout-border> -->
-</div>
+<octopus-layout-border class="h-100" #border>
+    <div octopus-border-cell position="north" #north>
+        <octopus-navbar>
+            <a octopus-navbar-brand>
+                <img src="https://cdn.worldvectorlogo.com/logos/angular-3.svg" alt="">
+            </a>
+            <div class="flex-fill"></div>
+            <button octopus-icon-button>
+                <octopus-icon rounded="true">palette</octopus-icon>
+            </button>
+        </octopus-navbar>
+    </div>
+    <div octopus-border-cell position="east" class="overflow overflow-auto" style="width: 240px;"
+        [style.height]="calcSize()">
+        <octopus-nav-list>
+            <h1 octopus-list-headline>Chart</h1>
+            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of chartList">
+                <span octopus-list-text>{{item.text}}</span>
+                <span octopus-list-icon class="material-icons"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            </a>
+            <div octopus-divider class="mt-50"></div>
+            <h1 octopus-list-headline>Component</h1>
+            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of componentList">
+                <span octopus-list-text>{{item.text}}</span>
+                <span octopus-list-icon class="material-icons"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            </a>
+            <div octopus-divider class="mt-50"></div>
+            <h1 octopus-list-headline>Container</h1>
+            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of containerList">
+                <span octopus-list-text>{{item.text}}</span>
+                <span octopus-list-icon class="material-icons"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            </a>
+            <div octopus-divider class="mt-50"></div>
+            <h1 octopus-list-headline>Form</h1>
+            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of formList">
+                <span octopus-list-text>{{item.text}}</span>
+                <span octopus-list-icon class="material-icons"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            </a>
+            <div octopus-divider class="mt-50"></div>
+            <h1 octopus-list-headline>Layout</h1>
+            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of layoutList">
+                <span octopus-list-text>{{item.text}}</span>
+                <span octopus-list-icon class="material-icons"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            </a>
+            <div octopus-divider class="mt-50"></div>
+            <h1 octopus-list-headline>Popup</h1>
+            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of popupList">
+                <span octopus-list-text>{{item.text}}</span>
+                <span octopus-list-icon class="material-icons"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            </a>
+        </octopus-nav-list>
+    </div>
+    <div octopus-border-cell position="center" class="overflow overflow-auto" [style.height]="calcSize()">
+        <router-outlet></router-outlet>
+    </div>
+</octopus-layout-border>

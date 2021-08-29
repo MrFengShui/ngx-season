@@ -1,0 +1,158 @@
+.octopus-placeholder {
+    .placeholder-bar {
+        border-radius: 3px;
+        width: 100%;
+        height: 0.75rem;
+
+        &:nth-child(n) {
+            margin: 0.75rem 0;
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .placeholder-action {
+        border-radius: 3px;
+    }
+
+    .placeholder-icon {
+        border-radius: 50%;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        position: relative;
+
+        .material-icons {
+            position: absolute;
+            inset: 0.5rem;
+        }
+    }
+
+    .placeholder-media {
+        position: relative;
+
+        .material-icons {
+            font-size: 4rem;
+            position: absolute;
+            inset: calc(50% - 2rem);
+        }
+    }
+}
+
+.octopus-nodata-placeholder {
+    .octopus-nodata-placeholder-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+}
+
+.octopus-loading-placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 10000;
+
+    .octopus-loading-placeholder-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        .icon {
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+
+            &.rotate-cw {
+                animation-name: rotate-cw;
+            }
+
+            &.rotate-ccw {
+                animation-name: rotate-ccw;
+            }
+
+            @keyframes rotate-cw {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes rotate-ccw {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(-360deg);
+                }
+            }
+        }
+    }
+}
+
+@mixin placeholder-mixin($foreground, $background) {
+    .octopus-placeholder {
+        .placeholder-action,
+        .placeholder-icon,
+        .placeholder-media,
+        .placeholder-bar {
+            animation-name: recycle;
+            animation-duration: 1000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            background-color: lighten(map-get($background, "panel"), 15%);
+        }
+
+        .placeholder-icon,
+        .placeholder-media {
+            .material-icons {
+                color: $foreground;
+            }
+        }
+
+        @keyframes recycle {
+            $list: (
+                0%: 0.25,
+                10%: 0.35,
+                20%: 0.45,
+                30%: 0.55,
+                40%: 0.65,
+                50%: 0.75,
+                60%: 0.65,
+                70%: 0.55,
+                80%: 0.45,
+                90%: 0.35,
+                100%: 0.25,
+            );
+            @each $name, $value in $list {
+                #{$name} {
+                    opacity: $value;
+                }
+            }
+        }
+    }
+
+    .octopus-nodata-placeholder {
+        .octopus-nodata-placeholder-wrapper {
+            background-color: lighten(map-get($background, "panel"), 15%);
+        }
+    }
+
+    .octopus-loading-placeholder {
+        .octopus-loading-placeholder-wrapper {
+            $color: lighten(map-get($background, "panel"), 15%);
+            background-color: rgba($color, 0.75);
+        }
+    }
+}

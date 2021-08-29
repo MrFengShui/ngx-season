@@ -3,11 +3,15 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0.75rem;
     outline: none;
     overflow: hidden;
     text-overflow: ellipsis;
     text-decoration: none;
+    white-space: nowrap;
     width: 100%;
 
     &.octopus-outline-button {
@@ -16,13 +20,26 @@
         box-sizing: border-box;
     }
 
+    &.octopus-icon-button {
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+
+        .octopus-icon,
+        .material-icon {
+            font-size: calc(4rem - 0.75rem * 2);
+        }
+
+        .icon {
+            width: calc(4rem - 0.75rem * 2);
+            height: calc(4rem - 0.75rem * 2);
+        }
+    }
+
     &.octopus-mix-button {
         $size: calc(3rem + 1rem + 1.5rem * 2 + 2px);
         box-sizing: border-box;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         width: $size;
         height: $size;
 
@@ -42,454 +59,117 @@
             width: 100%;
         }
     }
-
-    &.octopus-icon-button {
-        border-radius: 50%;
-        width: 4rem;
-        height: 4rem;
-
-        .icon {
-            font-size: calc(4rem - 0.75rem * 2);
-        }
-    }
 }
 
 @mixin button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $foreground,
+    );
+
     .octopus-button {
-        &.octopus-ripple {
-            .octopus-ripple-wrapper {
-                background-color: rgba($foreground, 0.25);
-            }
-        }
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-button {
+                @if $name == "base" {
+                    color: $value;
 
-        &.octopus-primary-button {
-            $color: map-get($primary, "value");
-            color: $color;
+                    &:hover {
+                        background-color: rgba($value, 0.15);
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    color: $color;
 
-            &:hover {
-                background-color: rgba($color, 0.15);
-            }
-
-            &:active {
-                background-color: rgba($color, 0.05);
-            }
-        }
-
-        &.octopus-primary-fill-button {
-            $bg-color: map-get($primary, "value");
-            background-color: $bg-color;
-            color: map-get($primary, "text");
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-primary-outline-button {
-            $bg-color: map-get($primary, "value");
-            border-color: $bg-color;
-            color: $bg-color;
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($primary, "text");
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($primary, "text");
-            }
-        }
-
-        &.octopus-primary-mix-button,
-        &.octopus-primary-icon-button {
-            $bg-color: map-get($primary, "value");
-            background-color: rgba($bg-color, 0.025);
-            color: $bg-color;
-
-            hr {
-                border-color: $bg-color;
-            }
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($primary, "text");
-
-                hr {
-                    border-color: map-get($primary, "text");
+                    &:hover {
+                        background-color: rgba($color, 0.15);
+                    }
                 }
             }
 
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($primary, "text");
+            &.octopus-#{$name}-fill-button {
+                @if $name != "base" {
+                    $color: map-get($value, "value");
+                    background-color: $color;
+                    color: map-get($value, "text");
 
-                hr {
-                    border-color: map-get($primary, "text");
-                }
-            }
-        }
-
-        &.octopus-secondary-button {
-            $color: map-get($secondary, "value");
-            color: $color;
-
-            &:hover {
-                background-color: rgba($color, 0.15);
-            }
-
-            &:active {
-                background-color: rgba($color, 0.05);
-            }
-        }
-
-        &.octopus-secondary-fill-button {
-            $bg-color: map-get($secondary, "value");
-            background-color: $bg-color;
-            color: map-get($secondary, "text");
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-secondary-outline-button {
-            $bg-color: map-get($secondary, "value");
-            border-color: $bg-color;
-            color: $bg-color;
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($secondary, "text");
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($secondary, "text");
-            }
-        }
-
-        &.octopus-secondary-mix-button,
-        &.octopus-secondary-icon-button {
-            $bg-color: map-get($secondary, "value");
-            background-color: rgba($bg-color, 0.025);
-            color: $bg-color;
-
-            hr {
-                border-color: $bg-color;
-            }
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($secondary, "text");
-
-                hr {
-                    border-color: map-get($secondary, "text");
+                    &:hover {
+                        background-color: lighten($color, 10%);
+                    }
                 }
             }
 
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($secondary, "text");
+            &.octopus-#{$name}-outline-button {
+                @if $name != "base" {
+                    $color: map-get($value, "value");
+                    border-color: $color;
+                    color: $color;
 
-                hr {
-                    border-color: map-get($secondary, "text");
-                }
-            }
-        }
-
-        &.octopus-success-button {
-            $color: map-get($success, "value");
-            color: $color;
-
-            &:hover {
-                background-color: rgba($color, 0.15);
-            }
-
-            &:active {
-                background-color: rgba($color, 0.05);
-            }
-        }
-
-        &.octopus-success-fill-button {
-            $bg-color: map-get($success, "value");
-            background-color: $bg-color;
-            color: map-get($success, "text");
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-success-outline-button {
-            $bg-color: map-get($success, "value");
-            border-color: $bg-color;
-            color: $bg-color;
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($success, "text");
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($success, "text");
-            }
-        }
-
-        &.octopus-success-mix-button,
-        &.octopus-success-icon-button {
-            $bg-color: map-get($success, "value");
-            background-color: rgba($bg-color, 0.025);
-            color: $bg-color;
-
-            hr {
-                border-color: $bg-color;
-            }
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($success, "text");
-
-                hr {
-                    border-color: map-get($success, "text");
+                    &:hover {
+                        background-color: lighten($color, 10%);
+                        color: map-get($value, "text");
+                    }
                 }
             }
 
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($success, "text");
+            &.octopus-#{$name}-icon-button {
+                @if $name == "base" {
+                    background-color: rgba($value, 0.025);
+                    color: $value;
 
-                hr {
-                    border-color: map-get($success, "text");
-                }
-            }
-        }
+                    &:hover {
+                        background-color: rgba($value, 0.1);
+                        color: $value;
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    background-color: rgba($color, 0.025);
+                    color: $color;
 
-        &.octopus-warning-button {
-            $color: map-get($warning, "value");
-            color: $color;
-
-            &:hover {
-                background-color: rgba($color, 0.15);
-            }
-
-            &:active {
-                background-color: rgba($color, 0.05);
-            }
-        }
-
-        &.octopus-warning-fill-button {
-            $bg-color: map-get($warning, "value");
-            background-color: $bg-color;
-            color: map-get($warning, "text");
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-warning-outline-button {
-            $bg-color: map-get($warning, "value");
-            border-color: $bg-color;
-            color: $bg-color;
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($warning, "text");
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($warning, "text");
-            }
-        }
-
-        &.octopus-warning-mix-button,
-        &.octopus-warning-icon-button {
-            $bg-color: map-get($warning, "value");
-            background-color: rgba($bg-color, 0.025);
-            color: $bg-color;
-
-            hr {
-                border-color: $bg-color;
-            }
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($warning, "text");
-
-                hr {
-                    border-color: map-get($warning, "text");
+                    &:hover {
+                        background-color: lighten($color, 10%);
+                        color: map-get($value, "text");
+                    }
                 }
             }
 
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($warning, "text");
+            &.octopus-#{$name}-mix-button {
+                @if $name == "base" {
+                    background-color: rgba($value, 0.025);
+                    color: $value;
 
-                hr {
-                    border-color: map-get($warning, "text");
-                }
-            }
-        }
+                    hr {
+                        border-color: $value;
+                    }
 
-        &.octopus-failure-button {
-            $color: map-get($failure, "value");
-            color: $color;
+                    &:hover {
+                        background-color: rgba($value, 0.1);
 
-            &:hover {
-                background-color: rgba($color, 0.15);
-            }
+                        hr {
+                            border-color: $value;
+                        }
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    background-color: rgba($color, 0.025);
+                    color: $color;
 
-            &:active {
-                background-color: rgba($color, 0.05);
-            }
-        }
+                    hr {
+                        border-color: $color;
+                    }
 
-        &.octopus-failure-fill-button {
-            $bg-color: map-get($failure, "value");
-            background-color: $bg-color;
-            color: map-get($failure, "text");
+                    &:hover {
+                        background-color: lighten($color, 10%);
+                        color: map-get($value, "text");
 
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-failure-outline-button {
-            $bg-color: map-get($failure, "value");
-            border-color: $bg-color;
-            color: $bg-color;
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($failure, "text");
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($failure, "text");
-            }
-        }
-
-        &.octopus-failure-mix-button,
-        &.octopus-failure-icon-button {
-            $bg-color: map-get($failure, "value");
-            background-color: rgba($bg-color, 0.025);
-            color: $bg-color;
-
-            hr {
-                border-color: $bg-color;
-            }
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($failure, "text");
-
-                hr {
-                    border-color: map-get($failure, "text");
-                }
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($failure, "text");
-
-                hr {
-                    border-color: map-get($failure, "text");
-                }
-            }
-        }
-
-        &.octopus-info-button {
-            $color: map-get($info, "value");
-            color: $color;
-
-            &:hover {
-                background-color: rgba($color, 0.15);
-            }
-
-            &:active {
-                background-color: rgba($color, 0.05);
-            }
-        }
-
-        &.octopus-info-fill-button {
-            $bg-color: map-get($info, "value");
-            background-color: $bg-color;
-            color: map-get($info, "text");
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-info-outline-button {
-            $bg-color: map-get($info, "value");
-            border-color: $bg-color;
-            color: $bg-color;
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($info, "text");
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($info, "text");
-            }
-        }
-
-        &.octopus-info-mix-button,
-        &.octopus-info-icon-button {
-            $bg-color: map-get($info, "value");
-            background-color: rgba($bg-color, 0.025);
-            color: $bg-color;
-
-            hr {
-                border-color: $bg-color;
-            }
-
-            &:hover {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($info, "text");
-
-                hr {
-                    border-color: map-get($info, "text");
-                }
-            }
-
-            &:active {
-                background-color: lighten($bg-color, 5%);
-                color: map-get($info, "text");
-
-                hr {
-                    border-color: map-get($info, "text");
+                        hr {
+                            border-color: map-get($value, "text");
+                        }
+                    }
                 }
             }
         }

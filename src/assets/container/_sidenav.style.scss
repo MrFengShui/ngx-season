@@ -1,0 +1,82 @@
+.octopus-sidenav {
+    .octopus-sidenav-wrapper {
+        display: flex;
+        width: inherit;
+        height: inherit;
+        overflow: hidden;
+
+        .octopus-sidenav-control {
+            height: inherit;
+            position: absolute;
+            z-index: 10;
+            transition: width 1000ms ease-in-out, transform 1000ms ease-in-out;
+
+            &.start {
+                left: 0;
+            }
+
+            &.end {
+                right: 0;
+            }
+
+            .octopus-sidenav-control-wrapper {
+                height: 100%;
+                overflow: hidden;
+
+                &.active {
+                    overflow: auto;
+                }
+            }
+        }
+
+        .octopus-sidenav-content {
+            flex: auto;
+            height: inherit;
+            transition: margin-left 1000ms ease-in-out, margin-right 1000ms ease-in-out, transform 1000ms ease-in-out;
+
+            .octopus-sidenav-content-wrapper {
+                width: 100%;
+                height: 100%;
+                position: relative;
+
+                .octopus-sidenav-mask {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 5;
+                    visibility: hidden;
+
+                    &.active {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin sidenav-mixin($foreground, $background) {
+    $color: map-get($background, "panel");
+    .octopus-sidenav {
+        color: $foreground;
+
+        .octopus-sidenav-control {
+            background-color: lighten($color, 5%);
+
+            &.start {
+                box-shadow: 8px 0 8px -8px rgba($foreground, 0.25);
+            }
+
+            &.end {
+                box-shadow: -8px 0 8px -8px rgba($foreground, 0.25);
+            }
+        }
+
+        .octopus-sidenav-content {
+            background-color: lighten($color, 15%);
+
+            .octopus-sidenav-mask {
+                background-color: rgba($color, 0.75);
+            }
+        }
+    }
+}

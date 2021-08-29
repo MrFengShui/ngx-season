@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { OctopusCheckboxModule } from "src/app/form/check/check.module";
+import { OctopusRippleModule } from "../ripple/ripple.module";
 
 import { OctopusListItem, OctopusListIcon, OctopusNavListItem, OctopusSelectListItem, OctopusListText } from "./item.component";
 import { OctopusList, OctopusListHeadline, OctopusNavList, OctopusSelectList } from "./list.component";
@@ -20,7 +21,8 @@ import { OctopusList, OctopusListHeadline, OctopusNavList, OctopusSelectList } f
     ],
     imports: [
         CommonModule,
-        OctopusCheckboxModule
+        OctopusCheckboxModule,
+        OctopusRippleModule
     ],
     exports: [
         OctopusList,

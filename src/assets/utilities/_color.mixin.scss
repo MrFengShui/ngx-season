@@ -30,18 +30,24 @@
     @include divider-mixin($foreground);
     @include icon-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include list-mixin($foreground, $background);
+    @include placeholder-mixin($foreground, $background);
     @include progress-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
-    @include ripple-mixin($foreground);
 
     @include expansion-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include navbar-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include sidenav-mixin($foreground, $background);
     @include tabbed-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
 
     @include checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background);
+    @include select-mixin($foreground, $background);
 
     @include popup-mixin($foreground, $background);
     @include dialog-mixin($primary, $secondary, $foreground);
 
+    @include router-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include shadow-mixin($foreground);
     @include overflow-mixin($foreground, $background);
+
+    @include demo-mixin($foreground);
 }

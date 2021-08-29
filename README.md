@@ -1,9 +1,10 @@
 #### Container
 
 1. expansion
-2. sidenav
-3. toolbar
-4. tabpane
+2. navbar
+3. sidenav
+4. toolbar
+5. tabbed
 
 #### Component
 

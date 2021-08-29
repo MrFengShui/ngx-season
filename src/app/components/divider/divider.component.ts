@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 import { Subject } from "rxjs";
 
 @Component({
@@ -15,10 +15,10 @@ import { Subject } from "rxjs";
 })
 export class OctopusDivider implements OnChanges, OnInit, AfterViewInit {
 
-    @Input('direction') direction: string = 'horizontal';
+    @Input('direction') direction: 'horizontal' | 'vertical' = 'horizontal';
 
     @ViewChild('wrapper', { read: ElementRef, static: true })
-    wrapper: ElementRef<HTMLElement>;
+    private wrapper!: ElementRef<HTMLElement>;
 
     @HostBinding('class') class: string = 'octopus-divider';
 
@@ -31,23 +31,21 @@ export class OctopusDivider implements OnChanges, OnInit, AfterViewInit {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.direction !== undefined) {
-            this.build(changes.direction.previousValue, changes.direction.currentValue);
+            setTimeout(() => this.renderDirection(changes.direction.previousValue, changes.direction.currentValue));
         }
     }
 
     ngOnInit() {
-        this.build(undefined, this.direction);
+        setTimeout(() => this.renderDirection(undefined, this.direction));
     }
 
     ngAfterViewInit() {
         setTimeout(() => this.text$.next(this._ref.nativeElement.textContent === ''));
     }
 
-    private build(prevDir: string, currDir: string): void {
-        setTimeout(() => {
-            this._render.removeClass(this.wrapper.nativeElement, prevDir === undefined ? 'horizontal' : prevDir);
-            this._render.addClass(this.wrapper.nativeElement, currDir);
-        });
+    private renderDirection(prevDir: string | undefined, currDir: string): void {
+        this._render.removeClass(this.wrapper.nativeElement, prevDir === undefined ? 'horizontal' : prevDir);
+        this._render.addClass(this.wrapper.nativeElement, currDir);
     }
 
 }
