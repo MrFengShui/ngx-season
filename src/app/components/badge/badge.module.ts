@@ -1,20 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { OctopusDotBadge } from './dot.component';
-import { OctopusTextBadge } from './text.component';
+import { OctopusBadge } from './badge.component';
 
 @NgModule({
     declarations: [
-        OctopusDotBadge,
-        OctopusTextBadge
+        OctopusBadge
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        OctopusDotBadge,
-        OctopusTextBadge
+        OctopusBadge
     ]
 })
 export class OctopusBadgeModule { }

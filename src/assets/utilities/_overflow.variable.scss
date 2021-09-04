@@ -16,12 +16,11 @@ $list: auto, hidden;
 
 .overflow {
     &::-webkit-scrollbar {
-        width: 0.75rem;
-        height: 0.75rem;
+        width: 0.5rem;
+        height: 0.5rem;
     }
 
     &::-webkit-scrollbar-thumb {
-        border-radius: 0.25rem;
         visibility: hidden;
     }
 
@@ -40,8 +39,8 @@ $list: auto, hidden;
     .octopus-dialog-content {
         .octopus-dialog-content-wrapper {
             &::-webkit-scrollbar {
-                width: 0.75rem;
-                height: 0.75rem;
+                width: 0.5rem;
+                height: 0.5rem;
             }
 
             &::-webkit-scrollbar-corner {

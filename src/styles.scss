@@ -12,6 +12,7 @@
 @import "./assets/components/divider.style";
 @import "./assets/components/icon.style";
 @import "./assets/components/list.style";
+@import "./assets/components/paginator.style";
 @import "./assets/components/placeholder.style";
 @import "./assets/components/progress.style";
 @import "./assets/components/ripple.style";
@@ -23,6 +24,7 @@
 
 @import "./assets/form/check.style";
 @import "./assets/form/field.style";
+@import "./assets/form/input.style";
 @import "./assets/form/select.style";
 
 @import "./assets/layout/border.style";
@@ -99,7 +101,10 @@ html {
         "list-item": octopus-typography-level(0.75rem, normal, normal),
         "nav-list-item": octopus-typography-level(0.75rem, bold, normal),
         "list-headline": octopus-typography-level(1rem, bold, normal),
+        "paginator": octopus-typography-level(0.75rem, normal, normal),
         "progress": octopus-typography-level(0.5rem, normal, normal),
+        "select": octopus-typography-level(0.75rem, normal, normal),
+        "select-option": octopus-typography-level(0.75rem, normal, normal),
         "tabbed-control-tab": octopus-typography-level(0.75rem, bold, normal),
         "tabbed-content": octopus-typography-level(0.75rem, normal, normal),
     );

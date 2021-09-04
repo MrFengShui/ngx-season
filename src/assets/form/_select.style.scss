@@ -1,14 +1,36 @@
 .octopus-select {
-    appearance: none;
+    .octopus-select-wrapper {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: inherit;
+        height: inherit;
+    }
+}
 
-    .octopus-select-option {
-        padding: 0.25rem 0.5rem;
+.octopus-select-option {
+    .octopus-select-option-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
     }
 }
 
 @mixin select-mixin($foreground, $background) {
     .octopus-select {
+        color: $foreground;
+    }
+
+    .octopus-select-overlay {
+        background-color: map-get($background, "popup");
+
         .octopus-select-option {
+            .octopus-select-option-wrapper {
+                &:hover {
+                    background-color: rgba(map-get($background, "popup"), 0.75);
+                }
+            }
         }
     }
 }

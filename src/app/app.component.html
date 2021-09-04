@@ -1,7 +1,7 @@
 <octopus-layout-border class="h-100" #border>
     <div octopus-border-cell position="north" #north>
         <octopus-navbar>
-            <a octopus-navbar-brand>
+            <a octopus-navbar-brand routerLink="/octopus/dashboard">
                 <img src="https://cdn.worldvectorlogo.com/logos/angular-3.svg" alt="">
             </a>
             <div class="flex-fill"></div>
@@ -13,6 +13,11 @@
     <div octopus-border-cell position="east" class="overflow overflow-auto" style="width: 240px;"
         [style.height]="calcSize()">
         <octopus-nav-list>
+            <a octopus-nav-list-item [routerLink]="['octopus', 'dashboard']" [routerLinkActive]="['router-base-link']"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <span octopus-list-text>Dashboard</span>
+                <span octopus-list-icon class="material-icons">dashboard</span>
+            </a>
             <h1 octopus-list-headline>Chart</h1>
             <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
                 [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of chartList">

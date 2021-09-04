@@ -21,7 +21,7 @@
     }
 
     @include avatar-mixin($foreground);
-    @include badge-mixin($failure);
+    @include badge-mixin($primary, $secondary, $success, $warning, $failure, $info);
     @include breadcrumb-mixin($foreground);
     @include button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include card-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
@@ -30,6 +30,7 @@
     @include divider-mixin($foreground);
     @include icon-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include list-mixin($foreground, $background);
+    @include paginator-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include placeholder-mixin($foreground, $background);
     @include progress-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
 
@@ -40,6 +41,7 @@
 
     @include checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background);
+    @include input-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include select-mixin($foreground, $background);
 
     @include popup-mixin($foreground, $background);

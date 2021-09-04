@@ -1,0 +1,187 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Dot Badge" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;">
+                    <div octopus-badge>
+                        <button octopus-fill-button color="primary">Primary Button</button>
+                    </div>
+                    <div octopus-badge>
+                        <button octopus-fill-button color="secondary">Secondary Button</button>
+                    </div>
+                    <div octopus-badge>
+                        <button octopus-fill-button color="success">Success Button</button>
+                    </div>
+                    <div octopus-badge>
+                        <button octopus-fill-button color="warning">Warning Button</button>
+                    </div>
+                    <div octopus-badge>
+                        <button octopus-fill-button color="failure">Failure Button</button>
+                    </div>
+                    <div octopus-badge>
+                        <button octopus-fill-button color="info">Info Button</button>
+                    </div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Text Badge" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;">
+                    <div octopus-badge badgeText="999+">
+                        <button octopus-fill-button color="primary">Primary Button</button>
+                    </div>
+                    <div octopus-badge badgeText="999+">
+                        <button octopus-fill-button color="secondary">Secondary Button</button>
+                    </div>
+                    <div octopus-badge badgeText="999+">
+                        <button octopus-fill-button color="success">Success Button</button>
+                    </div>
+                    <div octopus-badge badgeText="999+">
+                        <button octopus-fill-button color="warning">Warning Button</button>
+                    </div>
+                    <div octopus-badge badgeText="999+">
+                        <button octopus-fill-button color="failure">Failure Button</button>
+                    </div>
+                    <div octopus-badge badgeText="999+">
+                        <button octopus-fill-button color="info">Info Button</button>
+                    </div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <div class="d-grid mb-100" style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;">
+                        <div octopus-badge badgeColor="primary">
+                            <button octopus-fill-button color="secondary">Primary Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="secondary">
+                            <button octopus-fill-button color="primary">Secondary Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="success">
+                            <button octopus-fill-button color="primary">Success Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="warning">
+                            <button octopus-fill-button color="primary">Warning Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="failure">
+                            <button octopus-fill-button color="primary">Failure Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="info">
+                            <button octopus-fill-button color="secondary">Info Badge</button>
+                        </div>
+                    </div>
+                    <div class="d-grid mt-100" style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;">
+                        <div octopus-badge badgeColor="primary" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Primary Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="secondary" badgeText="999+">
+                            <button octopus-fill-button color="primary">Secondary Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="success" badgeText="999+">
+                            <button octopus-fill-button color="primary">Success Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="warning" badgeText="999+">
+                            <button octopus-fill-button color="primary">Warning Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="failure" badgeText="999+">
+                            <button octopus-fill-button color="primary">Failure Badge</button>
+                        </div>
+                        <div octopus-badge badgeColor="info" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Info Badge</button>
+                        </div>
+                    </div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Show and Hide" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex">
+                    <div octopus-badge [badgeHidden]="dotHidden" class="flex-fill mr-25">
+                        <button octopus-fill-button color="secondary" (click)="dotHidden = !dotHidden">Dot
+                            Badge</button>
+                    </div>
+                    <div octopus-badge [badgeHidden]="textHidden" badgeText="999+" class="flex-fill ml-25">
+                        <button octopus-fill-button color="secondary" (click)="textHidden = !textHidden">Text
+                            Badge</button>
+                    </div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Position" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <div class="d-grid mb-150" style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;">
+                        <div octopus-badge badgePosition="top left">
+                            <button octopus-fill-button color="secondary">Top Left Badge</button>
+                        </div>
+                        <div octopus-badge badgePosition="top center">
+                            <button octopus-fill-button color="secondary">Top Center Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="top right">
+                            <button octopus-fill-button color="secondary">Top Right Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="bottom left">
+                            <button octopus-fill-button color="secondary">Bottom Left Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="bottom center">
+                            <button octopus-fill-button color="secondary">Bottom Center Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="bottom right">
+                            <button octopus-fill-button color="secondary">Bottom Right Button</button>
+                        </div>
+                    </div>
+                    <div class="d-grid mt-150" style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;">
+                        <div octopus-badge badgePosition="top left" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Top Left Badge</button>
+                        </div>
+                        <div octopus-badge badgePosition="top center" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Top Center Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="top right" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Top Right Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="bottom left" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Bottom Left Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="bottom center" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Bottom Center Button</button>
+                        </div>
+                        <div octopus-badge badgePosition="bottom right" badgeText="999+">
+                            <button octopus-fill-button color="secondary">Bottom Right Button</button>
+                        </div>
+                    </div>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

@@ -4,4 +4,9 @@ import { Component } from "@angular/core";
     selector: 'app-demo-badge-view',
     templateUrl: './badge.component.html'
 })
-export class DemoBadgeView { }
+export class DemoBadgeView {
+
+    dotHidden: boolean = false;
+    textHidden: boolean = false;
+
+}

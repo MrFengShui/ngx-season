@@ -1,0 +1,74 @@
+<div class="d-flex flex-column p-50">
+    <h6 class="text-base mt-0 mb-100">Chart</h6>
+    <section class="demo-block">
+        <a [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+            [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of chartList">
+            <img src="https://images.wallpaperscraft.com/image/single/monster_silhouette_forest_131112_1280x720.jpg"
+                alt="" width="100%">
+            <div class="box">
+                <div class="subject mb-50">{{item.subject}}</div>
+                <div class="description mt-50">{{item.description}}</div>
+            </div>
+        </a>
+    </section>
+    <h6 class="text-base my-100">Component</h6>
+    <section class="demo-block">
+        <a [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+            [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of componentList">
+            <img src="https://images.wallpaperscraft.com/image/single/monster_silhouette_forest_131112_1280x720.jpg"
+                alt="" width="100%">
+            <div class="box">
+                <div class="subject mb-50">{{item.subject}}</div>
+                <div class="description mt-50">{{item.description}}</div>
+            </div>
+        </a>
+    </section>
+    <h6 class="text-base my-100">Container</h6>
+    <section class="demo-block">
+        <a [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+            [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of containerList">
+            <img src="https://images.wallpaperscraft.com/image/single/monster_silhouette_forest_131112_1280x720.jpg"
+                alt="" width="100%">
+            <div class="box">
+                <div class="subject mb-50">{{item.subject}}</div>
+                <div class="description mt-50">{{item.description}}</div>
+            </div>
+        </a>
+    </section>
+    <h6 class="text-base my-100">Form</h6>
+    <section class="demo-block">
+        <a [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+            [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of formList">
+            <img src="https://images.wallpaperscraft.com/image/single/monster_silhouette_forest_131112_1280x720.jpg"
+                alt="" width="100%">
+            <div class="box">
+                <div class="subject mb-50">{{item.subject}}</div>
+                <div class="description mt-50">{{item.description}}</div>
+            </div>
+        </a>
+    </section>
+    <h6 class="text-base my-100">Layout</h6>
+    <section class="demo-block">
+        <a [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+            [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of layoutList">
+            <img src="https://images.wallpaperscraft.com/image/single/monster_silhouette_forest_131112_1280x720.jpg"
+                alt="" width="100%">
+            <div class="box">
+                <div class="subject mb-50">{{item.subject}}</div>
+                <div class="description mt-50">{{item.description}}</div>
+            </div>
+        </a>
+    </section>
+    <h6 class="text-base my-100">Popup</h6>
+    <section class="demo-block">
+        <a [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
+            [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of popupList">
+            <img src="https://images.wallpaperscraft.com/image/single/monster_silhouette_forest_131112_1280x720.jpg"
+                alt="" width="100%">
+            <div class="box">
+                <div class="subject mb-50">{{item.subject}}</div>
+                <div class="description mt-50">{{item.description}}</div>
+            </div>
+        </a>
+    </section>
+</div>

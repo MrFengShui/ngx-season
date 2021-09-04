@@ -10,11 +10,11 @@ export const OCTOPUS_DIALOG_DATA: InjectionToken<any> = new InjectionToken('Octo
 @Injectable()
 export class OctopusDialog<T = unknown, R = any> {
 
-    private open$: Subject<R>;
-    private close$: Subject<R>;
+    private open$!: Subject<R>;
+    private close$!: Subject<R>;
 
-    private ref: OverlayRef;
-    private config: OverlayConfig;
+    private ref!: OverlayRef;
+    private config!: OverlayConfig;
 
     constructor(
         private _inject: Injector,
@@ -74,7 +74,7 @@ export class OctopusDialog<T = unknown, R = any> {
     }
 
     scroll(flag: string = 'block'): OctopusDialog<T, R> {
-        let strategy: ScrollStrategy = null;
+        let strategy!: ScrollStrategy;
 
         switch (flag) {
             case 'block':
@@ -134,7 +134,6 @@ export class OctopusDialog<T = unknown, R = any> {
                 this.ref.detach();
                 this.ref.detachBackdrop();
                 this.ref.dispose();
-                this.ref = undefined;
             }
 
             this.close$.next(result);

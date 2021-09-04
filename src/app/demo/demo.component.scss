@@ -64,12 +64,53 @@
     }
 }
 
+.demo-block {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 15rem));
+    gap: 1rem;
+    place-items: stretch;
+
+    a {
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        display: flex;
+        flex-direction: column;
+        font-family: system-ui;
+        text-decoration: none;
+
+        .box {
+            padding: 0.5rem;
+
+            .subject {
+                font-size: 0.75rem;
+                font-weight: bold;
+            }
+
+            .description {
+                font-size: 0.5rem;
+            }
+        }
+    }
+}
+
 @mixin demo-mixin($foreground) {
     .demo-section {
         .section-head,
         .section-body,
         .section-foot {
             border-color: rgba($foreground, 0.25);
+        }
+    }
+
+    .demo-block {
+        a {
+            border-color: $foreground;
+            color: $foreground;
+
+            .box {
+                background-color: darken($foreground, 80%);
+            }
         }
     }
 }

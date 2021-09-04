@@ -1,0 +1,86 @@
+.octopus-paginator {
+    .octopus-paginator-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+
+        input[type="text"] {
+            appearance: none;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 0 0 3px;
+            box-sizing: border-box;
+            outline: none;
+            padding: 0 0.25rem;
+            width: 2.5rem;
+            height: 2rem;
+        }
+
+        .octopus-icon-button {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        > :nth-child(n) {
+            margin: 0 0.5rem;
+        }
+
+        > :first-child {
+            margin-left: 0;
+        }
+
+        > :last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+@mixin paginator-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+    @each $name, $value in $color-list {
+        .octopus-paginator {
+            &.octopus-#{$name}-paginator {
+                .octopus-paginator-wrapper {
+                    @if $name == "base" {
+                        $color: map-get($value, "paginator");
+                        background-color: $color;
+                        color: $foreground;
+
+                        input[type="text"] {
+                            background-color: lighten($color, 15%);
+                            border-color: rgba($foreground, 0.5);
+                            color: $foreground;
+
+                            &:focus {
+                                border-color: $foreground;
+                            }
+                        }
+                    } @else {
+                        $color: map-get($value, "value");
+                        background-color: $color;
+                        color: map-get($value, "text");
+
+                        input[type="text"] {
+                            background-color: lighten($color, 15%);
+                            border-color: rgba($foreground, 0.5);
+                            color: map-get($value, "text");
+
+                            &:focus {
+                                border-color: $foreground;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

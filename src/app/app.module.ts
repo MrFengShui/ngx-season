@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { DemoModule } from './demo/demo.module';
 import { OctopusButtonModule } from './components/button/button.module';
 import { OctopusDividerModule } from './components/divider/divider.module';
 import { OctopusIconModule } from './components/icon/icon.module';
@@ -12,14 +13,21 @@ import { OctopusLayoutModule } from './layout/layout.module';
 import { OctopusNavbarModule } from './container/navbar/navbar.module';
 
 import { AppComponent } from './app.component';
-import { DemoComponentOutlet } from './demo/components/component.component';
+import { DemoComponentOutlet } from './demo/component/component.component';
+import { DemoFormOutlet } from './demo/form/form.component';
 
+import { DemoDashboardView } from './demo/dashboard/dashboard.component';
 
 const ROOT_ROUTERS: Routes = [
-    { path: '', redirectTo: '/octopus/component/badge', pathMatch: 'full' },
+    { path: '', redirectTo: '/octopus/dashboard', pathMatch: 'full' },
+    { path: 'octopus/dashboard', component: DemoDashboardView, data: { breadcrumb: 'Dashboard' } },
     {
-        path: 'octopus/component', component: DemoComponentOutlet, data: { breadcrumb: 'Demonstration' },
-        loadChildren: () => import('./demo/components/component.module').then(module => module.ComponentViewModule)
+        path: 'octopus/component', component: DemoComponentOutlet, data: { breadcrumb: 'Component' },
+        loadChildren: () => import('./demo/component/component.module').then(module => module.ComponentViewModule)
+    },
+    {
+        path: 'octopus/form', component: DemoFormOutlet, data: { breadcrumb: 'Form' },
+        loadChildren: () => import('./demo/form/form.module').then(module => module.FormViewModule)
     },
 ];
 
@@ -36,6 +44,7 @@ const ROOT_ROUTERS: Routes = [
             useHash: true,
             initialNavigation: 'enabled'
         }),
+        DemoModule,
         OctopusButtonModule,
         OctopusIconModule,
         OctopusDividerModule,

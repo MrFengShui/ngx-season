@@ -3,25 +3,12 @@ import { Component, ElementRef, HostBinding, Input, OnChanges, OnInit, Renderer2
 import { ColorPalette } from "src/app/global/enum.utils";
 
 @Component({
-    selector: '[octopus-button]',
-    template: `
-        <div style="position: absolute;inset: 0;">
-            <div octopus-ripple class="h-100" style="z-index: 5;"></div>
-        </div>
-        <ng-content></ng-content>
-    `
+    selector: '',
+    template: ''
 })
-export class OctopusButton implements OnChanges, OnInit {
+abstract class AbstractOctopusButton implements OnChanges, OnInit {
 
-    @Input('color') color: ColorPalette = 'base';
-
-    @HostBinding('class')
-    protected class: string = 'octopus-button octopus-ripple';
-
-    constructor(
-        protected _ref: ElementRef,
-        protected _render: Renderer2
-    ) { }
+    @Input('color') color: ColorPalette = 'primary';
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.color !== undefined) {
@@ -31,6 +18,32 @@ export class OctopusButton implements OnChanges, OnInit {
 
     ngOnInit() {
         setTimeout(() => this.renderColor(undefined, this.color));
+    }
+
+    protected abstract renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void;
+
+}
+
+@Component({
+    selector: '[octopus-button]',
+    template: `
+        <div style="position: absolute;inset: 0;">
+            <div octopus-ripple class="h-100" style="z-index: 5;"></div>
+        </div>
+        <ng-content></ng-content>
+    `
+})
+export class OctopusButton extends AbstractOctopusButton {
+
+    @Input('color') color: ColorPalette = 'base';
+
+    @HostBinding('class') class: string = 'octopus-button';
+
+    constructor(
+        protected _ref: ElementRef,
+        protected _render: Renderer2
+    ) {
+        super();
     }
 
     protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
@@ -49,9 +62,7 @@ export class OctopusButton implements OnChanges, OnInit {
         <ng-content></ng-content>
     `
 })
-export class OctopusFillButton extends OctopusButton implements OnChanges, OnInit {
-
-    @HostBinding('style.white-space') whiteSpace: string = 'nowrap';
+export class OctopusFillButton extends OctopusButton {
 
     constructor(
         protected _ref: ElementRef<HTMLElement>,
@@ -60,17 +71,9 @@ export class OctopusFillButton extends OctopusButton implements OnChanges, OnIni
         super(_ref, _render);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.color !== undefined) {
-            this.renderColor(changes.color.previousValue, changes.color.currentValue);
-        }
-    }
-
     ngOnInit() {
-        setTimeout(() => {
-            this._render.addClass(this._ref.nativeElement, 'octopus-fill-button');
-            this.renderColor(undefined, this.color);
-        });
+        super.ngOnInit();
+        setTimeout(() => this._render.addClass(this._ref.nativeElement, 'octopus-fill-button'));
     }
 
     protected renderColor(prevColor: string | undefined, currColor: string): void {
@@ -89,9 +92,7 @@ export class OctopusFillButton extends OctopusButton implements OnChanges, OnIni
         <ng-content></ng-content>
     `
 })
-export class OctopusOutlineButton extends OctopusButton implements OnChanges, OnInit {
-
-    @HostBinding('style.white-space') whiteSpace: string = 'nowrap';
+export class OctopusOutlineButton extends OctopusButton {
 
     constructor(
         protected _ref: ElementRef<HTMLElement>,
@@ -100,18 +101,9 @@ export class OctopusOutlineButton extends OctopusButton implements OnChanges, On
         super(_ref, _render);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.color !== undefined) {
-            this.renderColor(changes.color.previousValue, changes.color.currentValue);
-        }
-    }
-
-
     ngOnInit() {
-        setTimeout(() => {
-            this._render.addClass(this._ref.nativeElement, 'octopus-outline-button');
-            this.renderColor(undefined, this.color);
-        });
+        super.ngOnInit();
+        setTimeout(() => this._render.addClass(this._ref.nativeElement, 'octopus-outline-button'));
     }
 
     protected renderColor(prevColor: string | undefined, currColor: string): void {
@@ -127,10 +119,10 @@ export class OctopusOutlineButton extends OctopusButton implements OnChanges, On
         <div style="position: absolute;inset: 0;">
             <div octopus-ripple class="h-100" style="z-index: 5;"></div>
         </div>
-        <ng-content></ng-content>
+        <ng-content select="octopus-icon"></ng-content>
     `
 })
-export class OctopusIconButton extends OctopusButton implements OnChanges, OnInit {
+export class OctopusIconButton extends OctopusButton {
 
     constructor(
         protected _ref: ElementRef<HTMLElement>,
@@ -139,17 +131,8 @@ export class OctopusIconButton extends OctopusButton implements OnChanges, OnIni
         super(_ref, _render);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.color !== undefined) {
-            this.renderColor(changes.color.previousValue, changes.color.currentValue);
-        }
-    }
-
     ngOnInit() {
-        setTimeout(() => {
-            this._render.addClass(this._ref.nativeElement, 'octopus-icon-button');
-            this.renderColor(undefined, this.color);
-        });
+        setTimeout(() => this._render.addClass(this._ref.nativeElement, 'octopus-icon-button'));
     }
 
     protected renderColor(prevColor: string | undefined, currColor: string): void {
@@ -170,7 +153,7 @@ export class OctopusIconButton extends OctopusButton implements OnChanges, OnIni
         <span class="text">{{text}}</span>
     `
 })
-export class OctopusMixButton extends OctopusButton implements OnChanges, OnInit {
+export class OctopusMixButton extends OctopusButton {
 
     @Input('icon') icon: string = '';
     @Input('text') text: string = '';
@@ -184,17 +167,9 @@ export class OctopusMixButton extends OctopusButton implements OnChanges, OnInit
         super(_ref, _render);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.color !== undefined) {
-            this.renderColor(changes.color.previousValue, changes.color.currentValue);
-        }
-    }
-
     ngOnInit() {
-        setTimeout(() => {
-            this._render.addClass(this._ref.nativeElement, 'octopus-mix-button');
-            this.renderColor(undefined, this.color);
-        });
+        super.ngOnInit();
+        setTimeout(() => this._render.addClass(this._ref.nativeElement, 'octopus-mix-button'));
     }
 
     protected renderColor(prevColor: string | undefined, currColor: string): void {
