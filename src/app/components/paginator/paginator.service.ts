@@ -8,10 +8,10 @@ export class OctopusPaginatorOption {
     lastLabel: string = 'Last Page';
     previousLabel: string = 'Previous Page';
     nextLabel: string = 'Next Page';
-    optionLabel: string = 'Size Options:';
+    optionLabel: string = 'Options';
 
     formatTotalLabel(index: number | string, size: number | string, length: number | string): string {
-        return `${coerceNumberProperty(index) + 1} of ${this.calculatePages(size, length)}`;
+        return `${coerceNumberProperty(index)} of ${this.calculatePages(size, length)}`;
     }
 
     calculatePages(size: number | string, length: number | string): number {

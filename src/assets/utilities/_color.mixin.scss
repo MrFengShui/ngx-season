@@ -42,10 +42,12 @@
     @include checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background);
     @include input-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
-    @include select-mixin($foreground, $background);
+    @include select-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
 
     @include popup-mixin($foreground, $background);
     @include dialog-mixin($primary, $secondary, $foreground);
+    @include toast-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include tooltip-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
 
     @include router-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include shadow-mixin($foreground);

@@ -67,9 +67,9 @@ export const LAYOUT_LIST: DemoRouterLinkModel[] = [
 ];
 
 export const POPUP_LIST: DemoRouterLinkModel[] = [
-    { icon: 'home', description: 'The dialog\'s description is undefined.', paths: ['/octopus', 'container', 'dialog'], subject: 'Dialog', text: 'Dialog' },
-    { icon: 'menu', description: 'The menu\'s description is undefined.', paths: ['/octopus', 'container', 'menu'], subject: 'Menu', text: 'Menu' },
-    { icon: 'home', description: 'The sheet\'s description is undefined.', paths: ['/octopus', 'container', 'sheet'], subject: 'Sheet', text: 'Sheet' },
-    { icon: 'home', description: 'The toast\'s description is undefined.', paths: ['/octopus', 'container', 'toast'], subject: 'Toast', text: 'Toast' },
-    { icon: 'home', description: 'The tooltip\'s description is undefined.', paths: ['/octopus', 'container', 'tooltip'], subject: 'Tooltip', text: 'Tooltip' }
+    { icon: 'home', description: 'The dialog\'s description is undefined.', paths: ['/octopus', 'popup', 'dialog'], subject: 'Dialog', text: 'Dialog' },
+    { icon: 'menu', description: 'The menu\'s description is undefined.', paths: ['/octopus', 'popup', 'menu'], subject: 'Menu', text: 'Menu' },
+    { icon: 'home', description: 'The sheet\'s description is undefined.', paths: ['/octopus', 'popup', 'sheet'], subject: 'Sheet', text: 'Sheet' },
+    { icon: 'home', description: 'The toast\'s description is undefined.', paths: ['/octopus', 'popup', 'toast'], subject: 'Toast', text: 'Toast' },
+    { icon: 'home', description: 'The tooltip\'s description is undefined.', paths: ['/octopus', 'popup', 'tooltip'], subject: 'Tooltip', text: 'Tooltip' }
 ];

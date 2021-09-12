@@ -1,9 +1,8 @@
 <div class="octopus-paginator-wrapper">
     <span class="text-truncate">{{optionLabel}}</span>
-    <select name="" id="" [ngModel]="size" (ngModelChange)="listenSelectChange($event)" style="height: 2rem;">
-        <option value="none" disabled>--- Select Items per Page ---</option>
-        <option [value]="option" *ngFor="let option of options">{{option}}</option>
-    </select>
+    <octopus-select [color]="color" [select]="size" (selectChange)="listenSelectChange($event)">
+        <octopus-select-option [value]="option" *ngFor="let option of options">{{option}}</octopus-select-option>
+    </octopus-select>
     <span class="text-truncate">{{pageLabel}}</span>
     <div class="flex-fill"></div>
     <button octopus-icon-button color="base" (click)="handleStepActionEvent(-2)">
@@ -12,7 +11,7 @@
     <button octopus-icon-button color="base" (click)="handleStepActionEvent(-1)">
         <octopus-icon size="24">navigate_before</octopus-icon>
     </button>
-    <input type="text" [value]="index + 1" (keyup.enter)="handleJumpActionEvent(input.value)" #input>
+    <input type="text" (keyup.enter)="handleJumpActionEvent(input.value)" #input>
     <button octopus-icon-button color="base" (click)="handleStepActionEvent(1)">
         <octopus-icon size="24">navigate_next</octopus-icon>
     </button>

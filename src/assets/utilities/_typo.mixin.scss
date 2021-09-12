@@ -42,7 +42,7 @@
         "dialog-title", "dialog-subtitle", "divider", "expansion-subject", "expansion-description",
         "expansion-panel-content", "form-input", "form-label", "form-valid", "select-list-item", "list-item",
         "nav-list-item", "list-headline", "paginator", "progress", "select", "select-option", "tabbed-control-tab",
-        "tabbed-content";
+        "tabbed-content", "toast", "toast-subject", "toast-description", "tooltip-container";
 
     @each $item in $component-list {
         .octopus-#{$item} {

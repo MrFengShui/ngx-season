@@ -1,0 +1,166 @@
+.octopus-alert-toast {
+    .octopus-alert-toast-wrapper {
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+
+        .octopus-icon-button {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        > :nth-child(n) {
+            margin: 0 0.25rem;
+        }
+
+        > :first-child {
+            margin-left: 0;
+        }
+
+        > :last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.octopus-notice-toast {
+    .octopus-notice-toast-wrapper {
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+
+        hr {
+            border-style: solid;
+            border-width: 0 0 1px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .octopus-toast-head {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.5rem 0.25rem;
+
+            .octopus-icon-button {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            > :nth-child(n) {
+                margin: 0 0.25rem;
+            }
+
+            > :first-child {
+                margin-left: 0;
+            }
+
+            > :last-child {
+                margin-right: 0;
+            }
+        }
+
+        .octopus-toast-body {
+            padding: 0.25rem 0.75rem 0.5rem;
+        }
+    }
+}
+
+.octopus-alert-toast-queue {
+    .octopus-alert-toast-queue-wrapper {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+
+        .octopus-toast {
+            &:nth-child(n) {
+                margin: 0.25rem 0;
+            }
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.octopus-notice-toast-queue {
+    .octopus-notice-toast-queue-wrapper {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+
+        .octopus-toast {
+            &:nth-child(n) {
+                margin: 0.25rem 0;
+            }
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+@mixin toast-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+    .octopus-alert-toast {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-alert-toast {
+                .octopus-alert-toast-wrapper {
+                    @if $name == "base" {
+                        background-color: map-get($value, "popup");
+                    } @else {
+                        background-color: map-get($value, "value");
+                    }
+                }
+            }
+        }
+
+        .octopus-alert-toast-wrapper {
+            box-shadow: 0 0 4px 1px rgba($foreground, 0.25);
+            color: $foreground;
+        }
+    }
+
+    .octopus-notice-toast {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-notice-toast {
+                .octopus-notice-toast-wrapper {
+                    @if $name == "base" {
+                        background-color: map-get($value, "popup");
+                    } @else {
+                        background-color: map-get($value, "value");
+                    }
+                }
+            }
+        }
+
+        .octopus-notice-toast-wrapper {
+            box-shadow: 0 0 4px 1px rgba($foreground, 0.25);
+            color: $foreground;
+
+            hr {
+                border-color: rgba($foreground, 0.25);
+            }
+        }
+    }
+}

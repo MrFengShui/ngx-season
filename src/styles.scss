@@ -31,6 +31,8 @@
 
 @import "./assets/popup/popup.style";
 @import "./assets/popup/dialog.style";
+@import "./assets/popup/toast.style";
+@import "./assets/popup/tooltip.style";
 
 @import "./assets/utilities/color.mixin";
 @import "./assets/utilities/typo.mixin";
@@ -107,6 +109,10 @@ html {
         "select-option": octopus-typography-level(0.75rem, normal, normal),
         "tabbed-control-tab": octopus-typography-level(0.75rem, bold, normal),
         "tabbed-content": octopus-typography-level(0.75rem, normal, normal),
+        "toast": octopus-typography-level(0.75rem, normal, normal),
+        "toast-subject": octopus-typography-level(0.75rem, bold, normal),
+        "toast-description": octopus-typography-level(0.5rem, normal, normal),
+        "tooltip-container": octopus-typography-level(0.75rem, normal, normal),
     );
     @include octopus-typography-mixin($typography);
 

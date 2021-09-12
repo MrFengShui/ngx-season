@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 
 import { DemoModule } from "../demo.module";
@@ -24,6 +25,8 @@ const DEMO_ROUTERS: Routes = [
     ],
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forChild(DEMO_ROUTERS),
         DemoModule,
         OctopusFormModule,

@@ -17,6 +17,17 @@
             height: 2rem;
         }
 
+        .octopus-select {
+            .octopus-select-wrapper {
+                border-radius: 3px;
+                border-style: solid;
+                border-width: 0 0 3px;
+                padding: 0 0.5rem;
+                width: 4rem;
+                height: 2rem;
+            }
+        }
+
         .octopus-icon-button {
             width: 2rem;
             height: 2rem;
@@ -64,6 +75,17 @@
                                 border-color: $foreground;
                             }
                         }
+
+                        .octopus-select {
+                            .octopus-select-wrapper {
+                                background-color: lighten($color, 15%);
+                                border-color: rgba($foreground, 0.5);
+
+                                &:focus {
+                                    border-color: $foreground;
+                                }
+                            }
+                        }
                     } @else {
                         $color: map-get($value, "value");
                         background-color: $color;
@@ -71,11 +93,23 @@
 
                         input[type="text"] {
                             background-color: lighten($color, 15%);
-                            border-color: rgba($foreground, 0.5);
+                            border-color: lighten($color, 25%);
                             color: map-get($value, "text");
 
                             &:focus {
-                                border-color: $foreground;
+                                border-color: lighten($color, 20%);
+                            }
+                        }
+
+                        .octopus-select {
+                            .octopus-select-wrapper {
+                                background-color: lighten($color, 15%);
+                                border-color: lighten($color, 25%);
+                                color: map-get($value, "text");
+
+                                &:focus {
+                                    border-color: lighten($color, 20%);
+                                }
                             }
                         }
                     }

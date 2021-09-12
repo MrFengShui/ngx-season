@@ -4,4 +4,9 @@ import { Component } from "@angular/core";
     selector: 'app-demo-select-view',
     templateUrl: './select.component.html'
 })
-export class DemoSelectView { }
+export class DemoSelectView {
+
+    flag: boolean = false;
+    select: string = 'instagram';
+
+}

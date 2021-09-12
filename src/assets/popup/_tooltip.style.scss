@@ -1,0 +1,31 @@
+.octopus-tooltip-container {
+    .octopus-tooltip-container-wrapper {
+        padding: 0.5rem;
+    }
+}
+
+@mixin tooltip-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+    .octopus-tooltip-overlay {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-tooltip-overlay {
+                @if $name == "base" {
+                    background-color: map-get($value, "popup");
+                } @else {
+                    background-color: map-get($value, "value");
+                }
+            }
+        }
+
+        box-shadow: 0 0 4px 1px rgba($foreground, 0.25);
+        color: $foreground;
+    }
+}

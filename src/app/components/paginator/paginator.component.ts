@@ -1,5 +1,5 @@
 import { coerceNumberProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { ColorPalette } from "src/app/global/enum.utils";
@@ -13,7 +13,7 @@ import { OctopusPaginatorOption } from "./paginator.service";
 export class OctopusPaginator implements OnChanges, OnInit, OnDestroy, AfterViewInit {
 
     @Input('color') color: ColorPalette = 'base';
-    @Input('length') length: number | string = 0;
+    @Input('length') length: number | string = 20;
     @Input('options') options: number[] = [5, 10, 15, 20];
     @Input('size') size: number | string = 20;
     @Input('select') select: number | string = 0;
@@ -21,14 +21,16 @@ export class OctopusPaginator implements OnChanges, OnInit, OnDestroy, AfterView
     @Output('sizeChange') sizeChange: EventEmitter<number> = new EventEmitter();
     @Output('selectChange') selectChange: EventEmitter<number> = new EventEmitter();
 
-    @HostBinding('class') class: string = 'octopus-paginator';
+    @ViewChild('input', { read: ElementRef, static: true })
+    private input!: ElementRef<HTMLInputElement>;
 
-    private subscription!: Subscription;
+    @HostBinding('class') class: string = 'octopus-paginator';
 
     pageLabel!: string;
     optionLabel!: string;
-    pages!: number;
-    index!: number;
+
+    private subscription!: Subscription;
+    private pages!: number;
 
     constructor(
         private _ref: ElementRef,
@@ -65,8 +67,8 @@ export class OctopusPaginator implements OnChanges, OnInit, OnDestroy, AfterView
 
     ngAfterViewInit() {
         this.subscription = this.selectChange.asObservable().subscribe(value => {
-            this.index = value;
-            this.pageLabel = this._option.formatTotalLabel(value, this.size, this.length);
+            this.input.nativeElement.value = (value + 1).toString();
+            this.renderPage(value, coerceNumberProperty(this.size), coerceNumberProperty(this.length));
         });
     }
 
@@ -76,10 +78,10 @@ export class OctopusPaginator implements OnChanges, OnInit, OnDestroy, AfterView
         }
     }
 
-    listenSelectChange(change: number | string): void {
-        this.renderSelect(coerceNumberProperty(change));
-        this.renderSize(coerceNumberProperty(this.size));
-        this.renderPage(coerceNumberProperty(this.select), coerceNumberProperty(this.size), coerceNumberProperty(this.length));
+    listenSelectChange(change: string): void {
+        this.renderSelect(0);
+        this.renderSize(coerceNumberProperty(change));
+        this.renderPage(coerceNumberProperty(this.select), coerceNumberProperty(change), coerceNumberProperty(this.length));
     }
 
     handleJumpActionEvent(param: string): void {
@@ -111,7 +113,7 @@ export class OctopusPaginator implements OnChanges, OnInit, OnDestroy, AfterView
     }
 
     private renderPage(index: number, size: number, length: number): void {
-        this.pageLabel = this._option.formatTotalLabel(index, size, length);
+        this.pageLabel = this._option.formatTotalLabel(index + 1, size, length);
         this.pages = this._option.calculatePages(size, length);
     }
 

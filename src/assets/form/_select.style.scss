@@ -1,5 +1,6 @@
 .octopus-select {
     .octopus-select-wrapper {
+        box-sizing: border-box;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -11,13 +12,24 @@
 
 .octopus-select-option {
     .octopus-select-option-wrapper {
+        cursor: pointer;
         display: flex;
         align-items: center;
         padding: 0.5rem;
     }
 }
 
-@mixin select-mixin($foreground, $background) {
+@mixin select-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        "primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "warning": $warning,
+        "failure": $failure,
+        "info": $info,
+        "base": $foreground,
+    );
+
     .octopus-select {
         color: $foreground;
     }
@@ -25,10 +37,34 @@
     .octopus-select-overlay {
         background-color: map-get($background, "popup");
 
-        .octopus-select-option {
-            .octopus-select-option-wrapper {
-                &:hover {
-                    background-color: rgba(map-get($background, "popup"), 0.75);
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-select-overlay {
+                .octopus-select-option {
+                    @if $name == "base" {
+                        .octopus-select-option-wrapper {
+                            &:hover {
+                                background-color: rgba($value, 0.05);
+                            }
+                        }
+
+                        &.active {
+                            .octopus-select-option-wrapper {
+                                background-color: rgba($value, 0.25);
+                            }
+                        }
+                    } @else {
+                        .octopus-select-option-wrapper {
+                            &:hover {
+                                background-color: rgba(map-get($value, "value"), 0.25);
+                            }
+                        }
+
+                        &.active {
+                            .octopus-select-option-wrapper {
+                                background-color: map-get($value, "value");
+                            }
+                        }
+                    }
                 }
             }
         }

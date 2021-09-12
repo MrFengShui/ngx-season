@@ -15,7 +15,7 @@ import { OctopusNavbarModule } from './container/navbar/navbar.module';
 import { AppComponent } from './app.component';
 import { DemoComponentOutlet } from './demo/component/component.component';
 import { DemoFormOutlet } from './demo/form/form.component';
-
+import { DemoPopupOutlet } from './demo/popup/popup.component';
 import { DemoDashboardView } from './demo/dashboard/dashboard.component';
 
 const ROOT_ROUTERS: Routes = [
@@ -28,6 +28,10 @@ const ROOT_ROUTERS: Routes = [
     {
         path: 'octopus/form', component: DemoFormOutlet, data: { breadcrumb: 'Form' },
         loadChildren: () => import('./demo/form/form.module').then(module => module.FormViewModule)
+    },
+    {
+        path: 'octopus/popup', component: DemoPopupOutlet, data: { breadcrumb: 'Popup' },
+        loadChildren: () => import('./demo/popup/popup.module').then(module => module.PopupViewModule)
     },
 ];
 

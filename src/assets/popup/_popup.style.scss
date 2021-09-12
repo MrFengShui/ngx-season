@@ -18,10 +18,5 @@
                 background-color: rgba($color, 0.95);
             }
         }
-
-        .cdk-overlay-pane {
-            background-color: lighten($color, 5%);
-            color: $foreground;
-        }
     }
 }

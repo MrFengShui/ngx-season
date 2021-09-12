@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
 export class DemoPaginatorView {
 
     options: number[] = [20, 25, 50, 100];
-    size: number = 100;
+    size: number = 50;
     length: number = 1000;
 
 }

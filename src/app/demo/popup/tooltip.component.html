@@ -1,0 +1,74 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Color" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button color="base" octopus-tooltip tooltipColor="base"
+                        tooltipText="This is a base tooltip." style="grid-column: 1 / 3;">Base
+                        Button</button>
+                    <button octopus-button color="primary" octopus-tooltip tooltipColor="primary"
+                        tooltipText="This is a primary tooltip.">Primary Button</button>
+                    <button octopus-button color="secondary" octopus-tooltip tooltipColor="secondary"
+                        tooltipText="This is a secondary tooltip.">Secondary
+                        Button</button>
+                    <button octopus-button color="success" octopus-tooltip tooltipColor="success"
+                        tooltipText="This is a success tooltip.">Success Button</button>
+                    <button octopus-button color="warning" octopus-tooltip tooltipColor="warning"
+                        tooltipText="This is a warning tooltip.">Warning
+                        Button</button>
+                    <button octopus-button color="failure" octopus-tooltip tooltipColor="failure"
+                        tooltipText="This is a failure tooltip.">Failure Button</button>
+                    <button octopus-button color="info" octopus-tooltip tooltipColor="info"
+                        tooltipText="This is a info tooltip.">Info Button</button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Position" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button color="base" octopus-tooltip tooltipColor="base" tooltipPosition="above"
+                        tooltipText="This is a base tooltip.">Tooltip Above</button>
+                    <button octopus-button color="base" octopus-tooltip tooltipColor="base" tooltipPosition="below"
+                        tooltipText="This is a base tooltip.">Tooltip Below</button>
+                    <button octopus-button color="base" octopus-tooltip tooltipColor="base" tooltipPosition="right"
+                        tooltipText="This is a base tooltip.">Tooltip Right</button>
+                    <button octopus-button color="base" octopus-tooltip tooltipColor="base" tooltipPosition="left"
+                        tooltipText="This is a base tooltip.">Tooltip Left</button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Show & Hide Delay" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button color="base" octopus-tooltip showDelay="0" hideDelay="0"
+                        tooltipText="This is a base tooltip.">No Delay</button>
+                    <button octopus-button color="base" octopus-tooltip showDelay="2500" hideDelay="1250"
+                        tooltipText="This is a base tooltip.">2500ms & 1250ms Delay</button>
+                    <button octopus-button color="base" octopus-tooltip showDelay="1250" hideDelay="2500"
+                        tooltipText="This is a base tooltip.">1250ms & 2500ms Delay</button>
+                    <button octopus-button color="base" octopus-tooltip showDelay="2500" hideDelay="2500"
+                        tooltipText="This is a base tooltip.">2500ms Delay</button>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

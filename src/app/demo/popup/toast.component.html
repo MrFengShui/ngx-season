@@ -1,0 +1,117 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Alert Toast" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-alert-toast color="base" content="This is a base alert toast." class="mb-25">
+                    </octopus-alert-toast>
+                    <octopus-alert-toast color="primary" content="This is a primary alert toast." class="my-25">
+                    </octopus-alert-toast>
+                    <octopus-alert-toast color="secondary" content="This is a secondary alert toast." class="my-25">
+                    </octopus-alert-toast>
+                    <octopus-alert-toast color="success" content="This is a success alert toast." class="my-25">
+                    </octopus-alert-toast>
+                    <octopus-alert-toast color="warning" content="This is a warning alert toast." class="my-25">
+                    </octopus-alert-toast>
+                    <octopus-alert-toast color="failure" content="This is a failure alert toast." class="my-25">
+                    </octopus-alert-toast>
+                    <octopus-alert-toast color="info" content="This is a info alert toast." class="mt-25">
+                    </octopus-alert-toast>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Notification Toast" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-notice-toast color="base" subject="Base Notification Toast Subject"
+                        description="This is a base notification toast." class="mb-25">
+                    </octopus-notice-toast>
+                    <octopus-notice-toast color="primary" subject="Primary Notification Toast Subject"
+                        description="This is a primary notification toast." class="my-25">
+                    </octopus-notice-toast>
+                    <octopus-notice-toast color="secondary" subject="Secondary Notification Toast Subject"
+                        description="This is a secondary notification toast." class="my-25">
+                    </octopus-notice-toast>
+                    <octopus-notice-toast color="success" subject="Success Notification Toast Subject"
+                        description="This is a success notification toast." class="my-25">
+                    </octopus-notice-toast>
+                    <octopus-notice-toast color="warning" subject="Warning Notification Toast Subject"
+                        description="This is a warning notification toast." class="my-25">
+                    </octopus-notice-toast>
+                    <octopus-notice-toast color="failure" subject="Failure Notification Toast Subject"
+                        description="This is a failure notification toast." class="my-25">
+                    </octopus-notice-toast>
+                    <octopus-notice-toast color="info" subject="Info Notification Toast Subject"
+                        description="This is a info notification toast." class="mt-25">
+                    </octopus-notice-toast>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Without Close Button" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-alert-toast noClose="true" content="This is a alert toast without close button."
+                        class="mb-25"></octopus-alert-toast>
+                    <octopus-notice-toast subject="Notification Toast Subject"
+                        description="This is a notification toast without close button." noClose="true" class="mt-25">
+                    </octopus-notice-toast>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Alert Toast Toggle" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button color="success" (click)="handleAlertActionEvent('success')">Success
+                        Button</button>
+                    <button octopus-button color="warning" (click)="handleAlertActionEvent('warning')">Warning
+                        Button</button>
+                    <button octopus-button color="failure" (click)="handleAlertActionEvent('failure')">Failure
+                        Button</button>
+                    <button octopus-button color="info" (click)="handleAlertActionEvent('info')">Info Button</button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Notification Toast Toggle" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button color="success" (click)="handleNoticeActionEvent('success')">Success
+                        Button</button>
+                    <button octopus-button color="warning" (click)="handleNoticeActionEvent('warning')">Warning
+                        Button</button>
+                    <button octopus-button color="failure" (click)="handleNoticeActionEvent('failure')">Failure
+                        Button</button>
+                    <button octopus-button color="info" (click)="handleNoticeActionEvent('info')">Info Button</button>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>
