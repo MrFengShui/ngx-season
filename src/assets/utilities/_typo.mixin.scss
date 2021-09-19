@@ -37,12 +37,12 @@
         }
     }
 
-    $component-list: "badge", "breadcrumb-action", "breadcrumb-label", "breadcrumb-split", "button", "card",
-        "card-title", "card-subtitle", "carousel", "carousel-subject", "carousel-description", "checkbox", "chip",
-        "dialog-title", "dialog-subtitle", "divider", "expansion-subject", "expansion-description",
-        "expansion-panel-content", "form-input", "form-label", "form-valid", "select-list-item", "list-item",
-        "nav-list-item", "list-headline", "paginator", "progress", "select", "select-option", "tabbed-control-tab",
-        "tabbed-content", "toast", "toast-subject", "toast-description", "tooltip-container";
+    $component-list: "badge", "breadcrumb", "button", "card", "card-title", "card-subtitle", "carousel",
+        "carousel-content", "carousel-subject", "carousel-description", "checkbox", "chip", "dialog", "divider",
+        "expansion-subject", "expansion-description", "expansion-panel-content", "form-input", "form-label",
+        "form-valid", "select-list-item", "list-item", "nav-list-item", "list-headline", "paginator", "progress",
+        "select", "select-option", "tabbed-control-tab", "tabbed-content", "toast", "toast-subject", "toast-description",
+        "tooltip-container";
 
     @each $item in $component-list {
         .octopus-#{$item} {

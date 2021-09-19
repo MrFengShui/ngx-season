@@ -1,5 +1,6 @@
 $dark: (
     "base": #212121,
+    "card": #424242,
     "expansion": #424242,
     "navbar": #424242,
     "overflow": #424242,
@@ -11,13 +12,14 @@ $dark: (
 
 $light: (
     "base": #f5f5f5,
+    "card": #eeeeee,
     "expansion": #eeeeee,
     "navbar": #eeeeee,
     "overflow": #eeeeee,
     "paginator": #eeeeee,
     "panel": #f5f5f5,
     "popup": #eeeeee,
-    "separator": #eeeeee,
+    "separator": #212121,
 );
 
 @function octopus-theme($primary, $secondary, $success, $warning, $failure, $info, $theme) {

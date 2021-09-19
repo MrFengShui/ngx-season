@@ -1,0 +1,64 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Color" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-breadcrumb [color]="item.color === undefined ? 'base' : item.color" [class.mb-25]="i === 0"
+                        [class.mt-25]="i === list.length - 1" [class.my-25]="i > 0 && i < list.length - 1"
+                        *ngFor="let item of list; index as i">
+                        <a octopus-breadcrumb-anchor icon="home" [text]="text" *ngFor="let text of item.text"></a>
+                    </octopus-breadcrumb>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Label & Anchor" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: auto 1fr;gap: 0.5rem;place-items: center stretch;">
+                    <span>Anchor Style:</span>
+                    <octopus-breadcrumb color="base" labeled="true">
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor I"></a>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor II"></a>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor III"></a>
+                    </octopus-breadcrumb>
+                    <span>Label Style:</span>
+                    <octopus-breadcrumb color="base" labeled="false">
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor I"></a>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor II"></a>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor III"></a>
+                    </octopus-breadcrumb>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="With Tooltip" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-breadcrumb [color]="item.color === undefined ? 'base' : item.color" tip="true"
+                        [class.mb-25]="i === 0" [class.mt-25]="i === list.length - 1"
+                        [class.my-25]="i > 0 && i < list.length - 1" *ngFor="let item of list; index as i">
+                        <a octopus-breadcrumb-anchor icon="home" [text]="text" *ngFor="let text of item.text"></a>
+                    </octopus-breadcrumb>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

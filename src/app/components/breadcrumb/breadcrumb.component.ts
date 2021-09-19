@@ -1,90 +1,88 @@
-import { Component, ElementRef, HostBinding, HostListener, Input, Renderer2, ViewChild } from "@angular/core";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { Component, ContentChildren, ElementRef, HostBinding, Input, OnChanges, OnInit, QueryList, Renderer2, SimpleChanges } from "@angular/core";
+
+import { ColorPalette } from "src/app/global/enum.utils";
 
 @Component({
-    selector: 'octopus-breadcrumb',
+    selector: 'a[octopus-breadcrumb-anchor]',
     template: `
-        <div class="octopus-breadcrumb-wrapper">
-            <ng-content select="octopus-breadcrumb-label,[octopus-breadcrumb-split],octopus-breadcrumb-action"></ng-content>
-        </div>
+        <octopus-icon [color]="color" size="18" rounded="true">{{icon}}</octopus-icon>
+        <span class="text-truncate" octopus-tooltip [tooltipColor]="color" [tooltipText]="text" *ngIf="matchBoolean(tip)">{{text}}</span>
+        <span class="text-truncate" *ngIf="!matchBoolean(tip)">{{text}}</span>
     `
 })
-export class OctopusBreadcrumb {
+export class OctopusBreadcrumbAnchor implements OnChanges, OnInit {
 
-    @HostBinding('class') class: string = 'octopus-breadcrumb';
-
-}
-
-@Component({
-    selector: 'octopus-breadcrumb-label',
-    template: `
-        <div class="octopus-breadcrumb-label-wrapper">
-            <span class="icon">
-                <span class="material-icons">{{icon}}</span>
-            </span>
-            <span class="text">{{text}}</span>
-        </div>
-    `
-})
-export class OctopusBreadcrumbLabel {
-
+    @Input('color') color: ColorPalette = 'base';
+    @Input('labeled') labeled: boolean | string = true;
     @Input('icon') icon: string = '';
     @Input('text') text: string = '';
+    @Input('tip') tip: boolean | string = false;
 
-    @HostBinding('class') class: string = 'octopus-breadcrumb-label';
-
-}
-
-@Component({
-    selector: 'octopus-breadcrumb-action',
-    template: `
-        <a class="octopus-breadcrumb-action-wrapper octopus-ripple" [routerLink]="link">
-            <div class="octopus-ripple-wrapper" #ripple></div>
-            <span class="icon">
-                <span class="material-icons">{{icon}}</span>
-            </span>
-            <span class="text">{{text}}</span>
-        </a>
-    `
-})
-export class OctopusBreadcrumbAction extends OctopusBreadcrumbLabel {
-
-    @Input('link') link: string | string[] = [];
-
-    @ViewChild('ripple', { read: ElementRef, static: true })
-    protected ripple: ElementRef<HTMLElement>;
-
-    @HostListener('click', ['$event'])
-    protected listenHostClick(event: MouseEvent): void {
-        setTimeout(() => this._render.addClass(this.ripple.nativeElement, 'active'));
-        setTimeout(() => this.locate(event));
-        setTimeout(() => this._render.removeClass(this.ripple.nativeElement, 'active'), 500);
-    }
-
-    @HostBinding('class') class: string = 'octopus-breadcrumb-action';
+    @HostBinding('class') class: string = 'octopus-breadcrumb-anchor';
 
     constructor(
         private _ref: ElementRef,
         private _render: Renderer2
-    ) {
-        super();
+    ) { }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.color !== undefined) {
+            setTimeout(() => this.renderColor(changes.color.previousValue, changes.color.currentValue));
+        }
+
+        if (changes.labeled !== undefined) {
+            setTimeout(() => this.renderLabeled(coerceBooleanProperty(changes.labeled.currentValue)));
+        }
     }
 
-    private locate(event: MouseEvent): void {
-        let radius: number = this._ref.nativeElement.clientWidth;
-        this._render.setStyle(this.ripple.nativeElement, 'width', `${radius * 2}px`);
-        this._render.setStyle(this.ripple.nativeElement, 'height', `${radius * 2}px`);
-        this._render.setStyle(this.ripple.nativeElement, 'top', `${event.pageY - this._ref.nativeElement.offsetTop - radius}px`);
-        this._render.setStyle(this.ripple.nativeElement, 'left', `${event.pageX - this._ref.nativeElement.offsetLeft - radius}px`);
+    ngOnInit() {
+        setTimeout(() => {
+            this.renderColor(undefined, this.color);
+            this.renderLabeled(coerceBooleanProperty(this.labeled));
+        });
+    }
+
+    matchBoolean(flag: boolean | string): boolean {
+        return coerceBooleanProperty(flag);
+    }
+
+    private renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
+        this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-base-breadcrumb-anchor' : `octopus-${prevColor}-breadcrumb-anchor`);
+        this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-breadcrumb-anchor`);
+    }
+
+    private renderLabeled(labeled: boolean): void {
+        if (labeled) {
+            this._render.addClass(this._ref.nativeElement, 'labeled');
+        } else {
+            this._render.removeClass(this._ref.nativeElement, 'labeled');
+        }
     }
 
 }
 
 @Component({
-    selector: '[octopus-breadcrumb-split]',
-    template: `<span class="material-icons"><ng-content></ng-content></span>`
+    selector: 'octopus-breadcrumb',
+    template: `
+        <div class="octopus-breadcrumb-wrapper" #wrapper>
+            <ng-container *ngFor="let anchor of anchors; index as i">
+                <a octopus-breadcrumb-anchor [color]="color" [labeled]="labeled" [icon]="anchor.icon" [text]="anchor.text" [tip]="tip"></a>
+                <octopus-icon [color]="color" *ngIf="i !== anchors.length - 1">{{delimiter}}</octopus-icon>
+            </ng-container>
+        </div>
+        <ng-template><ng-content select="a[octopus-breadcrumb-anchor]"></ng-content></ng-template>
+    `
 })
-export class OctopusBreadcrumbSplit {
+export class OctopusBreadcrumb {
 
-    @HostBinding('class') class: string = 'octopus-breadcrumb-split';
+    @Input('color') color: ColorPalette = 'base';
+    @Input('delimiter') delimiter: string = 'double_arrow';
+    @Input('labeled') labeled: boolean | string = true;
+    @Input('tip') tip: boolean | string = false;
+
+    @ContentChildren(OctopusBreadcrumbAnchor) anchors!: QueryList<OctopusBreadcrumbAnchor>;
+
+    @HostBinding('class') class: string = 'octopus-breadcrumb';
 
 }

@@ -2,24 +2,25 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 
-import { OctopusBreadcrumb, OctopusBreadcrumbAction, OctopusBreadcrumbLabel, OctopusBreadcrumbSplit } from "./breadcrumb.component";
+import { OctopusTooltipModule } from "src/app/popup/tooltip/tooltip.module";
+import { OctopusIconModule } from "../icon/icon.module";
+
+import { OctopusBreadcrumb, OctopusBreadcrumbAnchor } from "./breadcrumb.component";
 
 @NgModule({
     declarations: [
         OctopusBreadcrumb,
-        OctopusBreadcrumbAction,
-        OctopusBreadcrumbLabel,
-        OctopusBreadcrumbSplit
+        OctopusBreadcrumbAnchor
     ],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        OctopusIconModule,
+        OctopusTooltipModule
     ],
     exports: [
         OctopusBreadcrumb,
-        OctopusBreadcrumbAction,
-        OctopusBreadcrumbLabel,
-        OctopusBreadcrumbSplit
+        OctopusBreadcrumbAnchor
     ]
 })
 export class OctopusBreadcrumbModule { }

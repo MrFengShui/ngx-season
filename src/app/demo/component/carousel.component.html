@@ -1,0 +1,202 @@
+<!-- <octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Color" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));gap: 0.5rem;">
+                    <octopus-image-carousel [color]="item.color === undefined ? 'base' : item.color" width="320"
+                        height="180" *ngFor="let item of list">
+                        <octopus-image-carousel-unit [subject]="unit.subject" [description]="unit.description"
+                            [source]="unit.source" *ngFor="let unit of item.units">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Manner" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));gap: 0.5rem;">
+                    <octopus-image-carousel manner="fade" width="320" height="180">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                    <octopus-image-carousel manner="scale" width="320" height="180">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                    <octopus-image-carousel manner="sweep" width="320" height="180">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Shape" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));gap: 0.5rem;">
+                    <octopus-image-carousel shape="square" width="320" height="180">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                    <octopus-image-carousel shape="circle" width="320" height="180">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Size" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-image-carousel width="320" height="180" class="mb-25">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                    <octopus-image-carousel width="480" height="270" class="my-25">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                    <octopus-image-carousel width="640" height="320" class="mt-25">
+                        <octopus-image-carousel-unit subject="Carousel Subject I" description="Carousel Description I"
+                            source="https://images.wallpaperscraft.com/image/single/hexagons_immersion_bw_133660_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject II" description="Carousel Description II"
+                            source="https://images.wallpaperscraft.com/image/single/pattern_tropical_flowers_130382_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject III"
+                            description="Carousel Description III"
+                            source="https://images.wallpaperscraft.com/image/single/kaleidoscope_mosaic_patterns_126058_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                        <octopus-image-carousel-unit subject="Carousel Subject IV" description="Carousel Description IV"
+                            source="https://images.wallpaperscraft.com/image/single/desert_sand_surface_141026_1280x720.jpg">
+                        </octopus-image-carousel-unit>
+                    </octopus-image-carousel>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed> -->
+<octopus-text-carousel>
+    <octopus-text-carousel-content>Originally created by a designer and a developer at Twitter, Bootstrap has become one
+        of the most popular front-end frameworks and open source projects in the world.</octopus-text-carousel-content>
+    <octopus-text-carousel-content>Bootstrap was created at Twitter in mid-2010 by @mdo and @fat. Prior to being an
+        open-sourced framework, Bootstrap was known as Twitter Blueprint. A few months into development, Twitter held
+        its first Hack Week and the project exploded as developers of all skill levels jumped in without any external
+        guidance. It served as the style guide for internal tools development at the company for over a year before its
+        public release, and continues to do so today.</octopus-text-carousel-content>
+    <octopus-text-carousel-content>Originally released on Friday, August 19, 2011, we’ve since had over twenty releases,
+        including two major rewrites with v2 and v3. With Bootstrap 2, we added responsive functionality to the entire
+        framework as an optional stylesheet. Building on that with Bootstrap 3, we rewrote the library once more to make
+        it responsive by default with a mobile first approach.</octopus-text-carousel-content>
+    <octopus-text-carousel-content>With Bootstrap 4, we once again rewrote the project to account for two key
+        architectural changes: a migration to Sass and the move to CSS’s flexbox. Our intention is to help in a small
+        way to move the web development community forward by pushing for newer CSS properties, fewer dependencies, and
+        new technologies across more modern browsers.</octopus-text-carousel-content>
+    <octopus-text-carousel-content>Our latest release, Bootstrap 5, focuses on improving v4’s codebase with as few major
+        breaking changes as possible. We improved existing features and components, removed support for older browsers,
+        dropped jQuery for regular JavaScript, and embraced more future-friendly technologies like CSS custom properties
+        as part of our tooling.</octopus-text-carousel-content>
+</octopus-text-carousel>

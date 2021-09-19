@@ -1,39 +1,33 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
-import { OctopusCard } from "./card.component";
-import { OctopusCardAttach } from "./attach.component";
-import { OctopusCardHeader } from "./header.component";
-import { OctopusCardTitle } from "./title.component";
-import { OctopusCardSubtitle } from "./subtitle.component";
-import { OctopusCardContent } from "./content.component";
-import { OctopusCardFooter } from "./footer.component";
-
-import { OctopusCardAvatar } from "./avatar.directive";
+import { OctopusCard, OctopusCardAvatar, OctopusCardContent, OctopusCardFooter, OctopusCardGroup, OctopusCardHeader, OctopusCardMedia, OctopusCardSubtitle, OctopusCardTitle } from "./card.component";
 
 @NgModule({
     declarations: [
+        OctopusCardGroup,
         OctopusCard,
-        OctopusCardAttach,
+        OctopusCardAvatar,
         OctopusCardHeader,
         OctopusCardTitle,
         OctopusCardSubtitle,
+        OctopusCardMedia,
         OctopusCardContent,
-        OctopusCardFooter,
-        OctopusCardAvatar
+        OctopusCardFooter
     ],
     imports: [
         CommonModule
     ],
     exports: [
+        OctopusCardGroup,
         OctopusCard,
-        OctopusCardAttach,
+        OctopusCardAvatar,
         OctopusCardHeader,
         OctopusCardTitle,
         OctopusCardSubtitle,
+        OctopusCardMedia,
         OctopusCardContent,
-        OctopusCardFooter,
-        OctopusCardAvatar
+        OctopusCardFooter
     ]
 })
 export class OctopusCardModule { }

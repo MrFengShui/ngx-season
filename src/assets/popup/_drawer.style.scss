@@ -1,0 +1,106 @@
+@keyframes top-move-in {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes top-move-out {
+    from {
+        transform: translateY(0%);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes bottom-move-in {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes bottom-move-out {
+    from {
+        transform: translateY(0%);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes left-move-in {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes left-move-out {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes right-move-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes right-move-out {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+$list: top, bottom, left, right;
+
+.octopus-drawer-overlay {
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+
+    @each $item in $list {
+        &.octopus-drawer-#{$item}-overlay {
+            &.show {
+                animation-name: #{$item}-move-in;
+            }
+
+            &.hide {
+                animation-name: #{$item}-move-out;
+            }
+        }
+    }
+}
+
+@mixin drawer-mixin($foreground, $background) {
+    .octopus-drawer-overlay {
+        background-color: map-get($background, "popup");
+        box-shadow: 0 0 16px 4px rgba($foreground, 0.125);
+        color: $foreground;
+    }
+}

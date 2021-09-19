@@ -31,6 +31,7 @@
 
 @import "./assets/popup/popup.style";
 @import "./assets/popup/dialog.style";
+@import "./assets/popup/drawer.style";
 @import "./assets/popup/toast.style";
 @import "./assets/popup/tooltip.style";
 
@@ -78,20 +79,18 @@ html {
         "paragraph": octopus-typography-level(1rem, normal, normal),
         "caption": octopus-typography-level(0.75rem, lighter, normal),
         "badge": octopus-typography-level(0.5rem, normal, normal),
-        "breadcrumb-action": octopus-typography-level(1rem, bold, normal),
-        "breadcrumb-label": octopus-typography-level(1rem, bold, normal),
-        "breadcrumb-split": octopus-typography-level(2rem, normal, normal),
+        "breadcrumb": octopus-typography-level(0.75rem, bold, normal),
         "button": octopus-typography-level(0.75rem, normal, normal),
         "card": octopus-typography-level(0.75rem, normal, normal),
         "card-title": octopus-typography-level(0.75rem, bold, normal),
         "card-subtitle": octopus-typography-level(0.5rem, normal, normal),
         "carousel": octopus-typography-level(0.75rem, normal, normal),
+        "carousel-content": octopus-typography-level(1rem, bold, normal),
         "carousel-subject": octopus-typography-level(0.75rem, bold, normal),
         "carousel-description": octopus-typography-level(0.5rem, normal, normal),
         "checkbox": octopus-typography-level(0.75rem, normal, normal),
         "chip": octopus-typography-level(0.75rem, normal, normal),
-        "dialog-title": octopus-typography-level(1rem, bold, normal),
-        "dialog-subtitle": octopus-typography-level(0.75rem, bold, normal),
+        "dialog": octopus-typography-level(0.75rem, normal, normal),
         "divider": octopus-typography-level(0.75rem, normal, normal),
         "expansion-subject": octopus-typography-level(0.75rem, bold, normal),
         "expansion-description": octopus-typography-level(0.75rem, normal, normal),

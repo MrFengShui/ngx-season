@@ -1,66 +1,104 @@
-.octopus-dialog {
+@keyframes show {
+    from {
+        // opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        // opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes hide {
+    from {
+        // opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        // opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.octopus-dialog-overlay {
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    transition: width 250ms ease-in-out, height 250ms ease-in-out;
+
+    &.show {
+        animation-name: show;
+    }
+
+    &.hide {
+        animation-name: hide;
+    }
+
+    &.maximized {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
     .octopus-dialog-header {
         .octopus-dialog-header-wrapper {
-            border-radius: 3px 3px 0 0;
+            border-style: solid;
+            border-width: 0 0 1px;
             box-sizing: border-box;
-            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+
+            .octopus-icon-button {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            > :nth-child(n) {
+                margin: 0 0.25rem;
+            }
+
+            > :first-child {
+                margin-left: 0;
+            }
+
+            > :last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .octopus-dialog-footer {
+        .octopus-dialog-footer-wrapper {
+            border-style: solid;
+            border-width: 1px 0 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem;
         }
     }
 
     .octopus-dialog-content {
         .octopus-dialog-content-wrapper {
             box-sizing: border-box;
-            height: inherit;
-            padding: 0.75rem;
+            height: 100%;
             overflow: auto;
-        }
-    }
-
-    .octopus-dialog-footer {
-        .octopus-dialog-footer-wrapper {
-            border-radius: 0 0 3px 3px;
-            box-sizing: border-box;
-            padding: 0.75rem;
+            padding: 0.5rem;
         }
     }
 }
 
-@mixin dialog-mixin($primary, $secondary, $foreground) {
-    .octopus-dialog {
-        &.octopus-primary-dialog {
-            $color: map-get($primary, "value");
+@mixin dialog-mixin($foreground, $background) {
+    .octopus-dialog-overlay {
+        background-color: map-get($background, "popup");
+        box-shadow: 0 0 16px 4px rgba(map-get($background, "popup"), 0.25);
+        color: $foreground;
 
-            .octopus-dialog-header {
-                .octopus-dialog-header-wrapper {
-                    background-color: $color;
-                    color: map-get($primary, "text");
-                }
-            }
-
-            .octopus-dialog-footer {
-                .octopus-dialog-footer-wrapper {
-                    background-color: rgba($color, 0.5);
-                    color: map-get($primary, "text");
-                }
-            }
-        }
-
-        &.octopus-secondary-dialog {
-            $color: map-get($secondary, "value");
-
-            .octopus-dialog-header {
-                .octopus-dialog-header-wrapper {
-                    background-color: $color;
-                    color: map-get($secondary, "text");
-                }
-            }
-
-            .octopus-dialog-footer {
-                .octopus-dialog-footer-wrapper {
-                    background-color: rgba($color, 0.5);
-                    color: map-get($secondary, "text");
-                }
-            }
+        .octopus-dialog-header .octopus-dialog-header-wrapper,
+        .octopus-dialog-footer .octopus-dialog-footer-wrapper {
+            border-color: rgba($foreground, 0.25);
         }
     }
 }

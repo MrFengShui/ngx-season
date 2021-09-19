@@ -1,8 +1,8 @@
 <div class="octopus-card-wrapper">
-    <ng-content select="octopus-card-header"></ng-content>
-    <ng-content select="octopus-card-attach"></ng-content>
+    <ng-content select="octopus-card-header" *ngIf="headers.length === 1"></ng-content>
+    <ng-content select="octopus-card-media"></ng-content>
     <ng-content select="octopus-card-content"></ng-content>
     <ng-content select="hr"></ng-content>
-    <ng-content select="octopus-card-footer"></ng-content>
+    <ng-content select="octopus-card-footer" *ngIf="footers.length === 1"></ng-content>
     <ng-content></ng-content>
 </div>

@@ -6,7 +6,7 @@ import { ColorPalette } from 'src/app/global/enum.utils';
     selector: 'octopus-navbar',
     template: `
         <div class="octopus-navbar-wrapper">
-            <ng-content select="a[octopus-navbar-brand], [octopus-button], [octopus-icon-button], div"></ng-content>
+            <ng-content select="a[octopus-navbar-brand], [octopus-button], [octopus-icon-button], octopus-breadcrumb, div"></ng-content>
         </div>
     `
 })

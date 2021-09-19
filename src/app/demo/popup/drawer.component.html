@@ -1,0 +1,41 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Position" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button (click)="handlePositionActionEvent('top')">Top Drawer</button>
+                    <button octopus-button (click)="handlePositionActionEvent('bottom')">Bottom Drawer</button>
+                    <button octopus-button (click)="handlePositionActionEvent('left')">Left Drawer</button>
+                    <button octopus-button (click)="handlePositionActionEvent('right')">Right Drawer</button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Notification Toast Toggle" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid" style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;">
+                    <button octopus-button>Success
+                        Button</button>
+                    <button octopus-button>Warning
+                        Button</button>
+                    <button octopus-button>Failure
+                        Button</button>
+                    <button octopus-button>Info Button</button>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

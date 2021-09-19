@@ -1,161 +1,153 @@
 .octopus-card {
-    border-radius: 3px;
-    width: 100%;
-
     .octopus-card-wrapper {
+        border-radius: 3px;
         display: flex;
         flex-direction: column;
         padding: 0.5rem;
 
-        hr {
-            background: none;
-            border-style: solid;
-            margin: 0.25rem -0.5rem;
-        }
-
-        .octopus-button {
-            height: 2rem;
-            padding: 0.25rem 0.75rem;
-
-            &.octopus-icon-button {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-width: 2rem;
-                width: 2rem;
-            }
-        }
-
-        .octopus-card-attach {
-            margin: 0.25rem -0.5rem;
-
-            .octopus-card-attach-wrapper {
-                display: flex;
-            }
-        }
-
         .octopus-card-header {
-            margin-bottom: 0.25rem;
+            border-style: solid;
+            border-width: 0 0 1px;
+            box-sizing: border-box;
+            margin: 0 -0.5rem 0;
+            padding: 0 0.5rem 0.5rem;
+            width: calc(100% + 0.5rem * 2);
 
             .octopus-card-header-wrapper {
                 display: flex;
                 align-items: center;
+            }
+        }
 
-                .octopus-card-avatar {
-                    border-style: solid;
-                    border-radius: 50%;
-                    border-width: 1px;
-                    box-sizing: border-box;
-                    padding: 1px;
-                    width: 2rem;
-                    height: 2rem;
-                }
+        .octopus-card-media {
+            box-sizing: border-box;
+            margin: 0 -0.5rem !important;
+            width: calc(100% + 0.5rem * 2);
 
-                .octopus-card-title {
-                    margin-bottom: 0.125rem;
-                }
-
-                .octopus-card-subtitle {
-                    margin-top: 0.125rem;
-                }
+            .octopus-card-media-wrapper {
+                display: flex;
             }
         }
 
         .octopus-card-content {
-            margin: 0.25rem 0;
+            box-sizing: border-box;
+            margin: 0 0;
         }
 
         .octopus-card-footer {
-            margin-top: 0.25rem;
+            border-style: solid;
+            border-width: 1px 0 0;
+            box-sizing: border-box;
+            margin: 0 -0.5rem 0;
+            padding: 0.5rem 0.5rem 0;
+            width: calc(100% + 0.5rem * 2);
 
             .octopus-card-footer-wrapper {
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
+
+                > :nth-child(n) {
+                    margin: 0 0.25rem;
+                }
+
+                > :first-child {
+                    margin-left: 0;
+                }
+
+                > :last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        > :nth-child(n) {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        > :first-child {
+            margin-top: 0;
+        }
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.octopus-card-group {
+    .octopus-card-group-wrapper {
+        display: flex;
+
+        .octopus-card {
+            width: 100% !important;
+
+            .octopus-card-wrapper {
+                box-sizing: border-box;
+            }
+
+            &:nth-child(n) {
+                .octopus-card-wrapper {
+                    border-radius: 0;
+                    border-style: solid;
+                    border-width: 0 1px;
+                }
+            }
+
+            &:first-child {
+                .octopus-card-wrapper {
+                    border-radius: 3px 0 0 3px;
+                    border-width: 0 1px 0 0;
+                }
+            }
+
+            &:last-child {
+                .octopus-card-wrapper {
+                    border-radius: 0 3px 3px 0;
+                    border-width: 0 0 0 1px;
+                }
             }
         }
     }
 }
 
 @mixin card-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
     .octopus-card {
-        box-shadow: 0px 0px 4px 1px rgba($foreground, 0.5);
-        color: $foreground;
-
-        .octopus-button {
-            color: $foreground;
-        }
-
-        .octopus-card-avatar {
-            border-color: $foreground;
-        }
-
-        &.octopus-base-card {
-            $bg-color: map-get($background, "base");
-            background-color: lighten($bg-color, 5%);
-
-            hr {
-                border-color: rgba($foreground, 0.15);
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-card {
+                .octopus-card-wrapper {
+                    @if $name == "base" {
+                        background-color: map-get($value, "card");
+                        color: $foreground;
+                    } @else {
+                        background-color: map-get($value, "value");
+                        color: map-get($value, "text");
+                    }
+                }
             }
         }
 
-        &.octopus-primary-card {
-            $bg-color: map-get($primary, "value");
-            background-color: $bg-color;
-            color: map-get($primary, "text") !important;
-
-            hr {
-                border-color: lighten($bg-color, 5%);
-            }
+        .octopus-card-header,
+        .octopus-card-footer {
+            border-color: rgba($foreground, 0.25);
         }
+    }
 
-        &.octopus-secondary-card {
-            $bg-color: map-get($secondary, "value");
-            background-color: $bg-color;
-            color: map-get($secondary, "text") !important;
-
-            hr {
-                border-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-success-card {
-            $bg-color: map-get($success, "value");
-            background-color: $bg-color;
-            color: map-get($success, "text") !important;
-
-            hr {
-                border-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-warning-card {
-            $bg-color: map-get($warning, "value");
-            background-color: $bg-color;
-            color: map-get($warning, "text") !important;
-
-            hr {
-                border-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-failure-card {
-            $bg-color: map-get($failure, "value");
-            background-color: $bg-color;
-            color: map-get($failure, "text") !important;
-
-            hr {
-                border-color: lighten($bg-color, 5%);
-            }
-        }
-
-        &.octopus-info-card {
-            $bg-color: map-get($info, "value");
-            background-color: $bg-color;
-            color: map-get($info, "text") !important;
-
-            hr {
-                border-color: lighten($bg-color, 5%);
+    .octopus-card-group {
+        .octopus-card {
+            &:nth-child(n) {
+                .octopus-card-wrapper {
+                    border-color: rgba($foreground, 0.25);
+                }
             }
         }
     }

@@ -4,6 +4,10 @@
             <a octopus-navbar-brand routerLink="/octopus/dashboard">
                 <img src="https://cdn.worldvectorlogo.com/logos/angular-3.svg" alt="">
             </a>
+            <octopus-breadcrumb class="ml-450" style="height: 40px;">
+                <a octopus-breadcrumb-anchor [icon]="item.icon" [text]="item.text"
+                    *ngFor="let item of (breadcrumb$ | async)"></a>
+            </octopus-breadcrumb>
             <div class="flex-fill"></div>
             <button octopus-icon-button>
                 <octopus-icon rounded="true">palette</octopus-icon>

@@ -1,27 +1,21 @@
-<div class="octopus-carousel-wrapper">
+<div class="octopus-image-carousel-wrapper">
     <div class="octopus-carousel-box">
-        <div class="container" #container>
-            <ng-content select="[octopus-carousel-image]"></ng-content>
+        <div class="{{manner}}-container" #container>
+            <ng-content select="octopus-image-carousel-unit"></ng-content>
         </div>
     </div>
-    <div class="octopus-carousel-bar">
-        <button class="octopus-carousel-control" (click)="handleSweepActionEvent(-1)">
-            <span class="material-icons" style="transform: scale(1.5);">navigate_before</span>
-        </button>
-        <div class="d-flex flex-column mx-100" style="width: calc(100% - 2.5rem * 2 - 1rem * 2);">
-            <span class="octopus-carousel-subject mb-25">{{subject$ | async}}</span>
-            <span class="octopus-carousel-description">{{description$ | async}}</span>
-        </div>
-        <button class="octopus-carousel-control" (click)="handleSweepActionEvent(1)">
-            <span class="material-icons" style="transform: scale(1.5);">navigate_next</span>
-        </button>
-    </div>
+    <button octopus-icon-button [color]="color" class="octopus-carousel-control" (click)="handleSwtichActionEvent(-1)"
+        style="top: calc(50% - 18px);bottom: calc(50% - 18px);left: 0.5rem;width: 36px;height: 36px;">
+        <octopus-icon margin="0" rounded="true" size="36">navigate_before</octopus-icon>
+    </button>
+    <div class="flex-fill"></div>
+    <button octopus-icon-button [color]="color" class="octopus-carousel-control" (click)="handleSwtichActionEvent(1)"
+        style="top: calc(50% - 18px);bottom: calc(50% - 18px);right: 0.5rem;width: 36px;height: 36px;">
+        <octopus-icon margin="0" rounded="true" size="36">navigate_next</octopus-icon>
+    </button>
     <div class="octopus-carousel-orbit">
-        <div class="orbit-item" [class.active]="i === (index$ | async)" (click)="handleSweepActionEvent(0, i)"
-            #orbitItem *ngFor="let item of list; index as i">
+        <div class="orbit-item {{shape}}" [class.active]="i === (change | async)?.currentValue"
+            (click)="handleSwtichActionEvent(0, i)" #orbitItem *ngFor="let unit of units; index as i">
         </div>
-        <!-- <div class="orbit-item circle"></div>
-        <div class="orbit-item circle"></div>
-        <div class="orbit-item circle"></div> -->
     </div>
 </div>

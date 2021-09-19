@@ -1,19 +1,19 @@
-import { Directive, HostBinding } from "@angular/core";
+import { Directive, Input, HostListener } from "@angular/core";
+
+import { OctopusDialog } from "./dialog.service";
 
 @Directive({
-    selector: '[octopus-dialog-title]'
+    selector: 'button[octopus-dialog-close], a[octopus-dialog-close]',
 })
-export class OctopusDialogTitle {
+export class OctopusDialogClose {
 
-    @HostBinding('class') class: string = 'octopus-dialog-title';
+    @Input('octopus-dialog-close') close: any;
 
-}
+    @HostListener('click')
+    private listenHostClick(): void {
+        this._dialog.hide(this.close);
+    }
 
-@Directive({
-    selector: '[octopus-dialog-subtitle]'
-})
-export class OctopusDialogSubtitle {
-
-    @HostBinding('class') class: string = 'octopus-dialog-subtitle';
+    constructor(private _dialog: OctopusDialog) { }
 
 }

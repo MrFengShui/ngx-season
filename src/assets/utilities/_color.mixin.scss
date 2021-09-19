@@ -22,10 +22,10 @@
 
     @include avatar-mixin($foreground);
     @include badge-mixin($primary, $secondary, $success, $warning, $failure, $info);
-    @include breadcrumb-mixin($foreground);
+    @include breadcrumb-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include card-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
-    @include carousel-mixin($primary, $foreground);
+    @include carousel-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include chip-mixin($primary, $secondary, $success, $warning, $failure, $info);
     @include divider-mixin($foreground);
     @include icon-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
@@ -45,7 +45,8 @@
     @include select-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
 
     @include popup-mixin($foreground, $background);
-    @include dialog-mixin($primary, $secondary, $foreground);
+    @include dialog-mixin($foreground, $background);
+    @include drawer-mixin($foreground, $background);
     @include toast-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include tooltip-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
 

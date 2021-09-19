@@ -1,61 +1,69 @@
-.octopus-carousel {
-    .octopus-carousel-wrapper {
-        overflow: hidden;
+.octopus-image-carousel-unit {
+    .octopus-image-carousel-unit-wrapper {
         position: relative;
 
+        .octopus-carousel-subject {
+            padding: 0.5rem 0.5rem 0.25rem;
+            text-align: center;
+        }
+
+        .octopus-carousel-description {
+            padding: 0.25rem 0.5rem 0.5rem;
+            text-align: justify;
+        }
+    }
+}
+
+.octopus-image-carousel {
+    .octopus-image-carousel-wrapper {
+        overflow: hidden;
+        position: relative;
+        width: inherit;
+        height: inherit;
+
         .octopus-carousel-box {
+            height: 100%;
             overflow: hidden;
 
-            .container {
-                display: flex;
-                width: fit-content;
-                transition: transform 500ms linear;
+            .fade-container {
+                position: relative;
 
-                .octopus-carousel-image {
-                    .octopus-carousel-image-wrapper {
-                        display: flex;
+                .octopus-image-carousel-unit {
+                    position: absolute;
+                    inset: 0;
+                    opacity: 0;
+                    transition: opacity 2500ms ease-in-out;
+
+                    &.active {
+                        opacity: 1;
                     }
                 }
             }
+
+            .scale-container {
+                position: relative;
+
+                .octopus-image-carousel-unit {
+                    position: absolute;
+                    inset: 0;
+                    transform: scale(0);
+                    transition: transform 1000ms ease-in-out;
+
+                    &.active {
+                        transform: scale(1);
+                    }
+                }
+            }
+
+            .sweep-container {
+                display: flex;
+                width: fit-content;
+                transition: transform 1000ms ease-in-out;
+            }
         }
 
-        .octopus-carousel-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0.5rem 0;
+        .octopus-carousel-control {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-
-            .octopus-carousel-control {
-                background: none;
-                border: none;
-                border-radius: 50%;
-                cursor: pointer;
-                outline: none;
-                padding: 0.5rem;
-                width: 2.5rem;
-                height: 2.5rem;
-            }
-
-            .octopus-carousel-subject {
-                overflow: hidden;
-                text-align: center;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            .octopus-carousel-description {
-                display: -webkit-box;
-                display: -moz-box;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                -webkit-box-orient: vertical;
-                -moz-box-orient: vertical;
-                -webkit-line-clamp: 2;
-            }
         }
 
         .octopus-carousel-orbit {
@@ -91,51 +99,71 @@
     }
 }
 
-@mixin carousel-mixin($primary, $foreground) {
-    .octopus-carousel {
-        &.octopus-primary-carousel {
-            $color: map-get($primary, "value");
+.octopus-text-carousel {
+    .octopus-text-carousel-wrapper {
+        overflow: hidden;
+        padding: 0.5rem 0;
+        position: relative;
 
-            .octopus-carousel-bar {
-                .octopus-carousel-control {
-                    background-color: rgba($foreground, 0.25);
-                    color: lighten($color, 15%);
+        .octopus-text-carousel-content {
+            position: absolute;
 
-                    &:hover {
-                        background-color: $color;
-                        color: $foreground;
+            .octopus-text-carousel-content-wrapper {
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+@mixin carousel-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+    .octopus-image-carousel-unit,
+    .octopus-text-carousel-prefix,
+    .octopus-text-carousel-postfix,
+    .octopus-text-carousel-content {
+        color: $foreground;
+    }
+
+    .octopus-image-carousel {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-image-carousel {
+                .octopus-carousel-orbit {
+                    .orbit-item {
+                        @if $name == "base" {
+                            background-color: $foreground;
+
+                            &.active {
+                                background-color: rgba(map-get($value, "base"), 0.75);
+                            }
+                        } @else {
+                            $color: map-get($value, "value");
+                            background-color: lighten($color, 25%);
+
+                            &.active {
+                                background-color: $color;
+                            }
+                        }
                     }
-
-                    &:active {
-                        background-color: rgba($color, 0.85);
-                    }
-                }
-
-                .octopus-carousel-subject,
-                .octopus-carousel-description {
-                    color: map-get($primary, "text");
                 }
             }
+        }
 
-            .octopus-carousel-orbit {
-                background-color: rgba($foreground, 0.25);
+        .octopus-image-carousel-wrapper {
+            background-color: map-get($background, "base");
+        }
+    }
 
-                .orbit-item {
-                    background-color: lighten($color, 15%);
-
-                    &:hover {
-                        background-color: $color;
-                    }
-
-                    &:active {
-                        background-color: rgba($color, 0.85);
-                    }
-
-                    &.active {
-                        background-color: $color;
-                    }
-                }
-            }
+    .octopus-text-carousel {
+        .octopus-text-carousel-wrapper {
+            background-color: map-get($background, "base");
         }
     }
 }

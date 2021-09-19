@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { DemoModule } from './demo/demo.module';
+import { OctopusBreadcrumbModule } from './components/breadcrumb/breadcrumb.module';
 import { OctopusButtonModule } from './components/button/button.module';
 import { OctopusDividerModule } from './components/divider/divider.module';
 import { OctopusIconModule } from './components/icon/icon.module';
@@ -36,9 +37,7 @@ const ROOT_ROUTERS: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -49,6 +48,7 @@ const ROOT_ROUTERS: Routes = [
             initialNavigation: 'enabled'
         }),
         DemoModule,
+        OctopusBreadcrumbModule,
         OctopusButtonModule,
         OctopusIconModule,
         OctopusDividerModule,
