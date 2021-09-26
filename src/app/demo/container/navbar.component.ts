@@ -1,8 +1,13 @@
 import { Component } from "@angular/core";
 
+import { ColorPalette } from "src/app/global/enum.utils";
+
 @Component({
     selector: 'app-demo-navbar-view',
-    styleUrls: ['../demo.module.scss'],
     templateUrl: './navbar.component.html'
 })
-export class DemoNavbarView { }
+export class DemoNavbarView {
+
+    list: ColorPalette[] = ['primary', 'secondary', 'success', 'warning', 'failure', 'info'];
+
+}

@@ -1,0 +1,95 @@
+.octopus-stepper {
+    .octopus-stepper-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octopus-stepper-head {
+            display: flex;
+            align-items: center;
+
+            .octopus-step-header {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+
+                .octopus-step-header-logo {
+                    border-radius: 50%;
+                    padding: 0.25rem;
+                }
+            }
+
+            .octopus-step-line {
+                border-style: solid;
+                border-width: 1px;
+                flex: auto;
+            }
+        }
+
+        .octopus-stepper-body {
+            padding: 0.5rem;
+        }
+    }
+}
+
+@mixin stepper-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+
+    .octopus-stepper {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-stepper {
+                @if $name == "base" {
+                    $color: map-get($value, "tabbed");
+
+                    .octopus-stepper-wrapper {
+                        background-color: $color;
+
+                        .octopus-step-header {
+                            .octopus-step-header-logo {
+                                background-color: lighten($color, 15%);
+                            }
+
+                            &:hover {
+                                background-color: lighten($color, 7.5%);
+                            }
+                        }
+
+                        .octopus-step-line {
+                            border-color: rgba($foreground, 0.25);
+                        }
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+
+                    .octopus-stepper-wrapper {
+                        background-color: $color;
+
+                        .octopus-step-header {
+                            .octopus-step-header-logo {
+                                background-color: lighten($color, 15%);
+                            }
+
+                            &:hover {
+                                background-color: lighten($color, 7.5%);
+                            }
+                        }
+
+                        .octopus-step-line {
+                            border-color: rgba($color, 0.25);
+                        }
+                    }
+                }
+            }
+        }
+
+        color: $foreground;
+    }
+}

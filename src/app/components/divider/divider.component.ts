@@ -2,23 +2,18 @@ import { AfterViewInit, Component, ElementRef, HostBinding, Input, OnChanges, On
 import { Subject } from "rxjs";
 
 @Component({
-    selector: '[octopus-divider]',
+    selector: 'div[octopus-divider]',
     template: `
-        <div class="octopus-divider-wrapper" #wrapper>
-            <hr>
-            <span [class.d-none]="text$ | async">
-                <ng-content></ng-content>
-            </span>
-            <hr>
-        </div>
+        <hr>
+        <span [class.d-none]="text$ | async">
+            <ng-content></ng-content>
+        </span>
+        <hr>
     `
 })
 export class OctopusDivider implements OnChanges, OnInit, AfterViewInit {
 
-    @Input('direction') direction: 'horizontal' | 'vertical' = 'horizontal';
-
-    @ViewChild('wrapper', { read: ElementRef, static: true })
-    private wrapper!: ElementRef<HTMLElement>;
+    @Input('divDir') direction: 'horizontal' | 'vertical' = 'horizontal';
 
     @HostBinding('class') class: string = 'octopus-divider';
 
@@ -44,8 +39,8 @@ export class OctopusDivider implements OnChanges, OnInit, AfterViewInit {
     }
 
     private renderDirection(prevDir: string | undefined, currDir: string): void {
-        this._render.removeClass(this.wrapper.nativeElement, prevDir === undefined ? 'horizontal' : prevDir);
-        this._render.addClass(this.wrapper.nativeElement, currDir);
+        this._render.removeClass(this._ref.nativeElement, prevDir === undefined ? 'horizontal' : prevDir);
+        this._render.addClass(this._ref.nativeElement, currDir);
     }
 
 }

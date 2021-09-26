@@ -68,7 +68,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10rem, 15rem));
     gap: 1rem;
-    place-items: stretch;
+    place-items: center;
 
     a {
         border-radius: 3px;

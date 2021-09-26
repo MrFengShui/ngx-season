@@ -5,14 +5,16 @@ import { NgModule } from "@angular/core";
 import { OctopusButtonModule } from "../button/button.module";
 import { OctopusIconModule } from "../icon/icon.module";
 
-import { OctopusImageCarousel, OctopusImageCarouselUnit, OctopusTextCarousel, OctopusTextCarouselContent } from "./carousel.component";
+import { OctopusImageCarousel, OctopusImageCarouselUnit, OctopusTextCarousel, OctopusTextCarouselContent, OctopusTextCarouselPostfix, OctopusTextCarouselPrefix } from "./carousel.component";
 
 @NgModule({
     declarations: [
         OctopusImageCarousel,
         OctopusImageCarouselUnit,
         OctopusTextCarousel,
-        OctopusTextCarouselContent
+        OctopusTextCarouselContent,
+        OctopusTextCarouselPrefix,
+        OctopusTextCarouselPostfix
     ],
     imports: [
         CommonModule,
@@ -24,7 +26,9 @@ import { OctopusImageCarousel, OctopusImageCarouselUnit, OctopusTextCarousel, Oc
         OctopusImageCarousel,
         OctopusImageCarouselUnit,
         OctopusTextCarousel,
-        OctopusTextCarouselContent
+        OctopusTextCarouselContent,
+        OctopusTextCarouselPrefix,
+        OctopusTextCarouselPostfix
     ]
 })
 export class OctopusCarouselModule { }

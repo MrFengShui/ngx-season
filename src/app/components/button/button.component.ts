@@ -119,7 +119,7 @@ export class OctopusOutlineButton extends OctopusButton {
         <div style="position: absolute;inset: 0;">
             <div octopus-ripple class="h-100" style="z-index: 5;"></div>
         </div>
-        <ng-content select="octopus-icon"></ng-content>
+        <ng-content select="octopus-icon, img[octopus-avatar]"></ng-content>
     `
 })
 export class OctopusIconButton extends OctopusButton {

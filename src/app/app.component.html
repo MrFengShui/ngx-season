@@ -17,57 +17,62 @@
     <div octopus-border-cell position="east" class="overflow overflow-auto" style="width: 240px;"
         [style.height]="calcSize()">
         <octopus-nav-list>
-            <a octopus-nav-list-item [routerLink]="['octopus', 'dashboard']" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }">
-                <span octopus-list-text>Dashboard</span>
-                <span octopus-list-icon class="material-icons">dashboard</span>
+            <a octopus-nav-list-item itemText="Dashboard" [routerLink]="['octopus', 'dashboard']"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }">
+                <octopus-icon margin="2">dashboard</octopus-icon>
             </a>
             <h1 octopus-list-headline>Chart</h1>
-            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of chartList">
-                <span octopus-list-text>{{item.text}}</span>
-                <span octopus-list-icon class="material-icons"
-                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            <a octopus-nav-list-item [itemText]="item.text" [routerLink]="item.paths"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }"
+                *ngFor="let item of chartList">
+                <octopus-icon margin="2"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">
+                    {{item.icon}}</octopus-icon>
             </a>
             <div octopus-divider class="mt-50"></div>
             <h1 octopus-list-headline>Component</h1>
-            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of componentList">
-                <span octopus-list-text>{{item.text}}</span>
-                <span octopus-list-icon class="material-icons"
-                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            <a octopus-nav-list-item [itemText]="item.text" [routerLink]="item.paths"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }"
+                *ngFor="let item of componentList">
+                <octopus-icon margin="2"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">
+                    {{item.icon}}</octopus-icon>
             </a>
             <div octopus-divider class="mt-50"></div>
             <h1 octopus-list-headline>Container</h1>
-            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of containerList">
-                <span octopus-list-text>{{item.text}}</span>
-                <span octopus-list-icon class="material-icons"
-                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            <a octopus-nav-list-item [itemText]="item.text" [routerLink]="item.paths"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }"
+                *ngFor="let item of containerList">
+                <octopus-icon margin="2"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">
+                    {{item.icon}}</octopus-icon>
             </a>
             <div octopus-divider class="mt-50"></div>
             <h1 octopus-list-headline>Form</h1>
-            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of formList">
-                <span octopus-list-text>{{item.text}}</span>
-                <span octopus-list-icon class="material-icons"
-                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            <a octopus-nav-list-item [itemText]="item.text" [routerLink]="item.paths"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }"
+                *ngFor="let item of formList">
+                <octopus-icon margin="2"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">
+                    {{item.icon}}</octopus-icon>
             </a>
             <div octopus-divider class="mt-50"></div>
             <h1 octopus-list-headline>Layout</h1>
-            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of layoutList">
-                <span octopus-list-text>{{item.text}}</span>
-                <span octopus-list-icon class="material-icons"
-                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            <a octopus-nav-list-item [itemText]="item.text" [routerLink]="item.paths"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }"
+                *ngFor="let item of layoutList">
+                <octopus-icon margin="2"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">
+                    {{item.icon}}</octopus-icon>
             </a>
             <div octopus-divider class="mt-50"></div>
             <h1 octopus-list-headline>Popup</h1>
-            <a octopus-nav-list-item [routerLink]="item.paths" [routerLinkActive]="['router-base-link']"
-                [routerLinkActiveOptions]="{ exact: true }" *ngFor="let item of popupList">
-                <span octopus-list-text>{{item.text}}</span>
-                <span octopus-list-icon class="material-icons"
-                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">{{item.icon}}</span>
+            <a octopus-nav-list-item [itemText]="item.text" [routerLink]="item.paths"
+                [routerLinkActive]="['router-base-link']" [routerLinkActiveOptions]="{ exact: true }"
+                *ngFor="let item of popupList">
+                <octopus-icon margin="2"
+                    [style.transform]="'rotate(' + (item.rotate === undefined ? 0 : item.rotate) + 'deg)'">
+                    {{item.icon}}</octopus-icon>
             </a>
         </octopus-nav-list>
     </div>

@@ -26,6 +26,7 @@ export const COMPONENT_LIST: DemoRouterLinkModel[] = [
     { icon: 'badge', description: 'The badge\'s description is undefined.', paths: ['/octopus', 'component', 'badge'], subject: 'Badge', text: 'Badge' },
     { icon: 'home', description: 'The breadcrumb\'s description is undefined.', paths: ['/octopus', 'component', 'breadcrumb'], subject: 'Breadcrumb', text: 'Breadcrumb' },
     { icon: 'smart_button', description: 'The button\'s description is undefined.', paths: ['/octopus', 'component', 'button'], subject: 'Button', text: 'Button' },
+    { icon: 'calendar_today', description: 'The calendar\'s description is undefined.', paths: ['/octopus', 'component', 'calendar'], subject: 'Calendar', text: 'Calendar' },
     { icon: 'redeem', description: 'The card\'s description is undefined.', paths: ['/octopus', 'component', 'card'], subject: 'Card', text: 'Card' },
     { icon: 'view_carousel', description: 'The carousel\'s description is undefined.', paths: ['/octopus', 'component', 'carousel'], subject: 'Carousel', text: 'Carousel' },
     { icon: 'memory', description: 'The chip\'s description is undefined.', paths: ['/octopus', 'component', 'chip'], subject: 'Chip', text: 'Chip' },
@@ -44,8 +45,8 @@ export const COMPONENT_LIST: DemoRouterLinkModel[] = [
 
 export const CONTAINER_LIST: DemoRouterLinkModel[] = [
     { icon: 'expand_circle_down', description: 'The expansion\'s description is undefined.', paths: ['/octopus', 'container', 'expansion'], subject: 'Expansion', text: 'Expansion' },
-    { icon: 'home', description: 'The navbar\'s description is undefined.', paths: ['/octopus', 'container', 'input'], subject: 'Navbar', text: 'Navbar' },
-    { icon: 'home', description: 'The sidenav\'s description is undefined.', paths: ['/octopus', 'container', 'radio'], subject: 'Sidenav', text: 'Sidenav' },
+    { icon: 'home', description: 'The navbar\'s description is undefined.', paths: ['/octopus', 'container', 'navbar'], subject: 'Navbar', text: 'Navbar' },
+    { icon: 'home', description: 'The sidenav\'s description is undefined.', paths: ['/octopus', 'container', 'sidenav'], subject: 'Sidenav', text: 'Sidenav' },
     { icon: 'linear_scale', description: 'The stepper\'s description is undefined.', paths: ['/octopus', 'container', 'stepper'], subject: 'Stepper', text: 'Stepper' },
     { icon: 'tab', description: 'The tabbed\'s description is undefined.', paths: ['/octopus', 'container', 'tabbed'], subject: 'Tabbed', text: 'Tabbed' },
     { icon: 'home', description: 'The toolbar\'s description is undefined.', paths: ['/octopus', 'container', 'toolbar'], subject: 'Toolbar', text: 'Toolbar' }

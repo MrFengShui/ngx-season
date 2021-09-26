@@ -1,0 +1,96 @@
+.octopus-calendar {
+    .octopus-calendar-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octopus-calendar-head {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            place-items: stretch;
+
+            .octopus-calendar-label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .octopus-calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            place-items: stretch;
+
+            .octopus-calendar-anchor {
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.active {
+                    border-radius: 3px;
+                }
+            }
+        }
+
+        .octopus-calendar-foot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 0;
+
+            .octopus-calendar-meta {
+                font-size: 1.25rem;
+            }
+
+            .octopus-icon-button {
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+
+            > :nth-child(n) {
+                margin: 0 0.25rem;
+            }
+
+            > :first-child {
+                margin-left: 0;
+            }
+
+            > :last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+@mixin calendar-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+    );
+    .octopus-calendar {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-calendar {
+                .octopus-calendar-anchor {
+                    &.active {
+                        background-color: map-get($value, "value");
+                    }
+                }
+            }
+        }
+
+        .octopus-calendar-label,
+        .octopus-calendar-anchor,
+        .octopus-calendar-meta {
+            color: $foreground;
+
+            &.disabled {
+                color: rgba($foreground, 0.25);
+            }
+        }
+    }
+}

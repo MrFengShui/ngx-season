@@ -1,68 +1,77 @@
+.octopus-expansion-panel {
+    .octopus-expansion-panel-wrapper {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .octopus-expansion-panel-head {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            user-select: none;
+
+            > :nth-child(n) {
+                margin: 0 0.5rem;
+            }
+
+            > :first-child {
+                margin-left: 0;
+            }
+
+            > :last-child {
+                margin-right: 0;
+            }
+        }
+
+        .octopus-expansion-panel-body {
+            .octopus-expansion-panel-addon {
+                .octopus-expansion-panel-addon-wrapper {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+            .octopus-expansion-panel-content .octopus-expansion-panel-content-wrapper,
+            .octopus-expansion-panel-addon .octopus-expansion-panel-addon-wrapper {
+                padding: 0.5rem;
+            }
+        }
+    }
+}
+
 .octopus-expansion {
     .octopus-expansion-wrapper {
         .octopus-expansion-panel {
-            box-sizing: border-box;
-            cursor: pointer;
-            user-select: none;
-
-            .octopus-expansion-panel-wrapper {
-                .octopus-expansion-panel-control {
-                    border-radius: 0;
-                    box-sizing: border-box;
-                    display: flex;
-                    align-items: center;
-                    padding: 0.5rem;
-                    transition: border-radius 1000ms ease-in-out;
-
-                    > :nth-child(n) {
-                        margin: 0 1rem;
-                    }
-
-                    > :first-child {
-                        margin-left: 0;
-                    }
-
-                    > :last-child {
-                        margin-right: 0;
-                    }
-
-                    .octopus-icon {
-                        border-radius: 50%;
-                        margin-right: 0;
-                    }
-
-                    &.active {
-                        border-radius: 3px 3px 0 0;
-                    }
+            &:first-child {
+                .octopus-expansion-panel-wrapper {
+                    border-radius: 3px 3px 0 0;
                 }
+            }
 
-                .octopus-expansion-panel-content {
+            &:last-child {
+                .octopus-expansion-panel-wrapper {
                     border-radius: 0 0 3px 3px;
-                    overflow: hidden;
+                }
+            }
+
+            &.expanded {
+                &:nth-child(n) {
+                    .octopus-expansion-panel-wrapper {
+                        border-radius: 3px !important;
+                        margin: 0.5rem 0;
+                    }
                 }
 
-                .octopus-expansion-action {
-                    .octopus-expansion-action-wrapper {
-                        border-style: solid;
-                        border-width: 1px 0 0 0;
-                        display: flex;
-                        padding: 0.5rem;
+                &:first-child {
+                    .octopus-expansion-panel-wrapper {
+                        margin-top: 0;
+                    }
+                }
 
-                        .octopus-button {
-                            width: auto;
-
-                            &:nth-child(n) {
-                                margin: 0 0.25rem;
-                            }
-
-                            &:first-child {
-                                margin-left: 0;
-                            }
-
-                            &:last-child {
-                                margin-right: 0;
-                            }
-                        }
+                &:last-child {
+                    .octopus-expansion-panel-wrapper {
+                        margin-bottom: 0;
                     }
                 }
             }
@@ -78,37 +87,53 @@
         warning: $warning,
         failure: $failure,
         info: $info,
+        base: $background,
     );
-
     .octopus-expansion {
-        .octopus-expansion-panel {
-            .octopus-expansion-panel-content {
-                background-color: darken(map-get($background, "expansion"), 5%);
-                color: $foreground;
-            }
-        }
-
         @each $name, $value in $color-list {
             &.octopus-#{$name}-expansion {
-                $color: map-get($value, "value");
+                @if $name == "base" {
+                    $color: map-get($value, "expansion");
 
-                .octopus-expansion-panel {
-                    .octopus-expansion-panel-control {
-                        background-color: $color;
-                        color: map-get($value, "text");
+                    .octopus-expansion-panel {
+                        .octopus-expansion-panel-wrapper {
+                            .octopus-icon {
+                                background-color: lighten($color, 7.5%);
+                            }
 
-                        .octopus-icon {
-                            background-color: lighten($color, 7.5%);
+                            .octopus-expansion-panel-head {
+                                background-color: darken($color, 7.5%);
+                            }
+
+                            .octopus-expansion-panel-body {
+                                background-color: $color;
+                            }
                         }
                     }
+                } @else {
+                    $color: map-get($value, "value");
 
-                    .octopus-expansion-action {
-                        .octopus-expansion-action-wrapper {
-                            border-color: rgba($foreground, 0.25);
+                    .octopus-expansion-panel {
+                        .octopus-expansion-panel-wrapper {
+                            .octopus-icon {
+                                background-color: lighten($color, 7.5%);
+                            }
+
+                            .octopus-expansion-panel-head {
+                                background-color: $color;
+                            }
+
+                            .octopus-expansion-panel-body {
+                                background-color: lighten($color, 15%);
+                            }
                         }
                     }
                 }
             }
+        }
+
+        .octopus-expansion-panel-wrapper {
+            color: $foreground;
         }
     }
 }

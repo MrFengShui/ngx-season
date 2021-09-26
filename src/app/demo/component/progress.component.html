@@ -1,0 +1,82 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Progress Bar" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-progress-bar [color]="item" [value]="value" *ngFor="let item of list">
+                    </octopus-progress-bar>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Progress Bar with Stripe" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-progress-bar [color]="item" [value]="value" striped="true" *ngFor="let item of list">
+                    </octopus-progress-bar>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Progress Bar with Animated Stripe" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-progress-bar [color]="item" [value]="value" striped="true" animated="true"
+                        *ngFor="let item of list"></octopus-progress-bar>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Progress Pie" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(6, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-progress-pie [color]="item" [value]="value" *ngFor="let item of list">
+                    </octopus-progress-pie>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Custom Percision" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr) repeat(3, auto);gap: 0.5rem;place-items: center stretch;">
+                    <octopus-progress-bar precision="0" [value]="value"></octopus-progress-bar>
+                    <octopus-progress-bar precision="1" [value]="value"></octopus-progress-bar>
+                    <octopus-progress-bar precision="2" [value]="value"></octopus-progress-bar>
+                    <octopus-progress-pie precision="0" [value]="value"></octopus-progress-pie>
+                    <octopus-progress-pie precision="1" [value]="value"></octopus-progress-pie>
+                    <octopus-progress-pie precision="2" [value]="value"></octopus-progress-pie>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

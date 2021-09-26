@@ -1,18 +1,64 @@
-import { Component, ElementRef, HostBinding, HostListener, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 
 import { ColorPalette } from 'src/app/global/enum.utils';
+
+@Component({
+    selector: 'a[octopus-navbar-brand]',
+    template: `<ng-content select="img"></ng-content>`
+})
+export class OctopusNavbarBrand {
+
+    @HostBinding('class') class: string = 'octopus-navbar-brand';
+
+}
+
+@Component({
+    selector: 'octopus-navbar-search',
+    template: `
+        <div class="octopus-navbar-search-wrapper">
+            <input type="search" [placeholder]="placeholder" [value]="value" (keyup.enter)="handleInputActionEvent(input.value)" #input>
+            <button octopus-icon-button [color]="color" [class.d-none]="!input.value" (click)="handleClearActionEvent(input)">
+                <octopus-icon size="16">close</octopus-icon>
+            </button>
+        </div>
+    `
+})
+export class OctopusNavbarSearch {
+
+    @Input('color') color: ColorPalette = 'base';
+    @Input('value') value: string = '';
+    @Input('placeholder') placeholder: string = 'Search...';
+
+    @Output('valueChange') valueChange: EventEmitter<string> = new EventEmitter();
+
+    @HostBinding('class') class: string = 'octopus-navbar-search';
+
+    handleClearActionEvent(element: HTMLInputElement): void {
+        element.value = '';
+        element.focus();
+    }
+
+    handleInputActionEvent(text: string): void {
+        this.value = text;
+        this.valueChange.emit(this.value);
+    }
+
+}
 
 @Component({
     selector: 'octopus-navbar',
     template: `
         <div class="octopus-navbar-wrapper">
-            <ng-content select="a[octopus-navbar-brand], [octopus-button], [octopus-icon-button], octopus-breadcrumb, div"></ng-content>
+            <ng-content select="a[octopus-navbar-brand], octopus-navbar-search, [octopus-button], [octopus-icon-button], octopus-breadcrumb, div"></ng-content>
         </div>
     `
 })
-export class OctopusNavbar implements OnChanges, OnInit {
+export class OctopusNavbar implements OnChanges, OnInit, AfterContentInit {
 
     @Input('color') color: ColorPalette = 'base';
+
+    @ContentChildren(OctopusNavbarSearch)
+    private searches!: QueryList<OctopusNavbarSearch>;
 
     @HostBinding('class') class: string = 'octopus-navbar';
 
@@ -31,6 +77,12 @@ export class OctopusNavbar implements OnChanges, OnInit {
         setTimeout(() => this.renderColor(undefined, this.color));
     }
 
+    ngAfterContentInit() {
+        if (this.searches.length > 1) {
+
+        }
+    }
+
     private renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
         this._render.removeClass(this._ref.nativeElement, prevColor == undefined ? 'octopus-base-navbar' : `octopus-${prevColor}-navbar`);
         this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-navbar`);
@@ -38,38 +90,3 @@ export class OctopusNavbar implements OnChanges, OnInit {
 
 }
 
-@Component({
-    selector: 'a[octopus-navbar-brand]',
-    template: `
-        <div class="octopus-ripple-wrapper" #ripple></div>
-        <ng-content select="img"></ng-content>
-    `
-})
-export class OctopusNavbarBrand {
-
-    @ViewChild('ripple', { read: ElementRef, static: true })
-    protected ripple!: ElementRef<HTMLElement>;
-
-    @HostBinding('class') class: string = 'octopus-navbar-brand octopus-ripple';
-
-    @HostListener('click', ['$event'])
-    protected listenHostClick(event: MouseEvent): void {
-        setTimeout(() => this._render.addClass(this.ripple.nativeElement, 'active'));
-        setTimeout(() => this.locate(event));
-        setTimeout(() => this._render.removeClass(this.ripple.nativeElement, 'active'), 500);
-    }
-
-    constructor(
-        private _ref: ElementRef,
-        private _render: Renderer2
-    ) { }
-
-    private locate(event: MouseEvent): void {
-        let radius: number = Math.max(this._ref.nativeElement.clientWidth, this._ref.nativeElement.clientHeight);
-        this._render.setStyle(this.ripple.nativeElement, 'width', `${radius * 2}px`);
-        this._render.setStyle(this.ripple.nativeElement, 'height', `${radius * 2}px`);
-        this._render.setStyle(this.ripple.nativeElement, 'top', `${event.pageY - this._ref.nativeElement.offsetTop - radius}px`);
-        this._render.setStyle(this.ripple.nativeElement, 'left', `${event.pageX - this._ref.nativeElement.offsetLeft - radius}px`);
-    }
-
-}

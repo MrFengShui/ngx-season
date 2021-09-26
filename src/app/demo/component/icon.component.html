@@ -1,0 +1,42 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section [label]="label">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <div class="d-flex mb-25">
+                        <button octopus-button class="flex-fill mr-25"
+                            (click)="handleChangeActionEvent('Filled')">Filled
+                            Icon</button>
+                        <button octopus-button color="success" class="flex-fill mx-25"
+                            (click)="handleChangeActionEvent('Outlined')">Outlined
+                            Icon</button>
+                        <button octopus-button color="warning" class="flex-fill mx-25"
+                            (click)="handleChangeActionEvent('Round')">Round
+                            Icon</button>
+                        <button octopus-button color="failure" class="flex-fill mx-25"
+                            (click)="handleChangeActionEvent('Sharp')">Sharp
+                            Icon</button>
+                        <button octopus-button color="info" class="flex-fill ml-25"
+                            (click)="handleChangeActionEvent('Two-Tone')">Two-Tone
+                            Icon</button>
+                    </div>
+                    <div class="d-grid mt-25"
+                        style="grid-template-columns: repeat(10, 1fr);gap: 0.5rem;place-items: center;">
+                        <span octopus-tooltip [tooltipText]="item" *ngFor="let item of (list$ | async)">
+                            <octopus-icon size="36" [type]="type">{{item}}</octopus-icon>
+                        </span>
+                    </div>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

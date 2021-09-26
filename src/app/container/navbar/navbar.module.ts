@@ -2,21 +2,25 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { OctopusButtonModule } from "src/app/components/button/button.module";
+import { OctopusIconModule } from "src/app/components/icon/icon.module";
 
-import { OctopusNavbar, OctopusNavbarBrand } from './navbar.component';
+import { OctopusNavbar, OctopusNavbarBrand, OctopusNavbarSearch } from './navbar.component';
 
 @NgModule({
     declarations: [
         OctopusNavbar,
-        OctopusNavbarBrand
+        OctopusNavbarBrand,
+        OctopusNavbarSearch
     ],
     imports: [
         CommonModule,
-        OctopusButtonModule
+        OctopusButtonModule,
+        OctopusIconModule
     ],
     exports: [
         OctopusNavbar,
-        OctopusNavbarBrand
+        OctopusNavbarBrand,
+        OctopusNavbarSearch
     ]
 })
 export class OctopusNavbarModule { }

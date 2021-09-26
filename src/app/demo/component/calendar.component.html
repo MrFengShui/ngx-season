@@ -1,0 +1,26 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Color">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));gap: 0.5rem;place-items: stretch;">
+                    <octopus-calendar color="primary"></octopus-calendar>
+                    <octopus-calendar color="secondary"></octopus-calendar>
+                    <octopus-calendar color="success"></octopus-calendar>
+                    <octopus-calendar color="warning"></octopus-calendar>
+                    <octopus-calendar color="failure"></octopus-calendar>
+                    <octopus-calendar color="info"></octopus-calendar>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

@@ -1,6 +1,6 @@
 import { coerceNumberProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren, ViewContainerRef } from "@angular/core";
-import { interval, Subject, Subscription, timer } from "rxjs";
+import { AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren } from "@angular/core";
+import { Observable, Subject, Subscription, timer } from "rxjs";
 
 import { ColorPalette } from "src/app/global/enum.utils";
 
@@ -218,9 +218,7 @@ export class OctopusTextCarouselContent implements AfterViewInit {
 
     @HostBinding('class') class: string = 'octopus-text-carousel-content octopus-carousel-content';
 
-    state$: Subject<'ready' | 'done'> = new Subject();
-
-    private subscription!: Subscription;
+    private active$: Subject<boolean> = new Subject();
 
     constructor(
         private _ref: ElementRef,
@@ -230,35 +228,67 @@ export class OctopusTextCarouselContent implements AfterViewInit {
     ) { }
 
     ngAfterViewInit() {
-        this._render.setStyle(this._ref.nativeElement, 'font-size', `${this._carousel.size}px`);
-        this._render.setStyle(this._ref.nativeElement, 'line-height', `${this._carousel.size}px`);
-        this._render.setStyle(this._ref.nativeElement, 'transform', `translateX(${this._carousel.wrapper.nativeElement.clientWidth}px)`);
-    }
-
-    start(): void {
-        let total: number = 0;
-        this.subscription = interval().subscribe(() => {
-            if (total === 0) {
-                this.state$.next('ready');
-            }
-
-            total += 1;
-            let offset: number = this._carousel.wrapper.nativeElement.clientWidth - total;
-            this._render.setStyle(this._ref.nativeElement, 'transform', `translateX(${offset}px)`);
-
-            if (Math.abs(offset) === this.wrapper.nativeElement.clientWidth) {
-                this.stop();
-            }
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            let size: number = coerceNumberProperty(this._carousel.wrapper.nativeElement.clientHeight);
+            this._render.setStyle(this._ref.nativeElement, 'font-size', `${size * 0.5}px`);
+            this._render.setStyle(this._ref.nativeElement, 'line-height', `${size}px`);
+            this._render.setStyle(this._ref.nativeElement, 'transform', `translateX(${this._carousel.track.nativeElement.clientWidth}px)`);
         });
     }
 
-    stop(): void {
-        this.state$.next('done');
+    execute(): Observable<boolean> {
+        let step: number = 0;
+        let task = setInterval(() => {
+            this.active$.next(true);
+            step += 1;
+            let selfSize: number = this.wrapper.nativeElement.clientWidth;
+            let trackSize: number = this._carousel.track.nativeElement.clientWidth;
+            let offset: number = trackSize - step;
+            this._render.setStyle(this._ref.nativeElement, 'transform', `translateX(${offset}px)`);
 
-        if (this.subscription !== undefined) {
-            this.subscription.unsubscribe();
-        }
+            if (selfSize <= trackSize) {
+                if (Math.abs(offset) === Math.ceil(selfSize + trackSize)) {
+                    this.active$.next(false);
+                    clearInterval(task);
+                }
+            } else {
+                if (Math.abs(offset) === Math.ceil(selfSize)) {
+                    this.active$.next(false);
+                    clearInterval(task);
+                }
+            }
+        }, 10);
+        return this.active$.asObservable();
     }
+
+}
+
+@Component({
+    selector: 'octopus-text-carousel-prefix',
+    template: `
+        <div class="octopus-text-carousel-prefix-wrapper">
+            <ng-content></ng-content>
+        </div>
+    `
+})
+export class OctopusTextCarouselPrefix {
+
+    @HostBinding('class') class: string = 'octopus-text-carousel-prefix';
+
+}
+
+@Component({
+    selector: 'octopus-text-carousel-postfix',
+    template: `
+        <div class="octopus-text-carousel-postfix-wrapper">
+            <ng-content></ng-content>
+        </div>
+    `
+})
+export class OctopusTextCarouselPostfix {
+
+    @HostBinding('class') class: string = 'octopus-text-carousel-postfix';
 
 }
 
@@ -266,19 +296,30 @@ export class OctopusTextCarouselContent implements AfterViewInit {
     selector: 'octopus-text-carousel',
     template: `
         <div class="octopus-text-carousel-wrapper" [style.height]="size + 'px'" #wrapper>
-            <ng-content select="octopus-text-carousel-content"></ng-content>
+            <div class="octopus-carousel-addon">
+                <ng-content select="octopus-text-carousel-prefix"></ng-content>
+            </div>
+            <div class="octopus-carousel-track" #track>
+                <ng-content select="octopus-text-carousel-content"></ng-content>
+            </div>
+            <div class="octopus-carousel-addon">
+                <ng-content select="octopus-text-carousel-postfix"></ng-content>
+            </div>
         </div>
     `
 })
 export class OctopusTextCarousel implements OnChanges, OnInit, AfterViewInit {
 
+    @Input('color') color: ColorPalette = 'base';
     @Input('index') index: number | string = 0;
-    @Input('size') size: number | string = 32;
+    @Input('interval') interval: number | string = 2500;
+    @Input('size') size: number | string = 48;
 
     @ContentChildren(OctopusTextCarouselContent) contents!: QueryList<OctopusTextCarouselContent>;
 
-    @ViewChild('wrapper', { read: ElementRef, static: true })
-    wrapper!: ElementRef<HTMLElement>;
+    @ViewChild('wrapper', { read: ElementRef, static: true }) wrapper!: ElementRef<HTMLElement>;
+
+    @ViewChild('track', { read: ElementRef, static: true }) track!: ElementRef<HTMLElement>;
 
     @HostBinding('class') class: string = 'octopus-text-carousel';
 
@@ -288,42 +329,52 @@ export class OctopusTextCarousel implements OnChanges, OnInit, AfterViewInit {
     ) { }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (changes.color !== undefined) {
+            setTimeout(() => this.renderColor(changes.color.previousValue, changes.color.currentValue));
+        }
+
         if (changes.index !== undefined) {
-            setTimeout(() => this.renderIndex(coerceNumberProperty(changes.index.currentValue)));
+            setTimeout(() => this.execTask(coerceNumberProperty(changes.index.currentValue), coerceNumberProperty(this.interval)));
+        }
+
+        if (changes.interval !== undefined) {
+            setTimeout(() => this.execTask(coerceNumberProperty(this.index), coerceNumberProperty(changes.interval.currentValue)));
         }
 
         if (changes.size !== undefined) {
-            setTimeout(() => this.renderHeight(coerceNumberProperty(changes.size.currentValue)));
+            setTimeout(() => this._render.setStyle(this._ref.nativeElement, 'height', `${changes.size.currentValue}px`));
         }
     }
 
     ngOnInit() {
-        setTimeout(() => this.renderHeight(coerceNumberProperty(this.size)));
+        setTimeout(() => {
+            this.renderColor(undefined, this.color);
+            this._render.setStyle(this._ref.nativeElement, 'height', `${this.size}px`);
+        });
     }
 
     ngAfterViewInit() {
         if (this.contents.length > 0) {
-            this.renderIndex(coerceNumberProperty(this.index));
+            this.execTask(coerceNumberProperty(this.index), coerceNumberProperty(this.interval));
         }
     }
 
-    private renderIndex(index: number): void {
-        this.contents.get(index)?.start();
-        this.contents.get(index)?.state$.asObservable().subscribe(value => {
-            console.log(value);
-            if (value === 'done') {
-                index = (index + 1) % this.contents.length;
-                this.index = index;
+    private execTask(index: number, interval: number): void {
+        let subscription = this.contents.get(index)?.execute().subscribe(value => {
+            if (!value) {
+                subscription?.unsubscribe();
                 let task = setTimeout(() => {
                     clearTimeout(task);
-                    this.renderIndex(index);
-                }, 2500);
+                    this.index = (index + 1) % this.contents.length;
+                    this.execTask(this.index, interval);
+                }, interval);
             }
         });
     }
 
-    private renderHeight(size: number): void {
-        this._render.setStyle(this._ref.nativeElement, 'height', `${size}px`);
+    private renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
+        this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-text-carousel' : `octopus-${prevColor}-text-carousel`);
+        this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-text-carousel`);
     }
 
 }

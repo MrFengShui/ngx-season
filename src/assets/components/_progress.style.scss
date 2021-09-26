@@ -1,10 +1,10 @@
 .octopus-progress {
-    border-radius: 2px;
+    border-radius: 3px;
+    overflow: hidden;
     width: 100%;
     height: 0.75rem;
 
     .octopus-progress-bar {
-        border-radius: inherit;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -54,6 +54,14 @@
 }
 
 @mixin progress-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+    );
     .octopus-progress {
         .octopus-progress-bar {
             &.stripe {
@@ -70,158 +78,30 @@
             }
         }
 
-        &.octopus-primary-progress {
-            $color: map-get($primary, "value");
-            background-color: rgba($color, 0.125);
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-progress {
+                $color: map-get($value, "value");
+                background-color: rgba($color, 0.125);
 
-            .octopus-progress-bar {
-                background-color: $color;
-                color: map-get($primary, "text");
-            }
-
-            .octopus-progress-pie {
-                .svg {
-                    .track {
-                        stroke: rgba($color, 0.125);
-                    }
-
-                    .thumb {
-                        stroke: $color;
-                    }
-                }
-
-                .text {
+                .octopus-progress-bar {
+                    background-color: $color;
                     color: map-get($primary, "text");
                 }
-            }
-        }
 
-        &.octopus-secondary-progress {
-            $color: map-get($secondary, "value");
-            background-color: rgba($color, 0.125);
+                .octopus-progress-pie {
+                    .svg {
+                        .track {
+                            stroke: rgba($color, 0.125);
+                        }
 
-            .octopus-progress-bar {
-                background-color: $color;
-                color: map-get($secondary, "text");
-            }
-
-            .octopus-progress-pie {
-                .svg {
-                    .track {
-                        stroke: rgba($color, 0.125);
+                        .thumb {
+                            stroke: $color;
+                        }
                     }
 
-                    .thumb {
-                        stroke: $color;
+                    .text {
+                        color: map-get($primary, "text");
                     }
-                }
-
-                .text {
-                    color: map-get($secondary, "text");
-                }
-            }
-        }
-
-        &.octopus-success-progress {
-            $color: map-get($success, "value");
-            background-color: rgba($color, 0.125);
-
-            .octopus-progress-bar {
-                background-color: $color;
-                color: map-get($success, "text");
-            }
-
-            .octopus-progress-pie {
-                .svg {
-                    .track {
-                        stroke: rgba($color, 0.125);
-                    }
-
-                    .thumb {
-                        stroke: $color;
-                    }
-                }
-
-                .text {
-                    color: map-get($success, "text");
-                }
-            }
-        }
-
-        &.octopus-warning-progress {
-            $color: map-get($warning, "value");
-            background-color: rgba($color, 0.125);
-
-            .octopus-progress-bar {
-                background-color: $color;
-                color: map-get($warning, "text");
-            }
-
-            .octopus-progress-pie {
-                .svg {
-                    .track {
-                        stroke: rgba($color, 0.125);
-                    }
-
-                    .thumb {
-                        stroke: $color;
-                    }
-                }
-
-                .text {
-                    color: map-get($warning, "text");
-                }
-            }
-        }
-
-        &.octopus-failure-progress {
-            $color: map-get($failure, "value");
-            background-color: rgba($color, 0.125);
-
-            .octopus-progress-bar {
-                background-color: $color;
-                color: map-get($failure, "text");
-            }
-
-            .octopus-progress-pie {
-                .svg {
-                    .track {
-                        stroke: rgba($color, 0.125);
-                    }
-
-                    .thumb {
-                        stroke: $color;
-                    }
-                }
-
-                .text {
-                    color: map-get($failure, "text");
-                }
-            }
-        }
-
-        &.octopus-info-progress {
-            $color: map-get($info, "value");
-            background-color: rgba($color, 0.125);
-
-            .octopus-progress-bar {
-                background-color: $color;
-                color: map-get($info, "text");
-            }
-
-            .octopus-progress-pie {
-                .svg {
-                    .track {
-                        stroke: rgba($color, 0.125);
-                    }
-
-                    .thumb {
-                        stroke: $color;
-                    }
-                }
-
-                .text {
-                    color: map-get($info, "text");
                 }
             }
         }

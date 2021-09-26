@@ -2,10 +2,10 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { OctopusFormModule } from "src/app/form/form.module";
+import { OctopusAvatarModule } from "../avatar/avatar.module";
 import { OctopusRippleModule } from "../ripple/ripple.module";
 
-import { OctopusListItem, OctopusListIcon, OctopusNavListItem, OctopusSelectListItem, OctopusListText } from "./item.component";
-import { OctopusList, OctopusListHeadline, OctopusNavList, OctopusSelectList } from "./list.component";
+import { OctopusList, OctopusListHeadline, OctopusListItem, OctopusListItemAddon, OctopusListItemContent, OctopusListItemDuration, OctopusListItemMedia, OctopusListItemSubtitle, OctopusListItemTitle, OctopusNavList, OctopusNavListItem, OctopusSelectList, OctopusSelectListItem } from "./list.component";
 
 @NgModule({
     declarations: [
@@ -13,14 +13,19 @@ import { OctopusList, OctopusListHeadline, OctopusNavList, OctopusSelectList } f
         OctopusNavList,
         OctopusListHeadline,
         OctopusListItem,
+        OctopusListItemTitle,
+        OctopusListItemSubtitle,
+        OctopusListItemContent,
+        OctopusListItemDuration,
+        OctopusListItemAddon,
+        OctopusListItemMedia,
         OctopusSelectList,
         OctopusSelectListItem,
-        OctopusNavListItem,
-        OctopusListIcon,
-        OctopusListText
+        OctopusNavListItem
     ],
     imports: [
         CommonModule,
+        OctopusAvatarModule,
         OctopusFormModule,
         OctopusRippleModule
     ],
@@ -29,11 +34,15 @@ import { OctopusList, OctopusListHeadline, OctopusNavList, OctopusSelectList } f
         OctopusNavList,
         OctopusListHeadline,
         OctopusListItem,
+        OctopusListItemTitle,
+        OctopusListItemSubtitle,
+        OctopusListItemContent,
+        OctopusListItemDuration,
+        OctopusListItemAddon,
+        OctopusListItemMedia,
         OctopusSelectList,
         OctopusSelectListItem,
-        OctopusNavListItem,
-        OctopusListIcon,
-        OctopusListText
+        OctopusNavListItem
     ]
 })
 export class OctopusListModule { }

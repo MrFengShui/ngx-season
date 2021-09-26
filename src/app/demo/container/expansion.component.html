@@ -1,0 +1,464 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Expansion" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-expansion>
+                        <octopus-expansion-panel subject="Expansion Panel I">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel II">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel III">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                    </octopus-expansion>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Expansion Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-expansion [color]="color" *ngFor="let color of colors">
+                        <octopus-expansion-panel [subject]="textFormat(color, 'I')">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel [subject]="textFormat(color, 'II')">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel [subject]="textFormat(color, 'III')">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                    </octopus-expansion>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Default Expanded Panel" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-expansion index="0">
+                        <octopus-expansion-panel subject="Expansion Panel I">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel II">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel III">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                    </octopus-expansion>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Multiple Expansion" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-expansion multi>
+                        <octopus-expansion-panel subject="Expansion Panel I">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel II">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel III">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                        </octopus-expansion-panel>
+                    </octopus-expansion>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Expansion with Addon" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-expansion>
+                        <octopus-expansion-panel subject="Expansion Panel I">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                            <octopus-expansion-panel-addon>
+                                <span class="octopus-paragraph flex-fill my-0">{{date | date: 'yyyy-MM-dd
+                                    hh:mm:ss'}}</span>
+                                <button octopus-button class="w-25" (click)="handleUpdateActionEvent()">Refresh</button>
+                            </octopus-expansion-panel-addon>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel II">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                            <octopus-expansion-panel-addon>
+                                <span class="octopus-paragraph flex-fill my-0">{{date | date: 'yyyy-MM-dd
+                                    hh:mm:ss'}}</span>
+                                <button octopus-button class="w-25" (click)="handleUpdateActionEvent()">Refresh</button>
+                            </octopus-expansion-panel-addon>
+                        </octopus-expansion-panel>
+                        <octopus-expansion-panel subject="Expansion Panel III">
+                            <octopus-expansion-panel-content>
+                                <p class="octopus-paragraph">The MIT License (MIT)</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 Twitter, Inc.</p>
+                                <p class="octopus-paragraph">Copyright (c) 2011-2021 The Bootstrap Authors</p>
+                                <p class="octopus-paragraph">Permission is hereby granted, free of charge, to any person
+                                    obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:</p>
+                                <p class="octopus-paragraph">The above copyright notice and this permission notice shall
+                                    be included in
+                                    all copies or substantial portions of the Software.</p>
+                                <p class="octopus-paragraph">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                                    KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+                                    THE SOFTWARE.</p>
+                            </octopus-expansion-panel-content>
+                            <octopus-expansion-panel-addon>
+                                <span class="octopus-paragraph flex-fill my-0">{{date | date: 'yyyy-MM-dd
+                                    hh:mm:ss'}}</span>
+                                <button octopus-button class="w-25" (click)="handleUpdateActionEvent()">Refresh</button>
+                            </octopus-expansion-panel-addon>
+                        </octopus-expansion-panel>
+                    </octopus-expansion>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

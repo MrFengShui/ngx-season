@@ -1,0 +1,41 @@
+<div class="octopus-calendar-wrapper">
+    <div class="octopus-calendar-head">
+        <span class="octopus-calendar-label" [style.height]="(label.clientWidth * 0.5) + 'px'" #label>Sunday</span>
+        <span class="octopus-calendar-label">Monday</span>
+        <span class="octopus-calendar-label">Tuesday</span>
+        <span class="octopus-calendar-label">Wednesday</span>
+        <span class="octopus-calendar-label">Thursday</span>
+        <span class="octopus-calendar-label">Friday</span>
+        <span class="octopus-calendar-label">Saturday</span>
+    </div>
+    <div octopus-divider></div>
+    <div class="octopus-calendar-body">
+        <a class="octopus-calendar-anchor disabled" [style.font-size]="(anchor.clientWidth * 0.25) + 'px'"
+            [style.height]="anchor.clientWidth + 'px'" *ngFor="let item of prevList" #anchor>{{item}}</a>
+        <a class="octopus-calendar-anchor" [class.active]="item === today" octopus-ripple
+            (click)="handleSelectActionEvent(item)" [style.font-size]="(anchor.clientWidth * 0.25) + 'px'"
+            [style.height]="anchor.clientWidth + 'px'" *ngFor="let item of currList" #anchor>{{item}}</a>
+        <a class="octopus-calendar-anchor disabled" [style.font-size]="(anchor.clientWidth * 0.25) + 'px'"
+            [style.height]="anchor.clientWidth + 'px'" *ngFor="let item of nextList" #anchor>{{item}}</a>
+    </div>
+    <div octopus-divider></div>
+    <div class="octopus-calendar-foot">
+        <button octopus-icon-button [color]="color" (click)="handleYearActionEvent(-1)">
+            <octopus-icon>keyboard_double_arrow_left</octopus-icon>
+        </button>
+        <button octopus-icon-button [color]="color" (click)="handleMonthActionEvent(-1)">
+            <octopus-icon>keyboard_arrow_left</octopus-icon>
+        </button>
+        <span class="octopus-calendar-meta">{{year}} &minus; {{month | zero}}</span>
+        <button octopus-icon-button [color]="color" (click)="handleMonthActionEvent(1)">
+            <octopus-icon>keyboard_arrow_right</octopus-icon>
+        </button>
+        <button octopus-icon-button [color]="color" (click)="handleYearActionEvent(1)">
+            <octopus-icon>keyboard_double_arrow_right</octopus-icon>
+        </button>
+        <span class="mx-100"></span>
+        <button octopus-icon-button [color]="color" (click)="handleTodayActionEvent()">
+            <octopus-icon>today</octopus-icon>
+        </button>
+    </div>
+</div>

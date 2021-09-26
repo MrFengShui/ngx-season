@@ -1,47 +1,47 @@
 .octopus-divider {
-    .octopus-divider-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    hr {
+        border-style: solid;
+        box-sizing: border-box;
+        margin: 0;
+        margin-block: 0;
+    }
+
+    span {
+        text-orientation: mixed;
+        white-space: nowrap;
+    }
+
+    &.horizontal {
+        flex-direction: row;
+        margin: 0.5rem 0;
+        width: 100%;
 
         hr {
-            border-style: solid;
             border-width: 1px 0 0 0;
-            margin: 0;
-            margin-block: 0;
+            width: 100%;
         }
 
         span {
-            text-orientation: mixed;
-            white-space: nowrap;
+            writing-mode: rl-tb;
         }
+    }
 
-        &.horizontal {
-            flex-direction: row;
-            width: 100%;
+    &.vertical {
+        flex-direction: column;
+        height: 100%;
+        margin: 0 0.5rem;
 
-            hr {
-                width: 100%;
-            }
-
-            span {
-                margin: 0 1rem;
-                writing-mode: rl-tb;
-            }
-        }
-
-        &.vertical {
-            flex-direction: column;
+        hr {
+            border-width: 0 1px 0 0;
             height: 100%;
+        }
 
-            hr {
-                height: 100%;
-            }
-
-            span {
-                margin: 1rem 0;
-                writing-mode: vertical-lr;
-            }
+        span {
+            writing-mode: vertical-rl;
         }
     }
 }

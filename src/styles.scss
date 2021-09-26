@@ -6,6 +6,7 @@
 @import "./assets/components/badge.style";
 @import "./assets/components/breadcrumb.style";
 @import "./assets/components/button.style";
+@import "./assets/components/calendar.style";
 @import "./assets/components/card.style";
 @import "./assets/components/carousel.style";
 @import "./assets/components/chip.style";
@@ -20,6 +21,7 @@
 @import "./assets/container/expansion.style";
 @import "./assets/container/navbar.style";
 @import "./assets/container/sidenav.style";
+@import "./assets/container/stepper.style";
 @import "./assets/container/tabbed.style";
 
 @import "./assets/form/check.style";
@@ -81,10 +83,12 @@ html {
         "badge": octopus-typography-level(0.5rem, normal, normal),
         "breadcrumb": octopus-typography-level(0.75rem, bold, normal),
         "button": octopus-typography-level(0.75rem, normal, normal),
+        "calendar": octopus-typography-level(0.75rem, bold, normal),
         "card": octopus-typography-level(0.75rem, normal, normal),
         "card-title": octopus-typography-level(0.75rem, bold, normal),
         "card-subtitle": octopus-typography-level(0.5rem, normal, normal),
         "carousel": octopus-typography-level(0.75rem, normal, normal),
+        "carousel-addon": octopus-typography-level(1.25rem, bold, normal),
         "carousel-content": octopus-typography-level(1rem, bold, normal),
         "carousel-subject": octopus-typography-level(0.75rem, bold, normal),
         "carousel-description": octopus-typography-level(0.5rem, normal, normal),
@@ -100,12 +104,17 @@ html {
         "form-valid": octopus-typography-level(0.75rem, normal, normal),
         "select-list-item": octopus-typography-level(0.75rem, normal, normal),
         "list-item": octopus-typography-level(0.75rem, normal, normal),
+        "list-item-title": octopus-typography-level(1rem, bold, normal),
+        "list-item-subtitle": octopus-typography-level(0.5rem, bold, normal),
+        "list-item-duration": octopus-typography-level(0.5rem, normal, normal),
+        "list-item-content": octopus-typography-level(0.75rem, normal, normal),
         "nav-list-item": octopus-typography-level(0.75rem, bold, normal),
         "list-headline": octopus-typography-level(1rem, bold, normal),
         "paginator": octopus-typography-level(0.75rem, normal, normal),
         "progress": octopus-typography-level(0.5rem, normal, normal),
         "select": octopus-typography-level(0.75rem, normal, normal),
         "select-option": octopus-typography-level(0.75rem, normal, normal),
+        "stepper": octopus-typography-level(0.75rem, normal, normal),
         "tabbed-control-tab": octopus-typography-level(0.75rem, bold, normal),
         "tabbed-content": octopus-typography-level(0.75rem, normal, normal),
         "toast": octopus-typography-level(0.75rem, normal, normal),

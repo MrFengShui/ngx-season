@@ -1,136 +1,161 @@
-.octopus-list {
-    height: fit-content;
+@mixin meta-mixin() {
+    .octopus-list-item-meta {
+        display: grid;
+        grid-template-columns: auto 1fr repeat(2, auto);
+        grid-template-rows: repeat(2, auto) 1fr auto;
+        gap: 0.5rem;
+        place-items: center stretch;
+        width: 100%;
 
-    .octopus-list-wrapper {
-        display: flex;
-        flex-direction: column;
+        .octopus-avatar {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
 
-        .octopus-list-headline {
-            box-sizing: border-box;
-            padding: 0.5rem;
-            user-select: none;
+        .octopus-list-item-title {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
 
-            &:nth-child(n) {
-                margin: 0.5rem 0;
+        .octopus-list-item-subtitle {
+            grid-column: 2 / 4;
+            grid-row: 2 / 3;
+        }
+
+        .octopus-list-item-duration {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+        }
+
+        .octopus-list-item-content {
+            grid-column: 1 / 4;
+            grid-row: 3 / 4;
+            place-self: stretch;
+        }
+
+        .octopus-list-item-addon {
+            display: flex;
+            align-items: center;
+            grid-column: 1 / 4;
+            grid-row: 4 / 5;
+
+            .octopus-button {
+                padding: 0.25rem 0.75rem;
             }
 
-            &:first-child {
-                margin-top: 0;
+            > :nth-child(n) {
+                margin: 0 0.25rem;
             }
 
-            &:last-child {
-                margin-bottom: 0;
+            > :first-child {
+                margin-left: 0;
+            }
+
+            > :last-child {
+                margin-right: 0;
             }
         }
 
-        .octopus-list-item {
-            .octopus-list-item-wrapper {
+        .octopus-list-item-media {
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px;
+            display: flex;
+            grid-column: 4 / 5;
+            grid-row: 1 / 5;
+            padding: 0.25rem;
+            width: 15rem;
+        }
+    }
+}
+
+$list: "list", "nav-list", "select-list";
+@each $item in $list {
+    .octopus-#{$item} {
+        height: fit-content;
+
+        .octopus-#{$item}-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            .octopus-list-headline {
                 box-sizing: border-box;
-                padding: 1rem 0.5rem;
+                padding: 0.5rem;
                 user-select: none;
+
+                &:nth-child(n) {
+                    margin: 0.5rem 0;
+                }
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .octopus-#{$item}-item {
+                @if $item == "nav-list" {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    padding: 0.5rem;
+                    position: relative;
+                    text-decoration: none;
+                    user-select: none;
+                    @include meta-mixin();
+
+                    .octopus-list-item-text {
+                        flex: auto;
+                        margin-right: 0.25rem;
+                    }
+                } @else {
+                    .octopus-#{$item}-item-wrapper {
+                        padding: 0.5rem;
+                        user-select: none;
+
+                        @if $item == "select-list" {
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+
+                            .content {
+                                flex: auto;
+                            }
+                        }
+
+                        @include meta-mixin();
+                    }
+
+                    @if $item == "select-list" {
+                        &.ltr {
+                            .octopus-select-list-item-wrapper {
+                                flex-direction: row;
+                            }
+                        }
+
+                        &.rtl {
+                            .octopus-select-list-item-wrapper {
+                                flex-direction: row-reverse;
+                            }
+                        }
+                    }
+                }
             }
         }
-    }
 
-    &.octopus-list-number {
-        counter-reset: number;
+        &.octopus-list-number {
+            counter-reset: number;
 
-        .octopus-list-item {
-            display: flex;
-            align-items: center;
-
-            &::before {
-                content: counter(number) ".";
-                counter-increment: number;
-            }
-        }
-    }
-}
-
-.octopus-nav-list {
-    height: fit-content;
-
-    .octopus-nav-list-wrapper {
-        display: flex;
-        flex-direction: column;
-
-        .octopus-list-headline {
-            box-sizing: border-box;
-            padding: 0.5rem;
-            user-select: none;
-
-            &:nth-child(n) {
-                margin: 0.5rem 0;
-            }
-
-            &:first-child {
-                margin-top: 0;
-            }
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        .octopus-nav-list-item {
-            box-sizing: border-box;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-            text-decoration: none;
-            user-select: none;
-
-            &.free {
-                padding: 1rem 0.5rem;
-            }
-
-            .octopus-list-icon {
-                border-radius: 50%;
-                box-sizing: border-box;
-                margin-left: 0.25rem;
-                padding: 0.25rem;
-            }
-
-            .octopus-list-text {
-                flex: auto;
-                margin-right: 0.25rem;
-            }
-        }
-    }
-}
-
-.octopus-select-list {
-    height: fit-content;
-
-    .octopus-select-list-wrapper {
-        display: flex;
-        flex-direction: column;
-
-        .octopus-select-list-item {
-            cursor: pointer;
-
-            .octopus-select-list-item-wrapper {
-                box-sizing: border-box;
+            .octopus-list-item {
                 display: flex;
                 align-items: center;
-                padding: 1rem 0.5rem;
-                user-select: none;
 
-                .content {
-                    flex: auto;
-                }
-            }
-
-            &.ltr {
-                .octopus-select-list-item-wrapper {
-                    flex-direction: row;
-                }
-            }
-
-            &.rtl {
-                .octopus-select-list-item-wrapper {
-                    flex-direction: row-reverse;
+                &::before {
+                    content: counter(number) ".";
+                    counter-increment: number;
                 }
             }
         }
@@ -142,6 +167,16 @@
         .octopus-list-headline,
         .octopus-list-item {
             color: $foreground;
+
+            .octopus-list-item-meta {
+                .octopus-list-item-duration {
+                    color: rgba($foreground, 0.25);
+                }
+
+                .octopus-list-item-media {
+                    border-color: rgba($foreground, 0.25);
+                }
+            }
         }
     }
 

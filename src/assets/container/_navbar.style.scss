@@ -26,7 +26,7 @@
                 width: $size;
                 height: $size;
 
-                .icon {
+                .octopus-avatar {
                     width: calc(#{$size} - 0.125rem);
                     height: calc(#{$size} - 0.25rem);
                 }
@@ -35,11 +35,45 @@
 
         .octopus-navbar-brand {
             cursor: pointer;
-            display: flex;
             height: $size;
 
             img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .octopus-navbar-search {
+            width: 100%;
+            height: $size;
+
+            .octopus-navbar-search-wrapper {
+                width: inherit;
                 height: inherit;
+                position: relative;
+
+                input[type="search"] {
+                    appearance: none;
+                    border: none;
+                    border-radius: 3px;
+                    outline: none;
+                    padding: 0.25rem;
+                    width: 100%;
+                    height: 100%;
+
+                    &::-webkit-search-cancel-button {
+                        display: none;
+                    }
+                }
+
+                .octopus-icon-button {
+                    position: absolute;
+                    top: calc(50% - 12px);
+                    bottom: calc(50% - 12px);
+                    right: 0.25rem;
+                    width: 16px;
+                    height: 16px;
+                }
             }
         }
     }
@@ -69,9 +103,33 @@
             &.octopus-#{$name}-navbar {
                 .octopus-navbar-wrapper {
                     @if $name == "base" {
-                        background-color: map-get($value, "navbar");
+                        $color: map-get($value, "navbar");
+                        background-color: $color;
+
+                        .octopus-navbar-search {
+                            input[type="search"] {
+                                background-color: lighten($color, 7.5%);
+                            }
+                        }
                     } @else {
-                        background-color: map-get($value, "value");
+                        $color: map-get($value, "value");
+                        background-color: $color;
+
+                        .octopus-navbar-search {
+                            input[type="search"] {
+                                background-color: lighten($color, 7.5%);
+                            }
+                        }
+                    }
+
+                    .octopus-navbar-search {
+                        input[type="search"] {
+                            color: $foreground;
+
+                            &::-webkit-input-placeholder {
+                                color: rgba($foreground, 0.25);
+                            }
+                        }
                     }
                 }
             }

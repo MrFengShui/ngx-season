@@ -2,27 +2,26 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { OctopusButtonModule } from "../button/button.module";
+import { OctopusDividerModule } from "../divider/divider.module";
 import { OctopusIconModule } from "../icon/icon.module";
 import { OctopusRippleModule } from "../ripple/ripple.module";
 
-import { OctopusChip, OctopusChipIcon, OctopusChipStack } from "./chip.component";
+import { OctopusCalendar, ZeroTextPipe } from "./calendar.component";
 
 @NgModule({
     declarations: [
-        OctopusChip,
-        OctopusChipIcon,
-        OctopusChipStack
+        OctopusCalendar,
+        ZeroTextPipe
     ],
     imports: [
         CommonModule,
         OctopusButtonModule,
+        OctopusDividerModule,
         OctopusIconModule,
         OctopusRippleModule
     ],
     exports: [
-        OctopusChip,
-        OctopusChipIcon,
-        OctopusChipStack
+        OctopusCalendar
     ]
 })
-export class OctopusChipModule { }
+export class OctopusCalendarModule { }

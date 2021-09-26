@@ -101,15 +101,28 @@
 
 .octopus-text-carousel {
     .octopus-text-carousel-wrapper {
-        overflow: hidden;
-        padding: 0.5rem 0;
-        position: relative;
+        display: flex;
+        align-items: center;
 
-        .octopus-text-carousel-content {
-            position: absolute;
+        .octopus-carousel-addon {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
 
-            .octopus-text-carousel-content-wrapper {
-                white-space: nowrap;
+        .octopus-carousel-track {
+            flex: auto;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+
+            .octopus-text-carousel-content {
+                position: absolute;
+
+                .octopus-text-carousel-content-wrapper {
+                    padding: 0 0.5rem;
+                    white-space: nowrap;
+                }
             }
         }
     }
@@ -157,13 +170,46 @@
         }
 
         .octopus-image-carousel-wrapper {
-            background-color: map-get($background, "base");
+            background-color: map-get($background, "carousel");
         }
     }
 
     .octopus-text-carousel {
-        .octopus-text-carousel-wrapper {
-            background-color: map-get($background, "base");
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-text-carousel {
+                @if $name == "base" {
+                    $color: map-get($background, "carousel");
+                    .octopus-carousel-addon {
+                        background-color: darken($color, 15%);
+                    }
+
+                    .octopus-carousel-track {
+                        background-color: darken($color, 7.5%);
+
+                        .octopus-text-carousel-content {
+                            .octopus-text-carousel-content-wrapper {
+                                background-color: $color;
+                                border-color: darken($color, 15%);
+                            }
+                        }
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    .octopus-carousel-addon {
+                        background-color: $color;
+                    }
+
+                    .octopus-carousel-track {
+                        background-color: rgba($color, 0.25);
+
+                        .octopus-text-carousel-content {
+                            .octopus-text-carousel-content-wrapper {
+                                background-color: lighten($color, 15%);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

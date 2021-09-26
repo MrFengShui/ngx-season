@@ -1,8 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
-import { OctopusProgressPie } from "./pie.component";
-import { OctopusProgressBar } from "./bar.component";
+import { OctopusProgressBar, OctopusProgressPie } from "./progress.component";
 
 @NgModule({
     declarations: [
