@@ -1,0 +1,109 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Tabbed Pane" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Tabbed Pane Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-tabbed [color]="item" [class.mb-25]="i === 0" [class.mt-25]="isLast"
+                        [class.my-25]="i > 0 && !isLast" *ngFor="let item of list; index as i; last as isLast">
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Tabbed Pane with Alignment" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-tabbed alignment="start" class="mb-25">
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                    <octopus-tabbed alignment="center" class="my-25">
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                    <octopus-tabbed alignment="end" class="mt-25">
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Tabbed Pane with Position" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-tabbed position="top" class="mb-25">
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                    <octopus-tabbed position="bottom" class="mt-25">
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject I">Tabbed Unit Description I
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject II">Tabbed Unit Description II
+                        </octopus-tabbed-unit>
+                        <octopus-tabbed-unit icon="home" text="Tabbed Unit Subject III">Tabbed Unit Description III
+                        </octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

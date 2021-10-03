@@ -1,0 +1,102 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Detail" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-detail>
+                        <octopus-detail-unit label="Product">Cloud Database</octopus-detail-unit>
+                        <octopus-detail-unit label="Billing Mode">Prepaid</octopus-detail-unit>
+                        <octopus-detail-unit label="Automatic Renewal">YES</octopus-detail-unit>
+                        <octopus-detail-unit label="Order Time">2018-04-24 18:00:00</octopus-detail-unit>
+                        <octopus-detail-unit label="Usage Time" span="3">2018-04-24 18:00:00 To 2019-04-24 18:00:00
+                        </octopus-detail-unit>
+                        <octopus-detail-unit label="Status" span="5">* Running</octopus-detail-unit>
+                        <octopus-detail-unit label="Negotiated Amount">$80.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Discount">$20.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Official Receipts">$60.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Config Info" span="5">
+                            * Data disk type: MongoDB <br>
+                            * Database version: 3.4 <br>
+                            * Package: dds.mongo.mid <br>
+                            * Storage space: 10 GB <br>
+                            * Replication_factor:3 <br>
+                            * Region: East China 1 <br>
+                        </octopus-detail-unit>
+                    </octopus-detail>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Basic Detail" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-detail [color]="item" [class.mb-25]="i === 0" [class.mt-25]="isLast"
+                        [class.my-25]="i > 0 && !isLast" *ngFor="let item of list; index as i; last as isLast">
+                        <octopus-detail-unit label="Product">Cloud Database</octopus-detail-unit>
+                        <octopus-detail-unit label="Billing Mode">Prepaid</octopus-detail-unit>
+                        <octopus-detail-unit label="Automatic Renewal">YES</octopus-detail-unit>
+                        <octopus-detail-unit label="Order Time">2018-04-24 18:00:00</octopus-detail-unit>
+                        <octopus-detail-unit label="Usage Time" span="3">2018-04-24 18:00:00 To 2019-04-24 18:00:00
+                        </octopus-detail-unit>
+                        <octopus-detail-unit label="Status" span="5">* Running</octopus-detail-unit>
+                        <octopus-detail-unit label="Negotiated Amount">$80.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Discount">$20.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Official Receipts">$60.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Config Info" span="5">
+                            * Data disk type: MongoDB <br>
+                            * Database version: 3.4 <br>
+                            * Package: dds.mongo.mid <br>
+                            * Storage space: 10 GB <br>
+                            * Replication_factor:3 <br>
+                            * Region: East China 1 <br>
+                        </octopus-detail-unit>
+                    </octopus-detail>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Detail without Border" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-detail bordered="false">
+                        <octopus-detail-unit label="Product">Cloud Database</octopus-detail-unit>
+                        <octopus-detail-unit label="Billing Mode">Prepaid</octopus-detail-unit>
+                        <octopus-detail-unit label="Automatic Renewal">YES</octopus-detail-unit>
+                        <octopus-detail-unit label="Order Time">2018-04-24 18:00:00</octopus-detail-unit>
+                        <octopus-detail-unit label="Usage Time" span="3">2018-04-24 18:00:00 To 2019-04-24 18:00:00
+                        </octopus-detail-unit>
+                        <octopus-detail-unit label="Status" span="5">* Running</octopus-detail-unit>
+                        <octopus-detail-unit label="Negotiated Amount">$80.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Discount">$20.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Official Receipts">$60.00</octopus-detail-unit>
+                        <octopus-detail-unit label="Config Info" span="5">
+                            * Data disk type: MongoDB <br>
+                            * Database version: 3.4 <br>
+                            * Package: dds.mongo.mid <br>
+                            * Storage space: 10 GB <br>
+                            * Replication_factor:3 <br>
+                            * Region: East China 1 <br>
+                        </octopus-detail-unit>
+                    </octopus-detail>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

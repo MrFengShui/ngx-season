@@ -1,5 +1,92 @@
-<octopus-stepper>
-    <octopus-step label="Stepper Item Subject I">Stepper Item Description I</octopus-step>
-    <octopus-step label="Stepper Item Subject II">Stepper Item Description II</octopus-step>
-    <octopus-step label="Stepper Item Subject III">Stepper Item Description III</octopus-step>
-</octopus-stepper>
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Stepper" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-stepper #stepper>
+                        <octopus-step label="Stepper Item Subject I">
+                            Stepper Item Description I
+                            <ng-template octopus-step-action>
+                                <div class="flex-fill"></div>
+                                <button octopus-button octopus-stepper-next>Next Step</button>
+                            </ng-template>
+                        </octopus-step>
+                        <octopus-step label="Stepper Item Subject II">
+                            Stepper Item Description II
+                            <ng-template octopus-step-action>
+                                <button octopus-button (click)="stepper.reset()">Reset</button>
+                                <div class="flex-fill"></div>
+                                <button octopus-button octopus-stepper-previous>Previous Step</button>
+                                <button octopus-button octopus-stepper-next>Next Step</button>
+                            </ng-template>
+                        </octopus-step>
+                        <octopus-step label="Stepper Item Subject III">
+                            Stepper Item Description III
+                            <ng-template octopus-step-action>
+                                <div class="flex-fill"></div>
+                                <button octopus-button (click)="stepper.reset()">Complete</button>
+                            </ng-template>
+                        </octopus-step>
+                    </octopus-stepper>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Stepper Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-stepper [color]="item" [class.mb-25]="i === 0" [class.mt-25]="isLast"
+                        [class.my-25]="i > 0 && !isLast" *ngFor="let item of list; index as i; last as isLast"
+                        #colorStepper>
+                        <octopus-step label="Stepper Item Subject I">
+                            Stepper Item Description I
+                            <ng-template octopus-step-action>
+                                <div class="flex-fill"></div>
+                                <button octopus-button octopus-stepper-next>Next Step</button>
+                            </ng-template>
+                        </octopus-step>
+                        <octopus-step label="Stepper Item Subject II">
+                            Stepper Item Description II
+                            <ng-template octopus-step-action>
+                                <button octopus-button octopus-stepper-previous>Previous Step</button>
+                                <button octopus-button octopus-stepper-next>Next Step</button>
+                            </ng-template>
+                        </octopus-step>
+                        <octopus-step label="Stepper Item Subject III">
+                            Stepper Item Description III
+                            <ng-template octopus-step-action>
+                                <div class="flex-fill"></div>
+                                <button octopus-button (click)="colorStepper.reset()">Complete</button>
+                            </ng-template>
+                        </octopus-step>
+                    </octopus-stepper>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Expansion with Addon" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

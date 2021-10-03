@@ -16,7 +16,6 @@ class DemoBreadcrumbModel {
 export class DemoBreadcrumbView {
 
     list: DemoBreadcrumbModel[] = [
-        { color: 'base', text: ['Base Breadcrumb Anchor I', 'Base Breadcrumb Anchor II', 'Base Breadcrumb Anchor III'] },
         { color: 'primary', text: ['Primary Breadcrumb Anchor I', 'Primary Breadcrumb Anchor II', 'Primary Breadcrumb Anchor III'] },
         { color: 'secondary', text: ['Secondary Breadcrumb Anchor I', 'Secondary Breadcrumb Anchor II', 'Secondary Breadcrumb Anchor III'] },
         { color: 'success', text: ['Success Breadcrumb Anchor I', 'Success Breadcrumb Anchor II', 'Success Breadcrumb Anchor III'] },

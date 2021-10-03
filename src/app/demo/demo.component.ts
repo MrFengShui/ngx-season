@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { Component, HostBinding, Input } from "@angular/core";
+import { Component, ElementRef, HostBinding, Input } from "@angular/core";
 
 @Component({
     selector: '[section-code]',
@@ -8,6 +8,8 @@ import { Component, HostBinding, Input } from "@angular/core";
 export class DemoSectionCodeComponent {
 
     @HostBinding('class') class: string = 'section-code';
+
+    constructor(public _ref: ElementRef<HTMLElement>) { }
 
 }
 
@@ -18,6 +20,8 @@ export class DemoSectionCodeComponent {
 export class DemoSectionFootComponent {
 
     @HostBinding('class') class: string = 'section-foot';
+
+    constructor(public _ref: ElementRef<HTMLElement>) { }
 
 }
 

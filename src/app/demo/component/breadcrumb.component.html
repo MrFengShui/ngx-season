@@ -3,7 +3,23 @@
     <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
     <octopus-tabbed-unit text="Example">
         <div class="d-flex flex-column">
-            <app-demo-section label="Color" class="mb-100">
+            <app-demo-section label="Basic Breadcrumb" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-breadcrumb>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor I"></a>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor II"></a>
+                        <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor III"></a>
+                    </octopus-breadcrumb>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Breadcrumb Color" class="my-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -19,7 +35,7 @@
                     </octopus-breadcrumb>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Label & Anchor" class="my-100">
+            <app-demo-section label="Breadcrumb by Label & Anchor" class="my-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -30,20 +46,20 @@
                 <div section-foot class="d-grid"
                     style="grid-template-columns: auto 1fr;gap: 0.5rem;place-items: center stretch;">
                     <span>Anchor Style:</span>
-                    <octopus-breadcrumb color="base" labeled="true">
+                    <octopus-breadcrumb color="base" labeled="false">
                         <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor I"></a>
                         <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor II"></a>
                         <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor III"></a>
                     </octopus-breadcrumb>
                     <span>Label Style:</span>
-                    <octopus-breadcrumb color="base" labeled="false">
+                    <octopus-breadcrumb color="base" labeled="true">
                         <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor I"></a>
                         <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor II"></a>
                         <a octopus-breadcrumb-anchor icon="home" text="Breadcrumb Anchor III"></a>
                     </octopus-breadcrumb>
                 </div>
             </app-demo-section>
-            <app-demo-section label="With Tooltip" class="mt-100">
+            <app-demo-section label="Breadcrumb with Tooltip" class="mt-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>

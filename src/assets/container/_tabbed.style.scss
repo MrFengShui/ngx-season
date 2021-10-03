@@ -1,16 +1,23 @@
 .octopus-tabbed {
     .octopus-tabbed-wrapper {
         display: flex;
-        flex-direction: column;
+
+        &.top {
+            flex-direction: column;
+        }
+
+        &.bottom {
+            flex-direction: column-reverse;
+        }
 
         .octopus-tabbed-control {
             border-style: solid;
-            border-width: 0 0 1px 0;
             box-sizing: border-box;
             display: flex;
 
             .octopus-tabbed-control-tabs {
                 display: flex;
+                align-items: center;
                 flex: auto;
                 overflow: auto;
 
@@ -19,44 +26,49 @@
                 }
 
                 .octopus-tabbed-control-tab {
-                    appearance: none;
-                    background: none;
-                    border-color: transparent;
                     border-style: solid;
-                    border-width: 0 0 2px 0;
                     box-sizing: border-box;
                     cursor: pointer;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    outline: none;
-                    padding: 0.75rem 1.5rem;
+                    padding: 1rem;
                     min-width: 12rem;
                     max-width: 15rem;
-                    transition: border-color 1000ms linear;
+                    transition: border-color 1000ms ease-in-out;
 
-                    .icon {
-                        border-radius: 50%;
-                        box-sizing: border-box;
-                        margin-right: 0.5rem;
-                        padding: 0.25rem;
+                    > :nth-child(n) {
+                        margin: 0 0.25rem;
+                    }
+
+                    > :first-child {
+                        margin-left: 0;
+                    }
+
+                    > :last-child {
+                        margin-right: 0;
                     }
                 }
             }
 
-            .octopus-tabbed-control-action {
-                appearance: none;
-                background: none;
-                border: none;
-                box-sizing: border-box;
-                cursor: pointer;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                outline: none;
-                padding: 0.75rem;
-                min-width: 3rem;
-                max-width: 3rem;
+            .octopus-button {
+                border-radius: 0;
+            }
+
+            &.top {
+                border-width: 0 0 1px;
+
+                .octopus-tabbed-control-tab {
+                    border-width: 0 0 2px;
+                }
+            }
+
+            &.bottom {
+                border-width: 1px 0 0;
+
+                .octopus-tabbed-control-tab {
+                    border-width: 2px 0 0;
+                }
             }
         }
 
@@ -74,78 +86,47 @@
         warning: $warning,
         failure: $failure,
         info: $info,
-        base: $foreground,
+        base: $background,
     );
     .octopus-tabbed {
         .octopus-tabbed-wrapper {
-            background-color: lighten(map-get($background, "panel"), 5%);
-
-            .octopus-tabbed-control {
-                .octopus-tabbed-control-tabs {
-                    .octopus-tabbed-control-tab {
-                        &.octopus-ripple {
-                            .octopus-ripple-wrapper {
-                                background-color: rgba($foreground, 0.25);
-                            }
-                        }
-
-                        color: $foreground;
-                    }
-                }
-
-                .octopus-tabbed-control-action {
-                    &.left {
-                        box-shadow: 4px 0 2px -2px rgba($foreground, 0.25);
-                    }
-
-                    &.right {
-                        box-shadow: -4px 0 2px -2px rgba($foreground, 0.25);
-                    }
-                }
-            }
-
-            .octopus-tabbed-content {
-                color: $foreground;
-            }
+            background-color: map-get($background, "tabbed");
+            color: $foreground;
         }
 
         @each $name, $value in $color-list {
             &.octopus-#{$name}-tabbed {
-                .octopus-tabbed-control {
-                    @if $name == "base" {
-                        border-color: rgba($value, 0.25);
-                    } @else {
-                        border-color: rgba(map-get($value, "value"), 0.25);
+                @if $name == "base" {
+                    .octopus-tabbed-control {
+                        border-color: rgba($foreground, 0.25);
+
+                        .octopus-tabbed-control-tab {
+                            border-color: rgba($foreground, 0);
+
+                            &.active {
+                                border-color: rgba($foreground, 1);
+                            }
+
+                            .octopus-icon {
+                                background-color: rgba($foreground, 0.25);
+                            }
+                        }
                     }
+                } @else {
+                    $color: map-get($value, "value");
 
-                    .octopus-tabbed-control-tab {
-                        &:hover {
-                            @if $name == "base" {
-                                background-color: rgba($value, 0.05) !important;
-                            } @else {
-                                background-color: rgba(map-get($value, "value"), 0.05) !important;
+                    .octopus-tabbed-control {
+                        border-color: rgba($color, 0.25) !important;
+
+                        .octopus-tabbed-control-tab {
+                            border-color: rgba($color, 0) !important;
+
+                            &.active {
+                                border-color: rgba($color, 1) !important;
                             }
-                        }
 
-                        &.active {
-                            @if $name == "base" {
-                                border-color: $value !important;
-                            } @else {
-                                border-color: map-get($value, "value") !important;
-                            }
-                        }
-
-                        @if $name == "base" {
-                            color: $value;
-
-                            .icon {
-                                background-color: rgba($value, 0.15);
-                            }
-                        } @else {
-                            color: map-get($value, "text");
-
-                            .icon {
-                                background-color: rgba(map-get($value, "value"), 0.15);
+                            .octopus-icon {
+                                background-color: $color !important;
                             }
                         }
                     }

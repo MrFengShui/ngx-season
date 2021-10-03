@@ -8,7 +8,11 @@ export class OctopusRipple implements OnChanges, OnInit {
 
     @Input('rippleCenter') center: boolean | string = false;
     @Input('rippleColor') color: string = '#9e9e9e';
-    @Input('rippleRadius') radius: number | string = 0;
+
+    @Input('rippleRadius')
+    get radius(): any { return this._radius; }
+    set radius(_radius: any) { this._radius = coerceNumberProperty(_radius); }
+    private _radius: any = 0;
 
     @HostBinding('class') class: string = 'octopus-ripple';
 
@@ -28,31 +32,35 @@ export class OctopusRipple implements OnChanges, OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.color !== undefined) {
-            this.renderColor(changes.color.currentValue, coerceNumberProperty(this.radius));
+            this.renderColor(changes.color.currentValue);
         }
 
         if (changes.radius !== undefined) {
-            this.renderColor(this.color, coerceNumberProperty(changes.radius.currentValue));
+            this.renderSize(changes.radius.currentValue);
         }
     }
 
     ngOnInit() {
         setTimeout(() => {
             this._render.appendChild(this._ref.nativeElement, this.element);
-            this.renderColor(this.color, coerceNumberProperty(this.radius));
+            this.renderColor(this.color);
+            this.renderSize(coerceNumberProperty(this.radius));
         });
     }
 
-    private renderColor(color: string, radius: number): void {
-        if (radius === 0) {
-            radius = Math.max(this._ref.nativeElement.clientWidth, this._ref.nativeElement.clientHeight);
-        }
-
+    private renderColor(color: string): void {
         this._render.addClass(this.element, 'octopus-ripple-wrapper');
         this._render.setStyle(this.element, 'background-color', color);
         this._render.setStyle(this.element, 'opacity', 0.25);
-        this._render.setStyle(this.element, 'width', `${radius * 2}px`);
-        this._render.setStyle(this.element, 'height', `${radius * 2}px`);
+    }
+
+    private renderSize(size: number): void {
+        if (size === 0) {
+            size = Math.max(this._ref.nativeElement.clientWidth, this._ref.nativeElement.clientHeight);
+        }
+
+        this._render.setStyle(this.element, 'width', `${size * 2}px`);
+        this._render.setStyle(this.element, 'height', `${size * 2}px`);
     }
 
     private locate(center: boolean, radius: number, event: MouseEvent): void {

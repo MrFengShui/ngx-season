@@ -30,6 +30,7 @@ export const COMPONENT_LIST: DemoRouterLinkModel[] = [
     { icon: 'redeem', description: 'The card\'s description is undefined.', paths: ['/octopus', 'component', 'card'], subject: 'Card', text: 'Card' },
     { icon: 'view_carousel', description: 'The carousel\'s description is undefined.', paths: ['/octopus', 'component', 'carousel'], subject: 'Carousel', text: 'Carousel' },
     { icon: 'memory', description: 'The chip\'s description is undefined.', paths: ['/octopus', 'component', 'chip'], subject: 'Chip', text: 'Chip' },
+    { icon: 'details', description: 'The detail\'s description is undefined.', paths: ['/octopus', 'component', 'detail'], subject: 'Detail', text: 'Detail' },
     { icon: 'safety_divider', description: 'The divider\'s description is undefined.', paths: ['/octopus', 'component', 'divider'], subject: 'Divider', text: 'Divider' },
     { icon: 'face', description: 'The icon\'s description is undefined.', paths: ['/octopus', 'component', 'icon'], subject: 'Icon', text: 'Icon' },
     { icon: 'list', description: 'The list\'s description is undefined.', paths: ['/octopus', 'component', 'list'], subject: 'List', text: 'List' },
@@ -37,6 +38,8 @@ export const COMPONENT_LIST: DemoRouterLinkModel[] = [
     { icon: 'home', description: 'The placeholder\'s description is undefined.', paths: ['/octopus', 'component', 'placeholder'], subject: 'Placeholder', text: 'Placeholder' },
     { icon: 'home', description: 'The progress\'s description is undefined.', paths: ['/octopus', 'component', 'progress'], subject: 'Progress', text: 'Progress' },
     { icon: 'waves', description: 'The ripple\'s description is undefined.', paths: ['/octopus', 'component', 'ripple'], subject: 'Ripple', text: 'Ripple' },
+    { icon: 'camera_roll', description: 'The roll\'s description is undefined.', paths: ['/octopus', 'component', 'roll'], subject: 'Roll', text: 'Roll' },
+    { icon: 'star', description: 'The score\'s description is undefined.', paths: ['/octopus', 'component', 'score'], subject: 'Score', text: 'Score' },
     { icon: 'swipe', description: 'The slider\'s description is undefined.', paths: ['/octopus', 'component', 'slider'], subject: 'Slider', text: 'Slider' },
     { icon: 'table_view', description: 'The table\'s description is undefined.', paths: ['/octopus', 'component', 'table'], subject: 'Table', text: 'Table' },
     { icon: 'toggle_on', description: 'The toggle\'s description is undefined.', paths: ['/octopus', 'component', 'toggle'], subject: 'Toggle', text: 'Toggle' },
@@ -45,7 +48,7 @@ export const COMPONENT_LIST: DemoRouterLinkModel[] = [
 
 export const CONTAINER_LIST: DemoRouterLinkModel[] = [
     { icon: 'expand_circle_down', description: 'The expansion\'s description is undefined.', paths: ['/octopus', 'container', 'expansion'], subject: 'Expansion', text: 'Expansion' },
-    { icon: 'home', description: 'The navbar\'s description is undefined.', paths: ['/octopus', 'container', 'navbar'], subject: 'Navbar', text: 'Navbar' },
+    { icon: 'apps', description: 'The navbar\'s description is undefined.', paths: ['/octopus', 'container', 'navbar'], subject: 'Navbar', text: 'Navbar' },
     { icon: 'home', description: 'The sidenav\'s description is undefined.', paths: ['/octopus', 'container', 'sidenav'], subject: 'Sidenav', text: 'Sidenav' },
     { icon: 'linear_scale', description: 'The stepper\'s description is undefined.', paths: ['/octopus', 'container', 'stepper'], subject: 'Stepper', text: 'Stepper' },
     { icon: 'tab', description: 'The tabbed\'s description is undefined.', paths: ['/octopus', 'container', 'tabbed'], subject: 'Tabbed', text: 'Tabbed' },
@@ -55,8 +58,12 @@ export const CONTAINER_LIST: DemoRouterLinkModel[] = [
 export const FORM_LIST: DemoRouterLinkModel[] = [
     { icon: 'check_box', description: 'The checkbox\'s description is undefined.', paths: ['/octopus', 'form', 'checkbox'], subject: 'Checkbox', text: 'Checkbox' },
     { icon: 'password', description: 'The input\'s description is undefined.', paths: ['/octopus', 'form', 'input'], subject: 'Input', text: 'Input' },
+    { icon: 'pin', description: 'The number\'s description is undefined.', paths: ['/octopus', 'form', 'number'], subject: 'Number', text: 'Number' },
     { icon: 'radio_button_checked', description: 'The radiobutton\'s description is undefined.', paths: ['/octopus', 'form', 'radio'], subject: 'RadioButton', text: 'RadioButton' },
-    { icon: 'home', description: 'The select\'s description is undefined.', paths: ['/octopus', 'form', 'select'], subject: 'Select', text: 'Select' }
+    { icon: 'colorize', description: 'The picker\'s description is undefined.', paths: ['/octopus', 'form', 'picker'], subject: 'Picker', text: 'Picker' },
+    { icon: 'date_range', description: 'The range\'s description is undefined.', paths: ['/octopus', 'form', 'range'], subject: 'Range', text: 'Range' },
+    { icon: 'checklist', description: 'The select\'s description is undefined.', paths: ['/octopus', 'form', 'select'], subject: 'Select', text: 'Select' },
+    { icon: 'toggle_on', description: 'The switch\'s description is undefined.', paths: ['/octopus', 'form', 'switch'], subject: 'Switch', text: 'Switch' }
 ];
 
 export const LAYOUT_LIST: DemoRouterLinkModel[] = [
@@ -71,6 +78,6 @@ export const POPUP_LIST: DemoRouterLinkModel[] = [
     { icon: 'home', description: 'The dialog\'s description is undefined.', paths: ['/octopus', 'popup', 'dialog'], subject: 'Dialog', text: 'Dialog' },
     { icon: 'home', description: 'The sheet\'s description is undefined.', paths: ['/octopus', 'popup', 'drawer'], subject: 'Drawer', text: 'Drawer' },
     { icon: 'menu', description: 'The menu\'s description is undefined.', paths: ['/octopus', 'popup', 'menu'], subject: 'Menu', text: 'Menu' },
-    { icon: 'home', description: 'The toast\'s description is undefined.', paths: ['/octopus', 'popup', 'toast'], subject: 'Toast', text: 'Toast' },
-    { icon: 'home', description: 'The tooltip\'s description is undefined.', paths: ['/octopus', 'popup', 'tooltip'], subject: 'Tooltip', text: 'Tooltip' }
+    { icon: 'shield', description: 'The toast\'s description is undefined.', paths: ['/octopus', 'popup', 'toast'], subject: 'Toast', text: 'Toast' },
+    { icon: 'pin_drop', description: 'The tooltip\'s description is undefined.', paths: ['/octopus', 'popup', 'tooltip'], subject: 'Tooltip', text: 'Tooltip' }
 ];

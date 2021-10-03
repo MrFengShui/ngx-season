@@ -2,7 +2,7 @@
     <div class="section-head">
         <h6 class="flex-fill my-0">{{label}}</h6>
         <a octopus-ripple class="control" (click)="toggled = !toggled">
-            <span class="material-icons">{{toggled ? 'code' : 'code_off'}}</span>
+            <span class="material-icons">{{toggled ? 'code_off' : 'code'}}</span>
         </a>
     </div>
     <div class="section-body" [@CODE_COLLAPSE]="toggled ? 'show' : 'hide'">

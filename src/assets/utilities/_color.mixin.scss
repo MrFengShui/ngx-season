@@ -23,17 +23,20 @@
     @include avatar-mixin($foreground);
     @include badge-mixin($primary, $secondary, $success, $warning, $failure, $info);
     @include breadcrumb-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
-    @include button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include calendar-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include card-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include carousel-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include chip-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include detail-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include divider-mixin($foreground);
     @include icon-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include list-mixin($foreground, $background);
     @include paginator-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include placeholder-mixin($foreground, $background);
     @include progress-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include roll-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include score-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
 
     @include expansion-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include navbar-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);

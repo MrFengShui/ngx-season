@@ -9,9 +9,9 @@
         transform: scale(0);
 
         &.active {
-            opacity: 0;
+            opacity: 0.5;
             transform: scale(1.5);
-            transition: transform 1000ms, opacity 1000ms;
+            transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
         }
     }
 }

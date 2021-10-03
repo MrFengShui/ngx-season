@@ -1,0 +1,70 @@
+.octopus-detail {
+    .octopus-detail-wrapper {
+        table-layout: auto;
+
+        &.no-border {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+        }
+    }
+}
+
+@mixin detail-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+    .octopus-detail {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-detail {
+                .octopus-detail-wrapper {
+                    @if $name == "base" {
+                        $color: map-get($value, "panel");
+                        background-color: lighten($color, 25%);
+                        color: $foreground;
+
+                        th {
+                            background-color: lighten($color, 6.25%);
+                        }
+
+                        td {
+                            background-color: lighten($color, 12.5%);
+                        }
+                    } @else {
+                        $color: map-get($value, "value");
+                        background-color: lighten($color, 50%);
+                        color: $foreground;
+
+                        th {
+                            background-color: $color;
+                        }
+
+                        td {
+                            background-color: lighten($color, 5%);
+                        }
+                    }
+                }
+            }
+        }
+
+        .octopus-detail-wrapper {
+            &.no-border {
+                background-color: lighten(map-get($background, "panel"), 25%) !important;
+
+                th,
+                td {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+}

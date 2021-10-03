@@ -7,6 +7,7 @@ import { DemoModule } from "../demo.module";
 import { OctopusAvatarModule } from "src/app/components/avatar/avatar.module";
 import { OctopusBreadcrumbModule } from "src/app/components/breadcrumb/breadcrumb.module";
 import { OctopusButtonModule } from "src/app/components/button/button.module";
+import { OctopusDividerModule } from "src/app/components/divider/divider.module";
 import { OctopusIconModule } from "src/app/components/icon/icon.module";
 import { OctopusExpansionModule } from "src/app/container/expansion/expansion.module";
 import { OctopusNavbarModule } from "src/app/container/navbar/navbar.module";
@@ -17,12 +18,14 @@ import { DemoContainerOutlet } from "./container.component";
 import { DemoExpansionView } from "./expansion.component";
 import { DemoNavbarView } from "./navbar.component";
 import { DemoStepperView } from "./stepper.component";
+import { DemoTabbedView } from "./tabbed.component";
 
 const DEMO_ROUTERS: Routes = [
     { path: '', redirectTo: 'expansion', pathMatch: 'full' },
     { path: 'expansion', component: DemoExpansionView, data: { breadcrumb: 'Expansion' } },
     { path: 'navbar', component: DemoNavbarView, data: { breadcrumb: 'Navbar' } },
-    { path: 'stepper', component: DemoStepperView, data: { breadcrumb: 'Stepper' } }
+    { path: 'stepper', component: DemoStepperView, data: { breadcrumb: 'Stepper' } },
+    { path: 'tabbed', component: DemoTabbedView, data: { breadcrumb: 'Tabbed Pane' } }
 ];
 
 @NgModule({
@@ -30,7 +33,8 @@ const DEMO_ROUTERS: Routes = [
         DemoContainerOutlet,
         DemoExpansionView,
         DemoNavbarView,
-        DemoStepperView
+        DemoStepperView,
+        DemoTabbedView
     ],
     imports: [
         CommonModule,
@@ -41,6 +45,7 @@ const DEMO_ROUTERS: Routes = [
         OctopusAvatarModule,
         OctopusBreadcrumbModule,
         OctopusButtonModule,
+        OctopusDividerModule,
         OctopusIconModule,
         OctopusExpansionModule,
         OctopusNavbarModule,
@@ -51,7 +56,8 @@ const DEMO_ROUTERS: Routes = [
         DemoContainerOutlet,
         DemoExpansionView,
         DemoNavbarView,
-        DemoStepperView
+        DemoStepperView,
+        DemoTabbedView
     ]
 })
 export class ContainerViewModule { }

@@ -15,7 +15,7 @@
     white-space: nowrap;
 
     &.octopus-outline-button {
-        border-width: 3px;
+        border-width: 2px;
         border-style: solid;
         box-sizing: border-box;
     }
@@ -43,10 +43,6 @@
         width: $size;
         height: $size;
 
-        .icon {
-            font-size: 3rem;
-        }
-
         hr {
             border-style: solid;
             margin: auto 0;
@@ -59,9 +55,174 @@
             width: 100%;
         }
     }
+
+    .octopus-button-ripple {
+        position: absolute;
+        inset: 0;
+    }
 }
 
-@mixin button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+.octopus-scroll-button,
+.octopus-toggle-button {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.octopus-scroll-button {
+    overflow: hidden;
+    position: fixed;
+    padding: 1rem;
+    z-index: 100;
+
+    .octopus-button-ripple {
+        position: absolute;
+        inset: 0;
+    }
+
+    &.octopus-square-scroll-button {
+        border-radius: 3px;
+    }
+
+    &.octopus-circle-scroll-button {
+        border-radius: 50%;
+    }
+}
+
+.octopus-toggle-button {
+    border-radius: 3px;
+    padding: 0.5rem;
+    position: relative;
+
+    .octopus-button-ripple {
+        position: absolute;
+        inset: 0;
+    }
+}
+
+.octopus-button-group {
+    display: flex;
+    width: fit-content;
+
+    &.octopus-horizontal-group {
+        flex-direction: row;
+
+        .octopus-fill-button,
+        .octopus-outline-button {
+            width: 100%;
+
+            &:nth-child(n) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-radius: 3px 0 0 3px;
+            }
+
+            &:last-child {
+                border-radius: 0 3px 3px 0;
+            }
+        }
+
+        .octopus-outline-button {
+            &:nth-child(n) {
+                border-width: 2px 1px;
+            }
+
+            &:first-child {
+                border-width: 2px 1px 2px 2px;
+            }
+
+            &:last-child {
+                border-width: 2px 2px 2px 1px;
+            }
+        }
+    }
+
+    &.octopus-vertical-group {
+        flex-direction: column;
+
+        .octopus-fill-button,
+        .octopus-outline-button {
+            width: 100%;
+
+            &:nth-child(n) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-radius: 3px 3px 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 0 3px 3px;
+            }
+        }
+
+        .octopus-outline-button {
+            &:nth-child(n) {
+                border-width: 1px 2px;
+            }
+
+            &:first-child {
+                border-width: 2px 2px 1px 2px;
+            }
+
+            &:last-child {
+                border-width: 1px 2px 2px 2px;
+            }
+        }
+    }
+}
+
+.octopus-toggle-group {
+    display: flex;
+    width: fit-content;
+
+    &.octopus-horizontal-group {
+        flex-direction: row;
+
+        .octopus-toggle-button {
+            width: 100%;
+
+            &:nth-child(n) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-radius: 3px 0 0 3px;
+            }
+
+            &:last-child {
+                border-radius: 0 3px 3px 0;
+            }
+        }
+    }
+
+    &.octopus-vertical-group {
+        flex-direction: column;
+
+        .octopus-toggle-button {
+            width: 100%;
+
+            &:nth-child(n) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-radius: 3px 3px 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 0 3px 3px;
+            }
+        }
+    }
+}
+
+@mixin button-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
     $color-list: (
         primary: $primary,
         secondary: $secondary,
@@ -69,16 +230,21 @@
         warning: $warning,
         failure: $failure,
         info: $info,
-        base: $foreground,
+        base: $background,
     );
     .octopus-button {
+        &:disabled {
+            opacity: 0.5;
+        }
+
         @each $name, $value in $color-list {
             &.octopus-#{$name}-button {
                 @if $name == "base" {
-                    color: $value;
+                    $color: map-get($value, "button");
+                    color: $foreground;
 
                     &:hover {
-                        background-color: rgba($value, 0.15);
+                        background-color: lighten($color, 2.5%);
                     }
                 } @else {
                     $color: map-get($value, "value");
@@ -91,71 +257,98 @@
             }
 
             &.octopus-#{$name}-fill-button {
-                @if $name != "base" {
-                    $color: map-get($value, "value");
-                    background-color: $color;
-                    color: map-get($value, "text");
+                @if $name == "base" {
+                    $color: map-get($value, "button");
+                    background-color: lighten($color, 15%);
 
                     &:hover {
-                        background-color: lighten($color, 10%);
+                        background-color: lighten($color, 7.5%);
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    background-color: $color;
+
+                    &:hover {
+                        background-color: rgba($color, 0.85);
                     }
                 }
             }
 
             &.octopus-#{$name}-outline-button {
-                @if $name != "base" {
+                @if $name == "base" {
+                    $color: map-get($value, "button");
+                    border-color: lighten($color, 15%);
+                    color: lighten($color, 15%);
+
+                    &:hover {
+                        background-color: lighten($color, 7.5%);
+                        color: $foreground;
+                    }
+                } @else {
                     $color: map-get($value, "value");
                     border-color: $color;
                     color: $color;
 
                     &:hover {
                         background-color: lighten($color, 10%);
-                        color: map-get($value, "text");
+                        color: lighten($color, 50%);
                     }
                 }
             }
 
             &.octopus-#{$name}-icon-button {
                 @if $name == "base" {
-                    background-color: rgba($value, 0.025);
-                    color: $value;
+                    $color: map-get($value, "button");
+                    background-color: rgba($color, 0.025);
+                    color: $foreground;
 
                     &:hover {
-                        background-color: rgba($value, 0.1);
-                        color: $value;
+                        background-color: lighten($color, 10%);
                     }
                 } @else {
                     $color: map-get($value, "value");
                     background-color: rgba($color, 0.025);
                     color: $color;
 
+                    .octopus-icon {
+                        color: $color;
+                    }
+
                     &:hover {
                         background-color: lighten($color, 10%);
-                        color: map-get($value, "text");
+
+                        .octopus-icon {
+                            color: $foreground;
+                        }
                     }
                 }
             }
 
             &.octopus-#{$name}-mix-button {
                 @if $name == "base" {
-                    background-color: rgba($value, 0.025);
-                    color: $value;
+                    $color: map-get($value, "button");
+                    background-color: rgba($color, 0.025);
+                    color: $foreground;
 
                     hr {
-                        border-color: $value;
+                        border-color: $foreground;
                     }
 
                     &:hover {
-                        background-color: rgba($value, 0.1);
+                        background-color: lighten($color, 10%);
 
                         hr {
-                            border-color: $value;
+                            border-color: lighten($foreground, 10%);
                         }
                     }
                 } @else {
                     $color: map-get($value, "value");
                     background-color: rgba($color, 0.025);
                     color: $color;
+
+                    .octopus-icon {
+                        color: $color;
+                    }
 
                     hr {
                         border-color: $color;
@@ -163,14 +356,77 @@
 
                     &:hover {
                         background-color: lighten($color, 10%);
-                        color: map-get($value, "text");
+                        color: $foreground;
+
+                        .octopus-icon {
+                            color: $foreground;
+                        }
 
                         hr {
-                            border-color: map-get($value, "text");
+                            border-color: $foreground;
                         }
                     }
                 }
             }
         }
+
+        color: $foreground;
+    }
+
+    .octopus-scroll-button {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-scroll-button {
+                @if $name == "base" {
+                    $color: map-get($value, "button");
+                    background-color: lighten($color, 15%);
+
+                    &:hover {
+                        background-color: lighten($color, 7.5%);
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    background-color: $color;
+
+                    &:hover {
+                        background-color: rgba($color, 0.75);
+                    }
+                }
+            }
+        }
+
+        color: $foreground;
+    }
+
+    .octopus-toggle-button {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-toggle-button {
+                @if $name == "base" {
+                    $color: map-get($value, "button");
+                    background-color: lighten($color, 15%);
+
+                    &:hover {
+                        background-color: lighten($color, 7.5%);
+                    }
+
+                    &.toggled {
+                        box-shadow: inset 0 0 8px 2px rgba($color, 0.85);
+                    }
+                } @else {
+                    $color: map-get($value, "value");
+                    background-color: $color;
+
+                    &:hover {
+                        background-color: rgba($color, 0.75);
+                    }
+
+                    &.toggled {
+                        background-color: lighten($color, 15%);
+                        box-shadow: inset 0 0 8px 2px rgba($color, 0.85);
+                    }
+                }
+            }
+        }
+
+        color: $foreground;
     }
 }

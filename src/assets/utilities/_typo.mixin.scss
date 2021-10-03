@@ -38,12 +38,12 @@
     }
 
     $component-list: "badge", "breadcrumb", "button", "calendar", "card", "card-title", "card-subtitle", "carousel",
-        "carousel-addon", "carousel-content", "carousel-subject", "carousel-description", "checkbox", "chip", "dialog",
-        "divider", "expansion-subject", "expansion-description", "expansion-panel-content", "form-input", "form-label",
-        "form-valid", "select-list-item", "list-item", "list-item-title", "list-item-subtitle", "list-item-duration",
-        "list-item-content", "nav-list-item", "list-headline", "paginator", "progress", "select", "select-option",
-        "stepper", "tabbed-control-tab", "tabbed-content", "toast", "toast-subject", "toast-description",
-        "tooltip-container";
+        "carousel-addon", "carousel-content", "carousel-subject", "carousel-description", "checkbox", "chip", "detail",
+        "dialog", "divider", "expansion-subject", "expansion-description", "expansion-panel-content", "form-input",
+        "form-label", "form-valid", "select-list-item", "list-item", "list-item-title", "list-item-subtitle",
+        "list-item-duration", "list-item-content", "nav-list-item", "list-headline", "paginator", "progress", "select",
+        "select-option", "stepper", "tabbed-control-tab", "tabbed-content", "toast", "toast-subject",
+        "toast-description", "tooltip-container";
 
     @each $item in $component-list {
         .octopus-#{$item} {

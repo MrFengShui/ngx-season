@@ -1,0 +1,76 @@
+.octopus-roll {
+    .octopus-roll-wrapper {
+        position: relative;
+        height: fit-content;
+
+        .octopus-icon-button {
+            position: absolute;
+
+            $size: 2rem;
+
+            &.head {
+                top: calc(50% - #{$size});
+                bottom: calc(50% - #{$size});
+                left: 0.5rem;
+            }
+
+            &.tail {
+                top: calc(50% - #{$size});
+                bottom: calc(50% - #{$size});
+                right: 0.5rem;
+            }
+        }
+
+        .octopus-roll-stack {
+            display: flex;
+            flex-direction: row;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .octopus-roll-unit {
+                border-radius: 3px;
+                padding: 0.5rem;
+
+                &:nth-child(n) {
+                    margin: 0 0.25rem;
+                }
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+@mixin roll-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $background,
+    );
+    .octopus-roll {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-roll {
+                .octopus-roll-unit {
+                    @if $name == "base" {
+                        background-color: lighten(map-get($value, "card"), 7.5%);
+                    } @else {
+                        background-color: lighten(map-get($value, "value"), 7.5%);
+                    }
+                }
+            }
+        }
+    }
+}

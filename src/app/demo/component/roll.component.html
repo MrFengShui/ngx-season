@@ -1,0 +1,71 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Roll" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-roll>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/planet_galaxy_universe_121293_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/space_planets_takeoff_explosion_96455_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/stars_space_glow_planet_99744_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/star_galaxy_glow_light_95414_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/milky_way_starry_sky_stars_128523_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/galaxy_glow_spiral_142698_1280x720.jpg">
+                        </octopus-roll-unit>
+                    </octopus-roll>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Roll Color" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-roll [color]="item" [class.mb-25]="i === 0" [class.mt-25]="isLast"
+                        [class.my-25]="i > 0 && !isLast" *ngFor="let item of list; index as i; last as isLast">
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/planet_galaxy_universe_121293_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/space_planets_takeoff_explosion_96455_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/stars_space_glow_planet_99744_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/star_galaxy_glow_light_95414_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/milky_way_starry_sky_stars_128523_1280x720.jpg">
+                        </octopus-roll-unit>
+                        <octopus-roll-unit
+                            source="https://images.wallpaperscraft.com/image/single/galaxy_glow_spiral_142698_1280x720.jpg">
+                        </octopus-roll-unit>
+                    </octopus-roll>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

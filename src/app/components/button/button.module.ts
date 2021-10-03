@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
+import { OctopusIconModule } from "../icon/icon.module";
 import { OctopusRippleModule } from "../ripple/ripple.module";
 
-import { OctopusButton, OctopusFillButton, OctopusIconButton, OctopusMixButton, OctopusOutlineButton } from "./button.component";
+import { OctopusButton, OctopusButtonGroup, OctopusFillButton, OctopusIconButton, OctopusMixButton, OctopusOutlineButton, OctopusScrollButton, OctopusToggleButton, OctopusToggleGroup } from "./button.component";
 
 @NgModule({
     declarations: [
@@ -11,10 +12,15 @@ import { OctopusButton, OctopusFillButton, OctopusIconButton, OctopusMixButton, 
         OctopusFillButton,
         OctopusIconButton,
         OctopusMixButton,
-        OctopusOutlineButton
+        OctopusOutlineButton,
+        OctopusScrollButton,
+        OctopusToggleButton,
+        OctopusButtonGroup,
+        OctopusToggleGroup
     ],
     imports: [
         CommonModule,
+        OctopusIconModule,
         OctopusRippleModule
     ],
     exports: [
@@ -22,7 +28,11 @@ import { OctopusButton, OctopusFillButton, OctopusIconButton, OctopusMixButton, 
         OctopusFillButton,
         OctopusIconButton,
         OctopusMixButton,
-        OctopusOutlineButton
+        OctopusOutlineButton,
+        OctopusScrollButton,
+        OctopusToggleButton,
+        OctopusButtonGroup,
+        OctopusToggleGroup
     ]
 })
 export class OctopusButtonModule { }

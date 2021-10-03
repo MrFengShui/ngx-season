@@ -11,18 +11,10 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-                    <div class="d-flex halign mb-50">
-                        <button octopus-button color="base">Base Button</button>
-                        <button octopus-button color="primary">Primary Button</button>
-                        <button octopus-button color="secondary">Secondary Button</button>
-                    </div>
-                    <div class="d-flex halign mt-50">
-                        <button octopus-button color="success">Success Button</button>
-                        <button octopus-button color="warning">Warning Button</button>
-                        <button octopus-button color="failure">Failure Button</button>
-                        <button octopus-button color="info">Info Button</button>
-                    </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <button octopus-button color="base" style="grid-column: 1 / 3;">Base Button</button>
+                    <button octopus-button [color]="item" *ngFor="let item of list">{{format(item)}} Button</button>
                 </div>
             </app-demo-section>
             <app-demo-section label="Filled Button" class="my-100">
@@ -33,17 +25,11 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-                    <div class="d-flex halign mb-50">
-                        <button octopus-fill-button color="primary">Primary Filled Button</button>
-                        <button octopus-fill-button color="secondary">Secondary Filled Button</button>
-                    </div>
-                    <div class="d-flex halign mt-50">
-                        <button octopus-fill-button color="success">Success Filled Button</button>
-                        <button octopus-fill-button color="warning">Warning Filled Button</button>
-                        <button octopus-fill-button color="failure">Failure Filled Button</button>
-                        <button octopus-fill-button color="info">Info Filled Button</button>
-                    </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <button octopus-fill-button color="base" style="grid-column: 1 / 3;">Base Filled Button</button>
+                    <button octopus-fill-button [color]="item" *ngFor="let item of list">{{format(item)}} Filled
+                        Button</button>
                 </div>
             </app-demo-section>
             <app-demo-section label="Outlined Button" class="my-100">
@@ -54,17 +40,12 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-                    <div class="d-flex halign mb-50">
-                        <button octopus-outline-button color="primary">Primary Outlined Button</button>
-                        <button octopus-outline-button color="secondary">Secondary Outlined Button</button>
-                    </div>
-                    <div class="d-flex halign mt-50">
-                        <button octopus-outline-button color="success">Success Outlined Button</button>
-                        <button octopus-outline-button color="warning">Warning Outlined Button</button>
-                        <button octopus-outline-button color="failure">Failure Outlined Button</button>
-                        <button octopus-outline-button color="info">Info Outlined Button</button>
-                    </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <button octopus-outline-button color="base" style="grid-column: 1 / 3;">Base Outlined
+                        Button</button>
+                    <button octopus-outline-button [color]="item" *ngFor="let item of list">{{format(item)}} Outlined
+                        Button</button>
                 </div>
             </app-demo-section>
             <app-demo-section label="Icon Button" class="my-100">
@@ -75,33 +56,17 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-                    <div class="d-flex halign">
-                        <button octopus-icon-button color="base">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                        <button octopus-icon-button color="primary">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                        <button octopus-icon-button color="secondary">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                        <button octopus-icon-button color="success">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                        <button octopus-icon-button color="warning">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                        <button octopus-icon-button color="failure">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                        <button octopus-icon-button color="info">
-                            <octopus-icon>home</octopus-icon>
-                        </button>
-                    </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(7, 1fr);gap: 0.5rem;place-items: center;">
+                    <button octopus-icon-button color="base">
+                        <octopus-icon size="36">home</octopus-icon>
+                    </button>
+                    <button octopus-icon-button [color]="item" *ngFor="let item of list">
+                        <octopus-icon size="36">home</octopus-icon>
+                    </button>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Mixed Button" class="mt-100">
+            <app-demo-section label="Mixed Button" class="my-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -112,13 +77,362 @@
                 <div section-foot>
                     <div class="d-flex halign">
                         <button octopus-mix-button color="base" icon="home" text="Base Mixed Button"></button>
-                        <button octopus-mix-button color="primary" icon="home" text="Primary Mixed Button"></button>
-                        <button octopus-mix-button color="secondary" icon="home" text="Secondary Mixed Button"></button>
-                        <button octopus-mix-button color="success" icon="home" text="Success Mixed Button"></button>
-                        <button octopus-mix-button color="warning" icon="home" text="Warning Mixed Button"></button>
-                        <button octopus-mix-button color="failure" icon="home" text="Failure Mixed Button"></button>
-                        <button octopus-mix-button color="info" icon="home" text="Info Mixed Button"></button>
+                        <button octopus-mix-button [color]="item" icon="home" text="{{format(item)}} Mixed Button"
+                            *ngFor="let item of list"></button>
                     </div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Basic Scroll Button" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex" style="height: 480px;">
+                    <div class="flex-fill overflow-auto overflow h-100" #target>
+                        <article>
+                            <p class="octopus-paragraph text-justify">The ASF provides an established framework for
+                                intellectual property
+                                and financial contributions that limits potential legal exposure for our project
+                                committers.
+                                Through the ASF's meritocratic process known as "The Apache Way," more than 850
+                                individual
+                                Members and 8,200 Committers successfully collaborate to develop freely available
+                                enterprise-grade software that benefits millions of users worldwide: projects distribute
+                                thousands of software solutions under the Apache License; and the community actively
+                                participates in ASF mailing lists, mentoring initiatives, and ApacheCon (the
+                                Foundation's
+                                official user conference), trainings, and other events.</p>
+                            <p class="octopus-paragraph text-justify">Formerly known as the Apache Group, the ASF was
+                                incorporated in
+                                1999 as a membership-based, not-for-profit corporation to ensure that the Apache
+                                projects
+                                continue to exist beyond the participation of individual volunteers. Individuals who
+                                have
+                                demonstrated a commitment to collaborative open-source software development, through
+                                sustained participation and contributions within the Foundation's projects, are eligible
+                                for
+                                membership in the ASF. An individual receives membership after nomination and approval
+                                by a
+                                majority of the existing ASF members. Thus, the ASF is governed by the community it most
+                                directly serves: the people collaborating within its projects.</p>
+                            <p class="octopus-paragraph text-justify">The ASF members periodically elect a Board of
+                                Directors to manage
+                                the organizational affairs of the Foundation, following the ASF Bylaws. The Board, in
+                                turn,
+                                appoints a number of officers to oversee the day-to-day operations of the Foundation.
+                                Public
+                                records of our operations are available to the community. A more detailed explanation of
+                                How
+                                the ASF works in terms of day to day operations is available, and the Apache Community
+                                Development project's goal is to help newcomers learn more about the Apache Software
+                                Foundation.</p>
+                            <p class="octopus-paragraph text-justify">The ASF provides an established framework for
+                                intellectual property
+                                and financial contributions that limits potential legal exposure for our project
+                                committers.
+                                Through the ASF's meritocratic process known as "The Apache Way," more than 850
+                                individual
+                                Members and 8,200 Committers successfully collaborate to develop freely available
+                                enterprise-grade software that benefits millions of users worldwide: projects distribute
+                                thousands of software solutions under the Apache License; and the community actively
+                                participates in ASF mailing lists, mentoring initiatives, and ApacheCon (the
+                                Foundation's
+                                official user conference), trainings, and other events.</p>
+                            <p class="octopus-paragraph text-justify">Formerly known as the Apache Group, the ASF was
+                                incorporated in
+                                1999 as a membership-based, not-for-profit corporation to ensure that the Apache
+                                projects
+                                continue to exist beyond the participation of individual volunteers. Individuals who
+                                have
+                                demonstrated a commitment to collaborative open-source software development, through
+                                sustained participation and contributions within the Foundation's projects, are eligible
+                                for
+                                membership in the ASF. An individual receives membership after nomination and approval
+                                by a
+                                majority of the existing ASF members. Thus, the ASF is governed by the community it most
+                                directly serves: the people collaborating within its projects.</p>
+                            <p class="octopus-paragraph text-justify">The ASF members periodically elect a Board of
+                                Directors to manage
+                                the organizational affairs of the Foundation, following the ASF Bylaws. The Board, in
+                                turn,
+                                appoints a number of officers to oversee the day-to-day operations of the Foundation.
+                                Public
+                                records of our operations are available to the community. A more detailed explanation of
+                                How
+                                the ASF works in terms of day to day operations is available, and the Apache Community
+                                Development project's goal is to help newcomers learn more about the Apache Software
+                                Foundation.</p>
+                            <p class="octopus-paragraph text-justify">The ASF provides an established framework for
+                                intellectual property
+                                and financial contributions that limits potential legal exposure for our project
+                                committers.
+                                Through the ASF's meritocratic process known as "The Apache Way," more than 850
+                                individual
+                                Members and 8,200 Committers successfully collaborate to develop freely available
+                                enterprise-grade software that benefits millions of users worldwide: projects distribute
+                                thousands of software solutions under the Apache License; and the community actively
+                                participates in ASF mailing lists, mentoring initiatives, and ApacheCon (the
+                                Foundation's
+                                official user conference), trainings, and other events.</p>
+                            <p class="octopus-paragraph text-justify">Formerly known as the Apache Group, the ASF was
+                                incorporated in
+                                1999 as a membership-based, not-for-profit corporation to ensure that the Apache
+                                projects
+                                continue to exist beyond the participation of individual volunteers. Individuals who
+                                have
+                                demonstrated a commitment to collaborative open-source software development, through
+                                sustained participation and contributions within the Foundation's projects, are eligible
+                                for
+                                membership in the ASF. An individual receives membership after nomination and approval
+                                by a
+                                majority of the existing ASF members. Thus, the ASF is governed by the community it most
+                                directly serves: the people collaborating within its projects.</p>
+                            <p class="octopus-paragraph text-justify">The ASF members periodically elect a Board of
+                                Directors to manage
+                                the organizational affairs of the Foundation, following the ASF Bylaws. The Board, in
+                                turn,
+                                appoints a number of officers to oversee the day-to-day operations of the Foundation.
+                                Public
+                                records of our operations are available to the community. A more detailed explanation of
+                                How
+                                the ASF works in terms of day to day operations is available, and the Apache Community
+                                Development project's goal is to help newcomers learn more about the Apache Software
+                                Foundation.</p>
+                            <p class="octopus-paragraph text-justify">The ASF provides an established framework for
+                                intellectual property
+                                and financial contributions that limits potential legal exposure for our project
+                                committers.
+                                Through the ASF's meritocratic process known as "The Apache Way," more than 850
+                                individual
+                                Members and 8,200 Committers successfully collaborate to develop freely available
+                                enterprise-grade software that benefits millions of users worldwide: projects distribute
+                                thousands of software solutions under the Apache License; and the community actively
+                                participates in ASF mailing lists, mentoring initiatives, and ApacheCon (the
+                                Foundation's
+                                official user conference), trainings, and other events.</p>
+                            <p class="octopus-paragraph text-justify">Formerly known as the Apache Group, the ASF was
+                                incorporated in
+                                1999 as a membership-based, not-for-profit corporation to ensure that the Apache
+                                projects
+                                continue to exist beyond the participation of individual volunteers. Individuals who
+                                have
+                                demonstrated a commitment to collaborative open-source software development, through
+                                sustained participation and contributions within the Foundation's projects, are eligible
+                                for
+                                membership in the ASF. An individual receives membership after nomination and approval
+                                by a
+                                majority of the existing ASF members. Thus, the ASF is governed by the community it most
+                                directly serves: the people collaborating within its projects.</p>
+                            <p class="octopus-paragraph text-justify">The ASF members periodically elect a Board of
+                                Directors to manage
+                                the organizational affairs of the Foundation, following the ASF Bylaws. The Board, in
+                                turn,
+                                appoints a number of officers to oversee the day-to-day operations of the Foundation.
+                                Public
+                                records of our operations are available to the community. A more detailed explanation of
+                                How
+                                the ASF works in terms of day to day operations is available, and the Apache Community
+                                Development project's goal is to help newcomers learn more about the Apache Software
+                                Foundation.</p>
+                            <p class="octopus-paragraph text-justify">The ASF provides an established framework for
+                                intellectual property
+                                and financial contributions that limits potential legal exposure for our project
+                                committers.
+                                Through the ASF's meritocratic process known as "The Apache Way," more than 850
+                                individual
+                                Members and 8,200 Committers successfully collaborate to develop freely available
+                                enterprise-grade software that benefits millions of users worldwide: projects distribute
+                                thousands of software solutions under the Apache License; and the community actively
+                                participates in ASF mailing lists, mentoring initiatives, and ApacheCon (the
+                                Foundation's
+                                official user conference), trainings, and other events.</p>
+                            <p class="octopus-paragraph text-justify">Formerly known as the Apache Group, the ASF was
+                                incorporated in
+                                1999 as a membership-based, not-for-profit corporation to ensure that the Apache
+                                projects
+                                continue to exist beyond the participation of individual volunteers. Individuals who
+                                have
+                                demonstrated a commitment to collaborative open-source software development, through
+                                sustained participation and contributions within the Foundation's projects, are eligible
+                                for
+                                membership in the ASF. An individual receives membership after nomination and approval
+                                by a
+                                majority of the existing ASF members. Thus, the ASF is governed by the community it most
+                                directly serves: the people collaborating within its projects.</p>
+                            <p class="octopus-paragraph text-justify">The ASF members periodically elect a Board of
+                                Directors to manage
+                                the organizational affairs of the Foundation, following the ASF Bylaws. The Board, in
+                                turn,
+                                appoints a number of officers to oversee the day-to-day operations of the Foundation.
+                                Public
+                                records of our operations are available to the community. A more detailed explanation of
+                                How
+                                the ASF works in terms of day to day operations is available, and the Apache Community
+                                Development project's goal is to help newcomers learn more about the Apache Software
+                                Foundation.</p>
+                        </article>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <button octopus-scroll-button buttonUsage="north" [buttonTarget]="target" class="mb-25"
+                            style="position: relative;inset: 0;"></button>
+                        <button octopus-scroll-button buttonUsage="south" [buttonTarget]="target" class="mt-25"
+                            style="position: relative;inset: 0;"></button>
+                    </div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Scroll Button with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(6, 1fr);gap: 0.5rem;place-items: center;">
+                    <button octopus-scroll-button [color]="item" style="position: relative;inset: 0;"
+                        *ngFor="let item of list"></button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Scroll Button with Shape" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));gap: 0.5rem;place-items: center;">
+                    <button octopus-scroll-button buttonShape="square" style="position: relative;inset: 0;"></button>
+                    <button octopus-scroll-button buttonShape="circle" style="position: relative;inset: 0;"></button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Scroll Button with Usage" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));gap: 0.5rem;place-items: center;">
+                    <button octopus-scroll-button buttonUsage="north" style="position: relative;inset: 0;"></button>
+                    <button octopus-scroll-button buttonUsage="south" style="position: relative;inset: 0;"></button>
+                    <button octopus-scroll-button buttonUsage="east" style="position: relative;inset: 0;"></button>
+                    <button octopus-scroll-button buttonUsage="west" style="position: relative;inset: 0;"></button>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Button Group" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-button-group color="base" class="w-100" style="grid-column: 1 / 4;">
+                        <button octopus-fill-button>Button I</button>
+                        <button octopus-fill-button>Button II</button>
+                        <button octopus-fill-button>Button III</button>
+                    </octopus-button-group>
+                    <octopus-button-group [color]="item" class="w-100" *ngFor="let item of list">
+                        <button octopus-fill-button>Button I</button>
+                        <button octopus-fill-button>Button II</button>
+                        <button octopus-fill-button>Button III</button>
+                    </octopus-button-group>
+                    <octopus-button-group color="base" class="w-100" style="grid-column: 1 / 4;">
+                        <button octopus-outline-button>Button I</button>
+                        <button octopus-outline-button>Button II</button>
+                        <button octopus-outline-button>Button III</button>
+                    </octopus-button-group>
+                    <octopus-button-group [color]="item" class="w-100" *ngFor="let item of list">
+                        <button octopus-outline-button>Button I</button>
+                        <button octopus-outline-button>Button II</button>
+                        <button octopus-outline-button>Button III</button>
+                    </octopus-button-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Button Group with Vertical Alignment" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(7, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-button-group alignment="vertical" color="base" class="w-100">
+                        <button octopus-fill-button>Button I</button>
+                        <button octopus-fill-button>Button II</button>
+                        <button octopus-fill-button>Button III</button>
+                    </octopus-button-group>
+                    <octopus-button-group alignment="vertical" [color]="item" class="w-100" *ngFor="let item of list">
+                        <button octopus-fill-button>Button I</button>
+                        <button octopus-fill-button>Button II</button>
+                        <button octopus-fill-button>Button III</button>
+                    </octopus-button-group>
+                    <octopus-button-group alignment="vertical" color="base" class="w-100">
+                        <button octopus-outline-button>Button I</button>
+                        <button octopus-outline-button>Button II</button>
+                        <button octopus-outline-button>Button III</button>
+                    </octopus-button-group>
+                    <octopus-button-group alignment="vertical" [color]="item" class="w-100" *ngFor="let item of list">
+                        <button octopus-outline-button>Button I</button>
+                        <button octopus-outline-button>Button II</button>
+                        <button octopus-outline-button>Button III</button>
+                    </octopus-button-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Toggle Group" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-group color="base" class="w-100" style="grid-column: 1 / 4;">
+                        <button octopus-toggle-button>Button I</button>
+                        <button octopus-toggle-button>Button II</button>
+                        <button octopus-toggle-button>Button III</button>
+                    </octopus-toggle-group>
+                    <octopus-toggle-group [color]="item" class="w-100" *ngFor="let item of list">
+                        <button octopus-toggle-button>Button I</button>
+                        <button octopus-toggle-button>Button II</button>
+                        <button octopus-toggle-button>Button III</button>
+                    </octopus-toggle-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Toggle Group" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(7, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-group alignment="vertical" color="base" class="w-100">
+                        <button octopus-toggle-button>Button I</button>
+                        <button octopus-toggle-button>Button II</button>
+                        <button octopus-toggle-button>Button III</button>
+                    </octopus-toggle-group>
+                    <octopus-toggle-group alignment="vertical" [color]="item" class="w-100" *ngFor="let item of list">
+                        <button octopus-toggle-button>Button I</button>
+                        <button octopus-toggle-button>Button II</button>
+                        <button octopus-toggle-button>Button III</button>
+                    </octopus-toggle-group>
                 </div>
             </app-demo-section>
         </div>

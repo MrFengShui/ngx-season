@@ -1,0 +1,51 @@
+.octopus-score {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+
+    .material-icons {
+        cursor: pointer;
+        transition: transform 250ms ease-in-out;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+
+        &:nth-child(n) {
+            margin: 0 0.125rem;
+        }
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+@mixin score-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+        base: $foreground,
+    );
+    .octopus-score {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-score {
+                .material-icons {
+                    @if $name == "base" {
+                        color: $value;
+                    } @else {
+                        color: map-get($value, "value");
+                    }
+                }
+            }
+        }
+    }
+}

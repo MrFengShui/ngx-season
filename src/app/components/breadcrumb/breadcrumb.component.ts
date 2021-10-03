@@ -6,7 +6,7 @@ import { ColorPalette } from "src/app/global/enum.utils";
 @Component({
     selector: 'a[octopus-breadcrumb-anchor]',
     template: `
-        <octopus-icon [color]="color" size="18" rounded="true">{{icon}}</octopus-icon>
+        <octopus-icon [color]="color" margin="4" size="18" rounded="true">{{icon}}</octopus-icon>
         <span class="text-truncate" octopus-tooltip [tooltipColor]="color" [tooltipText]="text" *ngIf="matchBoolean(tip)">{{text}}</span>
         <span class="text-truncate" *ngIf="!matchBoolean(tip)">{{text}}</span>
     `
@@ -54,9 +54,9 @@ export class OctopusBreadcrumbAnchor implements OnChanges, OnInit {
 
     private renderLabeled(labeled: boolean): void {
         if (labeled) {
-            this._render.addClass(this._ref.nativeElement, 'labeled');
-        } else {
             this._render.removeClass(this._ref.nativeElement, 'labeled');
+        } else {
+            this._render.addClass(this._ref.nativeElement, 'labeled');
         }
     }
 
@@ -66,9 +66,9 @@ export class OctopusBreadcrumbAnchor implements OnChanges, OnInit {
     selector: 'octopus-breadcrumb',
     template: `
         <div class="octopus-breadcrumb-wrapper" #wrapper>
-            <ng-container *ngFor="let anchor of anchors; index as i">
+            <ng-container *ngFor="let anchor of anchors; index as i; last as isLast">
                 <a octopus-breadcrumb-anchor [color]="color" [labeled]="labeled" [icon]="anchor.icon" [text]="anchor.text" [tip]="tip"></a>
-                <octopus-icon [color]="color" *ngIf="i !== anchors.length - 1">{{delimiter}}</octopus-icon>
+                <octopus-icon [color]="color" *ngIf="!isLast">{{delimiter}}</octopus-icon>
             </ng-container>
         </div>
         <ng-template><ng-content select="a[octopus-breadcrumb-anchor]"></ng-content></ng-template>

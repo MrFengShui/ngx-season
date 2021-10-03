@@ -10,6 +10,7 @@
 @import "./assets/components/card.style";
 @import "./assets/components/carousel.style";
 @import "./assets/components/chip.style";
+@import "./assets/components/detail.style";
 @import "./assets/components/divider.style";
 @import "./assets/components/icon.style";
 @import "./assets/components/list.style";
@@ -17,6 +18,8 @@
 @import "./assets/components/placeholder.style";
 @import "./assets/components/progress.style";
 @import "./assets/components/ripple.style";
+@import "./assets/components/roll.style";
+@import "./assets/components/score.style";
 
 @import "./assets/container/expansion.style";
 @import "./assets/container/navbar.style";
@@ -94,6 +97,7 @@ html {
         "carousel-description": octopus-typography-level(0.5rem, normal, normal),
         "checkbox": octopus-typography-level(0.75rem, normal, normal),
         "chip": octopus-typography-level(0.75rem, normal, normal),
+        "detail": octopus-typography-level(0.75rem, normal, normal),
         "dialog": octopus-typography-level(0.75rem, normal, normal),
         "divider": octopus-typography-level(0.75rem, normal, normal),
         "expansion-subject": octopus-typography-level(0.75rem, bold, normal),
