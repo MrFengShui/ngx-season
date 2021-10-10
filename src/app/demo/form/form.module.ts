@@ -4,24 +4,39 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 
 import { DemoModule } from "../demo.module";
-import { OctopusFormModule } from "src/app/form/form.module";
+import { OctopusButtonModule } from "src/app/components/button/button.module";
+import { OctopusCheckboxModule } from "src/app/form/check/check.module";
+import { OctopusIconModule } from "src/app/components/icon/icon.module";
+import { OctopusInputModule } from "src/app/form/input/input.module";
+import { OctopusRangeModule } from "src/app/form/range/range.module";
 import { OctopusTabbedModule } from "src/app/container/tabbed/tabbed.module";
+import { OctopusToggleModule } from "src/app/form/toggle/toggle.module";
 
 import { DemoFormOutlet } from "./form.component";
+import { DemoCheckboxView } from "./check.component";
 import { DemoInputView } from "./input.component";
+import { DemoRangeView } from "./range.component";
 import { DemoSelectView } from "./select.component";
+import { DemoToggleView } from "./toggle.component";
+
 
 const DEMO_ROUTERS: Routes = [
     { path: '', redirectTo: 'input', pathMatch: 'full' },
+    { path: 'checkbox', component: DemoCheckboxView, data: { breadcrumb: 'Checkbox' } },
     { path: 'input', component: DemoInputView, data: { breadcrumb: 'Input' } },
-    { path: 'select', component: DemoSelectView, data: { breadcrumb: 'Select' } }
+    { path: 'range', component: DemoRangeView, data: { breadcrumb: 'Range' } },
+    { path: 'select', component: DemoSelectView, data: { breadcrumb: 'Select' } },
+    { path: 'toggle', component: DemoToggleView, data: { breadcrumb: 'Toggle' } }
 ];
 
 @NgModule({
     declarations: [
         DemoFormOutlet,
+        DemoCheckboxView,
         DemoInputView,
-        DemoSelectView
+        DemoRangeView,
+        DemoSelectView,
+        DemoToggleView
     ],
     imports: [
         CommonModule,
@@ -29,13 +44,21 @@ const DEMO_ROUTERS: Routes = [
         ReactiveFormsModule,
         RouterModule.forChild(DEMO_ROUTERS),
         DemoModule,
-        OctopusFormModule,
-        OctopusTabbedModule
+        OctopusButtonModule,
+        OctopusCheckboxModule,
+        OctopusIconModule,
+        OctopusInputModule,
+        OctopusRangeModule,
+        OctopusTabbedModule,
+        OctopusToggleModule
     ],
     exports: [
         DemoFormOutlet,
+        DemoCheckboxView,
         DemoInputView,
-        DemoSelectView
+        DemoRangeView,
+        DemoSelectView,
+        DemoToggleView
     ]
 })
 export class FormViewModule { }

@@ -1,17 +1,23 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Input, Output, Renderer2, SimpleChanges } from "@angular/core";
-import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Input, Output, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { of } from "rxjs";
+
+import { AbstractOctopusToggle } from "src/app/global/base.utils";
+import { ColorPalette } from "src/app/global/enum.utils";
+
+let checkID: number = 0;
 
 @Component({
     selector: 'octopus-checkbox',
     template: `
-        <div class="octopus-checkbox-wrapper">
-            <input type="checkbox">
-            <label>
-                <span class="material-icons {{align}}" [class.active]="selected || indeterminated">{{matchState(selected,
-                    indeterminated)}}</span>
+        <label class="octopus-checkbox-wrapper" [for]="'octopus-checkbox-' + (id$ | async)">
+            <input type="checkbox" [id]="'octopus-checkbox-' + (id$ | async)" [checked]="checked" (change)="updateChange(input.checked)" class="d-none" #input>
+            <span class="material-icons" [class.active]="checked || indeterminated">{{updateState(checked,
+                indeterminated)}}</span>
+            <span class="octopus-checkbox-content" #content>
                 <ng-content></ng-content>
-            </label>
-        </div>
+            </span>
+        </label>
     `,
     providers: [{
         provide: NG_VALUE_ACCESSOR,
@@ -19,69 +25,39 @@ import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms"
         multi: true
     }]
 })
-export class OctopusCheckbox extends CheckboxControlValueAccessor {
+export class OctopusCheckbox extends AbstractOctopusToggle implements AfterViewInit {
 
-    @Input('align') align: string = 'left';
-    @Input('color') color: string = 'primary';
     @Input('indeterminated') indeterminated: boolean = false;
-    @Input('selected') selected: boolean = false;
 
     @Output('indeterminatedChange') indeterminatedChange: EventEmitter<boolean> = new EventEmitter();
     @Output('selectedChange') selectedChange: EventEmitter<boolean> = new EventEmitter();
+
+    @ViewChild('content', { read: ElementRef, static: true })
+    private content!: ElementRef<HTMLElement>;
 
     @HostBinding('class') class: string = 'octopus-checkbox';
 
     @HostListener('click')
     handleClickAction(): void {
-        this.selected = !this.selected;
-        this._cdr.detectChanges();
-        this.selectedChange.emit(this.selected);
-        this.onChange(this.selected);
+        this.updateChange(!this.checked);
     }
 
     constructor(
-        private _cdr: ChangeDetectorRef,
-        private _ref: ElementRef,
-        private _render: Renderer2
+        protected _ref: ElementRef,
+        protected _render: Renderer2
     ) {
-        super(_render, _ref);
+        super(_ref, _render);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.color !== undefined) {
-            setTimeout(() => this.renderColor(changes.color.previousValue, changes.color.currentValue));
+    ngAfterViewInit() {
+        this.id$ = of(++checkID);
+
+        if (this.content.nativeElement.childElementCount === 0 && this.content.nativeElement.textContent?.length === 0) {
+            this._render.setStyle(this._ref.nativeElement, 'width', 'fit-content');
         }
     }
 
-    ngOnInit() {
-        setTimeout(() => this.renderColor(undefined, this.color));
-    }
-
-    writeValue(value: any): void {
-        if (value !== null) {
-            this.selected = value;
-            this._cdr.detectChanges();
-            this.selectedChange.emit(this.selected);
-            this.onChange(this.selected);
-        }
-    }
-
-    registerOnChange(fn: (_: any) => {}): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn: () => {}): void {
-        this.onTouched = fn;
-    }
-
-    setDisabledState(isDisabled: boolean): void {
-
-    }
-
-    onChange!: (_: any) => void;
-    onTouched!: () => void;
-
-    matchState(selected: boolean, indeterminated: boolean): string {
+    updateState(selected: boolean, indeterminated: boolean): string {
         if (indeterminated) {
             return 'indeterminate_check_box';
         } else {
@@ -89,7 +65,7 @@ export class OctopusCheckbox extends CheckboxControlValueAccessor {
         }
     }
 
-    private renderColor(prevColor: string | undefined, currColor: string): void {
+    protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
         this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-checkbox' : `octopus-${prevColor}-checkbox`);
         this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-checkbox`);
     }

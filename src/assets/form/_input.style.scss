@@ -1,25 +1,119 @@
 .octopus-input {
-    width: 100%;
+    border-radius: 3px;
+    display: flex;
+    position: relative;
 
-    &.octopus-input-range {
+    input {
         appearance: none;
         background: none;
         border: none;
-        box-sizing: border-box;
-        cursor: pointer;
         outline: none;
-        margin: 0.25rem 0;
+        padding: 0.125rem 0.25rem;
+        width: 100%;
+        height: 2rem;
 
-        &::-webkit-slider-runnable-track {
-            height: 0.25rem;
+        &::-webkit-search-cancel-button {
+            display: none;
         }
 
-        &::-webkit-slider-thumb {
-            appearance: none;
-            border-radius: 50%;
-            margin: -0.25rem 0 0 0;
-            width: 0.75rem;
-            height: 0.75rem;
+        &.focused {
+            padding-right: calc(1.25rem + 0.25rem * 2) !important;
+        }
+    }
+
+    .octopus-icon-button {
+        padding: 0.125rem;
+        position: absolute;
+        top: calc(50% - 1.25rem * 0.5);
+        bottom: calc(50% - 1.25rem * 0.5);
+        right: 0.25rem;
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+    }
+}
+
+.octopus-input-phone {
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+
+    .octopus-input {
+        &:nth-child(n) {
+            border-radius: 0;
+            width: 5rem;
+        }
+
+        &:first-child {
+            border-radius: 3px 0 0 3px;
+        }
+
+        &:last-child {
+            border-radius: 0 3px 3px 0;
+            flex: auto;
+        }
+    }
+
+    .octopus-input-delimit {
+        margin: 0 0.5rem;
+    }
+}
+
+.octopus-input-group {
+    .octopus-input-group-wrapper {
+        display: flex;
+        align-items: center;
+
+        .octopus-input,
+        .octopus-input-phone {
+            flex: auto;
+
+            &:nth-child(n) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                border-radius: 3px 0 0 3px;
+            }
+
+            &:last-child {
+                border-radius: 0 3px 3px 0;
+            }
+        }
+
+        .octopus-input-phone {
+            .octopus-input {
+                &:nth-child(n) {
+                    max-width: 5rem;
+                }
+
+                &:last-child {
+                    max-width: 100%;
+                }
+            }
+        }
+
+        .octopus-input-group-prefix,
+        .octopus-input-group-suffix {
+            border-style: groove;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.125rem;
+            width: 2rem;
+            height: 2rem;
+
+            .octopus-icon-button {
+                width: inherit;
+                height: inherit;
+            }
+        }
+
+        .octopus-input-group-prefix {
+            border-width: 0 2px 0 0;
+        }
+
+        .octopus-input-group-suffix {
+            border-width: 0 0 0 2px;
         }
     }
 }
@@ -35,16 +129,53 @@
     );
     .octopus-input {
         @each $name, $value in $color-list {
-            $color: map-get($value, "value");
+            &.octopus-#{$name}-input {
+                $color: map-get($value, "value");
+                background-color: rgba($color, 0.15) !important;
 
-            &.octopus-#{$name}-input-range {
-                &::-webkit-slider-runnable-track {
-                    background-color: lighten($color, 30%);
+                &:focus-within {
+                    box-shadow: 0 0 4px 1px rgba(lighten($color, 25%), 0.25);
                 }
 
-                &::-webkit-slider-thumb {
-                    background-color: $color;
-                    box-shadow: 0px 0px 4px 1px rgba($foreground, 0.25);
+                input {
+                    color: $foreground;
+
+                    &::-webkit-input-placeholder {
+                        color: rgba($color, 0.85);
+                    }
+                }
+            }
+        }
+    }
+
+    .octopus-input-phone {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-input-phone {
+                $color: map-get($value, "value");
+                background-color: rgba($color, 0.15);
+
+                .octopus-input {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+
+    .octopus-input-group {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-input-group {
+                .octopus-input-group-wrapper {
+                    $color: map-get($value, "value");
+                    background-color: rgba($color, 0.15);
+
+                    .octopus-input {
+                        background-color: transparent !important;
+                    }
+
+                    .octopus-input-group-prefix,
+                    .octopus-input-group-suffix {
+                        border-color: rgba($color, 0.25);
+                    }
                 }
             }
         }

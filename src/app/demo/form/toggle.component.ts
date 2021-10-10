@@ -1,18 +1,15 @@
 import { Component } from "@angular/core";
-
 import { ColorPalette } from "src/app/global/enum.utils";
 
 @Component({
-    selector: 'app-demo-input-view',
-    templateUrl: './input.component.html'
+    selector: 'app-demo-toggle-view',
+    templateUrl: './toggle.component.html'
 })
-export class DemoInputView {
+export class DemoToggleView {
 
     list: ColorPalette[] = ['primary', 'secondary', 'success', 'warning', 'failure', 'info'];
-    types: Array<'text' | 'password' | 'email' | 'search'> = ['text', 'password', 'email', 'search'];
-    phone: string = '';
-    visible: boolean = false;
-    value: string = '';
+    checked: boolean = true;
+    value: any = 3;
 
     format(text: string): string {
         return text.charAt(0).toUpperCase() + text.slice(1);

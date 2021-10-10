@@ -1,0 +1,92 @@
+.octopus-range {
+    .octopus-range-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 1rem;
+        position: relative;
+
+        input[type="range"] {
+            appearance: none;
+            background: none;
+            border: none;
+            box-sizing: border-box;
+            cursor: pointer;
+            outline: none;
+
+            &::-webkit-slider-thumb {
+                appearance: none;
+                border-radius: 50%;
+                margin: -0.375rem 0;
+                width: 1rem;
+                height: 1rem;
+                transition: transform 250ms ease-in-out;
+
+                &:active {
+                    transform: scale(1.25);
+                }
+            }
+        }
+
+        .octopus-range-tick {
+            border-radius: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0.5rem;
+            position: absolute;
+            z-index: -5;
+            width: calc(100% - 0.5rem * 2);
+            height: 0.25rem;
+
+            .tick {
+                width: 0.25rem;
+                height: 100%;
+
+                &:first-child,
+                &:last-child {
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}
+
+@mixin range-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+    );
+    .octopus-range {
+        @each $name, $value in $color-list {
+            $color: map-get($value, "value");
+
+            &.octopus-#{$name}-range {
+                input[type="range"] {
+                    &::-webkit-slider-thumb {
+                        background-color: $color;
+                        box-shadow: 0px 0px 4px 1px rgba($foreground, 0.5);
+
+                        &:hover {
+                            background-color: lighten($color, 5%);
+                        }
+                    }
+                }
+
+                .octopus-range-tick {
+                    background-color: lighten($color, 30%);
+                }
+            }
+        }
+
+        .octopus-range-tick {
+            .tick {
+                background-color: darken($foreground, 15%);
+            }
+        }
+    }
+}

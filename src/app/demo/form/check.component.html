@@ -1,0 +1,82 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Checkbox" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-checkbox>Checkbox</octopus-checkbox>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Checkbox with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-checkbox [color]="item" *ngFor="let item of list">{{format(item)}} Checkbox
+                    </octopus-checkbox>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Checkbox with Label Position" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-checkbox position="before">Checkbox with Label Before</octopus-checkbox>
+                    <octopus-checkbox position="after">Checkbox with Label After</octopus-checkbox>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Checkbox with Data Binding" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-checkbox [(checked)]="checked">Data Binding by Value: {{checked}}</octopus-checkbox>
+                    <octopus-checkbox [(ngModel)]="checked">Data Binding by ngModel: {{checked}}</octopus-checkbox>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Checkbox with Indeterminated State" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-checkbox [color]="tree.color === undefined ? 'primary' : tree.color"
+                        [checked]="allComplete" [indeterminated]="someComplete()" (checkedChange)="setAll($event)">
+                        {{tree.text}}</octopus-checkbox>
+                    <div class="pl-100">
+                        <octopus-checkbox [color]="item.color === undefined ? 'primary' : item.color"
+                            [(checked)]="item.completed" (checkedChange)="updateAllComplete()"
+                            *ngFor="let item of tree.list">{{item.text}}
+                        </octopus-checkbox>
+                    </div>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

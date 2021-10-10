@@ -1,7 +1,5 @@
-import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
-import { SelectionModel } from "@angular/cdk/collections";
-import { AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Inject, Input, Output, QueryList, Renderer2, SimpleChanges } from "@angular/core";
-import { Subscription } from "rxjs";
+import { coerceNumberProperty } from "@angular/cdk/coercion";
+import { AfterViewInit, Component, ContentChildren, ElementRef, HostBinding, HostListener, Input, QueryList, Renderer2, SimpleChanges } from "@angular/core";
 
 import { AbstractOctopusButton, AbstractOctopusComponent } from "src/app/global/base.utils";
 import { Alignment, ColorPalette, Shape } from "src/app/global/enum.utils";
@@ -277,100 +275,6 @@ export class OctopusScrollButton extends AbstractOctopusButton implements AfterV
 }
 
 @Component({
-    selector: 'button[octopus-toggle-button],a[octopus-toggle-button]',
-    template: `
-        <span class="octopus-button-ripple" octopus-ripple [rippleRadius]="size$ | async"></span>
-        <ng-content></ng-content>
-    `
-})
-export class OctopusToggleButton extends AbstractOctopusButton implements AfterViewInit {
-
-    @Input('toggled')
-    get toggled(): any { return this._toggled; }
-    set toggled(_toggled: any) { this._toggled = coerceBooleanProperty(_toggled); }
-    private _toggled: any = false;
-
-    @Output('toggledChange') toggledChange: EventEmitter<boolean> = new EventEmitter();
-
-    @HostBinding('class') class: string = 'octopus-toggle-button';
-
-    @HostListener('click')
-    protected listenToggleClick(): void {
-        this._group.toggles.forEach(item => item.updateState(true));
-        this.updateState(this.toggled);
-    }
-
-    private subscription!: Subscription;
-
-    constructor(
-        protected _ref: ElementRef,
-        protected _render: Renderer2,
-        @Inject(forwardRef(() => OctopusToggleGroup))
-        private _group: OctopusToggleGroup
-    ) {
-        super(_ref);
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        setTimeout(() => super.ngOnChanges(changes));
-
-        if (changes.toggled !== undefined) {
-            setTimeout(() => this.renderState(changes.toggled.currentValue));
-        }
-    }
-
-    ngOnInit() {
-        setTimeout(() => {
-            super.ngOnInit();
-            this.renderState(this.toggled);
-        });
-    }
-
-    ngAfterViewInit() {
-        this.subscription = this.toggledChange.asObservable().subscribe(value => {
-            this.renderState(value);
-
-            if (value) {
-                this._group.selection.select(this);
-            } else {
-                this._group.selection.deselect(this);
-            }
-        });
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-
-        if (this.subscription !== undefined && !this.subscription.closed) {
-            this.subscription.unsubscribe();
-        }
-    }
-
-    updateState(toggled: boolean): void {
-        this.toggled = !toggled;
-        this.toggledChange.emit(this.toggled);
-    }
-
-    protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
-        this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-base-toggle-button' : `octopus-${prevColor}-toggle-button`);
-        this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-toggle-button`);
-    }
-
-    private renderState(toggled: boolean): void {
-        if (toggled) {
-            this._render.addClass(this._ref.nativeElement, 'toggled');
-        } else {
-            this._render.removeClass(this._ref.nativeElement, 'toggled');
-        }
-    }
-
-    log(): void {
-        console.log(this._ref.nativeElement.textContent);
-    }
-
-}
-
-@Component({
     selector: 'octopus-button-group',
     template: `<ng-content select="[octopus-fill-button], [octopus-outline-button]"></ng-content>`
 })
@@ -414,31 +318,6 @@ export class OctopusButtonGroup extends AbstractOctopusComponent {
     protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
         this.fillButtons.forEach(button => button.color = currColor);
         this.outlineButtons.forEach(button => button.color = currColor);
-    }
-
-}
-
-@Component({
-    selector: 'octopus-toggle-group',
-    template: `<ng-content select="button[octopus-toggle-button],a[octopus-toggle-button]"></ng-content>`
-})
-export class OctopusToggleGroup extends OctopusButtonGroup {
-
-    @ContentChildren(OctopusToggleButton) toggles!: QueryList<OctopusToggleButton>;
-
-    @HostBinding('class') class: string = 'octopus-toggle-group';
-
-    selection: SelectionModel<OctopusToggleButton> = new SelectionModel(false, new Array());
-
-    constructor(
-        protected _ref: ElementRef,
-        protected _render: Renderer2
-    ) {
-        super(_ref, _render);
-    }
-
-    protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
-        this.toggles.forEach(toggle => toggle.color = currColor);
     }
 
 }

@@ -3,7 +3,7 @@
     <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
     <octopus-tabbed-unit text="Example">
         <div class="d-flex flex-column">
-            <app-demo-section label="Button" class="mb-100">
+            <app-demo-section label="Basic Input" class="mb-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -12,10 +12,10 @@
                     </octopus-tabbed>
                 </div>
                 <div section-foot>
-
+                    <octopus-input></octopus-input>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Filled Button" class="my-100">
+            <app-demo-section label="Input with Color" class="my-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -23,11 +23,14 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-input [color]="item" [placeholder]="format(item) + ' Input Field'"
+                        *ngFor="let item of list">
+                    </octopus-input>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Outlined Button" class="my-100">
+            <app-demo-section label="Input with Type" class="my-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -35,11 +38,14 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-input [type]="type" [placeholder]="format(type) + ' Input Field'"
+                        *ngFor="let type of types">
+                    </octopus-input>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Icon Button" class="my-100">
+            <app-demo-section label="Input by Data Binding" class="my-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -47,11 +53,15 @@
                         <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
                     </octopus-tabbed>
                 </div>
-                <div section-foot>
-
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-input [(value)]="value"></octopus-input>
+                    <octopus-input [(ngModel)]="value"></octopus-input>
+                    <span>Data Binding by Value: {{value}}</span>
+                    <span>Data Binding by ngModel: {{value}}</span>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Input Range" class="mt-100">
+            <app-demo-section label="Basic Phone Number Input" class="mb-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -60,13 +70,99 @@
                     </octopus-tabbed>
                 </div>
                 <div section-foot>
-                    <input octopus-input-range color="primary" type="range" min="0" max="100" value="50" class="my-50">
-                    <input octopus-input-range color="secondary" type="range" min="0" max="100" value="50"
-                        class="my-50">
-                    <input octopus-input-range color="success" type="range" min="0" max="100" value="50" class="my-50">
-                    <input octopus-input-range color="warning" type="range" min="0" max="100" value="50" class="my-50">
-                    <input octopus-input-range color="failure" type="range" min="0" max="100" value="50" class="my-50">
-                    <input octopus-input-range color="info" type="range" min="0" max="100" value="50" class="mt-50">
+                    <octopus-input-phone></octopus-input-phone>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Phone Number Input with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-input-phone [color]="item" *ngFor="let item of list"></octopus-input-phone>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Basic Input Group" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-input-group>
+                        <octopus-input placeholder="First Name"></octopus-input>
+                        <octopus-input placeholder="Middle Name"></octopus-input>
+                        <octopus-input placeholder="Last Name"></octopus-input>
+                    </octopus-input-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Input Group with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-input-group [color]="item" *ngFor="let item of list">
+                        <octopus-input placeholder="First Name"></octopus-input>
+                        <octopus-input placeholder="Middle Name"></octopus-input>
+                        <octopus-input placeholder="Last Name"></octopus-input>
+                    </octopus-input-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Input Group with Prefix & Suffix" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-input-group>
+                        <ng-template octopus-input-group-prefix>
+                            <octopus-icon>security</octopus-icon>
+                        </ng-template>
+                        <octopus-input [type]="visible ? 'text' : 'password'" value="Passw0rd"></octopus-input>
+                        <ng-template octopus-input-group-suffix>
+                            <button octopus-icon-button (click)="visible = !visible">
+                                <octopus-icon>{{visible ? 'visibility_off' : 'visibility'}}</octopus-icon>
+                            </button>
+                        </ng-template>
+                    </octopus-input-group>
+                    <octopus-input-group>
+                        <ng-template octopus-input-group-prefix>
+                            <octopus-icon>email</octopus-icon>
+                        </ng-template>
+                        <octopus-input type="email"></octopus-input>
+                    </octopus-input-group>
+                    <octopus-input-group>
+                        <ng-template octopus-input-group-prefix>
+                            <octopus-icon>search</octopus-icon>
+                        </ng-template>
+                        <octopus-input type="search"></octopus-input>
+                    </octopus-input-group>
+                    <octopus-input-group style="grid-column: 1 / 4;">
+                        <ng-template octopus-input-group-prefix>
+                            <octopus-icon>phone</octopus-icon>
+                        </ng-template>
+                        <octopus-input-phone [value]="phone" #phoneInput></octopus-input-phone>
+                        <ng-template octopus-input-group-suffix>
+                            <button octopus-icon-button (click)="phoneInput.clearInput()">
+                                <octopus-icon>clear</octopus-icon>
+                            </button>
+                        </ng-template>
+                    </octopus-input-group>
                 </div>
             </app-demo-section>
         </div>

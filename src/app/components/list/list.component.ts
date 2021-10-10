@@ -168,7 +168,7 @@ export class OctopusNavListItem extends OctopusListItem implements OnInit {
     selector: 'octopus-select-list-item',
     template: `
         <div class="octopus-select-list-item-wrapper" octopus-ripple>
-            <octopus-checkbox [color]="color" [selected]="formatBoolean(selected)"></octopus-checkbox>
+            <octopus-checkbox [color]="color" [checked]="formatBoolean(selected)"></octopus-checkbox>
             <div class="content">
                 <div class="octopus-list-item-meta" *ngIf="check()">
                     <ng-content select="img[octopus-avatar]" *ngIf="avatars.length === 1"></ng-content>

@@ -359,7 +359,7 @@
                     </octopus-button-group>
                 </div>
             </app-demo-section>
-            <app-demo-section label="Button Group with Vertical Alignment" class="my-100">
+            <app-demo-section label="Button Group with Vertical Alignment" class="mt-100">
                 <div section-code>
                     <octopus-tabbed>
                         <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
@@ -389,50 +389,6 @@
                         <button octopus-outline-button>Button II</button>
                         <button octopus-outline-button>Button III</button>
                     </octopus-button-group>
-                </div>
-            </app-demo-section>
-            <app-demo-section label="Toggle Group" class="my-100">
-                <div section-code>
-                    <octopus-tabbed>
-                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
-                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
-                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
-                    </octopus-tabbed>
-                </div>
-                <div section-foot class="d-grid"
-                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
-                    <octopus-toggle-group color="base" class="w-100" style="grid-column: 1 / 4;">
-                        <button octopus-toggle-button>Button I</button>
-                        <button octopus-toggle-button>Button II</button>
-                        <button octopus-toggle-button>Button III</button>
-                    </octopus-toggle-group>
-                    <octopus-toggle-group [color]="item" class="w-100" *ngFor="let item of list">
-                        <button octopus-toggle-button>Button I</button>
-                        <button octopus-toggle-button>Button II</button>
-                        <button octopus-toggle-button>Button III</button>
-                    </octopus-toggle-group>
-                </div>
-            </app-demo-section>
-            <app-demo-section label="Toggle Group" class="mt-100">
-                <div section-code>
-                    <octopus-tabbed>
-                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
-                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
-                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
-                    </octopus-tabbed>
-                </div>
-                <div section-foot class="d-grid"
-                    style="grid-template-columns: repeat(7, 1fr);gap: 0.5rem;place-items: stretch;">
-                    <octopus-toggle-group alignment="vertical" color="base" class="w-100">
-                        <button octopus-toggle-button>Button I</button>
-                        <button octopus-toggle-button>Button II</button>
-                        <button octopus-toggle-button>Button III</button>
-                    </octopus-toggle-group>
-                    <octopus-toggle-group alignment="vertical" [color]="item" class="w-100" *ngFor="let item of list">
-                        <button octopus-toggle-button>Button I</button>
-                        <button octopus-toggle-button>Button II</button>
-                        <button octopus-toggle-button>Button III</button>
-                    </octopus-toggle-group>
                 </div>
             </app-demo-section>
         </div>

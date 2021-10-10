@@ -47,7 +47,9 @@
     @include checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background);
     @include input-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include range-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include select-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include toggle-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
 
     @include popup-mixin($foreground, $background);
     @include dialog-mixin($foreground, $background);

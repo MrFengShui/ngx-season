@@ -1,0 +1,138 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Toggle Group" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-toggle-group class="w-100">
+                        <octopus-toggle-button>Toggle Button I</octopus-toggle-button>
+                        <octopus-toggle-button>Toggle Button II</octopus-toggle-button>
+                        <octopus-toggle-button>Toggle Button III</octopus-toggle-button>
+                    </octopus-toggle-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Toggle Group with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-group [color]="item" class="w-100" *ngFor="let item of list">
+                        <octopus-toggle-button>{{format(item)}} Toggle Button I</octopus-toggle-button>
+                        <octopus-toggle-button>{{format(item)}} Toggle Button II</octopus-toggle-button>
+                        <octopus-toggle-button>{{format(item)}} Toggle Button III</octopus-toggle-button>
+                    </octopus-toggle-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Toggle Group with Vertical Alignment" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-group alignment="vertical" [color]="item" class="w-100" *ngFor="let item of list">
+                        <octopus-toggle-button>{{format(item)}} Toggle Button I</octopus-toggle-button>
+                        <octopus-toggle-button>{{format(item)}} Toggle Button II</octopus-toggle-button>
+                        <octopus-toggle-button>{{format(item)}} Toggle Button III</octopus-toggle-button>
+                    </octopus-toggle-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Toggle Group with Data Binding" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: auto 1fr;gap: 0.5rem;place-items: center stretch;">
+                    <octopus-toggle-group [(value)]="value" class="w-100">
+                        <octopus-toggle-button value="1">Toggle Button I</octopus-toggle-button>
+                        <octopus-toggle-button value="2">Toggle Button II</octopus-toggle-button>
+                        <octopus-toggle-button value="3">Toggle Button III</octopus-toggle-button>
+                    </octopus-toggle-group>
+                    <span>Binding Data by Value: {{value}}</span>
+                    <octopus-toggle-group [(ngModel)]="value" class="w-100">
+                        <octopus-toggle-button value="1">Toggle Button I</octopus-toggle-button>
+                        <octopus-toggle-button value="2">Toggle Button II</octopus-toggle-button>
+                        <octopus-toggle-button value="3">Toggle Button III</octopus-toggle-button>
+                    </octopus-toggle-group>
+                    <span>Binding Data by ngModel: {{value}}</span>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Basic Switch" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-toggle-switch></octopus-toggle-switch>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Switch with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-switch [color]="item" *ngFor="let item of list">{{format(item)}} Toggle Switch
+                    </octopus-toggle-switch>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Switch with Label Position" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-switch position="before">Toggle Switch with Label Before</octopus-toggle-switch>
+                    <octopus-toggle-switch position="after">Toggle Switch with Label After</octopus-toggle-switch>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Switch with Data Binding" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-toggle-switch [(checked)]="checked">Data Binding by Value: {{checked}}
+                    </octopus-toggle-switch>
+                    <octopus-toggle-switch [(ngModel)]="checked">Data Binding by ngModel: {{checked}}
+                    </octopus-toggle-switch>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

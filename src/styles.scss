@@ -30,7 +30,9 @@
 @import "./assets/form/check.style";
 @import "./assets/form/field.style";
 @import "./assets/form/input.style";
+@import "./assets/form/range.style";
 @import "./assets/form/select.style";
+@import "./assets/form/toggle.style";
 
 @import "./assets/layout/border.style";
 
@@ -124,6 +126,8 @@ html {
         "toast": octopus-typography-level(0.75rem, normal, normal),
         "toast-subject": octopus-typography-level(0.75rem, bold, normal),
         "toast-description": octopus-typography-level(0.5rem, normal, normal),
+        "toggle-button": octopus-typography-level(0.75rem, normal, normal),
+        "toggle-switch": octopus-typography-level(0.75rem, normal, normal),
         "tooltip-container": octopus-typography-level(0.75rem, normal, normal),
     );
     @include octopus-typography-mixin($typography);

@@ -43,7 +43,7 @@
         "form-label", "form-valid", "select-list-item", "list-item", "list-item-title", "list-item-subtitle",
         "list-item-duration", "list-item-content", "nav-list-item", "list-headline", "paginator", "progress", "select",
         "select-option", "stepper", "tabbed-control-tab", "tabbed-content", "toast", "toast-subject",
-        "toast-description", "tooltip-container";
+        "toast-description", "toggle-button", "toggle-switch", "tooltip-container";
 
     @each $item in $component-list {
         .octopus-#{$item} {
