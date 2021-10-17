@@ -1,5 +1,5 @@
 import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
-import { Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 
 import { ColorPalette } from "src/app/global/enum.utils";
 
@@ -10,8 +10,17 @@ import { ColorPalette } from "src/app/global/enum.utils";
 abstract class AbstractOctopusProgress implements OnChanges, OnInit {
 
     @Input('color') color: ColorPalette = 'primary';
-    @Input('value') value: number | string = 0;
-    @Input('total') total: number | string = 100;
+
+    @Input('value')
+    get value(): any { return this._value; }
+    set value(_value: any) { this._value = coerceNumberProperty(_value); }
+    private _value: any = 0;
+
+    @Input('total')
+    get total(): any { return this._total; }
+    set total(_total: any) { this._total = coerceNumberProperty(_total); }
+    private _total: any = 100;
+
     @Input('precision') precision: number | string = 0;
 
     @Output('change') change: EventEmitter<number> = new EventEmitter();
@@ -124,10 +133,10 @@ export class OctopusProgressBar extends AbstractOctopusProgress implements OnCha
 @Component({
     selector: 'octopus-progress-pie',
     template: `
-        <div class="octopus-progress-pie" [style.width]="(formatNumber(radius) * 2) + 'px'" [style.height]="(formatNumber(radius) * 2) + 'px'">
+        <div class="octopus-progress-pie" [style.width]="'calc(' + radius + 'px * 2)'" [style.height]="'calc(' + radius + 'px * 2)'">
             <svg xmlns="http://w3.org/2000/svg" width="100%" height="100%" class="svg">
-                <circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="formatNumber(radius) - formatNumber(thick) * 0.5" [attr.stroke-width]="thick" fill="none" class="track"></circle>
-                <circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="formatNumber(radius) - formatNumber(thick) * 0.5" [attr.stroke-width]="thick" fill="none" class="thumb" [style.stroke-dasharray]="circumference" [style.stroke-dashoffset]="offset"></circle>
+                <circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="calcCircleRadius(radius, thick)" [attr.stroke-width]="thick" fill="none" class="track"></circle>
+                <circle [attr.cx]="radius" [attr.cy]="radius" [attr.r]="calcCircleRadius(radius, thick)" [attr.stroke-width]="thick" fill="none" class="thumb" [style.stroke-dasharray]="circumference" [style.stroke-dashoffset]="offset"></circle>
             </svg>
             <span class="text d-flex justify-content-center align-items-center">{{calcPercentage(value, total)}}</span>
         </div>
@@ -135,8 +144,15 @@ export class OctopusProgressBar extends AbstractOctopusProgress implements OnCha
 })
 export class OctopusProgressPie extends AbstractOctopusProgress implements OnChanges, OnInit {
 
-    @Input('radius') radius: number | string = 48;
-    @Input('thick') thick: number | string = 12;
+    @Input('radius')
+    get radius(): any { return this._radius; }
+    set radius(_radius: any) { this._radius = coerceNumberProperty(_radius); }
+    private _radius: any = 48;
+
+    @Input('thick')
+    get thick(): any { return this._thick; }
+    set thick(_thick: any) { this._thick = coerceNumberProperty(_thick); }
+    private _thick: any = 12;
 
     @HostBinding('class') class: string = 'octopus-progress';
 
@@ -144,6 +160,7 @@ export class OctopusProgressPie extends AbstractOctopusProgress implements OnCha
     offset: number = 0;
 
     constructor(
+        protected _cdr: ChangeDetectorRef,
         protected _ref: ElementRef<HTMLElement>,
         protected _render: Renderer2
     ) {
@@ -151,7 +168,7 @@ export class OctopusProgressPie extends AbstractOctopusProgress implements OnCha
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
+        setTimeout(() => super.ngOnChanges(changes));
 
         if (changes.radius !== undefined) {
             this.circumference = this.calcCircumference(coerceNumberProperty(changes.radius.currentValue), coerceNumberProperty(this.thick));
@@ -163,27 +180,28 @@ export class OctopusProgressPie extends AbstractOctopusProgress implements OnCha
     }
 
     ngOnInit() {
-        super.ngOnInit();
         setTimeout(() => {
+            super.ngOnInit();
             this._render.setStyle(this._ref.nativeElement, 'background', 'none');
             this._render.setStyle(this._ref.nativeElement, 'width', 'auto');
             this._render.setStyle(this._ref.nativeElement, 'height', 'auto');
+            this.circumference = this.calcCircumference(this.radius, this.thick);
         });
-        this.circumference = this.calcCircumference(coerceNumberProperty(this.radius), coerceNumberProperty(this.thick));
     }
 
-    formatNumber(value: number | string): number {
-        return coerceNumberProperty(value);
+    calcCircleRadius(radius: number | string, thick: number | string): number {
+        return coerceNumberProperty(radius) - coerceNumberProperty(thick) * 0.5;
     }
 
-    calcCircumference(radius: number, thick: number): number {
+    private calcCircumference(radius: number, thick: number): number {
         return 2 * Math.PI * (radius - thick * 0.5);
     }
 
     protected update(value: number, total: number): void {
         let ratio: number = value / total;
-        this.offset = this.circumference * (1 - ratio);
         this.change.emit(ratio);
+        this.offset = this.circumference * (1 - ratio);
+        this._cdr.markForCheck();
     }
 
 }

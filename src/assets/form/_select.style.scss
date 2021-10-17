@@ -1,21 +1,51 @@
 .octopus-select {
     .octopus-select-wrapper {
-        box-sizing: border-box;
+        border-radius: 3px;
         cursor: pointer;
         display: flex;
         align-items: center;
-        padding: 0.5rem;
-        width: inherit;
-        height: inherit;
+        padding: 0.125rem 0.25rem;
+        height: 2rem;
+
+        .octopus-select-content {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 
 .octopus-select-option {
-    .octopus-select-option-wrapper {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.octopus-select-overlay {
+    border-radius: 0 !important;
+
+    .octopus-select-dropdown {
+        .octopus-list {
+            .octopus-list-headline {
+                font-size: 0.75rem;
+                margin: 0;
+                min-height: 2.5rem;
+            }
+
+            .octopus-list-item {
+                .octopus-list-item-wrapper {
+                    padding: 0;
+
+                    .octopus-select-option {
+                        box-sizing: border-box;
+                        min-height: 2.5rem;
+                        padding: 0.5rem;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -27,43 +57,40 @@
         "warning": $warning,
         "failure": $failure,
         "info": $info,
-        "base": $foreground,
     );
 
     .octopus-select {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-select {
+                .octopus-select-wrapper {
+                    $color: map-get($value, "value");
+                    background-color: rgba($color, 0.15) !important;
+
+                    &:focus-within {
+                        box-shadow: 0 0 4px 1px rgba(lighten($color, 25%), 0.25);
+                    }
+                }
+            }
+        }
+
         color: $foreground;
     }
 
     .octopus-select-overlay {
         background-color: map-get($background, "popup");
+        box-shadow: 0 0 8px 2px rgba($foreground, 0.125);
 
         @each $name, $value in $color-list {
             &.octopus-#{$name}-select-overlay {
+                $color: map-get($value, "value");
+
                 .octopus-select-option {
-                    @if $name == "base" {
-                        .octopus-select-option-wrapper {
-                            &:hover {
-                                background-color: rgba($value, 0.05);
-                            }
-                        }
+                    &:hover {
+                        background-color: rgba($color, 0.25);
+                    }
 
-                        &.active {
-                            .octopus-select-option-wrapper {
-                                background-color: rgba($value, 0.25);
-                            }
-                        }
-                    } @else {
-                        .octopus-select-option-wrapper {
-                            &:hover {
-                                background-color: rgba(map-get($value, "value"), 0.25);
-                            }
-                        }
-
-                        &.active {
-                            .octopus-select-option-wrapper {
-                                background-color: map-get($value, "value");
-                            }
-                        }
+                    &.active {
+                        background-color: $color;
                     }
                 }
             }

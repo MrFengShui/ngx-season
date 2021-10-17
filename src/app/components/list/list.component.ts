@@ -287,7 +287,7 @@ export class OctopusSelectListItem extends OctopusListItem implements OnChanges,
     selector: 'octopus-list',
     template: `
         <div class="octopus-list-wrapper">
-            <ng-content select="octopus-list-item,[octopus-list-headline],[octopus-divider]"></ng-content>
+            <ng-content select="octopus-list-item,[octopus-list-headline],[octopus-divider],ng-container"></ng-content>
         </div>
     `
 })

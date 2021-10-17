@@ -1,12 +1,7 @@
 <div class="octopus-calendar-wrapper">
     <div class="octopus-calendar-head">
-        <span class="octopus-calendar-label" [style.height]="(label.clientWidth * 0.5) + 'px'" #label>Sunday</span>
-        <span class="octopus-calendar-label">Monday</span>
-        <span class="octopus-calendar-label">Tuesday</span>
-        <span class="octopus-calendar-label">Wednesday</span>
-        <span class="octopus-calendar-label">Thursday</span>
-        <span class="octopus-calendar-label">Friday</span>
-        <span class="octopus-calendar-label">Saturday</span>
+        <span class="octopus-calendar-label" [style.height]="label.clientWidth + 'px'" #label
+            *ngFor="let name of names">{{name}}</span>
     </div>
     <div octopus-divider></div>
     <div class="octopus-calendar-body">
@@ -26,7 +21,7 @@
         <button octopus-icon-button [color]="color" (click)="handleMonthActionEvent(-1)">
             <octopus-icon>keyboard_arrow_left</octopus-icon>
         </button>
-        <span class="octopus-calendar-meta">{{year}} &minus; {{month | zero}}</span>
+        <span class="octopus-calendar-meta text-truncate">{{year}} &minus; {{month | zero}}</span>
         <button octopus-icon-button [color]="color" (click)="handleMonthActionEvent(1)">
             <octopus-icon>keyboard_arrow_right</octopus-icon>
         </button>

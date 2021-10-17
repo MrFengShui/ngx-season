@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 
-import { OctopusFormModule } from "src/app/form/form.module";
+import { OctopusFieldModule } from "src/app/form/field/field.module";
 import { OctopusButtonModule } from '../button/button.module';
 import { OctopusIconModule } from '../icon/icon.module';
 
@@ -19,7 +19,7 @@ import { OctopusPaginatorOption } from './paginator.service';
         FormsModule,
         OctopusButtonModule,
         OctopusIconModule,
-        OctopusFormModule
+        OctopusFieldModule
     ],
     exports: [
         OctopusPaginator

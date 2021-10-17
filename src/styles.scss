@@ -30,6 +30,9 @@
 @import "./assets/form/check.style";
 @import "./assets/form/field.style";
 @import "./assets/form/input.style";
+@import "./assets/form/number.style";
+@import "./assets/form/picker.style";
+@import "./assets/form/radio.style";
 @import "./assets/form/range.style";
 @import "./assets/form/select.style";
 @import "./assets/form/toggle.style";
@@ -105,9 +108,9 @@ html {
         "expansion-subject": octopus-typography-level(0.75rem, bold, normal),
         "expansion-description": octopus-typography-level(0.75rem, normal, normal),
         "expansion-panel-content": octopus-typography-level(0.75rem, normal, normal),
-        "form-input": octopus-typography-level(1rem, normal, normal),
+        "file-picker": octopus-typography-level(0.75rem, normal, normal),
         "form-label": octopus-typography-level(0.75rem, normal, normal),
-        "form-valid": octopus-typography-level(0.75rem, normal, normal),
+        "form-tip": octopus-typography-level(0.5rem, normal, normal),
         "select-list-item": octopus-typography-level(0.75rem, normal, normal),
         "list-item": octopus-typography-level(0.75rem, normal, normal),
         "list-item-title": octopus-typography-level(1rem, bold, normal),
@@ -117,7 +120,9 @@ html {
         "nav-list-item": octopus-typography-level(0.75rem, bold, normal),
         "list-headline": octopus-typography-level(1rem, bold, normal),
         "paginator": octopus-typography-level(0.75rem, normal, normal),
+        "picker": octopus-typography-level(0.75rem, normal, normal),
         "progress": octopus-typography-level(0.5rem, normal, normal),
+        "radio-button": octopus-typography-level(0.75rem, normal, normal),
         "select": octopus-typography-level(0.75rem, normal, normal),
         "select-option": octopus-typography-level(0.75rem, normal, normal),
         "stepper": octopus-typography-level(0.75rem, normal, normal),

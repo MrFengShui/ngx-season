@@ -1,7 +1,6 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges } from "@angular/core";
 import { interval, Subject } from "rxjs";
-import { map } from 'rxjs/operators';
 
 import { ColorPalette } from "src/app/global/enum.utils";
 

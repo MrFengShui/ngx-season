@@ -1,0 +1,178 @@
+.octopus-date-picker {
+    .octopus-date-picker-wrapper {
+        border-radius: 3px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 0.125rem 0.25rem;
+        height: 2rem;
+
+        .octopus-date-picker-content {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.octopus-date-picker-overlay {
+    border-radius: 0 !important;
+}
+
+.octopus-color-picker {
+    .octopus-color-picker-wrapper {
+        display: flex;
+        align-items: center;
+
+        .octopus-picker-control {
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 3px;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: block;
+            padding: 0.125rem;
+            width: 3rem;
+            height: 3rem;
+
+            .octopus-picker-palette {
+                border-radius: 50%;
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .octopus-range {
+            flex: auto;
+        }
+    }
+}
+
+.octopus-file-picker {
+    .octopus-file-picker-wrapper {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 4rem;
+
+        .octopus-picker-control {
+            border-radius: 3px 0 0 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 1rem;
+        }
+
+        .octopus-picker-meta {
+            flex: auto;
+            height: 100%;
+
+            td {
+                padding: 0 0.5rem;
+            }
+        }
+
+        .octopus-picker-progress {
+            border-radius: 0 3px 3px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 0.5rem;
+            height: 100%;
+        }
+    }
+}
+
+@mixin picker-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background) {
+    $color-list: (
+        "primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "warning": $warning,
+        "failure": $failure,
+        "info": $info,
+    );
+
+    .octopus-date-picker {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-date-picker {
+                .octopus-date-picker-wrapper {
+                    $color: map-get($value, "value");
+                    background-color: rgba($color, 0.15) !important;
+
+                    &:focus-within {
+                        box-shadow: 0 0 4px 1px rgba(lighten($color, 25%), 0.25);
+                    }
+                }
+            }
+        }
+
+        color: $foreground;
+    }
+
+    .octopus-date-picker-overlay {
+        background-color: map-get($background, "popup");
+        box-shadow: 0 0 8px 2px rgba($foreground, 0.125);
+
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-date-picker-overlay {
+                $color: map-get($value, "value");
+
+                .octopus-date-picker-option {
+                    &:hover {
+                        background-color: rgba($color, 0.25);
+                    }
+
+                    &.active {
+                        background-color: $color;
+                    }
+                }
+            }
+        }
+    }
+
+    .octopus-color-picker {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-color-picker {
+                $color: map-get($value, "value");
+
+                .octopus-picker-control {
+                    background-color: lighten($color, 25%);
+                    border-color: $color;
+                    box-shadow: inset 0 0 8px 2px rgba($foreground, 0.15);
+                }
+            }
+        }
+    }
+
+    .octopus-file-picker {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-file-picker {
+                $color: map-get($value, "value");
+
+                .octopus-picker-control {
+                    background-color: $color;
+
+                    &:hover {
+                        background-color: darken($color, 15%);
+                    }
+                }
+
+                .octopus-picker-meta {
+                    background-color: lighten($color, 15%);
+                    box-shadow: inset 0 0 8px 2px rgba(darken($color, 25%), 0.25);
+                }
+
+                .octopus-picker-progress {
+                    background-color: darken($color, 15%);
+                }
+            }
+        }
+
+        color: $foreground;
+    }
+}

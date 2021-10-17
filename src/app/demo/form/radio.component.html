@@ -1,0 +1,87 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Radio Button" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-radio-group>
+                        <octopus-radio-button>Radio Button I</octopus-radio-button>
+                        <octopus-radio-button>Radio Button II</octopus-radio-button>
+                        <octopus-radio-button>Radio Button III</octopus-radio-button>
+                    </octopus-radio-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Radio Button with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));gap: 0.5rem;place-items: center;">
+                    <octopus-radio-group [color]="item" [(value)]="value" *ngFor="let item of list">
+                        <octopus-radio-button value="radio-1">Radio Button I</octopus-radio-button>
+                        <octopus-radio-button value="radio-2">Radio Button II</octopus-radio-button>
+                        <octopus-radio-button value="radio-3">Radio Button III</octopus-radio-button>
+                    </octopus-radio-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Radio Button with Label Position" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));gap: 0.5rem;place-items: center;">
+                    <octopus-radio-group>
+                        <octopus-radio-button position="before">Radio Button I</octopus-radio-button>
+                        <octopus-radio-button position="before">Radio Button II</octopus-radio-button>
+                        <octopus-radio-button position="before">Radio Button III</octopus-radio-button>
+                    </octopus-radio-group>
+                    <octopus-radio-group>
+                        <octopus-radio-button position="after">Radio Button I</octopus-radio-button>
+                        <octopus-radio-button position="after">Radio Button II</octopus-radio-button>
+                        <octopus-radio-button position="after">Radio Button III</octopus-radio-button>
+                    </octopus-radio-group>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Radio Button with Data Binding" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: 1fr auto;gap: 0.5rem;place-items: stretch;">
+                    <octopus-radio-group [(value)]="value">
+                        <octopus-radio-button value="radio-1">Radio Button I</octopus-radio-button>
+                        <octopus-radio-button value="radio-2">Radio Button II</octopus-radio-button>
+                        <octopus-radio-button value="radio-3">Radio Button III</octopus-radio-button>
+                    </octopus-radio-group>
+                    <span>Data Binding by Value: {{value}}</span>
+                    <octopus-radio-group [(ngModel)]="value">
+                        <octopus-radio-button value="radio-1">Radio Button I</octopus-radio-button>
+                        <octopus-radio-button value="radio-2">Radio Button II</octopus-radio-button>
+                        <octopus-radio-button value="radio-3">Radio Button III</octopus-radio-button>
+                    </octopus-radio-group>
+                    <span>Data Binding by ngModel: {{value}}</span>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

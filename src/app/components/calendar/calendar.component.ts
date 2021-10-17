@@ -1,4 +1,6 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Pipe, PipeTransform, Renderer2, SimpleChanges } from "@angular/core";
+import { coerceArray } from "@angular/cdk/coercion";
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnInit, Pipe, PipeTransform, Renderer2, SimpleChanges } from "@angular/core";
+import { AbstractOctopusComponent } from "src/app/global/base.utils";
 
 import { ColorPalette } from "src/app/global/enum.utils";
 
@@ -17,10 +19,14 @@ export class ZeroTextPipe implements PipeTransform {
     selector: 'octopus-calendar',
     templateUrl: './calendar.component.html'
 })
-export class OctopusCalendar implements OnChanges, OnInit {
+export class OctopusCalendar extends AbstractOctopusComponent {
 
     @Input('color') color: ColorPalette = 'primary';
     @Input('date') date: Date = new Date(Date.now());
+    @Input('names')
+    get names(): string[] { return this._names; }
+    set names(_names: string[]) { this._names = coerceArray(_names); }
+    private _names: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     @Input('dateChange') dateChange: EventEmitter<Date> = new EventEmitter();
 
@@ -34,14 +40,14 @@ export class OctopusCalendar implements OnChanges, OnInit {
     today: number = 0;
 
     constructor(
-        private _ref: ElementRef,
-        private _render: Renderer2
-    ) { }
+        protected _ref: ElementRef,
+        protected _render: Renderer2
+    ) {
+        super(_ref);
+    }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.color !== undefined) {
-            setTimeout(() => this.renderColor(changes.color.previousValue, changes.color.currentValue));
-        }
+        setTimeout(() => super.ngOnChanges(changes));
 
         if (changes.date !== undefined) {
             setTimeout(() => this.renderDate(changes.date.currentValue));
@@ -50,7 +56,7 @@ export class OctopusCalendar implements OnChanges, OnInit {
 
     ngOnInit() {
         setTimeout(() => {
-            this.renderColor(undefined, this.color);
+            super.ngOnInit();
             this.renderDate(this.date);
         });
     }
@@ -101,6 +107,11 @@ export class OctopusCalendar implements OnChanges, OnInit {
         this.dateChange.emit(this.date);
     }
 
+    protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
+        this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-calendar' : `octopus-${prevColor}-calendar`);
+        this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-calendar`);
+    }
+
     private buildCalendar(year: number, month: number): void {
         this.prevList.length = 0;
         this.currList.length = 0;
@@ -140,11 +151,6 @@ export class OctopusCalendar implements OnChanges, OnInit {
         this.month = date.getMonth() + 1;
         this.today = date.getDate();
         this.buildCalendar(this.year, this.month);
-    }
-
-    private renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
-        this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-calendar' : `octopus-${prevColor}-calendar`);
-        this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-calendar`);
     }
 
 }

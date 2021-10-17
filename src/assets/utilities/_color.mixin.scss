@@ -45,8 +45,11 @@
     @include tabbed-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
 
     @include checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
-    @include field-mixin($primary, $secondary, $success, $warning, $failure, $foreground, $background);
+    @include field-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include input-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include number-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
+    @include picker-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
+    @include radiobutton-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include range-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);
     @include select-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground, $background);
     @include toggle-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground);

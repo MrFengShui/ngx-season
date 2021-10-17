@@ -1,1 +1,0 @@
-export type ValidationType = 'hint' | 'success' | 'warning' | 'error';

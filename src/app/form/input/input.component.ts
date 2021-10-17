@@ -11,7 +11,7 @@ type InputType = 'text' | 'password' | 'email' | 'search';
     template: `
         <input [type]="type" [placeholder]="placeholder" [value]="value === undefined ? '' : value" (keyup.enter)="input.blur()" 
             (change)="updateChange(input.value)" [class.focused]="input.value.length > 0" #input>
-        <button octopus-icon-button [class.d-none]="input.value.length === 0" (click)="clearInput()">
+        <button octopus-icon-button (click)="clearInput()" *ngIf="input.value.length > 0" >
             <octopus-icon size="16">clear</octopus-icon>
         </button>
     `,
@@ -174,7 +174,7 @@ export class OctopusInputGroupSuffix {
             <div class="octopus-input-group-prefix" *ngIf="prefixContent !== undefined">
                 <ng-container [ngTemplateOutlet]="prefixContent"></ng-container>
             </div>
-            <ng-content select="octopus-input, octopus-input-phone"></ng-content>
+            <ng-content select="octopus-input, octopus-input-phone, octopus-select, octopus-date-picker, octopus-number"></ng-content>
             <div class="octopus-input-group-suffix" *ngIf="suffixContent !== undefined">
                 <ng-container [ngTemplateOutlet]="suffixContent"></ng-container>
             </div>

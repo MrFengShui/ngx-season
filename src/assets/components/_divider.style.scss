@@ -26,6 +26,7 @@
         }
 
         span {
+            margin: 0 1rem;
             writing-mode: rl-tb;
         }
     }
@@ -41,6 +42,7 @@
         }
 
         span {
+            margin: 1rem 0;
             writing-mode: vertical-rl;
         }
     }

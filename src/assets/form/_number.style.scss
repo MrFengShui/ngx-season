@@ -1,0 +1,80 @@
+.octopus-number {
+    .octopus-number-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .octopus-icon-button {
+            width: calc(2rem + 0.125rem * 2);
+            height: calc(2rem + 0.125rem * 2);
+        }
+
+        .octopus-input {
+            border-radius: 3px;
+            display: flex;
+            flex: auto;
+            margin: 0 0.5rem;
+            position: relative;
+
+            input[type="number"] {
+                appearance: none;
+                background: none;
+                border: none;
+                outline: none;
+                padding: 0.125rem calc(1.25rem + 0.25rem * 2) 0.125rem 0.25rem;
+                width: 100%;
+                height: 2rem;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    display: none;
+                }
+            }
+
+            .octopus-icon-button {
+                padding: 0.125rem;
+                position: absolute;
+                top: calc(50% - 1.25rem * 0.5);
+                bottom: calc(50% - 1.25rem * 0.5);
+                right: 0.25rem;
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+            }
+        }
+    }
+}
+
+@mixin number-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+    $color-list: (
+        primary: $primary,
+        secondary: $secondary,
+        success: $success,
+        warning: $warning,
+        failure: $failure,
+        info: $info,
+    );
+    .octopus-number {
+        @each $name, $value in $color-list {
+            &.octopus-#{$name}-number {
+                $color: map-get($value, "value");
+
+                .octopus-input {
+                    background-color: rgba($color, 0.15) !important;
+
+                    &:focus-within {
+                        box-shadow: 0 0 4px 1px rgba(lighten($color, 25%), 0.25);
+                    }
+
+                    input[type="number"] {
+                        color: $foreground;
+
+                        &::-webkit-input-placeholder {
+                            color: rgba($color, 0.85);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

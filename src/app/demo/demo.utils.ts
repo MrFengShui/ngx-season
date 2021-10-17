@@ -56,9 +56,10 @@ export const CONTAINER_LIST: DemoRouterLinkModel[] = [
 
 export const FORM_LIST: DemoRouterLinkModel[] = [
     { icon: 'check_box', description: 'The checkbox\'s description is undefined.', paths: ['/octopus', 'form', 'checkbox'], subject: 'Checkbox', text: 'Checkbox' },
+    { icon: 'assignment', description: 'The field\'s description is undefined.', paths: ['/octopus', 'form', 'field'], subject: 'Field', text: 'Field' },
     { icon: 'keyboard', description: 'The input\'s description is undefined.', paths: ['/octopus', 'form', 'input'], subject: 'Input', text: 'Input' },
     { icon: 'pin', description: 'The number\'s description is undefined.', paths: ['/octopus', 'form', 'number'], subject: 'Number', text: 'Number' },
-    { icon: 'radio_button_checked', description: 'The radiobutton\'s description is undefined.', paths: ['/octopus', 'form', 'radio'], subject: 'RadioButton', text: 'RadioButton' },
+    { icon: 'radio_button_checked', description: 'The radiobutton\'s description is undefined.', paths: ['/octopus', 'form', 'radiobutton'], subject: 'RadioButton', text: 'RadioButton' },
     { icon: 'colorize', description: 'The picker\'s description is undefined.', paths: ['/octopus', 'form', 'picker'], subject: 'Picker', text: 'Picker' },
     { icon: 'date_range', description: 'The range\'s description is undefined.', paths: ['/octopus', 'form', 'range'], subject: 'Range', text: 'Range' },
     { icon: 'checklist', description: 'The select\'s description is undefined.', paths: ['/octopus', 'form', 'select'], subject: 'Select', text: 'Select' },

@@ -1,22 +1,36 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
+import { coerceNumberProperty } from "@angular/cdk/coercion";
 import { CdkOverlayOrigin, ConnectedPosition, FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { ComponentPortal, TemplatePortal } from "@angular/cdk/portal";
-import { AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Inject, InjectionToken, Injector, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
-import { NG_VALUE_ACCESSOR, SelectControlValueAccessor } from "@angular/forms";
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Inject, InjectionToken, Injector, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { interval, Subject, Subscription } from "rxjs";
+import { take } from "rxjs/operators";
+
+import { AbstractOctopusComponent } from "src/app/global/base.utils";
 import { ColorPalette } from "src/app/global/enum.utils";
 
 class OctopusSelectInjector {
 
     color: ColorPalette;
-    template: TemplateRef<any>;
+    groups: QueryList<OctopusSelectOptionGroup>;
+    options: QueryList<OctopusSelectOption>;
+    lines: number;
+    selected: any;
 
     constructor(
         private _color: ColorPalette,
-        private _template: TemplateRef<any>
+        private _groups: QueryList<OctopusSelectOptionGroup>,
+        private _options: QueryList<OctopusSelectOption>,
+        private _lines: number,
+        private _selected: any
     ) {
-        this.color = _color;
-        this.template = _template;
+        this.color = this._color;
+        this.groups = this._groups;
+        this.options = this._options;
+        this.lines = this._lines;
+        this.selected = this._selected;
     }
 
 }
@@ -25,89 +39,91 @@ const OCTOPUS_SELECT_INJECTOR_DATA: InjectionToken<OctopusSelectInjector> = new 
 
 @Component({
     selector: 'octopus-select-option',
-    template: `
-        <div class="octopus-select-option-wrapper" #wrapper>
-            <ng-content></ng-content>
-        </div>
-    `
+    template: `<ng-content></ng-content>`
 })
 export class OctopusSelectOption {
 
     @Input('value') value: any;
 
-    @ViewChild('wrapper', { read: ElementRef, static: false })
-    private wrapper!: ElementRef<HTMLElement>;
-
     @HostBinding('class') class: string = 'octopus-select-option';
-
-    @HostListener('click')
-    private listenHostClick(): void {
-        this._select.changeState(false);
-        this._select.changeSelect(this.value);
-        this._select.changeDOM(this.copy(), this.value);
-    }
 
     constructor(
         private _ref: ElementRef,
-        private _render: Renderer2,
         @Inject(forwardRef(() => OctopusSelect))
         private _select: OctopusSelect
     ) { }
 
-    copy(): HTMLElement {
-        if (this.wrapper.nativeElement.children.length > 0) {
-            let element: HTMLElement = this.wrapper.nativeElement.children.item(0) as HTMLElement;
-            return element.cloneNode(true) as HTMLElement;
-        } else {
-            let content: HTMLElement = this._render.createText(this.wrapper.nativeElement.textContent as string);
-            let element: HTMLElement = this._render.createElement('div');
-            this._render.setAttribute(element, 'class', 'w-100');
-            this._render.appendChild(element, content);
-            return element;
-        }
+    copyHTML(): string {
+        return this._ref.nativeElement.innerHTML;
     }
 
-    render(flag: boolean): void {
-        if (flag) {
-            this._render.addClass(this._ref.nativeElement, 'active');
-        } else {
-            this._render.removeClass(this._ref.nativeElement, 'active');
-        }
+    select(): void {
+        this._select.updateSelect(this.value, this.copyHTML());
+        this._select.state$.next(false);
     }
+
+}
+
+@Component({
+    selector: 'octopus-select-option-group',
+    template: `<ng-content select="octopus-select-option"></ng-content>`
+})
+export class OctopusSelectOptionGroup {
+
+    @Input('label') label: string = '';
+
+    @ContentChildren(OctopusSelectOption) options!: QueryList<OctopusSelectOption>;
+
+    @HostBinding('class') class: string = 'octopus-select-option-group';
 
 }
 
 @Component({
     selector: 'octopus-select-dropdown',
-    template: `<ng-template [cdkPortalOutlet]="portal"></ng-template>`
+    template: `
+        <octopus-list>
+            <octopus-list-item *ngFor="let option of options">
+                <a class="octopus-select-option" [class.active]="select !== undefined && option.value == select" [innerHTML]="option.copyHTML()" (click)="option.select()"></a>
+            </octopus-list-item>
+            <ng-container *ngFor="let group of groups">
+                <span octopus-list-headline>{{group.label}}</span>
+                <octopus-list-item *ngFor="let option of group.options">
+                    <a class="octopus-select-option pl-200" [class.active]="select !== undefined && option.value == select" [innerHTML]="option.copyHTML()" (click)="option.select()"></a>
+                </octopus-list-item>
+            </ng-container>
+        </octopus-list>
+    `
 })
-export class OctopusSelectDropdown implements OnInit {
+export class OctopusSelectDropdown implements OnInit, AfterViewInit {
 
-    @HostBinding('class') class: string = 'octopus-select-dropdown-wrapper';
+    @HostBinding('class') class: string = 'octopus-select-dropdown';
 
-    portal!: TemplatePortal;
+    groups!: QueryList<OctopusSelectOptionGroup>;
+    options!: QueryList<OctopusSelectOption>;
+    select!: any;
 
     constructor(
+        private _ref: ElementRef,
+        private _render: Renderer2,
         @Inject(OCTOPUS_SELECT_INJECTOR_DATA)
-        private _data: OctopusSelectInjector,
-        private _vcr: ViewContainerRef
+        private _data: OctopusSelectInjector
     ) { }
 
     ngOnInit() {
-        this.portal = new TemplatePortal(this._data.template, this._vcr);
+        this.groups = this._data.groups;
+        this.options = this._data.options;
+        this.select = this._data.selected;
+    }
+
+    ngAfterViewInit() {
+        this._render.addClass(this._ref.nativeElement, 'overflow-auto');
+        this._render.addClass(this._ref.nativeElement, 'overflow');
+        this._render.setStyle(this._ref.nativeElement, 'max-height', `calc(2.5rem * ${this._data.lines})`);
     }
 
 }
 
 @Component({
-    selector: 'octopus-select',
-    template: `
-        <div class="octopus-select-wrapper" cdkOverlayOrigin #origin="cdkOverlayOrigin">
-            <span class="flex-fill d-flex justify-content-center" #content></span>
-            <span class="material-icons" style="font-size: 0.85rem;" [@ICON_ROTATE]="(state$ | async) ? 'up' : 'down'">expand_circle_down</span>
-        </div>
-        <ng-template #template><ng-content select="octopus-select-option"></ng-content></ng-template>
-    `,
     animations: [
         trigger('ICON_ROTATE', [
             state('up', style({ transform: 'rotate(180deg)' })),
@@ -116,16 +132,31 @@ export class OctopusSelectDropdown implements OnInit {
             transition('down => up', animate('250ms ease-in-out'))
         ])
     ],
+    selector: 'octopus-select',
+    template: `
+        <div class="octopus-select-wrapper" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+            <div class="octopus-select-content" [innerHTML]="html" *ngIf="!initial"></div>
+            <div octopus-divider *ngIf="select === undefined && initial">{{placeholder}}</div>
+            <octopus-icon size="24" [@ICON_ROTATE]="(state$ | async) ? 'up' : 'down'" class="ml-25">expand_circle_down</octopus-icon>
+        </div>
+        <ng-template><ng-content select="octopus-select-option, octopus-select-option-group"></ng-content></ng-template>
+    `,
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => OctopusSelect),
         multi: true
     }]
 })
-export class OctopusSelect extends SelectControlValueAccessor implements OnChanges, OnInit, OnDestroy, AfterViewInit {
+export class OctopusSelect extends AbstractOctopusComponent implements ControlValueAccessor, OnDestroy, AfterContentInit, AfterViewInit {
 
     @Input('color') color: ColorPalette = 'primary';
-    @Input('placeholder') placeholder: string = '---------- Select One ----------';
+
+    @Input('lines')
+    get lines(): any { return this._lines; }
+    set lines(_lines: any) { this._lines = coerceNumberProperty(_lines); }
+    private _lines: any = 8;
+
+    @Input('placeholder') placeholder: string = 'Select One';
     @Input('select') select: any;
 
     @Output('selectChange') selectChange: EventEmitter<any> = new EventEmitter();
@@ -133,73 +164,62 @@ export class OctopusSelect extends SelectControlValueAccessor implements OnChang
     @ViewChild('origin', { read: CdkOverlayOrigin, static: true })
     private origin!: CdkOverlayOrigin;
 
-    @ViewChild('template', { read: TemplateRef, static: true })
-    private template!: TemplateRef<any>;
-
-    @ViewChild('content', { read: ElementRef, static: true })
-    private content!: ElementRef<HTMLElement>;
-
     @ContentChildren(OctopusSelectOption)
     private options!: QueryList<OctopusSelectOption>;
+
+    @ContentChildren(OctopusSelectOptionGroup)
+    private groups!: QueryList<OctopusSelectOptionGroup>;
 
     @HostBinding('class') class: string = 'octopus-select';
 
     @HostListener('click')
     private listenHostClick(): void {
-        this.changeState(true);
+        this.state$.next(true);
     }
 
     state$: Subject<boolean> = new Subject();
+    html!: SafeHtml;
+    initial: boolean = true;
 
-    private state: boolean = false;
     private ref!: OverlayRef;
     private stateSub!: Subscription;
-    private selectSub!: Subscription;
     private updateSub!: Subscription;
     private eventSub!: Subscription;
 
     constructor(
-        private _ref: ElementRef,
-        private _injector: Injector,
-        private _overlay: Overlay,
-        private _render: Renderer2,
-        private _vcr: ViewContainerRef
+        protected _sanitizer: DomSanitizer,
+        protected _ref: ElementRef,
+        protected _injector: Injector,
+        protected _overlay: Overlay,
+        protected _render: Renderer2,
+        protected _vcr: ViewContainerRef
     ) {
-        super(_render, _ref);
+        super(_ref);
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        setTimeout(() => super.ngOnChanges(changes));
+
         if (changes.select !== undefined) {
-            this.changeSelect(changes.select.currentValue);
+            setTimeout(() => {
+                this.updateHTML(this.options, changes.select.currentValue);
+                this.groups.forEach(group => this.updateHTML(group.options, changes.select.currentValue));
+            });
         }
     }
 
-    ngOnInit() {
-        this.changeSelect(this.select);
+    ngAfterContentInit() {
+        this.updateHTML(this.options, this.select);
+        this.groups.forEach(group => this.updateHTML(group.options, this.select));
     }
 
     ngAfterViewInit() {
-        if (this.select !== undefined) {
-            this.update(this.select)
-        }
-
-        this.selectSub = this.selectChange.asObservable().subscribe(value => this.update(value));
-        this.stateSub = this.state$.asObservable().subscribe(value => {
-            if (value) {
-                this.show();
-            } else {
-                this.hide();
-            }
-        });
+        this.stateSub = this.state$.asObservable().subscribe(value => value ? this.show() : this.hide());
     }
 
     ngOnDestroy() {
         if (this.stateSub !== undefined && !this.stateSub.closed) {
             this.stateSub.unsubscribe();
-        }
-
-        if (this.selectSub !== undefined && !this.selectSub.closed) {
-            this.selectSub.unsubscribe();
         }
 
         if (this.eventSub !== undefined && !this.eventSub.closed) {
@@ -209,11 +229,15 @@ export class OctopusSelect extends SelectControlValueAccessor implements OnChang
         if (this.updateSub !== undefined && !this.updateSub.closed) {
             this.updateSub.unsubscribe();
         }
+
+        this.state$.complete();
     }
 
     writeValue(value: any): void {
         if (value !== null) {
-            this.changeSelect(value);
+            this.updateSelect(value);
+            this.updateHTML(this.options, value);
+            this.groups.forEach(group => this.updateHTML(group.options, value));
         }
     }
 
@@ -225,44 +249,35 @@ export class OctopusSelect extends SelectControlValueAccessor implements OnChang
         this.onTouched = fn;
     }
 
-    setDisabledState(isDisabled: boolean): void {
-
-    }
+    setDisabledState(isDisabled: boolean): void { }
 
     onChange!: (_: any) => void;
     onTouched!: () => void;
 
-    changeState(state: boolean): void {
-        this.state = state;
-        this.state$.next(this.state);
-    }
-
-    changeSelect(select: any): void {
+    updateSelect(select: any, html: string = ''): void {
         this.select = select;
         this.selectChange.emit(this.select);
-    }
 
-    changeDOM(element: HTMLElement | undefined, value: any): void {
-        if (value === undefined) {
-            element = this._render.createElement('span');
-            element?.appendChild(this._render.createText(this.placeholder));
+        if (this.onChange !== undefined) {
+            this.onChange(select);
         }
 
-        let children: HTMLCollection = this.content.nativeElement.children;
-
-        if (children.length === 1) {
-            this._render.removeChild(this.content.nativeElement, children.item(0));
-        }
-
-        this._render.appendChild(this.content.nativeElement, element);
+        this.html = this._sanitizer.bypassSecurityTrustHtml(html);
+        this.initial = false;
     }
 
-    private update(value: any): void {
-        this.options.forEach(option => option.render(false));
-        let option: OctopusSelectOption = this.options.find(option => option.value === value) as OctopusSelectOption;
-        option.render(true);
-        let element: HTMLElement = option.copy() as HTMLElement;
-        this.changeDOM(element, value);
+    protected renderColor(prevColor: ColorPalette | undefined, currColor: ColorPalette): void {
+        this._render.removeClass(this._ref.nativeElement, prevColor === undefined ? 'octopus-primary-select' : `octopus-${prevColor}-select`);
+        this._render.addClass(this._ref.nativeElement, `octopus-${currColor}-select`);
+    }
+
+    private updateHTML(options: QueryList<OctopusSelectOption>, value: any): void {
+        this.initial = value === undefined;
+        let option = options.find(option => option.value == value);
+
+        if (option !== undefined) {
+            this.html = this._sanitizer.bypassSecurityTrustHtml(option.copyHTML());
+        }
     }
 
     private create(): void {
@@ -274,7 +289,7 @@ export class OctopusSelect extends SelectControlValueAccessor implements OnChang
             .withPositions(positions);
         let scrollStrategy: any = this._overlay.scrollStrategies.close();
         this.ref = this._overlay.create({
-            panelClass: ['octopus-select-overlay', `octopus-${this.color}-select-overlay`, 'octopus-shadow-z1'],
+            panelClass: ['octopus-select-overlay', `octopus-${this.color}-select-overlay`],
             positionStrategy, scrollStrategy,
             width: this.origin.elementRef.nativeElement.clientWidth
         });
@@ -289,13 +304,16 @@ export class OctopusSelect extends SelectControlValueAccessor implements OnChang
                     provide: OCTOPUS_SELECT_INJECTOR_DATA,
                     useValue: {
                         color: this.color,
-                        template: this.template
+                        groups: this.groups,
+                        options: this.options,
+                        lines: this.lines,
+                        selected: this.select
                     }
                 }
             ]
         })));
-        this.updateSub = interval(250).subscribe(() => this.ref.updatePosition());
-        this.eventSub = this.ref.outsidePointerEvents().subscribe(event => this.changeState(false));
+        this.updateSub = interval(250).pipe(take(10)).subscribe(() => this.ref.updatePosition());
+        this.eventSub = this.ref.outsidePointerEvents().subscribe(event => this.state$.next(false));
     }
 
     private hide(): void {
@@ -308,6 +326,3 @@ export class OctopusSelect extends SelectControlValueAccessor implements OnChang
 
 }
 
-function take(arg0: number): import("rxjs").OperatorFunction<number, unknown> {
-    throw new Error("Function not implemented.");
-}

@@ -1,43 +1,143 @@
-<!-- <octopus-select class="w-25" [(ngModel)]="select">
-    <octopus-select-option>None</octopus-select-option>
-    <octopus-select-option value="facebook">
-        <div class="d-grid w-100" style="grid-template-columns: auto 1fr 1fr;gap: 0.25rem;">
-            <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/1_social-512.png" alt="" width="32"
-                height="32" style="grid-column: 1 / 2;grid-row: 1 / 3;">
-            <span style="font-size: 0.75rem;grid-column: 2 / 4; grid-row: 1 / 2;">Facebook</span>
-            <span class="text-truncate" style="font-size: 0.5rem;grid-column: 2 / 3;grid-row: 2 / 3;">Facebook
-                Account</span>
-            <span style="font-size: 0.5rem;grid-column: 3 / 4;grid-row: 2 / 3;">Text Two</span>
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Select" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-select>
+                        <octopus-select-option>None</octopus-select-option>
+                        <octopus-select-option>Select Item I</octopus-select-option>
+                        <octopus-select-option>Select Item II</octopus-select-option>
+                        <octopus-select-option>Select Item III</octopus-select-option>
+                        <octopus-select-option>Select Item IV</octopus-select-option>
+                    </octopus-select>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Select with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-select [color]="item" *ngFor="let item of list">
+                        <octopus-select-option>None</octopus-select-option>
+                        <octopus-select-option>{{format(item)}} Select Item I</octopus-select-option>
+                        <octopus-select-option>{{format(item)}} Select Item II</octopus-select-option>
+                        <octopus-select-option>{{format(item)}} Select Item III</octopus-select-option>
+                        <octopus-select-option>{{format(item)}} Select Item IV</octopus-select-option>
+                    </octopus-select>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Select with Custom Options" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-select>
+                        <octopus-select-option>None</octopus-select-option>
+                        <octopus-select-option>
+                            <div class="d-flex align-items-center">
+                                <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/1_social-512.png"
+                                    alt="" width="24" height="24">
+                                <span class="flex-fill ml-50">Facebook</span>
+                            </div>
+                        </octopus-select-option>
+                        <octopus-select-option>
+                            <div class="d-flex align-items-center">
+                                <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/2_social-512.png"
+                                    alt="" width="24" height="24">
+                                <span class="flex-fill ml-50">Twitter</span>
+                            </div>
+                        </octopus-select-option>
+                        <octopus-select-option>
+                            <div class="d-flex align-items-center">
+                                <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/25_social-512.png"
+                                    alt="" width="24" height="24">
+                                <span class="flex-fill ml-50">Instagram</span>
+                            </div>
+                        </octopus-select-option>
+                        <octopus-select-option>
+                            <div class="d-flex align-items-center">
+                                <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/6_social-512.png"
+                                    alt="" width="24" height="24">
+                                <span class="flex-fill ml-50">YouTube</span>
+                            </div>
+                        </octopus-select-option>
+                    </octopus-select>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Select with Option Groups" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-select>
+                        <octopus-select-option-group label="Group Label I">
+                            <octopus-select-option>Group Option I - 1</octopus-select-option>
+                            <octopus-select-option>Group Option I - 2</octopus-select-option>
+                            <octopus-select-option>Group Option I - 3</octopus-select-option>
+                        </octopus-select-option-group>
+                        <octopus-select-option-group label="Group Label II">
+                            <octopus-select-option>Group Option II - 1</octopus-select-option>
+                            <octopus-select-option>Group Option II - 2</octopus-select-option>
+                            <octopus-select-option>Group Option II - 3</octopus-select-option>
+                        </octopus-select-option-group>
+                        <octopus-select-option-group label="Group Label III">
+                            <octopus-select-option>Group Option III - 1</octopus-select-option>
+                            <octopus-select-option>Group Option III - 2</octopus-select-option>
+                            <octopus-select-option>Group Option III - 3</octopus-select-option>
+                        </octopus-select-option-group>
+                    </octopus-select>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Select with Data Binding" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-select [(select)]="select">
+                        <octopus-select-option value="none">None</octopus-select-option>
+                        <octopus-select-option value="item-1">Select Item I</octopus-select-option>
+                        <octopus-select-option value="item-2">Select Item II</octopus-select-option>
+                        <octopus-select-option value="item-3">Select Item III</octopus-select-option>
+                        <octopus-select-option value="item-4">Select Item IV</octopus-select-option>
+                    </octopus-select>
+                    <octopus-select [(ngModel)]="select">
+                        <octopus-select-option value="none">None</octopus-select-option>
+                        <octopus-select-option value="item-1">Select Item I</octopus-select-option>
+                        <octopus-select-option value="item-2">Select Item II</octopus-select-option>
+                        <octopus-select-option value="item-3">Select Item III</octopus-select-option>
+                        <octopus-select-option value="item-4">Select Item IV</octopus-select-option>
+                    </octopus-select>
+                    <span>Data Binding by Value: {{select}}</span>
+                    <span>Data Binding by ngModel: {{select}}</span>
+                </div>
+            </app-demo-section>
         </div>
-    </octopus-select-option>
-    <octopus-select-option value="twitter">
-        <div class="d-grid w-100" style="grid-template-columns: auto 1fr 1fr;gap: 0.25rem;">
-            <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/2_social-512.png" alt="" width="32"
-                height="32" style="grid-column: 1 / 2;grid-row: 1 / 3;">
-            <span style="font-size: 0.75rem;grid-column: 2 / 4; grid-row: 1 / 2;">Twitter</span>
-            <span class="text-truncate" style="font-size: 0.5rem;grid-column: 2 / 3;grid-row: 2 / 3;">Twitter
-                Account</span>
-            <span style="font-size: 0.5rem;grid-column: 3 / 4;grid-row: 2 / 3;">Text Two</span>
-        </div>
-    </octopus-select-option>
-    <octopus-select-option value="instagram">
-        <div class="d-grid w-100" style="grid-template-columns: auto 1fr 1fr;gap: 0.25rem;">
-            <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/25_social-512.png" alt="" width="32"
-                height="32" style="grid-column: 1 / 2;grid-row: 1 / 3;">
-            <span style="font-size: 0.75rem;grid-column: 2 / 4; grid-row: 1 / 2;">Instagram</span>
-            <span class="text-truncate" style="font-size: 0.5rem;grid-column: 2 / 3;grid-row: 2 / 3;">Instagram
-                Accound</span>
-            <span style="font-size: 0.5rem;grid-column: 3 / 4;grid-row: 2 / 3;">Text Two</span>
-        </div>
-    </octopus-select-option>
-    <octopus-select-option value="youtube">
-        <div class="d-grid w-100" style="grid-template-columns: auto 1fr 1fr;gap: 0.25rem;">
-            <img src="https://cdn4.iconfinder.com/data/icons/social-media-2146/512/6_social-512.png" alt="" width="32"
-                height="32" style="grid-column: 1 / 2;grid-row: 1 / 3;">
-            <span style="font-size: 0.75rem;grid-column: 2 / 4; grid-row: 1 / 2;">YouTube</span>
-            <span class="text-truncate" style="font-size: 0.5rem;grid-column: 2 / 3;grid-row: 2 / 3;">YouTube
-                Account</span>
-            <span style="font-size: 0.5rem;grid-column: 3 / 4;grid-row: 2 / 3;">Text Two</span>
-        </div>
-    </octopus-select-option>
-</octopus-select> -->
+    </octopus-tabbed-unit>
+</octopus-tabbed>

@@ -1,0 +1,161 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Color Picker" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-color-picker></octopus-color-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Color Picker with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: center stretch;">
+                    <octopus-color-picker [color]="item" *ngFor="let item of list"></octopus-color-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Color Picker with Data Binding" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: 1fr auto 1fr auto;gap: 0.5rem;place-items: center stretch;">
+                    <octopus-color-picker [(value)]="color" (colorChange)="change = $event">
+                    </octopus-color-picker>
+                    <div class="text-base">{{color}}</div>
+                    <octopus-color-picker [(ngModel)]="color" (colorChange)="change = $event">
+                    </octopus-color-picker>
+                    <div class="text-base">{{color}}</div>
+                    <div class="text-base" style="grid-column: 1 / 5;">{{change | json}}</div>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Basic Date Picker" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-date-picker></octopus-date-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Date Picker with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-date-picker [color]="item" *ngFor="let item of list"></octopus-date-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Date Picker with Format" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(4, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-date-picker format="shortDate"></octopus-date-picker>
+                    <octopus-date-picker format="mediumDate"></octopus-date-picker>
+                    <octopus-date-picker format="longDate"></octopus-date-picker>
+                    <octopus-date-picker format="yyyy/MM/dd, EEEE"></octopus-date-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Date Picker with Data Binding" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-date-picker [(value)]="value"></octopus-date-picker>
+                    <octopus-date-picker [(ngModel)]="value"></octopus-date-picker>
+                    <span>Data Binding by Value: {{value}}</span>
+                    <span>Data Binding by ngModel: {{value}}</span>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Basic File Picker" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-file-picker></octopus-file-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="File Picker with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-file-picker [color]="item" *ngFor="let item of list"></octopus-file-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="File Picker with Mime-Types" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-file-picker [accept]="accept"></octopus-file-picker>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="File Picker with Blob Type" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-flex flex-column">
+                    <octopus-file-picker [type]="type" (blobChange)="listenChange($event)" [class.mb-25]="i === 0"
+                        [class.mt-25]="isLast" [class.my-25]="i > 0 && !isLast"
+                        *ngFor="let type of types; index as i; last as isLast">
+                    </octopus-file-picker>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

@@ -1,0 +1,276 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Form Field" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-form-field>
+                        <label octopus-form-label>Form Field</label>
+                        <octopus-input></octopus-input>
+                    </octopus-form-field>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Form Field with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-form-field [color]="item" *ngFor="let item of list">
+                        <label octopus-form-label>{{format(item)}} Form Field</label>
+                        <octopus-input [color]="item"></octopus-input>
+                    </octopus-form-field>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Form Field with Appearance" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-form-field appearance="standard">
+                        <label octopus-form-label>Standard Form Field</label>
+                        <octopus-input></octopus-input>
+                    </octopus-form-field>
+                    <octopus-form-field appearance="outline">
+                        <label octopus-form-label>Outline Form Field</label>
+                        <octopus-input></octopus-input>
+                    </octopus-form-field>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Form Field with Tip" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-form-field [color]="state === 'error' ? 'failure' : state === 'hint' ? 'primary' : state"
+                        active *ngFor="let state of states">
+                        <label octopus-form-label [state]="state">{{format(state)}} Form Field</label>
+                        <octopus-input></octopus-input>
+                        <octopus-form-tip [state]="state">{{format(state)}} Form Field Tip</octopus-form-tip>
+                    </octopus-form-field>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Form Example" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <form octopus-layout-grid gridGapX="8" gridGapY="8" gridColumns="1fr 0.75fr 1fr">
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="1" cellEndY="2">
+                            <octopus-form-field>
+                                <label octopus-form-label>Username</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>person</octopus-icon>
+                                    </ng-template>
+                                    <octopus-input type="text"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="2" cellEndY="3">
+                            <octopus-form-field>
+                                <label octopus-form-label>Password</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>security</octopus-icon>
+                                    </ng-template>
+                                    <ng-template octopus-input-group-suffix>
+                                        <button octopus-icon-button>
+                                            <octopus-icon>visibility</octopus-icon>
+                                        </button>
+                                    </ng-template>
+                                    <octopus-input type="password"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="3" cellEndY="4">
+                            <octopus-form-field>
+                                <label octopus-form-label>Confirmed Password</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>lock</octopus-icon>
+                                    </ng-template>
+                                    <ng-template octopus-input-group-suffix>
+                                        <button octopus-icon-button>
+                                            <octopus-icon>visibility</octopus-icon>
+                                        </button>
+                                    </ng-template>
+                                    <octopus-input type="password"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="4" cellEndY="5">
+                            <div octopus-divider>Personal Information</div>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="2" cellStartY="5" cellEndY="6">
+                            <octopus-form-field>
+                                <label octopus-form-label>First Name</label>
+                                <octopus-input type="text"></octopus-input>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="2" cellEndX="3" cellStartY="5" cellEndY="6">
+                            <octopus-form-field>
+                                <label octopus-form-label>Middle Name</label>
+                                <octopus-input></octopus-input>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="3" cellEndX="4" cellStartY="5" cellEndY="6">
+                            <octopus-form-field>
+                                <label octopus-form-label>Last Name</label>
+                                <octopus-input></octopus-input>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="2" cellStartY="6" cellEndY="7">
+                            <octopus-form-field>
+                                <label octopus-form-label>Card Number</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>badge</octopus-icon>
+                                    </ng-template>
+                                    <octopus-input type="text"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="2" cellEndX="3" cellStartY="6" cellEndY="7">
+                            <octopus-form-field>
+                                <label octopus-form-label>Credit Card</label>
+                                <octopus-select>
+                                    <octopus-select-option>
+                                        <img src="https://cdn0.iconfinder.com/data/icons/credit-8/512/4_credit-256.png"
+                                            alt="" width="36">
+                                        <span class="ml-50">MasterCard</span>
+                                    </octopus-select-option>
+                                    <octopus-select-option>
+                                        <img src="https://cdn0.iconfinder.com/data/icons/credit-8/512/1_credit-256.png"
+                                            alt="" width="36">
+                                        <span class="ml-50">Visa</span>
+                                    </octopus-select-option>
+                                    <octopus-select-option>
+                                        <img src="https://cdn0.iconfinder.com/data/icons/credit-8/512/7_credit-256.png"
+                                            alt="" width="36">
+                                        <span class="ml-50">PayPal</span>
+                                    </octopus-select-option>
+                                </octopus-select>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="3" cellEndX="4" cellStartY="6" cellEndY="7">
+                            <octopus-form-field>
+                                <label octopus-form-label>Date of Birth</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>calendar_today</octopus-icon>
+                                    </ng-template>
+                                    <octopus-date-picker></octopus-date-picker>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="3" cellStartY="7" cellEndY="8">
+                            <octopus-form-field>
+                                <label octopus-form-label>Phone</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>phone</octopus-icon>
+                                    </ng-template>
+                                    <octopus-input-phone></octopus-input-phone>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="3" cellEndX="4" cellStartY="7" cellEndY="8">
+                            <octopus-form-field>
+                                <label octopus-form-label>Email</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>email</octopus-icon>
+                                    </ng-template>
+                                    <octopus-input type="email"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="8" cellEndY="9">
+                            <div octopus-divider>Personal Address</div>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="9" cellEndY="10">
+                            <octopus-form-field>
+                                <label octopus-form-label>Address 1st</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>alternate_email</octopus-icon>
+                                    </ng-template>
+                                    <octopus-input type="text"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="10" cellEndY="11">
+                            <octopus-form-field>
+                                <label octopus-form-label>Address 2st</label>
+                                <octopus-input-group>
+                                    <ng-template octopus-input-group-prefix>
+                                        <octopus-icon>home</octopus-icon>
+                                    </ng-template>
+                                    <octopus-input type="text"></octopus-input>
+                                </octopus-input-group>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="2" cellStartY="11" cellEndY="12">
+                            <octopus-form-field>
+                                <label octopus-form-label>City / County</label>
+                                <octopus-input type="text"></octopus-input>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="2" cellEndX="3" cellStartY="11" cellEndY="12">
+                            <octopus-form-field>
+                                <label octopus-form-label>State</label>
+                                <octopus-select></octopus-select>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="3" cellEndX="4" cellStartY="11" cellEndY="12">
+                            <octopus-form-field>
+                                <label octopus-form-label>Zip Code</label>
+                                <octopus-number></octopus-number>
+                            </octopus-form-field>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="12" cellEndY="13" class="py-50">
+                            <octopus-checkbox>I read and agree to terms and conditions</octopus-checkbox>
+                        </div>
+                        <div octopus-grid-cell cellStartX="1" cellEndX="4" cellStartY="13" cellEndY="14">
+                            <button octopus-fill-button color="primary" class="w-25 py-25" style="float: right;">
+                                <octopus-icon margin="4">gpp_good</octopus-icon>
+                                Submit
+                            </button>
+                            <button octopus-fill-button color="secondary" class="w-25 py-25" style="float: left;">
+                                <octopus-icon margin="4">gpp_bad</octopus-icon>
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>

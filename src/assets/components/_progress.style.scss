@@ -38,11 +38,11 @@
             transform: rotate(-90deg);
 
             .track {
-                transition: stroke-dasharray 1000ms ease-in-out;
+                transition: stroke-dasharray 250ms ease-in-out;
             }
 
             .thumb {
-                transition: stroke-dasharray 1000ms ease-in-out, stroke-dashoffset 1000ms ease-in-out;
+                transition: stroke-dasharray 250ms ease-in-out, stroke-dashoffset 250ms ease-in-out;
             }
         }
 

@@ -1,5 +1,5 @@
-.octopus-checkbox {
-    .octopus-checkbox-wrapper {
+.octopus-radio-button {
+    .octopus-radio-button-wrapper {
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -11,27 +11,37 @@
     }
 
     &.before {
-        .octopus-checkbox-wrapper {
+        .octopus-radio-button-wrapper {
             flex-direction: row-reverse;
 
-            .octopus-checkbox-content {
+            .octopus-radio-button-content {
                 margin-right: 0.25rem;
             }
         }
     }
 
     &.after {
-        .octopus-checkbox-wrapper {
+        .octopus-radio-button-wrapper {
             flex-direction: row;
 
-            .octopus-checkbox-content {
+            .octopus-radio-button-content {
                 margin-left: 0.25rem;
             }
         }
     }
 }
 
-@mixin checkbox-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
+.octopus-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .octopus-radio-button {
+        margin: 0.25rem;
+    }
+}
+
+@mixin radiobutton-mixin($primary, $secondary, $success, $warning, $failure, $info, $foreground) {
     $color-list: (
         "primary": $primary,
         "secondary": $secondary,
@@ -40,17 +50,21 @@
         "failure": $failure,
         "info": $info,
     );
-    .octopus-checkbox {
+    .octopus-radio-button {
         @each $name, $value in $color-list {
-            &.octopus-#{$name}-checkbox {
-                color: $foreground;
+            &.octopus-#{$name}-radio-button {
+                $color: map-get($value, "value");
 
                 .material-icons {
+                    color: $foreground;
+
                     &.active {
-                        color: map-get($value, "value") !important;
+                        color: $color !important;
                     }
                 }
             }
         }
+
+        color: $foreground;
     }
 }

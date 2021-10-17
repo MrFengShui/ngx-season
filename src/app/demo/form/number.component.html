@@ -1,0 +1,75 @@
+<octopus-tabbed>
+    <octopus-tabbed-unit text="Overview"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Document"></octopus-tabbed-unit>
+    <octopus-tabbed-unit text="Example">
+        <div class="d-flex flex-column">
+            <app-demo-section label="Basic Number" class="mb-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot>
+                    <octopus-number></octopus-number>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Number with Color" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-number [color]="item" *ngFor="let item of list"></octopus-number>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Number with Restrictions" class="my-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(3, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-form-field style="grid-column: 1 / 2;">
+                        <label octopus-form-label>Min</label>
+                        <octopus-input [(value)]="minValue"></octopus-input>
+                    </octopus-form-field>
+                    <octopus-form-field style="grid-column: 2 / 3;">
+                        <label octopus-form-label>Max</label>
+                        <octopus-input [(value)]="maxValue"></octopus-input>
+                    </octopus-form-field>
+                    <octopus-form-field style="grid-column: 3 / 4;">
+                        <label octopus-form-label>Step</label>
+                        <octopus-input [(value)]="step"></octopus-input>
+                    </octopus-form-field>
+                    <octopus-number [minValue]="minValue" [maxValue]="maxValue" [step]="step"
+                        style="grid-column: 1 / 4;"></octopus-number>
+                </div>
+            </app-demo-section>
+            <app-demo-section label="Number with Data Binding" class="mt-100">
+                <div section-code>
+                    <octopus-tabbed>
+                        <octopus-tabbed-unit text="HTML"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="SCSS"></octopus-tabbed-unit>
+                        <octopus-tabbed-unit text="TS"></octopus-tabbed-unit>
+                    </octopus-tabbed>
+                </div>
+                <div section-foot class="d-grid"
+                    style="grid-template-columns: repeat(2, 1fr);gap: 0.5rem;place-items: stretch;">
+                    <octopus-number [(value)]="value"></octopus-number>
+                    <octopus-number [(ngModel)]="value"></octopus-number>
+                    <span>Date Binding by Value: {{value}}</span>
+                    <span>Date Binding by ngModel: {{value}}</span>
+                </div>
+            </app-demo-section>
+        </div>
+    </octopus-tabbed-unit>
+</octopus-tabbed>
