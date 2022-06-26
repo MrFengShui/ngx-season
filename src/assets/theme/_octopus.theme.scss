@@ -1,0 +1,80 @@
+@use "sass:map";
+@use "button.theme" as button;
+@use "ripple.theme" as ripple;
+@use "sidenav.theme" as sidenav;
+@use "tabs.theme" as tabs;
+@use "toolbar.theme" as toolbar;
+
+@mixin octopus-renderer-theme($theme) {
+    $primary: map.get($theme, "primary");
+    $accent: map.get($theme, "accent");
+    $success: map.get($theme, "success");
+    $warning: map.get($theme, "warning");
+    $failure: map.get($theme, "failure");
+    $foreground: map.get($theme, "foreground");
+    $background: map.get($theme, "background");
+
+    $colors: (
+        "primary": $primary, "accent": $accent,
+        "success": $success, "warning": $warning, "failure": $failure,
+    );
+
+    body {
+        background-color: map.get($background, "body");
+        color: map.get($foreground, "body");
+    }
+
+    $shadow-list: (0, 1, 2, 4, 8, 16);
+    @each $item in $shadow-list {
+        .octo-shadow-#{$item} {
+            box-shadow: 0 0 0.75rem 0 rgba(map.get($background, "base"), 0.75);
+        }
+    }
+
+    @each $key, $value in $colors {
+        .router-link-active-#{$key} {
+            background-color: $value !important;
+        }
+    }
+
+    @include button.mixin-button-theme($colors, $foreground, $background);
+    @include ripple.mixin-ripple-theme($colors, $foreground, $background);
+    @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
+    @include tabs.mixin-tabs-theme($colors, $foreground, $background);
+    @include toolbar.mixin-toolbar-theme($colors, $foreground, $background);
+
+    .octo-icon {
+        @each $key, $value in $colors {
+            &.octo-icon-#{$key} {
+                color: $value;
+            }
+        }
+    }
+
+    .octo-holder {
+        &.holder,
+        .holder {
+            background-color: gray;
+        }
+    }
+
+    .octo-split-line {
+        .line {
+            border-color: map.get($foreground, "base");
+        }
+    }
+
+    a.octo-queue-item {
+        background-color: map.get($background, "queue");
+        color: map.get($foreground, "queue");
+    }
+
+    .octo-status {
+        background-color: map.get($background, "card");
+        color: map.get($foreground, "card");
+
+        img {
+            filter: drop-shadow(0 0 0.25rem black);
+        }
+    }
+}

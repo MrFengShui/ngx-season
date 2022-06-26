@@ -1,0 +1,169 @@
+$blue: (
+    100: lighten(royalblue, 32%),
+    200: lighten(royalblue, 24%),
+    300: lighten(royalblue, 16%),
+    400: lighten(royalblue, 8%),
+    500: royalblue,
+    600: darken(royalblue, 4%),
+    700: darken(royalblue, 8%),
+    800: darken(royalblue, 12%),
+    900: darken(royalblue, 16%),
+);
+
+$cyan: (
+    100: lighten(cyan, 32%),
+    200: lighten(cyan, 24%),
+    300: lighten(cyan, 16%),
+    400: lighten(cyan, 8%),
+    500: cyan,
+    600: darken(cyan, 4%),
+    700: darken(cyan, 8%),
+    800: darken(cyan, 12%),
+    900: darken(cyan, 16%),
+);
+
+$gray: (
+    100: lighten(dimgray, 32%),
+    200: lighten(dimgray, 24%),
+    300: lighten(dimgray, 16%),
+    400: lighten(dimgray, 8%),
+    500: dimgray,
+    600: darken(dimgray, 4%),
+    700: darken(dimgray, 8%),
+    800: darken(dimgray, 12%),
+    900: darken(dimgray, 16%),
+);
+
+$green: (
+    100: lighten(forestgreen, 32%),
+    200: lighten(forestgreen, 24%),
+    300: lighten(forestgreen, 16%),
+    400: lighten(forestgreen, 8%),
+    500: forestgreen,
+    600: darken(forestgreen, 4%),
+    700: darken(forestgreen, 8%),
+    800: darken(forestgreen, 12%),
+    900: darken(forestgreen, 16%),
+);
+
+$indigo: (
+    100: lighten(indigo, 32%),
+    200: lighten(indigo, 24%),
+    300: lighten(indigo, 16%),
+    400: lighten(indigo, 8%),
+    500: indigo,
+    600: darken(indigo, 4%),
+    700: darken(indigo, 8%),
+    800: darken(indigo, 12%),
+    900: darken(indigo, 16%),
+);
+
+$orange: (
+    100: lighten(orangered, 32%),
+    200: lighten(orangered, 24%),
+    300: lighten(orangered, 16%),
+    400: lighten(orangered, 8%),
+    500: orangered,
+    600: darken(orangered, 4%),
+    700: darken(orangered, 8%),
+    800: darken(orangered, 12%),
+    900: darken(orangered, 16%),
+);
+
+$pink: (
+    100: lighten(deeppink, 32%),
+    200: lighten(deeppink, 24%),
+    300: lighten(deeppink, 16%),
+    400: lighten(deeppink, 8%),
+    500: deeppink,
+    600: darken(deeppink, 4%),
+    700: darken(deeppink, 8%),
+    800: darken(deeppink, 12%),
+    900: darken(deeppink, 16%),
+);
+
+$purple: (
+    100: lighten(darkviolet, 32%),
+    200: lighten(darkviolet, 24%),
+    300: lighten(darkviolet, 16%),
+    400: lighten(darkviolet, 8%),
+    500: darkviolet,
+    600: darken(darkviolet, 4%),
+    700: darken(darkviolet, 8%),
+    800: darken(darkviolet, 12%),
+    900: darken(darkviolet, 16%),
+);
+
+$red: (
+    100: lighten(red, 32%),
+    200: lighten(red, 24%),
+    300: lighten(red, 16%),
+    400: lighten(red, 8%),
+    500: red,
+    600: darken(red, 4%),
+    700: darken(red, 8%),
+    800: darken(red, 12%),
+    900: darken(red, 16%),
+);
+
+$teal: (
+    100: lighten(teal, 32%),
+    200: lighten(teal, 24%),
+    300: lighten(teal, 16%),
+    400: lighten(teal, 8%),
+    500: teal,
+    600: darken(teal, 4%),
+    700: darken(teal, 8%),
+    800: darken(teal, 12%),
+    900: darken(teal, 16%),
+);
+
+$yellow: (
+    100: lighten(gold, 32%),
+    200: lighten(gold, 24%),
+    300: lighten(gold, 16%),
+    400: lighten(gold, 8%),
+    500: gold,
+    600: darken(gold, 4%),
+    700: darken(gold, 8%),
+    800: darken(gold, 12%),
+    900: darken(gold, 16%),
+);
+
+@function create-bgcolor($base, $body, $button, $card, $queue, $sidenav, $tabs, $toolbar) {
+    @return (
+        "base": $base, "body": $body, "button": $button, "card": $card, "queue": $queue, "sidenav": $sidenav,
+        "tabs": $tabs, "toolbar": $toolbar
+    );
+}
+
+@function create-fgcolor($base, $body, $button, $card, $queue, $sidenav, $tabs, $toolbar) {
+    @return (
+        "base": $base, "body": $body, "button": $button, "card": $card, "queue": $queue, "sidenav": $sidenav,
+        "tabs": $tabs, "toolbar": $toolbar
+    );
+}
+
+@function fetch-color($color, $code: 500) {
+    @return map-get($color, $code);
+}
+
+@function create-dark-theme($primary, $accent, $success, $warning, $failure) {
+    $fgcolor: create-fgcolor(#fafafa, #fafafa, #fafafa, #fafafa, #fafafa, #eeeeee, #eeeeee, #fafafa);
+    $bgcolor: create-bgcolor(#212121, #212121, #424242, #424242, #424242, #424242, #424242, #424242);
+    @return (
+        "primary": $primary, "accent": $accent,
+        "success": $success, "warning": $warning, "failure": $failure,
+        "foreground": $fgcolor, "background": $bgcolor
+    );
+}
+
+@function create-light-theme($primary, $accent, $success, $warning, $failure) {
+    $fgcolor: create-fgcolor(#212121, #212121, #212121, #212121, #212121, #424242, #424242, #212121);
+    $bgcolor: create-bgcolor(#fafafa, #fafafa, #e0e0e0, #e0e0e0, #fafafa, #eeeeee, #eeeeee, #e0e0e0);
+    @return (
+        "primary": $primary, "accent": $accent,
+        "success": $success, "warning": $warning, "failure": $failure,
+        "foreground": $fgcolor, "background": $bgcolor
+    );
+}

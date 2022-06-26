@@ -34,7 +34,11 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            {
+                                "input": "src/assets/theme/prebuilt/default.theme.scss",
+                                "bundleName": "default.theme"
+                            }
                         ],
                         "scripts": []
                     },

@@ -1,0 +1,79 @@
+.octo-queue {
+    .octo-queue-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .octo-queue-header {
+            box-sizing: border-box;
+            filter: brightness(0.75);
+            margin: 0 0 1rem;
+            padding: 1rem;
+        }
+
+        .octo-queue-item {
+            box-sizing: border-box;
+            display: block;
+            min-height: 3rem;
+            padding: 0 1rem;
+
+            .octo-queue-line {
+                display: flex;
+                align-items: center;
+
+                &:nth-child(n) {
+                    margin-top: 1rem;
+                    margin-bottom: 1rem;
+                }
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &.octo-nav-queue {
+        .octo-nav-queue-item {
+            cursor: pointer;
+            min-height: 4rem;
+            text-decoration: none;
+            position: relative;
+
+            &:hover {
+                filter: brightness(1.25);
+            }
+
+            &.octo-queue-disitem {
+                background: none;
+                cursor: default;
+                filter: brightness(0.5);
+
+                &:hover {
+                    filter: brightness(0.5) !important;
+                }
+            }
+
+            .octo-ripple {
+                position: absolute;
+                inset: 0;
+            }
+
+            .octo-queue-icon {
+                font-size: 2rem;
+                line-height: 2rem;
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .octo-queue-text {
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+
+

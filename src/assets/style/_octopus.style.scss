@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+@import "button.style";
+@import "queue.style";
+@import "ripple.style";
+@import "sidenav.style";
+@import "tabs.style";
+@import "toolbar.style";
+@import "tools.style";
+@import "utility.style";
+
+* {
+    font-family: 'Noto Sans', sans-serif;
+    text-align: justify;
+}

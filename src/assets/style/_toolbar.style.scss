@@ -1,0 +1,38 @@
+.octo-toolbar {
+    display: block;
+
+    .octo-toolbar-row {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        height: 4rem;
+
+        > :nth-child(n) {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        > :first-child {
+            margin-left: 0;
+        }
+
+        > :last-child {
+            margin-right: 0;
+        }
+
+        .octo-toolbar-logo {
+            box-sizing: border-box;
+            height: 2.5rem;
+            padding: 0.25rem;
+        }
+
+        .octo-btn {
+            &.octo-btn-ring {
+                padding: 0.25rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+    }
+}

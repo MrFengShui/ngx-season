@@ -1,0 +1,89 @@
+@use "sass:map";
+
+@mixin mixin-button-theme($colors, $foreground, $background) {
+    .octo-btn {
+        filter: drop-shadow(0 0 0.125rem rgba(black, 0.125));
+
+        &.octo-base-btn {
+            color: map.get($foreground, "button");
+
+            &:hover {
+                background-color: rgba(map.get($background, "button"), 0.125);
+            }
+
+            &:active {
+                color: rgba(map.get($background, "button"), 0.125);
+            }
+        }
+
+        &.octo-solid-btn {
+            background-color: map.get($background, "button");
+            color: map.get($foreground, "button");
+
+            &:hover {
+                background-color: lighten(map.get($background, "button"), 2.5%);
+            }
+
+            &:active {
+                background-color: darken(map.get($background, "button"), 2.5%);
+            }
+        }
+
+        &.octo-stroke-btn {
+            border-color: map.get($foreground, "button");
+            color: map.get($foreground, "button");
+
+            &:hover {
+                border-color: lighten(map.get($foreground, "button"), 2.5%);
+                color: lighten(map.get($foreground, "button"), 2.5%);
+            }
+
+            &:active {
+                border-color: darken(map.get($foreground, "button"), 2.5%);
+                color: darken(map.get($foreground, "button"), 2.5%);
+            }
+        }
+
+        @each $key, $value in $colors {
+            &.octo-base-btn-#{$key} {
+                color: $value;
+
+                &:hover {
+                    background-color: rgba($value, 0.125);
+                }
+
+                &:active {
+                    color: rgba($value, 0.125);
+                }
+            }
+
+            &.octo-solid-btn-#{$key} {
+                background-color: $value;
+                color: lighten($value, 50%);
+
+                &:hover {
+                    background-color: lighten($value, 2.5%);
+                }
+
+                &:active {
+                    background-color: darken($value, 2.5%);
+                }
+            }
+
+            &.octo-stroke-btn-#{$key} {
+                border-color: $value;
+                color: $value;
+
+                &:hover {
+                    border-color: lighten($value, 2.5%);
+                    color: lighten($value, 2.5%);
+                }
+
+                &:active {
+                    border-color: darken($value, 2.5%);
+                    color: darken($value, 2.5%);
+                }
+            }
+        }
+    }
+}

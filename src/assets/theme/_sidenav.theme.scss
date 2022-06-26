@@ -1,0 +1,10 @@
+@use "sass:map";
+
+@mixin mixin-sidenav-theme($colors, $foreground, $background) {
+    .octo-sidenav-container {
+        .octo-sidenav,
+        .octo-sidenav-content{
+            background-color: map.get($background, "sidenav");
+        }
+    }
+}

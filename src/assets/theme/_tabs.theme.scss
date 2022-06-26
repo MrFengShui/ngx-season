@@ -1,0 +1,27 @@
+@use "sass:map";
+
+@mixin mixin-tabs-theme($colors, $foreground, $background) {
+    .octo-tab-pane {
+        background-color: map.get($background, "tabs");
+    }
+
+    .octo-tab-header {
+        background-color: map.get($background, "tabs");
+
+        .octo-tab {
+            color: map.get($foreground, "tabs");
+
+            .select-mark {
+                &.select-mark-base {
+                    background-color: map.get($foreground, "tabs");
+                }
+
+                @each $key, $value in $colors {
+                    &.select-mark-#{$key} {
+                        background-color: $value;
+                    }
+                }
+            }
+        }
+    }
+}

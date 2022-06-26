@@ -1,0 +1,21 @@
+@use "../palette.theme" as pale;
+@use "../octopus.theme" as octo;
+
+$primary: pale.fetch-color(pale.$purple);
+$accent: pale.fetch-color(pale.$orange);
+$success: pale.fetch-color(pale.$green, 700);
+$warning: pale.fetch-color(pale.$yellow, 700);
+$failure: pale.fetch-color(pale.$red, 700);
+
+$dark-theme: pale.create-dark-theme($primary, $accent, $success, $warning, $failure);
+$light-theme: pale.create-light-theme($primary, $accent, $success, $warning, $failure);
+
+.global-theme {
+    &.theme-dark-default {
+        @include octo.octopus-renderer-theme($dark-theme);
+    }
+
+    &.theme-light-default {
+        @include octo.octopus-renderer-theme($light-theme);
+    }
+}

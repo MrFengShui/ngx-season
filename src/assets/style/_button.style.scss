@@ -1,0 +1,43 @@
+.octo-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0.75rem;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    width: auto;
+    height: auto;
+
+    &.octo-btn-rect {
+        border-radius: 0.25rem;
+    }
+
+    &.octo-btn-ring {
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+
+        .octo-ripple {
+            border-radius: 50%;
+        }
+    }
+
+    &.octo-stroke-btn {
+        border-style: solid;
+        border-width: 0.125rem;
+    }
+
+    .octo-ripple {
+        position: absolute;
+        inset: 0;
+    }
+}

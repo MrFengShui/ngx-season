@@ -1,0 +1,173 @@
+$display-list: (none, flex, grid, block);
+$flex-dirs-map: ("col-pos": column, "col-neg": column-reverse, "row-pos": row, "row-neg": row-reverse);
+$flex-align-map: (
+    "stretch": stretch, "start": flex-start, "end": flex-end,
+    "center": center, "between": space-between, "around": space-around
+);
+@each $item in $display-list {
+    .d-#{$item} {
+        display: $item !important;
+    }
+
+    @if $item == "flex" {
+        @each $key, $value in $flex-dirs-map {
+            .flex-#{$key} {
+                flex-direction: $value;
+            }
+        }
+
+        @each $key, $value in $flex-align-map {
+            .flex-jc-#{$key} {
+                justify-content: $value;
+            }
+
+            .flex-ji-#{$key} {
+                justify-items: $value;
+            }
+
+            .flex-js-#{$key} {
+                justify-self: $value;
+            }
+
+            .flex-ac-#{$key} {
+                align-content: $value;
+            }
+
+            .flex-ai-#{$key} {
+                align-items: $value;
+            }
+
+            .flex-as-#{$key} {
+                align-self: $value;
+            }
+        }
+
+        .flex-fill {
+            flex: auto;
+        }
+    }
+}
+
+$size-list: (auto, fit, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100);
+@each $item in $size-list {
+    @if $item == auto {
+        .w-auto {
+            width: auto !important;
+        }
+
+        .h-auto {
+            height: auto !important;
+        }
+    } @else if $item == fit {
+        .w-fit {
+            width: fit-content !important;
+        }
+
+        .h-fit {
+            height: fit-content !important;
+        }
+    } @else {
+        .w-#{$item} {
+            width: percentage($item * 0.01) !important;
+        }
+
+        .h-#{$item} {
+            height: percentage($item * 0.01) !important;
+        }
+
+        .vw-#{$item} {
+            width: #{item}vw !important;
+        }
+
+        .vh-#{$item} {
+            height: #{$item}vh !important;
+        }
+    }
+}
+
+$space-name-map: (
+    "m": margin, "p": padding
+);
+$space-map: (
+    auto: auto, 0: 0, 25: 0.25rem, 50: 0.5rem, 75: 0.75rem, 100: 1rem, 125: 1.25rem, 150: 1.5rem,
+    200: 2rem, 250: 2.5rem, 300: 3rem, 350: 3.5rem, 400: 4rem, 450: 4.5rem, 500: 5rem
+);
+@each $key, $value in $space-map {
+    .g-#{$key} {
+        gap: $value;
+    }
+
+    .gx-#{$key} {
+        column-gap: $value;
+    }
+
+    .gy-#{$key} {
+        row-gap: $value;
+    }
+
+    .sx-#{$key} {
+        > :nth-child(n) {
+            margin-left: $value !important;
+            margin-right: $value !important;
+        }
+
+        > :first-child {
+            margin-left: 0 !important;
+        }
+
+        > :last-child {
+            margin-right: 0 !important;
+        }
+    }
+
+    .sy-#{$key} {
+        > :nth-child(n) {
+            margin-top: $value !important;
+            margin-bottom: $value !important;
+        }
+
+        > :first-child {
+            margin-top: 0 !important;
+        }
+
+        > :last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+@each $outer-key, $outer-value in $space-name-map {
+    @each $inner-key, $inner-value in $space-map {
+        .#{$outer-key}-#{$inner-key} {
+            #{$outer-value}-top: $inner-value !important;
+            #{$outer-value}-bottom: $inner-value !important;
+            #{$outer-value}-left: $inner-value !important;
+            #{$outer-value}-right: $inner-value !important;
+        }
+
+        .#{$outer-key}x-#{$inner-key} {
+            #{$outer-value}-left: $inner-value !important;
+            #{$outer-value}-right: $inner-value !important;
+        }
+
+        .#{$outer-key}y-#{$inner-key} {
+            #{$outer-value}-top: $inner-value !important;
+            #{$outer-value}-bottom: $inner-value !important;
+        }
+
+        .#{$outer-key}t-#{$inner-key} {
+            #{$outer-value}-top: $inner-value !important;
+        }
+
+        .#{$outer-key}b-#{$inner-key} {
+            #{$outer-value}-bottom: $inner-value !important;
+        }
+
+        .#{$outer-key}l-#{$inner-key} {
+            #{$outer-value}-left: $inner-value !important;
+        }
+
+        .#{$outer-key}r-#{$inner-key} {
+            #{$outer-value}-right: $inner-value !important;
+        }
+    }
+}

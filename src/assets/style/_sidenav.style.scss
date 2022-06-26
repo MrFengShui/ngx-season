@@ -1,0 +1,27 @@
+.octo-sidenav-container {
+    .octo-sidenav-container-wrapper {
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+
+        .octo-sidenav {
+            display: block;
+            filter: brightness(0.75);
+            overflow: hidden auto;
+
+            &.over {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+            }
+        }
+
+        .octo-sidenav-content {
+            display: block;
+            filter: brightness(0.95);
+            flex: auto;
+            overflow: auto;
+        }
+    }
+}
