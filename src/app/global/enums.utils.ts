@@ -2,6 +2,8 @@ export type OctopusAlignment = 'x' | 'y';
 
 export type OctopusColorPalette = 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'base';
 
+export type OctopusSpeed = 'fast' | 'normal' | 'slow';
+
 export type OctopusRatio = '1:1' | '4:3' | '3:4' | '16:9' | '9:16' | '16:10' | '10:16' | '21:9' | '9:21';
 
 export type OctopusShape = 'rect' | 'ring';

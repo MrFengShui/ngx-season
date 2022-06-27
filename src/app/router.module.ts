@@ -12,10 +12,14 @@ import {OctopusEffectsModule} from "./effects/effects.module";
 import {OctopusToolbarModule} from "./toolbar/toolbar.module";
 import {OctopusSidenavModule} from "./sidenav/sidenav.module";
 import {OctopusTabModule} from "./tabs/tabs.module";
+import {OctopusExpressModule} from "./express/express.module";
+import {OctopusCarouselModule} from "./carousel/carousel.module";
 
 const routes: Routes = [
-    {path: '', redirectTo: '/toolbar', pathMatch: 'full'},
+    {path: '', redirectTo: '/carousel', pathMatch: 'full'},
     {path: 'button', component: OctopusTemplateView},
+    {path: 'carousel', component: OctopusTemplateView},
+    {path: 'express', component: OctopusTemplateView},
     {path: 'icon', component: OctopusTemplateView},
     {path: 'queue', component: OctopusTemplateView},
     {path: 'sidenav', component: OctopusTemplateView},
@@ -35,7 +39,9 @@ const routes: Routes = [
             useHash: true
         }),
         OctopusButtonModule,
+        OctopusCarouselModule,
         OctopusEffectsModule,
+        OctopusExpressModule,
         OctopusImageModule,
         OctopusQueueModule,
         OctopusSidenavModule,
@@ -46,7 +52,9 @@ const routes: Routes = [
     exports: [
         OctopusTemplateView,
         OctopusButtonModule,
+        OctopusCarouselModule,
         OctopusEffectsModule,
+        OctopusExpressModule,
         OctopusImageModule,
         OctopusQueueModule,
         OctopusSidenavModule,

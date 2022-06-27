@@ -1,0 +1,17 @@
+@use "sass:map";
+
+@mixin mixin-express-theme($colors, $foreground, $background) {
+    .octo-express {
+        @each $key, $value in $colors {
+            @if $key == "primary" or $key == "accent" {
+                &.octo-express-#{$key} {
+                    background-color: rgba($value, 0.125);
+
+                    .octo-express-head {
+                        background-color: $value;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 @use "sass:map";
 @use "button.theme" as button;
+@use "carousel.theme" as carousel;
+@use "express.theme" as express;
 @use "ripple.theme" as ripple;
 @use "sidenav.theme" as sidenav;
 @use "tabs.theme" as tabs;
@@ -38,6 +40,8 @@
     }
 
     @include button.mixin-button-theme($colors, $foreground, $background);
+    @include carousel.mixin-carousel-theme($colors, $foreground, $background);
+    @include express.mixin-express-theme($colors, $foreground, $background);
     @include ripple.mixin-ripple-theme($colors, $foreground, $background);
     @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
     @include tabs.mixin-tabs-theme($colors, $foreground, $background);

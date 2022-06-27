@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@mixin mixin-carousel-theme($colors, $foreground, $background) {
+    .octo-carousel {
+        background-color: map.get($background, "base");
+
+        .octo-carousel-body {
+            background-color: map.get($background, "base");
+        }
+    }
+}

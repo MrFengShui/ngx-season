@@ -1,23 +1,33 @@
 import {animate, AnimationBuilder, AnimationPlayer, state, style, transition, trigger} from "@angular/animations";
 import {coerceBooleanProperty, coerceNumberProperty} from "@angular/cdk/coercion";
 import {
-    AfterContentInit, AfterViewInit, ChangeDetectorRef,
+    AfterContentInit,
+    AfterViewInit,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
-    Directive, ElementRef, EventEmitter, forwardRef,
-    HostBinding, HostListener, Inject, Input, NgZone, OnChanges, OnDestroy, Output,
-    QueryList, Renderer2, SimpleChanges, ViewChild
+    Directive,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    HostBinding,
+    HostListener,
+    Inject,
+    Input,
+    NgZone,
+    OnChanges,
+    OnDestroy,
+    Output,
+    QueryList,
+    Renderer2,
+    SimpleChanges,
+    ViewChild
 } from "@angular/core";
 import {Subscription} from "rxjs";
 
 import {OCTOPUS_TAB_HEADER_POSITIONS, OctopusColorPalette, OctopusTabHeaderPosition} from "../global/enums.utils";
 
-export interface OctopusTabSelectedChange {
-
-    currIndex: number;
-    prevIndex: number;
-
-}
+import {OctopusSelectedIndexChange} from "../global/event.model";
 
 @Directive({
     selector: 'octo-icon[octo-tab-thumb], img[octo-tab-thumb]'
@@ -140,7 +150,7 @@ export class OctopusTabHeader implements OnChanges, OnDestroy, AfterViewInit {
     @Input('octoIndex') index: number | string = 0;
     @Input('octoPos') position: OctopusTabHeaderPosition = 'top';
 
-    @Output('octoSelectChange') change: EventEmitter<OctopusTabSelectedChange> = new EventEmitter<OctopusTabSelectedChange>();
+    @Output('octoSelectChange') change: EventEmitter<OctopusSelectedIndexChange> = new EventEmitter<OctopusSelectedIndexChange>();
 
     @ContentChildren(OctopusTab) tabs!: QueryList<OctopusTab>;
 

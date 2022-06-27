@@ -1,0 +1,60 @@
+.octo-carousel {
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .octo-carousel-head {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+
+        .octo-carousel-sub {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .octo-carousel-desc {
+            font-size: 0.75rem;
+        }
+    }
+
+    .octo-carousel-body {
+        display: flex;
+        filter: brightness(1.5);
+        position: relative;
+
+        .octo-carousel-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .octo-carousel-foot {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 4rem;
+        padding: 0 1rem;
+
+        > .octo-btn {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .octo-carousel-orbit-wrapper {
+            display: flex;
+
+            .octo-btn {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+    }
+}
