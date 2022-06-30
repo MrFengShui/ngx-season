@@ -1,0 +1,61 @@
+.octo-label {
+    font-size: 0.75rem;
+    width: fit-content;
+    height: fit-content;
+    user-select: none;
+
+    &.octo-mark-label {
+        border-radius: 0.25rem;
+        display: flex;
+        overflow: hidden;
+
+        .octo-mark-label-head,
+        .octo-mark-label-tail {
+            box-sizing: border-box;
+            padding: 0.25rem 0.75rem;
+        }
+
+        .octo-mark-label-tail {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &.octo-chip-label {
+        border-radius: 9999rem;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        padding: 0.25rem;
+
+        .octo-chip-avatar {
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .octo-chip-label-text {
+            flex: auto;
+            font-size: 0.75rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .octo-btn {
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+    }
+}
+
+.octo-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+
+    .octo-chip-label {
+        margin: 0.5rem;
+    }
+}

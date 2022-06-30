@@ -1,8 +1,15 @@
+@import '@angular/cdk/overlay-prebuilt.css';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
+@import "accordion.style";
+@import "badge.style";
 @import "button.style";
 @import "carousel.style";
 @import "express.style";
+@import "label.style";
+@import "matrix.style";
+@import "menu.style";
+@import "overlay.style";
 @import "queue.style";
 @import "ripple.style";
 @import "sidenav.style";

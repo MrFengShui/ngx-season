@@ -1,5 +1,32 @@
-import {ChangeDetectionStrategy, Component} from "@angular/core";
-import {BehaviorSubject, interval, map, Observable, of, Subject} from "rxjs";
+import {ChangeDetectionStrategy, Component, Inject} from "@angular/core";
+import {interval, map, Observable, of} from "rxjs";
+import {OCTOPUS_DIALOG_DATA, OctopusDialog} from "../overlay/dialog.service";
+
+@Component({
+    selector: 'octopus-template-overlay-view',
+    template: `
+        <div octo-dialog-head octoMinMax>Octopus Template Head - {{_data | json}}</div>
+        <octo-split-line></octo-split-line>
+        <div octo-dialog-body>Octopus Template Body</div>
+        <octo-split-line></octo-split-line>
+        <div octo-dialog-ctrl>
+            <button octo-solid-btn octoColor="success" [octo-dialog-close]="'Submit'">Submit</button>
+            <button octo-solid-btn octoColor="failure" [octo-dialog-close]="'Cancel'">Cancel</button>
+        </div>
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <div octo-dialog-foot>Octopus Template Foot</div>-->
+    `
+})
+export class OctopusTemplateOverlayView {
+
+    constructor(
+        @Inject(OCTOPUS_DIALOG_DATA)
+        public _data: any
+    ) {
+        console.log(this._data);
+    }
+
+}
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,11 +36,12 @@ import {BehaviorSubject, interval, map, Observable, of, Subject} from "rxjs";
 export class OctopusTemplateView {
 
     flag$: Observable<boolean> = interval(1000).pipe(map(value => value % 2 === 0));
+    logo$: Observable<string> = of('https://cdn.worldvectorlogo.com/logos/google-play-4.svg');
     list$: Observable<Array<{label: string, content: string, image: string}>> =
-        of(Array.from({length: 3}).map((_, index) =>
+        of(Array.from({length: 8}).map((_, index) =>
             ({
-                label: `Carousel Subject 00${index + 1}`,
-                content: `Carousel Description 00${index + 1}`,
+                label: `Accordion Subject 00${index + 1}`,
+                content: `Accordion Description 00${index + 1}`,
                 image: index === 0
                     ? 'https://images.wallpaperscraft.com/image/single/bubbles_liquid_water_312589_1280x720.jpg'
                     : index === 1
@@ -30,5 +58,16 @@ export class OctopusTemplateView {
 
     fst: boolean = false;
     snd: boolean = false;
+    flag: boolean = true;
+
+    constructor(private _dialog: OctopusDialog) {
+    }
+
+    open(): void {
+        let dialog: OctopusDialog = this._dialog.config({data: {token: 'OCTOPUS_DIALOG_TOKEN'}})
+            .open(OctopusTemplateOverlayView);
+        dialog.afterOpened().subscribe(console.log);
+        dialog.afterClosed().subscribe(console.log);
+    }
 
 }

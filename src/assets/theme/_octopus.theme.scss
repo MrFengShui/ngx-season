@@ -1,7 +1,14 @@
 @use "sass:map";
+@use "accordion.theme" as accordion;
+@use "badge.theme" as badge;
 @use "button.theme" as button;
 @use "carousel.theme" as carousel;
 @use "express.theme" as express;
+@use "label.theme" as label;
+@use "matrix.theme" as matrix;
+@use "menu.theme" as menu;
+@use "overlay.theme" as overlay;
+@use "overflow.theme" as overflow;
 @use "ripple.theme" as ripple;
 @use "sidenav.theme" as sidenav;
 @use "tabs.theme" as tabs;
@@ -22,11 +29,11 @@
     );
 
     body {
-        background-color: map.get($background, "body");
-        color: map.get($foreground, "body");
+        background-color: map.get($background, "base");
+        color: map.get($foreground, "base");
     }
 
-    $shadow-list: (0, 1, 2, 4, 8, 16);
+    $shadow-list: (0, 1, 2, 4, 8, 12, 16);
     @each $item in $shadow-list {
         .octo-shadow-#{$item} {
             box-shadow: 0 0 0.75rem 0 rgba(map.get($background, "base"), 0.75);
@@ -34,14 +41,22 @@
     }
 
     @each $key, $value in $colors {
-        .router-link-active-#{$key} {
+        .octo-active-#{$key},
+        .octo-bg-#{$key} {
             background-color: $value !important;
         }
     }
 
+    @include accordion.mixin-accordion-theme($colors, $foreground, $background);
+    @include badge.mixin-badge-theme($colors, $foreground, $background);
     @include button.mixin-button-theme($colors, $foreground, $background);
     @include carousel.mixin-carousel-theme($colors, $foreground, $background);
     @include express.mixin-express-theme($colors, $foreground, $background);
+    @include label.mixin-label-theme($colors, $foreground, $background);
+    @include matrix.mixin-matrix-theme($colors, $foreground, $background);
+    @include menu.mixin-menu-theme($colors, $foreground, $background);
+    @include overlay.mixin-overlay-theme($colors, $foreground, $background);
+    @include overflow.mixin-overflow-theme($colors, $foreground, $background);
     @include ripple.mixin-ripple-theme($colors, $foreground, $background);
     @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
     @include tabs.mixin-tabs-theme($colors, $foreground, $background);

@@ -1,0 +1,33 @@
+.octo-badge {
+    position: relative;
+
+    .octo-badge-text {
+        border-radius: 50%;
+        font-size: 0.75rem;
+        position: absolute;
+    }
+
+    &.octo-dot-badge {
+        .octo-badge-text {
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+    }
+
+    &.octo-text-badge {
+        .octo-badge-text {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.5rem;
+            height: 1.5rem;
+
+            .octo-badge-inner-text {
+                display: block;
+                font-size: 0.75rem;
+                line-height: 0.75rem;
+            }
+        }
+    }
+}

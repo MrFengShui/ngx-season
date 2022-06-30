@@ -12,7 +12,7 @@ import {
 } from "@angular/core";
 import {animate, AnimationBuilder, AnimationPlayer, style} from "@angular/animations";
 
-import {OctopusSidenavMode} from "../global/enums.utils";
+import {OctopusColorPalette, OctopusSidenavMode} from "../global/enums.utils";
 
 @Directive({
     selector: '[octo-sidenav]'
@@ -39,10 +39,12 @@ export class OctopusSidenavContent {
     template: `
         <div class="octo-sidenav-container-wrapper" [class.flex-row-pos]="direction === 'ltr'"
              [class.flex-row-neg]="direction === 'rtl'">
-            <div class="octo-sidenav octo-shadow-8" [class.over]="mode === 'over'" #sidenav>
+            <div class="octo-sidenav" [octoShadow]="8" octo-overflow [octoColor]="color"
+                 [class.over]="mode === 'over'" #sidenav>
                 <ng-container [ngTemplateOutlet]="navbar._template"></ng-container>
             </div>
-            <div class="octo-sidenav-content" [style.min-width]="mode === 'push' ? 'calc(100% - ' + minSize + ')' : ''"
+            <div class="octo-sidenav-content" octo-overflow [octoColor]="color"
+                 [style.min-width]="mode === 'push' ? 'calc(100% - ' + minSize + ')' : ''"
                  [style.max-width]="mode === 'push' ? 'calc(100% - ' + minSize + ')' : ''" #sidectn>
                 <ng-container [ngTemplateOutlet]="content._template"></ng-container>
             </div>
@@ -52,6 +54,7 @@ export class OctopusSidenavContent {
 })
 export class OctopusSidenavContainer implements OnChanges, AfterViewInit {
 
+    @Input('octoColor') color: OctopusColorPalette = 'base';
     @Input('octoDir') direction: Direction = 'ltr';
     @Input('octoMode') mode: OctopusSidenavMode = 'side';
     @Input('octoMin') minSize: string | null = '4rem';

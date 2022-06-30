@@ -1,17 +1,21 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
-import {OctopusRipple} from "./ripple.directive";
+import {OctopusOverflow, OctopusRipple, OctopusShadow} from "./effects.directive";
 
 @NgModule({
     declarations: [
-        OctopusRipple
+        OctopusOverflow,
+        OctopusRipple,
+        OctopusShadow
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        OctopusRipple
+        OctopusOverflow,
+        OctopusRipple,
+        OctopusShadow
     ]
 })
 export class OctopusEffectsModule {}

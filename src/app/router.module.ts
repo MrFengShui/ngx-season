@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 
-import {OctopusTemplateView} from "./template/template.component";
+import {OctopusTemplateOverlayView, OctopusTemplateView} from "./template/template.component";
 
 import {OctopusButtonModule} from "./button/button.module";
 import {OctopusImageModule} from "./image/image.module";
@@ -14,6 +14,12 @@ import {OctopusSidenavModule} from "./sidenav/sidenav.module";
 import {OctopusTabModule} from "./tabs/tabs.module";
 import {OctopusExpressModule} from "./express/express.module";
 import {OctopusCarouselModule} from "./carousel/carousel.module";
+import {OctopusLabelModule} from "./label/label.module";
+import {OctopusOverlayModule} from "./overlay/overlay.module";
+import {OctopusMenuModule} from "./menu/menu.module";
+import {OctopusAccordionModule} from "./accordion/accordion.module";
+import {OctopusBadgeModule} from "./badge/badge.module";
+import {OctopusMatrixModule} from "./matrix/matrix.module";
 
 const routes: Routes = [
     {path: '', redirectTo: '/carousel', pathMatch: 'full'},
@@ -21,6 +27,7 @@ const routes: Routes = [
     {path: 'carousel', component: OctopusTemplateView},
     {path: 'express', component: OctopusTemplateView},
     {path: 'icon', component: OctopusTemplateView},
+    {path: 'label', component: OctopusTemplateView},
     {path: 'queue', component: OctopusTemplateView},
     {path: 'sidenav', component: OctopusTemplateView},
     {path: 'toolbar', component: OctopusTemplateView},
@@ -29,7 +36,8 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        OctopusTemplateView
+        OctopusTemplateView,
+        OctopusTemplateOverlayView
     ],
     imports: [
         CommonModule,
@@ -38,11 +46,17 @@ const routes: Routes = [
             preloadingStrategy: PreloadAllModules,
             useHash: true
         }),
+        OctopusAccordionModule,
+        OctopusBadgeModule,
         OctopusButtonModule,
         OctopusCarouselModule,
         OctopusEffectsModule,
         OctopusExpressModule,
         OctopusImageModule,
+        OctopusLabelModule,
+        OctopusMatrixModule,
+        OctopusMenuModule,
+        OctopusOverlayModule,
         OctopusQueueModule,
         OctopusSidenavModule,
         OctopusTabModule,
@@ -51,11 +65,18 @@ const routes: Routes = [
     ],
     exports: [
         OctopusTemplateView,
+        OctopusTemplateOverlayView,
+        OctopusAccordionModule,
+        OctopusBadgeModule,
         OctopusButtonModule,
         OctopusCarouselModule,
         OctopusEffectsModule,
         OctopusExpressModule,
         OctopusImageModule,
+        OctopusLabelModule,
+        OctopusMatrixModule,
+        OctopusMenuModule,
+        OctopusOverlayModule,
         OctopusQueueModule,
         OctopusSidenavModule,
         OctopusTabModule,

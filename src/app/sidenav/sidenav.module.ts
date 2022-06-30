@@ -4,6 +4,8 @@ import {CommonModule} from "@angular/common";
 
 import {OctopusSidenav, OctopusSidenavContainer, OctopusSidenavContent} from "./sidenav.component";
 
+import {OctopusEffectsModule} from "../effects/effects.module";
+
 @NgModule({
     declarations: [
         OctopusSidenavContainer,
@@ -12,7 +14,8 @@ import {OctopusSidenav, OctopusSidenavContainer, OctopusSidenavContent} from "./
     ],
     imports: [
         CommonModule,
-        ScrollingModule
+        ScrollingModule,
+        OctopusEffectsModule
     ],
     exports: [
         OctopusSidenavContainer,

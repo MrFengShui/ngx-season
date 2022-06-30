@@ -4,11 +4,12 @@
             <img src="https://cdn.worldvectorlogo.com/logos/angular-3.svg" alt="" height="100%">
         </a>
     </octo-toolbar>
-    <octo-sidenav-container [octoState]="state" octoMin="4rem" octoMax="15rem"  style="height: calc(100% - 4rem)">
+    <octo-sidenav-container octoColor="primary" [octoState]="state" octoMin="4rem" octoMax="17.5rem"
+                            style="height: calc(100% - 4rem)">
         <ng-template octo-sidenav>
-            <octo-nav-queue [octoHidden]="!state">
+            <octo-nav-queue>
                 <a octo-nav-queue-item [routerLink]="item.link" routerLinkActive="router-link-active-primary"
-                   *ngFor="let item of ROUTER_LIST_LINKS">
+                   *ngFor="let item of matchLinks(state) | async">
                     <octo-icon octo-queue-icon>{{item.icon}}</octo-icon>
                     <span octo-queue-text>{{item.text}}</span>
                 </a>

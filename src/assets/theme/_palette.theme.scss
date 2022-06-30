@@ -130,17 +130,38 @@ $yellow: (
     900: darken(gold, 16%),
 );
 
-@function create-bgcolor($base, $body, $button, $card, $queue, $sidenav, $tabs, $toolbar) {
+@function create-bgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar,
+    $sidenav, $tabs, $toolbar) {
     @return (
-        "base": $base, "body": $body, "button": $button, "card": $card, "queue": $queue, "sidenav": $sidenav,
-        "tabs": $tabs, "toolbar": $toolbar
+        "base": $base,
+        "accordion": $accordion,
+        "button": $button,
+        "card": $card,
+        "label": $label,
+        "menu": $menu,
+        "queue": $queue,
+        "overlay": $overlay,
+        "scrollbar": $scrollbar,
+        "sidenav": $sidenav,
+        "tabs": $tabs,
+        "toolbar": $toolbar
     );
 }
 
-@function create-fgcolor($base, $body, $button, $card, $queue, $sidenav, $tabs, $toolbar) {
+@function create-fgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar, $sidenav, $tabs, $toolbar) {
     @return (
-        "base": $base, "body": $body, "button": $button, "card": $card, "queue": $queue, "sidenav": $sidenav,
-        "tabs": $tabs, "toolbar": $toolbar
+        "base": $base,
+        "accordion": $accordion,
+        "button": $button,
+        "card": $card,
+        "label": $label,
+        "menu": $menu,
+        "queue": $queue,
+        "overlay": $overlay,
+        "scrollbar": $scrollbar,
+        "sidenav": $sidenav,
+        "tabs": $tabs,
+        "toolbar": $toolbar
     );
 }
 
@@ -149,8 +170,34 @@ $yellow: (
 }
 
 @function create-dark-theme($primary, $accent, $success, $warning, $failure) {
-    $fgcolor: create-fgcolor(#fafafa, #fafafa, #fafafa, #fafafa, #fafafa, #eeeeee, #eeeeee, #fafafa);
-    $bgcolor: create-bgcolor(#212121, #212121, #424242, #424242, #424242, #424242, #424242, #424242);
+    $fgcolor: create-fgcolor(
+            #fafafa, // base
+            #fafafa, // accordion
+            #fafafa, // button
+            #fafafa, // card
+            #e0e0e0, // label
+            #e0e0e0, // menu
+            #fafafa, // overlay
+            #fafafa, // queue
+            #e0e0e0, // scrollbar
+            #eeeeee, // sidenav
+            #eeeeee, // tabs
+            #fafafa // toolbar
+    );
+    $bgcolor: create-bgcolor(
+            #212121, // base
+            #424242, // accordion
+            #424242, // button
+            #424242, // card
+            #616161, // label
+            #616161, // menu
+            #212121, // overlay
+            #424242, // queue
+            #616161, // scrollbar
+            #424242, // sidenav
+            #424242, // tabs
+            #424242 // toolbar
+    );
     @return (
         "primary": $primary, "accent": $accent,
         "success": $success, "warning": $warning, "failure": $failure,
@@ -159,8 +206,34 @@ $yellow: (
 }
 
 @function create-light-theme($primary, $accent, $success, $warning, $failure) {
-    $fgcolor: create-fgcolor(#212121, #212121, #212121, #212121, #212121, #424242, #424242, #212121);
-    $bgcolor: create-bgcolor(#fafafa, #fafafa, #e0e0e0, #e0e0e0, #fafafa, #eeeeee, #eeeeee, #e0e0e0);
+    $fgcolor: create-fgcolor(
+            #212121, // base
+            #212121, // accordion
+            #212121, // button
+            #212121, // card
+            #616161, // label
+            #616161, // menu
+            #212121, // overlay
+            #424242, // queue
+            #616161, // scrollbar
+            #424242, // sidenav
+            #424242, // tabs
+            #212121 // toolbar
+    );
+    $bgcolor: create-bgcolor(
+            #fafafa, // base
+            #e0e0e0, // accordion
+            #e0e0e0, // button
+            #e0e0e0, // card
+            #e0e0e0, // label
+            #e0e0e0, // menu
+            #fafafa, // overlay
+            #fafafa, // queue
+            #e0e0e0, // scrollbar
+            #eeeeee, // sidenav
+            #eeeeee, // tabs
+            #e0e0e0 // toolbar
+    );
     @return (
         "primary": $primary, "accent": $accent,
         "success": $success, "warning": $warning, "failure": $failure,

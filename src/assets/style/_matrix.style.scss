@@ -1,0 +1,49 @@
+.octo-matrix {
+    display: grid;
+
+    .octo-matrix-tile {
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+
+        .octo-matrix-tile-header {
+            box-sizing: border-box;
+            padding: 0.5rem;
+            position: absolute;
+            inset: 0 0 auto 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .octo-matrix-tile-footer {
+            box-sizing: border-box;
+            padding: 0.5rem;
+            position: absolute;
+            inset: auto 0 0 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .octo-ripple {
+            display: none;
+        }
+    }
+
+    a {
+        &.octo-matrix-tile {
+            cursor: pointer;
+
+            .octo-ripple {
+                display: inherit;
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+            }
+        }
+    }
+}

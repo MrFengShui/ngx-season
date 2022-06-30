@@ -1,0 +1,40 @@
+.octo-accordion {
+    display: block;
+
+    .octo-accordion-panel {
+        .octo-accordion-panel-wrapper {
+            box-sizing: border-box;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            height: 4rem;
+            padding: 0 1rem;
+
+            .octo-accordion-thumb {
+                font-size: 2.25rem;
+                line-height: 2.25rem;
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+
+            .octo-panel-text-wraper {
+                display: flex;
+                flex-direction: column;
+                flex: auto;
+
+                .octo-panel-sub {
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                }
+
+                .octo-panel-desc {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+
+        .octo-accordion-panel-content {
+            overflow: hidden;
+        }
+    }
+}

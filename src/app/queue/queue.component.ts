@@ -149,15 +149,12 @@ export class OctopusQueueItem implements AfterContentChecked {
         <div octo-ripple class="mx-0" *ngIf="ripple"></div>
         <ng-container *ngIf="icons.length <= 1 && texts.length <= 1">
             <ng-content select="octo-icon[octo-queue-icon]"></ng-content>
-            <ng-container *ngIf="!hidden">
-                <ng-content select="span[octo-queue-text]"></ng-content>
-            </ng-container>
+            <ng-content select="span[octo-queue-text]"></ng-content>
         </ng-container>
     `
 })
 export class OctopusNavigatorQueueItem extends OctopusQueueItem implements OnChanges, AfterContentInit, AfterViewInit {
 
-    @Input('octoHidden') hidden: boolean | string | null = true;
     @Input('octoRipple') ripple: boolean | string | null = true;
     @Input('disabled') disabled: boolean | string | null = false;
 
@@ -232,10 +229,6 @@ export class OctopusNavigatorQueue extends OctopusAbstractQueue implements OnCha
     private items!: QueryList<OctopusNavigatorQueueItem>;
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['hidden']) {
-            this.toggleHidden(changes['hidden'].currentValue);
-        }
-
         if (changes['ripple']) {
             this.toggleRipple(changes['ripple'].currentValue);
         }
@@ -246,19 +239,12 @@ export class OctopusNavigatorQueue extends OctopusAbstractQueue implements OnCha
     }
 
     ngAfterContentInit() {
-        this.toggleHidden(this.hidden);
         this.toggleRipple(this.ripple);
         this.toggleDisabled(this.disabled);
     }
 
     ngAfterViewInit() {
         this._render.addClass(this._element.nativeElement, 'octo-nav-queue');
-    }
-
-    toggleHidden(hidden: boolean | string | null): void {
-        if (this.items) {
-            this.items.forEach(item => item.hidden = hidden);
-        }
     }
 
     toggleRipple(ripple: boolean | string | null): void {

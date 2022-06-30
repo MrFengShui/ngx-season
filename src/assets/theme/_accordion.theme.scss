@@ -1,0 +1,21 @@
+@use "sass:map";
+
+@mixin mixin-accordion-theme($colors, $foreground, $background) {
+    .octo-accordion {
+        .octo-accordion-panel {
+            color: map.get($foreground, "accordion");
+
+            .octo-accordion-panel-wrapper {
+                background-color: darken(map.get($background, "accordion"), 2.5%);
+
+                &:hover {
+                    background-color: lighten(map.get($background, "accordion"), 2.5%);
+                }
+            }
+
+            .octo-accordion-panel-content {
+                background-color: lighten(map.get($background, "accordion"), 2.5%);
+            }
+        }
+    }
+}

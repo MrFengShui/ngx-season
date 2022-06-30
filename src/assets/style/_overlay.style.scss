@@ -1,0 +1,59 @@
+.octo-overlay {
+    &.octo-dialog {
+        border-radius: 0.25rem;
+        overflow: hidden;
+
+        .cdk-dialog-container {
+            > :nth-child(n) {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+
+                .octo-dialog-head {
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    padding: 1rem;
+
+                    .octo-dialog-head-wrapper {
+                        flex: auto;
+                    }
+                }
+
+                .octo-dialog-body {
+                    box-sizing: border-box;
+                    flex: auto;
+                    padding: 1rem;
+                }
+
+                .octo-dialog-foot{
+                    box-sizing: border-box;
+                    padding: 1rem;
+                }
+
+                .octo-dialog-ctrl {
+                    box-sizing: border-box;
+                    display: flex;
+                    padding: 1rem;
+
+                    > :nth-child(n) {
+                        margin-left: 0.5rem;
+                        margin-right: 0.5rem;
+                    }
+
+                    > :first-child {
+                        margin-left: 0;
+                    }
+
+                    > :last-child {
+                        margin-right: 0;
+                    }
+                }
+
+                .octo-split-line {
+                    margin: 0 !important;
+                }
+            }
+        }
+    }
+}

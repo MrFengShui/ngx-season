@@ -1,0 +1,23 @@
+.octo-menu {
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 15rem;
+    max-width: 20rem;
+    overflow: hidden;
+
+    .octo-menu-item {
+        cursor: pointer;
+        position: relative;
+        padding: 1rem;
+
+        .octo-ripple {
+            position: absolute;
+            inset: 0;
+        }
+    }
+
+    .octo-split-line {
+        margin: 0 !important;
+    }
+}

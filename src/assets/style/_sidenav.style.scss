@@ -8,7 +8,6 @@
         .octo-sidenav {
             display: block;
             filter: brightness(0.75);
-            overflow: hidden auto;
 
             &.over {
                 position: absolute;
@@ -21,7 +20,6 @@
             display: block;
             filter: brightness(0.95);
             flex: auto;
-            overflow: auto;
         }
     }
 }

@@ -1,0 +1,12 @@
+@use "sass:map";
+
+@mixin mixin-overlay-theme($colors, $foreground, $background) {
+    .octo-overlay-mask {
+        background-color: rgba(map.get($background, "overlay"), 0.5);
+    }
+
+    .octo-overlay {
+        background-color: map.get($background, "overlay");
+        color: map.get($foreground, "overlay");
+    }
+}

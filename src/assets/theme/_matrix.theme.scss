@@ -1,0 +1,23 @@
+@use "sass:map";
+
+@mixin mixin-matrix-theme($colors, $foreground, $background) {
+    .octo-matrix-tile {
+        &.octo-matrix-tile-base {
+            color: map.get($foreground, "card");
+
+            .octo-matrix-tile-header,
+            .octo-matrix-tile-footer {
+                background-color: rgba(map.get($background, "card"), 0.5);
+            }
+        }
+
+        @each $key, $value in $colors {
+            &.octo-matrix-tile-#{$key} {
+                .octo-matrix-tile-header,
+                .octo-matrix-tile-footer {
+                    background-color: rgba($value, 0.5);
+                }
+            }
+        }
+    }
+}

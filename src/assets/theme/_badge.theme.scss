@@ -1,0 +1,13 @@
+@use "sass:map";
+
+@mixin mixin-badge-theme($colors, $foreground, $background) {
+    .octo-badge {
+        @each $key, $value in $colors {
+            &.octo-badge-#{$key} {
+                .octo-badge-text {
+                    background-color: $value;
+                }
+            }
+        }
+    }
+}
