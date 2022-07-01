@@ -3,15 +3,16 @@ import {OverlayModule} from "@angular/cdk/overlay";
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
-import {OCTOPUS_DIALOG_DATA, OctopusDialog} from "./dialog.service";
+import {OctopusDialog, OctopusDrawer} from "./overlay.service";
 
 import {
     OctopusDialogBody,
     OctopusDialogClose,
     OctopusDialogControlBar,
     OctopusDialogFoot,
-    OctopusDialogHead
-} from "./dialog.component";
+    OctopusDialogHead, OctopusDrawerContent, OctopusDrawerHeader
+} from "./overlay.component";
+
 import {OctopusButtonModule} from "../button/button.module";
 import {OctopusImageModule} from "../image/image.module";
 
@@ -21,7 +22,9 @@ import {OctopusImageModule} from "../image/image.module";
         OctopusDialogHead,
         OctopusDialogBody,
         OctopusDialogFoot,
-        OctopusDialogControlBar
+        OctopusDialogControlBar,
+        OctopusDrawerHeader,
+        OctopusDrawerContent
     ],
     imports: [
         CommonModule,
@@ -35,10 +38,13 @@ import {OctopusImageModule} from "../image/image.module";
         OctopusDialogHead,
         OctopusDialogBody,
         OctopusDialogFoot,
-        OctopusDialogControlBar
+        OctopusDialogControlBar,
+        OctopusDrawerHeader,
+        OctopusDrawerContent
     ],
     providers: [
-        OctopusDialog
+        OctopusDialog,
+        OctopusDrawer
     ]
 })
 export class OctopusOverlayModule {}

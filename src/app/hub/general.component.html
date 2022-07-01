@@ -1,0 +1,6 @@
+<octo-matrix octoCols="4" octoRatio="4:3">
+    <a octo-matrix-tile octoColor="primary" [routerLink]="item.link" [queryParams]="" *ngFor="let item of list$ | async">
+        <img src="https://images.wallpaperscraft.com/image/single/cubes_shapes_volume_314479_1280x960.jpg" alt="" width="100%">
+        <octo-matrix-tile-footer>{{item.text}}</octo-matrix-tile-footer>
+    </a>
+</octo-matrix>

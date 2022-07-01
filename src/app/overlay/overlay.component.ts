@@ -10,8 +10,9 @@ import {
     SimpleChanges
 } from "@angular/core";
 import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette, OctopusFlex} from "../global/enums.utils";
-import {OctopusDialog} from "./dialog.service";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
+
+import {OctopusDialog, OctopusDrawer} from "./overlay.service";
 
 @Component({
     selector: 'div[octo-dialog-head], div[octoDialogHead]',
@@ -157,6 +158,69 @@ export class OctopusDialogControlBar implements OnChanges, AfterViewInit {
         let task = setTimeout(() => {
             clearTimeout(task);
             this._render.setStyle(this._element.nativeElement, 'justify-content', flex);
+        });
+    }
+
+}
+
+@Component({
+    selector: 'div[octo-drawer-header], div[octoDrawerHeader]',
+    template: `
+        <div class="octo-drawer-header-wrapper">
+            <ng-content></ng-content>
+        </div>
+        <button octo-btn octoShape="ring" class="ml-100" style="width: 2rem;height: 2rem;"
+                (click)="_drawer.close()">
+            <octo-icon octoSize="1rem">close</octo-icon>
+        </button>
+    `
+})
+export class OctopusDrawerHeader {
+
+    @HostBinding('class') class: string = 'octo-drawer-header';
+
+    constructor(public _drawer: OctopusDrawer) {
+    }
+
+}
+
+
+@Directive({
+    selector: 'div[octo-drawer-content], div[octoDrawerContent]'
+})
+export class OctopusDrawerContent implements OnChanges, AfterViewInit {
+
+    @Input('octoColor') color: OctopusColorPalette = 'base';
+
+    @HostBinding('class') class: string = 'octo-drawer-content';
+
+    constructor(
+        private _element: ElementRef,
+        private _render: Renderer2
+    ) {
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['color']) {
+            this.renderColor(changes['color'].currentValue);
+        }
+    }
+
+    ngAfterViewInit() {
+        this._render.addClass(this._element.nativeElement, 'overflow');
+        this._render.addClass(this._element.nativeElement, 'overflow-auto-y');
+        this.renderColor(this.color);
+    }
+
+    private renderColor(color: OctopusColorPalette): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            OCTOPUS_COLOR_PALETTES.forEach(item =>
+                this._render.removeClass(this._element.nativeElement, `overflow-${item}`));
+
+            if (color === 'base' || color === 'primary' || color === 'accent') {
+                this._render.addClass(this._element.nativeElement, `overflow-${color}`);
+            }
         });
     }
 

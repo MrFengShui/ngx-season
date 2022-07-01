@@ -37,6 +37,7 @@
     a {
         &.octo-matrix-tile {
             cursor: pointer;
+            text-decoration: none;
 
             .octo-ripple {
                 display: inherit;

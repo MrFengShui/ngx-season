@@ -8,8 +8,8 @@
                             style="height: calc(100% - 4rem)">
         <ng-template octo-sidenav>
             <octo-nav-queue>
-                <a octo-nav-queue-item [routerLink]="item.link" routerLinkActive="router-link-active-primary"
-                   *ngFor="let item of matchLinks(state) | async">
+                <a octo-nav-queue-item [routerLink]="item.link" [queryParams]="item.params"
+                   routerLinkActive="octo-active-primary" *ngFor="let item of matchLinks(state) | async">
                     <octo-icon octo-queue-icon>{{item.icon}}</octo-icon>
                     <span octo-queue-text>{{item.text}}</span>
                 </a>

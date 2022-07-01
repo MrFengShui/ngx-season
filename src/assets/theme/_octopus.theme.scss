@@ -9,6 +9,7 @@
 @use "menu.theme" as menu;
 @use "overlay.theme" as overlay;
 @use "overflow.theme" as overflow;
+@use "progress.theme" as progress;
 @use "ripple.theme" as ripple;
 @use "sidenav.theme" as sidenav;
 @use "tabs.theme" as tabs;
@@ -57,6 +58,7 @@
     @include menu.mixin-menu-theme($colors, $foreground, $background);
     @include overlay.mixin-overlay-theme($colors, $foreground, $background);
     @include overflow.mixin-overflow-theme($colors, $foreground, $background);
+    @include progress.mixin-progress-theme($colors, $foreground, $background);
     @include ripple.mixin-ripple-theme($colors, $foreground, $background);
     @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
     @include tabs.mixin-tabs-theme($colors, $foreground, $background);

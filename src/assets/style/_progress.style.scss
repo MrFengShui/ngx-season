@@ -1,0 +1,20 @@
+.octo-progress {
+    display: flex;
+
+    .octo-progress-index {
+        transition: all 250ms linear;
+    }
+
+    .octo-progress-text {
+        font-size: 0.75rem;
+    }
+
+    &.octo-progress-pie {
+        border-radius: 50%;
+
+        .octo-progress-index {
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+    }
+}

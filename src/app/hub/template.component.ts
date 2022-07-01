@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, Inject} from "@angular/core";
-import {interval, map, Observable, of} from "rxjs";
-import {OCTOPUS_DIALOG_DATA, OctopusDialog} from "../overlay/dialog.service";
+import {interval, map, Observable, of, take} from "rxjs";
+import {OCTOPUS_DIALOG_DATA, OCTOPUS_DRAWER_DATA, OctopusDialog, OctopusDrawer} from "../overlay/overlay.service";
 
 @Component({
     selector: 'octopus-template-overlay-view',
     template: `
-        <div octo-dialog-head octoMinMax>Octopus Template Head - {{_data | json}}</div>
+        <div octo-dialog-head octoMinMax octoClose>Octopus Template Head - {{_dialogData | json}}</div>
         <octo-split-line></octo-split-line>
         <div octo-dialog-body>Octopus Template Body</div>
         <octo-split-line></octo-split-line>
@@ -13,24 +13,26 @@ import {OCTOPUS_DIALOG_DATA, OctopusDialog} from "../overlay/dialog.service";
             <button octo-solid-btn octoColor="success" [octo-dialog-close]="'Submit'">Submit</button>
             <button octo-solid-btn octoColor="failure" [octo-dialog-close]="'Cancel'">Cancel</button>
         </div>
-<!--        <octo-split-line></octo-split-line>-->
-<!--        <div octo-dialog-foot>Octopus Template Foot</div>-->
+        <octo-split-line></octo-split-line>
+        <div octo-dialog-foot>Octopus Template Foot</div>
+<!--        <div octo-drawer-header>Octopus Template Header - {{_drawerData | json}}</div>-->
+<!--        <div octo-drawer-content>Octopus Template Content</div>-->
     `
 })
 export class OctopusTemplateOverlayView {
 
     constructor(
         @Inject(OCTOPUS_DIALOG_DATA)
-        public _data: any
-    ) {
-        console.log(this._data);
-    }
+        public _dialogData: any,
+        @Inject(OCTOPUS_DRAWER_DATA)
+        public _drawerData: any
+    ) {}
 
 }
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'octopus-template-view',
+    selector: 'octopus-hub-view',
     templateUrl: 'template.component.html'
 })
 export class OctopusTemplateView {
@@ -55,19 +57,21 @@ export class OctopusTemplateView {
         `The color palette starts with primary colors and fills in the spectrum to create a complete and usable palette for Android, Web, and iOS. Google suggests using the 500 colors as the primary colors in your app and the other colors as accents colors.`,
         `Themes enable consistent app styling through surface shades, shadow depth, and ink opacity.`
     ]);
+    progress$: Observable<number> = interval(100).pipe(take(1001), map(value => value * 0.001));
 
-    fst: boolean = false;
-    snd: boolean = false;
     flag: boolean = true;
 
-    constructor(private _dialog: OctopusDialog) {
+    constructor(
+        private _dialog: OctopusDialog,
+        private _drawer: OctopusDrawer
+    ) {
     }
 
     open(): void {
         let dialog: OctopusDialog = this._dialog.config({data: {token: 'OCTOPUS_DIALOG_TOKEN'}})
             .open(OctopusTemplateOverlayView);
-        dialog.afterOpened().subscribe(console.log);
-        dialog.afterClosed().subscribe(console.log);
+        // this._drawer.config({data: {token: 'OCTOPUS_DRAWER_TOKEN'}, height: '80vh'})
+        //     .open(OctopusTemplateOverlayView)
     }
 
 }

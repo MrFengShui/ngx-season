@@ -2,9 +2,9 @@
 
 @mixin mixin-matrix-theme($colors, $foreground, $background) {
     .octo-matrix-tile {
-        &.octo-matrix-tile-base {
-            color: map.get($foreground, "card");
+        color: map.get($foreground, "card");
 
+        &.octo-matrix-tile-base {
             .octo-matrix-tile-header,
             .octo-matrix-tile-footer {
                 background-color: rgba(map.get($background, "card"), 0.5);
