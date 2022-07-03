@@ -1,17 +1,21 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
-import {OctopusIcon} from "./icon.component";
+import {OctopusFigure, OctopusFigureCaption, OctopusIcon} from "./image.component";
 
 @NgModule({
     declarations: [
-        OctopusIcon
+        OctopusIcon,
+        OctopusFigure,
+        OctopusFigureCaption
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        OctopusIcon
+        OctopusIcon,
+        OctopusFigure,
+        OctopusFigureCaption
     ]
 })
 export class OctopusImageModule {}

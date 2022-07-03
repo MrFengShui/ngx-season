@@ -20,6 +20,8 @@ export type OctopusSidenavMode = 'over' | 'push' | 'side';
 
 export type OctopusSpeed = 'fast' | 'normal' | 'slow';
 
+export type OctopusTextAlign = 'left' | 'center' | 'right';
+
 export type OctopusTabHeaderPosition = 'top' | 'bottom';
 
 export const OCTOPUS_ALIGNMENTS: OctopusAlignment[] = ['x', 'y'];
@@ -33,5 +35,7 @@ export const OCTOPUS_OVERFLOW_TYPES: OctopusOverflowType[] = ['auto', 'visible',
 export const OCTOPUS_SHADOWS: OctopusShadowBlur[] = [0, 1, 2, 4, 8, 12, 16];
 
 export const OCTOPUS_SHAPES: OctopusShape[] = ['rect', 'ring'];
+
+export const OCTOPUS_TEXT_ALIGNMENTS: OctopusTextAlign[] = ['left', 'center', 'right'];
 
 export const OCTOPUS_TAB_HEADER_POSITIONS: OctopusTabHeaderPosition[] = ['top', 'bottom'];

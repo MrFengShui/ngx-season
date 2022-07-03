@@ -4,8 +4,13 @@ import {Dialog, DIALOG_DATA, DialogCloseOptions, DialogConfig, DialogRef} from "
 import {ComponentType, Overlay} from "@angular/cdk/overlay";
 import {Observable, of} from "rxjs";
 
+import {OctopusToastBox} from "./overlay.component";
+
 export const OCTOPUS_DIALOG_DATA: InjectionToken<any> = DIALOG_DATA;
 export const OCTOPUS_DRAWER_DATA: InjectionToken<any> = DIALOG_DATA;
+export const OCTOPUS_TOAST_DATA: InjectionToken<any> = DIALOG_DATA;
+
+export type OctopusToastType = 'success' | 'warning' | 'failure';
 
 @Injectable()
 export class OctopusDialog<T = unknown, D = any, R = any> {
@@ -162,6 +167,57 @@ export class OctopusDrawer<T = unknown, D = any, R = any> {
                 player.play();
             }
         });
+    }
+
+}
+
+@Injectable()
+export class OctopusToast {
+
+    closable!: boolean;
+
+    private dialogRef: DialogRef<void, OctopusToastBox> | null = null;
+    private dialogCfg: DialogConfig<{type: OctopusToastType, text: string}, DialogRef<void, OctopusToastBox>> = {
+        disableClose: true, hasBackdrop: false, panelClass: ['octo-overlay', 'octo-toast', 'octo-shadow-8'],
+        positionStrategy: this._overlay.position().global().centerHorizontally().bottom('5%'),
+        width: '80%', height: '4rem'
+    };
+    private dialogID: number = 0;
+
+    constructor(
+        private _builder: AnimationBuilder,
+        private _dialog: Dialog,
+        private _overlay: Overlay
+    ) {
+    }
+
+    config(config?: DialogConfig<{type: OctopusToastType, text: string}, DialogRef<void, OctopusToastBox>>): OctopusToast {
+        this.dialogCfg = {...this.dialogCfg, ...config};
+        return this;
+    }
+
+    open(closable: boolean = false, duration: number = 0): OctopusToast {
+        if (this.dialogRef === null) {
+            this.closable = duration === 0 || closable;
+            this.dialogCfg.id = `octopus-dialog-${this.dialogID++}`;
+            this.dialogRef = this._dialog.open(OctopusToastBox, this.dialogCfg);
+            this.dialogRef.addPanelClass(`octo-toast-${this.dialogCfg.data?.type}`);
+
+            if (duration > 0) {
+                setTimeout(() => this.close(), duration);
+            }
+        }
+
+        return this;
+    }
+
+    close(): void {
+        this.dialogRef?.close();
+        this.dialogRef = null;
+    }
+
+    closeAll(): void {
+        this._dialog.closeAll();
     }
 
 }

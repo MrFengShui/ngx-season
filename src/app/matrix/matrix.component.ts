@@ -9,8 +9,9 @@ import {
     SimpleChanges
 } from "@angular/core";
 import {coerceNumberProperty} from "@angular/cdk/coercion";
-import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
 import {interval, map, Subscription} from "rxjs";
+
+import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
 
 @Component({
     selector: 'octo-matrix-tile-header',

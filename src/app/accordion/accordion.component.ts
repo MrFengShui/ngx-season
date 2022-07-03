@@ -14,6 +14,7 @@ import {animate, AnimationBuilder, AnimationPlayer, style} from "@angular/animat
 import {UniqueSelectionDispatcher} from "@angular/cdk/collections";
 import {coerceNumberProperty} from "@angular/cdk/coercion";
 import {Subscription} from "rxjs";
+
 import {OctopusColorPalette} from "../global/enums.utils";
 
 export const OCTOPUS_ACCORDION: InjectionToken<OctopusAccordion> =
@@ -137,7 +138,7 @@ export class OctopusAccordionPanel extends CdkAccordionItem implements OnChanges
     private createContentAnimate(expended: boolean): void {
         let player: AnimationPlayer | null = this._builder.build([
             style({height: expended ? 0 : `${this.content.nativeElement.scrollHeight}px`}),
-            animate(`${coerceNumberProperty(this._accordion.delay)}ms linear`,
+            animate(`${coerceNumberProperty(this._accordion.period)}ms linear`,
                 style({height: expended ? `${this.content.nativeElement.scrollHeight}px` : 0}))
         ]).create(this.content.nativeElement);
         player.onDone(() => player = null);
@@ -147,7 +148,7 @@ export class OctopusAccordionPanel extends CdkAccordionItem implements OnChanges
     private createDropdownAnimate(expended: boolean): void {
         let player: AnimationPlayer | null = this._builder.build([
             style({transform: `rotate(${expended ? 0 : 180}deg)`}),
-            animate(`${coerceNumberProperty(this._accordion.delay)}ms linear`,
+            animate(`${coerceNumberProperty(this._accordion.period)}ms linear`,
                 style({transform: `rotate(${expended ? 180 : 0}deg)`}))
         ]).create(this.dropdown.nativeElement);
         player.onDone(() => player = null);
@@ -166,7 +167,11 @@ export class OctopusAccordionPanel extends CdkAccordionItem implements OnChanges
 export class OctopusAccordion extends CdkAccordion {
 
     @Input('octoColor') color: OctopusColorPalette = 'base';
-    @Input('octoDelay') delay: number | string = 250;
+
+    @Input('octoPeriod')
+    get period() { return this._period; }
+    set period(_period: any) { this._period = coerceNumberProperty(_period); }
+    private _period: number = 250;
 
     @ContentChildren(OctopusAccordionPanel) panels!: QueryList<OctopusAccordionPanel>;
 

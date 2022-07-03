@@ -8,5 +8,15 @@
     .octo-overlay {
         background-color: map.get($background, "overlay");
         color: map.get($foreground, "overlay");
+
+        &.octo-toast {
+            @each $key, $value in $colors {
+                @if $key == "success" or $key == "warning" or $key == "failure" {
+                    &.octo-toast-#{$key} {
+                        background-color: $value;
+                    }
+                }
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ import {
     Renderer2,
     SimpleChanges
 } from "@angular/core";
-import {coerceBooleanProperty} from "@angular/cdk/coercion";
+import {coerceBooleanProperty, coerceNumberProperty} from "@angular/cdk/coercion";
 
 import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette, OctopusMountPoint} from "../global/enums.utils";
 
@@ -16,13 +16,12 @@ import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette, OctopusMountPoint} from "..
 abstract class OctopusAbstractBadge implements OnChanges, AfterViewInit {
 
     @Input('octoBadgeColor') color: OctopusColorPalette = 'failure';
+    @Input('octoBadgeMount') point: OctopusMountPoint = 'top-right';
 
     @Input('octoBadgeMarked')
     get marked() { return this._marked; }
-    set marked(_marked: boolean | string | null) { this._marked = coerceBooleanProperty(_marked); }
-    private _marked: boolean | string | null = true;
-
-    @Input('octoBadgeMount') point: OctopusMountPoint = 'top-right';
+    set marked(_marked: any) { this._marked = coerceBooleanProperty(_marked); }
+    private _marked: boolean = true;
 
     @HostBinding('class') class: string = 'octo-badge';
 
@@ -131,7 +130,10 @@ export class OctopusDotBadge extends OctopusAbstractBadge {
 })
 export class OctopusTextBadge extends OctopusAbstractBadge {
 
-    @Input('octoTextBadge') text: number | string = '';
+    @Input('octoTextBadge')
+    get text() { return this._text; }
+    set text(_text: any) { this._text = coerceNumberProperty(_text); }
+    private _text: number = 0;
 
     override ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);

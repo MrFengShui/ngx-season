@@ -8,11 +8,11 @@ import {
     Renderer2,
     SimpleChanges
 } from "@angular/core";
+import {coerceNumberProperty} from "@angular/cdk/coercion";
+
 import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
-import {coerceBooleanProperty, coerceNumberProperty} from "@angular/cdk/coercion";
 
 @Component({
-    selector: '',
     template: ''
 })
 abstract class OctopusAbstractProgress implements OnChanges, AfterViewInit {

@@ -18,11 +18,13 @@ export class OctopusLinkHubView implements OnDestroy {
         {icon: 'help', link: ['..', 'express'], text: 'Express'},
         {icon: 'help', link: ['..', 'icon'], text: 'Icon'},
         {icon: 'help', link: ['..', 'label'], text: 'Label'},
+        {icon: 'help', link: ['..', 'paginator'], text: 'Paginator'},
         {icon: 'help', link: ['..', 'queue'], text: 'Queue'},
         {icon: 'help', link: ['..', 'sidenav'], text: 'Sidenav'},
         {icon: 'help', link: ['..', 'table'], text: 'Table'},
         {icon: 'help', link: ['..', 'tabs'], text: 'Tabs'},
         {icon: 'help', link: ['..', 'toolbar'], text: 'Toolbar'},
+        {icon: 'help', link: ['..', 'tooltip'], text: 'Tooltip'},
         {icon: 'help', link: ['..', 'tree'], text: 'Tree'}
     ];
     private readonly CHART_LINKS: RouterListLink[] = [

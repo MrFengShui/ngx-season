@@ -8,13 +8,12 @@ import {
     Renderer2,
     SimpleChanges, TemplateRef
 } from "@angular/core";
-
-import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
 import {Direction} from "@angular/cdk/bidi";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
 
+import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
+
 @Component({
-    selector: '',
     template: ''
 })
 abstract class OctopusAbstractLabel implements OnChanges, AfterViewInit {
@@ -150,23 +149,23 @@ export class OctopusChipAvatar {
         <ng-content select="img[octo-chip-avatar]"></ng-content>
         <span class="octo-chip-label-text"
               [ngStyle]="{'margin-left': avatars.length === 1 ? '0.25rem' : '0.75rem',
-              'margin-right': close ? '0.25rem' : '0.75rem'}">{{text}}</span>
-        <button octo-btn octoShape="ring" (click)="dismiss.emit()" *ngIf="close">
+              'margin-right': closed ? '0.25rem' : '0.75rem'}">{{text}}</span>
+        <button octo-btn octoShape="ring" (click)="change.emit()" *ngIf="closed">
             <octo-icon octoSize="0.75rem">close</octo-icon>
         </button>
     `
 })
 export class OctopusChipLabel extends OctopusAbstractLabel {
 
-    @Input('octoClose')
-    get close() { return this._close; }
-    set close(_close: any) { this._close = coerceBooleanProperty(_close); }
-    private _close: boolean | string | null = false;
-
     @Input('octoColor') override color: OctopusColorPalette = 'base';
     @Input('octoText') text: string = '';
 
-    @Output('octoDismiss') dismiss: EventEmitter<void> = new EventEmitter<void>();
+    @Input('octoClosed')
+    get closed() { return this._closed; }
+    set closed(_closed: any) { this._closed = coerceBooleanProperty(_closed); }
+    private _closed: boolean = false;
+
+    @Output('octoClosedChange') change: EventEmitter<void> = new EventEmitter<void>();
 
     @ContentChildren(OctopusChipAvatar) avatars!: QueryList<OctopusChipAvatar>;
 

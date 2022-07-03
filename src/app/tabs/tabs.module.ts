@@ -2,10 +2,9 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
 import {
-    OctopusTab,
+    OctopusTabbedUnit,
     OctopusTabHeader,
-    OctopusTabContent,
-    OctopusTabPane, OctopusTabThumbnail, OctopusTabbBox
+    OctopusTabbedGroup, OctopusTabbedUnitHead, OctopusTabbedBox, OctopusTabbedUnitBody, OctopusTabbedControl
 } from "./tabs.component";
 
 import {OctopusButtonModule} from "../button/button.module";
@@ -15,12 +14,13 @@ import {OctopusToolsModule} from "../tools/tools.module";
 
 @NgModule({
     declarations: [
-        OctopusTabbBox,
-        OctopusTabThumbnail,
-        OctopusTabContent,
-        OctopusTab,
+        OctopusTabbedBox,
+        OctopusTabbedUnitHead,
+        OctopusTabbedUnitBody,
+        OctopusTabbedControl,
+        OctopusTabbedUnit,
         OctopusTabHeader,
-        OctopusTabPane
+        OctopusTabbedGroup
     ],
     imports: [
         CommonModule,
@@ -30,13 +30,14 @@ import {OctopusToolsModule} from "../tools/tools.module";
         OctopusEffectsModule
     ],
     exports: [
-        OctopusTabbBox,
-        OctopusTabThumbnail,
-        OctopusTabContent,
-        OctopusTab,
-        OctopusTab,
+        OctopusTabbedBox,
+        OctopusTabbedUnitHead,
+        OctopusTabbedUnitBody,
+        OctopusTabbedControl,
+        OctopusTabbedUnit,
+        OctopusTabbedUnit,
         OctopusTabHeader,
-        OctopusTabPane
+        OctopusTabbedGroup
     ]
 })
 export class OctopusTabModule {}

@@ -59,7 +59,11 @@ export class OctopusSidenavContainer implements OnChanges, AfterViewInit {
     @Input('octoMode') mode: OctopusSidenavMode = 'side';
     @Input('octoMin') minSize: string | null = '4rem';
     @Input('octoMax') maxSize: string | null = '16rem';
-    @Input('octoState') state: boolean | string | null = true;
+
+    @Input('octoState')
+    get state() { return this._state; }
+    set state(_state: any) { this._state = coerceBooleanProperty(_state); }
+    private _state: boolean = true;
 
     @ContentChild(OctopusSidenav) navbar!: OctopusSidenav;
     @ContentChild(OctopusSidenavContent) content!: OctopusSidenavContent;

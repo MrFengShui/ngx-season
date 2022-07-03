@@ -146,7 +146,7 @@ export class OctopusQueueItem implements AfterContentChecked {
 @Component({
     selector: 'a[octo-nav-queue-item]',
     template: `
-        <div octo-ripple class="mx-0" *ngIf="ripple"></div>
+        <div octo-ripple class="mx-0" *ngIf="rippled"></div>
         <ng-container *ngIf="icons.length <= 1 && texts.length <= 1">
             <ng-content select="octo-icon[octo-queue-icon]"></ng-content>
             <ng-content select="span[octo-queue-text]"></ng-content>
@@ -155,11 +155,17 @@ export class OctopusQueueItem implements AfterContentChecked {
 })
 export class OctopusNavigatorQueueItem extends OctopusQueueItem implements OnChanges, AfterContentInit, AfterViewInit {
 
-    @Input('octoRipple') ripple: boolean | string | null = true;
-    @Input('disabled') disabled: boolean | string | null = false;
+    @Input('octoRippled')
+    get rippled() { return this._rippled; }
+    set rippled(_rippled: any) { this._rippled = coerceBooleanProperty(_rippled); }
+    private _rippled: boolean = true;
+
+    @Input('octoDisabled')
+    get disabled() { return this._disabled; }
+    set disabled(_disabled: any) { this._disabled = coerceBooleanProperty(_disabled); }
+    private _disabled: boolean = false;
 
     @ContentChildren(OctopusQueueIcon) icons!: QueryList<OctopusQueueIcon>;
-
     @ContentChildren(OctopusQueueText) texts!: QueryList<OctopusQueueText>;
 
     ngOnChanges(changes: SimpleChanges) {
@@ -183,15 +189,14 @@ export class OctopusNavigatorQueueItem extends OctopusQueueItem implements OnCha
         this.renderDisabled(this.disabled);
     }
 
-    renderDisabled(disabled: boolean | string | null): void {
+    renderDisabled(disabled: boolean): void {
         let task = setTimeout(() => {
             clearTimeout(task);
-            this.ripple = !coerceBooleanProperty(disabled);
 
-            if (coerceBooleanProperty(disabled)) {
-                this._render.addClass(this._element.nativeElement, 'octo-queue-disitem');
+            if (disabled) {
+                this._render.setAttribute(this._element.nativeElement, 'disabled', '');
             } else {
-                this._render.removeClass(this._element.nativeElement, 'octo-queue-disitem');
+                this._render.removeAttribute(this._element.nativeElement, 'disabled');
             }
         });
     }
@@ -221,16 +226,27 @@ export class OctopusQueue extends OctopusAbstractQueue {
 })
 export class OctopusNavigatorQueue extends OctopusAbstractQueue implements OnChanges, AfterContentInit, AfterViewInit {
 
-    @Input('octoHidden') hidden: boolean | string | null = false;
-    @Input('octoRipple') ripple: boolean | string | null = true;
-    @Input('disabled') disabled: boolean | string | null = false;
+    @Input('octoHidden')
+    get hidden() { return this._hidden; }
+    set hidden(_hidden: any) { this._hidden = coerceBooleanProperty(_hidden); }
+    private _hidden: boolean = false;
+
+    @Input('octoRippled')
+    get rippled() { return this._rippled; }
+    set rippled(_rippled: any) { this._rippled = coerceBooleanProperty(_rippled); }
+    private _rippled: boolean = true;
+
+    @Input('octoDisabled')
+    get disabled() { return this._disabled; }
+    set disabled(_disabled: any) { this._disabled = coerceBooleanProperty(_disabled); }
+    private _disabled: boolean = false;
 
     @ContentChildren(OctopusNavigatorQueueItem)
     private items!: QueryList<OctopusNavigatorQueueItem>;
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['ripple']) {
-            this.toggleRipple(changes['ripple'].currentValue);
+        if (changes['rippled']) {
+            this.toggleRipple(changes['rippled'].currentValue);
         }
 
         if (changes['disabled']) {
@@ -239,7 +255,7 @@ export class OctopusNavigatorQueue extends OctopusAbstractQueue implements OnCha
     }
 
     ngAfterContentInit() {
-        this.toggleRipple(this.ripple);
+        this.toggleRipple(this.rippled);
         this.toggleDisabled(this.disabled);
     }
 
@@ -247,13 +263,13 @@ export class OctopusNavigatorQueue extends OctopusAbstractQueue implements OnCha
         this._render.addClass(this._element.nativeElement, 'octo-nav-queue');
     }
 
-    toggleRipple(ripple: boolean | string | null): void {
+    toggleRipple(rippled: boolean): void {
         if (this.items) {
-            this.items.forEach(item => item.ripple = ripple);
+            this.items.forEach(item => item.rippled = rippled);
         }
     }
 
-    toggleDisabled(disabled: boolean | string | null): void {
+    toggleDisabled(disabled: boolean): void {
         if (this.items) {
             this.items.forEach(item => item.renderDisabled(disabled));
         }

@@ -1,7 +1,7 @@
 import {
     AfterViewInit, ChangeDetectorRef,
     Component,
-    ContentChildren, ElementRef,
+    ContentChildren, Directive, ElementRef,
     EventEmitter,
     HostBinding,
     Input, NgZone, OnChanges, OnDestroy,
@@ -10,25 +10,40 @@ import {
     TemplateRef,
     ViewChild, ViewChildren
 } from "@angular/core";
-
-import {OctopusColorPalette} from "../global/enums.utils";
-import {OctopusSelectedIndexChange} from "../global/event.model";
 import {coerceNumberProperty} from "@angular/cdk/coercion";
 import {animate, AnimationBuilder, AnimationPlayer, style} from "@angular/animations";
 import {map, Subscription, timer} from "rxjs";
 
-@Component({
-    selector: 'octo-carousel-item',
-    template: `<ng-template #template><ng-content></ng-content></ng-template>`
+import {OctopusColorPalette} from "../global/enums.utils";
+import {OctopusSelectedIndexChange} from "../global/event.model";
+
+@Directive({
+    selector: '[octo-carousel-item]'
 })
 export class OctopusCarouselItem {
 
     @Input('octoSub') subject: string = '';
     @Input('octoDesc') description: string = '';
 
-    @ViewChild('template', {read: TemplateRef}) template!: TemplateRef<any>;
+    constructor(public _template: TemplateRef<any>) {
+    }
 
-    constructor(public _element: ElementRef) {
+}
+
+@Component({
+    selector: 'octo-carousel-box',
+    template: ` <div class="octo-carousel-box-wrapper" #wrapper><ng-content></ng-content></div>`
+})
+export class OctopusCarouselBox {
+
+    @ViewChild('wrapper', {read: ElementRef}) wrapper!: ElementRef;
+
+    @HostBinding('class') class: string = 'octo-carousel-box';
+
+    constructor(
+        private _element: ElementRef,
+        private _render: Renderer2
+    ) {
     }
 
 }
@@ -41,32 +56,41 @@ export class OctopusCarouselItem {
             <span class="octo-carousel-desc">{{selectItem(items, index)?.description}}</span>
         </div>
         <div class="octo-carousel-body" #body>
-            <div class="octo-carousel-box" #box *ngFor="let item of items; index as i">
-                <ng-container [ngTemplateOutlet]="item.template"></ng-container>
-            </div>
+            <octo-carousel-box [class.active]="i === index" #box *ngFor="let item of items; index as i">
+                <ng-container [ngTemplateOutlet]="item._template"></ng-container>
+            </octo-carousel-box>
         </div>
         <div class="octo-carousel-foot">
-            <button octo-btn [octoColor]="color" octoShape="ring" (click)="selectLeftItem()">
+            <button octo-solid-btn [octoColor]="color" octoShape="ring" style="width: 3rem;height: 3rem;"
+                    (click)="selectLeftItem()">
                 <octo-icon>chevron_left</octo-icon>
             </button>
             <div class="octo-carousel-orbit-wrapper sx-50">
                 <button octo-solid-btn [octoColor]="i === index ? color : 'base'" octoShape="ring"
-                        (click)="selectAnyItem(i)" *ngFor="let item of items; index as i"></button>
+                        style="width: 1.5rem;height: 1.5rem;" (click)="selectAnyItem(i)"
+                        *ngFor="let item of items; index as i"></button>
             </div>
-            <button octo-btn [octoColor]="color" octoShape="ring" (click)="selectRightItem()">
+            <button octo-solid-btn [octoColor]="color" octoShape="ring" style="width: 3rem;height: 3rem;"
+                    (click)="selectRightItem()">
                 <octo-icon>chevron_right</octo-icon>
             </button>
         </div>
-        <ng-content select="[octo-carousel-item]"></ng-content>
+        <ng-content></ng-content>
     `
 })
 export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
 
     @Input('octoColor') color: OctopusColorPalette = 'primary';
-    @Input('octoDelay') delay: number | string = 5000;
-    @Input('octoIndex') index: number | string = 0;
-    @Input('octoWidth') width: string = '40rem';
-    @Input('octoHeight') height: string = '22.5rem';
+
+    @Input('octoPeriod')
+    get period() { return this._period; }
+    set period(_period: any) { this._period = coerceNumberProperty(_period); }
+    private _period: number = 5000;
+
+    @Input('octoIndex')
+    get index() { return this._index; }
+    set index(_index: any) { this._index = coerceNumberProperty(_index); }
+    private _index: number = 0;
 
     @Output('octoSelectedChange') change: EventEmitter<OctopusSelectedIndexChange> =
         new EventEmitter<OctopusSelectedIndexChange>();
@@ -76,8 +100,8 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
     @ViewChild('body', {read: ElementRef})
     private body!: ElementRef;
 
-    @ViewChildren('box', {read: ElementRef})
-    private boxes!: QueryList<ElementRef>;
+    @ViewChildren('box', {read: OctopusCarouselBox})
+    private boxes!: QueryList<OctopusCarouselBox>;
 
     @HostBinding('class') class: string = 'octo-carousel';
 
@@ -94,8 +118,8 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['delay']) {
-            this.loop(changes['delay'].currentValue);
+        if (changes['period']) {
+            this.loop(changes['period'].currentValue);
         }
 
         if (changes['index']) {
@@ -113,8 +137,7 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
 
     ngAfterViewInit() {
         this.initialize(this.index);
-        this.renderDimension(this.width, this.height);
-        this.loop(this.delay);
+        this.loop(this.period);
     }
 
     selectAnyItem(index: number | string): void {
@@ -123,7 +146,7 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
         }
 
         this.selection(coerceNumberProperty(index));
-        this.loop(this.delay);
+        this.loop(this.period);
     }
 
     selectRightItem(): void {
@@ -132,7 +155,7 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
         }
 
         this.increment(coerceNumberProperty(this.index));
-        this.loop(this.delay);
+        this.loop(this.period);
     }
 
     selectLeftItem(): void {
@@ -141,7 +164,7 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
         }
 
         this.decrement(coerceNumberProperty(this.index));
-        this.loop(this.delay);
+        this.loop(this.period);
     }
 
     selectItem(items: QueryList<OctopusCarouselItem>, index: number | string): OctopusCarouselItem | undefined {
@@ -165,41 +188,38 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
         this.createExitAnimate(this.prevIndex, this.index, false);
     }
 
-    private selection(index: number | string): void {
+    private selection(index: number): void {
         this.prevIndex = coerceNumberProperty(this.index);
         this.index = index;
-        this.change.next({currIndex: coerceNumberProperty(this.index), prevIndex: this.prevIndex});
-        this.createEnterAnimate(coerceNumberProperty(this.index), this.prevIndex,
-            coerceNumberProperty(this.index) > this.prevIndex);
-        this.createExitAnimate(this.prevIndex, coerceNumberProperty(this.index),
-            coerceNumberProperty(this.index) > this.prevIndex);
+        this.change.next({currIndex: this.index, prevIndex: this.prevIndex});
+        this.createEnterAnimate(this.index, this.prevIndex, this.index > this.prevIndex);
+        this.createExitAnimate(this.prevIndex, this.index, this.index > this.prevIndex);
     }
 
-    private loop(delay: number | string): void {
-        this.subscription = this._zone.runOutsideAngular(() =>
-            timer(coerceNumberProperty(delay), coerceNumberProperty(delay))
-                .pipe(map(() => coerceNumberProperty(this.index) % this.items.length))
-                .subscribe(value => {
-                    this.increment(value);
-                    this._zone.run(() => this._cdr.markForCheck());
-                }));
+    private loop(period: number): void {
+        this.subscription = this._zone.runOutsideAngular(() => timer(period, period)
+            .pipe(map(() => this.index % this.items.length))
+            .subscribe(value => {
+                this.increment(value);
+                this._zone.run(() => this._cdr.markForCheck());
+            }));
     }
 
-    private initialize(index: number | string): void {
+    private initialize(index: number): void {
         if (this.boxes) {
             this.boxes.forEach((box, i) => {
-                if (i === coerceNumberProperty(index)) {
-                    this._render.setStyle(box.nativeElement, 'visibility', 'visible');
+                if (i === index) {
+                    this._render.setStyle(box.wrapper.nativeElement, 'visibility', 'visible');
                 } else {
-                    this._render.setStyle(box.nativeElement, 'visibility', 'hidden');
+                    this._render.setStyle(box.wrapper.nativeElement, 'visibility', 'hidden');
                 }
             });
         }
     }
 
     private createEnterAnimate(currIndex: number, prevIndex: number, flag: boolean): void {
-        let currBox: any = this.boxes.get(currIndex)?.nativeElement;
-        let prevBox: any = this.boxes.get(prevIndex)?.nativeElement;
+        let currBox: any = this.boxes.get(currIndex)?.wrapper.nativeElement;
+        let prevBox: any = this.boxes.get(prevIndex)?.wrapper.nativeElement;
         let player: AnimationPlayer | null = this._builder.build([
             style({transform: flag ? 'translateX(100%)' : 'translateX(-100%)'}),
             animate('1000ms linear', style({transform: 'translateX(0%)'}))
@@ -213,8 +233,8 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
     }
 
     private createExitAnimate(currIndex: number, prevIndex: number, flag: boolean): void {
-        let currBox: any = this.boxes.get(currIndex)?.nativeElement;
-        let prevBox: any = this.boxes.get(prevIndex)?.nativeElement;
+        let currBox: any = this.boxes.get(currIndex)?.wrapper.nativeElement;
+        let prevBox: any = this.boxes.get(prevIndex)?.wrapper.nativeElement;
         let player: AnimationPlayer | null = this._builder.build([
             style({transform: 'translateX(0%)'}),
             animate('1000ms linear', style({transform: flag ? 'translateX(-100%)' : 'translateX(100%)'}))
@@ -225,15 +245,6 @@ export class OctopusCarousel implements OnChanges, OnDestroy, AfterViewInit {
         });
         player.onDone(() => player = null);
         player.play();
-    }
-
-    private renderDimension(width: string, height: string): void {
-        let task = setTimeout(() => {
-            clearTimeout(task);
-            this._render.setStyle(this._element.nativeElement, 'width', width);
-            this._render.setStyle(this.body.nativeElement, 'width', width);
-            this._render.setStyle(this.body.nativeElement, 'height', height);
-        });
     }
 
 }

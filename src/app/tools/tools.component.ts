@@ -13,7 +13,7 @@ import {
 } from "@angular/core";
 import {interval, map, Observable} from "rxjs";
 
-import {OctopusRatio} from "../global/enums.utils";
+import {OCTOPUS_ALIGNMENTS, OctopusAlignment, OctopusColorPalette, OctopusRatio} from "../global/enums.utils";
 
 @Component({
     animations: [
@@ -151,6 +151,127 @@ export class OctopusUserHolder extends OctopusAbstractHolder implements AfterVie
 
     ngAfterViewInit() {
         this._render.addClass(this._element.nativeElement, 'octo-user-holder');
+    }
+
+}
+
+@Component({
+    selector: 'octo-split-line',
+    template: `
+        <div class="line"></div>
+        <span class="text mx-100" *ngIf="text.trim.length > 0">{{text}}</span>
+        <div class="line"></div>
+    `
+})
+export class OctopusSplitline implements OnChanges, AfterViewInit {
+
+    @Input('octoAlign') align: OctopusAlignment = 'x';
+    @Input('octoText') text: string = '';
+
+    @HostBinding('class') class: string = 'octo-split-line';
+
+    constructor(
+        private _element: ElementRef,
+        private _render: Renderer2
+    ) {
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['align']) {
+            this.renderAlignment(changes['align'].currentValue);
+        }
+    }
+
+    ngAfterViewInit() {
+        this.renderAlignment(this.align);
+    }
+
+    private renderAlignment(align: OctopusAlignment): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            OCTOPUS_ALIGNMENTS.forEach(item =>
+                this._render.removeClass(this._element.nativeElement, `octo-split-${item}line`));
+            this._render.addClass(this._element.nativeElement, `octo-split-${align}line`);
+        });
+    }
+
+}
+
+@Component({
+    template: ''
+})
+abstract class OctopusAbstractStatus {
+
+    @Input('octoTitle') title: string = 'Enter Title Here';
+    @Input('octoSubtitle') subtitle: string = 'Enter Subtitle Here';
+    @Input('octoContent') content: string = 'Enter Description Here';
+
+    @HostBinding('class') class: string = 'octo-status';
+
+    constructor(
+        protected _element: ElementRef,
+        protected _render: Renderer2
+    ) {
+    }
+
+}
+
+@Component({
+    selector: 'div[octo-empty-status]',
+    template: `
+        <img [src]="image" alt="" width="100%" style="grid-row: 1 / 3">
+        <div class="title">{{title}}</div>
+        <div class="subtitle">{{subtitle}}</div>
+        <div class="content">{{content}}</div>
+    `
+})
+export class OctopusEmptyStatus extends OctopusAbstractStatus implements AfterViewInit {
+
+    @Input('octoImage') image: string = 'assets/logo.svg';
+
+    ngAfterViewInit() {
+        this._render.addClass(this._element.nativeElement, 'octo-empty-status');
+    }
+
+}
+
+@Component({
+    selector: 'octo-error-status',
+    template: `
+        <img [src]="url" alt="" height="256" *ngIf="url !== 'success' && url !== 'warning' && url !== 'failure'">
+        <octo-icon [octoColor]="formatIconColor(url)" octoSize="16rem"
+                   *ngIf="url === 'success' || url === 'warning' || url === 'failure'">
+            {{selectImageIcon(url)}}
+        </octo-icon>
+        <div class="title mt-100 mb-50">{{title}}</div>
+        <div class="content mt-50 mb-150">{{content}}</div>
+        <div class="d-flex flex-jc-center w-100 sx-300 px-100" style="box-sizing: border-box">
+            <ng-content select="[octo-btn], [octo-solid-btn], [octo-stroke-btn]"></ng-content>
+        </div>
+    `
+})
+export class OctopusErrorStatus extends OctopusAbstractStatus implements AfterViewInit {
+
+    @Input('octoURL') url: 'success' | 'warning' | 'failure' | string = 'assets/logo.svg';
+
+    ngAfterViewInit() {
+        this._render.addClass(this._element.nativeElement, 'octo-error-status');
+    }
+
+    formatIconColor(url: 'success' | 'warning' | 'failure' | string): OctopusColorPalette {
+        return url as OctopusColorPalette;
+    }
+
+    selectImageIcon(url: 'success' | 'warning' | 'failure' | string): string {
+        switch (url) {
+            case 'success':
+                return 'verified';
+            case 'warning':
+                return 'warning';
+            case 'failure':
+            default:
+                return 'error';
+        }
     }
 
 }

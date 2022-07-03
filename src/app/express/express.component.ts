@@ -59,7 +59,7 @@ export class OctopusExpressItem implements OnDestroy {
 export class OctopusExpress implements OnChanges, AfterViewInit {
 
     @Input('octoColor') color: OctopusColorPalette = 'accent';
-    @Input('octoDelay') delay: OctopusSpeed = 'normal';
+    @Input('octoSpeed') speed: OctopusSpeed = 'normal';
     @Input('octoIcon') icon: string = 'stream';
     @Input('octoLoop') loop: number | string = 0;
 
@@ -88,8 +88,8 @@ export class OctopusExpress implements OnChanges, AfterViewInit {
             this.renderColor(changes['color'].currentValue);
         }
 
-        if (changes['delay']) {
-            this.createAnimation(changes['delay'].currentValue, this.loop);
+        if (changes['speed']) {
+            this.createAnimation(changes['speed'].currentValue, this.loop);
         }
 
         if (changes['icon']) {
@@ -97,14 +97,14 @@ export class OctopusExpress implements OnChanges, AfterViewInit {
         }
 
         if (changes['loop']) {
-            this.createAnimation(this.delay, changes['loop'].currentValue);
+            this.createAnimation(this.speed, changes['loop'].currentValue);
         }
     }
 
     ngAfterViewInit() {
         this.renderColor(this.color);
         this.renderIcon(this.icon);
-        this.createAnimation(this.delay, this.loop);
+        this.createAnimation(this.speed, this.loop);
     }
 
     private createAnimation(speed: OctopusSpeed, loop: number | string, count: number = 1): void {

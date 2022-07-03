@@ -22,6 +22,7 @@ import {OctopusAccordionModule} from "./accordion/accordion.module";
 import {OctopusBadgeModule} from "./badge/badge.module";
 import {OctopusMatrixModule} from "./matrix/matrix.module";
 import {OctopusProgressModule} from "./progress/progress.module";
+import {OctopusPaginatorModule} from "./paginator/paginator.module";
 
 const routes: Routes = [
     {path: '', redirectTo: '/general', pathMatch: 'full'},
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path: 'icon', component: OctopusTemplateView},
     {path: 'label', component: OctopusTemplateView},
     {path: 'overflow', component: OctopusTemplateView},
+    {path: 'paginator', component: OctopusTemplateView},
     {path: 'queue', component: OctopusTemplateView},
     {path: 'ripple', component: OctopusTemplateView},
     {path: 'shadow', component: OctopusTemplateView},
@@ -72,6 +74,7 @@ const routes: Routes = [
         OctopusMatrixModule,
         OctopusMenuModule,
         OctopusOverlayModule,
+        OctopusPaginatorModule,
         OctopusProgressModule,
         OctopusQueueModule,
         OctopusSidenavModule,
@@ -94,6 +97,7 @@ const routes: Routes = [
         OctopusMatrixModule,
         OctopusMenuModule,
         OctopusOverlayModule,
+        OctopusPaginatorModule,
         OctopusProgressModule,
         OctopusQueueModule,
         OctopusSidenavModule,

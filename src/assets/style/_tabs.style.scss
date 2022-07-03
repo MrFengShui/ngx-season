@@ -1,86 +1,71 @@
-.octo-tab-pane {
+.octo-tabbed-group {
     border-radius: 0.25rem;
     display: flex;
-    filter: brightness(1.25);
     overflow: hidden;
 
-    .octo-tab-header {
+    .octo-tabbed-header {
         border-radius: 0 !important;
-
-        &.octo-tab-header-top {
-            .select-mark {
-                inset: auto 0 0 0;
-            }
-        }
-
-        &.octo-tab-header-bottom {
-            .select-mark {
-                inset: 0 0 auto 0;
-            }
-        }
     }
 
-    .octo-tab-content {
+    .octo-tabbed-content {
+        display: flex;
+        position: relative;
         overflow: hidden;
 
-        .octo-tab-content-wrapper {
-            display: flex;
-            flex-wrap: nowrap;
+        .octo-tabbed-box {
+            display: block;
+            flex: auto;
+            position: absolute;
+            inset: 0;
 
-            .octo-tabbox {
-                min-width: 100%;
-                max-width: 100%;
+            &.active {
+                position: relative;
             }
         }
     }
 }
 
-.octo-tab-header {
+.octo-tabbed-header {
     border-radius: 0.25rem;
     display: flex;
     height: 4rem;
     overflow: hidden;
 
-    .octo-tab-header-wrapper {
+    .octo-tabbed-header-wrapper {
         display: flex;
         flex: auto;
         overflow: hidden;
 
-        .octo-tab {
-            appearance: none;
-            background: none;
-            border: none;
-            box-sizing: border-box;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .octo-tabbed-ctrl {
+            border-radius: 0 !important;
             min-width: 15rem;
             max-width: 20rem;
-            outline: none;
-            padding: 0 1rem;
             position: relative;
 
-            .octo-tab-label {
-                font-size: 1rem;
+            &.octo-tabbed-ctrl-top {
+                .active {
+                    position: absolute;
+                    inset: auto 0 0 0;
+                    height: 0.25rem;
+                }
             }
 
-            .octo-tab-thumb {
-                font-size: 1.5rem;
-                line-height: 1.5rem;
-                margin-right: 1rem;
+            &.octo-tabbed-ctrl-bottom {
+                .active {
+                    position: absolute;
+                    inset: 0 0 auto 0;
+                    height: 0.25rem;
+                }
+            }
+
+            > .octo-icon,
+            > img {
                 width: 1.5rem;
                 height: 1.5rem;
             }
 
-            .octo-ripple {
-                position: absolute;
-                inset: 0;
-            }
-
-            .select-mark {
-                position: absolute;
-                height: 0.125rem;
+            > .octo-btn {
+                margin-left: 1rem;
             }
         }
     }

@@ -3,9 +3,13 @@ import {CommonModule} from "@angular/common";
 
 import {OctopusImageModule} from "../image/image.module";
 
-import {OctopusBarsHolder, OctopusMediaHolder, OctopusUserHolder} from "./holders.component";
-import {OctopusEmptyStatus, OctopusErrorStatus} from "./status.component";
-import {OctopusSplitline} from "./split.component";
+import {
+    OctopusBarsHolder, OctopusEmptyStatus,
+    OctopusErrorStatus,
+    OctopusMediaHolder,
+    OctopusSplitline,
+    OctopusUserHolder
+} from "./tools.component";
 
 @NgModule({
     declarations: [

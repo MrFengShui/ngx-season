@@ -81,7 +81,7 @@ $overflow-list: (auto, clip, scroll, visible, hidden);
     }
 }
 
-$size-list: (auto, fit, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100);
+$size-list: (auto, fit, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100);
 @each $item in $size-list {
     @if $item == auto {
         .w-auto {
@@ -109,7 +109,7 @@ $size-list: (auto, fit, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100);
         }
 
         .vw-#{$item} {
-            width: #{item}vw !important;
+            width: #{$item}vw !important;
         }
 
         .vh-#{$item} {

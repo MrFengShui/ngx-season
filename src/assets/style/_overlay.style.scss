@@ -60,7 +60,6 @@
     &.octo-drawer {
         border-radius: 0.25rem;
         overflow: hidden;
-        transition: all 250ms linear;
 
         .cdk-dialog-container {
             > :nth-child(n) {
@@ -88,6 +87,28 @@
                 .octo-split-line {
                     margin: 0 !important;
                 }
+            }
+        }
+    }
+
+    &.octo-toast {
+        border-radius: 0.25rem;
+        overflow: hidden;
+
+        .octo-toast-box {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 1rem;
+
+            .octo-toast-box-text {
+                display: -webkit-box;
+                flex: auto;
+                margin-left: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
             }
         }
     }

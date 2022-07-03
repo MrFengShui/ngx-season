@@ -1,0 +1,17 @@
+.octo-paginator {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.octo-page-size-menu {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+
+    .octo-btn {
+        border-radius: 0;
+    }
+}

@@ -3,7 +3,7 @@ import {
     Component,
     Directive,
     ElementRef,
-    HostBinding, HostListener,
+    HostBinding, HostListener, Inject,
     Input,
     OnChanges,
     Renderer2,
@@ -12,7 +12,7 @@ import {
 import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette, OctopusFlex} from "../global/enums.utils";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
 
-import {OctopusDialog, OctopusDrawer} from "./overlay.service";
+import {OCTOPUS_TOAST_DATA, OctopusDialog, OctopusDrawer, OctopusToast, OctopusToastType} from "./overlay.service";
 
 @Component({
     selector: 'div[octo-dialog-head], div[octoDialogHead]',
@@ -222,6 +222,32 @@ export class OctopusDrawerContent implements OnChanges, AfterViewInit {
                 this._render.addClass(this._element.nativeElement, `overflow-${color}`);
             }
         });
+    }
+
+}
+
+@Component({
+    selector: 'octo-toast-box',
+    template: `
+        <octo-icon octoSize="3rem" *ngIf="_data.type === 'success'">verified</octo-icon>
+        <octo-icon octoSize="3rem" *ngIf="_data.type === 'warning'">warning</octo-icon>
+        <octo-icon octoSize="3rem" *ngIf="_data.type === 'failure'">error</octo-icon>
+        <span class="octo-toast-box-text">{{_data.text}}</span>
+        <button octo-btn octoShape="ring" class="ml-100" style="width: 2.5rem;height: 2.5rem;" (click)="_toast.close()"
+                *ngIf="_toast.closable">
+            <octo-icon>close</octo-icon>
+        </button>
+    `
+})
+export class OctopusToastBox {
+
+    @HostBinding('class') class: string = 'octo-toast-box';
+
+    constructor(
+        @Inject(OCTOPUS_TOAST_DATA)
+        public _data: {type: OctopusToastType, text: string},
+        public _toast: OctopusToast
+    ) {
     }
 
 }

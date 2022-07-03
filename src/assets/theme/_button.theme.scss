@@ -2,8 +2,6 @@
 
 @mixin mixin-button-theme($colors, $foreground, $background) {
     .octo-btn {
-        filter: drop-shadow(0 0 0.125rem rgba(black, 0.125));
-
         &.octo-base-btn {
             color: map.get($foreground, "button");
 

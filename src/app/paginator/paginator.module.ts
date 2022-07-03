@@ -1,26 +1,24 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {CdkMenuModule} from "@angular/cdk/menu";
 
-import {OctopusCarousel, OctopusCarouselBox, OctopusCarouselItem} from "./carousel.component";
+import {OctopusPaginator} from "./paginator.component";
 
 import {OctopusButtonModule} from "../button/button.module";
 import {OctopusImageModule} from "../image/image.module";
 
 @NgModule({
     declarations: [
-        OctopusCarousel,
-        OctopusCarouselBox,
-        OctopusCarouselItem
+        OctopusPaginator
     ],
     imports: [
         CommonModule,
+        CdkMenuModule,
         OctopusButtonModule,
         OctopusImageModule
     ],
     exports: [
-        OctopusCarousel,
-        OctopusCarouselBox,
-        OctopusCarouselItem
+        OctopusPaginator
     ]
 })
-export class OctopusCarouselModule {}
+export class OctopusPaginatorModule {}

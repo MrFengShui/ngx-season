@@ -1,0 +1,25 @@
+@use "sass:map";
+
+@mixin mixin-image-theme($colors, $foreground, $background) {
+    .octo-icon {
+        @each $key, $value in $colors {
+            &.octo-icon-#{$key} {
+                color: $value;
+            }
+        }
+    }
+
+    .octo-figure {
+        &.octo-figure-base {
+            background-color: rgba(map.get($foreground, "base"), 0.125);
+            border-color: map.get($foreground, "base");
+        }
+
+        @each $key, $value in $colors {
+            &.octo-figure-#{$key} {
+                background-color: rgba($value, 0.125);
+                border-color: $value;
+            }
+        }
+    }
+}

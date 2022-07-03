@@ -22,7 +22,7 @@ abstract class OctopusAbstractButton implements OnChanges, AfterViewInit {
     @HostBinding('class') class: string = 'octo-btn';
 
     constructor(
-        protected _element: ElementRef,
+        public _element: ElementRef,
         protected _render: Renderer2
     ) {
     }
@@ -58,7 +58,7 @@ abstract class OctopusAbstractButton implements OnChanges, AfterViewInit {
 @Component({
     selector: 'button[octo-btn], a[octo-btn]',
     template: `
-        <div octo-ripple [octoRippleColor]="color"></div>
+        <div octo-ripple [octoRippleColor]="color" *ngIf="!_element.nativeElement.disabled"></div>
         <ng-content></ng-content>
     `
 })
@@ -86,7 +86,7 @@ export class OctopusButton extends OctopusAbstractButton {
 @Component({
     selector: 'button[octo-solid-btn], a[octo-solid-btn]',
     template: `
-        <div octo-ripple [octoRippleColor]="color"></div>
+        <div octo-ripple [octoRippleColor]="color" *ngIf="!_element.nativeElement.disabled"></div>
         <ng-content></ng-content>
     `
 })
@@ -114,7 +114,7 @@ export class OctopusSolidButton extends OctopusAbstractButton {
 @Component({
     selector: 'button[octo-stroke-btn], a[octo-stroke-btn]',
     template: `
-        <div octo-ripple [octoRippleColor]="color"></div>
+        <div octo-ripple [octoRippleColor]="color" *ngIf="!_element.nativeElement.disabled"></div>
         <ng-content></ng-content>
     `
 })

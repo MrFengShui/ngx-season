@@ -4,11 +4,13 @@
 @use "button.theme" as button;
 @use "carousel.theme" as carousel;
 @use "express.theme" as express;
+@use "image.theme" as image;
 @use "label.theme" as label;
 @use "matrix.theme" as matrix;
 @use "menu.theme" as menu;
 @use "overlay.theme" as overlay;
 @use "overflow.theme" as overflow;
+@use "paginator.theme" as paginator;
 @use "progress.theme" as progress;
 @use "ripple.theme" as ripple;
 @use "sidenav.theme" as sidenav;
@@ -53,24 +55,18 @@
     @include button.mixin-button-theme($colors, $foreground, $background);
     @include carousel.mixin-carousel-theme($colors, $foreground, $background);
     @include express.mixin-express-theme($colors, $foreground, $background);
+    @include image.mixin-image-theme($colors, $foreground, $background);
     @include label.mixin-label-theme($colors, $foreground, $background);
     @include matrix.mixin-matrix-theme($colors, $foreground, $background);
     @include menu.mixin-menu-theme($colors, $foreground, $background);
     @include overlay.mixin-overlay-theme($colors, $foreground, $background);
     @include overflow.mixin-overflow-theme($colors, $foreground, $background);
+    @include paginator.mixin-paginator-theme($colors, $foreground, $background);
     @include progress.mixin-progress-theme($colors, $foreground, $background);
     @include ripple.mixin-ripple-theme($colors, $foreground, $background);
     @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
     @include tabs.mixin-tabs-theme($colors, $foreground, $background);
     @include toolbar.mixin-toolbar-theme($colors, $foreground, $background);
-
-    .octo-icon {
-        @each $key, $value in $colors {
-            &.octo-icon-#{$key} {
-                color: $value;
-            }
-        }
-    }
 
     .octo-holder {
         &.holder,

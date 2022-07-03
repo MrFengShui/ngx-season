@@ -48,8 +48,7 @@
                 filter: brightness(1.25);
             }
 
-            &.octo-queue-disitem {
-                background: none;
+            &:disabled {
                 cursor: default;
                 filter: brightness(0.5);
 

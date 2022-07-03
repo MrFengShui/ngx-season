@@ -23,6 +23,7 @@ export const FULL_LINKS: RouterListLink[] = [
     {icon: 'help', link: ['..', 'icon'], text: 'Icon'},
     {icon: 'help', link: ['..', 'label'], text: 'Label'},
     {icon: 'help', link: ['..', 'overflow'], text: 'Overflow'},
+    {icon: 'help', link: ['..', 'paginator'], text: 'Paginator'},
     {icon: 'help', link: ['..', 'queue'], text: 'Queue'},
     {icon: 'help', link: ['..', 'ripple'], text: 'Ripple'},
     {icon: 'help', link: ['..', 'shadow'], text: 'Shadow'},
@@ -33,6 +34,7 @@ export const FULL_LINKS: RouterListLink[] = [
     {icon: 'help', link: ['..', 'tabs'], text: 'Tabs'},
     {icon: 'help', link: ['..', 'toast'], text: 'Toast'},
     {icon: 'help', link: ['..', 'toolbar'], text: 'Toolbar'},
+    {icon: 'help', link: ['..', 'tooltip'], text: 'Tooltip'},
     {icon: 'help', link: ['..', 'tree'], text: 'Tree'}
 ];
 

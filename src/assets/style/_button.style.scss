@@ -10,11 +10,16 @@
     outline: none;
     margin: 0;
     padding: 0.75rem;
+    position: relative;
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
     width: auto;
     height: auto;
+
+    &:disabled {
+        filter: brightness(0.5);
+    }
 
     &.octo-btn-rect {
         border-radius: 0.25rem;

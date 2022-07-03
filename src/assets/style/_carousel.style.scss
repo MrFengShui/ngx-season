@@ -22,7 +22,6 @@
 
     .octo-carousel-body {
         display: flex;
-        filter: brightness(1.5);
         position: relative;
 
         .octo-carousel-box {
@@ -32,6 +31,10 @@
             position: absolute;
             width: 100%;
             height: 100%;
+
+            &.active {
+                position: relative;
+            }
         }
     }
 
@@ -43,18 +46,8 @@
         height: 4rem;
         padding: 0 1rem;
 
-        > .octo-btn {
-            width: 3rem;
-            height: 3rem;
-        }
-
         .octo-carousel-orbit-wrapper {
             display: flex;
-
-            .octo-btn {
-                width: 1.5rem;
-                height: 1.5rem;
-            }
         }
     }
 }

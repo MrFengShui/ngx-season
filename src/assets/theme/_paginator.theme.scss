@@ -1,0 +1,8 @@
+@use "sass:map";
+
+@mixin mixin-paginator-theme($colors, $foreground, $background) {
+    .octo-paginator {
+        background-color: map.get($background, "toolbar");
+        color: map.get($foreground, "toolbar");
+    }
+}
