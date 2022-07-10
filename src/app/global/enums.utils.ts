@@ -4,7 +4,7 @@ export type OctopusMountPoint = 'top-left' | 'top-center' | 'top-right' | 'botto
 
 export type OctopusColorPalette = 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'base';
 
-export type OctopusFlex = 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
+export type OctopusFlexAlign = 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
 
 export type OctopusOverflowXY = 'x' | 'y' | 'xy';
 

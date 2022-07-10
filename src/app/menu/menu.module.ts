@@ -2,26 +2,47 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {CdkMenuModule} from "@angular/cdk/menu";
 
-import {OctopusMenu, OctopusMenuItem, OctopusMenuTrigger} from "./menu.component";
+import {
+    OctopusMenu,
+    OctopusMenubar,
+    OctopusMenuCheckItem,
+    OctopusMenuGroup,
+    OctopusMenuItem,
+    OctopusMenuItemIcon, OctopusMenuRadioItem
+} from "./menu.component";
 
 import {OctopusEffectsModule} from "../effects/effects.module";
+import {OctopusToolsModule} from "../tools/tools.module";
+import {OctopusImageModule} from "../image/image.module";
+import {OctopusButtonModule} from "../button/button.module";
 
 @NgModule({
     declarations: [
-        OctopusMenuTrigger,
+        OctopusMenubar,
+        OctopusMenuGroup,
         OctopusMenu,
-        OctopusMenuItem
+        OctopusMenuItem,
+        OctopusMenuCheckItem,
+        OctopusMenuRadioItem,
+        OctopusMenuItemIcon
     ],
     imports: [
         CommonModule,
         CdkMenuModule,
-        OctopusEffectsModule
+        OctopusButtonModule,
+        OctopusEffectsModule,
+        OctopusImageModule,
+        OctopusToolsModule
     ],
     exports: [
         CdkMenuModule,
-        OctopusMenuTrigger,
+        OctopusMenubar,
+        OctopusMenuGroup,
         OctopusMenu,
-        OctopusMenuItem
+        OctopusMenuItem,
+        OctopusMenuCheckItem,
+        OctopusMenuRadioItem,
+        OctopusMenuItemIcon
     ]
 })
 export class OctopusMenuModule {}

@@ -1,2 +1,129 @@
 <!--<button (click)="open()">Open Overlay</button>-->
+<!--<div octo-menubar cdkMenuBar>-->
+<!--    <button octo-btn cdkMenuItem [cdkMenuTriggerFor]="file">File</button>-->
+<!--    <button octo-btn cdkMenuItem [cdkMenuTriggerFor]="edit">Edit</button>-->
+<!--    <button octo-btn cdkMenuItem [cdkMenuTriggerFor]="help">Help</button>-->
+<!--</div>-->
+<!--<ng-template #file>-->
+<!--    <div octo-menu cdkMenu>-->
+<!--        <button octo-menu-item octoMenuNext cdkMenuItem [cdkMenuTriggerFor]="fileNew">New</button>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>folder</octo-icon>-->
+<!--            Open-->
+<!--        </button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>save</octo-icon>-->
+<!--            Save-->
+<!--        </button>-->
+<!--        <button octo-menu-item cdkMenuItem>Save As</button>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>printer</octo-icon>-->
+<!--            Print-->
+<!--        </button>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>share</octo-icon>-->
+<!--            Share-->
+<!--        </button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item cdkMenuItem>Import</button>-->
+<!--        <button octo-menu-item octoMenuNext cdkMenuItem [cdkMenuTriggerFor]="fileExport">Export</button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>exit_to_app</octo-icon>-->
+<!--            Exit-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</ng-template>-->
+<!--<ng-template #edit>-->
+<!--    <div octo-menu cdkMenu>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>undo</octo-icon>-->
+<!--            Undo-->
+<!--        </button>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>redo</octo-icon>-->
+<!--            Redo-->
+<!--        </button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>content_cut</octo-icon>-->
+<!--            Cut-->
+<!--        </button>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>content_copy</octo-icon>-->
+<!--            Copy-->
+<!--        </button>-->
+<!--        <button octo-menu-item cdkMenuItem>-->
+<!--            <octo-icon octo-menu-item-icon>content_paste</octo-icon>-->
+<!--            Paste-->
+<!--        </button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item octoMenuNext cdkMenuItem [cdkMenuTriggerFor]="editFormat">-->
+<!--            <octo-icon octo-menu-item-icon>mode</octo-icon>-->
+<!--            Format-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</ng-template>-->
+<!--<ng-template #help>-->
+<!--    <div octo-menu cdkMenu>-->
+<!--        <button octo-menu-item>-->
+<!--            <octo-icon octo-menu-item-icon>help</octo-icon>-->
+<!--            Document-->
+<!--        </button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item>-->
+<!--            <octo-icon octo-menu-item-icon>update</octo-icon>-->
+<!--            Check Update-->
+<!--        </button>-->
+<!--        <button octo-menu-item>About</button>-->
+<!--    </div>-->
+<!--</ng-template>-->
+<!--<ng-template #editFormat>-->
+<!--    <div octo-menu cdkMenu>-->
+<!--        <div octo-menu-group cdkMenuGroup>-->
+<!--            <button octo-menu-check-item [cdkMenuItemChecked]="item.check"-->
+<!--                    (click)="item.check = !item.check"-->
+<!--                    *ngFor="let item of EDIT_FORMAT_FONT_STYLE_MENU_ITEMS">-->
+<!--                <octo-icon octo-menu-item-icon>{{item.icon}}</octo-icon>-->
+<!--                {{item.text}}-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <div octo-menu-group cdkMenuGroup>-->
+<!--            <button octo-menu-radio-item [cdkMenuItemChecked]="item.check"-->
+<!--                    (click)="selectMenuRadioItem(item, EDIT_FORMAT_FONT_ALIGN_MENU_ITEMS)"-->
+<!--                    *ngFor="let item of EDIT_FORMAT_FONT_ALIGN_MENU_ITEMS">-->
+<!--                <octo-icon octo-menu-item-icon>{{item.icon}}</octo-icon>-->
+<!--                {{item.text}}-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item>-->
+<!--            <octo-icon octo-menu-item-icon>format_indent_decrease</octo-icon>-->
+<!--            Dedent-->
+<!--        </button>-->
+<!--        <button octo-menu-item>-->
+<!--            <octo-icon octo-menu-item-icon>format_indent_increase</octo-icon>-->
+<!--            Indent-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</ng-template>-->
+<!--<ng-template #fileNew>-->
+<!--    <div octo-menu cdkMenu>-->
+<!--        <button octo-menu-item cdkMenuItem>Pages</button>-->
+<!--        <button octo-menu-item cdkMenuItem>Numbers</button>-->
+<!--        <button octo-menu-item cdkMenuItem>Keynotes</button>-->
+<!--        <octo-split-line></octo-split-line>-->
+<!--        <button octo-menu-item cdkMenuItem>From template</button>-->
+<!--    </div>-->
+<!--</ng-template>-->
+<!--<ng-template #fileExport>-->
+<!--    <div octo-menu cdkMenu>-->
+<!--        <button octo-menu-item cdkMenuItem>Microsoft Word (.docx)</button>-->
+<!--        <button octo-menu-item cdkMenuItem>Microsoft Excel (.xslx)</button>-->
+<!--        <button octo-menu-item cdkMenuItem>Microsoft PowerPoint (.pptx)</button>-->
+<!--        <button octo-menu-item cdkMenuItem>PDF (.pdf)</button>-->
+<!--    </div>-->
+<!--</ng-template>-->
 

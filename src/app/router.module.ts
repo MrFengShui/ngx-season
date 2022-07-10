@@ -23,6 +23,12 @@ import {OctopusBadgeModule} from "./badge/badge.module";
 import {OctopusMatrixModule} from "./matrix/matrix.module";
 import {OctopusProgressModule} from "./progress/progress.module";
 import {OctopusPaginatorModule} from "./paginator/paginator.module";
+import {OctopusTreeModule} from "./tree/tree.module";
+import {OctopusTableModule} from "./table/table.module";
+import {OctopusCardModule} from "./card/card.module";
+import {OctopusStepperModule} from "./stepper/stepper.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {OctopusFormModule} from "./form/form.module";
 
 const routes: Routes = [
     {path: '', redirectTo: '/general', pathMatch: 'full'},
@@ -30,24 +36,33 @@ const routes: Routes = [
     {path: 'accordion', component: OctopusTemplateView},
     {path: 'badge', component: OctopusTemplateView},
     {path: 'button', component: OctopusTemplateView},
+    {path: 'card', component: OctopusTemplateView},
     {path: 'carousel', component: OctopusTemplateView},
+    {path: 'check', component: OctopusTemplateView},
+    {path: 'combo', component: OctopusTemplateView},
     {path: 'dialog', component: OctopusTemplateView},
     {path: 'drawer', component: OctopusTemplateView},
     {path: 'express', component: OctopusTemplateView},
+    {path: 'figure', component: OctopusTemplateView},
     {path: 'holder', component: OctopusTemplateView},
     {path: 'icon', component: OctopusTemplateView},
+    {path: 'input', component: OctopusTemplateView},
     {path: 'label', component: OctopusTemplateView},
     {path: 'overflow', component: OctopusTemplateView},
     {path: 'paginator', component: OctopusTemplateView},
     {path: 'queue', component: OctopusTemplateView},
+    {path: 'radio', component: OctopusTemplateView},
     {path: 'ripple', component: OctopusTemplateView},
     {path: 'shadow', component: OctopusTemplateView},
     {path: 'sidenav', component: OctopusTemplateView},
     {path: 'split-line', component: OctopusTemplateView},
     {path: 'status', component: OctopusTemplateView},
+    {path: 'stepper', component: OctopusTemplateView},
+    {path: 'table', component: OctopusTemplateView},
     {path: 'tabs', component: OctopusTemplateView},
     {path: 'toast', component: OctopusTemplateView},
     {path: 'toolbar', component: OctopusTemplateView},
+    {path: 'tree', component: OctopusTemplateView}
 ];
 
 @NgModule({
@@ -58,6 +73,8 @@ const routes: Routes = [
     ],
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(routes, {
             relativeLinkResolution: 'legacy',
             preloadingStrategy: PreloadAllModules,
@@ -66,9 +83,11 @@ const routes: Routes = [
         OctopusAccordionModule,
         OctopusBadgeModule,
         OctopusButtonModule,
+        OctopusCardModule,
         OctopusCarouselModule,
         OctopusEffectsModule,
         OctopusExpressModule,
+        OctopusFormModule,
         OctopusImageModule,
         OctopusLabelModule,
         OctopusMatrixModule,
@@ -78,9 +97,12 @@ const routes: Routes = [
         OctopusProgressModule,
         OctopusQueueModule,
         OctopusSidenavModule,
+        OctopusStepperModule,
         OctopusTabModule,
+        OctopusTableModule,
         OctopusToolbarModule,
-        OctopusToolsModule
+        OctopusToolsModule,
+        OctopusTreeModule
     ],
     exports: [
         OctopusTemplateView,
@@ -89,9 +111,11 @@ const routes: Routes = [
         OctopusAccordionModule,
         OctopusBadgeModule,
         OctopusButtonModule,
+        OctopusCardModule,
         OctopusCarouselModule,
         OctopusEffectsModule,
         OctopusExpressModule,
+        OctopusFormModule,
         OctopusImageModule,
         OctopusLabelModule,
         OctopusMatrixModule,
@@ -101,9 +125,12 @@ const routes: Routes = [
         OctopusProgressModule,
         OctopusQueueModule,
         OctopusSidenavModule,
+        OctopusStepperModule,
         OctopusTabModule,
+        OctopusTableModule,
         OctopusToolbarModule,
-        OctopusToolsModule
+        OctopusToolsModule,
+        OctopusTreeModule
     ]
 })
 export class AppRouterModule {}

@@ -9,7 +9,7 @@ import {
     Renderer2,
     SimpleChanges
 } from "@angular/core";
-import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette, OctopusFlex} from "../global/enums.utils";
+import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette, OctopusFlexAlign} from "../global/enums.utils";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
 
 import {OCTOPUS_TOAST_DATA, OctopusDialog, OctopusDrawer, OctopusToast, OctopusToastType} from "./overlay.service";
@@ -134,7 +134,7 @@ export class OctopusDialogClose {
 })
 export class OctopusDialogControlBar implements OnChanges, AfterViewInit {
 
-    @Input('octoFlex') flex: OctopusFlex = 'flex-end';
+    @Input('octoFlex') flex: OctopusFlexAlign = 'flex-end';
 
     @HostBinding('class') class: string = 'octo-dialog-ctrl';
 
@@ -154,7 +154,7 @@ export class OctopusDialogControlBar implements OnChanges, AfterViewInit {
         this.renderFlexAlign(this.flex);
     }
 
-    private renderFlexAlign(flex: OctopusFlex): void {
+    private renderFlexAlign(flex: OctopusFlexAlign): void {
         let task = setTimeout(() => {
             clearTimeout(task);
             this._render.setStyle(this._element.nativeElement, 'justify-content', flex);

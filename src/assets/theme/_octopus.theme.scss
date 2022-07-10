@@ -2,8 +2,10 @@
 @use "accordion.theme" as accordion;
 @use "badge.theme" as badge;
 @use "button.theme" as button;
+@use "card.theme" as card;
 @use "carousel.theme" as carousel;
 @use "express.theme" as express;
+@use "form.theme" as form;
 @use "image.theme" as image;
 @use "label.theme" as label;
 @use "matrix.theme" as matrix;
@@ -14,7 +16,9 @@
 @use "progress.theme" as progress;
 @use "ripple.theme" as ripple;
 @use "sidenav.theme" as sidenav;
+@use "stepper.theme" as stepper;
 @use "tabs.theme" as tabs;
+@use "table.theme" as table;
 @use "toolbar.theme" as toolbar;
 
 @mixin octopus-renderer-theme($theme) {
@@ -39,7 +43,7 @@
     $shadow-list: (0, 1, 2, 4, 8, 12, 16);
     @each $item in $shadow-list {
         .octo-shadow-#{$item} {
-            box-shadow: 0 0 0.75rem 0 rgba(map.get($background, "base"), 0.75);
+            box-shadow: 0 0 $item * 0.25rem 0 rgba(#9e9e9e, 0.5);
         }
     }
 
@@ -53,8 +57,10 @@
     @include accordion.mixin-accordion-theme($colors, $foreground, $background);
     @include badge.mixin-badge-theme($colors, $foreground, $background);
     @include button.mixin-button-theme($colors, $foreground, $background);
+    @include card.mixin-card-theme($colors, $foreground, $background);
     @include carousel.mixin-carousel-theme($colors, $foreground, $background);
     @include express.mixin-express-theme($colors, $foreground, $background);
+    @include form.mixin-form-theme($colors, $foreground, $background);
     @include image.mixin-image-theme($colors, $foreground, $background);
     @include label.mixin-label-theme($colors, $foreground, $background);
     @include matrix.mixin-matrix-theme($colors, $foreground, $background);
@@ -65,7 +71,9 @@
     @include progress.mixin-progress-theme($colors, $foreground, $background);
     @include ripple.mixin-ripple-theme($colors, $foreground, $background);
     @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
+    @include stepper.mixin-stepper-theme($colors, $foreground, $background);
     @include tabs.mixin-tabs-theme($colors, $foreground, $background);
+    @include table.mixin-table-theme($colors, $foreground, $background);
     @include toolbar.mixin-toolbar-theme($colors, $foreground, $background);
 
     .octo-holder {

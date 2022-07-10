@@ -1,0 +1,51 @@
+@use "sass:map";
+
+@mixin mixin-table-theme($colors, $foreground, $background) {
+    .octo-table {
+        table {
+            tr {
+                th, td {
+                    background-color: map.get($background, "table");
+                    border-color: rgba(map.get($foreground, "table"), 0.25);
+                    color: map.get($foreground, "table");
+                }
+            }
+
+            &.octo-table-striped {
+                &.octo-table-base {
+                    .octo-table-row {
+                        &:nth-child(2n) {
+                            .octo-table-cell {
+                                background-color: lighten(map.get($background, "table"), 2.5%);
+                            }
+                        }
+
+                        &:nth-child(2n+1) {
+                            .octo-table-cell {
+                                background-color: darken(map.get($background, "table"), 2.5%);
+                            }
+                        }
+                    }
+                }
+
+                @each $key, $value in $colors {
+                    &.octo-table-#{$key} {
+                        .octo-table-row {
+                            &:nth-child(2n) {
+                                .octo-table-cell {
+                                    background-color: map.get($background, "table");
+                                }
+                            }
+
+                            &:nth-child(2n+1) {
+                                .octo-table-cell {
+                                    background-color: $value;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -131,7 +131,7 @@ $yellow: (
 );
 
 @function create-bgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar,
-    $sidenav, $tabs, $toolbar) {
+    $sidenav, $tabs, $table, $toolbar) {
     @return (
         "base": $base,
         "accordion": $accordion,
@@ -144,11 +144,13 @@ $yellow: (
         "scrollbar": $scrollbar,
         "sidenav": $sidenav,
         "tabs": $tabs,
+        "table": $table,
         "toolbar": $toolbar
     );
 }
 
-@function create-fgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar, $sidenav, $tabs, $toolbar) {
+@function create-fgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar,
+    $sidenav, $tabs, $table, $toolbar) {
     @return (
         "base": $base,
         "accordion": $accordion,
@@ -161,6 +163,7 @@ $yellow: (
         "scrollbar": $scrollbar,
         "sidenav": $sidenav,
         "tabs": $tabs,
+        "table": $table,
         "toolbar": $toolbar
     );
 }
@@ -172,9 +175,9 @@ $yellow: (
 @function create-dark-theme($primary, $accent, $success, $warning, $failure) {
     $fgcolor: create-fgcolor(
             #fafafa, // base
-            #fafafa, // accordion
-            #fafafa, // button
-            #fafafa, // card
+            #eeeeee, // accordion
+            #eeeeee, // button
+            #eeeeee, // card
             #e0e0e0, // label
             #e0e0e0, // menu
             #fafafa, // overlay
@@ -182,7 +185,8 @@ $yellow: (
             #e0e0e0, // scrollbar
             #eeeeee, // sidenav
             #e0e0e0, // tabs
-            #fafafa // toolbar
+            #eeeeee, // table
+            #fafafa  // toolbar
     );
     $bgcolor: create-bgcolor(
             #212121, // base
@@ -196,7 +200,8 @@ $yellow: (
             #616161, // scrollbar
             #424242, // sidenav
             #616161, // tabs
-            #424242 // toolbar
+            #424242, // table
+            #424242  // toolbar
     );
     @return (
         "primary": $primary, "accent": $accent,
@@ -208,9 +213,9 @@ $yellow: (
 @function create-light-theme($primary, $accent, $success, $warning, $failure) {
     $fgcolor: create-fgcolor(
             #212121, // base
-            #212121, // accordion
-            #212121, // button
-            #212121, // card
+            #424242, // accordion
+            #424242, // button
+            #424242, // card
             #616161, // label
             #616161, // menu
             #212121, // overlay
@@ -218,13 +223,14 @@ $yellow: (
             #616161, // scrollbar
             #424242, // sidenav
             #616161, // tabs
-            #212121 // toolbar
+            #424242, // table
+            #212121  // toolbar
     );
     $bgcolor: create-bgcolor(
             #fafafa, // base
-            #e0e0e0, // accordion
-            #e0e0e0, // button
-            #e0e0e0, // card
+            #eeeeee, // accordion
+            #eeeeee, // button
+            #eeeeee, // card
             #e0e0e0, // label
             #e0e0e0, // menu
             #fafafa, // overlay
@@ -232,7 +238,8 @@ $yellow: (
             #e0e0e0, // scrollbar
             #eeeeee, // sidenav
             #e0e0e0, // tabs
-            #e0e0e0 // toolbar
+            #eeeeee, // table
+            #e0e0e0  // toolbar
     );
     @return (
         "primary": $primary, "accent": $accent,

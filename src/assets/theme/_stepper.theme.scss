@@ -1,0 +1,33 @@
+@use "sass:map";
+
+@mixin mixin-stepper-theme($colors, $foreground, $background) {
+    .octo-stepper {
+        background-color: map.get($background, "tabs");
+        color: map.get($foreground, "tabs");
+
+        .octo-stepper-header {
+            @each $key, $value in $colors {
+                &.octo-stepper-header-#{$key} {
+                    &.active {
+                        .octo-stepper-head-mark {
+                            background-color: $value;
+                            border-color: $value;
+                        }
+                    }
+
+                    @if $key == "success" or $key == "warning" or $key == "failure" {
+                        &.active {
+                            .octo-stepper-head-text {
+                                color: $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .octo-stepper-joint {
+            background-color: map.get($foreground, "tabs");
+        }
+    }
+}

@@ -1,23 +1,56 @@
+.octo-menubar {
+    display: flex;
+
+    > :nth-child(n) {
+        border-radius: 0 !important;
+    }
+}
+
 .octo-menu {
     border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
-    min-width: 15rem;
-    max-width: 20rem;
+    min-width: 12.5rem;
+    max-width: 17.5rem;
     overflow: hidden;
 
-    .octo-menu-item {
-        cursor: pointer;
-        position: relative;
-        padding: 1rem;
+    .octo-menu-group {
+        display: flex;
+        flex-direction: column;
+    }
 
-        .octo-ripple {
-            position: absolute;
-            inset: 0;
+    .octo-menu-item,
+    .octo-menu-check-item,
+    .octo-menu-radio-item {
+        appearance: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        outline: none;
+        padding: 0 1rem;
+        position: relative;
+
+        &:hover {
+            filter: brightness(1.25);
+        }
+
+        &:active {
+            filter: brightness(0.75);
+        }
+
+        .octo-menu-item-icon {
+            font-size: 1.5rem !important;
+            line-height: 1.5rem !important;
+            width: 1.5rem !important;
+            height: 1.5rem !important;
         }
     }
 
     .octo-split-line {
-        margin: 0 !important;
+        margin: 0.5rem 0 !important;
     }
 }
+

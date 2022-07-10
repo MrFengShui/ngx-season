@@ -1,0 +1,12 @@
+@use "sass:map";
+
+@mixin mixin-card-theme($colors, $foreground, $background) {
+    .octo-card {
+        background-color: map.get($background, "card");
+        color: map.get($foreground, "card");
+
+        .octo-card-avatar {
+            border-color: rgba(map.get($foreground, "card"), 0.5);
+        }
+    }
+}
