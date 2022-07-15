@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import {Observable, of} from "rxjs";
+import {AfterViewInit, Component, Inject, Renderer2} from '@angular/core';
+import {DOCUMENT} from "@angular/common";
 import {Params} from "@angular/router";
+import {Observable, of} from "rxjs";
+import {HighlightLoader} from "ngx-highlightjs";
 
 export interface RouterListLink {
 
@@ -57,15 +59,43 @@ export const LESS_LINKS: RouterListLink[] = [
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
     private readonly ROUTER_MORE_LINKS: RouterListLink[] = FULL_LINKS;
     private readonly ROUTER_LESS_LINKS: RouterListLink[] = LESS_LINKS;
+    private readonly MODE_LIST: string[] = ['dark', 'light'];
 
+    mode: boolean = true;
     state: boolean = false;
+
+    constructor(
+        @Inject(DOCUMENT)
+        private _document: Document,
+        private _render: Renderer2,
+        private _loader: HighlightLoader
+    ) {
+    }
+
+    ngAfterViewInit() {
+        this.changeGlobalMode(this.mode);
+        this.changeCodeSnippetMode(this.mode);
+    }
 
     matchLinks(state: boolean): Observable<RouterListLink[]> {
         return state ? of(this.ROUTER_MORE_LINKS) : of(this.ROUTER_LESS_LINKS);
+    }
+
+    changeGlobalMode(mode: boolean): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            this.MODE_LIST.forEach(item =>
+                this._render.removeClass(this._document.documentElement, `theme-${item}-default`));
+            this._render.addClass(this._document.documentElement, `theme-${mode ? 'dark' : 'light'}-default`);
+        });
+    }
+
+    changeCodeSnippetMode(mode: boolean): void {
+        this._loader.setTheme(`assets/highlight/atom-one-${mode ? 'dark' : 'light'}.css`);
     }
 
 }

@@ -1,33 +1,44 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {TextFieldModule} from '@angular/cdk/text-field';
 
-import {OctopusCheckBox, OctopusCheckToggle} from "./check.component";
+import {
+    OctopusFormField,
+    OctopusFormHint,
+    OctopusFormLabel,
+    OctopusFormPrefix,
+    OctopusFormSuffix,
+    OctopusInput
+} from "./form.component";
 
 import {OctopusImageModule} from "../image/image.module";
 import {OctopusEffectsModule} from "../effects/effects.module";
-import {OctopusRadioButton, OctopusRadioGroup, OctopusRadioToggle} from "./radio.component";
 
 @NgModule({
     declarations: [
-        OctopusCheckBox,
-        OctopusCheckToggle,
-        OctopusRadioGroup,
-        OctopusRadioButton,
-        OctopusRadioToggle
+        OctopusFormField,
+        OctopusFormLabel,
+        OctopusFormHint,
+        OctopusFormPrefix,
+        OctopusFormSuffix,
+        OctopusInput
     ],
     imports: [
         CommonModule,
         FormsModule,
+        TextFieldModule,
         OctopusImageModule,
         OctopusEffectsModule
     ],
     exports: [
-        OctopusCheckBox,
-        OctopusCheckToggle,
-        OctopusRadioGroup,
-        OctopusRadioButton,
-        OctopusRadioToggle
+        TextFieldModule,
+        OctopusFormField,
+        OctopusFormLabel,
+        OctopusFormHint,
+        OctopusFormPrefix,
+        OctopusFormSuffix,
+        OctopusInput
     ]
 })
 export class OctopusFormModule {}

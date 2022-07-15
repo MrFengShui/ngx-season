@@ -1,37 +1,5 @@
 @use "sass:map";
 
 @mixin mixin-overflow-theme($colors, $foreground, $background) {
-    .overflow {
-        &.overflow-base {
-            &::-webkit-scrollbar-thumb {
-                background-color: map.get($background, "scrollbar");
 
-                &:hover {
-                    background-color: rgba(map.get($background, "scrollbar"), 0.85);
-                }
-            }
-
-            &::-webkit-scrollbar-track {
-                box-shadow: 0 0 0.75rem 0 rgba(map.get($background, "scrollbar"), 0.75) inset;
-            }
-        }
-
-        @each $key, $value in $colors {
-            @if $key == "primary" or $key == "accent" {
-                &.overflow-#{$key} {
-                    &::-webkit-scrollbar-thumb {
-                        background-color: $value;
-
-                        &:hover {
-                            background-color: lighten($value, 2.5%);
-                        }
-                    }
-
-                    &::-webkit-scrollbar-track {
-                        box-shadow: 0 0 0.75rem 0 rgba($value, 0.75) inset;
-                    }
-                }
-            }
-        }
-    }
 }

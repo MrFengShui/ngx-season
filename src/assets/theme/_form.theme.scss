@@ -1,24 +1,41 @@
 @use "sass:map";
 
 @mixin mixin-form-theme($colors, $foreground, $background) {
-    .octo-check {
-        &.octo-check-box {
-            .octo-check-box-wrapper {
-                .octo-check-input {
-                    .octo-check-mark {
-                        color: map.get($foreground, 'base');
-                    }
+    .octo-form-field {
+        background-color: map.get($background, "form");
+        color: map.get($foreground, "form");
+
+        .octo-form-field-wrapper {
+            .octo-form-field-bone {
+                .left,
+                .middle,
+                .right {
+                    border-color: map.get($foreground, "form");
+                }
+
+                .octo-form-label {
+                    color: map.get($foreground, "form");
                 }
             }
 
-            @each $key, $value in $colors {
-                &.octo-check-box-#{$key} {
-                    .octo-check-box-wrapper {
-                        &.active {
-                            .octo-check-input {
-                                .octo-check-mark {
-                                    color: $value;
-                                }
+            .octo-input {
+                color: map.get($foreground, "form");
+            }
+        }
+
+        @each $key, $value in $colors {
+            &.octo-form-field-#{$key} {
+                .octo-form-field-wrapper {
+                    &.focused {
+                        .octo-form-field-bone {
+                            .left,
+                            .middle,
+                            .right {
+                                border-color: $value;
+                            }
+
+                            .octo-form-label {
+                                color: $value;
                             }
                         }
                     }
@@ -26,91 +43,11 @@
             }
         }
 
-        &.octo-check-toggle {
-            .octo-check-toggle-wrapper {
-                .octo-check-input {
-                    .octo-check-ctrl {
-                        background-color: rgba(map.get($foreground, "base"), 0.25);
-                        border-color: map.get($foreground, "base");
-                        box-shadow: 0 0 0.125rem 0 map.get($foreground, "base") inset;
-
-                        .octo-check-ctrl-mark {
-                            background-color: map.get($foreground, "base");
-                        }
-                    }
-                }
-            }
-
+        .octo-form-hint {
             @each $key, $value in $colors {
-                &.octo-check-toggle-#{$key} {
-                    .octo-check-toggle-wrapper {
-                        &.active {
-                            .octo-check-input {
-                                .octo-check-ctrl {
-                                    background-color: rgba($value, 0.25);
-                                    border-color: $value;
-                                    box-shadow: 0 0 0.125rem 0 $value inset;
-
-                                    .octo-check-ctrl-mark {
-                                        background-color: $value;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .octo-radio {
-        &.octo-radio-button {
-            .octo-radio-button-wrapper {
-                .octo-radio-input {
-                    .octo-radio-mark {
-                        color: map.get($foreground, 'base');
-                    }
-                }
-            }
-
-            @each $key, $value in $colors {
-                &.octo-radio-button-#{$key} {
-                    .octo-radio-button-wrapper {
-                        &.active {
-                            .octo-radio-input {
-                                .octo-radio-mark {
-                                    color: $value;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &.octo-radio-toggle {
-            .octo-radio-toggle-wrapper {
-                .octo-check-input {
-                    background-color: darken(map.get($background, "button"), 7.5%);
-                    color: map.get($foreground, "button");
-                }
-
-                &.active {
-
-                    background-color: lighten(map.get($background, "button"), 2.5%);
-                    box-shadow: 0 0 0.75rem 0 rgba(map.get($background, "button"), 0.25) inset;
-                }
-            }
-
-            @each $key, $value in $colors {
-                &.octo-radio-toggle-#{$key} {
-                    .octo-radio-toggle-wrapper {
-                        background-color: darken($value, 7.5%);
-
-                        &.active {
-                            background-color: lighten($value, 2.5%);
-                            box-shadow: 0 0 0.25rem 0 rgba($value, 0.75) inset;
-                        }
+                @if $key == "success" or $key == "warning" or $key == "failure" {
+                    &.octo-form-hint-#{$key} {
+                        color: $value;
                     }
                 }
             }

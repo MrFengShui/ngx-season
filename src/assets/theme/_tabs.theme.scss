@@ -2,28 +2,35 @@
 
 @mixin mixin-tabs-theme($colors, $foreground, $background) {
     .octo-tabbed-group {
-        .octo-tabbed-content {
-            background-color: map.get($background, "tabs");
+        background-color: map.get($background, "tabs");
+
+        .octo-tabbed-header {
+            .octo-tabbed-ctrl {
+                color: map.get($foreground, "tabs");
+            }
         }
     }
 
     .octo-tabbed-header {
-        background-color: map.get($background, "tabs");
-        color: map.get($foreground, "tabs");
+        .octo-tabbed-header-wrapper {
+            .octo-tabbed-ctrl {
+                color: map.get($foreground, "tabs");
+            }
 
-        .octo-tabbed-ctrl {
-            background-color: transparent;
-
-            &.octo-tabbed-ctrl-base {
-                .active {
+            .octo-tabbed-mark-track {
+                .octo-tabbed-mark {
                     background-color: map.get($foreground, "tabs");
                 }
             }
+        }
 
-            @each $key, $value in $colors {
-                &.octo-tabbed-ctrl-#{$key} {
-                    .active {
-                        background-color: $value;
+        @each $key, $value in $colors {
+            &.octo-tabbed-header-#{$key} {
+                .octo-tabbed-header-wrapper {
+                    .octo-tabbed-mark-track {
+                        .octo-tabbed-mark {
+                            background-color: $value;
+                        }
                     }
                 }
             }

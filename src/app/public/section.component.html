@@ -1,0 +1,19 @@
+<ng-container *ngIf="entity">
+    <div class="octopus-section-heading" *ngIf="entity.heading">{{entity.heading}}</div>
+    <p class="octopus-section-paragraph" *ngFor="let paragraph of entity.paragraphs">
+        <ng-container *ngFor="let segment of paragraph">
+            <ng-container *ngIf="segment.type === 'normal'">{{segment.text}}</ng-container>
+            <span class="octopus-text-highlight" *ngIf="segment.type === 'highlight'">{{segment.text}}</span>
+        </ng-container>
+    </p>
+    <table class="octopus-section-table" *ngFor="let table of entity.tables">
+        <tr>
+            <th *ngFor="let header of table.headers">{{header}}</th>
+        </tr>
+        <tr *ngFor="let row of table.colrows">
+            <td *ngFor="let col of row">{{col}}</td>
+        </tr>
+    </table>
+</ng-container>
+
+

@@ -48,39 +48,6 @@ $flex-align-map: (
     }
 }
 
-$overflow-list: (auto, clip, scroll, visible, hidden);
-.overflow {
-    &::-webkit-scrollbar {
-        width: 0.75rem;
-        height: 0.75rem;
-    }
-
-    &::-webkit-scrollbar-button {
-        width: 0;
-        height: 0;
-    }
-
-    &::-webkit-scrollbar-corner {
-        appearance: none;
-    }
-
-    @each $item in $overflow-list {
-        &.overflow-#{$item}-xy {
-            overflow: $item;
-        }
-
-        &.overflow-#{$item}-x {
-            overflow-x: $item;
-            overflow-y: hidden;
-        }
-
-        &.overflow-#{$item}-y {
-            overflow-x: hidden;
-            overflow-y: $item;
-        }
-    }
-}
-
 $size-list: (auto, fit, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100);
 @each $item in $size-list {
     @if $item == auto {

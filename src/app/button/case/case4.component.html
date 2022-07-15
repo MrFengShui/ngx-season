@@ -1,0 +1,17 @@
+<div class="d-flex flex-jc-between">
+    <div class="d-grid g-100" style="grid-template-columns: repeat(3, 4rem);place-items: stretch;">
+        <button octo-btn [octoColor]="button.color" octoShape="ring" *ngFor="let button of BUTTONS">
+            <octo-icon octoSize="2rem">home</octo-icon>
+        </button>
+    </div>
+    <div class="d-grid g-100" style="grid-template-columns: repeat(3, 4rem);place-items: stretch;">
+        <button octo-solid-btn [octoColor]="button.color" octoShape="ring" *ngFor="let button of BUTTONS">
+            <octo-icon octoSize="2rem">home</octo-icon>
+        </button>
+    </div>
+    <div class="d-grid g-100" style="grid-template-columns: repeat(3, 4rem);place-items: stretch;">
+        <button octo-stroke-btn [octoColor]="button.color" octoShape="ring" *ngFor="let button of BUTTONS">
+            <octo-icon octoSize="2rem">home</octo-icon>
+        </button>
+    </div>
+</div>

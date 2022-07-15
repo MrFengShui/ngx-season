@@ -1,0 +1,28 @@
+@use "sass:map";
+
+$typo-map: (
+    "display-4": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 4rem, "weight": normal),
+    "display-3": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 3.5rem, "weight": normal),
+    "display-2": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 3rem, "weight": normal),
+    "display-1": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 2.5rem, "weight": normal),
+    "headline": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 2rem, "weight": bold),
+    "title": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.5rem, "weight": bold),
+    "subtitle": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.25rem, "weight": bold),
+    "heading-1": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.25rem, "weight": bold),
+    "heading-2": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.2rem, "weight": bold),
+    "heading-3": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.15rem, "weight": bold),
+    "heading-4": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.1rem, "weight": bold),
+    "heading-5": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1.05rem, "weight": bold),
+    "heading-6": ("family": "'Noto Sans'', sans-serif", "height": 1.5, "size": 1rem, "weight": bold),
+    "paragraph": ("family": "'Noto Sans'', sans-serif", "height": 1.25, "size": 1rem, "weight": normal),
+    "caption": ("family": "'Noto Sans'', sans-serif", "height": 1, "size": 0.75rem, "weight": normal),
+);
+@each $key, $value in $typo-map {
+    .octo-#{$key} {
+        font-family: map.get($value, "family");
+        font-size: map.get($value, "size");
+        font-weight: map.get($value, "weight");
+        line-height: map.get($value, "height");
+        margin: 0;
+    }
+}

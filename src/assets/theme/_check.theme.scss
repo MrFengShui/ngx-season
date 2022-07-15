@@ -1,0 +1,65 @@
+@use "sass:map";
+
+@mixin mixin-check-theme($colors, $foreground, $background) {
+    .octo-check {
+        &.octo-check-box {
+            .octo-check-box-wrapper {
+                .octo-check-input {
+                    .octo-check-mark {
+                        color: map.get($foreground, 'base');
+                    }
+                }
+            }
+
+            @each $key, $value in $colors {
+                &.octo-check-box-#{$key} {
+                    .octo-check-box-wrapper {
+                        &.active {
+                            .octo-check-input {
+                                .octo-check-mark {
+                                    color: $value;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.octo-check-toggle {
+            .octo-check-toggle-wrapper {
+                .octo-check-input {
+                    .octo-check-ctrl {
+                        background-color: rgba(map.get($foreground, "base"), 0.25);
+                        border-color: map.get($foreground, "base");
+                        box-shadow: 0 0 0.125rem 0 map.get($foreground, "base") inset;
+
+                        .octo-check-ctrl-mark {
+                            background-color: map.get($foreground, "base");
+                        }
+                    }
+                }
+            }
+
+            @each $key, $value in $colors {
+                &.octo-check-toggle-#{$key} {
+                    .octo-check-toggle-wrapper {
+                        &.active {
+                            .octo-check-input {
+                                .octo-check-ctrl {
+                                    background-color: rgba($value, 0.25);
+                                    border-color: $value;
+                                    box-shadow: 0 0 0.125rem 0 $value inset;
+
+                                    .octo-check-ctrl-mark {
+                                        background-color: $value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

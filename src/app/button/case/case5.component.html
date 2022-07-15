@@ -1,0 +1,12 @@
+<div class="d-flex sx-50">
+    <div octo-overflow octoScrollXY="y" class="w-100 vh-50" style="position: relative" #scrollpane>
+        <img src="https://images.wallpaperscraft.com/image/single/rocks_stones_sea_318383_1350x2400.jpg" alt=""
+             width="100%">
+    </div>
+    <div class="d-flex flex-col-pos flex-jc-between">
+        <button octo-scroll-btn octoDir="bottomup" [octoTarget]="scrollpane"
+                style="position: relative;width: 3rem;height: 3rem;"></button>
+        <button octo-scroll-btn octoDir="topdown" [octoTarget]="scrollpane"
+                style="position: relative;width: 3rem;height: 3rem;"></button>
+    </div>
+</div>

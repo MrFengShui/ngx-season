@@ -3,6 +3,11 @@
         <a octo-toolbar-logo href="/">
             <img src="https://cdn.worldvectorlogo.com/logos/angular-3.svg" alt="" height="100%">
         </a>
+        <span class="flex-fill"></span>
+        <octo-check-toggle octoColor="accent" octoLabelPos="before" [(ngModel)]="mode"
+                           (ngModelChange)="changeGlobalMode($event);changeCodeSnippetMode(mode);">
+            {{mode ? 'Dark Mode' : 'Light Mode'}}
+        </octo-check-toggle>
     </octo-toolbar>
     <octo-sidenav-container octoColor="primary" [octoState]="state" octoMin="4rem" octoMax="17.5rem"
                             style="height: calc(100% - 4rem)">

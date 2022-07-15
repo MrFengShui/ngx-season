@@ -1,0 +1,93 @@
+.octo-ripple {
+    position: relative;
+    overflow: hidden;
+
+    .ripple {
+        border-radius: 50%;
+        filter: opacity(0.25);
+        position: absolute;
+    }
+}
+
+$overflow-list: (auto, clip, scroll, visible, hidden);
+.overflow {
+    &::-webkit-scrollbar {
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+
+    &::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+    }
+
+    @each $item in $overflow-list {
+        &.overflow-#{$item}-xy {
+            overflow: $item;
+        }
+
+        &.overflow-#{$item}-x {
+            overflow-x: $item;
+            overflow-y: hidden;
+        }
+
+        &.overflow-#{$item}-y {
+            overflow-x: hidden;
+            overflow-y: $item;
+        }
+    }
+}
+
+$font-style-list: (italic, normal, oblique);
+@each $item in $font-style-list {
+    .fs-#{$item} {
+        font-style: $item !important;
+    }
+}
+
+$font-weight-list: (lighter, normal, bold, bolder);
+@each $item in $font-weight-list {
+    .fw-#{$item} {
+        font-weight: $item !important;
+    }
+}
+
+$text-xalign-list: (left, center, right, justify, justify-all);
+@each $item in $text-xalign-list {
+    .text-#{$item} {
+        text-align: $item !important;
+    }
+}
+
+$text-yalign-list: (top, middle, bottom, baseline);
+@each $item in $text-yalign-list {
+    .text-#{$item} {
+        vertical-align: $item !important;
+    }
+}
+
+.text-break {
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+}
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-wrap {
+    white-space: normal !important;
+}
+
+.text-nowrap {
+    white-space: nowrap !important;
+}
+
+$text-decorate-list: ("none": none, "through": line-through, "overline": overline, "underline": underline, "blink": blink);
+@each $key, $value in $text-decorate-list {
+    .td-#{$key} {
+        text-decoration-line: $value !important;
+    }
+}

@@ -130,18 +130,18 @@ $yellow: (
     900: darken(gold, 16%),
 );
 
-@function create-bgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar,
+@function create-bgcolor($base, $accordion, $button, $card, $form, $label, $menu, $overlay, $queue,
     $sidenav, $tabs, $table, $toolbar) {
     @return (
         "base": $base,
         "accordion": $accordion,
         "button": $button,
         "card": $card,
+        "form": $form,
         "label": $label,
         "menu": $menu,
         "queue": $queue,
         "overlay": $overlay,
-        "scrollbar": $scrollbar,
         "sidenav": $sidenav,
         "tabs": $tabs,
         "table": $table,
@@ -149,18 +149,18 @@ $yellow: (
     );
 }
 
-@function create-fgcolor($base, $accordion, $button, $card, $label, $menu, $overlay, $queue, $scrollbar,
+@function create-fgcolor($base, $accordion, $button, $card, $form, $label, $menu, $overlay, $queue,
     $sidenav, $tabs, $table, $toolbar) {
     @return (
         "base": $base,
         "accordion": $accordion,
         "button": $button,
         "card": $card,
+        "form": $form,
         "label": $label,
         "menu": $menu,
         "queue": $queue,
         "overlay": $overlay,
-        "scrollbar": $scrollbar,
         "sidenav": $sidenav,
         "tabs": $tabs,
         "table": $table,
@@ -174,32 +174,32 @@ $yellow: (
 
 @function create-dark-theme($primary, $accent, $success, $warning, $failure) {
     $fgcolor: create-fgcolor(
-            #fafafa, // base
+            #f5f5f5, // base
             #eeeeee, // accordion
             #eeeeee, // button
             #eeeeee, // card
+            #eeeeee, // form
             #e0e0e0, // label
             #e0e0e0, // menu
-            #fafafa, // overlay
-            #fafafa, // queue
-            #e0e0e0, // scrollbar
+            #f5f5f5, // overlay
+            #f5f5f5, // queue
             #eeeeee, // sidenav
-            #e0e0e0, // tabs
+            #eeeeee, // tabs
             #eeeeee, // table
-            #fafafa  // toolbar
+            #f5f5f5  // toolbar
     );
     $bgcolor: create-bgcolor(
             #212121, // base
             #424242, // accordion
             #424242, // button
             #424242, // card
+            #424242, // form
             #616161, // label
             #616161, // menu
             #212121, // overlay
             #424242, // queue
-            #616161, // scrollbar
             #424242, // sidenav
-            #616161, // tabs
+            #424242, // tabs
             #424242, // table
             #424242  // toolbar
     );
@@ -216,28 +216,28 @@ $yellow: (
             #424242, // accordion
             #424242, // button
             #424242, // card
+            #424242, // form
             #616161, // label
             #616161, // menu
             #212121, // overlay
             #424242, // queue
-            #616161, // scrollbar
             #424242, // sidenav
-            #616161, // tabs
+            #424242, // tabs
             #424242, // table
             #212121  // toolbar
     );
     $bgcolor: create-bgcolor(
-            #fafafa, // base
+            #f5f5f5, // base
             #eeeeee, // accordion
             #eeeeee, // button
             #eeeeee, // card
+            #eeeeee, // form
             #e0e0e0, // label
             #e0e0e0, // menu
-            #fafafa, // overlay
-            #fafafa, // queue
-            #e0e0e0, // scrollbar
+            #f5f5f5, // overlay
+            #f5f5f5, // queue
             #eeeeee, // sidenav
-            #e0e0e0, // tabs
+            #eeeeee, // tabs
             #eeeeee, // table
             #e0e0e0  // toolbar
     );

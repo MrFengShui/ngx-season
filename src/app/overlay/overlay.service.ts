@@ -196,7 +196,9 @@ export class OctopusToast {
         return this;
     }
 
-    open(closable: boolean = false, duration: number = 0): OctopusToast {
+    open(closable: boolean = false, duration: number = 5000): OctopusToast {
+        this.closeAll();
+
         if (this.dialogRef === null) {
             this.closable = duration === 0 || closable;
             this.dialogCfg.id = `octopus-dialog-${this.dialogID++}`;

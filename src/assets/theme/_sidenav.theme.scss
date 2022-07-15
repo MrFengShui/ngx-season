@@ -2,9 +2,12 @@
 
 @mixin mixin-sidenav-theme($colors, $foreground, $background) {
     .octo-sidenav-container {
-        .octo-sidenav,
+        .octo-sidenav {
+            background-color: darken(map.get($background, "sidenav"), 2.5%);
+        }
+
         .octo-sidenav-content{
-            background-color: map.get($background, "sidenav");
+            background-color: lighten(map.get($background, "sidenav"), 7.5%);
         }
     }
 }

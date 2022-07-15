@@ -1,0 +1,23 @@
+<div class="octopus-snippet-toolbar">
+    <span class="octopus-snippet-subject">{{subject}}</span>
+    <button octo-btn octoShape="ring" style="width: 3rem;height: 3rem;" (click)="state = !state">
+        <octo-icon>{{state ? 'code_off' : 'code'}}</octo-icon>
+    </button>
+</div>
+<div [@SHOW_HIDE]="state ? 'show' : 'hide'" class="octopus-snippet-code">
+    <octo-tabbed-group>
+        <octo-tabbed-unit *ngFor="let source of sources">
+            <ng-template octo-tabbed-unit-head>{{source.name}}</ng-template>
+            <ng-template octo-tabbed-unit-body>
+                <pre><code [highlight]="source.code" [languages]="['html', 'scss', 'typescript']"
+                           [lineNumbers]="true" style="background: none;overflow: inherit;"></code></pre>
+                <button octo-btn octoShape="ring" [cdkCopyToClipboard]="source.code"
+                        (cdkCopyToClipboardCopied)="listenCopiedChange($event)"
+                        style="position: absolute;top: 0;right: 0;">
+                    <octo-icon octoSize="2rem">content_copy</octo-icon>
+                </button>
+            </ng-template>
+        </octo-tabbed-unit>
+    </octo-tabbed-group>
+</div>
+<div class="octopus-snippet-result"><ng-content></ng-content></div>

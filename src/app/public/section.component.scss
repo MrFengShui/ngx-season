@@ -1,0 +1,49 @@
+.octopus-section {
+    display: flex;
+    flex-direction: column;
+
+    .octopus-section-heading {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.25;
+        margin: 1rem 0;
+    }
+
+    .octopus-section-paragraph {
+        font-size: 1rem;
+        font-weight: normal;
+        line-height: 2;
+        margin: 0.5rem 0;
+
+        .octopus-text-highlight {
+            background-color: rgba(gray, 0.5);
+            border-radius: 0.125rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    .octopus-section-table {
+        border-color: gray;
+        border-collapse: collapse;
+        border-style: solid;
+        border-width: 0.125rem;
+        margin: 0.5rem 0;
+
+        tr {
+            th, td {
+                border-color: rgba(gray, 0.25);
+                border-style: solid;
+                border-width: 0.125rem;
+                padding: 0.75rem;
+            }
+
+            th {
+                background-color: darkgray;
+            }
+
+            td {
+                background-color: lightgray;
+            }
+        }
+    }
+}

@@ -1,16 +1,26 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
-import {OctopusButton, OctopusSolidButton, OctopusStrokeButton} from "./button.component";
+import {
+    OctopusAnchor,
+    OctopusButton,
+    OctopusScrollButton, OctopusSolidAnchor,
+    OctopusSolidButton, OctopusStrokedAnchor,
+    OctopusStrokedButton
+} from "./button.component";
 
 import {OctopusImageModule} from "../image/image.module";
 import {OctopusEffectsModule} from "../effects/effects.module";
 
 @NgModule({
     declarations: [
+        OctopusAnchor,
         OctopusButton,
+        OctopusSolidAnchor,
         OctopusSolidButton,
-        OctopusStrokeButton
+        OctopusStrokedAnchor,
+        OctopusStrokedButton,
+        OctopusScrollButton
     ],
     imports: [
         CommonModule,
@@ -18,9 +28,13 @@ import {OctopusEffectsModule} from "../effects/effects.module";
         OctopusImageModule
     ],
     exports: [
+        OctopusAnchor,
         OctopusButton,
+        OctopusSolidAnchor,
         OctopusSolidButton,
-        OctopusStrokeButton
+        OctopusStrokedAnchor,
+        OctopusStrokedButton,
+        OctopusScrollButton
     ]
 })
 export class OctopusButtonModule {}

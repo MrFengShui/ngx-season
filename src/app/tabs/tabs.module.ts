@@ -3,8 +3,13 @@ import {CommonModule} from "@angular/common";
 
 import {
     OctopusTabbedUnit,
-    OctopusTabHeader,
-    OctopusTabbedGroup, OctopusTabbedUnitHead, OctopusTabbedBox, OctopusTabbedUnitBody, OctopusTabbedControl
+    OctopusTabbedHeader,
+    OctopusTabbedGroup,
+    OctopusTabbedUnitHead,
+    OctopusTabbedBox,
+    OctopusTabbedUnitBody,
+    OctopusTabbedControl,
+    OctopusTabbedFavicon
 } from "./tabs.component";
 
 import {OctopusButtonModule} from "../button/button.module";
@@ -17,9 +22,10 @@ import {OctopusToolsModule} from "../tools/tools.module";
         OctopusTabbedBox,
         OctopusTabbedUnitHead,
         OctopusTabbedUnitBody,
+        OctopusTabbedFavicon,
         OctopusTabbedControl,
         OctopusTabbedUnit,
-        OctopusTabHeader,
+        OctopusTabbedHeader,
         OctopusTabbedGroup
     ],
     imports: [
@@ -33,11 +39,12 @@ import {OctopusToolsModule} from "../tools/tools.module";
         OctopusTabbedBox,
         OctopusTabbedUnitHead,
         OctopusTabbedUnitBody,
+        OctopusTabbedFavicon,
         OctopusTabbedControl,
         OctopusTabbedUnit,
         OctopusTabbedUnit,
-        OctopusTabHeader,
+        OctopusTabbedHeader,
         OctopusTabbedGroup
     ]
 })
-export class OctopusTabModule {}
+export class OctopusTabbedModule {}

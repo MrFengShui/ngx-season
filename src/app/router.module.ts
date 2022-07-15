@@ -1,41 +1,24 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 
-import {OctopusTemplateOverlayView, OctopusTemplateView} from "./hub/template.component";
-import {OctopusLinkHubView} from "./hub/general.component";
+import {OctopusTemplateView} from "./public/template.component";
+import {OctopusLinkHubView} from "./public/general.component";
 
-import {OctopusButtonModule} from "./button/button.module";
-import {OctopusImageModule} from "./image/image.module";
-import {OctopusQueueModule} from "./queue/queue.module";
-import {OctopusToolsModule} from "./tools/tools.module";
-import {OctopusEffectsModule} from "./effects/effects.module";
-import {OctopusToolbarModule} from "./toolbar/toolbar.module";
-import {OctopusSidenavModule} from "./sidenav/sidenav.module";
-import {OctopusTabModule} from "./tabs/tabs.module";
-import {OctopusExpressModule} from "./express/express.module";
-import {OctopusCarouselModule} from "./carousel/carousel.module";
-import {OctopusLabelModule} from "./label/label.module";
-import {OctopusOverlayModule} from "./overlay/overlay.module";
-import {OctopusMenuModule} from "./menu/menu.module";
-import {OctopusAccordionModule} from "./accordion/accordion.module";
-import {OctopusBadgeModule} from "./badge/badge.module";
-import {OctopusMatrixModule} from "./matrix/matrix.module";
-import {OctopusProgressModule} from "./progress/progress.module";
-import {OctopusPaginatorModule} from "./paginator/paginator.module";
-import {OctopusTreeModule} from "./tree/tree.module";
-import {OctopusTableModule} from "./table/table.module";
-import {OctopusCardModule} from "./card/card.module";
-import {OctopusStepperModule} from "./stepper/stepper.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {OctopusFormModule} from "./form/form.module";
+import {OctopusAllModule} from "./global/all.module";
+import {OctopusPublicModule} from "./public/public.module";
+import {DEMO_BUTTON_ROUTER, OctopusDemoButtonModule} from "./button/demo/demo.module";
 
 const routes: Routes = [
     {path: '', redirectTo: '/general', pathMatch: 'full'},
     {path: 'general', component: OctopusLinkHubView},
     {path: 'accordion', component: OctopusTemplateView},
     {path: 'badge', component: OctopusTemplateView},
-    {path: 'button', component: OctopusTemplateView},
+    {
+        path: 'button', component: OctopusTemplateView,
+        children: DEMO_BUTTON_ROUTER
+    },
     {path: 'card', component: OctopusTemplateView},
     {path: 'carousel', component: OctopusTemplateView},
     {path: 'check', component: OctopusTemplateView},
@@ -66,11 +49,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        OctopusTemplateView,
-        OctopusTemplateOverlayView,
-        OctopusLinkHubView
-    ],
     imports: [
         CommonModule,
         FormsModule,
@@ -80,57 +58,12 @@ const routes: Routes = [
             preloadingStrategy: PreloadAllModules,
             useHash: true
         }),
-        OctopusAccordionModule,
-        OctopusBadgeModule,
-        OctopusButtonModule,
-        OctopusCardModule,
-        OctopusCarouselModule,
-        OctopusEffectsModule,
-        OctopusExpressModule,
-        OctopusFormModule,
-        OctopusImageModule,
-        OctopusLabelModule,
-        OctopusMatrixModule,
-        OctopusMenuModule,
-        OctopusOverlayModule,
-        OctopusPaginatorModule,
-        OctopusProgressModule,
-        OctopusQueueModule,
-        OctopusSidenavModule,
-        OctopusStepperModule,
-        OctopusTabModule,
-        OctopusTableModule,
-        OctopusToolbarModule,
-        OctopusToolsModule,
-        OctopusTreeModule
+        OctopusPublicModule,
+        OctopusAllModule,
+        OctopusDemoButtonModule
     ],
     exports: [
-        OctopusTemplateView,
-        OctopusTemplateOverlayView,
-        OctopusLinkHubView,
-        OctopusAccordionModule,
-        OctopusBadgeModule,
-        OctopusButtonModule,
-        OctopusCardModule,
-        OctopusCarouselModule,
-        OctopusEffectsModule,
-        OctopusExpressModule,
-        OctopusFormModule,
-        OctopusImageModule,
-        OctopusLabelModule,
-        OctopusMatrixModule,
-        OctopusMenuModule,
-        OctopusOverlayModule,
-        OctopusPaginatorModule,
-        OctopusProgressModule,
-        OctopusQueueModule,
-        OctopusSidenavModule,
-        OctopusStepperModule,
-        OctopusTabModule,
-        OctopusTableModule,
-        OctopusToolbarModule,
-        OctopusToolsModule,
-        OctopusTreeModule
+        OctopusAllModule
     ]
 })
 export class AppRouterModule {}

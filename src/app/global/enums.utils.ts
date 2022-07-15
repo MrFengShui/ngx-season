@@ -26,7 +26,7 @@ export type OctopusTabHeaderPosition = 'top' | 'bottom';
 
 export const OCTOPUS_ALIGNMENTS: OctopusAlignment[] = ['x', 'y'];
 
-export const OCTOPUS_COLOR_PALETTES: OctopusColorPalette[] = ['primary', 'accent', 'success', 'warning', 'failure'];
+export const OCTOPUS_COLOR_PALETTES: OctopusColorPalette[] = ['base', 'primary', 'accent', 'success', 'warning', 'failure'];
 
 export const OCTOPUS_OVERFLOW_XYS: OctopusOverflowXY[] = ['x', 'y', 'xy'];
 

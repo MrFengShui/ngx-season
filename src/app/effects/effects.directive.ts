@@ -98,11 +98,11 @@ export class OctopusRipple implements OnChanges, AfterViewInit {
 }
 
 @Directive({
-    selector: '[octo-overflow]'
+    selector: '[octo-overflow], [octoOverflow]'
 })
 export class OctopusOverflow implements OnChanges, AfterViewInit {
 
-    @Input('octoColor') color: OctopusColorPalette = 'base';
+    @Input('octoColor') color: OctopusColorPalette = 'primary';
     @Input('octoScrollXY') scrollXY: OctopusOverflowXY = 'xy';
     @Input('octoScrollType') scrollType: OctopusOverflowType = 'auto';
 
@@ -138,10 +138,7 @@ export class OctopusOverflow implements OnChanges, AfterViewInit {
             clearTimeout(task);
             OCTOPUS_COLOR_PALETTES.forEach(item =>
                 this._render.removeClass(this._element.nativeElement, `overflow-${item}`));
-
-            if (color === 'base' || color === 'primary' || color === 'accent') {
-                this._render.addClass(this._element.nativeElement, `overflow-${color}`);
-            }
+            this._render.addClass(this._element.nativeElement, `overflow-${color === 'base' ? 'primary' : color}`);
         });
     }
 

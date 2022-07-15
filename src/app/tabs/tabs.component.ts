@@ -1,14 +1,13 @@
 import {animate, AnimationBuilder, AnimationPlayer, style} from "@angular/animations";
 import {coerceBooleanProperty, coerceNumberProperty} from "@angular/cdk/coercion";
 import {
-    AfterContentInit, AfterViewInit,
-    Component, ContentChild,
+    AfterContentInit, AfterViewInit, Component, ContentChild,
     ContentChildren,
     Directive,
     ElementRef,
-    EventEmitter,
-    HostBinding,
-    Input, OnChanges,
+    EventEmitter, forwardRef,
+    HostBinding, Inject,
+    Input, NgZone, OnChanges,
     OnDestroy,
     Output,
     QueryList,
@@ -16,7 +15,7 @@ import {
     TemplateRef,
     ViewChild, ViewChildren
 } from "@angular/core";
-import {fromEvent} from "rxjs";
+import {fromEvent, interval, map, Observable, Subscription} from "rxjs";
 
 import {
     OCTOPUS_COLOR_PALETTES,
@@ -26,6 +25,15 @@ import {
 } from "../global/enums.utils";
 
 import {OctopusSelectedIndexChange} from "../global/event.model";
+
+@Directive({
+    selector: 'octo-icon[octo-tabbed-favicon], img[octo-tabbed-favicon]'
+})
+export class OctopusTabbedFavicon {
+
+    @HostBinding('class') class: string = 'octo-tabbed-favicon';
+
+}
 
 @Directive({
     selector: '[octo-tabbed-unit-head]',
@@ -60,34 +68,36 @@ export class OctopusTabbedUnit {
 
 }
 
-@Directive({
-    selector: 'button[octo-tabbed-ctrl], a[octo-tabbed-ctrl]'
+@Component({
+    selector: 'button[octo-tabbed-ctrl], a[octo-tabbed-ctrl]',
+    template: `
+        <div octo-ripple></div>
+        <ng-content select="octo-icon[octo-tabbed-favicon], img[octo-tabbed-favicon]"></ng-content>
+        <div class="octo-tabbed-ctrl-wrapper" [ngStyle]="{'flex': closable ? 'auto' : ''}"><ng-content></ng-content></div>
+        <button octo-solid-btn [octoColor]="_header.color" octoShape="ring" class="ml-100"
+                style="width: 0.75rem;height: 0.75rem;" (click)="$event.stopPropagation();close.emit();"
+                *ngIf="closable">
+            <octo-icon octoSize="0.75rem">close</octo-icon>
+        </button>
+    `
 })
-export class OctopusTabbedControl implements AfterViewInit {
+export class OctopusTabbedControl {
+
+    @Input('octoClose')
+    get closable() { return this._closable; }
+    set closable(_closable: any) { this._closable = coerceBooleanProperty(_closable); }
+    private _closable: boolean = false;
+
+    @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
     @HostBinding('class') class: string = 'octo-tabbed-ctrl';
 
-    private element: HTMLElement = this._render.createElement('span');
-
     constructor(
-        protected _builder: AnimationBuilder,
         public _element: ElementRef,
-        protected _render: Renderer2
+        protected _render: Renderer2,
+        @Inject(forwardRef(() => OctopusTabbedHeader))
+        public _header: OctopusTabbedHeader
     ) {
-    }
-
-    ngAfterViewInit() {
-        this._render.addClass(this.element, 'active');
-        this._render.appendChild(this._element.nativeElement, this.element);
-    }
-
-    createActiveAnimate(delay: number, active: boolean): void {
-        let player: AnimationPlayer | null = this._builder.build([
-            style({opacity: active ? 0.0 : 1.0}),
-            animate(`${delay}ms linear`, style({opacity: active ? 1.0 : 0.0}))
-        ]).create(this.element);
-        player.onDone(() => player = null);
-        player.play();
     }
 
 }
@@ -96,31 +106,34 @@ export class OctopusTabbedControl implements AfterViewInit {
     selector: 'octo-tabbed-header',
     template: `
         <button octo-btn [octoColor]="color" style="border-radius: 0;min-width: 3rem;"
-                (click)="scrollTo(wrapper, false)">
+                (click)="scrollTo(wrapper, false)" *ngIf="overflow$ | async">
             <octo-icon>chevron_left</octo-icon>
         </button>
         <div class="octo-tabbed-header-wrapper" #wrapper>
             <ng-content select="button[octo-tabbed-ctrl], a[octo-tabbed-ctrl]"></ng-content>
+            <div class="octo-tabbed-mark-track" [style.width]="wrapper$ | async">
+                <div class="octo-tabbed-mark" #mark></div>
+            </div>
         </div>
         <button octo-btn [octoColor]="color" style="border-radius: 0;min-width: 3rem;"
-                (click)="scrollTo(wrapper, true);">
+                (click)="scrollTo(wrapper, true);"  *ngIf="overflow$ | async">
             <octo-icon>chevron_right</octo-icon>
         </button>
     `
 })
-export class OctopusTabHeader implements OnChanges, OnDestroy, AfterContentInit {
+export class OctopusTabbedHeader implements OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
 
     @Input('octoColor') color: OctopusColorPalette = 'base';
     @Input('octoPos') position: OctopusTabHeaderPosition = 'top';
 
-    @Input('octoDelay')
-    get delay() { return this._delay; }
-    set delay(_delay: any) { this._delay = coerceNumberProperty(_delay); }
-    private _delay: number = 250;
+    @Input('octoDuration')
+    get duration() { return this._duration; }
+    set duration(_duration: any) { this._duration = coerceNumberProperty(_duration); }
+    private _duration: number = 250;
 
     @Input('octoIndex')
     get index() { return this._index; }
-    set index(_index: number) { this._index = coerceNumberProperty(_index); }
+    set index(_index: any) { this._index = coerceNumberProperty(_index); }
     private _index: number = 0;
 
     @Output('octoSelectChange') change: EventEmitter<OctopusSelectedIndexChange> =
@@ -129,28 +142,33 @@ export class OctopusTabHeader implements OnChanges, OnDestroy, AfterContentInit 
     @ContentChildren(OctopusTabbedControl)
     private controls!: QueryList<OctopusTabbedControl>;
 
+    @ViewChild('wrapper', {read: ElementRef})
+    private wrapper!: ElementRef;
+
+    @ViewChild('mark', {read: ElementRef})
+    private mark!: ElementRef;
+
     @HostBinding('class') class: string = 'octo-tabbed-header';
 
+    overflow$: Observable<boolean> = interval(10).pipe(map(() =>
+        this.wrapper.nativeElement.scrollWidth > this._element.nativeElement.clientWidth));
+    wrapper$: Observable<string> = interval(10).pipe(map(() =>
+        `${this.wrapper.nativeElement.scrollWidth}px`));
+
+    private subscription!: Subscription;
     private prevIndex: number = -1;
 
     constructor(
-        private _builder: AnimationBuilder,
-        private _element: ElementRef,
-        private _render: Renderer2
+        protected _builder: AnimationBuilder,
+        protected _element: ElementRef,
+        protected _render: Renderer2,
+        protected _zone: NgZone
     ) {
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['color']) {
             this.renderColor(changes['color'].currentValue);
-        }
-
-        if (changes['index']) {
-            this.initControlActive(changes['index'].currentValue, this.delay);
-        }
-
-        if (changes['delay']) {
-            this.initControlActive(this.index, changes['delay'].currentValue);
         }
 
         if (changes['position']) {
@@ -160,29 +178,41 @@ export class OctopusTabHeader implements OnChanges, OnDestroy, AfterContentInit 
 
     ngOnDestroy() {
         this.change.complete();
-    }
 
-    ngAfterContentInit() {
-        if (this.controls) {
-            this.controls.forEach((control, index) => {
-                fromEvent(control._element.nativeElement, 'click')
-                    .subscribe(() => {
-                        if (index !== this.index) {
-                            this.selection(index);
-                            this.controls.get(this.index)?.createActiveAnimate(this.delay, true);
-                            this.controls.get(this.prevIndex)?.createActiveAnimate(this.delay, false);
-                        }
-                    });
-            });
-            this.initControlActive(this.index, this.delay);
-            this.renderColor(this.color);
-            this.renderPosition(this.position);
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 
-    selection(index: number | string): void {
-        this.prevIndex = coerceNumberProperty(this.index);
-        this.index = coerceNumberProperty(index);
+    ngAfterContentInit() {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+
+            if (this.controls) {
+                this.controls.forEach((control, index) => {
+                    fromEvent(control._element.nativeElement, 'click')
+                        .subscribe(() => {
+                            if (index !== this.index) {
+                                this.selection(index);
+                            }
+                        });
+                });
+                this.createSelectionAnimate(this.index, this.prevIndex, this.duration);
+                this.renderColor(this.color);
+                this.renderPosition(this.position);
+            }
+        }, 1000);
+    }
+
+    ngAfterViewInit() {
+        this.subscription = this._zone.runOutsideAngular(() =>
+            this.change.asObservable().subscribe(value =>
+                this.createSelectionAnimate(value.currIndex, value.prevIndex, this.duration)));
+    }
+
+    selection(index: number): void {
+        this.prevIndex = this.index;
+        this.index = index;
         this.change.emit({currIndex: this.index, prevIndex: this.prevIndex});
     }
 
@@ -194,22 +224,24 @@ export class OctopusTabHeader implements OnChanges, OnDestroy, AfterContentInit 
         });
     }
 
-    private initControlActive(index: number, delay: number): void {
+    private createSelectionAnimate(currIndex: number, prevIndex: number, duration: number): void {
         let task = setTimeout(() => {
             clearTimeout(task);
-            this.controls.forEach(control => control.createActiveAnimate(delay, false));
-            this.controls.get(index)?.createActiveAnimate(delay, true);
+            let player: AnimationPlayer | null = this._builder.build([
+                style({transform: `translateX(calc(${prevIndex} * 100%))`}),
+                animate(`${duration}ms linear`, style({transform: `translateX(calc(${currIndex} * 100%))`}))
+            ]).create(this.mark.nativeElement);
+            player.onDone(() => player = null);
+            player.play();
         });
     }
 
     private renderColor(color: OctopusColorPalette): void {
         let task = setTimeout(() => {
             clearTimeout(task);
-            this.controls.forEach(button => {
-                OCTOPUS_COLOR_PALETTES.forEach(item =>
-                    this._render.removeClass(button._element.nativeElement, `octo-tabbed-ctrl-${item}`));
-                this._render.addClass(button._element.nativeElement, `octo-tabbed-ctrl-${color}`);
-            });
+            OCTOPUS_COLOR_PALETTES.forEach(item =>
+                this._render.removeClass(this._element.nativeElement, `octo-tabbed-header-${item}`));
+            this._render.addClass(this._element.nativeElement, `octo-tabbed-header-${color}`);
         });
     }
 
@@ -229,7 +261,7 @@ export class OctopusTabHeader implements OnChanges, OnDestroy, AfterContentInit 
 @Component({
     selector: 'octo-tabbed-box',
     template: `
-        <div octo-overflow octoScrollXY="y" [octoColor]="color" class="octo-tabbed-box-wrapper" #wrapper>
+        <div octo-overflow [octoColor]="color" octoScrollXY="xy" class="octo-tabbed-box-wrapper" #wrapper>
             <ng-content></ng-content>
         </div>
     `
@@ -242,30 +274,21 @@ export class OctopusTabbedBox {
 
     @HostBinding('class') class: string = 'octo-tabbed-box';
 
-    constructor(
-        private _element: ElementRef,
-        private _render: Renderer2
-    ) {
-    }
-
 }
 
 @Component({
     selector: 'octo-tabbed-group',
     template: `
-        <octo-tabbed-header [octoColor]="color" [octoIndex]="index" [octoDelay]="delay" [octoPos]="position"
-                            (octoSelectChange)="selectTab($event, delay)">
-            <button octo-btn octo-tabbed-ctrl *ngFor="let tab of tabs">
+        <octo-tabbed-header [octoColor]="color" [octoIndex]="index" [octoDuration]="duration" [octoPos]="position"
+                            (octoSelectChange)="selectTab($event, duration)">
+            <button octo-tabbed-ctrl [octoClose]="closable" *ngFor="let tab of tabs">
                 <ng-container [ngTemplateOutlet]="tab.head._template"></ng-container>
-                <button octo-solid-btn [octoColor]="color" octoShape="ring" style="width: 1rem;height: 1rem;"
-                        (click)="$event.stopPropagation();tab.close.emit();" *ngIf="closed">
-                    <octo-icon octoSize="1rem">close</octo-icon>
-                </button>
             </button>
         </octo-tabbed-header>
         <octo-split-line class="my-0"></octo-split-line>
-        <div class="octo-tabbed-content" #content>
-            <octo-tabbed-box [octoColor]="color" [class.active]="index === i" *ngFor="let tab of tabs; index as i">
+        <div class="octo-tabbed-content" [attr.aria-label]="index" #content>
+            <octo-tabbed-box [octoColor]="color" [class.active]="index === i" [style.width]="content.clientWidth + 'px'"
+                 *ngFor="let tab of tabs; index as i">
                 <ng-container [ngTemplateOutlet]="tab.body._template"></ng-container>
             </octo-tabbed-box>
         </div>
@@ -277,15 +300,15 @@ export class OctopusTabbedGroup implements OnChanges, AfterViewInit {
     @Input('octoColor') color: OctopusColorPalette = 'base';
     @Input('octoPos') position: OctopusTabHeaderPosition = 'top';
 
-    @Input('octoClosed')
-    get closed() { return this._closed; }
-    set closed(_closed: any) { this._closed = coerceBooleanProperty(_closed); }
-    private _closed: boolean  = false;
+    @Input('octoClose')
+    get closable() { return this._closable; }
+    set closable(_closable: any) { this._closable = coerceBooleanProperty(_closable); }
+    private _closable: boolean  = false;
 
-    @Input('octoDelay')
-    get delay() { return this._delay; }
-    set delay(_delay: any) { this._delay = coerceNumberProperty(_delay); }
-    private _delay: number = 250;
+    @Input('octoDuration')
+    get duration() { return this._duration; }
+    set duration(_duration: any) { this._duration = coerceNumberProperty(_duration); }
+    private _duration: number = 250;
 
     @Input('octoIndex')
     get index() { return this._index; }
@@ -321,26 +344,34 @@ export class OctopusTabbedGroup implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._render.addClass(this._element.nativeElement, 'octo-shadow-8');
         this.initialize(this.index);
         this.renderPosition(this.position);
     }
 
-    selectTab(change: OctopusSelectedIndexChange, delay: number): void {
-        this.createEnterAnimate(change.currIndex, change.prevIndex, delay, change.currIndex > change.prevIndex);
-        this.createExitAnimate(change.prevIndex, change.currIndex, delay, change.currIndex > change.prevIndex);
+    selectTab(change: OctopusSelectedIndexChange, duration: number): void {
+        this.index = change.currIndex;
+        this.indexChange.emit(this.index);
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            this.createEnterAnimate(change.currIndex, change.prevIndex, duration, change.currIndex > change.prevIndex);
+            this.createExitAnimate(change.prevIndex, change.currIndex, duration, change.currIndex > change.prevIndex);
+        });
     }
 
     private initialize(index: number): void {
-        if (this.boxes) {
-            this.boxes.forEach((box, i) => {
-                if (i === index) {
-                    this._render.setStyle(box.wrapper.nativeElement, 'visibility', 'visible');
-                } else {
-                    this._render.setStyle(box.wrapper.nativeElement, 'visibility', 'hidden');
-                }
-            });
-        }
+        let task = setTimeout(() => {
+            clearTimeout(task);
+
+            if (this.boxes) {
+                this.boxes.forEach((box, i) => {
+                    if (i === index) {
+                        this._render.setStyle(box.wrapper.nativeElement, 'visibility', 'visible');
+                    } else {
+                        this._render.setStyle(box.wrapper.nativeElement, 'visibility', 'hidden');
+                    }
+                });
+            }
+        }, 1000);
     }
 
     private renderPosition(position: OctopusTabHeaderPosition): void {
@@ -357,12 +388,12 @@ export class OctopusTabbedGroup implements OnChanges, AfterViewInit {
         });
     }
 
-    private createEnterAnimate(currIndex: number, prevIndex: number, delay: number, flag: boolean): void {
+    private createEnterAnimate(currIndex: number, prevIndex: number, duration: number, flag: boolean): void {
         let currBox: any = this.boxes.get(currIndex)?.wrapper.nativeElement;
         let prevBox: any = this.boxes.get(prevIndex)?.wrapper.nativeElement;
         let player: AnimationPlayer | null = this._builder.build([
             style({transform: flag ? 'translateX(100%)' : 'translateX(-100%)'}),
-            animate(`${delay}ms linear`, style({transform: 'translateX(0%)'}))
+            animate(`${duration}ms linear`, style({transform: 'translateX(0%)'}))
         ]).create(currBox);
         player.onStart(() => {
             this._render.removeStyle(currBox, 'visibility');
@@ -372,12 +403,12 @@ export class OctopusTabbedGroup implements OnChanges, AfterViewInit {
         player.play();
     }
 
-    private createExitAnimate(currIndex: number, prevIndex: number, delay: number, flag: boolean): void {
+    private createExitAnimate(currIndex: number, prevIndex: number, duration: number, flag: boolean): void {
         let currBox: any = this.boxes.get(currIndex)?.wrapper.nativeElement;
         let prevBox: any = this.boxes.get(prevIndex)?.wrapper.nativeElement;
         let player: AnimationPlayer | null = this._builder.build([
             style({transform: 'translateX(0%)'}),
-            animate(`${delay}ms linear`,
+            animate(`${duration}ms linear`,
                 style({transform: flag ? 'translateX(-100%)' : 'translateX(100%)'}))
         ]).create(currBox);
         player.onStart(() => {

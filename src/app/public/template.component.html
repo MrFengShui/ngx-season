@@ -1,0 +1,9 @@
+<octo-tabbed-header [octoIndex]="select$ | async">
+    <a octo-tabbed-ctrl [routerLink]="['overview']">OVERVIEW</a>
+    <a octo-tabbed-ctrl [routerLink]="['api']">API</a>
+    <a octo-tabbed-ctrl [routerLink]="['example']">EXAMPLE</a>
+</octo-tabbed-header>
+<router-outlet></router-outlet>
+
+
+

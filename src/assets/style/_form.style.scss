@@ -1,133 +1,156 @@
-.octo-check {
-    &.disabled {
-        filter: brightness(0.5);
-    }
+.octo-form-field {
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    display: block;
+    padding: 0.75rem 0.5rem 0.125rem;
 
-    &.octo-check-box .octo-check-box-wrapper,
-    &.octo-check-toggle .octo-check-toggle-wrapper{
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        user-select: none;
+    .octo-form-field-wrapper {
+        min-height: 4rem;
+        position: relative;
 
-        .octo-check-label {
-            flex: auto;
-        }
-    }
+        .octo-form-field-bone {
+            display: flex;
+            position: absolute;
+            inset: 0;
 
-    &.octo-check-box {
-        .octo-check-box-wrapper {
-            .octo-check-input {
-                position: relative;
-                width: 1.5rem;
-                height: 1.5rem;
-
-                input[type="checkbox"] {
-                    margin: 0;
-                    opacity: 0.0;
-                    padding: 0;
-                    position: absolute;
-                    inset: 0;
-                    z-index: -1;
-                }
+            .left {
+                display: flex;
+                align-items: center;
+                min-width: 0.5rem;
             }
-        }
-    }
 
-    &.octo-check-toggle {
-        .octo-check-toggle-wrapper {
-            .octo-check-input {
-                position: relative;
-                width: 3rem;
-                height: 1.5rem;
+            .middle {
+                .octo-form-label {
+                    display: block;
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    transform: translateY(calc(100% + 0.25rem));
+                    transition: all 100ms linear;
 
-                input[type="checkbox"] {
-                    margin: 0;
-                    opacity: 0.0;
-                    padding: 0;
-                    position: absolute;
-                    inset: 0;
-                    z-index: -1;
-                    width: inherit;
-                    height: inherit;
-                }
-
-                .octo-check-ctrl {
-                    border-radius: 1.5rem;
-                    border-style: solid;
-                    border-width: 0.125rem;
-                    box-sizing: border-box;
-                    padding: 0;
-                    position: absolute;
-                    inset: 0;
-
-                    .octo-check-ctrl-mark {
-                        border-radius: 50%;
-                        display: block;
-                        width: 50%;
-                        height: 100%;
+                    &.focused {
+                        font-size: 0.75rem;
+                        line-height: 0.75rem;
+                        padding: 0.125rem 0.5rem;
+                        transform: translateY(-0.5rem);
                     }
                 }
             }
+
+            .right {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex: auto;
+            }
+
+            .octo-form-prefix,
+            .octo-form-suffix {
+                height: 2rem;
+                margin: auto 0.5rem;
+
+                &.octo-btn {
+                    font-size: 0.75rem;
+
+                    &.octo-btn-ring {
+                        width: 2rem;
+                    }
+                }
+
+                &.octo-icon {
+                    font-size: 1.5rem;
+                    line-height: 1.5rem;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+        }
+
+        .octo-form-field-main {
+            display: flex;
+            align-items: center;
+            height: fit-content;
+            position: absolute;
+            inset: 0.5rem 0 0.5rem 0;
         }
     }
-}
 
-.octo-radio {
-    &.disabled {
-        filter: brightness(0.5);
-    }
+    &.octo-form-field-standard {
+        .octo-form-field-wrapper {
+            .octo-form-field-bone {
+                .left {
+                    border-style: solid;
+                    border-width: 0 0 0.125rem 0;
+                }
 
-    &.octo-radio-button {
-        .octo-radio-button-wrapper {
-            cursor: pointer;
-            display: flex;
-            padding: 1rem;
-            user-select: none;
+                .middle {
+                    border-style: solid;
+                    border-width: 0 0 0.125rem 0;
+                }
 
-            .octo-radio-input {
-                position: relative;
-                width: 1.5rem;
-                height: 1.5rem;
-
-                input[type="radio"] {
-                    margin: 0;
-                    opacity: 0.0;
-                    padding: 0;
-                    position: absolute;
-                    inset: 0;
-                    z-index: -1;
-                    width: inherit;
-                    height: inherit;
+                .right {
+                    border-style: solid;
+                    border-width: 0 0 0.125rem 0;
                 }
             }
         }
     }
 
-    &.octo-radio-toggle {
-        .octo-radio-toggle-wrapper {
-            box-sizing: border-box;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none;
-            padding: 0 1rem;
-            min-height: 4rem;
+    &.octo-form-field-outline {
+        .octo-form-field-wrapper {
+            .octo-form-field-bone {
+                .left {
+                    border-radius: 0.25rem 0 0 0.25rem;
+                    border-style: solid;
+                    border-width: 0.125rem 0 0.125rem 0.125rem;
+                }
 
-            input[type="radio"] {
-                display: none;
+                .middle {
+                    border-style: solid;
+                    border-width: 0.125rem 0;
+
+                    &.focused {
+                        border-width: 0 0 0.125rem !important;
+                    }
+                }
+
+                .right {
+                    border-radius: 0 0.25rem 0.25rem 0;
+                    border-style: solid;
+                    border-width: 0.125rem 0.125rem 0.125rem 0;
+                }
             }
+        }
+    }
+
+    .octo-form-field-addon {
+        box-sizing: border-box;
+        height: 1rem;
+        margin: 0.25rem 0;
+
+        .octo-form-hint {
+            display: block;
+            font-size: 0.75rem;
+            line-height: 0.75rem;
+            padding: 0.125rem;
         }
     }
 }
 
-.octo-radio-group {
-    border-radius: 0.25rem;
-    display: flex;
-    overflow: hidden;
+.octo-input {
+    appearance: none;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    resize: none;
+    text-align: inherit;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+}
 
-    .octo-radio-toggle {
-        width: 100%;
+input {
+    &.octo-input {
+        height: 3rem;
     }
 }

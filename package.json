@@ -19,6 +19,9 @@
     "@angular/platform-browser": "^14.0.3",
     "@angular/platform-browser-dynamic": "^14.0.3",
     "@angular/router": "^14.0.3",
+    "highlight.js": "^11.5.1",
+    "highlightjs-line-numbers.js": "^2.8.0",
+    "ngx-highlightjs": "^7.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

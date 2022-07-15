@@ -6,6 +6,7 @@
 @import "button.style";
 @import "card.style";
 @import "carousel.style";
+@import "check.style";
 @import "express.style";
 @import "form.style";
 @import "image.style";
@@ -16,7 +17,8 @@
 @import "paginator.style";
 @import "progress.style";
 @import "queue.style";
-@import "ripple.style";
+@import "radio.style";
+@import "effects.style";
 @import "sidenav.style";
 @import "stepper.style";
 @import "tabs.style";
@@ -25,6 +27,8 @@
 @import "tools.style";
 @import "tree.style";
 @import "utility.style";
+
+@import "typography.style";
 
 * {
     font-family: 'Noto Sans', sans-serif;

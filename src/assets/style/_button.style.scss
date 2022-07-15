@@ -40,6 +40,10 @@
         border-width: 0.125rem;
     }
 
+    &.octo-scroll-btn {
+        position: fixed;
+    }
+
     .octo-ripple {
         position: absolute;
         inset: 0;

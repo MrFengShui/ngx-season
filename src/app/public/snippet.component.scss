@@ -1,0 +1,50 @@
+.octopus-snippet {
+    border-color: rgba(gray, 0.25);
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 0.125rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &:nth-child(n) {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    &:first-child {
+        margin-top: 1rem;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .octopus-snippet-toolbar {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+
+        .octopus-snippet-subject {
+            flex: auto;
+        }
+    }
+
+    .octopus-snippet-code {
+        overflow: hidden;
+
+        .octo-tabbed-group {
+            border-radius: 0;
+            height: 100%;
+
+            .octo-tabbed-header,
+            .octo-tabbed-content {
+                background: none !important;
+            }
+        }
+    }
+
+    .octopus-snippet-result {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,14 @@
+<div class="d-flex sx-100">
+    <div class="d-grid g-100 flex-fill" style="grid-template-columns: repeat(3, 1fr);place-items: center stretch;">
+        <button octo-stroke-btn [octoColor]="button.color" class="flex-fill"
+                *ngFor="let button of STROKED_STYLE_BUTTONS">
+            {{button.label | titlecase}}
+        </button>
+    </div>
+    <div class="d-grid g-100" style="grid-template-columns: repeat(3, 4rem);place-items: stretch;">
+        <button octo-stroke-btn [octoColor]="button.color" octoShape="ring"
+                *ngFor="let button of STROKED_STYLE_BUTTONS">
+            Button
+        </button>
+    </div>
+</div>
