@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@mixin mixin-card-theme($colors, $foreground, $background) {
+@mixin mixin-card-theme($palettes, $foreground, $background) {
     .octo-card {
         background-color: map.get($background, "card");
         color: map.get($foreground, "card");

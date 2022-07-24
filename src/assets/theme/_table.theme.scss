@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-table-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-table-theme($palettes, $foreground, $background) {
     .octo-table {
         table {
             tr {
@@ -28,7 +30,7 @@
                     }
                 }
 
-                @each $key, $value in $colors {
+                @each $key, $value in $palettes {
                     &.octo-table-#{$key} {
                         .octo-table-row {
                             &:nth-child(2n) {
@@ -39,7 +41,7 @@
 
                             &:nth-child(2n+1) {
                                 .octo-table-cell {
-                                    background-color: $value;
+                                    background-color: palette.fetch-color($value);
                                 }
                             }
                         }

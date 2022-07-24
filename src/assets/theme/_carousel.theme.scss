@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@mixin mixin-carousel-theme($colors, $foreground, $background) {
+@mixin mixin-carousel-theme($palettes, $foreground, $background) {
     .octo-carousel {
         background-color: map.get($background, "tabs");
     }

@@ -1,136 +1,149 @@
+@use "sass:map";
+
+$blue-base: #304FFE;
 $blue: (
-    100: lighten(royalblue, 32%),
-    200: lighten(royalblue, 24%),
-    300: lighten(royalblue, 16%),
-    400: lighten(royalblue, 8%),
-    500: royalblue,
-    600: darken(royalblue, 4%),
-    700: darken(royalblue, 8%),
-    800: darken(royalblue, 12%),
-    900: darken(royalblue, 16%),
+    100: lighten($blue-base, 32%),
+    200: lighten($blue-base, 24%),
+    300: lighten($blue-base, 16%),
+    400: lighten($blue-base, 8%),
+    500: $blue-base,
+    600: darken($blue-base, 8%),
+    700: darken($blue-base, 16%),
+    800: darken($blue-base, 24%),
+    900: darken($blue-base, 32%),
 );
 
+$cyan-base: #00E5FF;
 $cyan: (
-    100: lighten(cyan, 32%),
-    200: lighten(cyan, 24%),
-    300: lighten(cyan, 16%),
-    400: lighten(cyan, 8%),
-    500: cyan,
-    600: darken(cyan, 4%),
-    700: darken(cyan, 8%),
-    800: darken(cyan, 12%),
-    900: darken(cyan, 16%),
+    100: lighten($cyan-base, 32%),
+    200: lighten($cyan-base, 24%),
+    300: lighten($cyan-base, 16%),
+    400: lighten($cyan-base, 8%),
+    500: $cyan-base,
+    600: darken($cyan-base, 8%),
+    700: darken($cyan-base, 16%),
+    800: darken($cyan-base, 24%),
+    900: darken($cyan-base, 32%),
 );
 
+$gray-base: #9E9E9E;
 $gray: (
-    100: lighten(dimgray, 32%),
-    200: lighten(dimgray, 24%),
-    300: lighten(dimgray, 16%),
-    400: lighten(dimgray, 8%),
-    500: dimgray,
-    600: darken(dimgray, 4%),
-    700: darken(dimgray, 8%),
-    800: darken(dimgray, 12%),
-    900: darken(dimgray, 16%),
+    100: lighten($gray-base, 32%),
+    200: lighten($gray-base, 24%),
+    300: lighten($gray-base, 16%),
+    400: lighten($gray-base, 8%),
+    500: $gray-base,
+    600: darken($gray-base, 8%),
+    700: darken($gray-base, 16%),
+    800: darken($gray-base, 32%),
+    900: darken($gray-base, 48%),
 );
 
+$green-base: #4CAF50;
 $green: (
-    100: lighten(forestgreen, 32%),
-    200: lighten(forestgreen, 24%),
-    300: lighten(forestgreen, 16%),
-    400: lighten(forestgreen, 8%),
-    500: forestgreen,
-    600: darken(forestgreen, 4%),
-    700: darken(forestgreen, 8%),
-    800: darken(forestgreen, 12%),
-    900: darken(forestgreen, 16%),
+    100: lighten($green-base, 32%),
+    200: lighten($green-base, 24%),
+    300: lighten($green-base, 16%),
+    400: lighten($green-base, 8%),
+    500: $green-base,
+    600: darken($green-base, 8%),
+    700: darken($green-base, 16%),
+    800: darken($green-base, 24%),
+    900: darken($green-base, 32%),
 );
 
+$indigo-base: #3F51B5;
 $indigo: (
-    100: lighten(indigo, 32%),
-    200: lighten(indigo, 24%),
-    300: lighten(indigo, 16%),
-    400: lighten(indigo, 8%),
-    500: indigo,
-    600: darken(indigo, 4%),
-    700: darken(indigo, 8%),
-    800: darken(indigo, 12%),
-    900: darken(indigo, 16%),
+    100: lighten($indigo-base, 32%),
+    200: lighten($indigo-base, 24%),
+    300: lighten($indigo-base, 16%),
+    400: lighten($indigo-base, 8%),
+    500: $indigo-base,
+    600: darken($indigo-base, 8%),
+    700: darken($indigo-base, 16%),
+    800: darken($indigo-base, 24%),
+    900: darken($indigo-base, 32%),
 );
 
+$orange-base: #FF5722;
 $orange: (
-    100: lighten(orangered, 32%),
-    200: lighten(orangered, 24%),
-    300: lighten(orangered, 16%),
-    400: lighten(orangered, 8%),
-    500: orangered,
-    600: darken(orangered, 4%),
-    700: darken(orangered, 8%),
-    800: darken(orangered, 12%),
-    900: darken(orangered, 16%),
+    100: lighten($orange-base, 32%),
+    200: lighten($orange-base, 24%),
+    300: lighten($orange-base, 16%),
+    400: lighten($orange-base, 8%),
+    500: $orange-base,
+    600: darken($orange-base, 8%),
+    700: darken($orange-base, 16%),
+    800: darken($orange-base, 24%),
+    900: darken($orange-base, 32%),
 );
 
+$pink-base: #F50057;
 $pink: (
-    100: lighten(deeppink, 32%),
-    200: lighten(deeppink, 24%),
-    300: lighten(deeppink, 16%),
-    400: lighten(deeppink, 8%),
-    500: deeppink,
-    600: darken(deeppink, 4%),
-    700: darken(deeppink, 8%),
-    800: darken(deeppink, 12%),
-    900: darken(deeppink, 16%),
+    100: lighten($pink-base, 32%),
+    200: lighten($pink-base, 24%),
+    300: lighten($pink-base, 16%),
+    400: lighten($pink-base, 8%),
+    500: $pink-base,
+    600: darken($pink-base, 8%),
+    700: darken($pink-base, 16%),
+    800: darken($pink-base, 24%),
+    900: darken($pink-base, 32%),
 );
 
+$purple-base: #9C27B0;
 $purple: (
-    100: lighten(darkviolet, 32%),
-    200: lighten(darkviolet, 24%),
-    300: lighten(darkviolet, 16%),
-    400: lighten(darkviolet, 8%),
-    500: darkviolet,
-    600: darken(darkviolet, 4%),
-    700: darken(darkviolet, 8%),
-    800: darken(darkviolet, 12%),
-    900: darken(darkviolet, 16%),
+    100: lighten($purple-base, 32%),
+    200: lighten($purple-base, 24%),
+    300: lighten($purple-base, 16%),
+    400: lighten($purple-base, 8%),
+    500: $purple-base,
+    600: darken($purple-base, 8%),
+    700: darken($purple-base, 16%),
+    800: darken($purple-base, 24%),
+    900: darken($purple-base, 32%),
 );
 
+$red-base: #E53935;
 $red: (
-    100: lighten(red, 32%),
-    200: lighten(red, 24%),
-    300: lighten(red, 16%),
-    400: lighten(red, 8%),
-    500: red,
-    600: darken(red, 4%),
-    700: darken(red, 8%),
-    800: darken(red, 12%),
-    900: darken(red, 16%),
+    100: lighten($red-base, 32%),
+    200: lighten($red-base, 24%),
+    300: lighten($red-base, 16%),
+    400: lighten($red-base, 8%),
+    500: $red-base,
+    600: darken($red-base, 8%),
+    700: darken($red-base, 16%),
+    800: darken($red-base, 24%),
+    900: darken($red-base, 32%),
 );
 
+$teal-base: #1DE9B6;
 $teal: (
-    100: lighten(teal, 32%),
-    200: lighten(teal, 24%),
-    300: lighten(teal, 16%),
-    400: lighten(teal, 8%),
-    500: teal,
-    600: darken(teal, 4%),
-    700: darken(teal, 8%),
-    800: darken(teal, 12%),
-    900: darken(teal, 16%),
+    100: lighten($teal-base, 32%),
+    200: lighten($teal-base, 24%),
+    300: lighten($teal-base, 16%),
+    400: lighten($teal-base, 8%),
+    500: $teal-base,
+    600: darken($teal-base, 8%),
+    700: darken($teal-base, 16%),
+    800: darken($teal-base, 24%),
+    900: darken($teal-base, 32%),
 );
 
+$yellow-base: #FFC400;
 $yellow: (
-    100: lighten(gold, 32%),
-    200: lighten(gold, 24%),
-    300: lighten(gold, 16%),
-    400: lighten(gold, 8%),
-    500: gold,
-    600: darken(gold, 4%),
-    700: darken(gold, 8%),
-    800: darken(gold, 12%),
-    900: darken(gold, 16%),
+    100: lighten($yellow-base, 32%),
+    200: lighten($yellow-base, 24%),
+    300: lighten($yellow-base, 16%),
+    400: lighten($yellow-base, 8%),
+    500: $yellow-base,
+    600: darken($yellow-base, 2%),
+    700: darken($yellow-base, 4%),
+    800: darken($yellow-base, 8%),
+    900: darken($yellow-base, 16%),
 );
 
-@function create-bgcolor($base, $accordion, $button, $card, $form, $label, $menu, $overlay, $queue,
+@function create-bgcolor($base, $accordion, $button, $card, $form, $label, $menu, $overlay,
     $sidenav, $tabs, $table, $toolbar) {
     @return (
         "base": $base,
@@ -140,7 +153,6 @@ $yellow: (
         "form": $form,
         "label": $label,
         "menu": $menu,
-        "queue": $queue,
         "overlay": $overlay,
         "sidenav": $sidenav,
         "tabs": $tabs,
@@ -149,7 +161,7 @@ $yellow: (
     );
 }
 
-@function create-fgcolor($base, $accordion, $button, $card, $form, $label, $menu, $overlay, $queue,
+@function create-fgcolor($base, $accordion, $button, $card, $form, $label, $menu, $overlay,
     $sidenav, $tabs, $table, $toolbar) {
     @return (
         "base": $base,
@@ -159,17 +171,12 @@ $yellow: (
         "form": $form,
         "label": $label,
         "menu": $menu,
-        "queue": $queue,
         "overlay": $overlay,
         "sidenav": $sidenav,
         "tabs": $tabs,
         "table": $table,
         "toolbar": $toolbar
     );
-}
-
-@function fetch-color($color, $code: 500) {
-    @return map-get($color, $code);
 }
 
 @function create-dark-theme($primary, $accent, $success, $warning, $failure) {
@@ -182,7 +189,6 @@ $yellow: (
             #e0e0e0, // label
             #e0e0e0, // menu
             #f5f5f5, // overlay
-            #f5f5f5, // queue
             #eeeeee, // sidenav
             #eeeeee, // tabs
             #eeeeee, // table
@@ -197,7 +203,6 @@ $yellow: (
             #616161, // label
             #616161, // menu
             #212121, // overlay
-            #424242, // queue
             #424242, // sidenav
             #424242, // tabs
             #424242, // table
@@ -220,7 +225,6 @@ $yellow: (
             #616161, // label
             #616161, // menu
             #212121, // overlay
-            #424242, // queue
             #424242, // sidenav
             #424242, // tabs
             #424242, // table
@@ -235,7 +239,6 @@ $yellow: (
             #e0e0e0, // label
             #e0e0e0, // menu
             #f5f5f5, // overlay
-            #f5f5f5, // queue
             #eeeeee, // sidenav
             #eeeeee, // tabs
             #eeeeee, // table
@@ -246,4 +249,8 @@ $yellow: (
         "success": $success, "warning": $warning, "failure": $failure,
         "foreground": $fgcolor, "background": $bgcolor
     );
+}
+
+@function fetch-color($palette, $code: 500) {
+    @return map.get($palette, $code);
 }

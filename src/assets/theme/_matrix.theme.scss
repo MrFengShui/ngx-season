@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-matrix-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-matrix-theme($palettes, $foreground, $background) {
     .octo-matrix-tile {
         color: map.get($foreground, "card");
 
@@ -11,11 +13,11 @@
             }
         }
 
-        @each $key, $value in $colors {
+        @each $key, $value in $palettes {
             &.octo-matrix-tile-#{$key} {
                 .octo-matrix-tile-header,
                 .octo-matrix-tile-footer {
-                    background-color: rgba($value, 0.5);
+                    background-color: rgba(palette.fetch-color($value), 0.5);
                 }
             }
         }

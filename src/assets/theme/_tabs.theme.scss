@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-tabs-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-tabs-theme($palettes, $foreground, $background) {
     .octo-tabbed-group {
         background-color: map.get($background, "tabs");
 
@@ -24,12 +26,12 @@
             }
         }
 
-        @each $key, $value in $colors {
+        @each $key, $value in $palettes {
             &.octo-tabbed-header-#{$key} {
                 .octo-tabbed-header-wrapper {
                     .octo-tabbed-mark-track {
                         .octo-tabbed-mark {
-                            background-color: $value;
+                            background-color: palette.fetch-color($value);
                         }
                     }
                 }

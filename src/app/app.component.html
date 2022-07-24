@@ -12,13 +12,13 @@
     <octo-sidenav-container octoColor="primary" [octoState]="state" octoMin="4rem" octoMax="17.5rem"
                             style="height: calc(100% - 4rem)">
         <ng-template octo-sidenav>
-            <octo-nav-queue>
-                <a octo-nav-queue-item [routerLink]="item.link" [queryParams]="item.params"
+            <octo-action-queue>
+                <a octo-queue-link [routerLink]="item.link" [queryParams]="item.params"
                    routerLinkActive="octo-active-primary" *ngFor="let item of matchLinks(state) | async">
-                    <octo-icon octo-queue-icon>{{item.icon}}</octo-icon>
+                    <octo-icon octo-queue-favicon>{{item.icon}}</octo-icon>
                     <span octo-queue-text>{{item.text}}</span>
                 </a>
-            </octo-nav-queue>
+            </octo-action-queue>
         </ng-template>
         <ng-template octo-sidenav-content>
             <div class="p-100"><router-outlet></router-outlet></div>

@@ -21,6 +21,7 @@ export const FULL_LINKS: RouterListLink[] = [
     {icon: 'help', link: ['..', 'carousel'], text: 'Carousel'},
     {icon: 'help', link: ['..', 'check'], text: 'Check'},
     {icon: 'help', link: ['..', 'combo'], text: 'ComboBox'},
+    {icon: 'help', link: ['..', 'datetime'], text: 'Datetime'},
     {icon: 'help', link: ['..', 'dialog'], text: 'Dialog'},
     {icon: 'help', link: ['..', 'drawer'], text: 'Drawer'},
     {icon: 'help', link: ['..', 'express'], text: 'Express'},

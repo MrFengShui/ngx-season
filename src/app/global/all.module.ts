@@ -25,6 +25,8 @@ import {OctopusStepperModule} from "../stepper/stepper.module";
 import {OctopusTableModule} from "../table/table.module";
 import {OctopusToolsModule} from "../tools/tools.module";
 import {OctopusTreeModule} from "../tree/tree.module";
+import {OctopusComboModule} from "../combo/combo.module";
+import {OctopusDatetimeModule} from "../datetime/datetime.module";
 
 @NgModule({
     imports: [
@@ -34,6 +36,8 @@ import {OctopusTreeModule} from "../tree/tree.module";
         OctopusCardModule,
         OctopusCarouselModule,
         OctopusCheckModule,
+        OctopusComboModule,
+        OctopusDatetimeModule,
         OctopusEffectsModule,
         OctopusExpressModule,
         OctopusFormModule,
@@ -60,6 +64,8 @@ import {OctopusTreeModule} from "../tree/tree.module";
         OctopusCardModule,
         OctopusCarouselModule,
         OctopusCheckModule,
+        OctopusComboModule,
+        OctopusDatetimeModule,
         OctopusEffectsModule,
         OctopusExpressModule,
         OctopusFormModule,

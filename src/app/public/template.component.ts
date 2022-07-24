@@ -10,7 +10,7 @@ import {filter, map, Observable, of} from "rxjs";
 export class OctopusTemplateView {
 
     select$!: Observable<number>;
-
+    date: Date = new Date();
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,

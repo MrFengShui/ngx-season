@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@mixin mixin-menu-theme($colors, $foreground, $background) {
+@mixin mixin-menu-theme($palettes, $foreground, $background) {
     .octo-menu {
         background-color: map.get($background, "menu");
 

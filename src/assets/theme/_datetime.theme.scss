@@ -1,0 +1,24 @@
+@use "sass:map";
+
+@mixin mixin-datetime-theme($palettes, $foreground, $background) {
+    .octo-calendar {
+        background-color: map.get($background, "overlay");
+        color: map.get($foreground, "overlay");
+
+        table {
+            border-spacing: 0;
+
+            thead {
+                th {
+                    border-color: rgba(map.get($foreground, "overlay"), 0.25);
+                }
+            }
+
+            tfoot {
+                td {
+                    border-color: rgba(map.get($foreground, "overlay"), 0.25);
+                }
+            }
+        }
+    }
+}

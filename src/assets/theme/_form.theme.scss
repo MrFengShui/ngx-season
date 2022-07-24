@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-form-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-form-theme($palettes, $foreground, $background) {
     .octo-form-field {
         background-color: map.get($background, "form");
         color: map.get($foreground, "form");
@@ -23,7 +25,7 @@
             }
         }
 
-        @each $key, $value in $colors {
+        @each $key, $value in $palettes {
             &.octo-form-field-#{$key} {
                 .octo-form-field-wrapper {
                     &.focused {
@@ -31,11 +33,11 @@
                             .left,
                             .middle,
                             .right {
-                                border-color: $value;
+                                border-color: palette.fetch-color($value);
                             }
 
                             .octo-form-label {
-                                color: $value;
+                                color: palette.fetch-color($value);
                             }
                         }
                     }
@@ -44,10 +46,10 @@
         }
 
         .octo-form-hint {
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 @if $key == "success" or $key == "warning" or $key == "failure" {
                     &.octo-form-hint-#{$key} {
-                        color: $value;
+                        color: palette.fetch-color($value);
                     }
                 }
             }

@@ -1,0 +1,53 @@
+.octo-combo-box {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+
+    .octo-combo-text {
+        display: flex;
+        align-items: center;
+        flex: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        .octo-combo-favicon {
+            font-size: 2rem;
+            line-height: 2rem;
+            margin-right: 1rem;
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+}
+
+.octo-combo-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .octo-combo-panel-header {
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    .octo-combo-panel-footer {
+        padding: 0 1rem 1rem 1rem;
+    }
+
+    .octo-combo-panel-content {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+
+    .octo-combo-item {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        min-height: 3rem;
+        padding: 0.5rem 1rem;
+    }
+}
+

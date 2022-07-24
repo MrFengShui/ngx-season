@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@mixin mixin-sidenav-theme($colors, $foreground, $background) {
+@mixin mixin-sidenav-theme($palettes, $foreground, $background) {
     .octo-sidenav-container {
         .octo-sidenav {
             background-color: darken(map.get($background, "sidenav"), 2.5%);

@@ -1,77 +1,124 @@
 .octo-queue {
-    .octo-queue-wrapper {
-        display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-        .octo-queue-header {
-            box-sizing: border-box;
-            filter: brightness(0.75);
-            margin: 0 0 1rem;
-            padding: 1rem;
+    .octo-queue-header,
+    .octo-queue-footer {
+        height: 4rem;
+        padding: 0 1rem;
+    }
+
+    .octo-queue-section {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        margin: 1rem 0;
+        overflow: hidden;
+        padding: 0 1rem;
+
+        .octo-queue-label {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.5;
         }
 
-        .octo-queue-item {
-            box-sizing: border-box;
-            display: block;
-            min-height: 3rem;
-            padding: 0 1rem;
+        .octo-queue-section-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: auto;
 
-            .octo-queue-line {
-                display: flex;
-                align-items: center;
+            .octo-queue-sub {
+                font-size: 1.25rem;
+                font-weight: bold;
+                line-height: 1.5;
+            }
 
-                &:nth-child(n) {
-                    margin-top: 1rem;
-                    margin-bottom: 1rem;
-                }
+            .octo-queue-desc {
+                font-size: 0.75rem;
+                font-weight: bold;
+                line-height: 1.25;
+            }
+        }
 
-                &:first-child {
-                    margin-top: 0;
-                }
+        .octo-queue-favicon {
+            margin-right: 1rem;
+        }
+    }
 
-                &:last-child {
-                    margin-bottom: 0;
-                }
+    .octo-queue-item {
+        display: flex;
+        align-items: center;
+        min-height: 3rem;
+        max-height: 6rem;
+        padding: 0 1rem;
+    }
+
+    &.octo-action-queue {
+        .octo-action-queue-item {
+            appearance: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            overflow: hidden;
+            position: relative;
+
+            .octo-ripple {
+                position: absolute;
+                inset: 0;
+            }
+        }
+
+        .octo-queue-link {
+            height: 4rem;
+            text-decoration: none;
+
+            .octo-queue-favicon {
+                margin-right: 1rem;
             }
         }
     }
 
-    &.octo-nav-queue {
-        .octo-nav-queue-item {
+    &.octo-select-queue {
+        .octo-queue-option {
             cursor: pointer;
-            min-height: 4rem;
-            text-decoration: none;
-            overflow: hidden;
             position: relative;
 
-            &:hover {
-                filter: brightness(1.25);
-            }
-
-            &:disabled {
-                cursor: default;
-                filter: brightness(0.5);
-
-                &:hover {
-                    filter: brightness(0.5) !important;
-                }
+            .octo-queue-option-wrapper {
+                flex: auto;
             }
 
             .octo-ripple {
                 position: absolute;
                 inset: 0;
             }
+        }
+    }
 
-            .octo-queue-icon {
-                font-size: 2rem;
-                line-height: 2rem;
-                width: 2rem;
-                height: 2rem;
-            }
+    .octo-queue-favicon {
+        font-size: 2rem !important;
+        line-height: 2rem !important;
+        width: 2rem !important;
+        height: 2rem !important;
+    }
 
-            .octo-queue-text {
-                margin-left: 1rem;
-            }
+    .octo-queue-line {
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        line-height: 1.25;
+        margin: 0.5rem 0;
+        width: 100%;
+
+        .octo-queue-favicon {
+            margin-right: 1rem;
+        }
+
+        .octo-queue-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     }
 }

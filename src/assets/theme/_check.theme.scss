@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-check-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-check-theme($palettes, $foreground, $background) {
     .octo-check {
         &.octo-check-box {
             .octo-check-box-wrapper {
@@ -11,13 +13,13 @@
                 }
             }
 
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-check-box-#{$key} {
                     .octo-check-box-wrapper {
                         &.active {
                             .octo-check-input {
                                 .octo-check-mark {
-                                    color: $value;
+                                    color: palette.fetch-color($value);
                                 }
                             }
                         }
@@ -41,18 +43,18 @@
                 }
             }
 
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-check-toggle-#{$key} {
                     .octo-check-toggle-wrapper {
                         &.active {
                             .octo-check-input {
                                 .octo-check-ctrl {
-                                    background-color: rgba($value, 0.25);
-                                    border-color: $value;
-                                    box-shadow: 0 0 0.125rem 0 $value inset;
+                                    background-color: rgba(palette.fetch-color($value), 0.25);
+                                    border-color: palette.fetch-color($value);
+                                    box-shadow: 0 0 0.125rem 0 palette.fetch-color($value) inset;
 
                                     .octo-check-ctrl-mark {
-                                        background-color: $value;
+                                        background-color: palette.fetch-color($value);
                                     }
                                 }
                             }

@@ -1,0 +1,30 @@
+@use "sass:map";
+
+@use "palette.theme" as palette;
+
+@mixin mixin-queue-theme($palettes, $foreground, $background) {
+    .octo-queue {
+        .octo-queue-item {
+            color: map.get($foreground, "base");
+        }
+
+        &.octo-action-queue {
+            .octo-action-queue-item,
+            .octo-queue-link {
+                &:hover {
+                    background-color: rgba(map.get($background, "base"), 0.25);
+                }
+            }
+
+            @each $key, $value in $palettes {
+                &.octo-action-queue-#{$key} {
+                    .octo-queue-link {
+                        &:hover {
+                            background-color: rgba(palette.fetch-color($value), 0.25);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

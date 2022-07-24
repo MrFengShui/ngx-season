@@ -1,14 +1,16 @@
 @use "sass:map";
 
-@mixin mixin-express-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-express-theme($palettes, $foreground, $background) {
     .octo-express {
-        @each $key, $value in $colors {
+        @each $key, $value in $palettes {
             @if $key == "primary" or $key == "accent" {
                 &.octo-express-#{$key} {
-                    background-color: rgba($value, 0.125);
+                    background-color: rgba(palette.fetch-color($value), 0.125);
 
                     .octo-express-head {
-                        background-color: $value;
+                        background-color: palette.fetch-color($value);
                     }
                 }
             }

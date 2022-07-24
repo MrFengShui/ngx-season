@@ -1,13 +1,15 @@
 @use "sass:map";
 
-@mixin mixin-toolbar-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-toolbar-theme($palettes, $foreground, $background) {
     .octo-toolbar {
         background-color: map.get($background, "toolbar");
 
-        @each $key, $value in $colors {
+        @each $key, $value in $palettes {
             @if $key == "primary" or $key == "accent" {
                 &.octo-toolbar-#{$key} {
-                    background-color: $value;
+                    background-color: palette.fetch-color($value);
                 }
             }
         }

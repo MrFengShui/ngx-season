@@ -10,28 +10,18 @@ import {
     AfterContentInit,
     Input,
     OnChanges,
-    SimpleChanges,
-    AfterContentChecked
+    SimpleChanges, Inject, forwardRef, OnInit, HostListener, Output, EventEmitter
 } from "@angular/core";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
+import {SelectionModel} from "@angular/cdk/collections";
+
+import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
+
+export type OctopusSelectQueueChange = {options: OctopusQueueOption[], source: OctopusSelectQueue};
+export type OctopusQueueOptionLabelPosition = 'after' | 'before'
 
 @Component({
-    template: ''
-})
-abstract class OctopusAbstractQueue {
-
-    @HostBinding('class') class: string = 'octo-queue';
-
-    constructor(
-        protected _element: ElementRef,
-        protected _render: Renderer2
-    ) {
-    }
-
-}
-
-@Component({
-    selector: 'div[octo-queue-header], div[octoQueueHeader]',
+    selector: 'octo-queue-header',
     template: `<ng-content></ng-content>`
 })
 export class OctopusQueueHeader {
@@ -40,45 +30,57 @@ export class OctopusQueueHeader {
 
 }
 
-@Directive({
-    selector: 'img[octo-queue-image]'
+@Component({
+    selector: 'octo-queue-footer',
+    template: `<ng-content></ng-content>`
 })
-export class OctopusQueueImage implements AfterViewInit {
+export class OctopusQueueFooter {
 
-    @HostBinding('class') class: string = 'octo-queue-image';
+    @HostBinding('class') class: string = 'octo-queue-footer';
 
-    constructor(
-        private _element: ElementRef,
-        private _render: Renderer2
-    ) {
-    }
+}
 
-    ngAfterViewInit() {
-        this.renderStyle();
-    }
+@Component({
+    selector: 'octo-queue-section',
+    template: `
+        <ng-content select="[octo-queue-favicon]"></ng-content>
+        <ng-content select="[octo-queue-label]"></ng-content>
+        <div class="octo-queue-section-wrapper">
+            <span class="octo-queue-sub">{{subject}}</span>
+            <span class="octo-queue-desc">{{description}}</span>
+        </div>
+        <ng-content></ng-content>
+    `
+})
+export class OctopusQueueSection {
 
-    private renderStyle(): void {
-        let task = setTimeout(() => {
-            clearTimeout(task);
-            this._render.setStyle(this._element.nativeElement, 'border-radius', '50%');
-            this._render.setStyle(this._element.nativeElement, 'width', '2.5rem');
-            this._render.setStyle(this._element.nativeElement, 'height', '2.5rem');
-        });
-    }
+    @Input('octoSub') subject: string = '';
+    @Input('octoDesc') description: string = '';
+
+    @HostBinding('class') class: string = 'octo-queue-section';
 
 }
 
 @Directive({
-    selector: 'octo-icon[octo-queue-icon]'
+    selector: '[octo-queue-label]'
 })
-export class OctopusQueueIcon {
+export class OctopusQueueLabel {
 
-    @HostBinding('class') class: string = 'octo-queue-icon';
+    @HostBinding('class') class: string = 'octo-queue-label';
 
 }
 
 @Directive({
-    selector: 'span[octo-queue-text]'
+    selector: '[octo-queue-favicon]'
+})
+export class OctopusQueueFavicon {
+
+    @HostBinding('class') class: string = 'octo-queue-favicon';
+
+}
+
+@Directive({
+    selector: '[octo-queue-text]'
 })
 export class OctopusQueueText {
 
@@ -87,18 +89,18 @@ export class OctopusQueueText {
 }
 
 @Component({
-    selector: 'div[octo-queue-line], div[octoQueueLine]',
+    selector: 'octo-queue-line',
     template: `
-        <ng-content select="img[octo-queue-image]"></ng-content>
+        <ng-content select="[octo-queue-favicon]"></ng-content>
         <ng-content></ng-content>
     `
 })
 export class OctopusQueueLine implements AfterContentInit {
 
-    @ContentChildren(OctopusQueueImage)
-    private images!: QueryList<OctopusQueueImage>;
+    @ContentChildren(OctopusQueueFavicon)
+    private images!: QueryList<OctopusQueueFavicon>;
 
-    @HostBinding('class') class: string = 'octo-queue-line sx-50'
+    @HostBinding('class') class: string = 'octo-queue-line';
 
     ngAfterContentInit() {
         if (this.images && this.images.length > 1) {
@@ -109,13 +111,10 @@ export class OctopusQueueLine implements AfterContentInit {
 }
 
 @Component({
-    selector: 'octo-queue-item, div[octo-queue-item]',
+    selector: 'octo-queue-item',
     template: `<ng-content></ng-content>`
 })
-export class OctopusQueueItem implements AfterContentChecked {
-
-    @ContentChildren(OctopusQueueLine)
-    private lines!: QueryList<OctopusQueueLine>;
+export class OctopusQueueItem {
 
     @HostBinding('class') class: string = 'octo-queue-item';
 
@@ -125,54 +124,69 @@ export class OctopusQueueItem implements AfterContentChecked {
     ) {
     }
 
-    ngAfterContentChecked() {
-        this.changeDisplay();
-    }
-
-    private changeDisplay(): void {
-        if (this.lines) {
-            if (this.lines.length > 0) {
-                this._render.removeStyle(this._element.nativeElement, 'display');
-                this._render.removeStyle(this._element.nativeElement, 'align-items');
-            } else {
-                this._render.setStyle(this._element.nativeElement, 'display', 'flex');
-                this._render.setStyle(this._element.nativeElement, 'align-items', 'center');
-            }
-        }
-    }
-
 }
 
 @Component({
-    selector: 'a[octo-nav-queue-item]',
+    selector: 'button[octo-action-queue-item]',
     template: `
-        <div octo-ripple class="mx-0" *ngIf="rippled"></div>
-        <ng-container *ngIf="icons.length <= 1 && texts.length <= 1">
-            <ng-content select="octo-icon[octo-queue-icon]"></ng-content>
-            <ng-content select="span[octo-queue-text]"></ng-content>
-        </ng-container>
+        <div octo-ripple></div>
+        <ng-content></ng-content>
     `
 })
-export class OctopusNavigatorQueueItem extends OctopusQueueItem implements OnChanges, AfterContentInit, AfterViewInit {
+export class OctopusActionQueueItem extends OctopusQueueItem implements OnChanges, AfterViewInit {
 
-    @Input('octoRippled')
-    get rippled() { return this._rippled; }
-    set rippled(_rippled: any) { this._rippled = coerceBooleanProperty(_rippled); }
-    private _rippled: boolean = true;
-
-    @Input('octoDisabled')
+    @Input('disabled')
     get disabled() { return this._disabled; }
     set disabled(_disabled: any) { this._disabled = coerceBooleanProperty(_disabled); }
     private _disabled: boolean = false;
 
-    @ContentChildren(OctopusQueueIcon) icons!: QueryList<OctopusQueueIcon>;
-    @ContentChildren(OctopusQueueText) texts!: QueryList<OctopusQueueText>;
+    constructor(
+        protected override _element: ElementRef,
+        protected override _render: Renderer2,
+        @Inject(forwardRef(() => OctopusActionQueue))
+        private _queue: OctopusActionQueue
+    ) {
+        super(_element, _render);
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['disabled']) {
             this.renderDisabled(changes['disabled'].currentValue);
         }
     }
+
+    ngAfterViewInit() {
+        this._render.addClass(this._element.nativeElement, 'octo-action-queue-item');
+        this.renderDisabled(this.disabled);
+    }
+
+    private renderDisabled(disabled: boolean): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+
+            if (this._queue.disabled || disabled) {
+                this._render.setAttribute(this._element.nativeElement, 'disabled', '');
+            } else {
+                this._render.removeAttribute(this._element.nativeElement, 'disabled');
+            }
+        });
+    }
+
+}
+
+@Component({
+    selector: 'a[octo-queue-link]',
+    template: `
+        <ng-container *ngIf="icons.length <= 1 && texts.length <= 1">
+            <ng-content select="[octo-queue-favicon]"></ng-content>
+            <ng-content select="span[octo-queue-text]"></ng-content>
+        </ng-container>
+    `
+})
+export class OctopusQueueLink extends OctopusQueueItem implements AfterContentInit, AfterViewInit {
+
+    @ContentChildren(OctopusQueueFavicon) icons!: QueryList<OctopusQueueFavicon>;
+    @ContentChildren(OctopusQueueText) texts!: QueryList<OctopusQueueText>;
 
     ngAfterContentInit() {
         if (this.icons && this.icons.length > 1) {
@@ -185,94 +199,181 @@ export class OctopusNavigatorQueueItem extends OctopusQueueItem implements OnCha
     }
 
     ngAfterViewInit() {
-        this._render.addClass(this._element.nativeElement, 'octo-nav-queue-item');
-        this.renderDisabled(this.disabled);
+        this._render.addClass(this._element.nativeElement, 'octo-queue-link');
     }
 
-    renderDisabled(disabled: boolean): void {
-        let task = setTimeout(() => {
-            clearTimeout(task);
+}
 
-            if (disabled) {
-                this._render.setAttribute(this._element.nativeElement, 'disabled', '');
-            } else {
-                this._render.removeAttribute(this._element.nativeElement, 'disabled');
-            }
-        });
+@Component({
+    selector: 'octo-queue-option',
+    template: `
+        <div octo-ripple></div>
+        <octo-icon [class.ml-100]="_queue.position === 'before'" [class.mr-100]="_queue.position === 'after'"
+                   *ngIf="_queue.multiple">
+            {{checked ? 'check_box' : 'check_box_outline_blank'}}
+        </octo-icon>
+        <octo-icon [class.ml-100]="_queue.position === 'before'" [class.mr-100]="_queue.position === 'after'"
+                   *ngIf="!_queue.multiple">
+            {{checked ? 'radio_button_checked' : 'radio_button_unchecked'}}
+        </octo-icon>
+        <div class="octo-queue-option-wrapper"><ng-content></ng-content></div>
+    `
+})
+export class OctopusQueueOption extends OctopusQueueItem implements AfterViewInit {
+
+    @Input('octoValue') value: any = '';
+
+    @Input('octoChecked')
+    get checked() { return this._checked; }
+    set checked(_checked: any) { this._checked = coerceBooleanProperty(_checked); }
+    private _checked: boolean = false;
+
+    @HostListener('click')
+    protected click(): void {
+        this.toggle();
+    }
+
+    constructor(
+        protected override _element: ElementRef,
+        protected override _render: Renderer2,
+        @Inject(forwardRef(() => OctopusSelectQueue))
+        public _queue: OctopusSelectQueue
+    ) {
+        super(_element, _render);
+    }
+
+    ngAfterViewInit() {
+        this._render.addClass(this._element.nativeElement, 'octo-queue-option');
+    }
+
+    toggle(): void {
+        if (!this._queue.selection.isMultipleSelection()) {
+            this._queue.options.forEach(option => option.checked = false);
+        }
+
+        this._queue.selection.toggle(this);
+        this.checked = this._queue.selection.selected.indexOf(this) !== -1;
+
+        this._queue.change.emit({options: this._queue.selection.selected, source: this._queue});
+    }
+
+    changeLabelPosition(position: OctopusQueueOptionLabelPosition): void {
+        if (position === 'after') {
+            this._render.setStyle(this._element.nativeElement, 'flex-direction', 'row');
+        }
+
+        if (position === 'before') {
+            this._render.setStyle(this._element.nativeElement, 'flex-direction', 'row-reverse');
+        }
     }
 
 }
 
 @Component({
     selector: 'octo-queue',
-    template: `
-        <div class="octo-queue-wrapper">
-            <ng-content
-                select="div[octo-queue-header], div[octoQueueHeader], octo-queue-item, div[octo-queue-item], octo-split-line"></ng-content>
-        </div>
-    `
+    template: `<ng-content></ng-content>`
 })
-export class OctopusQueue extends OctopusAbstractQueue {
+export class OctopusQueue {
+
+    @HostBinding('class') class: string = 'octo-queue';
+
+    constructor(
+        protected _element: ElementRef,
+        protected _render: Renderer2
+    ) {
+    }
 
 }
 
 @Component({
-    selector: 'octo-nav-queue',
-    template: `
-        <div class="octo-queue-wrapper" [ngStyle]="{'width': hidden ? 'fit-content' : 'auto'}">
-            <ng-content select="div[octo-queue-header], div[octoQueueHeader], a[octo-nav-queue-item]"></ng-content>
-        </div>
-    `
+    selector: 'octo-action-queue',
+    template: `<ng-content></ng-content>`
 })
-export class OctopusNavigatorQueue extends OctopusAbstractQueue implements OnChanges, AfterContentInit, AfterViewInit {
+export class OctopusActionQueue extends OctopusQueue implements OnChanges, AfterViewInit {
 
-    @Input('octoHidden')
-    get hidden() { return this._hidden; }
-    set hidden(_hidden: any) { this._hidden = coerceBooleanProperty(_hidden); }
-    private _hidden: boolean = false;
+    @Input('octoColor') color: OctopusColorPalette = 'base';
 
-    @Input('octoRippled')
-    get rippled() { return this._rippled; }
-    set rippled(_rippled: any) { this._rippled = coerceBooleanProperty(_rippled); }
-    private _rippled: boolean = true;
-
-    @Input('octoDisabled')
+    @Input('disabled')
     get disabled() { return this._disabled; }
     set disabled(_disabled: any) { this._disabled = coerceBooleanProperty(_disabled); }
     private _disabled: boolean = false;
 
-    @ContentChildren(OctopusNavigatorQueueItem)
-    private items!: QueryList<OctopusNavigatorQueueItem>;
-
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['rippled']) {
-            this.toggleRipple(changes['rippled'].currentValue);
+        if (changes['color']) {
+            this.renderColor(changes['color'].currentValue);
         }
-
-        if (changes['disabled']) {
-            this.toggleDisabled(changes['disabled'].currentValue);
-        }
-    }
-
-    ngAfterContentInit() {
-        this.toggleRipple(this.rippled);
-        this.toggleDisabled(this.disabled);
     }
 
     ngAfterViewInit() {
-        this._render.addClass(this._element.nativeElement, 'octo-nav-queue');
+        this._render.addClass(this._element.nativeElement, 'octo-action-queue');
+        this.renderColor(this.color);
     }
 
-    toggleRipple(rippled: boolean): void {
-        if (this.items) {
-            this.items.forEach(item => item.rippled = rippled);
+    private renderColor(color: OctopusColorPalette): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            OCTOPUS_COLOR_PALETTES.forEach(item =>
+                this._render.removeClass(this._element.nativeElement, `octo-action-queue-${item}`));
+            this._render.addClass(this._element.nativeElement, `octo-action-queue-${color}`);
+        });
+    }
+
+}
+
+@Component({
+    selector: 'octo-select-queue',
+    template: `<ng-content></ng-content>`
+})
+export class OctopusSelectQueue extends OctopusQueue implements OnChanges, OnInit, AfterViewInit {
+
+    @Input('octoColor') color: OctopusColorPalette = 'base';
+    @Input('octoLabelPos') position: OctopusQueueOptionLabelPosition = 'before';
+
+    @Input('octoMulti')
+    get multiple() { return this._multiple; }
+    set multiple(_multiple: any) { this._multiple = coerceBooleanProperty(_multiple); }
+    private _multiple: boolean = false;
+
+    @Output() change: EventEmitter<OctopusSelectQueueChange> = new EventEmitter<OctopusSelectQueueChange>();
+
+    @ContentChildren(OctopusQueueOption) options!: QueryList<OctopusQueueOption>;
+
+    selection!: SelectionModel<OctopusQueueOption>;
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['color']) {
+            this.renderColor(changes['color'].currentValue);
+        }
+
+        if (changes['position']) {
+            this.renderPosition(changes['position'].currentValue);
         }
     }
 
-    toggleDisabled(disabled: boolean): void {
-        if (this.items) {
-            this.items.forEach(item => item.renderDisabled(disabled));
-        }
+    ngOnInit() {
+        this.selection = new SelectionModel<OctopusQueueOption>(this.multiple, [], true);
+    }
+
+    ngAfterViewInit() {
+        this._render.addClass(this._element.nativeElement, 'octo-select-queue');
+        this.renderColor(this.color);
+        this.renderPosition(this.position);
+    }
+
+    private renderColor(color: OctopusColorPalette): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            OCTOPUS_COLOR_PALETTES.forEach(item =>
+                this._render.removeClass(this._element.nativeElement, `octo-select-queue-${item}`));
+            this._render.addClass(this._element.nativeElement, `octo-select-queue-${color}`)
+        });
+    }
+
+    private renderPosition(position: OctopusQueueOptionLabelPosition): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            this.options.forEach(option => option.changeLabelPosition(position));
+        });
     }
 
 }

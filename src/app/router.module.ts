@@ -23,6 +23,7 @@ const routes: Routes = [
     {path: 'carousel', component: OctopusTemplateView},
     {path: 'check', component: OctopusTemplateView},
     {path: 'combo', component: OctopusTemplateView},
+    {path: 'datetime', component: OctopusTemplateView},
     {path: 'dialog', component: OctopusTemplateView},
     {path: 'drawer', component: OctopusTemplateView},
     {path: 'express', component: OctopusTemplateView},

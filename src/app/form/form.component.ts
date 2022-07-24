@@ -1,7 +1,7 @@
 import {
     AfterContentInit,
     AfterViewInit,
-    Component, ContentChildren, Directive,
+    Component, ContentChild, ContentChildren, Directive,
     ElementRef, forwardRef,
     HostBinding, HostListener, Inject,
     Input,
@@ -11,6 +11,7 @@ import {
 } from "@angular/core";
 import {OCTOPUS_COLOR_PALETTES, OctopusColorPalette} from "../global/enums.utils";
 import {interval, map, Observable} from "rxjs";
+import {OctopusComboBox} from "../combo/combo.component";
 
 export type OctopusFormFieldMode = 'outline' | 'standard';
 export type OctopusFormHintAlignment = 'left' | 'right';
@@ -164,7 +165,9 @@ export class OctopusFormHint implements OnChanges, AfterViewInit {
             <div class="octo-form-field-main" [style.margin-left]="prefix$ | async"
                  [style.margin-right]="suffix$ | async" #main><ng-content></ng-content></div>
         </div>
-        <div class="octo-form-field-addon"><ng-content select="octo-form-hint"></ng-content></div>
+        <div class="octo-form-field-addon" [ngStyle]="{'height': hints.length === 0 ? '0.125rem' : '1rem'}">
+            <ng-content select="octo-form-hint"></ng-content>
+        </div>
     `
 })
 export class OctopusFormField implements OnChanges, AfterContentInit, AfterViewInit {
@@ -173,6 +176,10 @@ export class OctopusFormField implements OnChanges, AfterContentInit, AfterViewI
     @Input('octoMode') mode: OctopusFormFieldMode = 'standard';
 
     @ContentChildren(OctopusFormLabel) labels!: QueryList<OctopusFormLabel>;
+    @ContentChildren(OctopusFormHint) hints!: QueryList<OctopusFormHint>;
+
+    @ContentChild(OctopusComboBox)
+    private combo!: OctopusComboBox;
 
     @ViewChild('prefix', {read: ElementRef})
     private prefix!: ElementRef;

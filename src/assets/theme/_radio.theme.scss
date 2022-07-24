@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-radio-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-radio-theme($palettes, $foreground, $background) {
     .octo-radio {
         &.octo-radio-button {
             .octo-radio-button-wrapper {
@@ -11,13 +13,13 @@
                 }
             }
 
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-radio-button-#{$key} {
                     .octo-radio-button-wrapper {
                         &.active {
                             .octo-radio-input {
                                 .octo-radio-mark {
-                                    color: $value;
+                                    color: palette.fetch-color($value);
                                 }
                             }
                         }
@@ -40,14 +42,14 @@
                 }
             }
 
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-radio-toggle-#{$key} {
                     .octo-radio-toggle-wrapper {
-                        background-color: darken($value, 7.5%);
+                        background-color: darken(palette.fetch-color($value), 7.5%);
 
                         &.active {
-                            background-color: lighten($value, 2.5%);
-                            box-shadow: 0 0 0.25rem 0 rgba($value, 0.75) inset;
+                            background-color: lighten(palette.fetch-color($value), 2.5%);
+                            box-shadow: 0 0 0.25rem 0 rgba(palette.fetch-color($value), 0.75) inset;
                         }
                     }
                 }

@@ -1,0 +1,20 @@
+@use "sass:map";
+
+@use "palette.theme" as palette;
+
+@mixin mixin-combo-theme($palettes, $foreground, $background) {
+    .octo-combo-panel {
+        background-color: map.get($background, "overlay");
+        color: map.get($foreground, "overlay");
+
+        @each $key, $value in $palettes {
+            &.octo-combo-panel-#{$key} {
+                .octo-combo-item {
+                    &.active {
+                        background-color: palette.fetch-color($value);
+                    }
+                }
+            }
+        }
+    }
+}

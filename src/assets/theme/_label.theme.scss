@@ -1,15 +1,17 @@
 @use "sass:map";
 
-@mixin mixin-label-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-label-theme($palettes, $foreground, $background) {
     .octo-label {
         background-color: map.get($background, "label");
         color: map.get($foreground, "label");
 
         &.octo-mark-label {
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-mark-label-#{$key} {
                     .octo-mark-label-head {
-                        background-color: $value;
+                        background-color: palette.fetch-color($value);
                     }
                 }
             }
@@ -22,12 +24,12 @@
                 }
             }
 
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-chip-label-#{$key} {
-                    background-color: $value;
+                    background-color: palette.fetch-color($value);
 
                     &:hover {
-                        background-color: lighten($value, 2.5%);
+                        background-color: lighten(palette.fetch-color($value), 2.5%);
                     }
                 }
             }

@@ -1,6 +1,8 @@
 @use "sass:map";
 
-@mixin mixin-overlay-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-overlay-theme($palettes, $foreground, $background) {
     .octo-overlay-mask {
         background-color: rgba(map.get($background, "overlay"), 0.5);
     }
@@ -10,10 +12,10 @@
         color: map.get($foreground, "overlay");
 
         &.octo-toast {
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 @if $key == "success" or $key == "warning" or $key == "failure" {
                     &.octo-toast-#{$key} {
-                        background-color: $value;
+                        background-color: palette.fetch-color($value);
                     }
                 }
             }

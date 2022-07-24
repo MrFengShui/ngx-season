@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@mixin mixin-accordion-theme($colors, $foreground, $background) {
+@mixin mixin-accordion-theme($palettes, $foreground, $background) {
     .octo-accordion {
         .octo-accordion-panel {
             color: map.get($foreground, "accordion");

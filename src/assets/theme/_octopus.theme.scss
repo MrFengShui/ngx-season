@@ -1,10 +1,15 @@
 @use "sass:map";
+
+@use "palette.theme" as palette;
+
 @use "accordion.theme" as accordion;
 @use "badge.theme" as badge;
 @use "button.theme" as button;
 @use "card.theme" as card;
 @use "carousel.theme" as carousel;
 @use "check.theme" as check;
+@use "combo.theme" as combo;
+@use "datetime.theme" as datetime;
 @use "effects.theme" as effects;
 @use "express.theme" as express;
 @use "form.theme" as form;
@@ -15,6 +20,7 @@
 @use "overlay.theme" as overlay;
 @use "paginator.theme" as paginator;
 @use "progress.theme" as progress;
+@use "queue.theme" as queue;
 @use "radio.theme" as radio;
 @use "sidenav.theme" as sidenav;
 @use "stepper.theme" as stepper;
@@ -30,11 +36,7 @@
     $failure: map.get($theme, "failure");
     $foreground: map.get($theme, "foreground");
     $background: map.get($theme, "background");
-
-    $colors: (
-        "primary": $primary, "accent": $accent,
-        "success": $success, "warning": $warning, "failure": $failure,
-    );
+    $palettes: ("primary": $primary, "accent": $accent, "success": $success, "warning": $warning, "failure": $failure);
 
     * {
         text-decoration-color: map.get($background, "base");
@@ -45,35 +47,38 @@
         color: map.get($foreground, "base");
     }
 
-    @each $key, $value in $colors {
+    @each $key, $value in $palettes {
         .octo-active-#{$key},
         .octo-bg-#{$key} {
-            background-color: $value !important;
+            background-color: palette.fetch-color($value) !important;
         }
     }
 
-    @include accordion.mixin-accordion-theme($colors, $foreground, $background);
-    @include badge.mixin-badge-theme($colors, $foreground, $background);
-    @include button.mixin-button-theme($colors, $foreground, $background);
-    @include card.mixin-card-theme($colors, $foreground, $background);
-    @include carousel.mixin-carousel-theme($colors, $foreground, $background);
-    @include check.mixin-check-theme($colors, $foreground, $background);
-    @include effects.mixin-effects-theme($colors, $foreground, $background);
-    @include express.mixin-express-theme($colors, $foreground, $background);
-    @include form.mixin-form-theme($colors, $foreground, $background);
-    @include image.mixin-image-theme($colors, $foreground, $background);
-    @include label.mixin-label-theme($colors, $foreground, $background);
-    @include matrix.mixin-matrix-theme($colors, $foreground, $background);
-    @include menu.mixin-menu-theme($colors, $foreground, $background);
-    @include overlay.mixin-overlay-theme($colors, $foreground, $background);
-    @include paginator.mixin-paginator-theme($colors, $foreground, $background);
-    @include progress.mixin-progress-theme($colors, $foreground, $background);
-    @include radio.mixin-radio-theme($colors, $foreground, $background);
-    @include sidenav.mixin-sidenav-theme($colors, $foreground, $background);
-    @include stepper.mixin-stepper-theme($colors, $foreground, $background);
-    @include tabs.mixin-tabs-theme($colors, $foreground, $background);
-    @include table.mixin-table-theme($colors, $foreground, $background);
-    @include toolbar.mixin-toolbar-theme($colors, $foreground, $background);
+    @include accordion.mixin-accordion-theme($palettes, $foreground, $background);
+    @include badge.mixin-badge-theme($palettes, $foreground, $background);
+    @include button.mixin-button-theme($palettes, $foreground, $background);
+    @include card.mixin-card-theme($palettes, $foreground, $background);
+    @include carousel.mixin-carousel-theme($palettes, $foreground, $background);
+    @include check.mixin-check-theme($palettes, $foreground, $background);
+    @include combo.mixin-combo-theme($palettes, $foreground, $background);
+    @include datetime.mixin-datetime-theme($palettes, $foreground, $background);
+    @include effects.mixin-effects-theme($palettes, $foreground, $background);
+    @include express.mixin-express-theme($palettes, $foreground, $background);
+    @include form.mixin-form-theme($palettes, $foreground, $background);
+    @include image.mixin-image-theme($palettes, $foreground, $background);
+    @include label.mixin-label-theme($palettes, $foreground, $background);
+    @include matrix.mixin-matrix-theme($palettes, $foreground, $background);
+    @include menu.mixin-menu-theme($palettes, $foreground, $background);
+    @include overlay.mixin-overlay-theme($palettes, $foreground, $background);
+    @include paginator.mixin-paginator-theme($palettes, $foreground, $background);
+    @include progress.mixin-progress-theme($palettes, $foreground, $background);
+    @include queue.mixin-queue-theme($palettes, $foreground, $background);
+    @include radio.mixin-radio-theme($palettes, $foreground, $background);
+    @include sidenav.mixin-sidenav-theme($palettes, $foreground, $background);
+    @include stepper.mixin-stepper-theme($palettes, $foreground, $background);
+    @include tabs.mixin-tabs-theme($palettes, $foreground, $background);
+    @include table.mixin-table-theme($palettes, $foreground, $background);
+    @include toolbar.mixin-toolbar-theme($palettes, $foreground, $background);
 
     .octo-holder {
         &.holder,
@@ -86,11 +91,6 @@
         .line {
             border-color: map.get($foreground, "base");
         }
-    }
-
-    a.octo-queue-item {
-        background-color: map.get($background, "queue");
-        color: map.get($foreground, "queue");
     }
 
     .octo-status {

@@ -1,32 +1,34 @@
 @use "sass:map";
 
-@mixin mixin-progress-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-progress-theme($palettes, $foreground, $background) {
     .octo-progress {
         .octo-progress-text {
             fill: map.get($foreground, 'base');
         }
 
-        @each $key, $value in $colors {
+        @each $key, $value in $palettes {
             &.octo-progress-#{$key} {
                 &.octo-progress-bar {
                     .octo-progress-track {
-                        fill: lighten($value, 32%);
+                        fill: lighten(palette.fetch-color($value), 32%);
                     }
 
                     .octo-progress-index {
-                        fill: darken($value, 2%);
+                        fill: darken(palette.fetch-color($value), 2%);
                     }
                 }
 
                 &.octo-progress-pie {
                     .octo-progress-track {
                         fill: transparent;
-                        stroke: lighten($value, 32%);
+                        stroke: lighten(palette.fetch-color($value), 32%);
                     }
 
                     .octo-progress-index {
                         fill: transparent;
-                        stroke: darken($value, 2%);
+                        stroke: darken(palette.fetch-color($value), 2%);
                     }
                 }
             }

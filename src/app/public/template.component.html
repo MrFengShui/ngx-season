@@ -4,6 +4,5 @@
     <a octo-tabbed-ctrl [routerLink]="['example']">EXAMPLE</a>
 </octo-tabbed-header>
 <router-outlet></router-outlet>
-
-
-
+<octo-calendar [(octoValue)]="date"></octo-calendar>
+<div>{{date.getFullYear()}}-{{date.getMonth() + 1 | number: '2.0-0'}}-{{date.getDate() | number: '2.0-0'}}</div>

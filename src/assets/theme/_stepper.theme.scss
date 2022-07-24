@@ -1,24 +1,26 @@
 @use "sass:map";
 
-@mixin mixin-stepper-theme($colors, $foreground, $background) {
+@use "palette.theme" as palette;
+
+@mixin mixin-stepper-theme($palettes, $foreground, $background) {
     .octo-stepper {
         background-color: map.get($background, "tabs");
         color: map.get($foreground, "tabs");
 
         .octo-stepper-header {
-            @each $key, $value in $colors {
+            @each $key, $value in $palettes {
                 &.octo-stepper-header-#{$key} {
                     &.active {
                         .octo-stepper-head-mark {
-                            background-color: $value;
-                            border-color: $value;
+                            background-color: palette.fetch-color($value);
+                            border-color: palette.fetch-color($value);
                         }
                     }
 
                     @if $key == "success" or $key == "warning" or $key == "failure" {
                         &.active {
                             .octo-stepper-head-text {
-                                color: $value;
+                                color: palette.fetch-color($value);
                             }
                         }
                     }

@@ -2,41 +2,61 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 
 import {
-    OctopusNavigatorQueue, OctopusNavigatorQueueItem,
+    OctopusActionQueue,
+    OctopusQueueLink,
     OctopusQueue,
+    OctopusQueueFooter,
     OctopusQueueHeader,
-    OctopusQueueIcon, OctopusQueueImage,
-    OctopusQueueItem, OctopusQueueLine, OctopusQueueText
+    OctopusQueueFavicon,
+    OctopusQueueItem,
+    OctopusQueueLabel,
+    OctopusQueueLine,
+    OctopusQueueSection,
+    OctopusQueueText,
+    OctopusActionQueueItem,
+    OctopusSelectQueue, OctopusQueueOption
 } from "./queue.component";
 
 import {OctopusEffectsModule} from "../effects/effects.module";
+import {OctopusImageModule} from "../image/image.module";
 
 @NgModule({
     declarations: [
         OctopusQueueHeader,
-        OctopusQueueImage,
-        OctopusQueueIcon,
+        OctopusQueueFooter,
+        OctopusQueueSection,
+        OctopusQueueLabel,
+        OctopusQueueFavicon,
         OctopusQueueText,
         OctopusQueueLine,
-        OctopusQueue,
-        OctopusNavigatorQueue,
+        OctopusActionQueueItem,
         OctopusQueueItem,
-        OctopusNavigatorQueueItem
+        OctopusQueueLink,
+        OctopusQueueOption,
+        OctopusQueue,
+        OctopusActionQueue,
+        OctopusSelectQueue
     ],
     imports: [
         CommonModule,
-        OctopusEffectsModule
+        OctopusEffectsModule,
+        OctopusImageModule
     ],
     exports: [
         OctopusQueueHeader,
-        OctopusQueueImage,
-        OctopusQueueIcon,
+        OctopusQueueFooter,
+        OctopusQueueSection,
+        OctopusQueueLabel,
+        OctopusQueueFavicon,
         OctopusQueueText,
         OctopusQueueLine,
-        OctopusQueue,
-        OctopusNavigatorQueue,
+        OctopusActionQueueItem,
         OctopusQueueItem,
-        OctopusNavigatorQueueItem
+        OctopusQueueLink,
+        OctopusQueueOption,
+        OctopusQueue,
+        OctopusActionQueue,
+        OctopusSelectQueue
     ]
 })
 export class OctopusQueueModule {}
