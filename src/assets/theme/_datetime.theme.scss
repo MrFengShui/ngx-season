@@ -21,4 +21,9 @@
             }
         }
     }
+
+    .octo-digit-clock {
+        background-color: map.get($background, "overlay");
+        color: map.get($foreground, "overlay");
+    }
 }

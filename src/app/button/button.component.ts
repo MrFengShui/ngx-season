@@ -14,9 +14,13 @@ import {OCTOPUS_COLOR_PALETTES, OCTOPUS_SHAPES, OctopusColorPalette, OctopusShap
 export type OctopusScrollDirection = 'topdown' | 'bottomup';
 
 @Component({
-    template: ''
+    selector: 'button[octo-btn]',
+    template: `
+        <div octo-ripple [octoRippleColor]="color" *ngIf="!_element.nativeElement.disabled"></div>
+        <ng-content></ng-content>
+    `
 })
-abstract class OctopusAbstractButton implements OnChanges, AfterViewInit {
+export class OctopusButton implements OnChanges, AfterViewInit {
 
     @Input('octoColor') color: OctopusColorPalette = 'base';
     @Input('octoShape') shape: OctopusShape = 'rect';
@@ -44,7 +48,17 @@ abstract class OctopusAbstractButton implements OnChanges, AfterViewInit {
         this.renderShape(this.shape);
     }
 
-    protected abstract renderColor(color: OctopusColorPalette): void;
+    protected renderColor(color: OctopusColorPalette): void {
+        let task = setTimeout(() => {
+            clearTimeout(task);
+            OCTOPUS_COLOR_PALETTES.forEach(item =>
+                this._render.removeClass(this._element.nativeElement, `octo-btn-${item}`));
+
+            if (color !== 'base') {
+                this._render.addClass(this._element.nativeElement, `octo-btn-${color}`);
+            }
+        });
+    }
 
     protected renderShape(shape: OctopusShape): void {
         let task = setTimeout(() => {
@@ -52,34 +66,6 @@ abstract class OctopusAbstractButton implements OnChanges, AfterViewInit {
             OCTOPUS_SHAPES.forEach(item =>
                 this._render.removeClass(this._element.nativeElement, `octo-btn-${item}`));
             this._render.addClass(this._element.nativeElement, `octo-btn-${shape}`);
-        });
-    }
-
-}
-
-@Component({
-    selector: 'button[octo-btn]',
-    template: `
-        <div octo-ripple [octoRippleColor]="color" *ngIf="!_element.nativeElement.disabled"></div>
-        <ng-content></ng-content>
-    `
-})
-export class OctopusButton extends OctopusAbstractButton {
-
-    override ngAfterViewInit() {
-        super.ngAfterViewInit();
-        this._render.addClass(this._element.nativeElement, 'octo-base-btn');
-    }
-
-    protected renderColor(color: OctopusColorPalette): void {
-        let task = setTimeout(() => {
-            clearTimeout(task);
-            OCTOPUS_COLOR_PALETTES.forEach(item =>
-                this._render.removeClass(this._element.nativeElement, `octo-base-btn-${item}`));
-
-            if (color !== 'base') {
-                this._render.addClass(this._element.nativeElement, `octo-base-btn-${color}`);
-            }
         });
     }
 
@@ -101,14 +87,14 @@ export class OctopusAnchor extends OctopusButton {}
         <ng-content></ng-content>
     `
 })
-export class OctopusSolidButton extends OctopusAbstractButton {
+export class OctopusSolidButton extends OctopusButton {
 
     override ngAfterViewInit() {
         super.ngAfterViewInit();
         this._render.addClass(this._element.nativeElement, 'octo-solid-btn');
     }
 
-    protected renderColor(color: OctopusColorPalette): void {
+    protected override renderColor(color: OctopusColorPalette): void {
         let task = setTimeout(() => {
             clearTimeout(task);
             OCTOPUS_COLOR_PALETTES.forEach(item =>
@@ -138,14 +124,14 @@ export class OctopusSolidAnchor extends OctopusSolidButton {}
         <ng-content></ng-content>
     `
 })
-export class OctopusStrokedButton extends OctopusAbstractButton {
+export class OctopusStrokedButton extends OctopusButton {
 
     override ngAfterViewInit() {
         super.ngAfterViewInit();
         this._render.addClass(this._element.nativeElement, 'octo-stroke-btn');
     }
 
-    protected renderColor(color: OctopusColorPalette): void {
+    protected override renderColor(color: OctopusColorPalette): void {
         let task = setTimeout(() => {
             clearTimeout(task);
             OCTOPUS_COLOR_PALETTES.forEach(item =>

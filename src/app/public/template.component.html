@@ -6,3 +6,6 @@
 <router-outlet></router-outlet>
 <octo-calendar [(octoValue)]="date"></octo-calendar>
 <div>{{date.getFullYear()}}-{{date.getMonth() + 1 | number: '2.0-0'}}-{{date.getDate() | number: '2.0-0'}}</div>
+<octo-digit-clock [(octoValue)]="date"></octo-digit-clock>
+<div>{{date.getHours() | number: '2.0-0'}}:{{date.getMinutes() | number: '2.0-0'}}:
+    {{date.getSeconds() | number: '2.0-0'}}.{{date.getMilliseconds() | number: '3.0-0'}}</div>

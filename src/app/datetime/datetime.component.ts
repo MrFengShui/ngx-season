@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+    AfterViewInit, ChangeDetectorRef,
     Component,
     EventEmitter,
     HostBinding,
@@ -9,6 +9,9 @@ import {
 } from "@angular/core";
 
 import {OctopusColorPalette} from "../global/enums.utils";
+import {interval, Subscription} from "rxjs";
+
+export type OctopusDigitClockChange = {date: Date, hour: number, minute: number, second: number, millisecond: number};
 
 type OctopusCalendarCell = {disabled: boolean, value: number};
 
@@ -35,7 +38,7 @@ type OctopusCalendarCell = {disabled: boolean, value: number};
             <tfoot>
                 <tr>
                     <td colspan="3">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center px-50">
                             <button octo-btn octoShape="ring" (click)="decreaseYearValue()">
                                 <octo-icon>keyboard_double_arrow_left</octo-icon>
                             </button>
@@ -46,7 +49,7 @@ type OctopusCalendarCell = {disabled: boolean, value: number};
                         </div>
                     </td>
                     <td colspan="3">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center px-50">
                             <button octo-btn octoShape="ring" (click)="decreaseMonthValue()">
                                 <octo-icon>keyboard_arrow_left</octo-icon>
                             </button>
@@ -193,6 +196,170 @@ export class OctopusCalendar implements OnChanges, AfterViewInit {
         this.year = date.getFullYear();
         this.month = date.getMonth();
         this.day = date.getDate();
+    }
+
+}
+
+@Component({
+    selector: 'octo-digit-clock',
+    template: `
+        <div class="octo-digit-clock-wrapper sy-50">
+            <button octo-btn (click)="increaseHourValue()">
+                <octo-icon>keyboard_arrow_up</octo-icon>
+            </button>
+            <div class="octo-digit-text">{{hour | number: '2.0-0'}}</div>
+            <button octo-btn (click)="decreaseHourValue()">
+                <octo-icon>keyboard_arrow_down</octo-icon>
+            </button>
+        </div>
+        <div class="octo-digit-split">:</div>
+        <div class="octo-digit-clock-wrapper sy-50">
+            <button octo-btn (click)="increaseMinuteValue()">
+                <octo-icon>keyboard_arrow_up</octo-icon>
+            </button>
+            <div class="octo-digit-text">{{minute | number: '2.0-0'}}</div>
+            <button octo-btn (click)="decreaseMinuteValue()">
+                <octo-icon>keyboard_arrow_down</octo-icon>
+            </button>
+        </div>
+        <div class="octo-digit-split">:</div>
+        <div class="octo-digit-clock-wrapper sy-50">
+            <button octo-btn (click)="increaseSecondValue()">
+                <octo-icon>keyboard_arrow_up</octo-icon>
+            </button>
+            <div class="octo-digit-text">{{second | number: '2.0-0'}}</div>
+            <button octo-btn (click)="decreaseSecondValue()">
+                <octo-icon>keyboard_arrow_down</octo-icon>
+            </button>
+        </div>
+        <div class="octo-digit-split">.</div>
+        <div class="octo-digit-clock-wrapper sy-50">
+            <button octo-btn (click)="increaseMillisecondValue()">
+                <octo-icon>keyboard_arrow_up</octo-icon>
+            </button>
+            <div class="octo-digit-text" style="font-size: 1.5rem">{{millisecond | number: '3.0-0'}}</div>
+            <button octo-btn (click)="decreaseMillisecondValue()">
+                <octo-icon>keyboard_arrow_down</octo-icon>
+            </button>
+        </div>
+    `
+})
+export class OctopusDigitClock {
+
+    @Input('octoValue') value: Date = new Date();
+
+    @Output('octoValueChange') valueChange: EventEmitter<Date> = new EventEmitter<Date>();
+    @Output('octoChange') change: EventEmitter<OctopusDigitClockChange> = new EventEmitter<OctopusDigitClockChange>();
+
+    @HostBinding('class') class: string = 'octo-digit-clock';
+
+    hour: number = this.value.getHours();
+    minute: number = this.value.getMinutes();
+    second: number = this.value.getSeconds();
+    millisecond: number = this.value.getMilliseconds();
+
+    increaseHourValue(): void {
+        this.hour = this.hour === 23 ? 0 : this.hour + 1;
+        this.value.setHours(this.hour, this.minute, this.second, this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    decreaseHourValue(): void {
+        this.hour = this.hour === 0 ? 23 : this.hour - 1;
+        this.value.setHours(this.hour, this.minute, this.second, this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    increaseMinuteValue(): void {
+        this.minute = this.minute === 59 ? 0 : this.minute + 1;
+        this.value.setMinutes(this.minute, this.second, this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    decreaseMinuteValue(): void {
+        this.minute = this.minute === 0 ? 59 : this.minute - 1;
+        this.value.setMinutes(this.minute, this.second, this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    increaseSecondValue(): void {
+        this.second = this.second === 59 ? 0 : this.second + 1;
+        this.value.setSeconds(this.second, this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    decreaseSecondValue(): void {
+        this.second = this.second === 0 ? 59 : this.second - 1;
+        this.value.setSeconds(this.second, this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    increaseMillisecondValue(): void {
+        this.millisecond = this.millisecond === 999 ? 0 : this.millisecond + 1;
+        this.value.setMilliseconds(this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
+    }
+
+    decreaseMillisecondValue(): void {
+        this.millisecond = this.millisecond === 0 ? 999 : this.millisecond - 1;
+        this.value.setMilliseconds(this.millisecond);
+        this.valueChange.emit(this.value);
+        this.change.emit({
+            date: this.value,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
+            millisecond: this.millisecond
+        });
     }
 
 }

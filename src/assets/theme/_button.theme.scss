@@ -4,16 +4,11 @@
 
 @mixin mixin-button-theme($palettes, $foreground, $background) {
     .octo-btn {
-        &.octo-base-btn {
-            color: map.get($foreground, "button");
+        background-color: rgba(map.get($background, "button"), 0.25);
+        color: map.get($foreground, "button");
 
-            &:hover {
-                background-color: rgba(map.get($background, "button"), 0.125);
-            }
-
-            &:active {
-                color: rgba(map.get($background, "button"), 0.125);
-            }
+        &:hover {
+            background-color: rgba(map.get($background, "button"), 0.75);
         }
 
         &.octo-solid-btn {
@@ -21,11 +16,7 @@
             color: map.get($foreground, "button");
 
             &:hover {
-                background-color: lighten(map.get($background, "button"), 2.5%);
-            }
-
-            &:active {
-                background-color: darken(map.get($background, "button"), 2.5%);
+                background-color: rgba(map.get($background, "button"), 0.85);
             }
         }
 
@@ -34,39 +25,25 @@
             color: map.get($foreground, "button");
 
             &:hover {
-                border-color: lighten(map.get($foreground, "button"), 2.5%);
-                color: lighten(map.get($foreground, "button"), 2.5%);
-            }
-
-            &:active {
-                border-color: darken(map.get($foreground, "button"), 2.5%);
-                color: darken(map.get($foreground, "button"), 2.5%);
+                border-color: rgba(map.get($foreground, "button"), 0.85);
+                color: rgba(map.get($foreground, "button"), 0.85);
             }
         }
 
         @each $key, $value in $palettes {
-            &.octo-base-btn-#{$key} {
-                color: palette.fetch-color($value);
+            &.octo-btn-#{$key} {
+                background-color: rgba(palette.fetch-color($value), 0.25);
 
                 &:hover {
-                    background-color: rgba(palette.fetch-color($value), 0.125);
-                }
-
-                &:active {
-                    color: rgba(palette.fetch-color($value), 0.125);
+                    background-color: rgba(palette.fetch-color($value), 0.75);
                 }
             }
 
             &.octo-solid-btn-#{$key} {
                 background-color: palette.fetch-color($value);
-                color: lighten(palette.fetch-color($value), 50%);
 
                 &:hover {
-                    background-color: lighten(palette.fetch-color($value), 2.5%);
-                }
-
-                &:active {
-                    background-color: darken(palette.fetch-color($value), 2.5%);
+                    background-color: rgba(palette.fetch-color($value), 0.85);
                 }
             }
 
@@ -75,13 +52,12 @@
                 color: palette.fetch-color($value);
 
                 &:hover {
-                    border-color: lighten(palette.fetch-color($value), 2.5%);
-                    color: lighten(palette.fetch-color($value), 2.5%);
+                    border-color: rgba(palette.fetch-color($value), 0.85);
+                    color: rgba(palette.fetch-color($value), 0.85);
                 }
 
-                &:active {
-                    border-color: darken(palette.fetch-color($value), 2.5%);
-                    color: darken(palette.fetch-color($value), 2.5%);
+                .octo-icon {
+                    color: palette.fetch-color($value);
                 }
             }
         }
