@@ -1,0 +1,59 @@
+$gaps: (
+    "g": "",
+    "m": "margin",
+    "p": "padding"
+);
+
+@each $key, $value in $gaps {
+    @for $index from 0 through 10 {
+        @if $key == "g" {
+            .#{$key}x-#{$index * 25} {
+                > :nth-child(n) {
+                    margin-right: #{$index * 4}px !important;
+                }
+
+                > :last-child {
+                    margin-right: 0px !important;
+                }
+            }
+
+            .#{$key}y-#{$index * 25} {
+                > :nth-child(n) {
+                    margin-bottom: #{$index * 4}px !important;
+                }
+
+                > :last-child {
+                    margin-bottom: 0px !important;
+                }
+            }
+        } @else {
+            .#{$key}-#{$index * 25} {
+                #{$value}: #{$index * 4}px !important;
+            }
+    
+            .#{$key}x-#{$index * 25} {
+                #{$value}: 0px #{$index * 4}px !important;
+            }
+    
+            .#{$key}y-#{$index * 25} {
+                #{$value}: #{$index * 4}px 0px !important;
+            }
+    
+            .#{$key}t-#{$index * 25} {
+                #{$value}-top: #{$index * 4}px !important;
+            }
+    
+            .#{$key}b-#{$index * 25} {
+                #{$value}-bottom: #{$index * 4}px !important;
+            }
+    
+            .#{$key}l-#{$index * 25} {
+                #{$value}-left: #{$index * 4}px !important;
+            }
+    
+            .#{$key}r-#{$index * 25} {
+                #{$value}-right: #{$index * 4}px !important;
+            }
+        }
+    }
+}

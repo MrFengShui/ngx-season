@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    font-size: 16px;
+
+    &:not(head) {
+        display: block;
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

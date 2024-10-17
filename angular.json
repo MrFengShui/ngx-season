@@ -26,6 +26,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "baseHref": "/ngx-season/",
                         "outputPath": "dist/ngx-season",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -34,13 +35,13 @@
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
-                            "src/app",
                             "src/assets"
                         ],
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "verbose": true
                     },
                     "configurations": {
                         "production": {
@@ -77,6 +78,10 @@
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "servePath": "/ngx-season/",
+                        "verbose": true
+                    },
                     "configurations": {
                         "production": {
                             "disableHostCheck": false,

@@ -1,0 +1,255 @@
+@mixin setup-button-theme($theme) {
+    $colors: (
+        "default": "gray",
+        "primary": "indigo",
+        "accent": "pink",
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue",
+    );
+
+    .btn {
+        @each $key, $value in $colors {
+            /* Solid */
+            --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --button-color-#{$key}: #{var(--palette-white-color)};
+        
+            --button-hover-bgcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --button-hover-bdcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --button-hover-color-#{$key}: #{var(--palette-white-color)};
+        
+            --button-active-bgcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --button-active-bdcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --button-active-color-#{$key}: #{var(--palette-white-color)};
+
+            --button-disabled-color-#{$key}: #{var(--palette-#{$value}-200-color)};
+            /* Outline */
+            --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --button-color-#{$key}: #{var(--palette-white-color)};
+        
+            --button-hover-bgcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --button-hover-bdcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --button-hover-color-#{$key}: #{var(--palette-white-color)};
+        
+            --button-active-bgcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --button-active-bdcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --button-active-color-#{$key}: #{var(--palette-white-color)};
+
+            --button-disabled-color-#{$key}: #{var(--palette-#{$value}-200-color)};
+            /* Flat */
+            --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --button-color-#{$key}: #{var(--palette-white-color)};
+        
+            --button-hover-bgcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --button-hover-bdcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --button-hover-color-#{$key}: #{var(--palette-white-color)};
+        
+            --button-active-bgcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --button-active-bdcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --button-active-color-#{$key}: #{var(--palette-white-color)};
+
+            --button-disabled-color-#{$key}: #{var(--palette-#{$value}-200-color)};
+        }
+        /* Link */
+        @if $theme == "light" {
+            --button-link-color: #{var(--palette-gray-700-color)};
+            --button-link-hover-color: #{var(--palette-gray-800-color)};
+            --button-link-active-color: #{var(--palette-gray-600-color)};
+            --button-link-disabled-color: #{var(--palette-gray-800-color)};
+        } @else {
+            --button-link-color: #{var(--palette-gray-300-color)};
+            --button-link-hover-color: #{var(--palette-gray-200-color)};
+            --button-link-active-color: #{var(--palette-gray-400-color)};
+            --button-link-disabled-color: #{var(--palette-gray-200-color)};
+        }
+
+        --button-border-width: #{var(--size-pixel-2)};
+
+        --button-width-sm: #{var(--size-pixel-24)};
+        --button-width-md: #{var(--size-pixel-36)};
+        --button-width-lg: #{var(--size-pixel-48)};
+    
+        --button-font-size-sm: #{var(--size-pixel-12)};
+        --button-font-size-md: #{var(--size-pixel-16)};
+        --button-font-size-lg: #{var(--size-pixel-20)};
+    
+        appearance: none;
+        outline: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        border-width: var(--button-border-width);
+        border-style: solid;
+        border-radius: #{var(--size-pixel-3)};
+    
+        cursor: pointer;
+        font-weight: bold;
+        user-select: none;
+        text-transform: uppercase;
+
+        &:not(:disabled) {
+            box-shadow: if($theme == "light", var(--button-shadow-black), var(--button-shadow-white));
+        }
+
+        &.btn-block {
+            width: 100%;
+        }
+        
+        &.btn-sm {
+            font-size: var(--button-font-size-sm);
+            height: var(--button-width-sm);
+            padding: 0px calc(#{var(--button-font-size-sm)} * 1.25);
+        }
+
+        &.btn-md {
+            font-size: var(--button-font-size-md);
+            height: var(--button-width-md);
+            padding: 0px calc(#{var(--button-font-size-md)} * 1.5);
+        }
+
+        &.btn-lg {
+            font-size: var(--button-font-size-lg);
+            height: var(--button-width-lg);
+            padding: 0px calc(#{var(--button-font-size-lg)} * 1.75);
+        }
+
+        @each $item in map-keys($colors) {
+            &.btn-#{$item} {
+                border-color: var(--button-bdcolor-#{$item});
+                background-color: var(--button-bgcolor-#{$item});
+                color: var(--button-color-#{$item});
+    
+                &:hover {
+                    border-color: var(--button-hover-bdcolor-#{$item});
+                    background-color: var(--button-hover-bgcolor-#{$item});
+                    color: var(--button-hover-color-#{$item});
+                }
+            
+                &:active {
+                    border-color: var(--button-active-bdcolor-#{$item});
+                    background-color: var(--button-active-bgcolor-#{$item});
+                    color: var(--button-active-color-#{$item});
+                }
+
+                &:disabled {
+                    border-color: var(--button-disabled-color-#{$item});
+                    background-color: var(--button-disabled-color-#{$item});
+        
+                    &:hover {
+                        border-color: var(--button-disabled-color-#{$item});
+                        background-color: var(--button-disabled-color-#{$item});
+                    }
+                
+                    &:active {
+                        border-color: var(--button-disabled-color-#{$item});
+                        background-color: var(--button-disabled-color-#{$item});
+                    }
+                }
+            }
+
+            &.btn-outline-#{$item} {
+                border-color: var(--button-bdcolor-#{$item});
+                background-color: transparent;
+                color: var(--button-bgcolor-#{$item});
+    
+                &:not(:disabled) {
+                    // @if $theme == 'light' {
+                    //     text-shadow: var(--text-shadow-black);
+                    // } @else {
+                    //     text-shadow: var(--text-shadow-white);
+                    // }
+                    text-shadow: if($theme == 'light', var(--text-shadow-black), var(--text-shadow-white));
+                }
+        
+                &:hover {
+                    border-color: var(--button-hover-bdcolor-#{$item});
+                    color: var(--button-hover-bgcolor-#{$item});
+                }
+            
+                &:active {
+                    border-color: var(--button-active-bdcolor-#{$item});
+                    color: var(--button-active-bgcolor-#{$item});
+                }
+
+                &:disabled {
+                    border-color: var(--button-disabled-color-#{$item});
+                    color: var(--button-disabled-color-#{$item});
+        
+                    &:hover {
+                        border-color: var(--button-disabled-color-#{$item});
+                        color: var(--button-disabled-color-#{$item});
+                    }
+                
+                    &:active {
+                        border-color: var(--button-disabled-color-#{$item});
+                        color: var(--button-disabled-color-#{$item});
+                    }
+                }
+            }
+
+            &.btn-flat-#{$item} {
+                border-color: transparent;
+                background-color: transparent;
+                color: var(--button-bgcolor-#{$item});
+                box-shadow: none !important;
+    
+                &:hover {
+                    color: var(--button-hover-bgcolor-#{$item});
+                }
+            
+                &:active {
+                    color: var(--button-active-bgcolor-#{$item});
+                }
+
+                &:disabled {
+                    color: var(--button-disabled-color-#{$item});
+        
+                    &:hover {
+                        color: var(--button-disabled-color-#{$item});
+                    }
+                
+                    &:active {
+                        color: var(--button-disabled-color-#{$item});
+                    }
+                }
+            }
+        }
+
+        &.btn-link {
+            border-color: transparent;
+            background-color: transparent;
+            box-shadow: none !important;
+
+            color: var(--button-link-color);
+
+            &:hover {
+                color: var(--button-link-hover-color);
+            }
+        
+            &:active {
+                color: var(--button-link-active-color);
+            }
+
+            &:disabled {
+                color: var(--button-link-disabled-color);
+    
+                &:hover {
+                    color: var(--button-link-disabled-color);
+                }
+            
+                &:active {
+                    color: var(--button-link-disabled-color);
+                }
+            }
+        }
+
+        .icon {
+            margin-right: #{var(--size-pixel-8)};
+        }
+    }
+}

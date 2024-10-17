@@ -1,0 +1,97 @@
+$sizes: (0, 1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 60, 64, 72, 80, 96, 128, 256);
+
+:root {
+    @each $size in $sizes {
+        --size-pixel-#{$size}: #{$size}px;
+    }
+
+    @for $index from 0 through 10 {
+        @if $index < 10 {
+            $fstValue: $index * 10;
+            $sndValue: $index * 10 + 5;
+            --size-percent-#{$fstValue}: #{percentage($fstValue * 0.01)};
+            --size-percent-#{$sndValue}: #{percentage($sndValue * 0.01)};
+        } @else {
+            --size-percent-100: 100%;
+        }
+    }
+}
+
+@for $index from 0 through 10 {
+    $fstValue: $index * 10;
+    $sndValue: $index * 10 + 5;
+
+    .w-#{$fstValue} {
+        width: var(--size-percent-#{$fstValue});
+    }
+
+    .w-min-#{$fstValue} {
+        min-width: var(--size-percent-#{$fstValue});
+    }
+
+    .w-max-#{$fstValue} {
+        max-width: var(--size-percent-#{$fstValue});
+    }
+
+    .h-#{$fstValue} {
+        height: var(--size-percent-#{$fstValue});
+    }
+
+    .h-min-#{$fstValue} {
+        min-height: var(--size-percent-#{$fstValue});
+    }
+
+    .h-max-#{$fstValue} {
+        max-height: var(--size-percent-#{$fstValue});
+    }
+
+    @if $index < 10 {
+        .w-#{$sndValue} {
+            width: var(--size-percent-#{$sndValue});
+        }
+    
+        .w-min-#{$sndValue} {
+            min-width: var(--size-percent-#{$sndValue});
+        }
+    
+        .w-max-#{$sndValue} {
+            max-width: var(--size-percent-#{$sndValue});
+        }
+
+        .h-#{$sndValue} {
+            height: var(--size-percent-#{$sndValue});
+        }
+    
+        .h-min-#{$sndValue} {
+            min-height: var(--size-percent-#{$sndValue});
+        }
+    
+        .h-max-#{$sndValue} {
+            max-height: var(--size-percent-#{$sndValue});
+        }
+    }
+}
+
+.w-fit {
+    width: fit-content;
+}
+
+.w-fit-min {
+    width: min-content;
+}
+
+.w-fit-max {
+    width: max-content;
+}
+
+.h-fit {
+    height: fit-content;
+}
+
+.h-fit-min {
+    height: min-content;
+}
+
+.h-fit-max {
+    height: max-content;
+}

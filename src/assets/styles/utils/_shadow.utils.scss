@@ -1,0 +1,11 @@
+$blackShadowColor: rgba(#000, 0.125);
+$whiteShadowColor: rgba(#FFF, 0.375);
+
+:root {
+    --button-shadow-black: 0px -4px 8px 0px #{$blackShadowColor}, 0px 4px 8px 0px #{$blackShadowColor}, -4px 0px 8px -8px #{$blackShadowColor}, 4px 0px 8px -8px #{$blackShadowColor};
+    --button-shadow-white: 0px -4px 8px 0px #{$whiteShadowColor}, 0px 4px 8px 0px #{$whiteShadowColor}, -4px 0px 8px -8px #{$whiteShadowColor}, 4px 0px 8px -8px #{$whiteShadowColor};
+    --text-shadow-black: 0px 0px 8px #{rgba(#000, 0.25)};
+    --text-shadow-white: 0px 0px 8px #{rgba(#FFF, 0.75)};
+}
+
+

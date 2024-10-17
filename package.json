@@ -1,6 +1,6 @@
 {
   "name": "ngx-season",
-  "version": "0.0.0",
+  "version": "0.5.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -20,8 +20,10 @@
     "@angular/platform-browser": "^18.2.8",
     "@angular/platform-browser-dynamic": "^18.2.8",
     "@angular/router": "^18.2.8",
+    "crypto-js": "^4.2.0",
     "highlight.js": "^11.5.1",
     "highlightjs-line-numbers.js": "^2.8.0",
+    "moment": "^2.30.1",
     "ngx-highlightjs": "^7.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
@@ -31,6 +33,7 @@
     "@angular-devkit/build-angular": "^18.2.8",
     "@angular/cli": "^18.2.8",
     "@angular/compiler-cli": "^18.2.8",
+    "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "angular-eslint": "18.3.1",

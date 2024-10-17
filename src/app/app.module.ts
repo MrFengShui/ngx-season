@@ -1,9 +1,12 @@
 import {NgModule} from '@angular/core';
-import {APP_BASE_HREF, CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {APP_BASE_HREF, CommonModule, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterModule} from "@angular/router";
+import {PreloadAllModules, RouterModule} from "@angular/router";
+
+import { rootRoutes } from './routes/root.routes';
+
+import { PageModule } from './page/page.module';
 
 import {AppComponent} from './app.component';
 
@@ -15,11 +18,14 @@ import {AppComponent} from './app.component';
         BrowserModule,
         BrowserAnimationsModule,
         CommonModule,
-        FormsModule,
-        RouterModule
+        RouterModule.forRoot(rootRoutes, { preloadingStrategy: PreloadAllModules }),
+
+        PageModule
     ],
     providers: [
-        {provide: APP_BASE_HREF, useValue: '/page/demo'},        // }
+        { provide: APP_BASE_HREF, useValue: '/pages' }, 
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        // provideRouter(rootRoutes, withDebugTracing())  // }
     ],
     bootstrap: [AppComponent]
 })

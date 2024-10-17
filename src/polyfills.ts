@@ -41,10 +41,10 @@
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
  */
-// (window as any).__zone_symbol__UNPATCHED_EVENTS = [
-//     'scroll', 'keyup', 'keydown', 'click', 'dblclick',
-//     'mouseup', 'mousedown', 'mousemove', 'mouseenter', 'mouseleave', 'mouseout', 'mouseover'
-// ];
+(window as any).__zone_symbol__UNPATCHED_EVENTS = [
+    'scroll', 'keyup', 'keydown', 'click', 'dblclick',
+    'mouseup', 'mousedown', 'mousemove', 'mouseenter', 'mouseleave', 'mouseout', 'mouseover'
+];
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */

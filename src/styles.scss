@@ -1,1 +1,38 @@
+@import "./assets/styles/extendsion.style";
 
+@import "./assets/styles/utils/display.utils";
+@import "./assets/styles/utils/font.utils";
+@import "./assets/styles/utils/gap.utils";
+@import "./assets/styles/utils/palette.utils";
+@import "./assets/styles/utils/shadow.utils";
+@import "./assets/styles/utils/size.utils";
+
+@import "./assets/styles/theme/default.theme";
+
+$themes: ("default");
+
+[data-theme*="dark"] {
+    background-color: var(--palette-gray-900-color);
+    color: var(--palette-gray-100-color);
+
+    @each $theme in $themes {
+        @if $theme == "spring" {
+
+        } @else {
+            @include setup-default-theme("dark");
+        }
+    }
+}
+
+[data-theme*="light"] {
+    background-color: var(--palette-gray-100-color);
+    color: var(--palette-gray-900-color);
+    
+    @each $theme in $themes {
+        @if $theme == "spring" {
+
+        } @else {
+            @include setup-default-theme("light");
+        }
+    }
+}

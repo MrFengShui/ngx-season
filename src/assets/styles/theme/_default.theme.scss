@@ -1,0 +1,11 @@
+@import "../components/button.mixin";
+@import "../components/icons.mixin";
+@import "../components/layout.mixin";
+
+@mixin setup-default-theme($theme) {
+    &[data-color*="default"] {
+        @include setup-button-theme($theme);
+        @include setup-icons-theme($theme);
+        @include setup-layout-theme($theme);
+    }
+}
