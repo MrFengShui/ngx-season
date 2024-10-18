@@ -1,11 +1,17 @@
+@import "../components/alert.mixin";
 @import "../components/button.mixin";
 @import "../components/icons.mixin";
 @import "../components/layout.mixin";
+@import "../components/navigator.mixin";
+@import "../components/scrollbar.mixin";
 
 @mixin setup-default-theme($theme) {
     &[data-color*="default"] {
-        @include setup-button-theme($theme);
+        @include setup-alert-theme($theme, "indigo");
+        @include setup-button-theme($theme, "indigo", "pink");
         @include setup-icons-theme($theme);
         @include setup-layout-theme($theme);
+        @include setup-navigator-theme($theme, "indigo");
+        @include setup-scrollbar-theme($theme, "indigo");
     }
 }

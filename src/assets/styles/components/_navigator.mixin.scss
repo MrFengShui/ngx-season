@@ -1,0 +1,49 @@
+@mixin setup-navigator-theme($theme, $color) {
+    .nav-list {
+        
+        --navlink-bgcolor-hover: #{var(--palette-#{$color}-600-color)};
+        --navlink-bgcolor-active: #{var(--palette-#{$color}-400-color)};
+        --navlink-bgcolor-selected: #{var(--palette-#{$color}-500-color)};
+
+        --navlink-color-hover: #{var(--palette-gray-300-color)};
+        --navlink-color-active: #{var(--palette-gray-100-color)};
+        --navlink-color-selected: #{var(--palette-gray-100-color)};
+
+        --navlink-padding: #{var(--size-pixel-8)} #{var(--size-pixel-16)};
+
+        --navlink-icon-margin: #{var(--size-pixel-16)};
+
+        display: flex;
+        flex-direction: column;
+        min-width: fit-content;
+        width: var(--size-percent-100);
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            white-space: nowrap;
+
+            padding: var(--navlink-padding);
+
+            &:hover {
+                background-color: var(--navlink-bgcolor-hover);
+                color: var(--navlink-color-hover);
+            }
+
+            &:active {
+                background-color: var(--navlink-bgcolor-active);
+                color: var(--navlink-color-active);
+            }
+
+            &.selected {
+                background-color: var(--navlink-bgcolor-selected);
+                color: var(--navlink-color-selected);
+            }
+
+            .icon {
+                margin-right: var(--navlink-icon-margin);
+            }
+        }
+    }
+}

@@ -1,15 +1,1 @@
-<ngx-sui-layout>
-    <ngx-sui-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO">
-        <ng-container ngProjectAs="headerActions">
-            <button ngx-sui-LinkButton (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">
-                <ngx-sui-icon [iconShape]="themeFlag ? 'moon' : 'sun'" [iconSolid]="themeHoverFlag"></ngx-sui-icon>
-                <span>{{ themeFlag ? '黑夜模式' : '白昼模式' }}</span>
-            </button>
-        </ng-container>
-    </ngx-sui-header>
-    <ngx-sui-content contentSideWidth="256">
-        <ng-container ngProjectAs="contentSide"></ng-container>
-        <ng-container ngProjectAs="contentArea"><router-outlet></router-outlet></ng-container>
-    </ngx-sui-content>
-    <ngx-sui-footer></ngx-sui-footer>
-</ngx-sui-layout>
+Home Page

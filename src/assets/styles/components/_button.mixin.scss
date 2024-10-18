@@ -1,8 +1,8 @@
-@mixin setup-button-theme($theme) {
+@mixin setup-button-theme($theme, $primaryColor, $accentColor) {
     $colors: (
         "default": "gray",
-        "primary": "indigo",
-        "accent": "pink",
+        "primary": $primaryColor,
+        "accent": $accentColor,
         "success": "green",
         "warning": "yellow",
         "failure": "red",
@@ -96,6 +96,16 @@
             box-shadow: if($theme == "light", var(--button-shadow-black), var(--button-shadow-white));
         }
 
+        &:disabled {
+            cursor: not-allowed !important;
+        }
+
+        > :nth-child(n) {
+            &:not(:last-child) {
+                margin-right: #{var(--size-pixel-8)};
+            }
+        }
+
         &.btn-block {
             width: 100%;
         }
@@ -104,22 +114,34 @@
             font-size: var(--button-font-size-sm);
             height: var(--button-width-sm);
             padding: 0px calc(#{var(--button-font-size-sm)} * 1.25);
+
+            &[data-type*="icon"] {
+                padding: calc(#{var(--button-font-size-sm)} * 0.25);
+            }
         }
 
         &.btn-md {
             font-size: var(--button-font-size-md);
             height: var(--button-width-md);
             padding: 0px calc(#{var(--button-font-size-md)} * 1.5);
+
+            &[data-type*="icon"] {
+                padding: calc(#{var(--button-font-size-md)} * 0.5);
+            }
         }
 
         &.btn-lg {
             font-size: var(--button-font-size-lg);
             height: var(--button-width-lg);
             padding: 0px calc(#{var(--button-font-size-lg)} * 1.75);
+
+            &[data-type*="icon"] {
+                padding: calc(#{var(--button-font-size-md)} * 0.75);
+            }
         }
 
         @each $item in map-keys($colors) {
-            &.btn-#{$item} {
+            &.btn-#{$item}, &.btn-icon-#{$item} {
                 border-color: var(--button-bdcolor-#{$item});
                 background-color: var(--button-bgcolor-#{$item});
                 color: var(--button-color-#{$item});
@@ -152,17 +174,12 @@
                 }
             }
 
-            &.btn-outline-#{$item} {
+            &.btn-outline-#{$item}, &.btn-outline-icon-#{$item} {
                 border-color: var(--button-bdcolor-#{$item});
                 background-color: transparent;
                 color: var(--button-bgcolor-#{$item});
     
                 &:not(:disabled) {
-                    // @if $theme == 'light' {
-                    //     text-shadow: var(--text-shadow-black);
-                    // } @else {
-                    //     text-shadow: var(--text-shadow-white);
-                    // }
                     text-shadow: if($theme == 'light', var(--text-shadow-black), var(--text-shadow-white));
                 }
         
@@ -192,7 +209,7 @@
                 }
             }
 
-            &.btn-flat-#{$item} {
+            &.btn-flat-#{$item}, &.btn-flat-icon-#{$item} {
                 border-color: transparent;
                 background-color: transparent;
                 color: var(--button-bgcolor-#{$item});
@@ -220,7 +237,7 @@
             }
         }
 
-        &.btn-link {
+        &.btn-link, &.btn-link-icon {
             border-color: transparent;
             background-color: transparent;
             box-shadow: none !important;
@@ -246,10 +263,6 @@
                     color: var(--button-link-disabled-color);
                 }
             }
-        }
-
-        .icon {
-            margin-right: #{var(--size-pixel-8)};
         }
     }
 }

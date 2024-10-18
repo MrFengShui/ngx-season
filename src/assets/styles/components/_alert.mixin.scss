@@ -1,0 +1,83 @@
+@mixin setup-alert-theme($theme, $color) {
+    $colors: (
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .alert {
+        --alert-border-radius: #{var(--size-pixel-4)};
+        --alert-border-width: #{var(--size-pixel-2)};
+        --alert-gap: #{var(--size-pixel-16)};
+        --alert-padding: #{var(--size-pixel-8)} #{var(--size-pixel-16)};
+
+        --alert-advanced-padding: #{var(--size-pixel-16)};
+        --alert-advanced-header-subject-font-size: #{var(--typography-title-1)};
+        
+        @each $key, $value in $colors {
+            --alert-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+            --alert-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+        }
+
+        border: #{var(--alert-border-width)} solid transparent;
+        border-radius: #{var(--alert-border-radius)};
+        display: flex;
+        align-items: center;
+        user-select: none;
+
+        padding: var(--alert-padding);
+
+        > :nth-child(n) {
+            &:not(:last-child) {
+                margin-right: var(--alert-gap);
+            }
+        }
+        
+        .alert-text-wrapper, &.advanced .alert-header .alert-text-wrapper {
+            flex: 1 1 auto;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        @each $item in map-keys($colors) {
+            &.alert-#{$item} {
+                background-color: #{var(--alert-bgcolor-#{$item})};
+                border-color: #{var(--alert-bdcolor-#{$item})};
+                color: var(--alert-color-#{$item});
+            }
+        }
+
+        &.advanced {
+            display: flex;
+            flex-direction: column;
+
+            padding: var(--alert-advanced-padding);
+
+            .alert-header, .alert-footer {
+                display: flex;
+                align-items: center;
+
+                > :nth-child(n) {
+                    &:not(:last-child) {
+                        margin-right: var(--alert-gap);
+                    }
+                }
+            } 
+            
+            .alert-header {
+                .alert-text-wrapper {
+                    font-size: var(--alert-advanced-header-subject-font-size);
+                    font-weight: bold;
+                }
+            }
+
+            > :nth-child(n) {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+    }
+}

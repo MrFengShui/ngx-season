@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonButtonColor } from "src/app/components/button.directive";
+import { NGXSeasonButtonColor } from "src/app/components/button.component";
 
 @Component({
     selector: 'ngx-sui-demo-button-page',

@@ -1,21 +1,27 @@
 <div class="flex gx-100 p-100">
-    <button ngx-sui-Button [btnColor]="colorItem.color" [btnBlock]="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" [btnBlock]="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-FlatButton [btnColor]="colorItem.color" [btnBlock]="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-LinkButton [btnBlock]="true">链接按钮</button>
-    <a ngx-sui-LinkButton [btnBlock]="true" >链接按钮</a>
-    <button ngx-sui-Button [btnBlock]="true">
-        <ngx-sui-icon iconShape="moon"></ngx-sui-icon>
-        <span>图标按钮</span>
-    </button>
-    <button ngx-sui-Button [btnBlock]="true">
-        <ngx-sui-icon iconShape="sun"></ngx-sui-icon>
-        <span>图标按钮</span>
-    </button>
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-FlatButton [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-FlatButton [btnColor]="colorItem.color" btnBlocked="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-FlatButton [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>

@@ -15,7 +15,7 @@ export class NGXSeasonIconRegister {
     protected static instance: NGXSeasonIconRegister | null = null;
 
     private subject: Subject<IconsCache> = new BehaviorSubject({});
-    // private static subject: Subject<IconsCache> = new AsyncSubject();
+    
     private cache: IconsCache = {};
     private keys: string[] = [];
 
@@ -95,12 +95,9 @@ type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number };
 })
 export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
 
-    @ViewChild('svgBox', { read: ElementRef, static: true })
-    protected svgElement: ElementRef<SVGSVGElement> | undefined;
-
     @Input('iconShape')
-    set shape(shape: string) {
-        this._shape = shape;
+    set shape(shape: string | null) {
+        this._shape = shape ? shape : '';
     }
 
     get shape(): string {
@@ -128,6 +125,9 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
     private _shape: string = '';
     private _solid: boolean = false;
     private _size: NGXSeasonIconSize = 'md';
+
+    @ViewChild('svgBox', { read: ElementRef, static: true })
+    protected svgElement: ElementRef<SVGSVGElement> | undefined;
 
     protected svgContent$: Observable<SafeHtml> | undefined;
 

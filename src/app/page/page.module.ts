@@ -5,13 +5,17 @@ import { RouterOutlet } from "@angular/router";
 import { NGXSeasonComponentsModule } from "../components/components.module";
 
 import { HomePageComponent } from "./home/home.component";
+import { DemoPageComponent } from "./demo/demo.component";
 import { ErrorPageComponent } from "./error/error.component";
 import { DemoButtonPageComponent } from "./demo/button.component";
+import { DemoAlertPageComponent } from "./demo/alert.component";
 
 @NgModule({
     declarations: [
         HomePageComponent,
+        DemoPageComponent,
         ErrorPageComponent,
+        DemoAlertPageComponent,
         DemoButtonPageComponent
     ],
     imports: [
@@ -22,7 +26,9 @@ import { DemoButtonPageComponent } from "./demo/button.component";
     ],
     exports: [
         HomePageComponent,
+        DemoPageComponent,
         ErrorPageComponent,
+        DemoAlertPageComponent,
         DemoButtonPageComponent
     ]
 })

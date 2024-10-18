@@ -2,8 +2,8 @@ import { DOCUMENT } from "@angular/common";
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, Renderer2 } from "@angular/core";
 
 @Component({
-    selector: 'ngx-sui-home-page',
-    templateUrl: './home.component.html',
+    selector: 'ngx-sui-demo-page',
+    templateUrl: './demo.component.html',
     styles: `
         :host {
             &, .ngx-sui-layout {
@@ -16,7 +16,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit
         }
     `
 })
-export class HomePageComponent implements OnInit, AfterViewInit {
+export class DemoPageComponent implements OnInit, AfterViewInit {
 
     protected readonly DARK_MODE_LOGO: string = 'assets/logo/angular_wordmark_white.png';
     protected readonly LIGHT_MODE_LOGO: string = 'assets/logo/angular_wordmark_black.png';
