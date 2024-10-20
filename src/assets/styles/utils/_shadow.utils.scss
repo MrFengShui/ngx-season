@@ -1,11 +1,14 @@
-$blackShadowColor: rgba(#000, 0.125);
-$whiteShadowColor: rgba(#FFF, 0.375);
+$blackBoxShadowColor: rgba(#000, 0.125);
+$whiteBoxShadowColor: rgba(#FFF, 0.375);
+
+$blackTextShadowColor: rgba(#000, 0.125);
+$whiteTextShadowColor: rgba(#FFF, 0.375);
 
 :root {
-    --button-shadow-black: 0px -4px 8px 0px #{$blackShadowColor}, 0px 4px 8px 0px #{$blackShadowColor}, -4px 0px 8px -8px #{$blackShadowColor}, 4px 0px 8px -8px #{$blackShadowColor};
-    --button-shadow-white: 0px -4px 8px 0px #{$whiteShadowColor}, 0px 4px 8px 0px #{$whiteShadowColor}, -4px 0px 8px -8px #{$whiteShadowColor}, 4px 0px 8px -8px #{$whiteShadowColor};
-    --text-shadow-black: 0px 0px 8px #{rgba(#000, 0.25)};
-    --text-shadow-white: 0px 0px 8px #{rgba(#FFF, 0.75)};
+    --box-shadow-black: 0px -4px 8px 0px #{$blackBoxShadowColor}, 0px 4px 8px 0px #{$blackBoxShadowColor}, -4px 0px 8px -8px #{$blackBoxShadowColor}, 4px 0px 8px -8px #{$blackBoxShadowColor};
+    --box-shadow-white: 0px -4px 8px 0px #{$whiteBoxShadowColor}, 0px 4px 8px 0px #{$whiteBoxShadowColor}, -4px 0px 8px -8px #{$whiteBoxShadowColor}, 4px 0px 8px -8px #{$whiteBoxShadowColor};
+    --text-shadow-black: 0px 0px 2px #{$blackTextShadowColor}, 0px 0px 4px #{$blackTextShadowColor}, 0px 0px 6px #{$blackTextShadowColor}, 0px 0px 8px #{$blackTextShadowColor};
+    --text-shadow-white: 0px 0px 2px #{$whiteTextShadowColor}, 0px 0px 4px #{$whiteTextShadowColor}, 0px 0px 6px #{$whiteTextShadowColor}, 0px 0px 8px #{$whiteTextShadowColor};
 }
 
 

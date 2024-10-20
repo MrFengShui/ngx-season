@@ -1,7 +1,7 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, Input, OnChanges, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { BehaviorSubject, debounceTime, map, Observable, Subject, Subscription, switchMap, zip } from "rxjs";
+import { BehaviorSubject, debounceTime, filter, map, Observable, Subject, Subscription, switchMap, zip } from "rxjs";
 import { fromFetch } from 'rxjs/fetch';
 
 export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegister> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
@@ -47,7 +47,7 @@ export class NGXSeasonIconRegister {
     }
 
     public findIcon(shape: string): Observable<IconsCachePair> {
-        return this.subject.asObservable().pipe(map(cache => cache[shape]), debounceTime(100));
+        return this.subject.asObservable().pipe(map(cache => cache[shape]), filter(value => value !== undefined), debounceTime(100));
     }
 
     public findAllIcons(): Observable<IconsCache> {
@@ -84,8 +84,8 @@ export class NGXSeasonIconRegister {
 
 }
 
-type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl';
-type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number };
+type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl';
+type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
 
 @Component({
     selector: 'ngx-sui-icon',

@@ -1,6 +1,8 @@
 import { DOCUMENT } from "@angular/common";
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, Renderer2 } from "@angular/core";
 
+type NavigationMetainfo = { id: string, icon?: string, text: string, link?: string[], nodes?: NavigationMetainfo[] };
+
 @Component({
     selector: 'ngx-sui-demo-page',
     templateUrl: './demo.component.html',
@@ -20,6 +22,16 @@ export class DemoPageComponent implements OnInit, AfterViewInit {
 
     protected readonly DARK_MODE_LOGO: string = 'assets/logo/angular_wordmark_white.png';
     protected readonly LIGHT_MODE_LOGO: string = 'assets/logo/angular_wordmark_black.png';
+
+    protected readonly NAV_META_INFO_LIST: NavigationMetainfo[] = [
+        { 
+            id: '2', text: '组件展示', 
+            nodes: [
+                { id: '2-1', text: '警示框', link: ['/demo', 'alert'] },
+                { id: '2-2', text: '按钮', link: ['/demo', 'button'] },
+            ] 
+        }
+    ];
 
     protected themeFlag: boolean = false;
     protected themeHoverFlag: boolean = false;

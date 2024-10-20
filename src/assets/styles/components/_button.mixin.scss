@@ -8,259 +8,182 @@
         "failure": "red",
         "info": "blue",
     );
+    $styles: ("basic", "outline", "solid");
+    $sizes: (
+        "sm": "body-3", 
+        "md": "body-1", 
+        "lg": "subtitle-1",
+        "xl": "title-1"
+    );
+    $alphaBoxShadow: 25;
+    $alphaBTextShadow: 75;
 
     .btn {
-        @each $key, $value in $colors {
-            /* Solid */
-            --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --button-color-#{$key}: #{var(--palette-white-color)};
-        
-            --button-hover-bgcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --button-hover-bdcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --button-hover-color-#{$key}: #{var(--palette-white-color)};
-        
-            --button-active-bgcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
-            --button-active-bdcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
-            --button-active-color-#{$key}: #{var(--palette-white-color)};
+        --button-border-sm-width: #{var(--size-pixel-1)};
+        --button-border-md-width: #{var(--size-pixel-2)};
+        --button-border-lg-width: #{var(--size-pixel-3)};
+        --button-border-xl-width: #{var(--size-pixel-4)};
+        --button-border-radius: #{var(--size-pixel-4)};
 
-            --button-disabled-color-#{$key}: #{var(--palette-#{$value}-200-color)};
-            /* Outline */
-            --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --button-color-#{$key}: #{var(--palette-white-color)};
-        
-            --button-hover-bgcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --button-hover-bdcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --button-hover-color-#{$key}: #{var(--palette-white-color)};
-        
-            --button-active-bgcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
-            --button-active-bdcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
-            --button-active-color-#{$key}: #{var(--palette-white-color)};
+        --button-content-gap: #{var(--margin-50)};
 
-            --button-disabled-color-#{$key}: #{var(--palette-#{$value}-200-color)};
-            /* Flat */
-            --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --button-color-#{$key}: #{var(--palette-white-color)};
-        
-            --button-hover-bgcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --button-hover-bdcolor-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --button-hover-color-#{$key}: #{var(--palette-white-color)};
-        
-            --button-active-bgcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
-            --button-active-bdcolor-#{$key}: #{var(--palette-#{$value}-400-color)};
-            --button-active-color-#{$key}: #{var(--palette-white-color)};
+        --button-x-axis-padding: #{var(--padding-100)};
+        --button-y-axis-padding: #{var(--padding-50)};
 
-            --button-disabled-color-#{$key}: #{var(--palette-#{$value}-200-color)};
+        --button-sm-width: var(--size-pixel-24);
+        --button-md-width: var(--size-pixel-36);
+        --button-lg-width: var(--size-pixel-48);
+        --button-xl-width: var(--size-pixel-56);
+        --button-sm-height: var(--size-pixel-24);
+        --button-md-height: var(--size-pixel-36);
+        --button-lg-height: var(--size-pixel-48);
+        --button-xl-height: var(--size-pixel-56);
+
+        @each $style in $styles {
+            @each $colorKey, $colorValue in $colors {
+                --button-#{$style}-bdcolor-#{$colorKey}: #{if($style == "basic", transparent, var(--palette-#{$colorValue}-500-color))};
+                --button-#{$style}-bdcolor-hover-#{$colorKey}: #{if($style == "basic", transparent, var(--palette-#{$colorValue}-600-color))};
+                --button-#{$style}-bdcolor-active-#{$colorKey}: #{if($style == "basic", transparent, var(--palette-#{$colorValue}-400-color))};
+
+                --button-#{$style}-bgcolor-#{$colorKey}: #{if($style == "basic" or $style == "outline", transparent, var(--palette-#{$colorValue}-500-color))};
+                --button-#{$style}-bgcolor-hover-#{$colorKey}: #{if($style == "basic" or $style == "outline", transparent, var(--palette-#{$colorValue}-600-color))};
+                --button-#{$style}-bgcolor-active-#{$colorKey}: #{if($style == "basic" or $style == "outline", transparent, var(--palette-#{$colorValue}-400-color))};
+
+                --button-#{$style}-color-#{$colorKey}: #{if($style == "basic" or $style == "outline", var(--palette-#{$colorValue}-500-color), var(--palette-#{$colorValue}-50-color))};
+                --button-#{$style}-color-hover-#{$colorKey}: #{if($style == "basic" or $style == "outline", var(--palette-#{$colorValue}-600-color), var(--palette-#{$colorValue}-50-color))};
+                --button-#{$style}-color-active-#{$colorKey}: #{if($style == "basic" or $style == "outline", var(--palette-#{$colorValue}-400-color), var(--palette-#{$colorValue}-50-color))};
+
+                @if $style == "outline" {
+                    @if $colorKey == "default" {
+                        --button-outline-bdcolor-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
+                        --button-outline-bgcolor-disabled-#{$colorKey}: transparent;
+                        --button-outline-color-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
+                    } @else {
+                        --button-outline-bdcolor-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
+                        --button-outline-bgcolor-disabled-#{$colorKey}: transparent;
+                        --button-outline-color-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
+                    }
+                } @else if $style == "solid" {
+                    @if $colorKey == "default" {
+                        --button-solid-bdcolor-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
+                        --button-solid-bgcolor-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
+                        --button-solid-color-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+                    } @else {
+                        --button-solid-bdcolor-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
+                        --button-solid-bgcolor-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
+                        --button-solid-color-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-50-color)};
+                    }
+                } @else {
+                    @if $colorKey == "default" {
+                        --button-basic-bdcolor-disabled-#{$colorKey}: transparent;
+                        --button-basic-bgcolor-disabled-#{$colorKey}: transparent;
+                        --button-basic-color-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
+                    } @else {
+                        --button-basic-bdcolor-disabled-#{$colorKey}: transparent;
+                        --button-basic-bgcolor-disabled-#{$colorKey}: transparent;
+                        --button-basic-color-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
+                    }
+                }
+            }
         }
-        /* Link */
-        @if $theme == "light" {
-            --button-link-color: #{var(--palette-gray-700-color)};
-            --button-link-hover-color: #{var(--palette-gray-800-color)};
-            --button-link-active-color: #{var(--palette-gray-600-color)};
-            --button-link-disabled-color: #{var(--palette-gray-800-color)};
-        } @else {
-            --button-link-color: #{var(--palette-gray-300-color)};
-            --button-link-hover-color: #{var(--palette-gray-200-color)};
-            --button-link-active-color: #{var(--palette-gray-400-color)};
-            --button-link-disabled-color: #{var(--palette-gray-200-color)};
-        }
 
-        --button-border-width: #{var(--size-pixel-2)};
-
-        --button-width-sm: #{var(--size-pixel-24)};
-        --button-width-md: #{var(--size-pixel-36)};
-        --button-width-lg: #{var(--size-pixel-48)};
-    
-        --button-font-size-sm: #{var(--size-pixel-12)};
-        --button-font-size-md: #{var(--size-pixel-16)};
-        --button-font-size-lg: #{var(--size-pixel-20)};
-    
         appearance: none;
         outline: none;
+
         display: inline-flex;
         justify-content: center;
         align-items: center;
 
-        border-width: var(--button-border-width);
+        @each $key in map-keys($sizes) {
+            &[data-button-size=#{$key}] {
+                border-width: var(--button-border-#{$key}-width);
+            }
+        }
+        
+        border-radius: var(--button-border-radius);
         border-style: solid;
-        border-radius: #{var(--size-pixel-3)};
-    
-        cursor: pointer;
-        font-weight: bold;
-        user-select: none;
-        text-transform: uppercase;
 
-        &:not(:disabled) {
-            box-shadow: if($theme == "light", var(--button-shadow-black), var(--button-shadow-white));
-        }
-
-        &:disabled {
-            cursor: not-allowed !important;
-        }
+        padding: var(--button-y-axis-padding) var(--button-x-axis-padding);
 
         > :nth-child(n) {
             &:not(:last-child) {
-                margin-right: #{var(--size-pixel-8)};
+                margin-right: var(--button-content-gap);
+            }
+        }
+
+        & {
+            cursor: pointer;
+
+            &:disabled {
+                cursor: not-allowed;
             }
         }
 
         &.btn-block {
-            width: 100%;
+            width: var(--size-percent-100);
         }
-        
-        &.btn-sm {
-            font-size: var(--button-font-size-sm);
-            height: var(--button-width-sm);
-            padding: 0px calc(#{var(--button-font-size-sm)} * 1.25);
 
-            &[data-type*="icon"] {
-                padding: calc(#{var(--button-font-size-sm)} * 0.25);
+        &.btn-circle {
+            &.btn-icon-only {
+                border-radius: 50% !important;
+                padding: 0 !important;
+
+                @each $key, $value in $sizes {
+                    &[data-button-size=#{$key}] {
+                        width: var(--button-#{$key}-width);
+                        min-width: var(--button-#{$key}-width);
+                        max-width: var(--button-#{$key}-width);
+                    }
+                }
             }
         }
 
-        &.btn-md {
-            font-size: var(--button-font-size-md);
-            height: var(--button-width-md);
-            padding: 0px calc(#{var(--button-font-size-md)} * 1.5);
-
-            &[data-type*="icon"] {
-                padding: calc(#{var(--button-font-size-md)} * 0.5);
+        &.btn-solid {
+            &.btn-shadow {
+                box-shadow: if($theme == "light", var(--box-shadow-black), var(--box-shadow-white));
             }
         }
 
-        &.btn-lg {
-            font-size: var(--button-font-size-lg);
-            height: var(--button-width-lg);
-            padding: 0px calc(#{var(--button-font-size-lg)} * 1.75);
-
-            &[data-type*="icon"] {
-                padding: calc(#{var(--button-font-size-md)} * 0.75);
-            }
-        }
-
-        @each $item in map-keys($colors) {
-            &.btn-#{$item}, &.btn-icon-#{$item} {
-                border-color: var(--button-bdcolor-#{$item});
-                background-color: var(--button-bgcolor-#{$item});
-                color: var(--button-color-#{$item});
+        @each $key, $value in $sizes {
+            &[data-button-size=#{$key}] {
+                height: var(--button-#{$key}-height);
+                min-height: var(--button-#{$key}-height);
+                max-height: var(--button-#{$key}-height);
     
-                &:hover {
-                    border-color: var(--button-hover-bdcolor-#{$item});
-                    background-color: var(--button-hover-bgcolor-#{$item});
-                    color: var(--button-hover-color-#{$item});
-                }
-            
-                &:active {
-                    border-color: var(--button-active-bdcolor-#{$item});
-                    background-color: var(--button-active-bgcolor-#{$item});
-                    color: var(--button-active-color-#{$item});
-                }
-
-                &:disabled {
-                    border-color: var(--button-disabled-color-#{$item});
-                    background-color: var(--button-disabled-color-#{$item});
-        
-                    &:hover {
-                        border-color: var(--button-disabled-color-#{$item});
-                        background-color: var(--button-disabled-color-#{$item});
-                    }
-                
-                    &:active {
-                        border-color: var(--button-disabled-color-#{$item});
-                        background-color: var(--button-disabled-color-#{$item});
-                    }
-                }
-            }
-
-            &.btn-outline-#{$item}, &.btn-outline-icon-#{$item} {
-                border-color: var(--button-bdcolor-#{$item});
-                background-color: transparent;
-                color: var(--button-bgcolor-#{$item});
-    
-                &:not(:disabled) {
-                    text-shadow: if($theme == 'light', var(--text-shadow-black), var(--text-shadow-white));
-                }
-        
-                &:hover {
-                    border-color: var(--button-hover-bdcolor-#{$item});
-                    color: var(--button-hover-bgcolor-#{$item});
-                }
-            
-                &:active {
-                    border-color: var(--button-active-bdcolor-#{$item});
-                    color: var(--button-active-bgcolor-#{$item});
-                }
-
-                &:disabled {
-                    border-color: var(--button-disabled-color-#{$item});
-                    color: var(--button-disabled-color-#{$item});
-        
-                    &:hover {
-                        border-color: var(--button-disabled-color-#{$item});
-                        color: var(--button-disabled-color-#{$item});
-                    }
-                
-                    &:active {
-                        border-color: var(--button-disabled-color-#{$item});
-                        color: var(--button-disabled-color-#{$item});
-                    }
-                }
-            }
-
-            &.btn-flat-#{$item}, &.btn-flat-icon-#{$item} {
-                border-color: transparent;
-                background-color: transparent;
-                color: var(--button-bgcolor-#{$item});
-                box-shadow: none !important;
-    
-                &:hover {
-                    color: var(--button-hover-bgcolor-#{$item});
-                }
-            
-                &:active {
-                    color: var(--button-active-bgcolor-#{$item});
-                }
-
-                &:disabled {
-                    color: var(--button-disabled-color-#{$item});
-        
-                    &:hover {
-                        color: var(--button-disabled-color-#{$item});
-                    }
-                
-                    &:active {
-                        color: var(--button-disabled-color-#{$item});
-                    }
+                .btn-wrapper {
+                    font-size: #{calc(map-get($typography, $value) / 16px)}rem;
                 }
             }
         }
 
-        &.btn-link, &.btn-link-icon {
-            border-color: transparent;
-            background-color: transparent;
-            box-shadow: none !important;
-
-            color: var(--button-link-color);
-
-            &:hover {
-                color: var(--button-link-hover-color);
-            }
+        @each $style in $styles {
+            @each $color in map-keys($colors) {
+                &.btn-#{$style} {
+                    &[data-button-color=#{$color}] {
+                        border-color: var(--button-#{$style}-bdcolor-#{$color});
+                        background-color: var(--button-#{$style}-bgcolor-#{$color});
+                        color: var(--button-#{$style}-color-#{$color});
         
-            &:active {
-                color: var(--button-link-active-color);
-            }
-
-            &:disabled {
-                color: var(--button-link-disabled-color);
-    
-                &:hover {
-                    color: var(--button-link-disabled-color);
-                }
-            
-                &:active {
-                    color: var(--button-link-disabled-color);
+                        &:hover {
+                            border-color: var(--button-#{$style}-bdcolor-hover-#{$color});
+                            background-color: var(--button-#{$style}-bgcolor-hover-#{$color});
+                            color: var(--button-#{$style}-color-hover-#{$color});
+                        }
+        
+                        &:active {
+                            border-color: var(--button-#{$style}-bdcolor-active-#{$color});
+                            background-color: var(--button-#{$style}-bgcolor-active-#{$color});
+                            color: var(--button-#{$style}-color-active-#{$color});
+                        }
+        
+                        &:disabled {
+                            &, &:hover, &:active {
+                                border-color: var(--button-#{$style}-bdcolor-disabled-#{$color});
+                                background-color: var(--button-#{$style}-bgcolor-disabled-#{$color});
+                                color: var(--button-#{$style}-color-disabled-#{$color});
+                            }
+                        }
+                    }
                 }
             }
         }

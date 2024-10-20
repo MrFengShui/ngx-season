@@ -34,7 +34,7 @@ export class NGXSeasonLayoutComponent implements AfterViewInit {
     changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'ngx-sui-header',
     template: `
-        <button ngx-sui-LinkIconButton btnIcon="bars" (click)="handleControlToggledEvent()" *ngIf="showCtrl"></button>
+        <button ngx-sui-Button btnIcon="bars" btnIconOnly="true" (click)="handleControlToggledEvent()" *ngIf="showCtrl"></button>
         <a [attr.href]="logoHref" class="ngx-sui-header-logo">
             <img [attr.src]="this.baseLogoIcon$ | async" [attr.alt]="" height="100%"/>
         </a>
@@ -282,6 +282,8 @@ export class NGXSeasonContentComponent implements OnChanges, AfterViewInit {
             this.changeContentRatio(this.ratio);
         } else {
             this._renderer.setStyle(this.sideBox.nativeElement, 'width', `${sideWidth}px`);
+            this._renderer.setStyle(this.sideBox.nativeElement, 'min-width', `${sideWidth}px`);
+            this._renderer.setStyle(this.sideBox.nativeElement, 'max-width', `${sideWidth}px`);
             this._renderer.setStyle(this.areaBox.nativeElement, 'flex', '1 1 auto');
             this._renderer.removeStyle(this.areaBox.nativeElement, 'width');
         }

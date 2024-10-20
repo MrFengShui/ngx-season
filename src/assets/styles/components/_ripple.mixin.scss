@@ -1,0 +1,41 @@
+@mixin setup-ripple-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue",
+    );
+
+    .ripple {
+        @each $key, $value in $colors {
+            --ripple-#{$key}-color: #{var(--palette-#{$value}-500-color)};
+        }
+
+        position: relative;
+        overflow: hidden;
+
+        :nth-child(n) {
+            pointer-events: none;
+        }
+
+        .ripple-dot {
+            position: absolute;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            transform: scale(0);
+        }
+
+        @each $key in map-keys($colors) {
+            &.ripple-#{$key} {
+                .ripple-dot {
+                    background: var(--ripple-#{$key}-color);
+                    filter: opacity(0.5);
+                }
+            }
+        }
+    }
+}

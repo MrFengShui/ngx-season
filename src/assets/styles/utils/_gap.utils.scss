@@ -4,6 +4,13 @@ $gaps: (
     "p": "padding"
 );
 
+:root {
+    @for $index from 0 through 10 {
+        --margin-#{$index * 25}: #{$index * 4}px;
+        --padding-#{$index * 25}: #{$index * 4}px;
+    }
+}
+
 @each $key, $value in $gaps {
     @for $index from 0 through 10 {
         @if $key == "g" {

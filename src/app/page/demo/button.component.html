@@ -2,26 +2,80 @@
     <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" ngx-sui-Ripple [rippleColor]="colorItem.color" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" btnShadow="true" ngx-sui-Ripple [rippleColor]="colorItem.color" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+
 <div class="flex gx-100 p-100">
     <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" ngx-sui-Ripple [rippleColor]="colorItem.color" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-FlatButton [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" btnShadow="true" ngx-sui-Ripple [rippleColor]="colorItem.color" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-FlatButton [btnColor]="colorItem.color" btnBlocked="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnBlocked="true" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
-    <button ngx-sui-FlatButton [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" btnIcon="avatar" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" ngx-sui-Ripple [rippleColor]="colorItem.color" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnBlocked="true" [btnIcon]="DEMO_ICON" btnShadow="true" ngx-sui-Ripple [rippleColor]="colorItem.color" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnBlocked="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnSize="sm" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnSize="md" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnSize="lg" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="colorItem.color" btnSize="xl" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="sm" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="sm" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-SolidButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="sm" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="md" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="md" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-SolidButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="md" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="lg" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="lg" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-SolidButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="lg" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="xl" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-OutlineButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="xl" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
+    <button ngx-sui-SolidButton btnCircled="true" btnIconOnly="true" [btnColor]="colorItem.color" btnSize="xl" btnIcon="users" *ngFor="let colorItem of colorList">{{ colorItem.label }}</button>
 </div>

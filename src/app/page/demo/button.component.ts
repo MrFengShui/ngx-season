@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonButtonColor } from "src/app/components/button.component";
+import { NGXSeasonButtonColor } from "src/app/components/button/button.component";
 
 @Component({
     selector: 'ngx-sui-demo-button-page',
@@ -17,5 +17,7 @@ export class DemoButtonPageComponent {
         { color: 'failure', label: '错误按钮' }, 
         { color: 'info', label: '信息按钮' }
     ];
+
+    protected readonly DEMO_ICON: string = 'users';
 
 }

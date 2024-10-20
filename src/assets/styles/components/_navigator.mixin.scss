@@ -1,10 +1,14 @@
 @mixin setup-navigator-theme($theme, $color) {
     .nav-list {
-        
+        --navblock-header-padding: #{var(--size-pixel-8)} #{var(--size-pixel-16)};
+        --navblock-header-font-size: #{var(--typography-body-1)};
+        --navblock-icon-margin: #{var(--size-pixel-16)};
+
         --navlink-bgcolor-hover: #{var(--palette-#{$color}-600-color)};
         --navlink-bgcolor-active: #{var(--palette-#{$color}-400-color)};
         --navlink-bgcolor-selected: #{var(--palette-#{$color}-500-color)};
 
+        --navlink-color: #{if($theme == "light", var(--palette-gray-800-color), var(--palette-gray-200-color))};
         --navlink-color-hover: #{var(--palette-gray-300-color)};
         --navlink-color-active: #{var(--palette-gray-100-color)};
         --navlink-color-selected: #{var(--palette-gray-100-color)};
@@ -17,6 +21,36 @@
         flex-direction: column;
         min-width: fit-content;
         width: var(--size-percent-100);
+
+        .nav-block {
+            display: flex;
+            flex-direction: column;
+
+            .nav-block-header {
+                display: flex;
+                align-items: center;
+                font-weight: bold;
+                white-space: nowrap;
+
+                padding: var(--navblock-header-padding);
+
+                .icon {
+                    margin-right: var(--navblock-icon-margin);
+                    rotate: 90deg;
+                }
+
+                .block-text-wrapper {
+                    font-size: var(--navblock-header-font-size);
+                    font-weight: bold;
+                }
+            }
+
+            .nav-block-content {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+        }
         
         .nav-link {
             display: flex;
@@ -24,6 +58,7 @@
             font-weight: bold;
             white-space: nowrap;
 
+            color: var(--navlink-color);
             padding: var(--navlink-padding);
 
             &:hover {

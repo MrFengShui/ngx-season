@@ -69,9 +69,7 @@
                 height: 100%;
 
                 .btn {
-                    &.btn-link {
-                        height: var(--layout-header-height);
-                    }
+                    height: var(--layout-header-height);
                 }
             }
 
@@ -80,6 +78,10 @@
                 align-items: center;
                 flex: 1 1 auto;
                 height: 100%;
+            }
+
+            .btn {
+                --button-basic-color-default: #{if($theme == "light", var(--palette-gray-800-color), var(--palette-gray-200-color))};
             }
         }
 

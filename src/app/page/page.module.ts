@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterOutlet } from "@angular/router";
+import { RouterModule } from "@angular/router";
 
 import { NGXSeasonComponentsModule } from "../components/components.module";
 
@@ -20,7 +20,7 @@ import { DemoAlertPageComponent } from "./demo/alert.component";
     ],
     imports: [
         CommonModule,
-        RouterOutlet,
+        RouterModule,
 
         NGXSeasonComponentsModule
     ],
