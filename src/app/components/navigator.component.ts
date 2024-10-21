@@ -163,7 +163,7 @@ export class NGXSeasonNavblockComponent implements OnChanges, OnInit, OnDestroy,
         const value: string | null = contentElement.getAttribute('data-navblock-content-size');
 
         if (value === null) throw new Error();
-        console.debug(expanded);
+        
         if (expanded) {
             this._renderer.setStyle(ctrlIconElement, 'rotate', '180deg');
             this._renderer.setStyle(contentElement, 'height', `${value}px`);

@@ -1,0 +1,7 @@
+<div class="flex align-items-end gx-100 p-100">
+    <ngx-sui-avatar [avatarSrc]="srcURL" [avatarAlt]="srcURL" [avatarSize]="size" *ngFor="let size of sizes"></ngx-sui-avatar>
+</div>
+<div class="flex align-items-end gx-100 p-100">
+    <ngx-sui-avatar [avatarSrc]="srcURL" [avatarColor]="color" avatarShape="circle" *ngFor="let color of colors"></ngx-sui-avatar>
+    <ngx-sui-avatar [avatarSrc]="srcURL" [avatarColor]="color" avatarShape="round" *ngFor="let color of colors"></ngx-sui-avatar>
+</div>

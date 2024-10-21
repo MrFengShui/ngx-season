@@ -1,52 +1,8 @@
-<ngx-sui-alert alertType="success" alertShowClose="false" class="m-100">
-    警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。
-    警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。
-    警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。
-</ngx-sui-alert>
-<ngx-sui-alert alertType="warning" class="m-100">警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</ngx-sui-alert>
-<ngx-sui-alert alertType="failure" class="m-100">警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</ngx-sui-alert>
-<ngx-sui-alert alertType="info" class="m-100">警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</ngx-sui-alert>
-<ngx-sui-advanced-alert alertSubject="注意事项" alertType="success" class="m-100">
-    <ng-container ngProjectAs="content">
-        <p>警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</p>
-        <p>对话框是模态窗口——它们阻止用户访问程序界面的其他部分，直到对话框被关闭。出于这个原因，你不应该过度使用任何创建对话框（或模态窗口）的函数。</p>
-        <p>另外，&lt;dialog&gt; 元素也可用于显示警告。</p>
-    </ng-container>
-    <<ng-container ngProjectAs="footer">
-        <button ngx-sui-Button btnColor="primary" btnIcon="shield-check">确认</button>
-        <button ngx-sui-Button btnColor="accent" btnIcon="shield-times">取消</button>
-    </ng-container>
-</ngx-sui-advanced-alert>
-<ngx-sui-advanced-alert alertSubject="注意事项" alertType="warning" class="m-100">
-    <ng-container ngProjectAs="content">
-        <p>警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</p>
-        <p>对话框是模态窗口——它们阻止用户访问程序界面的其他部分，直到对话框被关闭。出于这个原因，你不应该过度使用任何创建对话框（或模态窗口）的函数。</p>
-        <p>另外，&lt;dialog&gt; 元素也可用于显示警告。</p>
-    </ng-container>
-    <<ng-container ngProjectAs="footer">
-        <button ngx-sui-Button btnColor="primary" btnIcon="shield-check">确认</button>
-        <button ngx-sui-Button btnColor="accent" btnIcon="shield-times">取消</button>
-    </ng-container>
-</ngx-sui-advanced-alert>
-<ngx-sui-advanced-alert alertSubject="注意事项" alertType="failure" class="m-100">
-    <ng-container ngProjectAs="content">
-        <p>警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</p>
-        <p>对话框是模态窗口——它们阻止用户访问程序界面的其他部分，直到对话框被关闭。出于这个原因，你不应该过度使用任何创建对话框（或模态窗口）的函数。</p>
-        <p>另外，&lt;dialog&gt; 元素也可用于显示警告。</p>
-    </ng-container>
-    <<ng-container ngProjectAs="footer">
-        <button ngx-sui-Button btnColor="primary" btnIcon="shield-check">确认</button>
-        <button ngx-sui-Button btnColor="accent" btnIcon="shield-times">取消</button>
-    </ng-container>
-</ngx-sui-advanced-alert>
-<ngx-sui-advanced-alert alertSubject="注意事项" alertType="info" class="m-100">
-    <ng-container ngProjectAs="content">
-        <p>警告对话框应该用于不需要用户做出任何反应的信息，除了对信息的确认之外。</p>
-        <p>对话框是模态窗口——它们阻止用户访问程序界面的其他部分，直到对话框被关闭。出于这个原因，你不应该过度使用任何创建对话框（或模态窗口）的函数。</p>
-        <p>另外，&lt;dialog&gt; 元素也可用于显示警告。</p>
-    </ng-container>
-    <<ng-container ngProjectAs="footer">
-        <button ngx-sui-Button btnColor="primary" btnIcon="shield-check">确认</button>
-        <button ngx-sui-Button btnColor="accent" btnIcon="shield-times">取消</button>
-    </ng-container>
-</ngx-sui-advanced-alert>
+<ngx-sui-alert alertType="success" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
+<ngx-sui-alert alertType="warning" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
+<ngx-sui-alert alertType="failure" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
+<ngx-sui-alert alertType="info" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
+<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="success" class="m-100"></ngx-sui-tip-alert>
+<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="warning" class="m-100"></ngx-sui-tip-alert>
+<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="failure" class="m-100"></ngx-sui-tip-alert>
+<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="info" class="m-100"></ngx-sui-tip-alert>

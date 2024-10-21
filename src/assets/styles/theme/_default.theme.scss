@@ -1,4 +1,5 @@
 @import "../components/alert.mixin";
+@import "../components/avatar.mixin";
 @import "../components/button.mixin";
 @import "../components/icons.mixin";
 @import "../components/layout.mixin";
@@ -9,6 +10,7 @@
 @mixin setup-default-theme($theme) {
     &[data-color*="default"] {
         @include setup-alert-theme($theme, "indigo");
+        @include setup-avatar-theme($theme, "indigo", "pink");
         @include setup-button-theme($theme, "indigo", "pink");
         @include setup-icons-theme($theme);
         @include setup-layout-theme($theme);

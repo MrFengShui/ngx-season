@@ -28,7 +28,8 @@ export class DemoPageComponent implements OnInit, AfterViewInit {
             id: '2', text: '组件展示', 
             nodes: [
                 { id: '2-1', text: '警示框', link: ['/demo', 'alert'] },
-                { id: '2-2', text: '按钮', link: ['/demo', 'button'] },
+                { id: '2-2', text: '头像', link: ['/demo', 'avatar'] },
+                { id: '2-3', text: '按钮', link: ['/demo', 'button'] },
             ] 
         }
     ];

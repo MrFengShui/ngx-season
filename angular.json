@@ -26,6 +26,9 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "allowedCommonJsDependencies": [
+                            "lodash", "moment", "crypto-js"
+                        ],
                         "baseHref": "/ngx-season/",
                         "outputPath": "dist/ngx-season",
                         "index": "src/index.html",

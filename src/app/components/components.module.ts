@@ -7,9 +7,9 @@ import { NGXSeasonContentComponent, NGXSeasonFooterComponent, NGXSeasonHeaderCom
 import { NGX_SEASON_ICONS_REGISTER_TOKEN, NGX_SEASON_ICONS_SIZE_MAP_TOKEN, NGXSeasonIconComponent, NGXSeasonIconRegister } from "./icon.component";
 import { NGXSeasonNavlistComponent, NGXSeasonNavlinkComponent, NGXSeasonNavblockComponent } from "./navigator.component";
 import { NGXSeasonScrollbarDirective } from "./scrollbar.directive";
-import { NGXSeasonAdvancedAlertComponent, NGXSeasonAlertComponent, NGXSeasonOutlineAlertComponent, NGXSeasonSolidAlertComponent } from "./alert/alert.component";
+import { NGXSeasonTipAlertComponent, NGXSeasonAlertComponent } from "./alert.component";
 import { NGXSeasonRippleDirective } from "./ripple.directive";
-import { RouterModule } from "@angular/router";
+import { NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, NGXSeasonAvatarComponent } from "./avatar.component";
 
 const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
                 .addIcon('moon').addIcon('sun')
@@ -21,9 +21,8 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 @NgModule({
     declarations: [
         NGXSeasonAlertComponent,
-        NGXSeasonSolidAlertComponent,
-        NGXSeasonOutlineAlertComponent,
-        NGXSeasonAdvancedAlertComponent,
+        NGXSeasonAvatarComponent,
+        NGXSeasonTipAlertComponent,
         NGXSeasonButtonComponent,
         NGXSeasonOutlineButtonComponent,
         NGXSeasonSolidButtonComponent,
@@ -40,13 +39,11 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
     ],
     imports: [
         CommonModule,
-        RouterModule
     ],
     exports: [
         NGXSeasonAlertComponent,
-        NGXSeasonSolidAlertComponent,
-        NGXSeasonOutlineAlertComponent,
-        NGXSeasonAdvancedAlertComponent,
+        NGXSeasonAvatarComponent,
+        NGXSeasonTipAlertComponent,
         NGXSeasonButtonComponent,
         NGXSeasonOutlineButtonComponent,
         NGXSeasonSolidButtonComponent,
@@ -69,7 +66,8 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
             useValue: { disableImageSizeWarning: true, disableImageLazyLoadWarning: true }
         },
         { provide: NGX_SEASON_ICONS_REGISTER_TOKEN, useValue: register },
-        { provide: NGX_SEASON_ICONS_SIZE_MAP_TOKEN, useValue: { sm: 16, md: 24, lg: 32, xl: 40, xxl: 48, xxxl: 56 } }
+        { provide: NGX_SEASON_ICONS_SIZE_MAP_TOKEN, useValue: { sm: 16, md: 24, lg: 32, xl: 40, xxl: 48, xxxl: 56 } },
+        { provide: NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, useValue: { sm: 16, md: 32, lg: 48, xl: 56, xxl: 64, xxxl: 72 } },
     ]
 })
 export class NGXSeasonComponentsModule { }

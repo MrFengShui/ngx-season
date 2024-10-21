@@ -1,0 +1,50 @@
+@mixin setup-avatar-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .avatar {
+        --avatar-border-radius-circle: 50%;
+        --avatar-border-radius-round: #{var(--size-pixel-4)};
+        --avatar-border-width: #{var(--size-pixel-2)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --avatar-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --avatar-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+            } @else {
+                --avatar-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --avatar-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+            }
+        }
+
+        display: inline-block;
+        overflow: hidden;
+        width: fit-content;
+        height: fit-content;
+
+        border-style: solid;
+        border-width: var(--avatar-border-width);
+
+        &[data-avatar-shape="circle"] {
+            border-radius: var(--avatar-border-radius-circle);
+        }
+
+        &[data-avatar-shape="round"] {
+            border-radius: var(--avatar-border-radius-round);
+        }
+
+        @each $key, $value in $colors {
+            &[data-avatar-color=#{$key}] {
+                border-color: var(--avatar-bdcolor-#{$key});
+                background-color: var(--avatar-bgcolor-#{$key});
+            }
+        }
+    }
+}
