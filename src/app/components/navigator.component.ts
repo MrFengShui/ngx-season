@@ -220,7 +220,7 @@ export class NGXSeasonNavlinkComponent implements OnChanges, AfterViewInit {
     }
 
     @Input('navLinkSelected')
-    set selected(selected: string | boolean) {
+    set selected(selected: boolean | string | null) {
         this._selected = coerceBooleanProperty(selected);
     }
 

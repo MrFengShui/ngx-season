@@ -11,8 +11,10 @@ $typography: (
     "headline": 36px,
     "title-1": 28px,
     "title-2": 24px,
+    "title-3": 16px,
     "subtitle-1": 20px,
     "subtitle-2": 18px,
+    "subtitle-3": 12px,
     "body-1": 16px,
     "body-2": 14px,
     "body-3": 12px,
@@ -21,6 +23,10 @@ $typography: (
 
 :root {
     --font-family: "MS-YaHei", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    @for $i from 100 through 250 {
+        --line-height-#{$i}: #{calc($i * 0.01)};
+    }
 
     @each $key, $value in $typography {
         --typography-#{$key}: #{$value};

@@ -10,6 +10,7 @@ import { ErrorPageComponent } from "./error/error.component";
 import { DemoButtonPageComponent } from "./demo/button.component";
 import { DemoAlertPageComponent } from "./demo/alert.component";
 import { DemoAvatarPageComponent } from "./demo/avatar.component";
+import { DemoCardPageComponent } from "./demo/card.component";
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { DemoAvatarPageComponent } from "./demo/avatar.component";
         ErrorPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
-        DemoButtonPageComponent
+        DemoButtonPageComponent,
+        DemoCardPageComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +34,8 @@ import { DemoAvatarPageComponent } from "./demo/avatar.component";
         ErrorPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
-        DemoButtonPageComponent
+        DemoButtonPageComponent,
+        DemoCardPageComponent
     ]
 })
 export class PageModule {}

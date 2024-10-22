@@ -1,3 +1,4 @@
+import {PortalModule} from '@angular/cdk/portal';
 import { NgModule } from "@angular/core";
 import { CommonModule, IMAGE_CONFIG } from "@angular/common";
 import { provideHttpClient, withInterceptorsFromDi, withJsonpSupport } from "@angular/common/http";
@@ -10,12 +11,13 @@ import { NGXSeasonScrollbarDirective } from "./scrollbar.directive";
 import { NGXSeasonTipAlertComponent, NGXSeasonAlertComponent } from "./alert.component";
 import { NGXSeasonRippleDirective } from "./ripple.directive";
 import { NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, NGXSeasonAvatarComponent } from "./avatar.component";
+import { NGXSeasonCardComponent, NGXSeasonCardContentComponent, NGXSeasonCardFooterDirective, NGXSeasonCardMediaBlockComponent, NGXSeasonCardHeaderDirective, NGXSeasonCardImageDirective, NGXSeasonCardHeaderComponent, NGXSeasonCardFooterComponent, NGXSeasonCardActionBlockComponent } from "./card.component";
 
 const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
-                .addIcon('moon').addIcon('sun')
-                .addIcon('check').addIcon('times').addIcon('check-circle').addIcon('times-circle').addIcon('shield-check').addIcon('shield-times')
+                .addIcon('moon').addIcon('sun').addIcon('thumbs-up').addIcon('thumbs-down')
+                .addIcon('check').addIcon('times').addIcon('times-circle').addIcon('shield-check').addIcon('shield-times')
                 .addIcon('avatar').addIcon('administrator').addIcon('assign-user').addIcon('user').addIcon('users')
-                .addIcon('applications').addIcon('bars').addIcon('close').addIcon('angle').addIcon('angle-double')
+                .addIcon('applications').addIcon('bars').addIcon('close').addIcon('angle').addIcon('angle-double').addIcon('star').addIcon('bookmark').addIcon('favorite').addIcon('share')
                 .addIcon('success').addIcon('success-standard').addIcon('warning').addIcon('warning-standard').addIcon('failure').addIcon('failure-standard').addIcon('info').addIcon('info-standard');
 
 @NgModule({
@@ -24,6 +26,15 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
         NGXSeasonAvatarComponent,
         NGXSeasonTipAlertComponent,
         NGXSeasonButtonComponent,
+        NGXSeasonCardComponent,
+        NGXSeasonCardHeaderComponent,
+        NGXSeasonCardFooterComponent,
+        NGXSeasonCardActionBlockComponent,
+        NGXSeasonCardMediaBlockComponent,
+        NGXSeasonCardImageDirective,
+        NGXSeasonCardHeaderDirective,
+        NGXSeasonCardFooterDirective,
+        NGXSeasonCardContentComponent,
         NGXSeasonOutlineButtonComponent,
         NGXSeasonSolidButtonComponent,
         NGXSeasonIconComponent,
@@ -39,12 +50,22 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
     ],
     imports: [
         CommonModule,
+        PortalModule
     ],
     exports: [
         NGXSeasonAlertComponent,
         NGXSeasonAvatarComponent,
         NGXSeasonTipAlertComponent,
         NGXSeasonButtonComponent,
+        NGXSeasonCardComponent,
+        NGXSeasonCardHeaderComponent,
+        NGXSeasonCardFooterComponent,
+        NGXSeasonCardActionBlockComponent,
+        NGXSeasonCardMediaBlockComponent,
+        NGXSeasonCardImageDirective,
+        NGXSeasonCardHeaderDirective,
+        NGXSeasonCardFooterDirective,
+        NGXSeasonCardContentComponent,
         NGXSeasonOutlineButtonComponent,
         NGXSeasonSolidButtonComponent,
         NGXSeasonIconComponent,

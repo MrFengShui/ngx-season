@@ -1,9 +1,13 @@
 import { DOCUMENT } from "@angular/common";
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, Renderer2 } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { Title, VERSION } from "@angular/platform-browser";
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
+import { BehaviorSubject, debounceTime, filter, map, Observable, of, Subject, throttleTime } from "rxjs";
 
 type NavigationMetainfo = { id: string, icon?: string, text: string, link?: string[], nodes?: NavigationMetainfo[] };
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'ngx-sui-demo-page',
     templateUrl: './demo.component.html',
     styles: `
@@ -18,7 +22,7 @@ type NavigationMetainfo = { id: string, icon?: string, text: string, link?: stri
         }
     `
 })
-export class DemoPageComponent implements OnInit, AfterViewInit {
+export class DemoPageComponent implements OnInit, OnDestroy {
 
     protected readonly DARK_MODE_LOGO: string = 'assets/logo/angular_wordmark_white.png';
     protected readonly LIGHT_MODE_LOGO: string = 'assets/logo/angular_wordmark_black.png';
@@ -30,32 +34,83 @@ export class DemoPageComponent implements OnInit, AfterViewInit {
                 { id: '2-1', text: '警示框', link: ['/demo', 'alert'] },
                 { id: '2-2', text: '头像', link: ['/demo', 'avatar'] },
                 { id: '2-3', text: '按钮', link: ['/demo', 'button'] },
+                { id: '2-5', text: '卡片', link: ['/demo', 'card'] },
             ] 
         }
     ];
+
+    protected selected$: Subject<boolean> = new BehaviorSubject(false);
 
     protected themeFlag: boolean = false;
     protected themeHoverFlag: boolean = false;
     protected controlToggled: boolean = true;
 
+    private source: string[] | undefined;
+
     constructor(
+        private _route: ActivatedRoute,
         private _cdr: ChangeDetectorRef,
         @Inject(DOCUMENT)
         private _document: Document,
-        private _element: ElementRef,
-        private _renderer: Renderer2
-    ) {}
+        private _renderer: Renderer2,
+        private _router: Router,
+        private _title: Title,
+        private _ngZone: NgZone
+    ) {
+        this._ngZone.runOutsideAngular(() => 
+            this._router.events.pipe(
+                filter(events => events instanceof NavigationEnd),
+                map(() => {
+                    const parent: ActivatedRouteSnapshot = this._route.snapshot;
+                    const parentPath: string = parent.routeConfig?.path as string;
+                    const parentTitle: string = parent.routeConfig?.title as string;
+
+                    const child: ActivatedRouteSnapshot = parent.children[0];
+                    const childPath: string = child.routeConfig?.path as string;
+                    const childTitle: string = child.routeConfig?.title as string;
+
+                    return { route: [`/${parentPath}`, `${childPath}`], title: `${parentTitle}——${childTitle}` };
+                })
+            ))
+            .subscribe(result => 
+                this._ngZone.run(() => {
+                    this.source = result.route;
+
+                    let task = setTimeout(() => {
+                        clearTimeout(task);
+
+                        this._title.setTitle(result.title);
+                        this._cdr.markForCheck();
+                    });
+                }));
+    }
 
     ngOnInit(): void {
         this.changeThemeMode();
     }
 
-    ngAfterViewInit(): void {
-        
+    ngOnDestroy(): void {
+        this.selected$.complete();
     }
 
     protected handleChangeThemeEvent(): void {
         this.changeThemeMode();
+    }
+
+    protected checkRouteSelected(target: string[] | undefined): Observable<boolean> {
+        if (!target || !this.source) return of(false);
+        
+        let flag: boolean = target.length === this.source.length;
+
+        for (let i = 0; i < target.length; i++) {
+            if (target[i] !== this.source[i]) {
+                flag = false;
+                break;
+            }
+        }
+
+        this.selected$.next(flag);
+        return this.selected$.asObservable().pipe(throttleTime(10));
     }
 
     private changeThemeMode(): void {
