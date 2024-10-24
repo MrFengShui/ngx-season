@@ -1,3 +1,4 @@
+@import "../components/accordion.mixin";
 @import "../components/alert.mixin";
 @import "../components/avatar.mixin";
 @import "../components/button.mixin";
@@ -10,6 +11,7 @@
 
 @mixin setup-default-theme($theme) {
     &[data-color*="default"] {
+        @include setup-accordion-theme($theme, "indigo", "pink");
         @include setup-alert-theme($theme, "indigo");
         @include setup-avatar-theme($theme, "indigo", "pink");
         @include setup-button-theme($theme, "indigo", "pink");

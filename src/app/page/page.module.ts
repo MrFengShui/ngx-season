@@ -11,12 +11,14 @@ import { DemoButtonPageComponent } from "./demo/button.component";
 import { DemoAlertPageComponent } from "./demo/alert.component";
 import { DemoAvatarPageComponent } from "./demo/avatar.component";
 import { DemoCardPageComponent } from "./demo/card.component";
+import { DemoAccordionPageComponent } from "./demo/accordion.component";
 
 @NgModule({
     declarations: [
         HomePageComponent,
         DemoPageComponent,
         ErrorPageComponent,
+        DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
         DemoButtonPageComponent,
@@ -32,6 +34,7 @@ import { DemoCardPageComponent } from "./demo/card.component";
         HomePageComponent,
         DemoPageComponent,
         ErrorPageComponent,
+        DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
         DemoButtonPageComponent,

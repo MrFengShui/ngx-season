@@ -1,0 +1,48 @@
+<div class="flex gx-100 p-100">
+    <ngx-sui-accordion [accordionColor]="color" class="flex-auto" *ngFor="let color of colors">
+        <ngx-sui-accordion-block accordionTitle="折叠面板一">
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-50"></div></ng-template>
+        </ngx-sui-accordion-block>
+        <ngx-sui-accordion-block accordionTitle="折叠面板二" accordionToggled="true">
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-40"></div></ng-template>
+        </ngx-sui-accordion-block>
+        <ngx-sui-accordion-block accordionTitle="折叠面板三">
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-60"></div></ng-template>
+        </ngx-sui-accordion-block>
+        <ngx-sui-accordion-block accordionTitle="折叠面板四">
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-25"></div></ng-template>
+        </ngx-sui-accordion-block>
+    </ngx-sui-accordion>
+</div>
+<div class="flex gx-100 p-100">
+    <ngx-sui-accordion class="flex-auto">
+        <ngx-sui-accordion-block accordionTitle="">
+            <ng-template ngx-sui-AccordionBlockHeader>
+                <span>折叠面板一（主题）</span>
+                <span>折叠面板一（描述）</span>
+            </ng-template>
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-50"></div></ng-template>
+        </ngx-sui-accordion-block>
+        <ngx-sui-accordion-block accordionToggled="true">
+            <ng-template ngx-sui-AccordionBlockHeader>
+                <span>折叠面板二（主题）</span>
+                <span>折叠面板二（描述）</span>
+            </ng-template>
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-40"></div></ng-template>
+        </ngx-sui-accordion-block>
+        <ngx-sui-accordion-block>
+            <ng-template ngx-sui-AccordionBlockHeader>
+                <span>折叠面板三（主题）</span>
+                <span>折叠面板三（描述）</span>
+            </ng-template>
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-60"></div></ng-template>
+        </ngx-sui-accordion-block>
+        <ngx-sui-accordion-block>
+            <ng-template ngx-sui-AccordionBlockHeader>
+                <span>折叠面板四（主题）</span>
+                <span>折叠面板四（描述）</span>
+            </ng-template>
+            <ng-template ngx-sui-AccordionBlockContent><div class="vh-25"></div></ng-template>
+        </ngx-sui-accordion-block>
+    </ngx-sui-accordion>
+</div>

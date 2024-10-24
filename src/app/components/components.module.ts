@@ -1,3 +1,4 @@
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {PortalModule} from '@angular/cdk/portal';
 import { NgModule } from "@angular/core";
 import { CommonModule, IMAGE_CONFIG } from "@angular/common";
@@ -12,16 +13,21 @@ import { NGXSeasonTipAlertComponent, NGXSeasonAlertComponent } from "./alert.com
 import { NGXSeasonRippleDirective } from "./ripple.directive";
 import { NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, NGXSeasonAvatarComponent } from "./avatar.component";
 import { NGXSeasonCardComponent, NGXSeasonCardContentComponent, NGXSeasonCardFooterDirective, NGXSeasonCardMediaBlockComponent, NGXSeasonCardHeaderDirective, NGXSeasonCardImageDirective, NGXSeasonCardHeaderComponent, NGXSeasonCardFooterComponent, NGXSeasonCardActionBlockComponent } from "./card.component";
+import { NGXSeasonAccordionBlockComponent, NGXSeasonAccordionBlockContentDirective, NGXSeasonAccordionBlockHeaderDirective, NGXSeasonAccordionComponent } from './accordion.component';
 
 const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
                 .addIcon('moon').addIcon('sun').addIcon('thumbs-up').addIcon('thumbs-down')
-                .addIcon('check').addIcon('times').addIcon('times-circle').addIcon('shield-check').addIcon('shield-times')
+                .addIcon('check').addIcon('plus').addIcon('plus-circle').addIcon('minus').addIcon('minus-circle').addIcon('times').addIcon('times-circle').addIcon('shield-check').addIcon('shield-times')
                 .addIcon('avatar').addIcon('administrator').addIcon('assign-user').addIcon('user').addIcon('users')
                 .addIcon('applications').addIcon('bars').addIcon('close').addIcon('angle').addIcon('angle-double').addIcon('star').addIcon('bookmark').addIcon('favorite').addIcon('share')
                 .addIcon('success').addIcon('success-standard').addIcon('warning').addIcon('warning-standard').addIcon('failure').addIcon('failure-standard').addIcon('info').addIcon('info-standard');
 
 @NgModule({
     declarations: [
+        NGXSeasonAccordionComponent,
+        NGXSeasonAccordionBlockComponent,
+        NGXSeasonAccordionBlockHeaderDirective,
+        NGXSeasonAccordionBlockContentDirective,
         NGXSeasonAlertComponent,
         NGXSeasonAvatarComponent,
         NGXSeasonTipAlertComponent,
@@ -50,9 +56,14 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
     ],
     imports: [
         CommonModule,
+        CdkAccordionModule,
         PortalModule
     ],
     exports: [
+        NGXSeasonAccordionComponent,
+        NGXSeasonAccordionBlockComponent,
+        NGXSeasonAccordionBlockHeaderDirective,
+        NGXSeasonAccordionBlockContentDirective,
         NGXSeasonAlertComponent,
         NGXSeasonAvatarComponent,
         NGXSeasonTipAlertComponent,

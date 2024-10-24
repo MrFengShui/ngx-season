@@ -31,10 +31,13 @@ export class DemoPageComponent implements OnInit, OnDestroy {
         { 
             id: '2', text: '组件展示', 
             nodes: [
-                { id: '2-1', text: '警示框', link: ['/demo', 'alert'] },
-                { id: '2-2', text: '头像', link: ['/demo', 'avatar'] },
-                { id: '2-3', text: '按钮', link: ['/demo', 'button'] },
-                { id: '2-5', text: '卡片', link: ['/demo', 'card'] },
+                { id: '2-1', text: '手风琴', link: ['/demo', 'accordion'] },
+                { id: '2-2', text: '警示框', link: ['/demo', 'alert'] },
+                { id: '2-3', text: '头像', link: ['/demo', 'avatar'] },
+                { id: '2-4', text: '徽章', link: ['/demo', 'badge'] },
+                { id: '2-5', text: '按钮', link: ['/demo', 'button'] },
+                { id: '2-6', text: '按钮组', link: ['/demo', 'button-group'] },
+                { id: '2-7', text: '卡片', link: ['/demo', 'card'] },
             ] 
         }
     ];

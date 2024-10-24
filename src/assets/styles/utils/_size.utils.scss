@@ -21,77 +21,93 @@ $sizes: (0, 1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 60, 64, 72, 8
     $fstValue: $index * 10;
     $sndValue: $index * 10 + 5;
 
+    .vw-#{$fstValue} {
+        width: #{$fstValue}vw !important;
+    }
+
+    .vw-#{$sndValue} {
+        width: #{$sndValue}vw !important;
+    }
+
+    .vh-#{$fstValue} {
+        height: #{$fstValue}vh !important;
+    }
+
+    .vh-#{$sndValue} {
+        height: #{$sndValue}vh !important;
+    }
+
     .w-#{$fstValue} {
-        width: var(--size-percent-#{$fstValue});
+        width: var(--size-percent-#{$fstValue}) !important;
     }
 
     .w-min-#{$fstValue} {
-        min-width: var(--size-percent-#{$fstValue});
+        min-width: var(--size-percent-#{$fstValue}) !important;
     }
 
     .w-max-#{$fstValue} {
-        max-width: var(--size-percent-#{$fstValue});
+        max-width: var(--size-percent-#{$fstValue}) !important;
     }
 
     .h-#{$fstValue} {
-        height: var(--size-percent-#{$fstValue});
+        height: var(--size-percent-#{$fstValue}) !important;
     }
 
     .h-min-#{$fstValue} {
-        min-height: var(--size-percent-#{$fstValue});
+        min-height: var(--size-percent-#{$fstValue}) !important;
     }
 
     .h-max-#{$fstValue} {
-        max-height: var(--size-percent-#{$fstValue});
+        max-height: var(--size-percent-#{$fstValue}) !important;
     }
 
     @if $index < 10 {
         .w-#{$sndValue} {
-            width: var(--size-percent-#{$sndValue});
+            width: var(--size-percent-#{$sndValue}) !important;
         }
     
         .w-min-#{$sndValue} {
-            min-width: var(--size-percent-#{$sndValue});
+            min-width: var(--size-percent-#{$sndValue}) !important;
         }
     
         .w-max-#{$sndValue} {
-            max-width: var(--size-percent-#{$sndValue});
+            max-width: var(--size-percent-#{$sndValue}) !important;
         }
 
         .h-#{$sndValue} {
-            height: var(--size-percent-#{$sndValue});
+            height: var(--size-percent-#{$sndValue}) !important;
         }
     
         .h-min-#{$sndValue} {
-            min-height: var(--size-percent-#{$sndValue});
+            min-height: var(--size-percent-#{$sndValue}) !important;
         }
     
         .h-max-#{$sndValue} {
-            max-height: var(--size-percent-#{$sndValue});
+            max-height: var(--size-percent-#{$sndValue}) !important;
         }
     }
 }
 
 .w-fit {
-    width: fit-content;
+    width: fit-content !important;
 }
 
 .w-fit-min {
-    width: min-content;
+    width: min-content !important;
 }
 
 .w-fit-max {
-    width: max-content;
+    width: max-content !important;
 }
 
 .h-fit {
-    height: fit-content;
+    height: fit-content !important;
 }
 
 .h-fit-min {
-    height: min-content;
+    height: min-content !important;
 }
 
 .h-fit-max {
-    height: max-content;
+    height: max-content !important;
 }

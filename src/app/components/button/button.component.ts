@@ -29,8 +29,8 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
     }
 
     @Input('btnColor') 
-    set color(color: NGXSeasonButtonColor) {
-        this._color = color;
+    set color(color: NGXSeasonButtonColor | null) {
+        this._color = color ? color : 'default';
     }
 
     get color(): NGXSeasonButtonColor {

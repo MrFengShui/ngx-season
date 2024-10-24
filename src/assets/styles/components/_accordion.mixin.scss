@@ -1,0 +1,111 @@
+@mixin setup-accordion-theme($theme, $primaryColor, $accentColor) {
+    .accordion {
+        $colors: (
+            "default": "gray",
+            "primary": $primaryColor,
+            "accent": $accentColor,
+            "success": "green",
+            "warning": "yellow",
+            "failure": "red",
+            "info": "blue"
+        );
+
+        @each $key, $value in $colors {
+            @if ($key == "default") {
+                --accordion-block-#{$key}-bdcolor: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
+
+                --accordion-block-header-#{$key}-bdcolor: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-gray-600-color))};
+                --accordion-block-header-#{$key}-bgcolor: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-gray-700-color))};
+
+                --accordion-block-content-#{$key}-bgcolor: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-gray-800-color))};
+            } @else {
+                --accordion-block-#{$key}-bdcolor: #{var(--palette-#{$value}-50-color)};
+                
+                --accordion-block-header-#{$key}-bdcolor: #{var(--palette-#{$value}-50-color)};
+                --accordion-block-header-#{$key}-bgcolor: #{var(--palette-#{$value}-500-color)};
+
+                --accordion-block-content-#{$key}-bgcolor: #{var(--palette-#{$value}-50-color)};
+            }
+        }
+
+        --accordion-block-border-width: #{var(--size-pixel-1)};
+
+        --accordion-block-header-gap: #{var(--size-pixel-8)};
+        --accordion-block-header-padding: #{var(--size-pixel-8)} #{var(--size-pixel-16)};
+        --accordion-block-header-font-size: #{var(--typography-title-3)};
+
+        --accordion-action-wrapper-padding: #{var(--size-pixel-8)} #{var(--size-pixel-16)};
+
+        display: flex;
+        flex-direction: column;
+
+        .accordion-block {
+            display: flex;
+            flex-direction: column;
+
+            .block-header {
+                display: flex;
+                align-items: center;
+
+                border-bottom-style: solid;
+                border-bottom-width: var(--accordion-block-border-width);
+                
+                padding: var(--accordion-block-header-padding);
+
+                .block-header-wrapper {
+                    display: inline-flex;
+                    
+                    font-size: var(--accordion-block-header-font-size);
+                    font-weight: bold;
+
+                    margin-left: var(--accordion-block-header-gap);
+                }
+            }
+
+            .block-content {
+                height: fit-content;
+                overflow: hidden;
+            }
+
+            &[data-accordion-block-state="expanded"] {
+                border-bottom-style: solid;
+                border-bottom-width: var(--accordion-block-border-width);
+            }
+        }
+
+        .accordion-action-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            padding: var(--accordion-action-wrapper-padding);
+        }
+        
+        @each $color in map-keys($colors) {
+            &[data-accordion-color=#{$color}] {
+                .accordion-block {
+                    .block-header {
+                        border-bottom-color: var(--accordion-block-header-#{$color}-bdcolor);
+                        background-color: var(--accordion-block-header-#{$color}-bgcolor);
+
+                        @if $color != "default" {
+                            color: #{var(--palette-gray-100-color)} !important;
+
+                            .block-header-ctrlbtn {
+                                color: #{var(--palette-gray-100-color)} !important;
+                            }
+                        }
+                    }
+
+                    .block-content {
+                        background-color: var(--accordion-block-content-#{$color}-bgcolor);
+                    }
+
+                    &[data-accordion-block-state="expanded"] {
+                        border-bottom-color: var(--accordion-block-#{$color}-bdcolor);
+                    }
+                }
+            }
+        }
+    }
+}
