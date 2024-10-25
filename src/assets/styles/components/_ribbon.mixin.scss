@@ -1,0 +1,84 @@
+@mixin setup-ribbon-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .ribbon {
+        --ribbon-corner-size: #{var(--size-pixel-4)};
+        --ribbon-line-height: #{var(--line-height-200)};
+        --ribbon-text-font-size: #{var(--typography-body-1)};
+        --ribbon-margin-top-bottom: #{var(--size-pixel-8)};
+
+        @each $key, $value in $colors {
+            --ribbon-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --ribbon-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+        }
+
+        font-size: var(--ribbon-text-font-size);
+        font-weight: bold;
+        line-height: var(--ribbon-line-height);
+        
+        position: absolute;
+
+        padding-bottom: var(--ribbon-corner-size);
+
+        user-select: none;
+
+        @each $color in map-keys($colors) {
+            &[data-ribbon-color=#{$color}] {
+                background-color: var(--ribbon-bgcolor-#{$color});
+                color: var(--ribbon-color-#{$color});
+            }
+        }
+
+        &[data-ribbon-position="left"], &[data-ribbon-position="right"] {
+            clip-path: polygon(100% calc(100% - var(--ribbon-corner-size)), 100% 100%, calc(100% - var(--ribbon-corner-size)) calc(100% - var(--ribbon-corner-size)), var(--ribbon-corner-size) calc(100% - var(--ribbon-corner-size)), 0 100%, 0 calc(100% - var(--ribbon-corner-size)), 999px calc(100% - var(--ribbon-corner-size) - 999px), calc(100% - 999px) calc(100% - var(--ribbon-corner-size) - 999px));
+            
+            padding-inline: 1lh;
+        }
+
+        &[data-ribbon-position="left"] {
+            top: 0;
+            left: 0;
+            transform: translate(calc((cos(45deg) - 1)*100%), -100%) rotate(-45deg);
+            transform-origin: 100% 100%;
+        }
+
+        &[data-ribbon-position="right"] {
+            top: 0;
+            right: 0;
+            transform: translate(calc((1 - cos(45deg))*100%), -100%) rotate(45deg);
+            transform-origin: 0% 100%;
+        }
+
+        &[data-ribbon-position="top"], &[data-ribbon-position="bottom"] {
+            inset-inline: calc(-1 * var(--ribbon-corner-size));
+            text-align: center;
+        }
+
+        &[data-ribbon-position="top"] {
+            clip-path: polygon(0 0,100% 0,100% calc(100% - var(--ribbon-corner-size)),calc(100% - var(--ribbon-corner-size)) 100%,calc(100% - var(--ribbon-corner-size)) calc(100% - var(--ribbon-corner-size)), var(--ribbon-corner-size) calc(100% - var(--ribbon-corner-size)),var(--ribbon-corner-size) 100%, 0 calc(100% - var(--ribbon-corner-size)));            
+            top: var(--ribbon-margin-top-bottom);
+
+            .ribbon-text-wrapper {
+                margin-top: var(--ribbon-corner-size);
+                margin-bottom: calc(var(--ribbon-corner-size) * 0.5);
+            }
+        }
+
+        &[data-ribbon-position="bottom"] {
+            clip-path: polygon(0 100%,100% 100%,100% var(--ribbon-corner-size),calc(100% - var(--ribbon-corner-size)) 0%,calc(100% - var(--ribbon-corner-size)) var(--ribbon-corner-size), var(--ribbon-corner-size) var(--ribbon-corner-size),var(--ribbon-corner-size) 0%, 0 var(--ribbon-corner-size));            
+            bottom: var(--ribbon-margin-top-bottom);
+
+            .ribbon-text-wrapper {
+                margin-top: calc(var(--ribbon-corner-size) * 1.5);
+            }
+        }
+    }
+}

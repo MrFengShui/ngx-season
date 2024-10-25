@@ -14,12 +14,14 @@ import { NGXSeasonRippleDirective } from "./ripple.directive";
 import { NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, NGXSeasonAvatarComponent } from "./avatar.component";
 import { NGXSeasonCardComponent, NGXSeasonCardContentComponent, NGXSeasonCardFooterDirective, NGXSeasonCardMediaBlockComponent, NGXSeasonCardHeaderDirective, NGXSeasonCardImageDirective, NGXSeasonCardHeaderComponent, NGXSeasonCardFooterComponent, NGXSeasonCardActionBlockComponent } from "./card.component";
 import { NGXSeasonAccordionBlockComponent, NGXSeasonAccordionBlockContentDirective, NGXSeasonAccordionBlockHeaderDirective, NGXSeasonAccordionComponent } from './accordion.component';
+import { NGXSeasonBadgeDirective } from './badge.component';
+import { NGXSeasonRibbonComponent } from './ribbon.component';
 
 const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
-                .addIcon('moon').addIcon('sun').addIcon('thumbs-up').addIcon('thumbs-down')
+                .addIcon('moon').addIcon('sun').addIcon('thumbs-up').addIcon('thumbs-down').addIcon('alarm-on').addIcon('alarm-off')
                 .addIcon('check').addIcon('plus').addIcon('plus-circle').addIcon('minus').addIcon('minus-circle').addIcon('times').addIcon('times-circle').addIcon('shield-check').addIcon('shield-times')
                 .addIcon('avatar').addIcon('administrator').addIcon('assign-user').addIcon('user').addIcon('users')
-                .addIcon('applications').addIcon('bars').addIcon('close').addIcon('angle').addIcon('angle-double').addIcon('star').addIcon('bookmark').addIcon('favorite').addIcon('share')
+                .addIcon('alert').addIcon('analytics').addIcon('application').addIcon('applications').addIcon('bank').addIcon('bars').addIcon('close').addIcon('angle').addIcon('angle-double').addIcon('star').addIcon('bookmark').addIcon('favorite').addIcon('home').addIcon('new').addIcon('share')
                 .addIcon('success').addIcon('success-standard').addIcon('warning').addIcon('warning-standard').addIcon('failure').addIcon('failure-standard').addIcon('info').addIcon('info-standard');
 
 @NgModule({
@@ -31,6 +33,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
         NGXSeasonAlertComponent,
         NGXSeasonAvatarComponent,
         NGXSeasonTipAlertComponent,
+        NGXSeasonBadgeDirective,
         NGXSeasonButtonComponent,
         NGXSeasonCardComponent,
         NGXSeasonCardHeaderComponent,
@@ -51,6 +54,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
         NGXSeasonNavlistComponent,
         NGXSeasonNavblockComponent,
         NGXSeasonNavlinkComponent,
+        NGXSeasonRibbonComponent,
         NGXSeasonScrollbarDirective,
         NGXSeasonRippleDirective
     ],
@@ -67,6 +71,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
         NGXSeasonAlertComponent,
         NGXSeasonAvatarComponent,
         NGXSeasonTipAlertComponent,
+        NGXSeasonBadgeDirective,
         NGXSeasonButtonComponent,
         NGXSeasonCardComponent,
         NGXSeasonCardHeaderComponent,
@@ -87,6 +92,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
         NGXSeasonNavlistComponent,
         NGXSeasonNavblockComponent,
         NGXSeasonNavlinkComponent,
+        NGXSeasonRibbonComponent,
         NGXSeasonScrollbarDirective,
         NGXSeasonRippleDirective
     ],

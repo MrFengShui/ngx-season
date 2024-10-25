@@ -12,6 +12,8 @@ import { DemoAlertPageComponent } from "./demo/alert.component";
 import { DemoAvatarPageComponent } from "./demo/avatar.component";
 import { DemoCardPageComponent } from "./demo/card.component";
 import { DemoAccordionPageComponent } from "./demo/accordion.component";
+import { DemoBadgePageComponent } from "./demo/badge.component";
+import { DemoRibbonPageComponent } from "./demo/ribbon.component";
 
 @NgModule({
     declarations: [
@@ -21,8 +23,10 @@ import { DemoAccordionPageComponent } from "./demo/accordion.component";
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
+        DemoBadgePageComponent,
         DemoButtonPageComponent,
-        DemoCardPageComponent
+        DemoCardPageComponent,
+        DemoRibbonPageComponent
     ],
     imports: [
         CommonModule,
@@ -37,8 +41,10 @@ import { DemoAccordionPageComponent } from "./demo/accordion.component";
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
+        DemoBadgePageComponent,
         DemoButtonPageComponent,
-        DemoCardPageComponent
+        DemoCardPageComponent,
+        DemoRibbonPageComponent
     ]
 })
 export class PageModule {}

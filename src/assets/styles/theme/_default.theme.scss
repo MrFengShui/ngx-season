@@ -1,11 +1,13 @@
 @import "../components/accordion.mixin";
 @import "../components/alert.mixin";
 @import "../components/avatar.mixin";
+@import "../components/badge.mixin";
 @import "../components/button.mixin";
 @import "../components/card.mixin";
 @import "../components/icons.mixin";
 @import "../components/layout.mixin";
 @import "../components/navigator.mixin";
+@import "../components/ribbon.mixin";
 @import "../components/ripple.mixin";
 @import "../components/scrollbar.mixin";
 
@@ -14,11 +16,13 @@
         @include setup-accordion-theme($theme, "indigo", "pink");
         @include setup-alert-theme($theme, "indigo");
         @include setup-avatar-theme($theme, "indigo", "pink");
+        @include setup-badge-theme($theme, "indigo", "pink");
         @include setup-button-theme($theme, "indigo", "pink");
         @include setup-card-theme($theme, "indigo");
         @include setup-icons-theme($theme);
         @include setup-layout-theme($theme);
         @include setup-navigator-theme($theme, "indigo");
+        @include setup-ribbon-theme($theme, "indigo", "pink");
         @include setup-ripple-theme($theme, "indigo", "pink");
         @include setup-scrollbar-theme($theme, "indigo");
     }

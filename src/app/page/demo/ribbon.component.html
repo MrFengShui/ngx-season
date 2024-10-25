@@ -1,0 +1,12 @@
+<div class="flex gx-100 p-100">
+    <div class="flex-auto vh-25" style="background: var(--palette-black-color);" *ngFor="let item of list">
+        <span ngx-sui-Ribbon [ribbonColor]="item.color" [ribbonText]="item.label" ribbonPosition="left"></span>
+        <span ngx-sui-Ribbon [ribbonColor]="item.color" [ribbonText]="item.label" ribbonPosition="right"></span>
+    </div>
+</div>
+<div class="flex gx-100 p-100">
+    <div class="flex-auto vh-25" style="background: var(--palette-black-color);" *ngFor="let item of list">
+        <span ngx-sui-Ribbon [ribbonColor]="item.color" [ribbonText]="item.label" ribbonPosition="top"></span>
+        <span ngx-sui-Ribbon [ribbonColor]="item.color" [ribbonText]="item.label" ribbonPosition="bottom"></span>
+    </div>
+</div>

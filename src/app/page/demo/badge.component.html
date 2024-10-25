@@ -1,0 +1,38 @@
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button [btnColor]="item.color" btnBlocked="true" btnIcon="home" ngx-sui-Badge [badgeColor]="item.color" [badgeVisible]="item.visible" (click)="item.visible = !item.visible" *ngFor="let item of list">{{ item.text }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button [btnColor]="item.color" btnBlocked="true" btnIcon="home" ngx-sui-Badge [badgeColor]="item.color" badgeOverlapped="true" [badgeVisible]="item.visible" (click)="item.visible = !item.visible" *ngFor="let item of list">{{ item.text }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-OutlineButton [btnColor]="item.color" btnBlocked="true" btnIcon="home" ngx-sui-Badge [badgeColor]="item.color" badgeOverlapped="true" [badgeText]="badgeText" [badgeVisible]="item.visible" (click)="item.visible = !item.visible" *ngFor="let item of list">{{ item.text }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-OutlineButton [btnColor]="item.color" btnBlocked="true" btnIcon="home" ngx-sui-Badge [badgeColor]="item.color" [badgeText]="badgeText" [badgeVisible]="item.visible" (click)="item.visible = !item.visible" *ngFor="let item of list">{{ item.text }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="item.color" btnBlocked="true" btnIcon="home" ngx-sui-Badge [badgeColor]="item.color" [badgeText]="badgeText" [badgeVisible]="item.visible" (click)="item.visible = !item.visible" *ngFor="let item of list">{{ item.text }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-SolidButton [btnColor]="item.color" btnBlocked="true" btnIcon="home" ngx-sui-Badge [badgeColor]="item.color" badgeOverlapped="true" [badgeText]="badgeText" [badgeVisible]="item.visible" (click)="item.visible = !item.visible" *ngFor="let item of list">{{ item.text }}</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="top-left">左上角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="top">正上方</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="top-right">右上角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="bottom-left">左下角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="bottom">正下方</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="bottom-right">右下角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="left">左边</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeDotted="true" badgeOverlapped="true" badgePosition="right">右边</button>
+</div>
+<div class="flex gx-100 p-100">
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="top-left" [badgeText]="badgeText">左上角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="top" [badgeText]="badgeText">正上方</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="top-right" [badgeText]="badgeText">右上角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="bottom-left" [badgeText]="badgeText">左下角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="bottom" [badgeText]="badgeText">正下方</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="bottom-right" [badgeText]="badgeText">右下角</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="left" [badgeText]="badgeText">左边</button>
+    <button ngx-sui-Button btnBlocked="true" btnIcon="home" ngx-sui-Badge badgeOverlapped="true" badgePosition="right" [badgeText]="badgeText">右边</button>
+</div>

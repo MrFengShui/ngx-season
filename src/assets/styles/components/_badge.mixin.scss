@@ -1,0 +1,84 @@
+@mixin setup-badge-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .badge {
+        --badge-padding: #{var(--size-pixel-4)};
+        --badge-x-axis-padding: #{var(--size-pixel-8)};
+        --badge-y-axis-padding: #{var(--size-pixel-0)};
+        
+        --badge-font-size: #{var(--typography-body-3)};
+        --badge-font-weight: 700;
+
+        --badge-min-width: #{var(--size-pixel-8)};
+        --badge-max-width: #{var(--size-pixel-36)};
+        --badge-min-height: #{var(--size-pixel-8)};
+        --badge-max-height: #{var(--size-pixel-24)};
+
+        @each $key, $value in $colors {
+            --badge-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --badge-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+        }
+
+        .badge-dot {
+            $size: calc(var(--badge-font-size) + var(--badge-padding) * 2);
+
+            line-height: $size;
+            text-align: center;
+            vertical-align: middle;
+
+            border-radius: calc($size * 0.5);
+
+            font-size: var(--badge-font-size);
+            font-weight: var(--badge-font-weight);
+    
+            min-width: var(--badge-min-width);
+            max-width: var(--badge-max-width);
+            min-height: var(--badge-min-height);
+            max-height: var(--badge-max-height);
+            width: fit-content;
+            height: fit-content;
+
+            padding: var(--badge-y-axis-padding) var(--badge-x-axis-padding);
+
+            // box-shadow: if($theme == "light", var(--box-shadow-black), var(--box-shadow-white));
+        }
+
+        &.badge-overlap {
+            position: relative;
+
+            .badge-dot {
+                position: absolute;
+                z-index: 10;
+            }
+        }
+
+        &[data-badge-state="visible"] {
+            .badge-dot {
+                visibility: visible;
+            }
+        }
+
+        &[data-badge-state="hidden"] {
+            .badge-dot {
+                visibility: hidden;
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-badge-color=#{$color}] {
+                .badge-dot {
+                    background-color: var(--badge-bgcolor-#{$color});
+                    color: var(--badge-color-#{$color});
+                }
+            }
+        }
+    }
+}
