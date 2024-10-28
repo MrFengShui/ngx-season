@@ -38,6 +38,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-5', text: '按钮', link: ['/demo', 'button'] },
                 { id: '2-6', text: '按钮组', link: ['/demo', 'button-group'] },
                 { id: '2-7', text: '卡片', link: ['/demo', 'card'] },
+                { id: '2-8', text: '轮播器', link: ['/demo', 'carousel'] },
                 { id: '2-17', text: '丝带', link: ['/demo', 'ribbon'] },
             ] 
         }

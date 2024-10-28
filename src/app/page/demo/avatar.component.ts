@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonAvatarColor, NGXSeasonAvatarSize } from "src/app/components/avatar.component";
+import { NGXSeasonAvatarColor, NGXSeasonAvatarSize } from "src/app/components/avatar/avatar.component";
 
 @Component({
     selector: 'ngx-sui-demo-avatar-page',

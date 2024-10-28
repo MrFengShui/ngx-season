@@ -4,6 +4,12 @@
     src: url("../../fonts/YaheiUI.ttf");
 }
 
+@font-face {
+    font-family: "SourceHan";
+    font-weight: 500;
+    src: url("../../fonts/SourceHanSansCN.otf");
+}
+
 $typography: (
     "display-3": 64px,
     "display-2": 56px,
@@ -22,7 +28,7 @@ $typography: (
 );
 
 :root {
-    --font-family: "MS-YaHei", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-family: "SourceHan", "MS-YaHei", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     @for $i from 100 through 250 {
         --line-height-#{$i}: #{calc($i * 0.01)};

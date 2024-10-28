@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NGXSeasonAccordionColor } from "src/app/components/accordion.component";
+import { NGXSeasonAccordionColor } from "src/app/components/accordion/accordion.component";
 
 @Component({
     selector: 'ngx-sui-demo-accordion-page',

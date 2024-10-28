@@ -14,6 +14,7 @@ import { DemoCardPageComponent } from "./demo/card.component";
 import { DemoAccordionPageComponent } from "./demo/accordion.component";
 import { DemoBadgePageComponent } from "./demo/badge.component";
 import { DemoRibbonPageComponent } from "./demo/ribbon.component";
+import { DemoCarouselPageComponent } from "./demo/carousel.component";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { DemoRibbonPageComponent } from "./demo/ribbon.component";
         DemoBadgePageComponent,
         DemoButtonPageComponent,
         DemoCardPageComponent,
+        DemoCarouselPageComponent,
         DemoRibbonPageComponent
     ],
     imports: [
@@ -44,6 +46,7 @@ import { DemoRibbonPageComponent } from "./demo/ribbon.component";
         DemoBadgePageComponent,
         DemoButtonPageComponent,
         DemoCardPageComponent,
+        DemoCarouselPageComponent,
         DemoRibbonPageComponent
     ]
 })

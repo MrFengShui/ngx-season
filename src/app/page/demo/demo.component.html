@@ -1,10 +1,10 @@
 <ngx-sui-layout>
-    <ngx-sui-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
+    <ngx-sui-layout-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
         <ng-container ngProjectAs="headerActions">
             <button ngx-sui-Button [btnIcon]="themeFlag ? 'moon' : 'sun'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
         </ng-container>
-    </ngx-sui-header>
-    <ngx-sui-content contentSideWidth="256" contentDuration="100" [contentToggled]="controlToggled">
+    </ngx-sui-layout-header>
+    <ngx-sui-layout-content contentSideWidth="256" contentDuration="100" [contentToggled]="controlToggled">
         <ng-container ngProjectAs="contentSide">
             <ngx-sui-navlist>
                 <ngx-sui-navblock [blockTitle]="item.text" *ngFor="let item of NAV_META_INFO_LIST">
@@ -13,6 +13,6 @@
             </ngx-sui-navlist>
         </ng-container>
         <ng-container ngProjectAs="contentArea"><router-outlet></router-outlet></ng-container>
-    </ngx-sui-content>
-    <ngx-sui-footer></ngx-sui-footer>
+    </ngx-sui-layout-content>
+    <ngx-sui-layout-footer></ngx-sui-layout-footer>
 </ngx-sui-layout>

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonBadgeColor } from "src/app/components/badge.component";
+import { NGXSeasonBadgeColor } from "src/app/components/badge/badge.directive";
 
 @Component({
     selector: 'ngx-sui-demo-badge-page',

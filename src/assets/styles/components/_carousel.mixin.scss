@@ -1,0 +1,185 @@
+@mixin setup-carousel-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue",
+    );
+
+    .carousel {
+        --carousel-content-metainfo-x-axis-padding: #{var(--size-pixel-16)};
+        --carousel-content-metainfo-y-axis-padding: #{var(--size-pixel-16)};
+        --carousel-content-metainfo-font-size: #{var(--typography-body-1)};
+        --carousel-content-metainfo-font-weight: bold;
+
+        --carousel-control-x-axis-padding: #{var(--size-pixel-16)};
+        --carousel-control-y-axis-padding: #{var(--size-pixel-16)};
+        --carousel-control-wrapper-x-axis-margin: #{var(--size-pixel-16)};
+        --carousel-control-wrapper-y-axis-margin: #{var(--size-pixel-0)};
+        --carousel-control-wrapper-gap: #{var(--size-pixel-8)};
+        --carousel-control-progressbar-height: #{var(--size-pixel-8)};
+        --carousel-control-progressbar-margin: #{var(--size-pixel-16)};
+        --carousel-control-item-border-width: #{var(--size-pixel-8)};
+        --carousel-control-item-width: 160px;
+        --carousel-control-item-height: 120px;
+        --carousel-control-item-triangle-size: #{var(--size-pixel-12)};
+
+        --carousel-bgcolor: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+        --carousel-control-progressbar-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
+        --carousel-control-progress-bgcolor: #{var(--palette-gray-500-color)};
+
+        --carousel-control-btn-bgcolor-hover: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
+        --carousel-control-btn-bgcolor-active: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
+        --carousel-control-btn-color-hover: #{if($theme == "light", var(--palette-gray-700-color), var(--palette-gray-300-color))};
+        --carousel-control-btn-color-active: #{if($theme == "light", var(--palette-gray-600-color), var(--palette-gray-400-color))};
+
+        --carousel-control-item-bdcolor: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
+        --carousel-control-item-bgcolor-hover: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
+        --carousel-control-item-bgcolor-active: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
+
+        background-color: var(--carousel-bgcolor);
+
+        display: inline-flex;
+        flex-direction: column;
+
+        .carousel-content-wrapper {
+            overflow: hidden;
+
+            .carousel-content-orbit {
+                display: flex;
+                
+                .carousel-content {
+                    height: fit-content;
+    
+                    .carousel-content-metainfo {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+    
+                        font-size: var(--carousel-content-metainfo-font-size);
+                        font-weight: var(--carousel-content-metainfo-font-weight);
+    
+                        padding: var(--carousel-content-metainfo-y-axis-padding) var(--carousel-content-metainfo-x-axis-padding);
+                    }
+                }
+            }
+        }
+
+        .carousel-control {
+            display: flex;
+            flex-direction: column;
+
+            padding: var(--carousel-control-y-axis-padding) var(--carousel-control-x-axis-padding);
+
+            .carousel-control-progressbar {
+                border-radius: calc(var(--carousel-control-progressbar-height) * 0.5);
+                background-color: var(--carousel-control-progressbar-bgcolor);
+                height: var(--carousel-control-progressbar-height);
+                margin-bottom: var(--carousel-control-progressbar-margin);
+                overflow: hidden;
+
+                .progress {
+                    background-color: var(--carousel-control-progress-bgcolor);
+                    width: 0;
+                    height: inherit;
+                }
+            }
+
+            .carousel-control-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .btn {
+                    max-height: var(--size-percent-100);
+                    height: var(--carousel-control-item-height);
+
+                    &:hover {
+                        background-color: var(--carousel-control-btn-bgcolor-hover);
+                        color: var(--carousel-control-btn-color-hover);
+                    }
+
+                    &:active {
+                        background-color: var(--carousel-control-btn-bgcolor-active);
+                        color: var(--carousel-control-btn-color-active);
+                    }
+                }
+
+                .carousel-control-item-wrapper {
+                    display: inline-flex;
+    
+                    margin: var(--carousel-control-wrapper-y-axis-margin) var(--carousel-control-wrapper-x-axis-margin);
+
+                    .carousel-control-item {
+                        border-color: transparent;
+                        border-style: solid;
+                        border-width: var(--carousel-control-item-border-width);
+    
+                        display: inline-flex;
+                        flex-direction: column;
+    
+                        position: relative;
+    
+                        width: var(--carousel-control-item-width);
+                        height: var(--carousel-control-item-height);
+    
+                        .triangle {
+                            width: var(--size-pixel-0);
+                            height: var(--size-pixel-0);
+                        }
+    
+                        img {
+                            object-fit: cover;
+                        }
+
+                        &:hover {
+                            background-color: var(--carousel-control-item-bgcolor-hover);
+                        }
+
+                        &:active {
+                            background-color: var(--carousel-control-item-bgcolor-active);
+                        }
+    
+                        &.selected {
+                            border-color: var(--carousel-control-item-bdcolor);
+
+                            .triangle {
+                                border-style: solid;
+    
+                                position: absolute;
+    
+                                width: var(--size-pixel-0);
+                                height: var(--size-pixel-0);
+        
+                                &.triangle-left {
+                                    border-color: transparent var(--carousel-control-item-bdcolor) transparent transparent;
+                                    border-width: calc(var(--carousel-control-item-triangle-size) * 2) var(--carousel-control-item-triangle-size) calc(var(--carousel-control-item-triangle-size) * 2) 0;
+    
+                                    top: calc(50% - var(--carousel-control-item-triangle-size) * 2);
+                                    left: calc((var(--carousel-control-item-triangle-size) + var(--carousel-control-item-border-width)) * -1);
+                                }
+    
+                                &.triangle-right {
+                                    border-color: transparent transparent transparent var(--carousel-control-item-bdcolor);
+                                    border-width: calc(var(--carousel-control-item-triangle-size) * 2) 0 calc(var(--carousel-control-item-triangle-size) * 2) var(--carousel-control-item-triangle-size);
+    
+                                    top: calc(50% - var(--carousel-control-item-triangle-size) * 2);
+                                    right: calc((var(--carousel-control-item-triangle-size) + var(--carousel-control-item-border-width)) * -1);
+                                }
+                            }
+                        }
+                    }
+    
+                    > :nth-child(n) {
+                        &:not(:last-child) {
+                            margin-right: var(--carousel-control-wrapper-gap);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

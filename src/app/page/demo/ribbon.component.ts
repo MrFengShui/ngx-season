@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NGXSeasonRibbonColor } from "src/app/components/ribbon.component";
+import { NGXSeasonRibbonColor } from "src/app/components/ribbon/ribbon.component";
 
 @Component({
     selector: 'ngx-sui-demo-ribbon-page',

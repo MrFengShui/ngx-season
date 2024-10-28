@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 
 export type NGXSeasonButtonColor = 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info' | 'default';
 export type NGXSeasonButtonSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -35,6 +35,15 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
 
     get color(): NGXSeasonButtonColor {
         return this._color;
+    }
+
+    @Input('btnIconDegree')
+    set degree(degree: number | string) {
+        this._degree = coerceNumberProperty(degree);
+    }
+
+    get degree(): number {
+        return this._degree;
     }
 
     @Input('btnDisabled') 
@@ -76,6 +85,7 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
     private _blocked: boolean = false;
     private _circled: boolean = false;
     private _color: NGXSeasonButtonColor = 'default';
+    private _degree: number = 0;
     private _disabled: boolean = false;
     private _icon: string | undefined;
     private _iconOnly: boolean = false;
