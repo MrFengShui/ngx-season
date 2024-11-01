@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { AnimationBuilder } from "@angular/animations";
 
 export type NGXSeasonButtonColor = 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info' | 'default';
 export type NGXSeasonButtonSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -46,6 +47,24 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
         return this._degree;
     }
 
+    @Input('btnIconDegreeStart')
+    set degreeStart(degreeStart: number | string) {
+        this._degreeStart = coerceNumberProperty(degreeStart);
+    }
+
+    get degreeStart(): number {
+        return this._degreeStart;
+    }
+
+    @Input('btnIconDegreeFinal')
+    set degreeFinal(degreeFinal: number | string) {
+        this._degreeFinal = coerceNumberProperty(degreeFinal);
+    }
+
+    get degreeFinal(): number {
+        return this._degreeFinal;
+    }
+
     @Input('btnDisabled') 
     set disabled(disabled: boolean | string) {
         this._disabled = coerceBooleanProperty(disabled);
@@ -73,6 +92,24 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
         return this._iconOnly;
     }
 
+    @Input('btnIconRotateDuration')
+    set rotateDuration(rotateDuration: number | string) {
+        this._rotateDuration = coerceNumberProperty(rotateDuration);
+    }
+
+    get rotateDuration(): number {
+        return this._rotateDuration;
+    }
+
+    @Input('btnIconRotateInfinite')
+    set rotateInfinite(rotateInfinite: boolean | string) {
+        this._rotateInfinite = coerceBooleanProperty(rotateInfinite);
+    }
+
+    get rotateInfinite(): boolean {
+        return this._rotateInfinite;
+    }
+
     @Input('btnSize') 
     set size(size: NGXSeasonButtonSize) {
         this._size = size;
@@ -86,24 +123,35 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
     private _circled: boolean = false;
     private _color: NGXSeasonButtonColor = 'default';
     private _degree: number = 0;
+    private _degreeStart: number = 0;
+    private _degreeFinal: number = 0;
     private _disabled: boolean = false;
     private _icon: string | undefined;
     private _iconOnly: boolean = false;
+    private _rotateDuration: number = 0;
+    private _rotateInfinite: boolean = false;
     private _size: NGXSeasonButtonSize = 'md';
 
-    @HostListener('mouseenter')
-    protected handleHostMouseEnterEvent(): void {
+    @HostListener('mouseenter', ['$event'])
+    protected handleHostMouseEnterEvent(event: MouseEvent): void {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
         this.isLinkHover = true;
     }
 
-    @HostListener('mouseleave')
-    protected handleHostMouseLeaveEvent(): void {
+    @HostListener('mouseleave', ['$event'])
+    protected handleHostMouseLeaveEvent(event: MouseEvent): void {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
         this.isLinkHover = false;
     }
 
     protected isLinkHover: boolean = false;
 
     constructor(
+        protected _builder: AnimationBuilder,
         protected _element: ElementRef,
         protected _renderer: Renderer2
     ) {}

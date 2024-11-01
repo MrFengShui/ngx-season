@@ -1,3 +1,8 @@
-<ngx-sui-carousel carslIndex="3" carslWidth="1280" class="m-100">
-    <ngx-sui-carousel-item [carslImageSrc]="item.url" [carslImageAlt]="item.url" [carslImageDesc]="item.text" *ngFor="let item of list"></ngx-sui-carousel-item>
-</ngx-sui-carousel>
+<div class="flex flex-dir-col gy-100">
+    <ng-container *ngFor="let color of colors; index as idx">
+        <ngx-sui-carousel [carslColor]="color" [carslWidth]="width" (carslSelectedIndexChange)="change[idx] = $event">
+            <ngx-sui-carousel-item [carslImageSrc]="item.url" [carslImageAlt]="item.url" [carslImageDesc]="item.text" *ngFor="let item of list"></ngx-sui-carousel-item>
+        </ngx-sui-carousel>
+        <span>change: {{ change[idx] | json }}</span>
+    </ng-container>
+</div>

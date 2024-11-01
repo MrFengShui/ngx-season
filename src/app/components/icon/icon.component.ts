@@ -1,5 +1,6 @@
+import { animate, animation, AnimationAnimateRefMetadata, AnimationBuilder, AnimationPlayer, AnimationReferenceMetadata, style, useAnimation } from "@angular/animations";
 import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, Input, OnChanges, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, Input, NgZone, OnChanges, OnDestroy, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { BehaviorSubject, debounceTime, filter, map, Observable, of, Subject, Subscription, switchMap, zip } from "rxjs";
 import { fromFetch } from 'rxjs/fetch';
@@ -86,6 +87,12 @@ export class NGXSeasonIconRegister {
 
 type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl';
 type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
+type NGXSeasonIconRotateMetainfo = { start: number, final: number };
+
+const rotateAnimation: AnimationReferenceMetadata = animation([
+    style({ rotate: '{{ start }}deg' }),
+    animate('{{ duration }}ms', style({ rotate: '{{ final }}deg' }))
+]);
 
 @Component({
     selector: 'ngx-sui-icon',
@@ -93,7 +100,7 @@ type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xx
         <svg xmlns="http://www.w3.org/2000/svg" [attr.width]="setupIconSize(size)" [attr.height]="setupIconSize(size)" viewBox="0 0 36 36" [innerHTML]="svgContent$ | async" #svgBox></svg>
     `
 })
-export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
+export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     @Input('iconDegree')
     set degree(degree: number | string) {
@@ -102,6 +109,42 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
 
     get degree(): number {
         return this._degree;
+    }
+
+    @Input('iconDegreeStart')
+    set degreeStart(degreeStart: number | string) {
+        this._degreeStart = coerceNumberProperty(degreeStart);
+    }
+
+    get degreeStart(): number {
+        return this._degreeStart;
+    }
+
+    @Input('iconDegreeFinal')
+    set degreeFinal(degreeFinal: number | string) {
+        this._degreeFinal = coerceNumberProperty(degreeFinal);
+    }
+
+    get degreeFinal(): number {
+        return this._degreeFinal;
+    }
+
+    @Input('iconRotateDuration')
+    set rotateDuration(rotateDuration: number | string) {
+        this._rotateDuration = coerceNumberProperty(rotateDuration);
+    }
+
+    get rotateDuration(): number {
+        return this._rotateDuration;
+    }
+
+    @Input('iconRotateInfinite')
+    set rotateInfinite(rotateInfinite: boolean | string) {
+        this._rotateInfinite = coerceBooleanProperty(rotateInfinite);
+    }
+
+    get rotateInfinite(): boolean {
+        return this._rotateInfinite;
     }
 
     @Input('iconShape')
@@ -132,6 +175,10 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
     }
 
     private _degree: number = 0;
+    private _degreeStart: number = 0;
+    private _degreeFinal: number = 0;
+    private _rotateDuration: number = 0;
+    private _rotateInfinite: boolean = false;
     private _shape: string | undefined;
     private _solid: boolean = false;
     private _size: NGXSeasonIconSize = 'md';
@@ -139,12 +186,19 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
     @ViewChild('svgBox', { read: ElementRef, static: true })
     protected svgElement: ElementRef<SVGSVGElement> | undefined;
 
+    protected player: AnimationPlayer | undefined;
+
     protected svgContent$: Observable<SafeHtml> | undefined;
+    protected metainfoChange$: Subject<NGXSeasonIconRotateMetainfo> = new BehaviorSubject({ start: this.degreeStart, final: this.degreeFinal });
+
+    private metainfo$: Subscription = Subscription.EMPTY;
 
     constructor(
+        protected _builder: AnimationBuilder,
         protected _sanitizer: DomSanitizer,
         protected _element: ElementRef,
         protected _renderer: Renderer2,
+        protected _ngZone: NgZone,
 
         @Inject(NGX_SEASON_ICONS_REGISTER_TOKEN)
         protected _register: NGXSeasonIconRegister,
@@ -154,11 +208,11 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
 
     ngOnChanges(changes: SimpleChanges): void {
         let keys: string[] | null = Object.keys(changes);
-
-        if (keys.includes('degree')) {
-            this.changeIconDegree(changes['degree'].currentValue as number);
-        }
         
+        if (keys.includes('degree')) {
+            this.changeIconDegree(coerceNumberProperty(changes['degree'].currentValue));
+        }
+
         if (keys.includes('shape')) {
             this.setupIconContent(changes['shape'].currentValue, this.solid);
         }
@@ -167,14 +221,33 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
             this.setupIconContent(this.shape, changes['solid'].currentValue);
         }
         
+        if (keys.includes('degreeStart') && keys.includes('degreeFinal')) {
+            this.metainfoChange$.next({
+                start: coerceNumberProperty(changes['degreeStart'].currentValue),
+                final: coerceNumberProperty(changes['degreeFinal'].currentValue)
+            });
+        }
+        
         keys.splice(0);
         keys = null;
+    }
+
+    ngOnDestroy(): void {
+        this.player?.destroy();
+        this.metainfo$?.unsubscribe();
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'icon');
         this.changeIconDegree(this.degree);
         this.setupIconContent(this.shape, this.solid);
+        this.listenRotateStartFinalChange();
+        this.player?.onDone(() => {
+            this._renderer.setStyle(this._element.nativeElement, 'rotate', `${this.degreeFinal}deg`);
+
+            this.player?.destroy();
+            this.player = undefined;
+        });
     }
 
     protected changeIconDegree(degree: number): void {
@@ -188,6 +261,17 @@ export class NGXSeasonIconComponent implements OnChanges, AfterViewInit {
 
     protected setupIconSize(size: NGXSeasonIconSize): number {
         return this._iconSizeMap[size];
+    }
+
+    private listenRotateStartFinalChange(): void {
+        this._ngZone.runOutsideAngular(() => 
+            this.metainfo$ = this.metainfoChange$.asObservable().pipe(debounceTime(100)).
+                subscribe(metainfo => 
+                    this._ngZone.run(() => {
+                        const animation: AnimationAnimateRefMetadata = useAnimation(rotateAnimation, { params: { duration: this.rotateDuration, start: metainfo.start, final: metainfo.final } });
+                        this.player = this._builder.build(animation).create(this._element.nativeElement);
+                        this.player.play();
+                    })));
     }
 
 }

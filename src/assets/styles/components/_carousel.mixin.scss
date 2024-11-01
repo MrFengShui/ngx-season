@@ -6,7 +6,7 @@
         "success": "green",
         "warning": "yellow",
         "failure": "red",
-        "info": "blue",
+        "info": "blue"
     );
 
     .carousel {
@@ -28,30 +28,53 @@
         --carousel-control-item-triangle-size: #{var(--size-pixel-12)};
 
         --carousel-bgcolor: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
-        --carousel-control-progressbar-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-        --carousel-control-progress-bgcolor: #{var(--palette-gray-500-color)};
 
-        --carousel-control-btn-bgcolor-hover: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-        --carousel-control-btn-bgcolor-active: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
-        --carousel-control-btn-color-hover: #{if($theme == "light", var(--palette-gray-700-color), var(--palette-gray-300-color))};
-        --carousel-control-btn-color-active: #{if($theme == "light", var(--palette-gray-600-color), var(--palette-gray-400-color))};
+        @each $key, $value in $colors {
+            --carousel-control-progress-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+    
+            @if $key == "default" {
+                --carousel-control-progressbar-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
 
-        --carousel-control-item-bdcolor: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
-        --carousel-control-item-bgcolor-hover: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-        --carousel-control-item-bgcolor-active: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
+                --carousel-control-btn-bgcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --carousel-control-btn-bgcolor-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
 
+                --carousel-control-btn-color-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+                --carousel-control-btn-color-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-600-color), var(--palette-#{$value}-400-color))};
+
+                --carousel-control-item-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+                --carousel-control-item-bgcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --carousel-control-item-bgcolor-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+            } @else {
+                --carousel-control-progressbar-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+
+                --carousel-control-btn-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                --carousel-control-btn-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+                --carousel-control-btn-color-hover-#{$key}: #{var(--palette-#{$value}-50-color)};
+                --carousel-control-btn-color-active-#{$key}: #{var(--palette-#{$value}-50-color)};
+
+                --carousel-control-item-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --carousel-control-item-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                --carousel-control-item-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+            }
+        }
+        
         background-color: var(--carousel-bgcolor);
 
         display: inline-flex;
         flex-direction: column;
 
-        .carousel-content-wrapper {
+        .carousel-content {
             overflow: hidden;
+            min-width: 100%;
+            max-width: 100%;
 
-            .carousel-content-orbit {
+            .carousel-content-wrapper {
                 display: flex;
                 
-                .carousel-content {
+                .carousel-content-item {
+                    min-width: 100%;
+                    max-width: 100%;
                     height: fit-content;
     
                     .carousel-content-metainfo {
@@ -76,13 +99,11 @@
 
             .carousel-control-progressbar {
                 border-radius: calc(var(--carousel-control-progressbar-height) * 0.5);
-                background-color: var(--carousel-control-progressbar-bgcolor);
                 height: var(--carousel-control-progressbar-height);
                 margin-bottom: var(--carousel-control-progressbar-margin);
                 overflow: hidden;
 
                 .progress {
-                    background-color: var(--carousel-control-progress-bgcolor);
                     width: 0;
                     height: inherit;
                 }
@@ -135,17 +156,7 @@
                             object-fit: cover;
                         }
 
-                        &:hover {
-                            background-color: var(--carousel-control-item-bgcolor-hover);
-                        }
-
-                        &:active {
-                            background-color: var(--carousel-control-item-bgcolor-active);
-                        }
-    
                         &.selected {
-                            border-color: var(--carousel-control-item-bdcolor);
-
                             .triangle {
                                 border-style: solid;
     
@@ -155,7 +166,6 @@
                                 height: var(--size-pixel-0);
         
                                 &.triangle-left {
-                                    border-color: transparent var(--carousel-control-item-bdcolor) transparent transparent;
                                     border-width: calc(var(--carousel-control-item-triangle-size) * 2) var(--carousel-control-item-triangle-size) calc(var(--carousel-control-item-triangle-size) * 2) 0;
     
                                     top: calc(50% - var(--carousel-control-item-triangle-size) * 2);
@@ -163,7 +173,6 @@
                                 }
     
                                 &.triangle-right {
-                                    border-color: transparent transparent transparent var(--carousel-control-item-bdcolor);
                                     border-width: calc(var(--carousel-control-item-triangle-size) * 2) 0 calc(var(--carousel-control-item-triangle-size) * 2) var(--carousel-control-item-triangle-size);
     
                                     top: calc(50% - var(--carousel-control-item-triangle-size) * 2);
@@ -176,6 +185,60 @@
                     > :nth-child(n) {
                         &:not(:last-child) {
                             margin-right: var(--carousel-control-wrapper-gap);
+                        }
+                    }
+                }
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-carousel-color=#{$color}] {
+                .carousel-control {
+                    .carousel-control-progressbar {
+                        background-color: var(--carousel-control-progressbar-bgcolor-#{$color});
+
+                        .progress {
+                            background-color: var(--carousel-control-progress-bgcolor-#{$color});
+                        }
+                    }
+
+                    .carousel-control-wrapper {
+                        .btn {
+                            &:hover {
+                                background-color: var(--carousel-control-btn-bgcolor-hover-#{$color});
+                                color: var(--carousel-control-btn-color-hover-#{$color});
+                            }
+        
+                            &:active {
+                                background-color: var(--carousel-control-btn-bgcolor-active-#{$color});
+                                color: var(--carousel-control-btn-color-active-#{$color});
+                            }
+                        }
+
+                        .carousel-control-item-wrapper {
+                            .carousel-control-item {
+                                &:hover {
+                                    background-color: var(--carousel-control-item-bgcolor-hover-#{$color});
+                                }
+        
+                                &:active {
+                                    background-color: var(--carousel-control-item-bgcolor-active-#{$color});
+                                }
+            
+                                &.selected {
+                                    border-color: var(--carousel-control-item-bdcolor-#{$color});
+
+                                    .triangle {
+                                        &.triangle-left {
+                                            border-color: transparent var(--carousel-control-item-bdcolor-#{$color}) transparent transparent;
+                                        }
+    
+                                        &.triangle-right {
+                                            border-color: transparent transparent transparent var(--carousel-control-item-bdcolor-#{$color});
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

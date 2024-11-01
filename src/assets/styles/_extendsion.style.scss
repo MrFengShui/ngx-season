@@ -3,7 +3,7 @@
     font-family: var(--font-family);
     font-size: var(--typography-body-1);
 
-    &:not(head) {
+    &:not(head, span) {
         display: block;
     }
 

@@ -1,15 +1,16 @@
-import { animate, AnimationBuilder, AnimationPlayer, style } from "@angular/animations";
 import { coerceNumberProperty } from "@angular/cdk/coercion";
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, InjectionToken, Input, NgZone, OnChanges, OnDestroy, QueryList, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
-import { BehaviorSubject, debounceTime, Subject } from "rxjs";
-import { PBKDF2, HmacSHA256 } from "crypto-js";
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, InjectionToken, Input, NgZone, OnChanges, OnDestroy, Output, QueryList, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
+import { BehaviorSubject, Subject } from "rxjs";
 
-import * as moment from "moment";
 import { NGXSeasonCarouselControlComponent } from "./carousel-control.component";
+
+import { NGXSeasonIDUtils } from "src/app/utils/id.utils";
+
+import { NGXSeasonSwitchSelectionIndexDispatcher } from "src/app/utils/services/switch-select.service";
 
 export const NGX_SEASON_CAROUSEL_TOKEN: InjectionToken<NGXSeasonCarouselComponent> = new InjectionToken('NGX_SEASON_CAROUSEL_TOKEN');
 
-export type NGXSeasonCarouselSelectionModel = { currIndex: number, prevIndex: number };
+export type NGXSeasonCarouselColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
 export type NGXSeasonCarouselMetainfoModel = { imageSrc?: string, imageAlt?: string, imageDesc?: string, imageIndex?: number };
 export type NGXSeasonCarouselProgressState = 'start' | 'done' | undefined;
 
@@ -55,17 +56,29 @@ export class NGXSeasonCarouselItemComponent {
 @Component({
     selector: 'ngx-sui-carousel',
     template: `
-        <div class="carousel-content-wrapper" #wrapper>
-            <div class="carousel-content-orbit" #orbit>
-                <ngx-sui-carousel-content [imgAlt]="item.imageAlt" [imgSrc]="item.imageSrc" [imgDesc]="item.imageDesc" [imgIdx]="idx" *ngFor="let item of (metainfo$ | async); index as idx"></ngx-sui-carousel-content>
-            </div>
-        </div>
-        <ngx-sui-carousel-control [delay]="delay" [duration]="duration" [selectedIndex]="index" (selectionChange)="listenCarouselSelectionChange($event, orbit, width, delay)" #control></ngx-sui-carousel-control>
+        <ngx-sui-carousel-content [duration]="delay" [offset]="width">
+            <ngx-sui-carousel-content-item [imgAlt]="item.imageAlt" [imgSrc]="item.imageSrc" [imgDesc]="item.imageDesc" [index]="idx" *ngFor="let item of items; index as idx"></ngx-sui-carousel-content-item>
+        </ngx-sui-carousel-content>
+        <ngx-sui-carousel-control [delay]="delay" [duration]="duration" (selectedChange)="selectedChange.emit($event)" (selectedIndexChange)="selectedIndexChange.emit($event)">
+            <a ngx-sui-CarouselControlItem [imgAlt]="item.imageAlt" [imgSrc]="item.imageSrc" [index]="idx" *ngFor="let item of items; index as idx"></a>
+        </ngx-sui-carousel-control>
         <ng-template><ng-content select="ngx-sui-carousel-item"></ng-content></ng-template>
     `,
-    providers: [{ provide: NGX_SEASON_CAROUSEL_TOKEN, useExisting: NGXSeasonCarouselComponent }]
+    providers: [
+        NGXSeasonSwitchSelectionIndexDispatcher,
+        { provide: NGX_SEASON_CAROUSEL_TOKEN, useExisting: NGXSeasonCarouselComponent }
+    ]
 })
 export class NGXSeasonCarouselComponent implements OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
+
+    @Input('carslColor')
+    set color(color: NGXSeasonCarouselColor) {
+        this._color = color;
+    }
+
+    get color(): NGXSeasonCarouselColor {
+        return this._color;
+    }
 
     @Input('carslDelay')
     set delay(delay: number | string) {
@@ -103,41 +116,49 @@ export class NGXSeasonCarouselComponent implements OnChanges, OnDestroy, AfterCo
         return this._width;
     }
 
-    private _delay: number = 100;
+    private _color: NGXSeasonCarouselColor = 'default';
+    private _delay: number = 1000;
     private _duration: number = 5000;
     private _index: number = 0;
     private _width: number = 0;
 
+    @Output('carslSelectedChange')
+    selectedChange: EventEmitter<{ prevIndex: number, currIndex: number }> = new EventEmitter();
+
+    @Output('carslSelectedIndexChange')
+    selectedIndexChange: EventEmitter<number> = new EventEmitter(true);
+
     @ContentChildren(NGXSeasonCarouselItemComponent)
     items: QueryList<NGXSeasonCarouselItemComponent> | undefined;
-
-    @ViewChild('wrapper', { read: ElementRef, static: true })
-    protected wrapper: ElementRef<HTMLElement> | undefined;
 
     @ViewChild('control', { read: NGXSeasonCarouselControlComponent, static: true })
     protected control: NGXSeasonCarouselControlComponent | undefined;
 
-    public id: string = this.generateCarouselID();
+    id: string = NGXSeasonIDUtils.generateHashID('ngx-sui-carousel');
 
-    public width$: Subject<number> = new BehaviorSubject(this.width);
-
-    metainfo$: Subject<NGXSeasonCarouselMetainfoModel[]> = new BehaviorSubject<NGXSeasonCarouselMetainfoModel[]>([]);
-    progressState$: Subject<NGXSeasonCarouselProgressState> = new BehaviorSubject<NGXSeasonCarouselProgressState>(undefined);
-
-    private metainfo: NGXSeasonCarouselMetainfoModel[] = [];
+    totalCount$: Subject<number> = new BehaviorSubject(0);
 
     constructor(
-        protected _builder: AnimationBuilder,
         protected _element: ElementRef,
         protected _renderer: Renderer2,
-        protected _ngZone: NgZone
+        protected _ngZone: NgZone,
+
+        protected _dispatcher: NGXSeasonSwitchSelectionIndexDispatcher
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         let keys: string[] | null = Object.keys(changes);
 
+        if (keys.includes('color')) {
+            this.changeCarouselColor(changes['color'].currentValue);
+        }
+        
+        if (keys.includes('index')) {
+            this.changeCarouselIndex(coerceNumberProperty(changes['index'].currentValue));
+        }
+        
         if (keys.includes('width')) {
-            this.changeCarouselWidth(changes['width'].currentValue as number);
+            this.changeCarouselWidth(coerceNumberProperty(changes['width'].currentValue));
         }
 
         keys.splice(0);
@@ -145,62 +166,36 @@ export class NGXSeasonCarouselComponent implements OnChanges, OnDestroy, AfterCo
     }
 
     ngOnDestroy(): void {
-        this.metainfo.splice(0);
-        this.metainfo$.complete();
-        this.progressState$.complete();
+        this.totalCount$.complete();
     }
 
     ngAfterContentInit(): void {
-        if (this.items) {
-            if (this.metainfo.length > 0) this.metainfo.splice(0);
-
-            this.items.forEach(item =>
-                this.metainfo.push({ imageAlt: item.imageAlt, imageDesc: item.imageDesc, imageSrc: item.imageSrc }));
-            this.metainfo$.next(this.metainfo);
-        }
+        if (this.items) this.totalCount$.next(this.items.length);
     }
 
     ngAfterViewInit(): void {
+        this.initialize();
+        this.changeCarouselColor(this.color);
+        this.changeCarouselIndex(this.index);
+        this.changeCarouselWidth(this.width);
+    }
+
+    protected initialize(): void {
         const element: HTMLElement = this._element.nativeElement;
         this._renderer.addClass(element, 'carousel');
         this._renderer.setAttribute(element, 'data-carousel-id', this.id);
-        this.changeCarouselWidth(this.width);
-        this.listenCarouselProgressStateChange();
+    }
+
+    protected changeCarouselColor(color: NGXSeasonCarouselColor): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-carousel-color', color);
+    }
+
+    protected changeCarouselIndex(index: number): void {
+        this._dispatcher.notify(-1, index, this.id);
     }
 
     protected changeCarouselWidth(width: number): void {
-        this._renderer.setStyle(this.wrapper?.nativeElement, 'width', width === 0 ? '100%' : `${width}px`);
-        this.width$.next(width);
-    }
-
-    protected listenCarouselSelectionChange(model: NGXSeasonCarouselSelectionModel, element: HTMLElement, width: number, time: number): void {
-        this.index = model.currIndex;
-
-        let player: AnimationPlayer = this._builder.build([
-            style({ transform: `translateX(-${model.prevIndex * width}px)` }),
-            animate(`${time}ms`, style({ transform: `translateX(-${model.currIndex * width}px)` }))
-        ]).create(element);
-        player.onDone(() => {
-            this._renderer.setStyle(element, 'transform', `translateX(-${model.currIndex * width}px)`);
-            player.destroy();
-        });
-        player.play();
-    }
-
-    private listenCarouselProgressStateChange(): void {
-        this._ngZone.runOutsideAngular(() =>
-            this.progressState$.asObservable().pipe(debounceTime(100))
-                .subscribe(value =>
-                    this._ngZone.run(() => {
-                        if (value === 'done') this.control?.nextToggle(this.index);
-                    })));
-    }
-
-    private generateCarouselID(): string {
-        const password: string = 'ngx-sui-carousel-block';
-        const salt: string = `${password}_${moment().format('x')}`;
-        const key: string = PBKDF2(password, salt, { keySize: 256, iterations: 1024 }).toString();
-        return HmacSHA256(salt, key).toString();
+        this._renderer.setStyle(this._element.nativeElement, 'width', width === 0 ? '100%' : `${width}px`);
     }
 
 }

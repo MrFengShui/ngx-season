@@ -1,9 +1,11 @@
 import { animate, AnimationBuilder, AnimationPlayer, style } from "@angular/animations";
-import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, InjectionToken, Input, NgZone, OnChanges, OnDestroy, Output, Renderer2, SimpleChange, SimpleChanges, ViewChild } from "@angular/core";
-import { Observable } from "rxjs";
+import { coerceNumberProperty } from "@angular/cdk/coercion";
+import { AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Inject, InjectionToken, Input, NgZone, OnDestroy, Output, QueryList, Renderer2, ViewChild } from "@angular/core";
+import { Subscription } from "rxjs";
 
-import { NGX_SEASON_CAROUSEL_TOKEN, NGXSeasonCarouselComponent, NGXSeasonCarouselMetainfoModel, NGXSeasonCarouselSelectionModel } from "./carousel.component";
+import { NGX_SEASON_CAROUSEL_TOKEN, NGXSeasonCarouselComponent } from "./carousel.component";
+
+import { NGXSeasonSwitchSelectionIndexDispatcher, NGXSeasonSwitchSelectionIndexModel } from "src/app/utils/services/switch-select.service";
 
 export const NGX_SEASON_CAROUSEL_CONTROL_BAR_TOKEN: InjectionToken<NGXSeasonCarouselControlComponent> = new InjectionToken('NGX_SEASON_CAROUSEL_CONTROL_BAR_TOKEN');
 
@@ -15,9 +17,9 @@ export const NGX_SEASON_CAROUSEL_CONTROL_BAR_TOKEN: InjectionToken<NGXSeasonCaro
         <span class="triangle triangle-right"></span>
     `
 })
-export class NGXSeasonCarouselControlItemComponent implements OnChanges, AfterViewInit {
+export class NGXSeasonCarouselControlItemComponent implements OnDestroy, AfterViewInit {
 
-    @Input('ctrlImageAlt')
+    @Input('imgAlt')
     set imageAlt(imageAlt: string | undefined) {
         this._imageAlt = imageAlt;
     }
@@ -26,7 +28,7 @@ export class NGXSeasonCarouselControlItemComponent implements OnChanges, AfterVi
         return this._imageAlt;
     }
 
-    @Input('ctrlImageSrc')
+    @Input('imgSrc')
     set imageSrc(imageSrc: string | undefined) {
         this._imageSrc = imageSrc;
     }
@@ -35,66 +37,80 @@ export class NGXSeasonCarouselControlItemComponent implements OnChanges, AfterVi
         return this._imageSrc;
     }
 
-    @Input('ctrlSelected')
-    set selected(selected: boolean | string) {
-        this._selected = coerceBooleanProperty(selected);
+    @Input('index')
+    set index(index: number | string) {
+        this._index = coerceNumberProperty(index);
     }
 
-    get selected(): boolean {
-        return this._selected;
+    get index(): number {
+        return this._index;
     }
 
     private _imageAlt: string | undefined;
     private _imageSrc: string | undefined;
-    private _selected: boolean = false;
+    private _index: number = 0;
 
-    @ViewChild('progress', { read: ElementRef, static: true })
-    protected progress: ElementRef<HTMLElement> | undefined;
+    @HostListener('click')
+    protected listenHostSelectionEvent(): void {
+        if (this.model?.id === this._carousel.id && this.model?.currIndex !== this.index) {
+            this._dispatcher.notify(this.model.currIndex, this.index, this._carousel.id);
+        }
+    }
+
+    private model: NGXSeasonSwitchSelectionIndexModel | undefined;
+
+    private dispatcher$: Subscription = Subscription.EMPTY;
 
     constructor(
         protected _element: ElementRef,
-        protected _renderer: Renderer2
+        protected _renderer: Renderer2,
+        protected _ngZone: NgZone,
+
+        protected _dispatcher: NGXSeasonSwitchSelectionIndexDispatcher,
+
+        @Inject(NGX_SEASON_CAROUSEL_TOKEN)
+        protected _carousel: NGXSeasonCarouselComponent,
     ) { }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        const change: SimpleChange | undefined = changes['selected'];
-
-        if (change) this.setupControlItemSelected(coerceBooleanProperty(change.currentValue));
+    ngOnDestroy(): void {
+        this.dispatcher$.unsubscribe();
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'carousel-control-item');
-        this.setupControlItemSelected(this.selected);
+        this.listenCarouselSelectionChange();
     }
 
-    protected setupControlItemSelected(selected: boolean): void {
-        const element: HTMLElement = this._element.nativeElement;
+    select(): void {
+        this._renderer.addClass(this._element.nativeElement, 'selected');
+    }
 
-        if (selected) {
-            this._renderer.addClass(element, 'selected');
-        } else {
-            this._renderer.removeClass(element, 'selected');
-        }
+    unselect(): void {
+        this._renderer.removeClass(this._element.nativeElement, 'selected');
+    }
+
+    private listenCarouselSelectionChange(): void {
+        this._ngZone.runOutsideAngular(() => 
+            this.dispatcher$ = this._dispatcher.listen().subscribe(model => this.model = model));
     }
 
 }
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'ngx-sui-carousel-control',
     template: `
         <div class="carousel-control-progressbar"><span class="progress" #progress></span></div>
         <div class="carousel-control-wrapper">
-            <button ngx-sui-Button btnIcon="angle" btnIconDegree="-90" btnIconOnly="true" (click)="prevToggle(index)"></button>
+            <button ngx-sui-Button btnIcon="angle" btnIconDegree="-90" btnIconOnly="true" (click)="prevToggle()"></button>
             <div class="carousel-control-item-wrapper">
-                <a ngx-sui-CarouselControlItem [ctrlImageSrc]="item.imageSrc" [ctrlImageAlt]="item.imageAlt" [ctrlSelected]="index === idx" (click)="currToggle(idx)" *ngFor="let item of metainfo$ | async; index as idx"></a>
+                <ng-content select="[ngx-sui-CarouselControlItem]"></ng-content>
             </div>
-            <button ngx-sui-Button btnIcon="angle" btnIconDegree="90" btnIconOnly="true" (click)="nextToggle(index)"></button>
+            <button ngx-sui-Button btnIcon="angle" btnIconDegree="90" btnIconOnly="true" (click)="nextToggle()"></button>
         </div>
     `,
     providers: [{ provide: NGX_SEASON_CAROUSEL_CONTROL_BAR_TOKEN, useExisting: NGXSeasonCarouselControlComponent }]
 })
-export class NGXSeasonCarouselControlComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class NGXSeasonCarouselControlComponent implements OnDestroy, AfterViewInit {
 
     @Input('delay')
     set delay(delay: number | string) {
@@ -114,105 +130,123 @@ export class NGXSeasonCarouselControlComponent implements OnChanges, OnDestroy, 
         return this._duration;
     }
 
-    @Input('selectedIndex')
-    set index(index: number | string) {
-        this._index = coerceNumberProperty(index);
-    }
-
-    get index(): number {
-        return this._index;
-    }
-
     private _delay: number = 100;
     private _duration: number = 5000;
-    private _index: number = 0;
 
-    @Output('selectionChange') change: EventEmitter<NGXSeasonCarouselSelectionModel> = new EventEmitter(true);
+    @Output('selectedChange')
+    selectedChange: EventEmitter<{ prevIndex: number, currIndex: number }> = new EventEmitter(true);
+
+    @Output('selectedIndexChange')
+    selectedIndexChange: EventEmitter<number> = new EventEmitter(true);
+
+    @ContentChildren(NGXSeasonCarouselControlItemComponent)
+    protected items: QueryList<NGXSeasonCarouselControlItemComponent> | undefined;
 
     @ViewChild('progress', { read: ElementRef, static: true })
     protected progress: ElementRef<HTMLElement> | undefined;
 
-    protected metainfo$: Observable<NGXSeasonCarouselMetainfoModel[]> = this._carousel.metainfo$.asObservable();
-
     private player: AnimationPlayer | undefined;
-    private size: number = 0;
+
+    private currIndex: number = -1;
+    private prevIndex: number = -1;
+    private total: number = -1;
+
+    private totalCount$: Subscription = Subscription.EMPTY;
+    private dispatcher$: Subscription = Subscription.EMPTY;
 
     constructor(
         protected _builder: AnimationBuilder,
-        protected _cdr: ChangeDetectorRef,
         protected _element: ElementRef,
         protected _renderer: Renderer2,
         protected _ngZone: NgZone,
+
+        protected _dispatcher: NGXSeasonSwitchSelectionIndexDispatcher,
 
         @Inject(NGX_SEASON_CAROUSEL_TOKEN)
         protected _carousel: NGXSeasonCarouselComponent
     ) { }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        const change: SimpleChange | undefined = changes['index'];
-
-        if (change && this.player) {
-            this.player.reset();
-            this.executeProgressAnimation();
-        }
-    }
-
     ngOnDestroy(): void {
         this.player?.destroy();
+        this.totalCount$.unsubscribe();
+        this.dispatcher$.unsubscribe();
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'carousel-control');
-        this.listenCarouselMetainfoChange();
-        this.executeProgressAnimation();
+        this.listenCarouselTotalCountChange();
+        this.listenCarouselSelectionChange();
+        this.execProgressAnimation(this.progress?.nativeElement, this.duration, this.delay);
     }
 
-    currToggle(index: number): void {
-        if (this.index !== index) {
-            this.change.emit({ currIndex: index, prevIndex: this.index });
-            this.index = index;
-        }
+    prevToggle(): void {
+        this.prevIndex = this.currIndex;
+        this.currIndex -= 1;
+
+        if (this.currIndex === -1) this.currIndex = this.total - 1;
+
+        this._dispatcher.notify(this.prevIndex, this.currIndex, this._carousel.id);
     }
 
-    prevToggle(index: number): void {
-        this.index -= 1;
+    nextToggle(): void {
+        this.prevIndex = this.currIndex;
+        this.currIndex += 1;
 
-        if (this.index === -1) this.index = this.size - 1;
+        if (this.currIndex === this.total) this.currIndex = 0;
 
-        this.change.emit({ currIndex: this.index, prevIndex: index });
+        this._dispatcher.notify(this.prevIndex, this.currIndex, this._carousel.id);
     }
 
-    nextToggle(index: number): void {
-        this.index += 1;
-
-        if (this.index === this.size) this.index = 0;
-
-        this.change.emit({ currIndex: this.index, prevIndex: index });
-    }
-
-    private listenCarouselMetainfoChange(): void {
+    private listenCarouselTotalCountChange(): void {
         this._ngZone.runOutsideAngular(() => 
-            this.metainfo$.subscribe(metainfo => 
-                this._ngZone.run(() => this.size = metainfo.length)));
+            this.totalCount$ = this._carousel.totalCount$.asObservable().subscribe(value => 
+                this._ngZone.run(() => this.total = value)));
     }
 
-    private executeProgressAnimation(): void {
-        this.player = this.createProgressAnimation(this.progress?.nativeElement, this.duration, this.delay);
+    private listenCarouselSelectionChange(): void {
+        this._ngZone.runOutsideAngular(() => 
+            this.dispatcher$ = this._dispatcher.listen().subscribe(model => 
+                this._ngZone.run(() => {
+                    if (!this.items) throw new Error();
+                    
+                    if (model.id === this._carousel.id) {
+                        this.currIndex = model.currIndex;
+                        this.prevIndex = model.prevIndex;
+                        this.selectedChange.emit({ prevIndex: this.prevIndex, currIndex: this.currIndex });
+                        this.selectedIndexChange.emit(this.currIndex);
+    
+                        if (model.currIndex !== -1) this.items.get(model.currIndex)?.select();
+    
+                        if (model.prevIndex !== -1) this.items.get(model.prevIndex)?.unselect();
+    
+                        this.replay();
+                    }
+                })));
+    }
+
+    private execProgressAnimation(element: HTMLElement | undefined, duration: number, delay: number): void {
+        if (!element) throw new Error();
+        
+        if (!this.player) {
+            this.player = this._builder.build([
+                style({ width: '0' }),
+                animate(`${duration}ms`, style({ width: '100%' }))
+            ]).create(element, { delay });
+        }
+        
         this.player.onDone(() => {
-            this.player?.reset();
-            this._carousel.progressState$.next('done');
+            this.nextToggle();
+            this.replay();
         });
-        this.player.onStart(() => this._carousel.progressState$.next('start'));
         this.player.play();
     }
 
-    private createProgressAnimation(element: HTMLElement | undefined, duration: number, delay: number): AnimationPlayer {
-        if (!element) throw new Error();
+    private replay(): void {
+        if (!this.player) throw new Error();
 
-        return this._builder.build([
-            style({ width: '0' }),
-            animate(`${duration}ms`, style({ width: '100%' }))
-        ]).create(element, { delay });
+        this.player.pause();
+        this.player.reset();
+        this.player.play();
     }
 
 }
