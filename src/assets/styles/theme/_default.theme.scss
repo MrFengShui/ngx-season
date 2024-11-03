@@ -5,6 +5,7 @@
 @import "../components/button.mixin";
 @import "../components/card.mixin";
 @import "../components/carousel.mixin";
+@import "../components/digital.mixin";
 @import "../components/icons.mixin";
 @import "../components/layout.mixin";
 @import "../components/navigator.mixin";
@@ -22,6 +23,7 @@
         @include setup-button-theme($theme, "indigo", "pink");
         @include setup-card-theme($theme, "indigo");
         @include setup-carousel-theme($theme, "indigo", "pink");
+        @include setup-digital-theme($theme, "indigo", "pink");
         @include setup-icons-theme($theme);
         @include setup-layout-theme($theme);
         @include setup-navigator-theme($theme, "indigo");

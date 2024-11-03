@@ -1,5 +1,3 @@
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import {PortalModule} from '@angular/cdk/portal';
 import { NgModule } from "@angular/core";
 import { CommonModule, IMAGE_CONFIG } from "@angular/common";
 import { provideHttpClient, withInterceptorsFromDi, withJsonpSupport } from "@angular/common/http";
@@ -17,12 +15,11 @@ import { NGXSeasonEffectsModule } from './effects/effects.module';
 import { NGXSeasonRibbonModule } from './ribbon/ribbon.module';
 import { NGXSeasonNavigatorModule } from './navigator/navigator.module';
 import { NGXSeasonProgressModule } from './progress/progress.module';
+import { NGXSeasonDigitalModule } from './digital/digital.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        CdkAccordionModule,
-        PortalModule,
 
         NGXSeasonAccordionModule,
         NGXSeasonAlertModule,
@@ -31,6 +28,7 @@ import { NGXSeasonProgressModule } from './progress/progress.module';
         NGXSeasonButtonModule,
         NGXSeasonCardModule,
         NGXSeasonCarouselModule,
+        NGXSeasonDigitalModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
         NGXSeasonLayoutModule,
@@ -46,6 +44,7 @@ import { NGXSeasonProgressModule } from './progress/progress.module';
         NGXSeasonButtonModule,
         NGXSeasonCardModule,
         NGXSeasonCarouselModule,
+        NGXSeasonDigitalModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
         NGXSeasonLayoutModule,

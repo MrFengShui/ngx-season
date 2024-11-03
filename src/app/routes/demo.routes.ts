@@ -8,6 +8,7 @@ import { DemoBadgePageComponent } from "../page/demo/badge.component";
 import { DemoRibbonPageComponent } from "../page/demo/ribbon.component";
 import { DemoCarouselPageComponent } from "../page/demo/carousel.component";
 import { DemoProgressPageComponent } from "../page/demo/progress.component";
+import { DemoDigitalPageComponent } from "../page/demo/digital.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'accordion', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const demoRoutes: Routes = [
     { path: 'button', component: DemoButtonPageComponent, title: '按钮' },
     { path: 'card', component: DemoCardPageComponent, title: '卡片' },
     { path: 'carousel', component: DemoCarouselPageComponent, title: '轮播器' },
+    { path: 'digital', component: DemoDigitalPageComponent, title: '数码' },
     { path: 'progress', component: DemoProgressPageComponent, title: '进度' },
     { path: 'ribbon', component: DemoRibbonPageComponent, title: '丝带' },
 ];

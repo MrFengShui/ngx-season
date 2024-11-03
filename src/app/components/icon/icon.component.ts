@@ -184,7 +184,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     private _size: NGXSeasonIconSize = 'md';
 
     @ViewChild('svgBox', { read: ElementRef, static: true })
-    protected svgElement: ElementRef<SVGSVGElement> | undefined;
+    protected svgElement: ElementRef<SVGElement> | undefined;
 
     protected player: AnimationPlayer | undefined;
 
@@ -241,9 +241,9 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         this._renderer.addClass(this._element.nativeElement, 'icon');
         this.changeIconDegree(this.degree);
         this.setupIconContent(this.shape, this.solid);
-        this.listenRotateStartFinalChange();
+        this.listenRotateStartFinalChange(this.svgElement?.nativeElement);
         this.player?.onDone(() => {
-            this._renderer.setStyle(this._element.nativeElement, 'rotate', `${this.degreeFinal}deg`);
+            this._renderer.setStyle(this.svgElement?.nativeElement, 'rotate', `${this.degreeFinal}deg`);
 
             this.player?.destroy();
             this.player = undefined;
@@ -251,7 +251,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     protected changeIconDegree(degree: number): void {
-        this._renderer.setStyle(this._element.nativeElement, 'rotate', `${degree}deg`);
+        this._renderer.setStyle(this.svgElement?.nativeElement, 'rotate', `${degree}deg`);
     }
 
     protected setupIconContent(shape: string | undefined, solid: boolean): void {
@@ -263,13 +263,13 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         return this._iconSizeMap[size];
     }
 
-    private listenRotateStartFinalChange(): void {
+    private listenRotateStartFinalChange(element: SVGElement | undefined): void {
         this._ngZone.runOutsideAngular(() => 
             this.metainfo$ = this.metainfoChange$.asObservable().pipe(debounceTime(100)).
                 subscribe(metainfo => 
                     this._ngZone.run(() => {
                         const animation: AnimationAnimateRefMetadata = useAnimation(rotateAnimation, { params: { duration: this.rotateDuration, start: metainfo.start, final: metainfo.final } });
-                        this.player = this._builder.build(animation).create(this._element.nativeElement);
+                        this.player = this._builder.build(animation).create(element);
                         this.player.play();
                     })));
     }

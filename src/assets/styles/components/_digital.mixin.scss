@@ -1,0 +1,47 @@
+@mixin setup-digital-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .digital {
+        --digital-bgcolor: var(--palette-black-color);
+        --digital-padding: var(--size-pixel-4);
+
+        --digial-thumb-stroke-color: #{var(--digital-bgcolor)};
+        --digial-thumb-stroke-width: #{var(--size-pixel-4)};
+
+        --digital-thumb-bgcolor: #{var(--palette-white-color-35)};
+
+        @each $key, $value in $colors {
+            --digital-thumb-bgcolor-active-#{$key}: #{var(--palette-#{$value}-color-100)};
+        }
+
+        background-color: var(--digital-bgcolor);
+
+        display: inline-block;
+
+        padding: var(--digital-padding);
+
+        .digital-thumb {
+            fill: var(--digital-thumb-bgcolor);
+            stroke: var(--digial-thumb-stroke-color);
+            stroke-width: var(--digial-thumb-stroke-width);
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-digital-color=#{$color}] {
+                .digital-thumb {
+                    &.active {
+                        fill: var(--digital-thumb-bgcolor-active-#{$color});
+                    }
+                }
+            }
+        }
+    }
+}

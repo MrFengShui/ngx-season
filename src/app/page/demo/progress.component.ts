@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from "@angular/core";
 import { interval, map, Observable, of, take } from "rxjs";
 
-import { NGXSeasonProgressColor, NGXSeasonProgressSize } from "src/app/components/progress/progress-bar.component";
+import { NGXSeasonProgressColor, NGXSeasonProgressSize } from "src/app/components/progress/progress.component";
 
 @Component({
     selector: 'ngx-sui-demo-progress-page',

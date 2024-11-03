@@ -161,4 +161,9 @@ $alphas: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 
     
     --palette-black-color: #000000;
     --palette-white-color: #FFFFFF;
+
+    @each $alpha in $alphas {
+        --palette-black-color-#{$alpha}: #{rgba(#000, calc($alpha * 0.01))};
+        --palette-white-color-#{$alpha}: #{rgba(#FFF, calc($alpha * 0.01))};
+    }
 }

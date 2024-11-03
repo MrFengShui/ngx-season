@@ -1,0 +1,28 @@
+<div class="flex flex-dir-col gy-100">
+    <!-- <div class="flex gx-100 p-100" *ngFor="let color of colors">
+        <ngx-sui-digital [digitColor]="color" [digitValue]="value" *ngFor="let value of values"></ngx-sui-digital>
+    </div> -->
+    <div class="flex p-100">
+        <ngx-sui-digital [digitValue]="fstYear"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="sndYear"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="trdYear"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="fthYear"></ngx-sui-digital>
+        <ngx-sui-digital digitValue="-"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="fstMonth"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="sndMonth"></ngx-sui-digital>
+        <ngx-sui-digital digitValue="-"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="fstDate"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="sndDate"></ngx-sui-digital>
+        
+    </div>
+    <div class="flex p-100">
+        <ngx-sui-digital [digitValue]="fstHour"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="sndHour"></ngx-sui-digital>
+        <ngx-sui-digital [digitActive]="isActive(sndSecond)" digitValue=":"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="fstMinute"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="sndMinute"></ngx-sui-digital>
+        <ngx-sui-digital [digitActive]="isActive(sndSecond)" digitValue=":"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="fstSecond"></ngx-sui-digital>
+        <ngx-sui-digital [digitValue]="sndSecond"></ngx-sui-digital>
+    </div>
+</div>
