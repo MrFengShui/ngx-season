@@ -22,6 +22,18 @@
     flex: 1 1 auto !important;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-wrap-flip {
+    flex-wrap: wrap-reverse;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+
 .flex-dir-row {
     flex-direction: row !important;
 }
@@ -38,27 +50,27 @@
     flex-direction: column-reverse !important;
 }
 
-.justsify-content-baseline {
+.justify-content-baseline {
     justify-content: baseline !important;
 }
 
-.justsify-content-center {
+.justify-content-center {
     justify-content: center !important;
 }
 
-.justsify-content-start {
+.justify-content-start {
     justify-content: flex-start !important;
 }
 
-.justsify-content-end {
+.justify-content-end {
     justify-content: flex-end !important;
 }
 
-.justsify-content-between {
+.justify-content-between {
     justify-content: space-between !important;
 }
 
-.justsify-content-around {
+.justify-content-around {
     justify-content: space-around !important;
 }
 

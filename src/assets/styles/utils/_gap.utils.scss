@@ -5,14 +5,14 @@ $gaps: (
 );
 
 :root {
-    @for $index from 0 through 10 {
+    @for $index from 0 through 20 {
         --margin-#{$index * 25}: #{$index * 4}px;
         --padding-#{$index * 25}: #{$index * 4}px;
     }
 }
 
 @each $key, $value in $gaps {
-    @for $index from 0 through 10 {
+    @for $index from 0 through 20 {
         @if $key == "g" {
             .#{$key}x-#{$index * 25} {
                 > :nth-child(n) {

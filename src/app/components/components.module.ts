@@ -16,6 +16,7 @@ import { NGXSeasonLayoutModule } from './layout/layout.module';
 import { NGXSeasonEffectsModule } from './effects/effects.module';
 import { NGXSeasonRibbonModule } from './ribbon/ribbon.module';
 import { NGXSeasonNavigatorModule } from './navigator/navigator.module';
+import { NGXSeasonProgressModule } from './progress/progress.module';
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import { NGXSeasonNavigatorModule } from './navigator/navigator.module';
         NGXSeasonIconModule,
         NGXSeasonLayoutModule,
         NGXSeasonNavigatorModule,
+        NGXSeasonProgressModule,
         NGXSeasonRibbonModule
     ],
     exports: [
@@ -48,6 +50,7 @@ import { NGXSeasonNavigatorModule } from './navigator/navigator.module';
         NGXSeasonIconModule,
         NGXSeasonLayoutModule,
         NGXSeasonNavigatorModule,
+        NGXSeasonProgressModule,
         NGXSeasonRibbonModule,
     ],
     providers: [
