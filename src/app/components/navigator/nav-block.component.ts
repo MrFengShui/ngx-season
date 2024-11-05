@@ -8,7 +8,7 @@ import { NGXSeasonIconComponent } from "../icon/icon.component";
     selector: 'ngx-sui-navblock',
     template: `
         <a class="nav-block-header" (click)="handleToggleEvent()">
-            <ngx-sui-icon iconDegree="90" [iconShape]="icon" [iconSolid]="isLinkHover" #blockCtrlIcon *ngIf="icon"></ngx-sui-icon>
+            <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover" #blockCtrlIcon *ngIf="icon"></ngx-sui-icon>
             <span class="header-text-wrapper">{{ title }}</span>
         </a>
         <div class="nav-block-content" #blockContent><ng-content select="a[ngx-sui-NavLink]"></ng-content></div>

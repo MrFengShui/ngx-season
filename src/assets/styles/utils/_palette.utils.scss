@@ -158,6 +158,12 @@ $alphas: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 
             --palette-#{$colorName}-color-#{$alpha}: #{rgba($colorValue, calc($alpha * 0.01))};
         }
     }
+
+    @each $colorKey, $colorValue in $grayColors {
+        @each $alpha in $alphas {
+            --palette-gray-#{$colorKey}-color-#{$alpha}: #{rgba($colorValue, calc($alpha * 0.01))};
+        }
+    }
     
     --palette-black-color: #000000;
     --palette-white-color: #FFFFFF;

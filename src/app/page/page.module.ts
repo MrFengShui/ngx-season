@@ -17,6 +17,9 @@ import { DemoRibbonPageComponent } from "./demo/ribbon.component";
 import { DemoCarouselPageComponent } from "./demo/carousel.component";
 import { DemoProgressPageComponent } from "./demo/progress.component";
 import { DemoDigitalPageComponent } from "./demo/digital.component";
+import { DemoPlaceholderPageComponent } from "./demo/placeholder.component";
+import { DemoBreadcrumbPageComponent } from "./demo/breadcrumb.component";
+import { DemoBackgroundPageComponent } from "./demo/background.component";
 
 @NgModule({
     declarations: [
@@ -26,11 +29,14 @@ import { DemoDigitalPageComponent } from "./demo/digital.component";
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
+        DemoBackgroundPageComponent,
         DemoBadgePageComponent,
+        DemoBreadcrumbPageComponent,
         DemoButtonPageComponent,
         DemoCardPageComponent,
         DemoCarouselPageComponent,
         DemoDigitalPageComponent,
+        DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRibbonPageComponent
     ],
@@ -47,11 +53,14 @@ import { DemoDigitalPageComponent } from "./demo/digital.component";
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
+        DemoBackgroundPageComponent,
         DemoBadgePageComponent,
+        DemoBreadcrumbPageComponent,
         DemoButtonPageComponent,
         DemoCardPageComponent,
         DemoCarouselPageComponent,
         DemoDigitalPageComponent,
+        DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRibbonPageComponent
     ]

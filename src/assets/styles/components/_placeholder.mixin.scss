@@ -1,0 +1,92 @@
+@mixin setup-placeholder-theme($theme) {
+    .placeholder {
+        --placeholder-block-margin: #{var(--size-pixel-16)} #{var(--size-pixel-0)};
+        --placeholder-block-width: #{var(--size-percent-100)};
+        --placeholder-block-height: #{var(--size-pixel-128)};
+
+        --placeholder-circle-radius: #{var(--size-pixel-48)};
+
+        --placeholder-column-width: #{var(--size-percent-100)};
+        --placeholder-column-height: #{var(--size-pixel-16)};
+
+        --placeholder-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
+        --placeholder-bgcolor-highlight: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+
+        @keyframes placeholder-shape-animation {
+            @for $i from 0 through 100 {
+                $percent: percentage($i * 0.01);
+                #{$percent}{
+                    background: linear-gradient(to right, var(--placeholder-bgcolor) 0%, var(--placeholder-bgcolor-highlight) #{$percent}, var(--placeholder-bgcolor) 100%);
+                }
+            }
+        }
+
+        .placeholder-shape {
+            display: inline-block;
+
+            &[data-placeholder-shape="block"], &[data-placeholder-shape="circle"], &[data-placeholder-shape="column"] {
+                animation-name: placeholder-shape-animation;
+                animation-duration: 875ms;
+                animation-timing-function: linear;
+                animation-delay: 125ms;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+                animation-fill-mode: both;
+            }
+
+            &[data-placeholder-shape="block"] {
+                margin: var(--placeholder-block-margin);
+
+                width: var(--placeholder-block-width);
+                height: var(--placeholder-block-height);
+            }
+
+            &[data-placeholder-shape="circle"] {
+                border-radius: 50%;
+    
+                width: var(--placeholder-circle-radius);
+                height: var(--placeholder-circle-radius);
+            }
+
+            &[data-placeholder-shape="column"] {
+                width: var(--placeholder-column-width);
+                height: var(--placeholder-column-height);
+            }
+        }
+
+        &.card-placeholder {
+            display: flex;
+            flex-direction: column;
+
+            .placeholder-header {
+                display: inline-flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                .placeholder-header-wrapper {
+                    display: inline-flex;
+                    justify-content: space-around;
+                    flex-direction: column;
+
+                    width: calc(var(--size-percent-100) - var(--size-pixel-16) - var(--placeholder-circle-radius));
+                    height: var(--placeholder-circle-radius);
+                }
+            }
+
+            .placeholder-content {
+                display: inline-flex;
+                flex-direction: column;
+
+                > :nth-child(n) {
+                    &:not(:last-child) {
+                        margin-bottom: var(--size-pixel-8);
+                    }
+
+                    &:last-child {
+                        width: calc(var(--placeholder-column-width) * 0.5);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,7 +7,9 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
                 .addIcon('moon').addIcon('sun').addIcon('thumbs-up').addIcon('thumbs-down').addIcon('alarm-on').addIcon('alarm-off')
                 .addIcon('check').addIcon('plus').addIcon('plus-circle').addIcon('minus').addIcon('minus-circle').addIcon('times').addIcon('times-circle').addIcon('shield-check').addIcon('shield-times')
                 .addIcon('avatar').addIcon('administrator').addIcon('assign-user').addIcon('user').addIcon('users')
-                .addIcon('alert').addIcon('analytics').addIcon('application').addIcon('applications').addIcon('bank').addIcon('bars').addIcon('close').addIcon('angle').addIcon('angle-double').addIcon('star').addIcon('bookmark').addIcon('favorite').addIcon('home').addIcon('new').addIcon('share')
+                .addIcon('alert').addIcon('analytics').addIcon('application').addIcon('applications').addIcon('bank').addIcon('bars').addIcon('color-palette').addIcon('close').addIcon('cog').addIcon('dashboard').addIcon('angle').addIcon('angle-double').addIcon('star').addIcon('bookmark').addIcon('favorite').addIcon('home').addIcon('new').addIcon('share').addIcon('organization').addIcon('terminal').addIcon('wifi').addIcon('world')
+                .addIcon('storage').addIcon('arrow').addIcon('caret').addIcon('collapse')
+                .addIcon('grid-view').addIcon('tree-view')
                 .addIcon('success').addIcon('success-standard').addIcon('warning').addIcon('warning-standard').addIcon('failure').addIcon('failure-standard').addIcon('info').addIcon('info-standard');
 
 @NgModule({

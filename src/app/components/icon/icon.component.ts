@@ -243,15 +243,16 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         this.setupIconContent(this.shape, this.solid);
         this.listenRotateStartFinalChange(this.svgElement?.nativeElement);
         this.player?.onDone(() => {
-            this._renderer.setStyle(this.svgElement?.nativeElement, 'rotate', `${this.degreeFinal}deg`);
+            this._renderer.setStyle(this.svgElement?.nativeElement, 'transform', `rotate(${this.degreeFinal}deg)`);
 
             this.player?.destroy();
             this.player = undefined;
         });
+        this.player?.onStart(() => this._renderer.setStyle(this.svgElement?.nativeElement, 'transform', `rotate(${this.degreeStart}deg)`));
     }
 
     protected changeIconDegree(degree: number): void {
-        this._renderer.setStyle(this.svgElement?.nativeElement, 'rotate', `${degree}deg`);
+        this._renderer.setStyle(this.svgElement?.nativeElement, 'transform', `rotate(${degree}deg)`);
     }
 
     protected setupIconContent(shape: string | undefined, solid: boolean): void {

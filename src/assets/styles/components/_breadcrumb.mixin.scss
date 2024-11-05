@@ -1,0 +1,44 @@
+@mixin setup-breadcrumb-theme($theme) {
+    --breadcrumb-item-padding: #{var(--size-pixel-16)};
+
+    --breadcrumb-item-font-size: #{var(--typography-body-1)};
+    --breadcrumb-item-font-weight: 700;
+    --breadcrumb-item-line-height: #{var(--line-height-100)};
+
+    --breadcrumb-item-text-wrapper-gap: #{var(--size-pixel-8)};
+
+    --breadcrumb-item-link-bgcolor-hover: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
+    --breadcrumb-item-link-bgcolor-active: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+
+    .breadcrumb {
+        display: inline-flex;
+        align-items: center;
+
+        .breadcrumb-item {
+            display: inline-flex;
+            align-items: center;
+
+            user-select: none;
+
+            font-size: var(--breadcrumb-item-font-size);
+            font-weight: var(--breadcrumb-item-font-weight);
+            line-height: var(--breadcrumb-item-line-height);
+
+            padding: var(--breadcrumb-item-padding);
+
+            .item-text-wrapper {
+                margin-left: var(--breadcrumb-item-text-wrapper-gap);
+            }
+
+            &.link {
+                &:hover {
+                    background-color: var(--breadcrumb-item-link-bgcolor-hover);
+                }
+
+                &:active {
+                    background-color: var(--breadcrumb-item-link-bgcolor-active);
+                }
+            }
+        }
+    }
+}

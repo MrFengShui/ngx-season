@@ -35,14 +35,22 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-2', text: '警示框', link: ['/demo', 'alert'] },
                 { id: '2-3', text: '头像', link: ['/demo', 'avatar'] },
                 { id: '2-4', text: '徽章', link: ['/demo', 'badge'] },
-                { id: '2-5', text: '按钮', link: ['/demo', 'button'] },
-                { id: '2-6', text: '按钮组', link: ['/demo', 'button-group'] },
-                { id: '2-7', text: '卡片', link: ['/demo', 'card'] },
-                { id: '2-8', text: '轮播器', link: ['/demo', 'carousel'] },
+                { id: '2-5', text: '面包屑', link: ['/demo', 'breadcrumb'] },
+                { id: '2-6', text: '按钮', link: ['/demo', 'button'] },
+                { id: '2-7', text: '按钮组', link: ['/demo', 'button-group'] },
+                { id: '2-8', text: '卡片', link: ['/demo', 'card'] },
+                { id: '2-9', text: '轮播器', link: ['/demo', 'carousel'] },
                 { id: '2-10', text: '数码', link: ['/demo', 'digital'] },
+                { id: '2-13', text: '占位符', link: ['/demo', 'placeholder'] },
                 { id: '2-14', text: '进度', link: ['/demo', 'progress'] },
                 { id: '2-17', text: '丝带', link: ['/demo', 'ribbon'] },
-            ] 
+            ]
+        },
+        { 
+            id: '3', text: '特效展示', 
+            nodes: [
+                { id: '2-1', text: '背景', link: ['/demo', 'background'] }
+            ]
         }
     ];
 
