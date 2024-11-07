@@ -7,9 +7,11 @@
 @import "../components/button.mixin";
 @import "../components/card.mixin";
 @import "../components/carousel.mixin";
+@import "../components/check.mixin";
 @import "../components/digital.mixin";
 @import "../components/icons.mixin";
 @import "../components/layout.mixin";
+@import "../components/list.mixin";
 @import "../components/navigator.mixin";
 @import "../components/placeholder.mixin";
 @import "../components/progress.mixin";
@@ -28,9 +30,11 @@
         @include setup-button-theme($theme, "indigo", "pink");
         @include setup-card-theme($theme, "indigo");
         @include setup-carousel-theme($theme, "indigo", "pink");
+        @include setup-check-theme($theme, "indigo", "pink");
         @include setup-digital-theme($theme, "indigo", "pink");
         @include setup-icons-theme($theme);
         @include setup-layout-theme($theme);
+        @include setup-list-theme($theme);
         @include setup-navigator-theme($theme, "indigo");
         @include setup-placeholder-theme($theme);
         @include setup-progress-theme($theme, "indigo", "pink");

@@ -2,7 +2,7 @@ import { AnimationBuilder, AnimationPlayer, style, animate } from "@angular/anim
 import { coerceNumberProperty, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { Component, OnChanges, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener, Renderer2, SimpleChanges } from "@angular/core";
 
-import { NGXSeasonIconComponent } from "../icon/icon.component";
+import { NGXSeasonIconComponent, NGXSeasonIconName } from "../icon/icon.component";
 
 @Component({
     selector: 'ngx-sui-navblock',
@@ -17,11 +17,11 @@ import { NGXSeasonIconComponent } from "../icon/icon.component";
 export class NGXSeasonNavigatorblockComponent implements OnChanges, OnInit, OnDestroy, AfterViewInit {
 
     @Input('blockIcon')
-    set icon(icon: string | undefined) {
+    set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
 
-    get icon(): string | undefined {
+    get icon(): NGXSeasonIconName | undefined {
         return this._icon;
     }
 
@@ -52,7 +52,7 @@ export class NGXSeasonNavigatorblockComponent implements OnChanges, OnInit, OnDe
         return this._title;
     }
 
-    private _icon: string | undefined = 'angle';
+    private _icon: NGXSeasonIconName | undefined = 'angle';
     private _duration: number = 125;
     private _expanded: boolean = false;
     private _title: string | undefined;

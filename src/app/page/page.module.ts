@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
 import { NGXSeasonComponentsModule } from "../components/components.module";
@@ -20,6 +21,9 @@ import { DemoDigitalPageComponent } from "./demo/digital.component";
 import { DemoPlaceholderPageComponent } from "./demo/placeholder.component";
 import { DemoBreadcrumbPageComponent } from "./demo/breadcrumb.component";
 import { DemoBackgroundPageComponent } from "./demo/background.component";
+import { DemoListPageComponent } from "./demo/list.component";
+import { DemoIconPageComponent } from "./demo/icon.component";
+import { DemoCheckboxPageComponent } from "./demo/checkbox.component";
 
 @NgModule({
     declarations: [
@@ -35,13 +39,18 @@ import { DemoBackgroundPageComponent } from "./demo/background.component";
         DemoButtonPageComponent,
         DemoCardPageComponent,
         DemoCarouselPageComponent,
+        DemoCheckboxPageComponent,
         DemoDigitalPageComponent,
+        DemoIconPageComponent,
+        DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRibbonPageComponent
     ],
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule,
 
         NGXSeasonComponentsModule
@@ -59,7 +68,10 @@ import { DemoBackgroundPageComponent } from "./demo/background.component";
         DemoButtonPageComponent,
         DemoCardPageComponent,
         DemoCarouselPageComponent,
+        DemoCheckboxPageComponent,
         DemoDigitalPageComponent,
+        DemoIconPageComponent,
+        DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRibbonPageComponent

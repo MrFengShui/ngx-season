@@ -2,6 +2,8 @@ import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, Renderer2, SimpleChanges, ViewContainerRef } from "@angular/core";
 import { Observable, of } from "rxjs";
 
+import { NGXSeasonIconName } from "../icon/icon.component";
+
 type NGXSeasonAlertType = 'success' | 'warning' | 'failure' | 'info';
 
 @Component({
@@ -49,7 +51,7 @@ export class NGXSeasonAlertComponent implements OnChanges, AfterViewInit {
     private _message: string | undefined;
     private _showClose: boolean = true;
 
-    protected iconShape$: Observable<string> | undefined;
+    protected iconShape$: Observable<NGXSeasonIconName> | undefined;
 
     private readonly ALERT_TYPES: NGXSeasonAlertType[] = ['success', 'warning', 'failure', 'info'];
 
@@ -86,7 +88,7 @@ export class NGXSeasonAlertComponent implements OnChanges, AfterViewInit {
         
         Promise.resolve()
             .then(() => this._renderer.addClass(element, `alert-${alertType}`))
-            .then(() => this.iconShape$ = of(`${alertType}-standard`));
+            .then(() => this.iconShape$ = of(`${alertType}-standard` as NGXSeasonIconName));
     }
 
     protected handleAlertDismissEvent(): void {

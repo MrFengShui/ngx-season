@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+
 import { NGXSeasonAccordionColor } from "src/app/components/accordion/accordion.component";
+import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 
 @Component({
     selector: 'ngx-sui-demo-accordion-page',
@@ -8,7 +10,7 @@ import { NGXSeasonAccordionColor } from "src/app/components/accordion/accordion.
 export class DemoAccordionPageComponent {
 
     protected colors: NGXSeasonAccordionColor[] = ['default', 'primary', 'accent', 'success', 'warning', 'failure', 'info'];
-    protected list: Array<{ icon: string, subject: string, description: string }> = [
+    protected list: Array<{ icon: NGXSeasonIconName, subject: string, description: string }> = [
         { icon: 'home', subject: '折叠面板一（主题）', description: '折叠面板一（描述）' },
         { icon: 'home', subject: '折叠面板二（主题）', description: '折叠面板二（描述）' },
         { icon: 'home', subject: '折叠面板三（主题）', description: '折叠面板三（描述）' },

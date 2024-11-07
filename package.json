@@ -1,6 +1,6 @@
 {
   "name": "ngx-season",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,6 +23,7 @@
     "crypto-js": "^4.2.0",
     "highlight.js": "^11.10.0",
     "highlightjs-line-numbers.js": "^2.8.0",
+    "lunisolar": "^2.5.1",
     "moment": "^2.30.1",
     "ngx-highlightjs": "^7.0.0",
     "rxjs": "~7.4.0",

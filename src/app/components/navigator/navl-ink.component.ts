@@ -1,21 +1,23 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { Component, OnChanges, AfterViewInit, Input, HostListener, ElementRef, Renderer2, SimpleChanges } from "@angular/core";
 
+import { NGXSeasonIconName } from "../icon/icon.component";
+
 @Component({
     selector: 'a[ngx-sui-NavLink]',
     template: `
-        <ngx-sui-icon [iconShape]="icon ? icon : ''" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'"></ngx-sui-icon>
+        <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'"></ngx-sui-icon>
         <div class="nav-link-wrapper"><ng-content></ng-content></div>
     `
 })
 export class NGXSeasonNavigatorLinkComponent implements OnChanges, AfterViewInit {
 
     @Input('navLinkIcon')
-    set icon(icon: string | undefined) {
+    set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
 
-    get icon(): string | undefined {
+    get icon(): NGXSeasonIconName | undefined {
         return this._icon;
     }
 
@@ -28,7 +30,7 @@ export class NGXSeasonNavigatorLinkComponent implements OnChanges, AfterViewInit
         return this._selected;
     }
 
-    private _icon: string | undefined;
+    private _icon: NGXSeasonIconName | undefined;
     private _selected: boolean = false;
 
     @HostListener('mouseenter')

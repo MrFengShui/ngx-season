@@ -12,6 +12,9 @@ import { DemoDigitalPageComponent } from "../page/demo/digital.component";
 import { DemoPlaceholderPageComponent } from "../page/demo/placeholder.component";
 import { DemoBreadcrumbPageComponent } from "../page/demo/breadcrumb.component";
 import { DemoBackgroundPageComponent } from "../page/demo/background.component";
+import { DemoListPageComponent } from "../page/demo/list.component";
+import { DemoIconPageComponent } from "../page/demo/icon.component";
+import { DemoCheckboxPageComponent } from "../page/demo/checkbox.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'accordion', pathMatch: 'full' },
@@ -24,7 +27,10 @@ export const demoRoutes: Routes = [
     { path: 'button', component: DemoButtonPageComponent, title: '按钮' },
     { path: 'card', component: DemoCardPageComponent, title: '卡片' },
     { path: 'carousel', component: DemoCarouselPageComponent, title: '轮播器' },
+    { path: 'checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
     { path: 'digital', component: DemoDigitalPageComponent, title: '数码' },
+    { path: 'icon', component: DemoIconPageComponent, title: '图标' },
+    { path: 'list', component: DemoListPageComponent, title: '列表' },
     { path: 'placeholder', component: DemoPlaceholderPageComponent, title: '占位符' },
     { path: 'progress', component: DemoProgressPageComponent, title: '进度' },
     { path: 'ribbon', component: DemoRibbonPageComponent, title: '丝带' },

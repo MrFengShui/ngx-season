@@ -1,0 +1,417 @@
+@mixin setup-check-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .checkbox {
+        --checkbox-size: #{var(--size-pixel-24)};
+        --checkbox-gap: #{var(--size-pixel-16)};
+
+        --checkbox-mark-border-radius: #{var(--size-pixel-4)};
+        --checkbox-mark-border-width: #{var(--size-pixel-2)};
+        --checkbox-mark-size: #{var(--size-pixel-16)};
+        --checkbox-mark-offset: #{var(--size-pixel-2)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --checkbox-mark-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --checkbox-mark-bdcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+
+                --checkbox-mark-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
+                --checkbox-mark-bgcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --checkbox-mark-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --checkbox-mark-color-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+
+                --checkbox-text-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --checkbox-text-color-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            } @else {
+                --checkbox-mark-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --checkbox-mark-bdcolor-disabled-#{$key}: #{var(--palette-#{$value}-100-color)};
+
+                --checkbox-mark-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+                --checkbox-mark-bgcolor-disabled-#{$key}: #{var(--palette-#{$value}-50-color)};
+
+                --checkbox-mark-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --checkbox-mark-color-disabled-#{$key}: #{var(--palette-#{$value}-100-color)};
+
+                --checkbox-text-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --checkbox-text-color-disabled-#{$key}: #{var(--palette-#{$value}-100-color)};
+            }
+        }
+
+        display: inline-flex;
+        align-items: center;
+
+        &[data-check-label-position="before"] {
+            flex-direction: row-reverse;
+        }
+
+        cursor: pointer;
+        user-select: none;
+
+        &[data-checkbox-usable="disable"] {
+            cursor: not-allowed !important;
+        }
+
+        &[data-checkbox-check-mark="tick"] {
+            .checkbox-mark {
+                &::before {
+                    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+                }
+            }
+        }
+
+        &[data-checkbox-check-mark="cross"] {
+            .checkbox-mark {
+                &::before {
+                    clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);;
+                }
+            }
+        }
+
+        &[data-checkbox-indeterminate-mark="dash"] {
+            .checkbox-mark {
+                &::after {
+                    clip-path: polygon(0% 37%, 100% 37%, 100% 63%, 0% 63%);
+                }
+            }
+        }
+
+        &[data-checkbox-indeterminate-mark="solid"] {
+            .checkbox-mark {
+                &::after {
+                    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+                }
+            }
+        }
+
+        input[type=checkbox] {
+            display: none;
+
+            &:not(:checked) + .checkbox-mark {
+                &::before {
+                    display: none !important;
+                }
+            }
+
+            &:not(:indeterminate) + .checkbox-mark {
+                &::after {
+                    display: none !important;
+                }
+            }
+        }
+
+        .checkbox-mark {
+            display: inline-block;
+
+            border-radius: var(--checkbox-mark-border-radius);
+            border-width: var(--checkbox-mark-border-width);
+            border-style: solid;
+
+            position: relative;
+ 
+            width: var(--checkbox-size);
+            height: var(--checkbox-size);
+
+            &::before, &::after {
+                content: '';
+
+                display: inline-block;
+
+                position: absolute;
+                top: var(--checkbox-mark-offset);
+                left: var(--checkbox-mark-offset);
+    
+                width: var(--checkbox-mark-size);
+                height: var(--checkbox-mark-size);
+            }
+        }
+
+        .checkbox-wrapper {
+            flex: 1 1 auto;
+            font-weight: var(--font-weight-900);
+        }
+
+        &[data-check-label-position="after"] {
+            > :nth-child(n) {
+                &:not(:last-child) {
+                    margin-right: var(--checkbox-gap);
+                }
+            }
+        }
+
+        &[data-check-label-position="before"] {
+            > :nth-child(n) {
+                &:not(:last-child) {
+                    margin-left: var(--checkbox-gap);
+                }
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-checkbox-color=#{$color}] {
+                .checkbox-mark {
+                    background-color: var(--checkbox-mark-bgcolor-#{$color});
+                    border-color: var(--checkbox-mark-bdcolor-#{$color});
+
+                    &::before, &::after {
+                        background-color: var(--checkbox-mark-color-#{$color});
+                    }
+                }
+
+                .checkbox-wrapper {
+                    color: var(--checkbox-text-color-#{$color});
+                }
+
+                &[data-checkbox-usable="disable"] {
+                    .checkbox-mark {
+                        background-color: var(--checkbox-mark-bgcolor-disabled-#{$color});
+                        border-color: var(--checkbox-mark-bdcolor-disabled-#{$color});
+
+                        &::before, &::after {
+                            background-color: var(--checkbox-mark-color-disabled-#{$color});
+                        }
+                    }
+                    
+                    .checkbox-wrapper {
+                        color: var(--checkbox-text-color-disabled-#{$color});
+                    }
+                }
+            }
+        }
+    }
+
+    .check-switch {
+        --check-switch-gap: #{var(--size-pixel-16)};
+
+        --check-switch-track-border-radius: #{calc((var(--size-pixel-24) + var(--size-pixel-4) * 2) * 0.5)};
+        --check-switch-track-border-width: #{var(--size-pixel-2)};
+        --check-switch-track-width: #{calc(var(--size-pixel-24) * 2 + var(--size-pixel-8) * 4)};
+        --check-switch-track-height: #{var(--size-pixel-24)};
+        --check-switch-track-padding: #{var(--size-pixel-2)};
+
+        --check-switch-thumb-border-raidus: #{var(--size-pixel-12)};
+        --check-switch-thumb-width: #{calc(var(--size-pixel-24) + var(--size-pixel-8) * 2)};
+        --check-switch-thumb-height: #{var(--size-pixel-24)};
+        --check-switch-thumb-font-size: #{var(--font-size-12)};
+        --check-switch-thumb-font-weight: #{var(--font-weight-700)};
+        --check-switch-thumb-line-height: #{var(--line-height-200)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --check-switch-track-on-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-track-off-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-track-bdcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --check-switch-track-on-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-track-off-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --check-switch-track-bgcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --check-switch-track-on-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+                --check-switch-track-off-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+                --check-switch-track-color-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+
+                --check-switch-thumb-on-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-600-color), var(--palette-#{$value}-400-color))};
+                --check-switch-thumb-off-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-thumb-bgcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            } @else {
+                --check-switch-track-on-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-track-off-bdcolor-#{$key}: #{var(--palette-gray-500-color)};
+                --check-switch-track-bdcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --check-switch-track-on-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+                --check-switch-track-off-bgcolor-#{$key}: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
+                --check-switch-track-bgcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --check-switch-track-on-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-track-off-color-#{$key}: #{if($theme == "light", var(--palette-gray-700-color), var(--palette-gray-300-color))};
+                --check-switch-track-color-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+
+                --check-switch-thumb-on-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --check-switch-thumb-off-bgcolor-#{$key}: #{var(--palette-gray-500-color)};
+                --check-switch-thumb-bgcolor-disabled-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            }
+        }
+
+        @keyframes check-switch-on-animation {
+            0% {
+                left: 0;
+            }
+
+            100% {
+                left: 50%;
+            }
+        }
+
+        @keyframes check-switch-off-animation {
+            0% {
+                left: 50%;
+            }
+
+            100% {
+                left: 0;
+            }
+        }
+
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &[data-check-label-position="before"] {
+            flex-direction: row-reverse;
+        }
+
+        cursor: pointer;
+        user-select: none;
+
+        input[type=checkbox] {
+            display: none;
+
+            &:checked + .check-switch-track {
+                .check-switch-thumb {
+                    animation-name: check-switch-on-animation;
+                    animation-duration: 250ms;
+                    animation-timing-function: linear;
+                    animation-iteration-count: 1;
+                    animation-direction: normal;
+                    animation-fill-mode: both;
+                }
+            }
+
+            &:not(:checked) + .check-switch-track {
+                .check-switch-thumb {
+                    animation-name: check-switch-off-animation;
+                    animation-duration: 250ms;
+                    animation-timing-function: linear;
+                    animation-iteration-count: 1;
+                    animation-direction: normal;
+                    animation-fill-mode: both;
+                }
+            }
+        }
+
+        .check-switch-track {
+            border-radius: var(--check-switch-track-border-radius);
+            border-width: var(--check-switch-track-border-width);
+            border-style: solid;
+
+            display: inline-flex;
+
+            padding: var(--check-switch-track-padding);
+
+            .check-switch-track-wrapper {
+                display: inline-flex;
+                align-items: center;
+
+                position: relative;
+    
+                width: var(--check-switch-track-width);
+                height: var(--check-switch-track-height);
+    
+                &::before { 
+                    content: attr(data-check-switch-on-label) "";
+
+                    border-top-left-radius: var(--check-switch-thumb-border-raidus);
+                    border-bottom-left-radius: var(--check-switch-thumb-border-raidus);
+                }
+    
+                &::after { 
+                    content: attr(data-check-switch-off-label) "";
+    
+                    border-top-right-radius: var(--check-switch-thumb-border-raidus);
+                    border-bottom-right-radius: var(--check-switch-thumb-border-raidus);
+                }
+    
+                &::before, &::after {
+                    display: inline-block;
+    
+                    font-size: var(--check-switch-thumb-font-size);
+                    font-weight: var(--check-switch-thumb-font-weight);
+                    line-height: var(--check-switch-thumb-line-height);
+                    text-align: center;
+                    vertical-align: middle;
+    
+                    width: var(--check-switch-thumb-width);
+                    height: var(--check-switch-thumb-height);
+                }
+    
+                .check-switch-thumb {
+                    border-radius: var(--check-switch-thumb-border-raidus);
+
+                    display: inline-block;
+    
+                    position: absolute;
+                    z-index: 1;
+    
+                    width: var(--check-switch-thumb-width);
+                    height: var(--check-switch-thumb-height);
+                }
+            }
+        }
+
+        .check-switch-wrapper {
+            font-weight: var(--font-weight-900);
+        }
+
+        &[data-check-label-position="after"] {
+            > :nth-child(n) {
+                &:not(:last-child) {
+                    margin-right: var(--check-switch-gap);
+                }
+            }
+        }
+
+        &[data-check-label-position="before"] {
+            > :nth-child(n) {
+                &:not(:last-child) {
+                    margin-left: var(--check-switch-gap);
+                }
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-check-switch-color=#{$color}] {
+                .check-switch-track {
+                    background-color: var(--check-switch-track-off-bgcolor-#{$color});
+                    border-color: var(--check-switch-track-off-bdcolor-#{$color});
+                    color: var(--check-switch-track-off-color-#{$color});
+
+                    .check-switch-thumb {
+                        background-color: var(--check-switch-thumb-off-bgcolor-#{$color});
+                    }
+                }
+
+                input[type=checkbox] {
+                    &:checked + .check-switch-track {
+                        background-color: var(--check-switch-track-on-bgcolor-#{$color});
+                        border-color: var(--check-switch-track-on-bdcolor-#{$color});
+                        color: var(--check-switch-track-on-color-#{$color});
+
+                        .check-switch-thumb {
+                            background-color: var(--check-switch-thumb-on-bgcolor-#{$color});
+                        }
+                    }
+                }
+
+                &[data-checkbox-usable="disable"] {
+                    .check-switch-track {
+                        border-color: var(--check-switch-track-bdcolor-disabled-#{$color});
+                    }
+
+                    input[type=checkbox] {
+                        &:checked + .check-switch-track {
+                            background-color: var(--check-switch-track-bgcolor-disabled-#{$color});
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

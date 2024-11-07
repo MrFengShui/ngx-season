@@ -1,5 +1,6 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { AfterViewInit, Component, ContentChildren, ElementRef, Input, QueryList, Renderer2 } from "@angular/core";
+import { NGXSeasonIconName } from "../icon/icon.component";
 
 @Component({
     selector: 'ngx-sui-breadcrumb-item',
@@ -8,11 +9,11 @@ import { AfterViewInit, Component, ContentChildren, ElementRef, Input, QueryList
 export class NGXSeasonBreadcrumbItem {
 
     @Input('bcIcon')
-    set icon(icon: string | undefined) {
-        this._icon = icon;
+    set icon(icon: NGXSeasonIconName | undefined | null) {
+        this._icon = icon ? icon : undefined;
     }
 
-    get icon(): string | undefined {
+    get icon(): NGXSeasonIconName | undefined {
         return this._icon;
     }
 
@@ -34,7 +35,7 @@ export class NGXSeasonBreadcrumbItem {
         return this._text;
     }
 
-    private _icon: string | undefined;
+    private _icon: NGXSeasonIconName | undefined;
     private _link: string | undefined;
     private _text: string | undefined;
 
@@ -65,11 +66,11 @@ export class NGXSeasonBreadcrumbItem {
 export class NGXSeasonBreadcrumbComponent implements AfterViewInit {
 
     @Input('bcSplitIcon')
-    set splitIcon(splitIcon: string | null) {
+    set splitIcon(splitIcon: NGXSeasonIconName | null) {
         this._splitIcon = splitIcon ? splitIcon : 'angle';
     }
 
-    get splitIcon(): string {
+    get splitIcon(): NGXSeasonIconName {
         return this._splitIcon;
     }
 
@@ -82,7 +83,7 @@ export class NGXSeasonBreadcrumbComponent implements AfterViewInit {
         return this._textOnly;
     }
 
-    private _splitIcon: string = 'angle-double';
+    private _splitIcon: NGXSeasonIconName = 'angle-double';
     private _textOnly: boolean = false;
 
     @ContentChildren(NGXSeasonBreadcrumbItem)

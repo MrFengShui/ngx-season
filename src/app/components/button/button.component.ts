@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { AnimationBuilder } from "@angular/animations";
+import { NGXSeasonIconName } from "../icon/icon.component";
 
 export type NGXSeasonButtonColor = 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info' | 'default';
 export type NGXSeasonButtonSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -75,11 +76,11 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
     }
 
     @Input('btnIcon')
-    set icon(icon: string | undefined) {
+    set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
 
-    get icon(): string | undefined {
+    get icon(): NGXSeasonIconName | undefined {
         return this._icon;
     }
 
@@ -126,7 +127,7 @@ export class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
     private _degreeStart: number = 0;
     private _degreeFinal: number = 0;
     private _disabled: boolean = false;
-    private _icon: string | undefined;
+    private _icon: NGXSeasonIconName | undefined;
     private _iconOnly: boolean = false;
     private _rotateDuration: number = 0;
     private _rotateInfinite: boolean = false;

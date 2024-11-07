@@ -7,6 +7,7 @@ import { NGXSeasonAccordionPanelComponent } from './accordion-panel.component';
 
 import { NGXSeasonIDUtils } from 'src/app/utils/id.utils';
 import { NGXSeasonUniqueSelectionIDDispatcher } from 'src/app/utils/services/switch-select.service';
+import { NGXSeasonIconName } from '../icon/icon.component';
 
 export type NGXSeasonAccordionColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
 
@@ -56,11 +57,11 @@ export class NGXSeasonAccordionComponent extends CdkAccordion implements OnChang
     }
 
     @Input('accdinToggleIcon')
-    set toggleIcon(toggleIcon: string | undefined) {
+    set toggleIcon(toggleIcon: NGXSeasonIconName | undefined) {
         this._toggleIcon = toggleIcon;
     }
 
-    get toggleIcon(): string | undefined {
+    get toggleIcon(): NGXSeasonIconName | undefined {
         return this._toggleIcon;
     }
 
@@ -68,12 +69,12 @@ export class NGXSeasonAccordionComponent extends CdkAccordion implements OnChang
     private _multiple: boolean = false;
     private _showIcon: boolean = true;
     private _showToggle: boolean = true;
-    private _toggleIcon: string | undefined;
+    private _toggleIcon: NGXSeasonIconName | undefined;
 
     @ContentChildren(NGXSeasonAccordionPanelComponent)
     panels: QueryList<NGXSeasonAccordionPanelComponent> | undefined;
 
-    toggleIcon$: Subject<string | undefined> = new BehaviorSubject(this.toggleIcon);
+    toggleIcon$: Subject<NGXSeasonIconName | undefined> = new BehaviorSubject(this.toggleIcon);
 
     // override readonly id: string = NGXSeasonIDUtils.generateHashID('ngx-sui-accordion');
     override readonly id: string = `ngx-sui-accordion-${orderIndex++}`;

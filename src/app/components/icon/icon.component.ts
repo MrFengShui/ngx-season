@@ -8,6 +8,20 @@ import { fromFetch } from 'rxjs/fetch';
 export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegister> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 
+export type NGXSeasonIconName = 
+    'administrator' | 'alarm-off' | 'alarm-on' | 'alert' | 'analytics' | 'angle-double' | 'angle' | 'application' | 'applications' | 'arrow' | 'assign-user' | 'avatar' | 
+    'bars' |
+    'close' |
+    'dashboard' |
+    'favorite' |
+    'home' |
+    'moon' |
+    'organization' |
+    'share' |
+    'sun' |
+    'thumbs-down' | 'thumbs-up' |
+    'users';
+
 type IconsCachePair = { solid: string, outline: string };
 type IconsCache = { [key: string]: IconsCachePair };
 
@@ -85,7 +99,7 @@ export class NGXSeasonIconRegister {
 
 }
 
-type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl';
+type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
 type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
 type NGXSeasonIconRotateMetainfo = { start: number, final: number };
 
@@ -148,11 +162,11 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconShape')
-    set shape(shape: string | undefined | null) {
-        this._shape = shape ? shape : '';
+    set shape(shape: NGXSeasonIconName | undefined | null) {
+        this._shape = shape ? shape : undefined;
     }
 
-    get shape(): string | undefined {
+    get shape(): NGXSeasonIconName | undefined {
         return this._shape;
     }
 
@@ -179,7 +193,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     private _degreeFinal: number = 0;
     private _rotateDuration: number = 0;
     private _rotateInfinite: boolean = false;
-    private _shape: string | undefined;
+    private _shape: NGXSeasonIconName | undefined;
     private _solid: boolean = false;
     private _size: NGXSeasonIconSize = 'md';
 

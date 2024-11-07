@@ -10,6 +10,7 @@ import { NGXSeasonAccordionComponent } from "./accordion.component";
 import { NGXSeasonAccordionPanelContentDirective, NGXSeasonAccordionPanelFooterDirective } from "./accordion-widget.component";
 
 import { NGXSeasonUniqueSelectionIDDispatcher } from "src/app/utils/services/switch-select.service";
+import { NGXSeasonIconName } from "../icon/icon.component";
 
 @Component({
     selector: 'ngx-sui-accordion-panel',
@@ -45,11 +46,11 @@ export class NGXSeasonAccordionPanelComponent extends CdkAccordionItem implement
     }
 
     @Input('accdinIcon')
-    set icon(icon: string | undefined) {
+    set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
 
-    get icon(): string | undefined {
+    get icon(): NGXSeasonIconName | undefined {
         return this._icon;
     }
 
@@ -72,20 +73,20 @@ export class NGXSeasonAccordionPanelComponent extends CdkAccordionItem implement
     }
 
     @Input('accdinToggleIcon')
-    set toggleIcon(toggleIcon: string) {
+    set toggleIcon(toggleIcon: NGXSeasonIconName) {
         this._toggleIcon = toggleIcon;
     }
 
-    get toggleIcon(): string {
+    get toggleIcon(): NGXSeasonIconName {
         return this._toggleIcon;
     }
 
     private _duration: number = 1000;
     private _description: string | undefined;
-    private _icon: string | undefined;
+    private _icon: NGXSeasonIconName | undefined;
     private _subject: string | undefined;
     private _toggled: boolean = false;
-    private _toggleIcon: string = 'angle-double';
+    private _toggleIcon: NGXSeasonIconName = 'angle-double';
 
     @Output('accdinToggledChange')
     toggledChange: EventEmitter<boolean> = new EventEmitter(true);

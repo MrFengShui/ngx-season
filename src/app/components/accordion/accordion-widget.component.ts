@@ -3,6 +3,7 @@ import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coerci
 import { AfterViewInit, Component, Directive, ElementRef, EventEmitter, HostListener, Inject, Input, Output, Renderer2, TemplateRef } from "@angular/core";
 
 import { NGXSeasonAccordionComponent } from "./accordion.component";
+import { NGXSeasonIconName } from "../icon/icon.component";
 
 @Component({
     selector: 'ngx-sui-accordion-panel-header',
@@ -38,11 +39,11 @@ export class NGXSeasonAccordionPanelHeaderComponent implements AfterViewInit {
     }
 
     @Input('icon')
-    set icon(icon: string | undefined) {
+    set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
 
-    get icon(): string | undefined {
+    get icon(): NGXSeasonIconName | undefined {
         return this._icon;
     }
 
@@ -65,20 +66,20 @@ export class NGXSeasonAccordionPanelHeaderComponent implements AfterViewInit {
     }
 
     @Input('toggleIcon')
-    set toggleIcon(toggleIcon: string) {
+    set toggleIcon(toggleIcon: NGXSeasonIconName) {
         this._toggleIcon = toggleIcon;
     }
 
-    get toggleIcon(): string {
+    get toggleIcon(): NGXSeasonIconName {
         return this._toggleIcon;
     }
 
     private _description: string | undefined;
     private _duration: number = 1000;
-    private _icon: string | undefined;
+    private _icon: NGXSeasonIconName | undefined;
     private _subject: string | undefined;
     private _toggled: boolean = false;
-    private _toggleIcon: string = 'angle-double';
+    private _toggleIcon: NGXSeasonIconName = 'angle-double';
 
     @Output('toggleEvent')
     event: EventEmitter<void> = new EventEmitter(true);
