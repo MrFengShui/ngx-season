@@ -20,6 +20,7 @@ import { NGXSeasonPlaceholderModule } from "./placeholder/placeholder.module";
 import { NGXSeasonBreadcrumbModule } from "./breadcrumb/breadcrumb.module";
 import { NGXSeasonListModule } from "./list/list.module";
 import { NGXSeasonCheckModule } from "./check/check.module";
+import { NGXSeasonInputModule } from "./input/input.module";
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { NGXSeasonCheckModule } from "./check/check.module";
         NGXSeasonDigitalModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
+        NGXSeasonInputModule,
         NGXSeasonLayoutModule,
         NGXSeasonListModule,
         NGXSeasonNavigatorModule,
@@ -57,6 +59,7 @@ import { NGXSeasonCheckModule } from "./check/check.module";
         NGXSeasonDigitalModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
+        NGXSeasonInputModule,
         NGXSeasonLayoutModule,
         NGXSeasonListModule,
         NGXSeasonNavigatorModule,

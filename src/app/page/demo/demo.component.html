@@ -1,7 +1,7 @@
 <ngx-sui-layout>
     <ngx-sui-layout-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
         <ng-container ngProjectAs="headerActions">
-            <button ngx-sui-Button [btnIcon]="themeFlag ? 'moon' : 'sun'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
+            <button ngx-sui-FlatTextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
         </ng-container>
     </ngx-sui-layout-header>
     <ngx-sui-layout-content contentSideWidth="256" contentDuration="100" [contentToggled]="controlToggled">

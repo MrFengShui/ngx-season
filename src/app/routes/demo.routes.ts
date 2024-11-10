@@ -15,6 +15,8 @@ import { DemoBackgroundPageComponent } from "../page/demo/background.component";
 import { DemoListPageComponent } from "../page/demo/list.component";
 import { DemoIconPageComponent } from "../page/demo/icon.component";
 import { DemoCheckboxPageComponent } from "../page/demo/checkbox.component";
+import { DemoCheckSwitchPageComponent } from "../page/demo/check-switch.component";
+import { DemoInputPageComponent } from "../page/demo/input.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'accordion', pathMatch: 'full' },
@@ -28,8 +30,10 @@ export const demoRoutes: Routes = [
     { path: 'card', component: DemoCardPageComponent, title: '卡片' },
     { path: 'carousel', component: DemoCarouselPageComponent, title: '轮播器' },
     { path: 'checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
+    { path: 'check-switch', component: DemoCheckSwitchPageComponent, title: '开关' },
     { path: 'digital', component: DemoDigitalPageComponent, title: '数码' },
     { path: 'icon', component: DemoIconPageComponent, title: '图标' },
+    { path: 'input', component: DemoInputPageComponent, title: '输入框' },
     { path: 'list', component: DemoListPageComponent, title: '列表' },
     { path: 'placeholder', component: DemoPlaceholderPageComponent, title: '占位符' },
     { path: 'progress', component: DemoProgressPageComponent, title: '进度' },

@@ -10,6 +10,7 @@
 @import "../components/check.mixin";
 @import "../components/digital.mixin";
 @import "../components/icons.mixin";
+@import "../components/input.mixin";
 @import "../components/layout.mixin";
 @import "../components/list.mixin";
 @import "../components/navigator.mixin";
@@ -32,7 +33,8 @@
         @include setup-carousel-theme($theme, "indigo", "pink");
         @include setup-check-theme($theme, "indigo", "pink");
         @include setup-digital-theme($theme, "indigo", "pink");
-        @include setup-icons-theme($theme);
+        @include setup-icons-theme($theme, "indigo", "pink");
+        @include setup-input-theme($theme, "indigo", "pink");
         @include setup-layout-theme($theme);
         @include setup-list-theme($theme);
         @include setup-navigator-theme($theme, "indigo");

@@ -1,5 +1,31 @@
-@mixin setup-icons-theme($theme) {
+@mixin setup-icons-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
     .icon {
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --icon-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-900-color), var(--palette-#{$value}-100-color))};
+            } @else {
+                --icon-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+            }
+        }
+
         display: inline-block;
+
+        @each $color in map-keys($colors) {
+            &[data-icon-color=#{$color}] {
+                svg {
+                    color: var(--icon-color-#{$color});
+                }
+            }
+        }
     }
 }

@@ -6,8 +6,12 @@ $gaps: (
 
 :root {
     @for $index from 0 through 20 {
-        --margin-#{$index * 25}: #{$index * 4}px;
-        --padding-#{$index * 25}: #{$index * 4}px;
+        $key: $index * 25;
+        $value: $index * 4;
+        --margin-#{$key}: #{$value}px;
+        --padding-#{$key}: #{$value}px;
+        --row-gap-#{$key}: #{$value}px;
+        --col-gap-#{$key}: #{$value}px;
     }
 }
 
@@ -62,5 +66,18 @@ $gaps: (
                 #{$value}-right: #{$index * 4}px !important;
             }
         }
+    }
+}
+
+@for $index from 0 through 20 {
+    $key: $index * 25;
+    $value: $index * 4;
+
+    .row-gap-#{$key} {
+        row-gap: #{$value}px !important;
+    }
+
+    .col-gap-#{$key} {
+        column-gap: #{$value}px !important;
     }
 }

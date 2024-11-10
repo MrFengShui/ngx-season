@@ -14,7 +14,7 @@ import { NGXSeasonIconName } from "../icon/icon.component";
             <span class="panel-header-description" *ngIf="subject && description">{{ description }}</span>
         </div>
         <span #btnBox *ngIf="_accordion.showToggle">
-            <button ngx-sui-Button btnIconDegree="-90" [btnColor]="_accordion.color" [btnIcon]="toggleIcon" btnIconOnly="true" btnCircled="true" [btnIconDegreeStart]="toggled ? -90 : -180" [btnIconDegreeFinal]="toggled ? -180 : -90" btnIconRotateDuration="1000" (click)="handleToggleEvent($event)"></button>
+            <button ngx-sui-FlatIconButton btnIconDegree="-90" [btnColor]="_accordion.color" [btnIcon]="toggleIcon" btnIconOnly="true" btnCircled="true" [btnIconDegreeStart]="toggled ? -90 : -180" [btnIconDegreeFinal]="toggled ? -180 : -90" btnIconRotateDuration="1000" (click)="handleToggleEvent($event)"></button>
         </span>
     `
 })

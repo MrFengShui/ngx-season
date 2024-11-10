@@ -1,8 +1,8 @@
 import { DOCUMENT } from "@angular/common";
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, Renderer2 } from "@angular/core";
-import { Title, VERSION } from "@angular/platform-browser";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
-import { BehaviorSubject, debounceTime, filter, map, Observable, of, Subject, throttleTime } from "rxjs";
+import { BehaviorSubject, filter, map, Observable, of, Subject, throttleTime } from "rxjs";
 
 type NavigationMetainfo = { id: string, icon?: string, text: string, link?: string[], nodes?: NavigationMetainfo[] };
 
@@ -41,12 +41,14 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-8', text: '卡片', link: ['/demo', 'card'] },
                 { id: '2-9', text: '轮播器', link: ['/demo', 'carousel'] },
                 { id: '2-10', text: '检查框', link: ['/demo', 'checkbox'] },
-                { id: '2-10', text: '数码', link: ['/demo', 'digital'] },
-                { id: '2-11', text: '图标', link: ['/demo', 'icon'] },
-                { id: '2-12', text: '列表', link: ['/demo', 'list'] },
-                { id: '2-13', text: '占位符', link: ['/demo', 'placeholder'] },
-                { id: '2-14', text: '进度', link: ['/demo', 'progress'] },
-                { id: '2-17', text: '丝带', link: ['/demo', 'ribbon'] },
+                { id: '2-11', text: '开关', link: ['/demo', 'check-switch'] },
+                { id: '2-12', text: '数码', link: ['/demo', 'digital'] },
+                { id: '2-13', text: '图标', link: ['/demo', 'icon'] },
+                { id: '2-14', text: '输入框', link: ['/demo', 'input'] },
+                { id: '2-15', text: '列表', link: ['/demo', 'list'] },
+                { id: '2-16', text: '占位符', link: ['/demo', 'placeholder'] },
+                { id: '2-17', text: '进度', link: ['/demo', 'progress'] },
+                { id: '2-18', text: '丝带', link: ['/demo', 'ribbon'] },
             ]
         },
         { 

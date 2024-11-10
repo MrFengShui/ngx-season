@@ -9,18 +9,27 @@ export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegist
 export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 
 export type NGXSeasonIconName = 
-    'administrator' | 'alarm-off' | 'alarm-on' | 'alert' | 'analytics' | 'angle-double' | 'angle' | 'application' | 'applications' | 'arrow' | 'assign-user' | 'avatar' | 
-    'bars' |
-    'close' |
+    'accessibility-1' | 'accessibility-2' | 'add-text' | 'administrator' | 'airplane' | 'alarm-off' | 'alarm-on' | 'alert' | 'align-bottom' | 'align-center' | 'align-left' | 'align-left-text' | 'align-middle' | 'align-right' | 'align-right-text' | 'align-top' | 'analytics' | 'angle-double' | 'angle' | 'animation' | 'application' | 'applications' | 'archive' | 'arrow' | 'assign-user' | 'asterisk' | 'atom' | 'attachment' | 'auto' | 'avatar' | 'axis-chart' |
+    'bank' | 'bars' | 'bookmark' |
+    'caret' | 'check' | 'close' | 'cog' | 'collapse' | 'color-palette' |
     'dashboard' |
-    'favorite' |
+    'eye-hide' | 'eye-show' | 'eye' |
+    'failure-standard' | 'failure' | 'favorite' |
+    'grid-view' |
     'home' |
-    'moon' |
+    'info-standard' | 'info' |
+    'minus-circle' | 'minus' | 'moon' |
+    'new' |
     'organization' |
-    'share' |
-    'sun' |
-    'thumbs-down' | 'thumbs-up' |
-    'users';
+    'plus-circle' | 'plus' |
+    'share' | 'shield-check' | 'shield-times' | 'shield' | 'star' | 'storage' | 'sun' | 'success-standard' | 'success' | 
+    'terminal' | 'times-circle' | 'times' | 'tree-view' | 'thumbs-down' | 'thumbs-up' |
+    'user' | 'users' |
+    'warning-standard' | 'warning' | 'wifi' | 'world';
+
+export type NGXSeasonIconColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
+export type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
+export type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
 
 type IconsCachePair = { solid: string, outline: string };
 type IconsCache = { [key: string]: IconsCachePair };
@@ -36,7 +45,7 @@ export class NGXSeasonIconRegister {
 
     protected constructor() {}
 
-    public addIcon(shape: string): NGXSeasonIconRegister {
+    public addIcon(shape: NGXSeasonIconName): NGXSeasonIconRegister {
         if (this.keys.includes(shape)) throw new Error();
 
         let subscription: Subscription = this.loadSVGIcon(shape).subscribe({
@@ -52,7 +61,7 @@ export class NGXSeasonIconRegister {
         return this;
     }
 
-    public removeIcon(shape: string): NGXSeasonIconRegister {
+    public removeIcon(shape: NGXSeasonIconName): NGXSeasonIconRegister {
         if (!this.keys.includes(shape)) throw new Error();
 
         this.keys.splice(this.keys.indexOf(shape), 1);
@@ -61,7 +70,7 @@ export class NGXSeasonIconRegister {
         return this;
     }
 
-    public findIcon(shape: string): Observable<IconsCachePair> {
+    public findIcon(shape: NGXSeasonIconName): Observable<IconsCachePair> {
         return this.subject.asObservable().pipe(map(cache => cache[shape]), filter(value => value !== undefined), debounceTime(100));
     }
 
@@ -75,7 +84,7 @@ export class NGXSeasonIconRegister {
         return this.instance;
     }
 
-    private loadSVGIcon(shape: string): Observable<IconsCachePair> {
+    private loadSVGIcon(shape: NGXSeasonIconName): Observable<IconsCachePair> {
         const solidURL: string = `assets/icons/clarity-${shape.toLowerCase()}-solid.svg`;
         const outlineURL: string = `assets/icons/clarity-${shape.toLowerCase()}-outline.svg`;
         const solidFetch = fromFetch(solidURL).pipe(switchMap(res => res.text()));
@@ -99,9 +108,7 @@ export class NGXSeasonIconRegister {
 
 }
 
-type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
-type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
-type NGXSeasonIconRotateMetainfo = { start: number, final: number };
+type NGXSeasonIconRotateState = { start: number, final: number };
 
 const rotateAnimation: AnimationReferenceMetadata = animation([
     style({ rotate: '{{ start }}deg' }),
@@ -116,9 +123,18 @@ const rotateAnimation: AnimationReferenceMetadata = animation([
 })
 export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewInit {
 
+    @Input('iconColor')
+    set color(color: NGXSeasonIconColor | null) {
+        this._color = color ? color : 'default';
+    }
+
+    get color(): NGXSeasonIconColor {
+        return this._color;
+    }
+
     @Input('iconDegree')
-    set degree(degree: number | string) {
-        this._degree = coerceNumberProperty(degree);
+    set degree(degree: number | string | null) {
+        this._degree = degree ? coerceNumberProperty(degree) : 0;
     }
 
     get degree(): number {
@@ -126,8 +142,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconDegreeStart')
-    set degreeStart(degreeStart: number | string) {
-        this._degreeStart = coerceNumberProperty(degreeStart);
+    set degreeStart(degreeStart: number | string | null) {
+        this._degreeStart = degreeStart ? coerceNumberProperty(degreeStart) : 0;
     }
 
     get degreeStart(): number {
@@ -135,8 +151,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconDegreeFinal')
-    set degreeFinal(degreeFinal: number | string) {
-        this._degreeFinal = coerceNumberProperty(degreeFinal);
+    set degreeFinal(degreeFinal: number | string | null) {
+        this._degreeFinal = degreeFinal ? coerceNumberProperty(degreeFinal) : 0;
     }
 
     get degreeFinal(): number {
@@ -144,8 +160,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconRotateDuration')
-    set rotateDuration(rotateDuration: number | string) {
-        this._rotateDuration = coerceNumberProperty(rotateDuration);
+    set rotateDuration(rotateDuration: number | string | null) {
+        this._rotateDuration = rotateDuration ? coerceNumberProperty(rotateDuration) : 0;
     }
 
     get rotateDuration(): number {
@@ -153,7 +169,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconRotateInfinite')
-    set rotateInfinite(rotateInfinite: boolean | string) {
+    set rotateInfinite(rotateInfinite: boolean | string | null) {
         this._rotateInfinite = coerceBooleanProperty(rotateInfinite);
     }
 
@@ -171,7 +187,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconSolid')
-    set solid(solid: boolean | string) {
+    set solid(solid: boolean | string | null) {
         this._solid = coerceBooleanProperty(solid);
     }
 
@@ -180,14 +196,15 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconSize')
-    set size(size: NGXSeasonIconSize) {
-        this._size = size;
+    set size(size: NGXSeasonIconSize | null) {
+        this._size = size ? size : 'md';
     }
 
     get size(): NGXSeasonIconSize {
         return this._size;
     }
 
+    private _color: NGXSeasonIconColor = 'default';
     private _degree: number = 0;
     private _degreeStart: number = 0;
     private _degreeFinal: number = 0;
@@ -201,11 +218,12 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     protected svgElement: ElementRef<SVGElement> | undefined;
 
     protected player: AnimationPlayer | undefined;
+    protected rotateState: NGXSeasonIconRotateState = { start: this.degreeStart, final: this.degreeFinal };
 
     protected svgContent$: Observable<SafeHtml> | undefined;
-    protected metainfoChange$: Subject<NGXSeasonIconRotateMetainfo> = new BehaviorSubject({ start: this.degreeStart, final: this.degreeFinal });
+    protected rotateStateChange$: Subject<NGXSeasonIconRotateState> = new BehaviorSubject(this.rotateState);
 
-    private metainfo$: Subscription = Subscription.EMPTY;
+    private rotateState$: Subscription = Subscription.EMPTY;
 
     constructor(
         protected _builder: AnimationBuilder,
@@ -221,38 +239,31 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        let keys: string[] | null = Object.keys(changes);
-        
-        if (keys.includes('degree')) {
-            this.changeIconDegree(coerceNumberProperty(changes['degree'].currentValue));
+        for (const name in changes) {
+            if (name === 'color') this.changeIconColor(changes[name].currentValue as NGXSeasonIconColor);
+
+            if (name === 'degree') this.changeIconDegree(coerceNumberProperty(changes[name].currentValue));
+    
+            if (name === 'shape') this.setupIconContent(changes[name].currentValue, this.solid);
+    
+            if (name === 'solid') this.setupIconContent(this.shape, coerceBooleanProperty(changes[name].currentValue));
+            
+            if (name === 'degreeStart') this.rotateState.start = coerceNumberProperty(changes[name].currentValue);
+
+            if (name === 'degreeFinal') this.rotateState.final = coerceNumberProperty(changes[name].currentValue);
         }
 
-        if (keys.includes('shape')) {
-            this.setupIconContent(changes['shape'].currentValue, this.solid);
-        }
-
-        if (keys.includes('solid')) {
-            this.setupIconContent(this.shape, changes['solid'].currentValue);
-        }
-        
-        if (keys.includes('degreeStart') && keys.includes('degreeFinal')) {
-            this.metainfoChange$.next({
-                start: coerceNumberProperty(changes['degreeStart'].currentValue),
-                final: coerceNumberProperty(changes['degreeFinal'].currentValue)
-            });
-        }
-        
-        keys.splice(0);
-        keys = null;
+        this.rotateStateChange$.next(this.rotateState);
     }
 
     ngOnDestroy(): void {
         this.player?.destroy();
-        this.metainfo$?.unsubscribe();
+        this.rotateState$?.unsubscribe();
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'icon');
+        this.changeIconColor(this.color);
         this.changeIconDegree(this.degree);
         this.setupIconContent(this.shape, this.solid);
         this.listenRotateStartFinalChange(this.svgElement?.nativeElement);
@@ -265,11 +276,15 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         this.player?.onStart(() => this._renderer.setStyle(this.svgElement?.nativeElement, 'transform', `rotate(${this.degreeStart}deg)`));
     }
 
+    protected changeIconColor(color: NGXSeasonIconColor): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-icon-color', color);
+    }
+
     protected changeIconDegree(degree: number): void {
         this._renderer.setStyle(this.svgElement?.nativeElement, 'transform', `rotate(${degree}deg)`);
     }
 
-    protected setupIconContent(shape: string | undefined, solid: boolean): void {
+    protected setupIconContent(shape: NGXSeasonIconName | undefined, solid: boolean): void {
         this.svgContent$ = shape ? this._register.findIcon(shape).pipe(map(pair => 
             this._sanitizer.bypassSecurityTrustHtml(solid ? pair.solid : pair.outline))) : of();
     }
@@ -280,7 +295,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
 
     private listenRotateStartFinalChange(element: SVGElement | undefined): void {
         this._ngZone.runOutsideAngular(() => 
-            this.metainfo$ = this.metainfoChange$.asObservable().pipe(debounceTime(100)).
+            this.rotateState$ = this.rotateStateChange$.asObservable().pipe(debounceTime(100)).
                 subscribe(metainfo => 
                     this._ngZone.run(() => {
                         const animation: AnimationAnimateRefMetadata = useAnimation(rotateAnimation, { params: { duration: this.rotateDuration, start: metainfo.start, final: metainfo.final } });

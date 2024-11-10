@@ -24,6 +24,8 @@ import { DemoBackgroundPageComponent } from "./demo/background.component";
 import { DemoListPageComponent } from "./demo/list.component";
 import { DemoIconPageComponent } from "./demo/icon.component";
 import { DemoCheckboxPageComponent } from "./demo/checkbox.component";
+import { DemoCheckSwitchPageComponent } from "./demo/check-switch.component";
+import { DemoInputPageComponent } from "./demo/input.component";
 
 @NgModule({
     declarations: [
@@ -40,8 +42,10 @@ import { DemoCheckboxPageComponent } from "./demo/checkbox.component";
         DemoCardPageComponent,
         DemoCarouselPageComponent,
         DemoCheckboxPageComponent,
+        DemoCheckSwitchPageComponent,
         DemoDigitalPageComponent,
         DemoIconPageComponent,
+        DemoInputPageComponent,
         DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
@@ -69,8 +73,10 @@ import { DemoCheckboxPageComponent } from "./demo/checkbox.component";
         DemoCardPageComponent,
         DemoCarouselPageComponent,
         DemoCheckboxPageComponent,
+        DemoCheckSwitchPageComponent,
         DemoDigitalPageComponent,
         DemoIconPageComponent,
+        DemoInputPageComponent,
         DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,

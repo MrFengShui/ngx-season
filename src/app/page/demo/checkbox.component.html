@@ -7,7 +7,3 @@
 </form>
 <span>{{ group.value | json }}</span>
 
-<div class="flex flex-dir-col gy-100 p-100">
-    <label ngx-sui-CheckSwitch [(ngModel)]="item.check" [checkColor]="item.color" class="m-100" *ngFor="let item of list">开关</label>
-    <label ngx-sui-CheckSwitch [(ngModel)]="item.check" [checkColor]="item.color" checkLabelPos="before" class="m-100" *ngFor="let item of list">开关</label>
-</div>

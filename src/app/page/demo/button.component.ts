@@ -9,7 +9,7 @@ import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 })
 export class DemoButtonPageComponent {
 
-    protected colorList: Array<{ color: NGXSeasonButtonColor, label: string }> = [
+    protected list: Array<{ color: NGXSeasonButtonColor, label: string }> = [
         { color: 'default', label: '默认按钮' }, 
         { color: 'primary', label: '主要按钮' }, 
         { color: 'accent', label: '强调按钮' }, 

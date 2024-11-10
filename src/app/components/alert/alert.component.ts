@@ -12,7 +12,7 @@ type NGXSeasonAlertType = 'success' | 'warning' | 'failure' | 'info';
         <ngx-sui-icon [iconShape]="iconShape$ | async" iconSize="md" iconSolid="true"></ngx-sui-icon>
         <span class="alert-text-wrapper">{{ message }}</span>
         <div class="alert-action-wrapper">
-            <button ngx-sui-Button [btnColor]="alertType" btnCircled="true" btnIcon="close" btnIconOnly="true" btnSize="sm"
+            <button ngx-sui-FlatIconButton [btnColor]="alertType" btnCircled="true" btnIcon="close" btnIconOnly="true" btnSize="sm"
                 (click)="handleAlertDismissEvent()" *ngIf="showClose"></button>
             <ng-content select="alertAction"></ng-content>
         </div>

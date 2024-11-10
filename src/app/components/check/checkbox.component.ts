@@ -3,8 +3,8 @@ import { Component, forwardRef, Input, Provider, SimpleChanges } from "@angular/
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NGXSeasonCheckColor, NGXSeasonCheckComponent } from "./check.component";
 
-export type NGXSeasonCheckCheckedMarkShape = 'tick' | 'cross';
-export type NGXSeasonCheckIndeterminateMarkShape = 'dash' | 'solid';
+export type NGXSeasonCheckboxCheckedMarkShape = 'tick' | 'cross';
+export type NGXSeasonCheckboxIndeterminatedMarkShape = 'dash' | 'solid';
 
 const NGXSeasonCheckboxValueAccessor: Provider = {
     provide: NG_VALUE_ACCESSOR,
@@ -24,20 +24,20 @@ const NGXSeasonCheckboxValueAccessor: Provider = {
 export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implements ControlValueAccessor {
 
     @Input('cbCheckMark')
-    set checkMark(checkMark: NGXSeasonCheckCheckedMarkShape) {
+    set checkMark(checkMark: NGXSeasonCheckboxCheckedMarkShape) {
         this._checkMark = checkMark;
     }
 
-    get checkMark(): NGXSeasonCheckCheckedMarkShape {
+    get checkMark(): NGXSeasonCheckboxCheckedMarkShape {
         return this._checkMark;
     }
 
     @Input('cbIndetMark')
-    set indetMark(indetMark: NGXSeasonCheckIndeterminateMarkShape) {
+    set indetMark(indetMark: NGXSeasonCheckboxIndeterminatedMarkShape) {
         this._indetMark = indetMark;
     }
 
-    get indetMark(): NGXSeasonCheckIndeterminateMarkShape {
+    get indetMark(): NGXSeasonCheckboxIndeterminatedMarkShape {
         return this._indetMark;
     }
 
@@ -50,8 +50,8 @@ export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implemen
         return this._indeterminated;
     }
 
-    private _checkMark: NGXSeasonCheckCheckedMarkShape = 'tick';
-    private _indetMark: NGXSeasonCheckIndeterminateMarkShape = 'dash';
+    private _checkMark: NGXSeasonCheckboxCheckedMarkShape = 'tick';
+    private _indetMark: NGXSeasonCheckboxIndeterminatedMarkShape = 'dash';
     private _indeterminated: boolean = false;
 
     protected onChange = (checked: boolean) => this.checkedChange.emit(checked);
@@ -61,9 +61,9 @@ export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implemen
         super.ngOnChanges(changes);
 
         for (const name in changes) {
-            if (name === 'checkMark') this.changeCheckMark(changes[name].currentValue as NGXSeasonCheckCheckedMarkShape);
+            if (name === 'checkMark') this.changeCheckMark(changes[name].currentValue as NGXSeasonCheckboxCheckedMarkShape);
 
-            if (name === 'indetMark') this.changeIndeterminateMark(changes[name].currentValue as NGXSeasonCheckIndeterminateMarkShape);
+            if (name === 'indetMark') this.changeIndeterminateMark(changes[name].currentValue as NGXSeasonCheckboxIndeterminatedMarkShape);
         }
     }
 
@@ -104,11 +104,11 @@ export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implemen
         this._renderer.setAttribute(this._element.nativeElement, 'data-checkbox-usable', disabled ? 'disable' : 'enable');
     }
 
-    protected changeCheckMark(checkMark: NGXSeasonCheckCheckedMarkShape): void {
+    protected changeCheckMark(checkMark: NGXSeasonCheckboxCheckedMarkShape): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-checkbox-check-mark', checkMark);
     }
 
-    protected changeIndeterminateMark(indetMark: NGXSeasonCheckIndeterminateMarkShape): void {
+    protected changeIndeterminateMark(indetMark: NGXSeasonCheckboxIndeterminatedMarkShape): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-checkbox-indeterminate-mark', indetMark);
     }
 
