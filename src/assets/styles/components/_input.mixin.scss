@@ -1,0 +1,405 @@
+@mixin setup-input-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+    $meterColors: (
+        "weak": "red",
+        "medium": "yellow",
+        "strong": "green",
+        "very": "blue"
+    );
+
+    .input {
+        --input-border-radius: #{var(--size-pixel-4)};
+        --input-border-width: #{var(--size-pixel-1)};
+        --input-border-width-focus: #{var(--size-pixel-2)};
+        --input-padding: #{var(--padding-50)};
+        --input-gap: #{var(--row-gap-50)};
+        --input-min-size: #{var(--size-pixel-384)};
+
+        --input-label-font-size: #{var(--font-size-12)};
+        --input-label-font-weight: #{var(--font-weight-700)};
+        --input-label-line-height: #{var(--line-height-100)};
+
+        --input-field-gap: #{calc(var(--input-gap) * 2)};
+        --input-field-border-width: #{var(--input-border-width)};
+        --input-field-border-width-focus: #{var(--input-border-width-focus)};
+        --input-field-wrapper-gap: #{var(--margin-50)};
+        --input-field-entry-height: #{var(--size-pixel-32)};
+        --input-field-entry-placeholder-font-size: #{var(--font-size-16)};
+        --input-field-entry-placeholder-font-weight: #{var(--font-weight-700)};
+        --input-field-entry-placeholder-font-style: italic;
+        --input-field-prefix-suffix-font-size: #{var(--font-size-12)};
+        --input-field-prefix-suffix-font-weight: #{var(--font-weight-500)};
+
+        --input-divider-border-width: #{var(--size-pixel-1)};
+
+        --input-prompt-font-size: #{var(--font-size-12)};
+        --input-prompt-font-weight: #{var(--font-weight-500)};
+        --input-prompt-alert-size: #{var(--size-percent-75)};
+
+        --check-padding: #{var(--padding-0)};
+        --check-gap: #{var(--row-gap-100)};
+        --check-min-width: #{Var(--size-pixel-128)};
+        --check-max-width: #{Var(--size-pixel-512)};
+        --check-subject-font-size: #{var(--font-size-20)};
+        --check-subject-font-weight: #{var(--font-weight-900)};
+        --check-subject-line-height: #{var(--line-height-200)};
+        --check-meter-gap: #{var(--row-gap-25)};
+        --check-meter-mark-width: #{var(--size-percent-100)};
+        --check-meter-mark-height: #{var(--size-pixel-8)};
+        --check-meter-text-font-size: #{var(--font-size-12)};
+        --check-meter-text-font-weight: #{var(--font-weight-900)};
+        --check-suggest-list-margin: #{var(--margin-0)};
+        --check-suggest-list-padding: #{var(--padding-0)};
+        --check-suggest-list-mark-size: #{var(--size-pixel-12)};
+        --check-suggest-list-mark-gap: #{var(--margin-50)};
+        --check-suggest-list-font-size: #{var(--font-size-12)};
+        --check-suggest-list-font-weight: #{var(--font-weight-500)};
+        --check-suggest-list-line-height: #{var(--line-height-200)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --input-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --input-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+                --input-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --input-label-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                
+                --input-field-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --input-field-placeholder-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+
+                --input-divider-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --input-divider-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+                --input-divider-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --input-divider-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --input-divider-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+                --input-divider-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --input-prompt-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+
+                --check-meter-mark-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color-25), var(--palette-#{$value}-200-color-25))};
+                --check-meter-text-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color-25), var(--palette-#{$value}-200-color-25))};
+            } @else {
+                --input-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --input-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                --input-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+                --input-label-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --input-field-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --input-field-placeholder-color-#{$key}: #{var(--palette-#{$value}-color-50)};
+
+                --input-divider-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --input-divider-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                --input-divider-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+                --input-prompt-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --check-meter-mark-bgcolor-#{$key}: #{var(--palette-#{$value}-color-25)};
+                --check-meter-text-color-#{$key}: #{var(--palette-#{$value}-color-25)};
+            }
+
+            --check-subject-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --check-suggest-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+        }
+
+        @each $key, $value in $meterColors {
+            --password-strong-meter-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --password-strong-meter-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+        }
+
+        &.textfield, &.password, &.search {
+            display: inline-flex;
+            flex-direction: column;
+            row-gap: var(--input-gap);
+
+            border-radius: var(--input-border-radius);
+            border-style: solid;
+            border-width: var(--input-border-width);
+
+            &:focus-within {
+                border-width: var(--input-border-width-focus);
+            }
+
+            padding: var(--input-padding);
+
+            min-width: var(--input-min-size);
+
+            .input-field {
+                display: inline-flex;
+                flex-direction: column;
+                row-gap: var(--input-field-gap);
+
+                width: var(--size-percent-100);
+
+                .label {
+                    display: inline-block;
+
+                    font-size: var(--input-label-font-size);
+                    font-weight: var(--input-label-font-weight);
+                    line-height: var(--input-label-line-height);
+
+                    margin-bottom: var(--input-lable-margin);
+                }
+
+                .field {
+                    display: flex;
+                    align-items: center;
+
+                    > :nth-child(n) {
+                        &:not(:last-child) {
+                            margin-right: var(--input-field-wrapper-gap);
+                        }
+                    }
+
+                    .prefix-wrapper, .suffix-wrapper {
+                        display: inline-flex;
+
+                        font-size: var(--input-field-prefix-suffix-font-size);
+                        font-weight: var(--input-field-prefix-suffix-font-weight);
+                    }
+
+                    .entry-wrapper {
+                        display: flex;
+                        align-items: center;
+                        flex: 1 1 auto;
+
+                        input[type=text], input[type=password] {
+                            appearance: none;
+                            background: none;
+                            border: none;
+                            outline: none;
+
+                            flex: 1 1 auto;
+
+                            padding: var(--padding-0);
+
+                            min-width: var(--size-percent-0);
+                            max-width: var(--size-percent-100);
+                            width: var(--size-percent-100);
+                            height: var(--size-percent-100);
+
+                            &::placeholder {
+                                font-size: var(--input-field-entry-placeholder-font-size);
+                                font-weight: var(--input-field-entry-placeholder-font-weight);
+                                font-style: var(--input-field-entry-placeholder-font-style);
+                            }
+                        }
+
+                        height: var(--input-field-entry-height);
+                    }
+                }
+            }
+
+            .input-divider {
+                border-bottom-style: solid;
+                border-bottom-width: var(--input-divider-border-width);
+            }
+
+            .input-prompt {
+                display: inline-flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .alert-text, .tip-text {
+                    display: inline-block;
+
+                    font-size: var(--input-prompt-font-size);
+                    font-weight: var(--input-prompt-font-weight);
+
+                    user-select: none;
+                }
+
+                .alert-text {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+
+                    width: var(--input-prompt-alert-size);
+                }
+            }
+
+            .input-check {
+                text-align: center;
+
+                .password-strength-check {
+                    display: inline-flex;
+                    flex-direction: column;
+                    row-gap: var(--check-gap);
+    
+                    padding: var(--check-padding);
+
+                    min-width: var(--check-min-width);
+                    max-width: max(var(--check-max-width), var(--size-percent-75));
+                    width: var(--size-percent-100);
+    
+                    .check-subject {
+                        font-size: var(--check-subject-font-size);
+                        font-weight: var(--check-subject-font-weight);
+                        line-height: var(--check-subject-line-height);
+                        text-align: center;
+                    }
+    
+                    .check-meter-wrapper {
+                        display: flex;
+    
+                        .check-meter {
+                            display: inline-flex;
+                            flex-direction: column;
+                            align-items: center;
+                            row-gap: calc(var(--check-meter-gap) * 2);
+    
+                            width: var(--size-percent-100);
+    
+                            .meter-mark {
+                                display: inline-block;
+    
+                                width: var(--check-meter-mark-width);
+                                height: var(--check-meter-mark-height);
+                            }
+    
+                            .meter-text {
+                                font-size: var(--check-meter-text-font-size);
+                                font-weight: var(--check-meter-text-font-weight);
+                            }
+                        }
+    
+                        > :nth-child(-n + 4) {
+                            margin-right: var(--check-meter-gap);
+                        }
+                    }
+    
+                    .check-suggest {
+                        display: inline-flex;
+                        flex-direction: column;
+    
+                        list-style: none;
+    
+                        margin: var(--check-suggest-list-margin);
+                        padding: var(--check-suggest-list-padding);
+                        
+                        .check-suggest-item {
+                            display: inline-flex;
+                            align-items: center;
+    
+                            font-size: var(--check-suggest-list-font-size);
+                            font-weight: var(--check-suggest-list-font-weight);
+                            line-height: var(--check-suggest-list-line-height);
+    
+                            &:before {
+                                content: '';
+                                clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+    
+                                display: inline-block;
+    
+                                margin-right: var(--check-suggest-list-mark-gap);
+    
+                                width: var(--check-suggest-list-mark-size);
+                                height: var(--check-suggest-list-mark-size);
+                            }
+                        }
+                    }
+                }
+            }
+            
+
+            @each $color in map-keys($colors) {
+                &[data-input-color=#{$color}] {
+                    border-color: var(--input-bdcolor-#{$color});
+    
+                    &:hover {
+                        border-color: var(--input-bdcolor-hover-#{$color});
+    
+                        .input-divider {
+                            border-color: var(--input-divider-bdcolor-hover-#{$color});
+                        }
+                    }
+    
+                    &:focus-within {
+                        border-color: var(--input-bdcolor-focus-#{$color});
+    
+                        .input-divider {
+                            border-color: var(--input-divider-bdcolor-focus-#{$color});
+                        }
+                    }
+    
+                    .input-field {
+                        .label {
+                            color: var(--input-label-color-#{$color});
+                        }
+    
+                        .field {
+                            .entry-wrapper {
+                                input[type=text], input[type=password] {
+                                    color: var(--input-field-color-#{$color});
+    
+                                    &::placeholder {
+                                        color: var(--input-field-placeholder-color-#{$color});
+                                    }
+                                }
+                            }
+                        }
+                    }
+    
+                    .input-divider {
+                        border-color: var(--input-divider-bdcolor-#{$color});
+                    }
+                    
+                    .input-prompt {
+                        color: var(--input-prompt-color-#{$color});
+                    }
+                }
+            }
+        }
+        
+        .password-strength-check {
+            @each $color in map-keys($colors) {
+                &[data-check-color=#{$color}] {
+                    .check-subject {
+                        color: var(--check-subject-color-#{$color});
+                    }
+
+                    .check-meter {
+                        .meter-mark {
+                            background-color: var(--check-meter-mark-bgcolor-#{$color});
+                        }
+    
+                        .meter-text {
+                            color: var(--check-meter-text-color-#{$color});
+                        }
+
+                        @each $key, $value in $meterColors {
+                            &.#{$key} {
+                                .meter-mark {
+                                    background-color: var(--palette-#{$value}-500-color);
+                                }
+            
+                                .meter-text {
+                                    color: var(--palette-#{$value}-500-color);
+                                }
+                            }
+                        }
+                    }
+
+                    .check-suggest {
+                        .check-suggest-item {
+                            color: var(--check-suggest-color-#{$color});
+
+                            &::before {
+                                background-color: var(--check-suggest-color-#{$color});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
