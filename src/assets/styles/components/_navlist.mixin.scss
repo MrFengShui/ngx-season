@@ -1,0 +1,113 @@
+@mixin setup-navlist-theme($theme, $color) {
+    .nav-list {
+        --navlist-collapsed-size: #{var(--layout-content-side-collapsed-size)};
+
+        --navlist-section-header-height: #{var(--size-pixel-42)};
+        --navlist-section-header-text-font-size: #{var(--font-size-16)};
+        --navlist-section-header-text-font-weight: #{var(--font-weight-700)};
+        --navlist-section-header-text-line-height: #{var(--line-height-100)};
+        --navlist-section-header-icon-width: #{var(--navlist-collapsed-size)};
+        --navlist-section-header-icon-height: #{var(--navlist-section-header-height)};
+
+        --navlist-item-height: #{var(--size-pixel-42)};
+        --navlist-item-font-size: #{var(--font-size-16)};
+        --navlist-item-font-weight: #{var(--font-weight-500)};
+        --navlist-item-line-height: #{var(--line-height-100)};
+        --navlist-item-icon-width: #{var(--navlist-collapsed-size)};
+        --navlist-item-icon-height: #{var(--navlist-item-height)};
+
+        --navlist-item-bgcolor-hover: #{var(--palette-#{$color}-600-color)};
+        --navlist-item-bgcolor-active: #{var(--palette-#{$color}-400-color)};
+        --navlist-item-bgcolor-selected: #{var(--palette-#{$color}-500-color)};
+
+        --navlist-item-color: #{if($theme == "light", var(--palette-gray-800-color), var(--palette-gray-200-color))};
+        --navlist-item-color-hover: #{var(--palette-gray-300-color)};
+        --navlist-item-color-active: #{var(--palette-gray-100-color)};
+        --navlist-item-color-selected: #{var(--palette-gray-100-color)};
+
+        display: inline-flex;
+        flex-direction: column;
+
+        min-width: fit-content;
+        width: var(--size-percent-100);
+
+        .nav-list-section {
+            display: flex;
+            flex-direction: column;
+
+            .section-header {
+                display: inline-flex;
+                align-items: center;
+
+                white-space: nowrap;
+
+                height: var(--navlist-section-header-height);
+
+                .section-icon {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: var(--navlist-section-header-icon-width);
+                    height: var(--navlist-section-header-icon-height);
+                }
+
+                .section-text {
+                    font-size: var(--navlist-section-header-text-font-size);
+                    font-weight: var(--navlist-section-header-text-font-weight);
+                    line-height: var(--navlist-section-header-text-line-height);
+                }
+            }
+
+            .section-content {
+                display: inline-flex;
+                flex-direction: column;
+                
+                overflow: hidden;
+            }
+        }
+
+        .nav-list-item {
+            display: flex;
+            align-items: center;
+
+            font-size: var(--navlist-item-font-size);
+            font-weight: var(--navlist-item-font-weight);
+            line-height: var(--navlist-item-line-height);
+
+            white-space: nowrap;
+
+            height: var(--navlist-item-height);
+
+            .list-item-icon {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+
+                width: var(--navlist-item-icon-width);
+                height: var(--navlist-item-icon-height);
+            }
+
+            color: var(--navlist-item-color);
+
+            &:hover {
+                background-color: var(--navlist-item-bgcolor-hover);
+                color: var(--navlist-item-color-hover);
+            }
+
+            &:active {
+                background-color: var(--navlist-item-bgcolor-active);
+                color: var(--navlist-item-color-active);
+            }
+
+            &.selected {
+                background-color: var(--navlist-item-bgcolor-selected);
+                color: var(--navlist-item-color-selected);
+            }
+
+            .icon {
+                margin-right: var(--navlink-icon-margin);
+            }
+        }
+    }
+}

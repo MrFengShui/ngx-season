@@ -1,0 +1,170 @@
+@mixin setup-overlay-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .tooltip {
+        --tooltip-border-radius: #{var(--size-pixel-4)};
+        --tooltip-font-size: #{var(--font-size-14)};
+        --tooltip-font-weight: #{var(--font-weight-500)};
+        --tooltip-line-height: #{var(--line-height-150)};
+        --tooltip-padding: #{var(--padding-50)};
+
+        --tooltip-triangle-top-size: #{var(--size-pixel-8)} #{var(--size-pixel-8)} #{var(--size-pixel-0)} #{var(--size-pixel-8)};
+        --tooltip-triangle-bottom-size: #{var(--size-pixel-0)} #{var(--size-pixel-8)} #{var(--size-pixel-8)} #{var(--size-pixel-8)};
+        --tooltip-triangle-left-size: #{var(--size-pixel-8)} #{var(--size-pixel-0)} #{var(--size-pixel-8)} #{var(--size-pixel-8)};
+        --tooltip-triangle-right-size: #{var(--size-pixel-8)} #{var(--size-pixel-8)} #{var(--size-pixel-8)} #{var(--size-pixel-0)};
+
+        --tooltip-shadow-blur: #{var(--size-pixel-16)};
+        --tooltip-shadow-color: #{if($theme == "light", rgba(#000, 0.125), rgba(#FFF, 0.375))};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --tooltip-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --tooltip-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+            } @else {
+                --tooltip-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --tooltip-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+            }
+        }
+
+        user-select: none;
+
+        .tooltip-container {
+            display: inline-flex;  
+            align-items: center;
+            
+            width: var(--size-percent-100);
+
+            .tooltip-message {
+                border-radius: var(--tooltip-border-radius);
+
+                display: inline-block;
+
+                filter: drop-shadow(0 0 #{var(--tooltip-shadow-blur)} #{var(--tooltip-shadow-color)});
+
+                font-size: var(--tooltip-font-size);
+                font-weight: var(--tooltip-font-weight);
+                line-height: var(--tooltip-line-height);
+                text-align: justify;
+
+                padding: var(--tooltip-padding);
+
+                width: var(--size-percent-100);
+            }
+
+            .tooltip-triangle {
+                display: inline-block;
+                
+                border-style: solid;
+                
+                transform: rotate(0deg);
+
+                width: var(--size-pixel-0);
+                height: var(--size-pixel-0);
+            }
+        }
+
+        &.tooltip-top {
+            .tooltip-container {
+                flex-direction: column;
+
+                .tooltip-triangle {
+                    border-width: var(--tooltip-triangle-top-size);
+                }
+            }
+        }
+
+        &.tooltip-bottom {
+            .tooltip-container {
+                flex-direction: column-reverse;
+
+                .tooltip-triangle {
+                    border-width: var(--tooltip-triangle-bottom-size);
+                }
+            }
+        }
+
+        &.tooltip-left {
+            .tooltip-container {
+                flex-direction: row;
+
+                .tooltip-triangle {
+                    border-width: var(--tooltip-triangle-left-size);
+                }
+            }
+        }
+
+        &.tooltip-right {
+            .tooltip-container {
+                flex-direction: row-reverse;
+
+                .tooltip-triangle {
+                    border-width: var(--tooltip-triangle-right-size);
+                }
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &.tooltip-#{$color} {
+                &.tooltip-top {
+                    .tooltip-container {
+                        .tooltip-message {
+                            background-color: var(--tooltip-bgcolor-#{$color});
+                            color: var(--tooltip-color-#{$color});
+                        }
+
+                        .tooltip-triangle {
+                            border-color: var(--tooltip-bgcolor-#{$color}) transparent transparent transparent;
+                        }
+                    }
+                }
+        
+                &.tooltip-bottom {
+                    .tooltip-container {
+                        .tooltip-message {
+                            background-color: var(--tooltip-bgcolor-#{$color});
+                            color: var(--tooltip-color-#{$color});
+                        }
+
+                        .tooltip-triangle {
+                            border-color: transparent transparent var(--tooltip-bgcolor-#{$color}) transparent;
+                        }
+                    }
+                }
+        
+                &.tooltip-left {
+                    .tooltip-container {
+                        .tooltip-message {
+                            background-color: var(--tooltip-bgcolor-#{$color});
+                            color: var(--tooltip-color-#{$color});
+                        }
+
+                        .tooltip-triangle {
+                            border-color: transparent transparent transparent var(--tooltip-bgcolor-#{$color});
+                        }
+                    }
+                }
+        
+                &.tooltip-right {
+                    .tooltip-container {
+                        .tooltip-message {
+                            background-color: var(--tooltip-bgcolor-#{$color});
+                            color: var(--tooltip-color-#{$color});
+                        }
+
+                        .tooltip-triangle {
+                            border-color: transparent var(--tooltip-bgcolor-#{$color}) transparent transparent;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

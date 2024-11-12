@@ -1,18 +1,21 @@
 <ngx-sui-layout>
     <ngx-sui-layout-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
-        <ng-container ngProjectAs="headerActions">
+        <ng-template ngx-sui-LayoutHeaderActions="">
             <button ngx-sui-FlatTextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
-        </ng-container>
+        </ng-template>
     </ngx-sui-layout-header>
-    <ngx-sui-layout-content contentSideWidth="256" contentDuration="100" [contentToggled]="controlToggled">
-        <ng-container ngProjectAs="contentSide">
+    <ngx-sui-layout-content [contentToggled]="controlToggled">
+        <ng-template ngx-sui-LayoutContentSide>
             <ngx-sui-navlist>
-                <ngx-sui-navblock [blockTitle]="item.text" *ngFor="let item of NAV_META_INFO_LIST">
-                    <a ngx-sui-NavLink [navLinkSelected]="checkRouteSelected(node.link) | async" [routerLink]="node.link" *ngFor="let node of item.nodes">{{ node.text }}</a>
-                </ngx-sui-navblock>
+                <ng-container *ngFor="let item of NAV_META_INFO_LIST; index as idx">
+                    <ngx-sui-navlist-section [navSecFoldHref]="item.link" [navSecFolded]="!controlToggled" [navSecFoldIcon]="item.icon" [navSecLabel]="item.text" [navSecExpanded]="checkSectionExpanded(item.nodes) | async" *ngIf="item.type === 'section'">
+                        <a ngx-sui-NavListItem [navItemSelected]="checkRouteSelected(node.link) | async" [routerLink]="node.link" *ngFor="let node of item.nodes">{{ node.text }}</a>
+                    </ngx-sui-navlist-section>
+                    <a ngx-sui-NavListItem [navItemIcon]="item.icon" [navItemSelected]="checkRouteSelected(item.link) | async" [routerLink]="item.link" *ngIf="item.type === 'item'">{{ item.text }}</a>
+                </ng-container>
             </ngx-sui-navlist>
-        </ng-container>
-        <ng-container ngProjectAs="contentArea"><router-outlet></router-outlet></ng-container>
+        </ng-template>
+        <ng-template ngx-sui-LayoutContentArea><router-outlet></router-outlet></ng-template>
     </ngx-sui-layout-content>
     <ngx-sui-layout-footer></ngx-sui-layout-footer>
 </ngx-sui-layout>

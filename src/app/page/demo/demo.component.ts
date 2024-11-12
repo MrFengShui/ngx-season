@@ -4,7 +4,9 @@ import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
 import { BehaviorSubject, filter, map, Observable, of, Subject, throttleTime } from "rxjs";
 
-type NavigationMetainfo = { id: string, icon?: string, text: string, link?: string[], nodes?: NavigationMetainfo[] };
+import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
+
+type NavigationMetainfo = { id: string, icon?: NGXSeasonIconName, type?: 'item' | 'section', text: string, link?: string[], nodes?: NavigationMetainfo[] };
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,10 +14,10 @@ type NavigationMetainfo = { id: string, icon?: string, text: string, link?: stri
     templateUrl: './demo.component.html',
     styles: `
         :host {
-            &, .ngx-sui-layout {
+            &, .layout {
                 height: 100%;
 
-                .ngx-sui-content {
+                .layout-content {
                     height: calc(100% - #{var(--layout-header-height)} - #{var(--layout-footer-height)})
                 }
             }
@@ -28,42 +30,58 @@ export class DemoPageComponent implements OnInit, OnDestroy {
     protected readonly LIGHT_MODE_LOGO: string = 'assets/logo/angular_wordmark_black.png';
 
     protected readonly NAV_META_INFO_LIST: NavigationMetainfo[] = [
+        { id: '1', icon: 'dashboard', link: ['/demo', 'dashboard'], type: 'item', text: '仪表盘' },
         { 
-            id: '2', text: '组件展示', 
+            id: '2', icon: 'dashboard', link: ['/demo', 'component'], type: 'section', text: '常规组件展示', 
             nodes: [
-                { id: '2-1', text: '手风琴', link: ['/demo', 'accordion'] },
-                { id: '2-2', text: '警示框', link: ['/demo', 'alert'] },
-                { id: '2-3', text: '头像', link: ['/demo', 'avatar'] },
-                { id: '2-4', text: '徽章', link: ['/demo', 'badge'] },
-                { id: '2-5', text: '面包屑', link: ['/demo', 'breadcrumb'] },
-                { id: '2-6', text: '按钮', link: ['/demo', 'button'] },
-                { id: '2-7', text: '按钮组', link: ['/demo', 'button-group'] },
-                { id: '2-8', text: '卡片', link: ['/demo', 'card'] },
-                { id: '2-9', text: '轮播器', link: ['/demo', 'carousel'] },
-                { id: '2-10', text: '检查框', link: ['/demo', 'checkbox'] },
-                { id: '2-11', text: '开关', link: ['/demo', 'check-switch'] },
-                { id: '2-12', text: '数码', link: ['/demo', 'digital'] },
-                { id: '2-13', text: '图标', link: ['/demo', 'icon'] },
-                { id: '2-14', text: '输入框', link: ['/demo', 'input'] },
-                { id: '2-15', text: '列表', link: ['/demo', 'list'] },
-                { id: '2-16', text: '占位符', link: ['/demo', 'placeholder'] },
-                { id: '2-17', text: '进度', link: ['/demo', 'progress'] },
-                { id: '2-18', text: '丝带', link: ['/demo', 'ribbon'] },
+                { id: '2-1', text: '手风琴', link: ['/demo', 'component', 'accordion'] },
+                { id: '2-2', text: '警示框', link: ['/demo', 'component', 'alert'] },
+                { id: '2-3', text: '头像', link: ['/demo', 'component', 'avatar'] },
+                { id: '2-4', text: '徽章', link: ['/demo', 'component', 'badge'] },
+                { id: '2-5', text: '面包屑', link: ['/demo', 'component', 'breadcrumb'] },
+                { id: '2-6', text: '按钮', link: ['/demo', 'component', 'button'] },
+                { id: '2-7', text: '按钮组', link: ['/demo', 'component', 'button-group'] },
+                { id: '2-8', text: '卡片', link: ['/demo', 'component', 'card'] },
+                { id: '2-9', text: '轮播器', link: ['/demo', 'component', 'carousel'] },
+                
+                { id: '2-11', text: '开关', link: ['/demo', 'component', 'check-switch'] },
+                { id: '2-12', text: '数码', link: ['/demo', 'component', 'digital'] },
+                { id: '2-13', text: '图标', link: ['/demo', 'component', 'icon'] },
+                
+                { id: '2-15', text: '列表', link: ['/demo', 'component', 'list'] },
+                { id: '2-16', text: '占位符', link: ['/demo', 'component', 'placeholder'] },
+                { id: '2-17', text: '进度', link: ['/demo', 'component', 'progress'] },
+                { id: '2-18', text: '丝带', link: ['/demo', 'component', 'ribbon'] },
+                { id: '2-22', text: '提示框', link: ['/demo', 'component', 'tooltip'] },
             ]
         },
         { 
-            id: '3', text: '特效展示', 
+            id: '3', icon: 'form', type: 'section', text: '表单组件展示', 
             nodes: [
-                { id: '2-1', text: '背景', link: ['/demo', 'background'] }
+                { id: '2-2', text: '检查框', link: ['/demo', 'form', 'checkbox'] },
+                // { id: '2-3', text: '邮件输入框', link: ['/demo', 'form', 'email'] },
+                // { id: '2-4', text: '输入框', link: ['/demo', 'form', 'number'] },
+                { id: '2-5', text: '密码输入框', link: ['/demo', 'form', 'password'] },
+                // { id: '2-6', text: '电话输入框', link: ['/demo', 'form', 'phone'] },
+                { id: '2-7', text: '搜索输入框', link: ['/demo', 'form', 'search'] },
+                { id: '2-8', text: '文字输入框', link: ['/demo', 'form', 'textfield'] },
+            ]
+        },
+        { 
+            id: '4', icon: 'animation', type: 'section', text: '特效展示', 
+            nodes: [
+                { id: '4-1', text: '背景', link: ['/demo', 'effect', 'background'] },
+                { id: '4-5', text: '波纹', link: ['/demo', 'effect', 'ripple'] },
             ]
         }
     ];
 
-    protected selected$: Subject<boolean> = new BehaviorSubject(false);
-
     protected themeFlag: boolean = false;
     protected themeHoverFlag: boolean = false;
     protected controlToggled: boolean = true;
+
+    private expanded$: Subject<boolean> = new BehaviorSubject(false);
+    private selected$: Subject<boolean> = new BehaviorSubject(false);
 
     private source: string[] | undefined;
 
@@ -110,6 +128,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.expanded$.complete();
         this.selected$.complete();
     }
 
@@ -117,20 +136,35 @@ export class DemoPageComponent implements OnInit, OnDestroy {
         this.changeThemeMode();
     }
 
-    protected checkRouteSelected(target: string[] | undefined): Observable<boolean> {
-        if (!target || !this.source) return of(false);
-        
-        let flag: boolean = target.length === this.source.length;
+    protected checkSectionExpanded(nodes: NavigationMetainfo[] | undefined): Observable<boolean> {
+        if (nodes) {
+            let flag: boolean = false;
 
-        for (let i = 0; i < target.length; i++) {
-            if (target[i] !== this.source[i]) {
-                flag = false;
-                break;
+            for (let length = nodes.length, i = 0, j = length - 1; i < j; i++, j--) {
+                if (this.checkSelected(nodes[i].link, this.source) || this.checkSelected(nodes[j].link, this.source)) {
+                    flag = true;
+                    break;
+                }
             }
+
+            this.expanded$.next(flag);
+        } else {
+            this.expanded$.next(false);
         }
 
-        this.selected$.next(flag);
-        return this.selected$.asObservable().pipe(throttleTime(10));
+        return this.expanded$.asObservable().pipe(throttleTime(100));
+    }
+
+    protected checkRouteSelected(target: string[] | undefined): Observable<boolean> {
+        this.selected$.next(this.checkSelected(target, this.source));
+        return this.selected$.asObservable().pipe(throttleTime(100));
+    }
+
+    private checkSelected(source: string[] | undefined, target: string[] | undefined): boolean {
+        if (!target || !source) return false;
+        
+        const sourceURL: string = source.join('/'), targetURL: string = target.join('/');
+        return sourceURL === targetURL;
     }
 
     private changeThemeMode(): void {

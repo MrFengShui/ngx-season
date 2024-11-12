@@ -13,7 +13,7 @@ import { NGXSeasonBadgeModule } from './badge/badge.module';
 import { NGXSeasonLayoutModule } from './layout/layout.module';
 import { NGXSeasonEffectsModule } from './effects/effects.module';
 import { NGXSeasonRibbonModule } from './ribbon/ribbon.module';
-import { NGXSeasonNavigatorModule } from './navigator/navigator.module';
+import { NGXSeasonNavlistModule } from './navlist/navlist.module';
 import { NGXSeasonProgressModule } from './progress/progress.module';
 import { NGXSeasonDigitalModule } from './digital/digital.module';
 import { NGXSeasonPlaceholderModule } from "./placeholder/placeholder.module";
@@ -21,6 +21,7 @@ import { NGXSeasonBreadcrumbModule } from "./breadcrumb/breadcrumb.module";
 import { NGXSeasonListModule } from "./list/list.module";
 import { NGXSeasonCheckModule } from "./check/check.module";
 import { NGXSeasonInputModule } from "./input/input.module";
+import { NGXSeasonOverlayModule } from "./overlay/overlay.module";
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { NGXSeasonInputModule } from "./input/input.module";
         NGXSeasonInputModule,
         NGXSeasonLayoutModule,
         NGXSeasonListModule,
-        NGXSeasonNavigatorModule,
+        NGXSeasonNavlistModule,
+        NGXSeasonOverlayModule,
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
         NGXSeasonRibbonModule
@@ -62,7 +64,8 @@ import { NGXSeasonInputModule } from "./input/input.module";
         NGXSeasonInputModule,
         NGXSeasonLayoutModule,
         NGXSeasonListModule,
-        NGXSeasonNavigatorModule,
+        NGXSeasonNavlistModule,
+        NGXSeasonOverlayModule,
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
         NGXSeasonRibbonModule,

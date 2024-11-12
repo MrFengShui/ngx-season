@@ -16,7 +16,7 @@ export class NGXSeasonLayoutFooterComponent {
     }
 
     private initialize(): void {
-        this._renderer.addClass(this._element.nativeElement, 'ngx-sui-footer');
+        this._renderer.addClass(this._element.nativeElement, 'layout-footer');
     }
 
 }

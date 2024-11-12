@@ -1,22 +1,49 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { TemplatePortal } from "@angular/cdk/portal";
 import { HttpClient } from "@angular/common/http";
-import { Component, ChangeDetectionStrategy, OnChanges, AfterViewInit, Input, Output, EventEmitter, ChangeDetectorRef, ElementRef, Renderer2, SimpleChanges } from "@angular/core";
+import { Component, OnChanges, AfterViewInit, Input, Output, EventEmitter, ElementRef, Renderer2, SimpleChanges, Directive, TemplateRef, ContentChild, AfterContentInit, ViewContainerRef, NgZone, OnDestroy } from "@angular/core";
 import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
-import { Observable, Subscription } from "rxjs";
+import { BehaviorSubject, Subject, Subscription } from "rxjs";
+
+@Directive({
+    selector: '[ngx-sui-LayoutHeaderContent]'
+})
+export class NGXSeasonLayoutHeaderContentDirective {
+
+    constructor(protected _template: TemplateRef<any>) {}
+
+    fetchTemplate(): TemplateRef<any> {
+        return this._template;
+    }
+
+}
+
+@Directive({
+    selector: '[ngx-sui-LayoutHeaderActions]'
+})
+export class NGXSeasonLayoutHeaderActionsDirective {
+
+    constructor(protected _template: TemplateRef<any>) {}
+
+    fetchTemplate(): TemplateRef<any> {
+        return this._template;
+    }
+
+}
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'ngx-sui-layout-header',
     template: `
-        <button ngx-sui-Button btnIcon="bars" btnIconOnly="true" (click)="handleControlToggledEvent()" *ngIf="showCtrl"></button>
-        <a [attr.href]="logoHref" class="ngx-sui-header-logo">
-            <img [attr.src]="this.baseLogoIcon$ | async" [attr.alt]="" height="100%"/>
+        <button ngx-sui-FlatIconButton btnIcon="bars" (click)="handleControlToggledEvent()" *ngIf="showCtrl"></button>
+        <a [attr.href]="logoHref" class="header-logo">
+            <img [attr.src]="this.logoImageChange$.asObservable() | async" [attr.alt]="" height="100%"/>
         </a>
-        <div class="ngx-sui-header-content"><ng-content select="headerContent"></ng-content></div>
-        <div class="ngx-sui-header-actions"><ng-content select="headerActions"></ng-content></div>
+        <div class="header-content"><ng-container [cdkPortalOutlet]="contentPortal"></ng-container></div>
+        <div class="header-actions"><ng-container [cdkPortalOutlet]="actionsPortal"></ng-container></div>
+        <ng-template><ng-content select="[ngx-sui-LayoutHeaderContent], [ngx-sui-LayoutHeaderActions]"></ng-content></ng-template>
     `
 })
-export class NGXSeasonLayoutHeaderComponent implements OnChanges, AfterViewInit {
+export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
 
     @Input('headerLogoHref')
     set logoHref(logoHref: string) {
@@ -62,34 +89,47 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, AfterViewInit 
     @Output('headerToggledChange')
     protected toggledChange: EventEmitter<boolean> = new EventEmitter(true);
 
-    protected baseLogoIcon$: Observable<SafeUrl> | undefined;
+    @ContentChild(NGXSeasonLayoutHeaderContentDirective)
+    protected contentTemplate: NGXSeasonLayoutHeaderContentDirective | undefined;
+
+    @ContentChild(NGXSeasonLayoutHeaderActionsDirective)
+    protected actionsTemplate: NGXSeasonLayoutHeaderActionsDirective | undefined;
+
+    protected logoImageChange$: Subject<string> = new BehaviorSubject('');
+
+    protected contentPortal: TemplatePortal | undefined;
+    protected actionsPortal: TemplatePortal | undefined;
+
+    private logoImage$: Subscription = Subscription.EMPTY;
 
     constructor(
-        protected _cdr: ChangeDetectorRef,
         protected _sanitizer: DomSanitizer,
         protected _element: ElementRef,
         protected _renderer: Renderer2,
-        protected _http: HttpClient
+        protected _http: HttpClient,
+        protected _vcr: ViewContainerRef,
+        protected _ngZone: NgZone
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        let keys: string[] | null = Object.keys(changes);
-
-        if (keys.includes('logoIcon')) {
-            this.baseLogoIcon$ = this.fetchIconByBase64(changes['logoIcon'].currentValue as string);
+        for (const name in changes) {
+            if (name === 'logoIcon') this.fetchImageAsBase64(changes[name].currentValue);
         }
+    }
 
-        this._cdr.markForCheck();
+    ngOnDestroy(): void {
+        this.logoImageChange$.complete();
+    }
 
-        keys.splice(0);
-        keys = null;
+    ngAfterContentInit(): void {
+        if (this.contentTemplate) this.contentPortal = new TemplatePortal(this.contentTemplate.fetchTemplate(), this._vcr);
+
+        if (this.actionsTemplate) this.actionsPortal = new TemplatePortal(this.actionsTemplate.fetchTemplate(), this._vcr);
     }
 
     ngAfterViewInit(): void {
         this.initialize();
-
-        this.baseLogoIcon$ = this.fetchIconByBase64(this.logoIcon);
-        this._cdr.markForCheck();
+        this.fetchImageAsBase64(this.logoIcon);
     }
 
     protected handleControlToggledEvent(): void {
@@ -97,30 +137,24 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, AfterViewInit 
         this.toggledChange.emit(this.toggled);
     }
 
-    private fetchIconByBase64(url: string): Observable<string> {
-        return new Observable(subscriber => {
-            let subscription: Subscription = this._http.get(url, { responseType: 'blob' }).subscribe({
-                next: blob => {
-                    let reader: FileReader | null = new FileReader();
-                    reader.onload = event => subscriber.next(event.target?.result as string);
-                    reader.onloadend = () => {
-                        subscriber.complete();
-                        reader = null;
-                    };
-                    reader.onerror = error => subscriber.error(error);
-                    reader.readAsDataURL(blob);
-                },
-                error: error => {
-                    subscriber.error(error);
-                    subscription.unsubscribe();
-                },
-                complete: () => subscription.unsubscribe()
-            });
-        });
+    private fetchImageAsBase64(url: string): void {
+        this._ngZone.runOutsideAngular(() => 
+            this.logoImage$ = this._http.get(url, { responseType: 'blob' }).subscribe({
+                next: blob => 
+                    this._ngZone.run(() => {
+                        let reader: FileReader | null = new FileReader();
+                        reader.onload = event => this.logoImageChange$.next(event.target?.result as string);
+                        reader.onloadend = () => reader = null;
+                        reader.onerror = error => this.logoImageChange$.error(error);
+                        reader.readAsDataURL(blob);
+                    }),
+                error: error => this.logoImageChange$.error(error),
+                complete: () => this.logoImage$.unsubscribe()
+            }));
     }
 
     private initialize(): void {
-        this._renderer.addClass(this._element.nativeElement, 'ngx-sui-header');
+        this._renderer.addClass(this._element.nativeElement, 'layout-header');
     }
 
 }

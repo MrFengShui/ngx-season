@@ -4,15 +4,17 @@ import { Component, OnChanges, AfterViewInit, Input, HostListener, ElementRef, R
 import { NGXSeasonIconName } from "../icon/icon.component";
 
 @Component({
-    selector: 'a[ngx-sui-NavLink]',
+    selector: 'a[ngx-sui-NavListItem]',
     template: `
-        <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'"></ngx-sui-icon>
-        <div class="nav-link-wrapper"><ng-content></ng-content></div>
+        <span class="list-item-icon">
+            <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'" iconSize="lg"></ngx-sui-icon>
+        </span>
+        <div class="list-item-wrapper"><ng-content></ng-content></div>
     `
 })
-export class NGXSeasonNavigatorLinkComponent implements OnChanges, AfterViewInit {
+export class NGXSeasonNavlistItemComponent implements OnChanges, AfterViewInit {
 
-    @Input('navLinkIcon')
+    @Input('navItemIcon')
     set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
@@ -21,7 +23,7 @@ export class NGXSeasonNavigatorLinkComponent implements OnChanges, AfterViewInit
         return this._icon;
     }
 
-    @Input('navLinkSelected')
+    @Input('navItemSelected')
     set selected(selected: boolean | string | null) {
         this._selected = coerceBooleanProperty(selected);
     }
@@ -62,7 +64,7 @@ export class NGXSeasonNavigatorLinkComponent implements OnChanges, AfterViewInit
     }
 
     ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'nav-link');
+        this._renderer.addClass(this._element.nativeElement, 'nav-list-item');
         this.changeNavLinkSelected(this.selected);
     }
 

@@ -81,7 +81,7 @@ export class NGXSeasonAccordionPanelComponent extends CdkAccordionItem implement
         return this._toggleIcon;
     }
 
-    private _duration: number = 1000;
+    private _duration: number = 250;
     private _description: string | undefined;
     private _icon: NGXSeasonIconName | undefined;
     private _subject: string | undefined;

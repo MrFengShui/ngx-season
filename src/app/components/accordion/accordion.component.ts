@@ -1,11 +1,10 @@
 import { CDK_ACCORDION, CdkAccordion } from '@angular/cdk/accordion';
-import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, Component, ContentChildren, ElementRef, Input, NgZone, OnChanges, OnDestroy, QueryList, Renderer2, SimpleChanges } from "@angular/core";
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
 import { NGXSeasonAccordionPanelComponent } from './accordion-panel.component';
 
-import { NGXSeasonIDUtils } from 'src/app/utils/id.utils';
 import { NGXSeasonUniqueSelectionIDDispatcher } from 'src/app/utils/services/switch-select.service';
 import { NGXSeasonIconName } from '../icon/icon.component';
 

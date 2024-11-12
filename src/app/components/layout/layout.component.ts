@@ -20,7 +20,7 @@ export class NGXSeasonLayoutComponent implements AfterViewInit {
     }
 
     private initialize(): void {
-        this._renderer.addClass(this._element.nativeElement, 'ngx-sui-layout');
+        this._renderer.addClass(this._element.nativeElement, 'layout');
     }
 
 }

@@ -26,12 +26,15 @@ import { DemoIconPageComponent } from "./demo/icon.component";
 import { DemoCheckboxPageComponent } from "./demo/checkbox.component";
 import { DemoCheckSwitchPageComponent } from "./demo/check-switch.component";
 import { DemoInputPageComponent } from "./demo/input.component";
+import { DemoTooltipPageComponent } from "./demo/tooltip.component";
+import { DemoComponentPageComponent } from "./demo/component.component";
 
 @NgModule({
     declarations: [
         HomePageComponent,
         DemoPageComponent,
         ErrorPageComponent,
+        DemoComponentPageComponent,
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
@@ -49,7 +52,8 @@ import { DemoInputPageComponent } from "./demo/input.component";
         DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
-        DemoRibbonPageComponent
+        DemoRibbonPageComponent,
+        DemoTooltipPageComponent
     ],
     imports: [
         CommonModule,
@@ -63,6 +67,7 @@ import { DemoInputPageComponent } from "./demo/input.component";
         HomePageComponent,
         DemoPageComponent,
         ErrorPageComponent,
+        DemoComponentPageComponent,
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
         DemoAvatarPageComponent,
@@ -80,7 +85,8 @@ import { DemoInputPageComponent } from "./demo/input.component";
         DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
-        DemoRibbonPageComponent
+        DemoRibbonPageComponent,
+        DemoTooltipPageComponent
     ]
 })
 export class PageModule {}

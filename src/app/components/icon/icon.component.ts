@@ -10,19 +10,21 @@ export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMa
 
 export type NGXSeasonIconName = 
     'accessibility-1' | 'accessibility-2' | 'add-text' | 'administrator' | 'airplane' | 'alarm-off' | 'alarm-on' | 'alert' | 'align-bottom' | 'align-center' | 'align-left' | 'align-left-text' | 'align-middle' | 'align-right' | 'align-right-text' | 'align-top' | 'analytics' | 'angle-double' | 'angle' | 'animation' | 'application' | 'applications' | 'archive' | 'arrow' | 'assign-user' | 'asterisk' | 'atom' | 'attachment' | 'auto' | 'avatar' | 'axis-chart' |
-    'bank' | 'bars' | 'bookmark' |
+    'backup-restore' | 'backup' | 'balance' | 'ban' | 'bank' | 'bar-chart' | 'bar-code' | 'bars' | 'battery' | 'bell-curve' | 'bell' | 'beta' | 'bicycle' | 'bitcoin' | 'block' | 'blocks-group' | 'bluetooth-off' | 'bluetooth-on' | 'boat' | 'bold' | 'bolt' | 'book' | 'bookmark' | 'box-plot' | 'briefcase' | 'bubble-exclamation' | 'bug' | 'building' | 'bullet-list' | 'bullseye' | 'bundle' |
     'caret' | 'check' | 'close' | 'cog' | 'collapse' | 'color-palette' |
     'dashboard' |
     'eye-hide' | 'eye-show' | 'eye' |
-    'failure-standard' | 'failure' | 'favorite' |
+    'failure-standard' | 'failure' | 'favorite' | 'form' |
     'grid-view' |
     'home' |
     'info-standard' | 'info' |
+    'list-view' |
     'minus-circle' | 'minus' | 'moon' |
     'new' |
     'organization' |
     'plus-circle' | 'plus' |
-    'share' | 'shield-check' | 'shield-times' | 'shield' | 'star' | 'storage' | 'sun' | 'success-standard' | 'success' | 
+    'qrcode' |
+    'search' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'star' | 'storage' | 'sun' | 'success-standard' | 'success' | 
     'terminal' | 'times-circle' | 'times' | 'tree-view' | 'thumbs-down' | 'thumbs-up' |
     'user' | 'users' |
     'warning-standard' | 'warning' | 'wifi' | 'world';
@@ -252,8 +254,10 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
 
             if (name === 'degreeFinal') this.rotateState.final = coerceNumberProperty(changes[name].currentValue);
         }
+        
+        const names: string[] = Object.keys(changes);
 
-        this.rotateStateChange$.next(this.rotateState);
+        if (names.includes('degreeStart') && names.includes('degreeFinal')) this.rotateStateChange$.next(this.rotateState);
     }
 
     ngOnDestroy(): void {
@@ -297,7 +301,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         this._ngZone.runOutsideAngular(() => 
             this.rotateState$ = this.rotateStateChange$.asObservable().pipe(debounceTime(100)).
                 subscribe(metainfo => 
-                    this._ngZone.run(() => {
+                    this._ngZone.run(() => { 
                         const animation: AnimationAnimateRefMetadata = useAnimation(rotateAnimation, { params: { duration: this.rotateDuration, start: metainfo.start, final: metainfo.final } });
                         this.player = this._builder.build(animation).create(element);
                         this.player.play();
