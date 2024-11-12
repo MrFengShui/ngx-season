@@ -19,6 +19,7 @@ import { DemoCheckSwitchPageComponent } from "../page/demo/check-switch.componen
 import { DemoInputPageComponent } from "../page/demo/input.component";
 import { DemoTooltipPageComponent } from "../page/demo/tooltip.component";
 import { DemoComponentPageComponent } from "../page/demo/component.component";
+import { DemoDividerPageComponent } from "../page/demo/divider.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -33,8 +34,9 @@ export const demoRoutes: Routes = [
     { path: 'component/card', component: DemoCardPageComponent, title: '卡片' },
     { path: 'component/carousel', component: DemoCarouselPageComponent, title: '轮播器' },
     { path: 'form/checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
-    { path: 'component/check-switch', component: DemoCheckSwitchPageComponent, title: '开关' },
+    { path: 'form/check-switch', component: DemoCheckSwitchPageComponent, title: '开关' },
     { path: 'component/digital', component: DemoDigitalPageComponent, title: '数码' },
+    { path: 'component/divider', component: DemoDividerPageComponent, title: '分割器' },
     { path: 'component/icon', component: DemoIconPageComponent, title: '图标' },
     { path: 'form/input', component: DemoInputPageComponent, title: '输入框' },
     { path: 'component/list', component: DemoListPageComponent, title: '列表' },

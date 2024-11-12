@@ -22,6 +22,7 @@ import { NGXSeasonListModule } from "./list/list.module";
 import { NGXSeasonCheckModule } from "./check/check.module";
 import { NGXSeasonInputModule } from "./input/input.module";
 import { NGXSeasonOverlayModule } from "./overlay/overlay.module";
+import { NGXSeasonDividerModule } from "./divider/divider.module";
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { NGXSeasonOverlayModule } from "./overlay/overlay.module";
         NGXSeasonCarouselModule,
         NGXSeasonCheckModule,
         NGXSeasonDigitalModule,
+        NGXSeasonDividerModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
         NGXSeasonInputModule,
@@ -59,6 +61,7 @@ import { NGXSeasonOverlayModule } from "./overlay/overlay.module";
         NGXSeasonCarouselModule,
         NGXSeasonCheckModule,
         NGXSeasonDigitalModule,
+        NGXSeasonDividerModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
         NGXSeasonInputModule,

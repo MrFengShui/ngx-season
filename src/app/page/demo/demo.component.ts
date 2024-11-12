@@ -31,8 +31,8 @@ export class DemoPageComponent implements OnInit, OnDestroy {
 
     protected readonly NAV_META_INFO_LIST: NavigationMetainfo[] = [
         { id: '1', icon: 'dashboard', link: ['/demo', 'dashboard'], type: 'item', text: '仪表盘' },
-        { 
-            id: '2', icon: 'dashboard', link: ['/demo', 'component'], type: 'section', text: '常规组件展示', 
+        {
+            id: '2', icon: 'dashboard', link: ['/demo', 'component'], type: 'section', text: '常规组件展示',
             nodes: [
                 { id: '2-1', text: '手风琴', link: ['/demo', 'component', 'accordion'] },
                 { id: '2-2', text: '警示框', link: ['/demo', 'component', 'alert'] },
@@ -43,11 +43,10 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-7', text: '按钮组', link: ['/demo', 'component', 'button-group'] },
                 { id: '2-8', text: '卡片', link: ['/demo', 'component', 'card'] },
                 { id: '2-9', text: '轮播器', link: ['/demo', 'component', 'carousel'] },
-                
-                { id: '2-11', text: '开关', link: ['/demo', 'component', 'check-switch'] },
-                { id: '2-12', text: '数码', link: ['/demo', 'component', 'digital'] },
-                { id: '2-13', text: '图标', link: ['/demo', 'component', 'icon'] },
-                
+                { id: '2-10', text: '数码', link: ['/demo', 'component', 'digital'] },
+                { id: '2-11', text: '分割器', link: ['/demo', 'component', 'divider'] },
+                { id: '2-12', text: '图标', link: ['/demo', 'component', 'icon'] },
+
                 { id: '2-15', text: '列表', link: ['/demo', 'component', 'list'] },
                 { id: '2-16', text: '占位符', link: ['/demo', 'component', 'placeholder'] },
                 { id: '2-17', text: '进度', link: ['/demo', 'component', 'progress'] },
@@ -55,10 +54,11 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-22', text: '提示框', link: ['/demo', 'component', 'tooltip'] },
             ]
         },
-        { 
-            id: '3', icon: 'form', type: 'section', text: '表单组件展示', 
+        {
+            id: '3', icon: 'form', type: 'section', text: '表单组件展示',
             nodes: [
                 { id: '2-2', text: '检查框', link: ['/demo', 'form', 'checkbox'] },
+                { id: '2-3', text: '开关', link: ['/demo', 'form', 'check-switch'] },
                 // { id: '2-3', text: '邮件输入框', link: ['/demo', 'form', 'email'] },
                 // { id: '2-4', text: '输入框', link: ['/demo', 'form', 'number'] },
                 { id: '2-5', text: '密码输入框', link: ['/demo', 'form', 'password'] },
@@ -67,8 +67,8 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-8', text: '文字输入框', link: ['/demo', 'form', 'textfield'] },
             ]
         },
-        { 
-            id: '4', icon: 'animation', type: 'section', text: '特效展示', 
+        {
+            id: '4', icon: 'animation', type: 'section', text: '特效展示',
             nodes: [
                 { id: '4-1', text: '背景', link: ['/demo', 'effect', 'background'] },
                 { id: '4-5', text: '波纹', link: ['/demo', 'effect', 'ripple'] },
@@ -95,7 +95,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
         private _title: Title,
         private _ngZone: NgZone
     ) {
-        this._ngZone.runOutsideAngular(() => 
+        this._ngZone.runOutsideAngular(() =>
             this._router.events.pipe(
                 filter(events => events instanceof NavigationEnd),
                 map(() => {
@@ -110,7 +110,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                     return { route: [`/${parentPath}`, `${childPath}`], title: `${parentTitle}——${childTitle}` };
                 })
             ))
-            .subscribe(result => 
+            .subscribe(result =>
                 this._ngZone.run(() => {
                     this.source = result.route;
 
@@ -162,7 +162,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
 
     private checkSelected(source: string[] | undefined, target: string[] | undefined): boolean {
         if (!target || !source) return false;
-        
+
         const sourceURL: string = source.join('/'), targetURL: string = target.join('/');
         return sourceURL === targetURL;
     }

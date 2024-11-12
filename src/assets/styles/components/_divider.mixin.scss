@@ -1,0 +1,86 @@
+@mixin setup-divider-theme($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    .divider {
+        --divider-font-size: #{var(--font-size-12)};
+        --divider-font-weight: #{var(--font-weight-500)};
+        --divider-line-height: #{var(--line-height-100)};
+
+        --divider-x-text-margin: #{var(--margin-0)} #{var(--margin-100)};
+        --divider-y-text-margin: #{var(--margin-100)} #{var(--margin-0)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --divider-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            } @else {
+                --divider-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+            }
+        }
+
+        &.x-divider {
+            display: flex;
+            align-items: center;
+
+            width: var(--size-percent-100);
+
+            .left, .right {
+                width: var(--size-percent-100);
+                height: var(--divider-thickness);
+            }
+
+            .text {
+                font-size: var(--divider-font-size);
+                font-weight: var(--divider-font-weight);
+                line-height: var(--divider-line-height);
+                white-space: nowrap;
+
+                margin: var(--divider-x-text-margin);
+            }
+        }
+
+        &.y-divider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .left, .right {
+                width: var(--divider-thickness);
+                height: var(--size-percent-100);
+            }
+
+            .text {
+                font-size: var(--divider-font-size);
+                font-weight: var(--divider-font-weight);
+                line-height: var(--divider-line-height);
+
+                white-space: nowrap;
+                writing-mode: vertical-lr;
+                text-orientation: sideways;
+
+                margin: var(--divider-y-text-margin);
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-divider-color=#{$color}] {
+                &.x-divider, &.y-divider {
+                    .left, .right {
+                        background-color: var(--divider-color-#{$color});
+                    }
+
+                    > span {
+                        color: var(--divider-color-#{$color});
+                    }
+                }
+            }
+        }
+    }
+}

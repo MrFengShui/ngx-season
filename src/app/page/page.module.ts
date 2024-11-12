@@ -28,6 +28,7 @@ import { DemoCheckSwitchPageComponent } from "./demo/check-switch.component";
 import { DemoInputPageComponent } from "./demo/input.component";
 import { DemoTooltipPageComponent } from "./demo/tooltip.component";
 import { DemoComponentPageComponent } from "./demo/component.component";
+import { DemoDividerPageComponent } from "./demo/divider.component";
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { DemoComponentPageComponent } from "./demo/component.component";
         DemoCheckboxPageComponent,
         DemoCheckSwitchPageComponent,
         DemoDigitalPageComponent,
+        DemoDividerPageComponent,
         DemoIconPageComponent,
         DemoInputPageComponent,
         DemoListPageComponent,
@@ -80,6 +82,7 @@ import { DemoComponentPageComponent } from "./demo/component.component";
         DemoCheckboxPageComponent,
         DemoCheckSwitchPageComponent,
         DemoDigitalPageComponent,
+        DemoDividerPageComponent,
         DemoIconPageComponent,
         DemoInputPageComponent,
         DemoListPageComponent,

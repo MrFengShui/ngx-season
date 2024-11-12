@@ -9,6 +9,7 @@
 @import "../components/carousel.mixin";
 @import "../components/check.mixin";
 @import "../components/digital.mixin";
+@import "../components/divider.mixin";
 @import "../components/icons.mixin";
 @import "../components/input.mixin";
 @import "../components/layout.mixin";
@@ -34,6 +35,7 @@
         @include setup-carousel-theme($theme, "indigo", "pink");
         @include setup-check-theme($theme, "indigo", "pink");
         @include setup-digital-theme($theme, "indigo", "pink");
+        @include setup-divider-theme($theme, "indigo", "pink");
         @include setup-icons-theme($theme, "indigo", "pink");
         @include setup-input-theme($theme, "indigo", "pink");
         @include setup-layout-theme($theme);
