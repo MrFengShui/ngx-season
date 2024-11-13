@@ -17,5 +17,10 @@
         </ng-template>
         <ng-template ngx-sui-LayoutContentArea><router-outlet></router-outlet></ng-template>
     </ngx-sui-layout-content>
-    <ngx-sui-layout-footer></ngx-sui-layout-footer>
+    <ngx-sui-layout-footer>
+        <div class="flex justify-content-between align-items-center w-100 h-100">
+            <span class="fs-16 fw-900">在此进行版权声明&nbsp;&nbsp;&nbsp;&copy;2024-2034</span>
+            <span class="fs-16 fw-900">{{ datetime$ | async }}</span>
+        </div>
+    </ngx-sui-layout-footer>
 </ngx-sui-layout>

@@ -13,6 +13,7 @@
         --layout-header-link-margin: #{var(--size-pixel-0)} #{var(--size-pixel-16)};
 
         --layout-footer-height: #{var(--size-pixel-48)};
+        --layout-footer-padding: #{var(--size-pixel-0)} #{var(--size-pixel-16)};
 
         display: flex;
         flex-direction: column;
@@ -93,7 +94,7 @@
         .layout-content {
             display: flex;
             flex: 1 1 auto;
-            
+
             .content-side {
                 border-right-color: var(--layout-split-bdcolor);
                 border-right-style: solid;
@@ -111,6 +112,8 @@
             border-top-width: var(--layout-split-border-width);
 
             min-height: var(--layout-footer-height);
+
+            padding: var(--layout-footer-padding);
         }
     }
 }

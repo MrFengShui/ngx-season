@@ -8,26 +8,29 @@ import { fromFetch } from 'rxjs/fetch';
 export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegister> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 
-export type NGXSeasonIconName = 
+export type NGXSeasonIconName =
     'accessibility-1' | 'accessibility-2' | 'add-text' | 'administrator' | 'airplane' | 'alarm-off' | 'alarm-on' | 'alert' | 'align-bottom' | 'align-center' | 'align-left' | 'align-left-text' | 'align-middle' | 'align-right' | 'align-right-text' | 'align-top' | 'analytics' | 'angle-double' | 'angle' | 'animation' | 'application' | 'applications' | 'archive' | 'arrow' | 'assign-user' | 'asterisk' | 'atom' | 'attachment' | 'auto' | 'avatar' | 'axis-chart' |
     'backup-restore' | 'backup' | 'balance' | 'ban' | 'bank' | 'bar-chart' | 'bar-code' | 'bars' | 'battery' | 'bell-curve' | 'bell' | 'beta' | 'bicycle' | 'bitcoin' | 'block' | 'blocks-group' | 'bluetooth-off' | 'bluetooth-on' | 'boat' | 'bold' | 'bolt' | 'book' | 'bookmark' | 'box-plot' | 'briefcase' | 'bubble-exclamation' | 'bug' | 'building' | 'bullet-list' | 'bullseye' | 'bundle' |
-    'caret' | 'check' | 'close' | 'cog' | 'collapse' | 'color-palette' |
-    'dashboard' |
-    'eye-hide' | 'eye-show' | 'eye' |
-    'failure-standard' | 'failure' | 'favorite' | 'form' |
+    'calculator' | 'calendar' | 'camera' | 'campervan' | 'cancel' | 'capacitor' | 'car' | 'caravan' | 'caret' | 'cddvd' | 'center-text' | 'certificate' | 'chat-bubble' | 'check-circle' | 'check' | 'checkbox-list' | 'child-arrow' | 'cicd' | 'circle-arrow' | 'circle' | 'clipboard' | 'clock' | 'clone' | 'close' | 'cloud-chart' | 'cloud-network' | 'cloud-scale' | 'cloud-traffic' | 'cloud' | 'cluster' | 'code' | 'cog' | 'coin-bag' | 'collapse-card' | 'collapse' | 'color-palette' | 'color-picker' | 'command' | 'compass' | 'computer' | 'connect' | 'container' | 'container-volume' | 'contract' | 'control-lun' | 'copy' | 'copy-to-clipboard' | 'cpu' | 'credit-card' | 'crosshairs' | 'crown' | 'cursor-arrow' | 'cursor-hand-click' | 'cursor-hand-grab' | 'cursor-hand-open' | 'cursor-hand' | 'cursor-move' | 'curve-chart' |
+    'dashboard' | 'data-cluster' | 'date' | 'deploy' | 'design' | 'details' | 'devices' | 'digital-signature' | 'directory' | 'disconnect' | 'display' | 'dna' | 'document' | 'dollar-bill' | 'dollar' | 'dot-circle' | 'download-cloud' | 'download' | 'drag-handle-corner' | 'drag-handle' |
+    'edit' | 'ellipsis-horizontal' | 'ellipsis-vertical' | 'email' | 'employee-group' | 'employee' | 'eraser' | 'euro' | 'export' | 'eye-hide' | 'eye-show' | 'eye' |
+    'face-happy' | 'face-neutral' | 'face-sad' | 'factory' | 'failure-standard' | 'failure' | 'favorite' | 'file-group' | 'file' | 'filter-off' | 'filter-on' | 'firewall' | 'flag' | 'floppy' | 'form' |
     'grid-view' |
-    'home' |
-    'info-standard' | 'info' |
-    'list-view' |
-    'minus-circle' | 'minus' | 'moon' |
-    'new' |
+    'heart-broken' | 'heart' | 'help-standard' | 'home' |
+    'id-badge' | 'image-gallery' | 'image' | 'import' | 'info-standard' | 'info' | 'internet-of-things' |
+    'key' | 'keyboard' |
+    'language' | 'library' | 'list-view' | 'list' | 'login' | 'logout' |
+    'minus-circle' | 'minus' | 'mobile' | 'moon' | 'mouse' |
+    'new' | 'network-globe' | 'no-access' |
     'organization' |
-    'plus-circle' | 'plus' |
+    'paperclip' | 'pause' | 'phone' | 'pin' | 'play' | 'plugin' | 'plus-circle' | 'plus' | 'pound' | 'power' | 'printer' |
     'qrcode' |
-    'search' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'star' | 'storage' | 'sun' | 'success-standard' | 'success' | 
-    'terminal' | 'times-circle' | 'times' | 'tree-view' | 'thumbs-down' | 'thumbs-up' |
-    'user' | 'users' |
-    'warning-standard' | 'warning' | 'wifi' | 'world';
+    'recycle' | 'rewind' | 'router' | 'ruble' | 'rupee' |
+    'savings' | 'search' | 'server' | 'settings' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'slider' | 'star' | 'step-forward' | 'stop' | 'storage' | 'store' | 'success-standard' | 'success' | 'sun' | 'switch' | 'sync' |
+    'table' | 'tablet' | 'tag' | 'tags' | 'target' | 'terminal' | 'thumbs-down' | 'thumbs-up' | 'times-circle' | 'times' | 'tools' | 'trash' | 'tree-view' |
+    'unlock' | 'upload-cloud' | 'upload' | 'user' | 'users' |
+    'video-camera' | 'video-gallery' | 'volume-down' | 'volume-mute' | 'volume-up' |
+    'wallet' | 'warning-standard' | 'warning' | 'wifi-off' | 'wifi-on' | 'world';
 
 export type NGXSeasonIconColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
 export type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
@@ -41,7 +44,7 @@ export class NGXSeasonIconRegister {
     protected static instance: NGXSeasonIconRegister | null = null;
 
     private subject: Subject<IconsCache> = new BehaviorSubject({});
-    
+
     private cache: IconsCache = {};
     private keys: string[] = [];
 
@@ -92,9 +95,9 @@ export class NGXSeasonIconRegister {
         const solidFetch = fromFetch(solidURL).pipe(switchMap(res => res.text()));
         const outlineFetch = fromFetch(outlineURL).pipe(switchMap(res => res.text()));
         return zip(solidFetch, outlineFetch)
-            .pipe(map(values => ({ 
-                solid: this.fetchSVGContent(values[0]), 
-                outline: this.fetchSVGContent(values[1]) 
+            .pipe(map(values => ({
+                solid: this.fetchSVGContent(values[0]),
+                outline: this.fetchSVGContent(values[1])
             })));
     }
 
@@ -245,16 +248,16 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
             if (name === 'color') this.changeIconColor(changes[name].currentValue as NGXSeasonIconColor);
 
             if (name === 'degree') this.changeIconDegree(coerceNumberProperty(changes[name].currentValue));
-    
+
             if (name === 'shape') this.setupIconContent(changes[name].currentValue, this.solid);
-    
+
             if (name === 'solid') this.setupIconContent(this.shape, coerceBooleanProperty(changes[name].currentValue));
-            
+
             if (name === 'degreeStart') this.rotateState.start = coerceNumberProperty(changes[name].currentValue);
 
             if (name === 'degreeFinal') this.rotateState.final = coerceNumberProperty(changes[name].currentValue);
         }
-        
+
         const names: string[] = Object.keys(changes);
 
         if (names.includes('degreeStart') && names.includes('degreeFinal')) this.rotateStateChange$.next(this.rotateState);
@@ -289,7 +292,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     protected setupIconContent(shape: NGXSeasonIconName | undefined, solid: boolean): void {
-        this.svgContent$ = shape ? this._register.findIcon(shape).pipe(map(pair => 
+        this.svgContent$ = shape ? this._register.findIcon(shape).pipe(map(pair =>
             this._sanitizer.bypassSecurityTrustHtml(solid ? pair.solid : pair.outline))) : of();
     }
 
@@ -298,10 +301,10 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     private listenRotateStartFinalChange(element: SVGElement | undefined): void {
-        this._ngZone.runOutsideAngular(() => 
+        this._ngZone.runOutsideAngular(() =>
             this.rotateState$ = this.rotateStateChange$.asObservable().pipe(debounceTime(100)).
-                subscribe(metainfo => 
-                    this._ngZone.run(() => { 
+                subscribe(metainfo =>
+                    this._ngZone.run(() => {
                         const animation: AnimationAnimateRefMetadata = useAnimation(rotateAnimation, { params: { duration: this.rotateDuration, start: metainfo.start, final: metainfo.final } });
                         this.player = this._builder.build(animation).create(element);
                         this.player.play();

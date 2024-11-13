@@ -11,7 +11,7 @@
 
 @import "./assets/styles/theme/default.theme";
 
-$themes: ("default");
+$themes: ("default", "spring", "summer", "autumn", "winter");
 
 [data-theme*="dark"] {
     background-color: var(--palette-gray-900-color);
@@ -29,7 +29,7 @@ $themes: ("default");
 [data-theme*="light"] {
     background-color: var(--palette-gray-100-color);
     color: var(--palette-gray-900-color);
-    
+
     @each $theme in $themes {
         @if $theme == "spring" {
 

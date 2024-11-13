@@ -2,7 +2,9 @@ import { DOCUMENT } from "@angular/common";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
-import { BehaviorSubject, filter, map, Observable, of, Subject, throttleTime } from "rxjs";
+import { BehaviorSubject, filter, interval, map, Observable, of, Subject, throttleTime } from "rxjs";
+
+import * as moment from 'moment';
 
 import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 
@@ -80,6 +82,67 @@ export class DemoPageComponent implements OnInit, OnDestroy {
     protected themeHoverFlag: boolean = false;
     protected controlToggled: boolean = true;
 
+    protected datetime$: Observable<string> | undefined;
+
+    private readonly MOMENT_CHINESE_FORMAT: string = moment.locale('zh-cn', {
+        months: '一_二_三_四_五_六_七_八_九_十_十一_十二'.split('_'),
+        monthsShort: '01_02_03_04_05_06_07_08_09_10_11_12'.split('_'),
+        monthsParseExact: true,
+        weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+        weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
+        weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'YYYY-MM-DD',
+            LL: 'YYYY年MM月DD日',
+            LLL: 'YYYY年MMM月DD日 ddd HH:mm:ss A',
+            LLLL: 'YYYY年MMMM月DD日 dddd HH:mm:ss A'
+        },
+        calendar: {
+            sameDay: '[今天] LT',
+            nextDay: '[明天] LT',
+            nextWeek: '[下周]dd LT',
+            lastDay: '[昨天] LT',
+            lastWeek: '[上周]dd LT',
+            sameElse: 'L'
+        },
+        relativeTime: {
+            future: '%s内',
+            past: '%s前',
+            s: '几秒',
+            m: '一分钟',
+            mm: '%d分钟',
+            h: '一小时',
+            hh: '%d小时',
+            d: '天',
+            dd: '%d天',
+            M: '一个月',
+            MM: '%d个月',
+            y: '一年',
+            yy: '%d年'
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+        ordinal: function (number) {
+            return number + (number === 1 ? 'er' : 'e');
+        },
+        meridiemParse: /凌晨|早晨|上午|中午|下午|傍晚|午夜/,
+        meridiem: function (hours, minutes, isLower) {
+            if (hours >= 0 && hours < 5) return '凌晨';
+            else if (hours >= 5 && hours < 7) return '早晨';
+            else if (hours >= 7 && hours < 11) return '上午';
+            else if (hours >= 11 && hours < 13) return '中午';
+            else if (hours >= 13 && hours < 18) return '下午';
+            else if (hours >= 18 && hours < 20) return '傍晚';
+            else return '傍晚';
+        },
+        week: {
+            dow: 1,
+            doy: 4
+        }
+    });
+
     private expanded$: Subject<boolean> = new BehaviorSubject(false);
     private selected$: Subject<boolean> = new BehaviorSubject(false);
 
@@ -124,6 +187,9 @@ export class DemoPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        moment.locale(this.MOMENT_CHINESE_FORMAT);
+        this.datetime$ = interval(100).pipe(map(() => moment().format('LLL')));
+
         this.changeThemeMode();
     }
 

@@ -1,0 +1,40 @@
+@mixin setup-global-color($theme, $primaryColor, $accentColor) {
+    $colors: (
+        "default": "gray",
+        "primary": $primaryColor,
+        "accent": $accentColor,
+        "success": "green",
+        "warning": "yellow",
+        "failure": "red",
+        "info": "blue"
+    );
+
+    @each $key, $value in $colors {
+        @if $key == "default" {
+            --bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
+            --ccolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+        } @else {
+            --bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --color-#{$key}: #{var(--palette-#{$value}-500-color)};
+        }
+    }
+
+    --bgcolor-black: #{var(--palette-black-color)};
+    --bgcolor-white: #{var(--palette-white-color)};
+
+    @each $color in map-keys($colors) {
+        .bgcolor-#{$color} {
+            background-color: var(--bgcolor-#{$color}) !important;
+        }
+    }
+
+    .bgcolor-black {
+        background-color: var(--bgcolor-black);
+    }
+
+    .bgcolor-white {
+        background-color: var(--bgcolor-white);
+    }
+}
