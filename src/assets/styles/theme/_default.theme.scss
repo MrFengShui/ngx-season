@@ -1,7 +1,6 @@
 @import "../components/accordion.mixin";
 @import "../components/alert.mixin";
 @import "../components/avatar.mixin";
-@import "../components/background.mixin";
 @import "../components/badge.mixin";
 @import "../components/breadcrumb.mixin";
 @import "../components/button.mixin";
@@ -15,13 +14,15 @@
 @import "../components/layout.mixin";
 @import "../components/list.mixin";
 @import "../components/navlist.mixin";
-@import "../components/overlay.mixin";
 @import "../components/placeholder.mixin";
 @import "../components/progress.mixin";
 @import "../components/ribbon.mixin";
 @import "../components/ripple.mixin";
 @import "../components/scrollbar.mixin";
+@import "../components/toast.mixin";
+@import "../components/tooltip.mixin";
 
+@import "../effect/background.mixin";
 @import "../effect/color.mixin";
 
 @mixin setup-default-theme($theme) {
@@ -29,7 +30,6 @@
         @include setup-accordion-theme($theme, "indigo", "pink");
         @include setup-alert-theme($theme, "indigo");
         @include setup-avatar-theme($theme, "indigo", "pink");
-        @include setup-background-theme($theme, "indigo", "pink");
         @include setup-badge-theme($theme, "indigo", "pink");
         @include setup-breadcrumb-theme($theme);
         @include setup-button-theme($theme, "indigo", "pink");
@@ -43,13 +43,15 @@
         @include setup-layout-theme($theme);
         @include setup-list-theme($theme);
         @include setup-navlist-theme($theme, "indigo");
-        @include setup-overlay-theme($theme, "indigo", "pink");
         @include setup-placeholder-theme($theme);
         @include setup-progress-theme($theme, "indigo", "pink");
         @include setup-ribbon-theme($theme, "indigo", "pink");
         @include setup-ripple-theme($theme, "indigo", "pink");
         @include setup-scrollbar-theme($theme, "indigo");
+        @include setup-toast-theme($theme);
+        @include setup-tooltip-theme($theme, "indigo", "pink");
 
-        @include setup-global-color($theme, "indigo", "pink");
+        @include setup-background-effect($theme, "indigo", "pink");
+        @include setup-color-effect($theme, "indigo", "pink");
     }
 }

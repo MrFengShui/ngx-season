@@ -1,0 +1,4 @@
+<div class="flex flex-wrap row-gap-100 gx-100 p-100">
+    <button ngx-sui-SolidTextButton [btnColor]="item.color" (click)="handleTiggerToastEvent(item.color, item.label, item.position)"  class="flex-auto" *ngFor="let item of list">{{ item.label }}</button>
+</div>
+

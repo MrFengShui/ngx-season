@@ -1,6 +1,8 @@
 import { Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
-import { AfterViewInit, Component, Directive, ElementRef, Injector, Input, NgZone, OnChanges, Renderer2, SimpleChanges, ViewContainerRef } from "@angular/core";
+import { Component, Directive, ElementRef, Injector, Input, NgZone, Renderer2, ViewContainerRef } from "@angular/core";
+
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 export type NGXSeasonOverlayColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
 
@@ -9,6 +11,17 @@ export type NGXSeasonOverlayColor = 'default' | 'primary' | 'accent' | 'success'
     template: ''
 })
 export abstract class NGXSeasonOverlayComponent<T = any> {
+
+    @Input('olColor')
+    set color(color: NGXSeasonColorPalette | null) {
+        this._color = color ? color : 'default';
+    }
+
+    get color(): NGXSeasonColorPalette {
+        return this._color;
+    }
+
+    private _color: NGXSeasonColorPalette = 'default';
 
     protected overlayRef: OverlayRef | undefined;
     protected overlayPortal: ComponentPortal<T> | undefined;
@@ -22,28 +35,24 @@ export abstract class NGXSeasonOverlayComponent<T = any> {
         protected _overlay: Overlay
     ) {}
 
-    protected abstract create(): void;
-
-    protected abstract dispose(): void;
-
 }
 
 @Directive()
-export abstract class NGXSeasonOverlayDirective {
-    
+export abstract class NGXSeasonOverlayDirective<T = any> {
+
     @Input('olColor')
-    set color(color: NGXSeasonOverlayColor | null) {
+    set color(color: NGXSeasonColorPalette | null) {
         this._color = color ? color : 'default';
     }
 
-    get color(): NGXSeasonOverlayColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
-    private _color: NGXSeasonOverlayColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
 
     protected overlayRef: OverlayRef | undefined;
-    protected portal: ComponentPortal<any> | undefined;
+    protected portal: ComponentPortal<T> | undefined;
 
     constructor(
         protected _element: ElementRef,

@@ -1,6 +1,6 @@
 @use "sass:math";
 
-@mixin setup-background-theme($theme, $primaryColor, $accentColor) {
+@mixin setup-background-effect($theme, $primaryColor, $accentColor) {
     $colors: (
         "default": "gray",
         "primary": $primaryColor,
@@ -55,27 +55,27 @@
 
                 width: var(--size-percent-100);
                 height: var(--size-percent-100);
-            }    
-            
+            }
+
             &.glassy {
                 &::before {
                     opacity: if($theme == "light", 0.4, 0.1);
                 }
             }
-            
+
             &[data-background-pattern-name="brick"] {
                 &::before {
-                    background: 
+                    background:
                         linear-gradient(-45deg, transparent 1.3%, var(--background-pattern-brick-bgcolor) 0 32%, transparent 0),
                         linear-gradient( 45deg, transparent  48%,var(--background-pattern-brick-bdcolor) 0 52%, transparent 0),
                         linear-gradient( 45deg, transparent 1.3%,var(--background-pattern-brick-bgcolor) 0 32%, transparent 0) calc(var(--background-pattern-size) * 0.5) calc(var(--background-pattern-size) * 0.5),
                         linear-gradient(-45deg, transparent  48%, var(--background-pattern-brick-bdcolor) 0 52%, transparent 0) var(--background-pattern-brick-bgcolor);
-                    background-size: 
-                        calc(var(--background-pattern-size) * 2) var(--background-pattern-size), 
+                    background-size:
+                        calc(var(--background-pattern-size) * 2) var(--background-pattern-size),
                         var(--background-pattern-size) var(--background-pattern-size);
                 }
             }
-    
+
             &[data-background-pattern-name="cloud"] {
                 &::before {
                     background:
@@ -87,30 +87,30 @@
                     background-size: calc(var(--background-pattern-size) * 2) calc(var(--background-pattern-size) * 2);
                 }
             }
-    
+
             &[data-background-pattern-name="cube"] {
                 &::before {
-                    background-image: 
-                        linear-gradient(30deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)), 
-                        linear-gradient(150deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)), 
-                        linear-gradient(30deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)), 
-                        linear-gradient(150deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)), 
-                        linear-gradient(60deg, var(--background-pattern-cube-color-alpha) 25%, transparent 25.5%, transparent 75%, var(--background-pattern-cube-color-alpha) 75%, var(--background-pattern-cube-color-alpha)), 
+                    background-image:
+                        linear-gradient(30deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)),
+                        linear-gradient(150deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)),
+                        linear-gradient(30deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)),
+                        linear-gradient(150deg, var(--background-pattern-cube-color) 12%, transparent 12.5%, transparent 87%, var(--background-pattern-cube-color) 87.5%, var(--background-pattern-cube-color)),
+                        linear-gradient(60deg, var(--background-pattern-cube-color-alpha) 25%, transparent 25.5%, transparent 75%, var(--background-pattern-cube-color-alpha) 75%, var(--background-pattern-cube-color-alpha)),
                         linear-gradient(60deg, var(--background-pattern-cube-color-alpha) 25%, transparent 25.5%, transparent 75%, var(--background-pattern-cube-color-alpha) 75%, var(--background-pattern-cube-color-alpha));
                         background-color: var(--background-pattern-cube-bgcolor);
                         background-size: calc(var(--background-pattern-size) * 2) calc(var(--background-pattern-size) * 3.5);
-                    background-position: 
-                        0 0, 0 0, 
-                        var(--background-pattern-size) calc(var(--background-pattern-size) * 1.75), 
-                        var(--background-pattern-size) calc(var(--background-pattern-size) * 1.75), 
-                        0 0, 
+                    background-position:
+                        0 0, 0 0,
+                        var(--background-pattern-size) calc(var(--background-pattern-size) * 1.75),
+                        var(--background-pattern-size) calc(var(--background-pattern-size) * 1.75),
+                        0 0,
                         var(--background-pattern-size) calc(var(--background-pattern-size) * 1.75);
                 }
             }
-    
+
             &[data-background-pattern-name="grid"] {
                 &::before {
-                    background: 
+                    background:
                         calc(0.9 * var(--background-pattern-size)) calc(0.9 * var(--background-pattern-size)) / calc(2 * var(--background-pattern-size)) calc(2 * var(--background-pattern-size)) conic-gradient(at 20% 20%, transparent 75%, var(--background-pattern-grid-bgcolor) 0),
                         calc(-0.1 * var(--background-pattern-size)) calc(-0.1 * var(--background-pattern-size)) / calc(2 * var(--background-pattern-size)) calc(2 * var(--background-pattern-size)) conic-gradient(at 20% 20%, transparent 75%, var(--background-pattern-grid-bgcolor) 0),
                         calc(0.7 * var(--background-pattern-size)) calc(0.7 * var(--background-pattern-size)) / calc(2 * var(--background-pattern-size)) calc(2 * var(--background-pattern-size)) conic-gradient(at 40% 40%, transparent 75%, var(--background-pattern-grid-bdcolor) 0),
@@ -118,10 +118,10 @@
                         conic-gradient(from 90deg at 20% 20%, var(--background-pattern-grid-bgcolor) 25%, var(--background-pattern-grid-bdcolor) 0) 0 0 / var(--background-pattern-size) var(--background-pattern-size);
                 }
             }
-    
+
             &[data-background-pattern-name="hive"] {
                 &::before {
-                    background: 
+                    background:
                         radial-gradient(circle farthest-side at 0% 50%, var(--background-pattern-hive-bgcolor) 23.5%, transparent 0) calc(var(--background-pattern-size) * 1.05) calc(var(--background-pattern-size) * 1.5),
                         radial-gradient(circle farthest-side at 0% 50%, var(--background-pattern-hive-bdcolor) 24%, transparent 0) calc(var(--background-pattern-size) * 0.95) calc(var(--background-pattern-size) * 1.5),
                         linear-gradient(var(--background-pattern-hive-bgcolor) 14%, transparent 0, transparent 85%, var(--background-pattern-hive-bgcolor) 0) 0 0,
@@ -132,20 +132,20 @@
                     background-size: calc(var(--background-pattern-size) * 2) calc(var(--background-pattern-size) * 3);
                 }
             }
-    
+
             &[data-background-pattern-name="line"] {
                 &::before {
-                    background: 
+                    background:
                         linear-gradient(45deg, transparent 71%, var(--background-pattern-line-bgcolor) 0 79%, transparent 0) calc(var(--background-pattern-size) * -0.5) calc(var(--background-pattern-size) * 0.5) / calc(2 * var(--background-pattern-size)) calc(2 * var(--background-pattern-size)),
                         linear-gradient(135deg, transparent 71%, var(--background-pattern-line-bgcolor) 0 79%, transparent 0) calc(var(--background-pattern-size) * 0.5) calc(var(--background-pattern-size) * 0.5) / calc(2 * var(--background-pattern-size)) calc(2 * var(--background-pattern-size)),
                         radial-gradient(var(--background-pattern-line-bgcolor) 35%, var(--background-pattern-line-bdcolor) 37%) 0 0 / var(--background-pattern-size) var(--background-pattern-size);
                     background-color: var(--background-pattern-ring-bgcolor);
                 }
             }
-    
+
             &[data-background-pattern-name="maze"] {
                 &::before {
-                    background: 
+                    background:
                         conic-gradient(at 62.5% 12.5%, var(--background-pattern-maze-bdcolor) 25%, transparent 0) calc(var(--background-pattern-size) * -0.125) calc(var(--background-pattern-size) * 0.5),
                         conic-gradient(at 62.5% 12.5%, var(--background-pattern-maze-bdcolor) 25%, transparent 0) calc(-3 * var(--background-pattern-size) * 0.125) calc(var(--background-pattern-size) * 0.25),
                         conic-gradient(at 87.5% 62.5%, var(--background-pattern-maze-bdcolor) 25%, transparent 0) calc(3 * var(--background-pattern-size) * 0.125) calc(var(--background-pattern-size) * 0.25),
@@ -156,10 +156,10 @@
                     background-size: var(--background-pattern-size) var(--background-pattern-size);
                 }
             }
-    
+
             &[data-background-pattern-name="ring"] {
                 &::before {
-                    background: 
+                    background:
                         radial-gradient(50% 50% at 100% 0, var(--background-pattern-ring-bgcolor) 0% 5%, var(--background-pattern-ring-bdcolor) 6% 15%, var(--background-pattern-ring-bgcolor) 16% 25%, var(--background-pattern-ring-bdcolor) 26% 35%, var(--background-pattern-ring-bgcolor) 36% 45%, var(--background-pattern-ring-bdcolor) 46% 55%, var(--background-pattern-ring-bgcolor) 56% 65%, var(--background-pattern-ring-bdcolor) 66% 75%, var(--background-pattern-ring-bgcolor) 76% 85%, var(--background-pattern-ring-bdcolor) 86% 95%, transparent 96%),
                         radial-gradient(50% 50% at 0 100%, var(--background-pattern-ring-bgcolor) 0% 5%, var(--background-pattern-ring-bdcolor) 6%  15%, var(--background-pattern-ring-bgcolor) 16% 25%, var(--background-pattern-ring-bdcolor) 26% 35%, var(--background-pattern-ring-bgcolor) 36% 45%, var(--background-pattern-ring-bdcolor) 46% 55%, var(--background-pattern-ring-bgcolor) 56% 65%, var(--background-pattern-ring-bdcolor) 66% 75%, var(--background-pattern-ring-bgcolor) 76% 85%, var(--background-pattern-ring-bdcolor) 86% 95%, transparent 96%),
                         radial-gradient(50% 50% at 50% 50%, var(--background-pattern-ring-bgcolor) 0% 5%, var(--background-pattern-ring-bdcolor) 6%  15%, var(--background-pattern-ring-bgcolor) 16% 25%, var(--background-pattern-ring-bdcolor) 26% 35%, var(--background-pattern-ring-bgcolor) 36% 45%, var(--background-pattern-ring-bdcolor) 46% 55%, var(--background-pattern-ring-bgcolor) 56% 65%, var(--background-pattern-ring-bdcolor) 66% 75%, var(--background-pattern-ring-bgcolor) 76% 85%, var(--background-pattern-ring-bdcolor) 86% 95%, transparent 96%),
@@ -221,10 +221,10 @@
                 &[data-background-stripe-color=#{$color}] {
                     .stripe {
                         background-image: linear-gradient(
-                            var(--background-stripe-degree), 
-                            var(--background-stripe-color-#{$color}) 25%, var(--background-stripe-highlight-color) 25%, 
-                            var(--background-stripe-highlight-color) 50%, var(--background-stripe-color-#{$color}) 50%, 
-                            var(--background-stripe-color-#{$color}) 75%, var(--background-stripe-highlight-color) 75%, 
+                            var(--background-stripe-degree),
+                            var(--background-stripe-color-#{$color}) 25%, var(--background-stripe-highlight-color) 25%,
+                            var(--background-stripe-highlight-color) 50%, var(--background-stripe-color-#{$color}) 50%,
+                            var(--background-stripe-color-#{$color}) 75%, var(--background-stripe-highlight-color) 75%,
                             var(--background-stripe-highlight-color) 100%
                         );
                     }

@@ -20,7 +20,7 @@ import { NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN, NGX_SEASON_BUTTON_FONT_SIZE_MA
         NGXSeasonOutlineTextButtonComponent,
         NGXSeasonSolidTextButtonComponent
     ],
-    imports: [ 
+    imports: [
         CommonModule,
 
         NGXSeasonIconModule

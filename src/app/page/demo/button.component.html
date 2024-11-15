@@ -3,6 +3,11 @@
     <button ngx-sui-OutlineIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
     <button ngx-sui-SolidIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
 </div>
+<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
+    <button ngx-sui-FlatIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list"></button>
+    <button ngx-sui-OutlineIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list"></button>
+    <button ngx-sui-SolidIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list"></button>
+</div>
 <div class="flex gx-100 p-100">
     <button ngx-sui-FlatIconButton [btnColor]="item.color" btnCircled="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
     <button ngx-sui-OutlineIconButton [btnColor]="item.color" btnCircled="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
@@ -14,15 +19,24 @@
 <div class="flex gx-100 p-100">
     <button ngx-sui-FlatTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" btnDisabled="true" *ngFor="let item of list">{{ item.label }}</button>
 </div>
+<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
+    <button ngx-sui-FlatTextButton [btnColor]="item.color" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list">{{ item.label }}</button>
+</div>
 <div class="flex gx-100 p-100">
     <button ngx-sui-OutlineTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" *ngFor="let item of list">{{ item.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
     <button ngx-sui-OutlineTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" btnDisabled="true" *ngFor="let item of list">{{ item.label }}</button>
 </div>
+<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
+    <button ngx-sui-OutlineTextButton [btnColor]="item.color" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list">{{ item.label }}</button>
+</div>
 <div class="flex gx-100 p-100">
     <button ngx-sui-SolidTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" *ngFor="let item of list">{{ item.label }}</button>
 </div>
 <div class="flex gx-100 p-100">
     <button ngx-sui-SolidTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" btnDisabled="true" *ngFor="let item of list">{{ item.label }}</button>
+</div>
+<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
+    <button ngx-sui-SolidTextButton [btnColor]="item.color" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list">{{ item.label }}</button>
 </div>

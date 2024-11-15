@@ -5,6 +5,8 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { BehaviorSubject, debounceTime, filter, map, Observable, of, Subject, Subscription, switchMap, zip } from "rxjs";
 import { fromFetch } from 'rxjs/fetch';
 
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+
 export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegister> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 
@@ -32,7 +34,6 @@ export type NGXSeasonIconName =
     'video-camera' | 'video-gallery' | 'volume-down' | 'volume-mute' | 'volume-up' |
     'wallet' | 'warning-standard' | 'warning' | 'wifi-off' | 'wifi-on' | 'world';
 
-export type NGXSeasonIconColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
 export type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
 export type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
 
@@ -129,11 +130,11 @@ const rotateAnimation: AnimationReferenceMetadata = animation([
 export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     @Input('iconColor')
-    set color(color: NGXSeasonIconColor | null) {
-        this._color = color ? color : 'default';
+    set color(color: NGXSeasonColorPalette | null) {
+        this._color = color ? color as NGXSeasonColorPalette : 'default';
     }
 
-    get color(): NGXSeasonIconColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
@@ -209,7 +210,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         return this._size;
     }
 
-    private _color: NGXSeasonIconColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
     private _degree: number = 0;
     private _degreeStart: number = 0;
     private _degreeFinal: number = 0;
@@ -245,7 +246,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
 
     ngOnChanges(changes: SimpleChanges): void {
         for (const name in changes) {
-            if (name === 'color') this.changeIconColor(changes[name].currentValue as NGXSeasonIconColor);
+            if (name === 'color') this.changeIconColor(changes[name].currentValue as NGXSeasonColorPalette);
 
             if (name === 'degree') this.changeIconDegree(coerceNumberProperty(changes[name].currentValue));
 
@@ -283,7 +284,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         this.player?.onStart(() => this._renderer.setStyle(this.svgElement?.nativeElement, 'transform', `rotate(${this.degreeStart}deg)`));
     }
 
-    protected changeIconColor(color: NGXSeasonIconColor): void {
+    protected changeIconColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-icon-color', color);
     }
 

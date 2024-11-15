@@ -16,7 +16,8 @@ $sizes: (0, 1, 2, 3, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 60, 64, 72
         }
     }
 
-    --layout-content-side-collapsed-size: 64px;
+    --layout-content-side-collapsed-size: #{var(--size-pixel-64)};
+    --overlay-alert-toast-height: #{var(--size-pixel-48)};
 }
 
 @for $index from 0 through 10 {
@@ -67,11 +68,11 @@ $sizes: (0, 1, 2, 3, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 60, 64, 72
         .w-#{$sndValue} {
             width: var(--size-percent-#{$sndValue}) !important;
         }
-    
+
         .w-min-#{$sndValue} {
             min-width: var(--size-percent-#{$sndValue}) !important;
         }
-    
+
         .w-max-#{$sndValue} {
             max-width: var(--size-percent-#{$sndValue}) !important;
         }
@@ -79,11 +80,11 @@ $sizes: (0, 1, 2, 3, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 60, 64, 72
         .h-#{$sndValue} {
             height: var(--size-percent-#{$sndValue}) !important;
         }
-    
+
         .h-min-#{$sndValue} {
             min-height: var(--size-percent-#{$sndValue}) !important;
         }
-    
+
         .h-max-#{$sndValue} {
             max-height: var(--size-percent-#{$sndValue}) !important;
         }

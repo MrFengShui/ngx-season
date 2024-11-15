@@ -1,19 +1,22 @@
 import { coerceNumberProperty } from "@angular/cdk/coercion";
 import { ConnectedPosition, FlexibleConnectedPositionStrategy, OverlayRef } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
-import { AfterViewInit, Component, Directive, ElementRef, HostListener, Inject, InjectionToken, Injector, Input, OnDestroy, Renderer2, TemplateRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, Directive, ElementRef, HostListener, Inject, InjectionToken, Injector, Input, Renderer2, TemplateRef, ViewChild } from "@angular/core";
 import { Subscription } from "rxjs";
 
-import { NGXSeasonOverlayColor, NGXSeasonOverlayDirective } from "./overlay.component";
+import { NGXSeasonOverlayDirective } from "./overlay.component";
+
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 export type NGXSeasonTooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
 const NGX_SEASON_TOOLTIP_MESSAGE_TOKEN: InjectionToken<string> = new InjectionToken('NGX_SEASON_TOOLTIP_MESSAGE_TOKEN');
 
 @Directive({
-    selector: '[ngx-sui-Tooltip]'
+    selector: '[ngx-sui-Tooltip]',
+    exportAs: 'NGXSeasonTooltipDirective'
 })
-export class NGXSeasonTooltipComponent extends NGXSeasonOverlayDirective implements OnDestroy {
+export class NGXSeasonTooltipDirective extends NGXSeasonOverlayDirective {
 
     @Input('ttHideDelay')
     set hideDelay(hideDelay: number | string | null) {
@@ -64,7 +67,7 @@ export class NGXSeasonTooltipComponent extends NGXSeasonOverlayDirective impleme
         if (this.message && this.message.trim().length > 0) {
             let task = setTimeout(() => {
                 clearTimeout(task);
-    
+
                 this.display();
                 this.listenTooltipPositionChange(this.position);
             }, this.showDelay);
@@ -82,21 +85,16 @@ export class NGXSeasonTooltipComponent extends NGXSeasonOverlayDirective impleme
 
     private position$: Subscription = Subscription.EMPTY;
 
-    ngOnDestroy(): void {
-        this.overlayRef?.dispose();
-        this.position$.unsubscribe();
-    }
-
     display(): void {
         if (!this.overlayRef || !this.overlayRef?.hasAttached()) {
-            this.overlayRef = this.createOverlayRef(this._element.nativeElement, this.color, this.position);            
+            this.overlayRef = this.createOverlayRef(this._element.nativeElement, this.color, this.position);
             this.portal = this.createComponentPortal();
             this.overlayRef.attach(this.portal);
         }
     }
 
     dispose(): void {
-        if (this.overlayRef) { 
+        if (this.overlayRef) {
             this.overlayRef.detach();
             this.overlayRef.dispose();
 
@@ -104,16 +102,16 @@ export class NGXSeasonTooltipComponent extends NGXSeasonOverlayDirective impleme
         }
     }
 
-    protected createOverlayRef(element: HTMLElement, color: NGXSeasonOverlayColor, position: NGXSeasonTooltipPosition): OverlayRef {
+    protected createOverlayRef(element: HTMLElement, color: NGXSeasonColorPalette, position: NGXSeasonTooltipPosition): OverlayRef {
         const strategy: FlexibleConnectedPositionStrategy = this._overlay.position()
             .flexibleConnectedTo(element)
             .withPositions(this.createConnectedPositions(position))
             .withFlexibleDimensions(false)
             .withPush(false);
-        return this._overlay.create({ 
+        return this._overlay.create({
             panelClass: ['tooltip', `tooltip-${color}`, `tooltip-${position}`], positionStrategy: strategy,
             minWidth: 'var(--size-pixel-72)', maxWidth: '64vw', maxHeight: '36vw'
-        }); 
+        });
     }
 
     protected createComponentPortal(): ComponentPortal<NGXSeasonTooltipContainerComponent> {
@@ -154,28 +152,28 @@ export class NGXSeasonTooltipComponent extends NGXSeasonOverlayDirective impleme
         this._ngZone.runOutsideAngular(() => {
             const strategy = this.overlayRef?.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
             this.position$ = strategy.positionChanges.subscribe({
-                next: change => 
+                next: change =>
                     this._ngZone.run(() => {
                         const sourceOrigin = (position === 'left' || position === 'right') ? change.connectionPair.originX : change.connectionPair.originY;
                         const sourceOverlay = (position === 'left' || position === 'right') ? change.connectionPair.overlayX : change.connectionPair.overlayY;
                         const targetOrigin = (position === 'left' || position === 'right') ? strategy.positions[0].originX : strategy.positions[0].originY;
                         const targetOverlay = (position === 'left' || position === 'right') ? strategy.positions[0].overlayX : strategy.positions[0].overlayY;
-    
+
                         if (position === 'top' && sourceOrigin !== targetOrigin && sourceOverlay !== targetOverlay) {
                             this.overlayRef?.addPanelClass('tooltip-bottom');
                             this.overlayRef?.removePanelClass('tooltip-top');
                         }
-    
+
                         if (position === 'bottom' && sourceOrigin !== targetOrigin && sourceOverlay !== targetOverlay) {
                             this.overlayRef?.addPanelClass('tooltip-top');
                             this.overlayRef?.removePanelClass('tooltip-bottom');
                         }
-    
+
                         if (position === 'left' && sourceOrigin !== targetOrigin && sourceOverlay !== targetOverlay) {
                             this.overlayRef?.addPanelClass('tooltip-right');
                             this.overlayRef?.removePanelClass('tooltip-left');
                         }
-    
+
                         if (position === 'right' && sourceOrigin !== targetOrigin && sourceOverlay !== targetOverlay) {
                             this.overlayRef?.addPanelClass('tooltip-left');
                             this.overlayRef?.removePanelClass('tooltip-right');

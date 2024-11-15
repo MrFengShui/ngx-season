@@ -7,6 +7,7 @@
         "warning": "yellow",
         "failure": "red",
         "info": "blue",
+        "help": "gray",
     );
     $styles: ("flat", "outline", "solid");
     $alphaBoxShadow: 25;
@@ -19,7 +20,7 @@
     .button {
         --button-border-radius: #{var(--size-pixel-4)};
 
-        --button-padding: #{var(--padding-25)} #{var(--padding-75)};
+        --button-padding: #{var(--padding-50)};
 
         --button-content-gap: #{var(--margin-50)};
         --button-content-font-weight: #{var(--font-weight-900)};
@@ -86,7 +87,10 @@
         border-radius: var(--button-border-radius);
         border-style: solid;
 
-        padding: var(--button-padding);
+        height: calc(var(--button-content-size) + var(--button-padding) * 1.5);
+
+        padding-left: calc(var(--button-padding) * 2);
+        padding-right: calc(var(--button-padding) * 2);
 
         > :nth-child(n) {
             &:not(:last-child) {

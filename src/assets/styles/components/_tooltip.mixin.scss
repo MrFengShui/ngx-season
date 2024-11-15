@@ -1,4 +1,4 @@
-@mixin setup-overlay-theme($theme, $primaryColor, $accentColor) {
+@mixin setup-tooltip-theme($theme, $primaryColor, $accentColor) {
     $colors: (
         "default": "gray",
         "primary": $primaryColor,
@@ -6,7 +6,8 @@
         "success": "green",
         "warning": "yellow",
         "failure": "red",
-        "info": "blue"
+        "info": "blue",
+        "help": "gray"
     );
 
     .tooltip {
@@ -37,9 +38,9 @@
         user-select: none;
 
         .tooltip-container {
-            display: inline-flex;  
+            display: inline-flex;
             align-items: center;
-            
+
             width: var(--size-percent-100);
 
             .tooltip-message {
@@ -61,9 +62,9 @@
 
             .tooltip-triangle {
                 display: inline-block;
-                
+
                 border-style: solid;
-                
+
                 transform: rotate(0deg);
 
                 width: var(--size-pixel-0);
@@ -125,7 +126,7 @@
                         }
                     }
                 }
-        
+
                 &.tooltip-bottom {
                     .tooltip-container {
                         .tooltip-message {
@@ -138,7 +139,7 @@
                         }
                     }
                 }
-        
+
                 &.tooltip-left {
                     .tooltip-container {
                         .tooltip-message {
@@ -151,7 +152,7 @@
                         }
                     }
                 }
-        
+
                 &.tooltip-right {
                     .tooltip-container {
                         .tooltip-message {

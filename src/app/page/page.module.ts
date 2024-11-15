@@ -29,6 +29,7 @@ import { DemoInputPageComponent } from "./demo/input.component";
 import { DemoTooltipPageComponent } from "./demo/tooltip.component";
 import { DemoComponentPageComponent } from "./demo/component.component";
 import { DemoDividerPageComponent } from "./demo/divider.component";
+import { DemoToastPageComponent } from "./demo/toast.component";
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import { DemoDividerPageComponent } from "./demo/divider.component";
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRibbonPageComponent,
+        DemoToastPageComponent,
         DemoTooltipPageComponent
     ],
     imports: [
@@ -89,6 +91,7 @@ import { DemoDividerPageComponent } from "./demo/divider.component";
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRibbonPageComponent,
+        DemoToastPageComponent,
         DemoTooltipPageComponent
     ]
 })

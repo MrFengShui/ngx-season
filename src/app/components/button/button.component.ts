@@ -3,10 +3,11 @@ import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, Input, On
 
 import { NGX_SEASON_ICONS_SIZE_MAP_TOKEN, NGXSeasonIconSizeMap } from "../icon/icon.component";
 
+import { NGXSeasonColorPalette } from 'src/app/utils/_palette.utils';
+
 export const NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonButtonBorderSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
 export const NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonButtonFontSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
 
-export type NGXSeasonButtonColor = 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info' | 'default';
 export type NGXSeasonButtonSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 
 export type NGXSeasonButtonBorderSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
@@ -17,9 +18,9 @@ export type NGXSeasonButtonFontSizeMap = { sm: number, md: number, lg: number, x
     template: ''
 })
 export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
-    
-    @Input('btnBlocked') 
-    set blocked(blocked: boolean | string) {
+
+    @Input('btnBlocked')
+    set blocked(blocked: boolean | string | null) {
         this._blocked = coerceBooleanProperty(blocked);
     }
 
@@ -27,12 +28,12 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._blocked;
     }
 
-    @Input('btnColor') 
-    set color(color: NGXSeasonButtonColor | null) {
-        this._color = color ? color : 'default';
+    @Input('btnColor')
+    set color(color: NGXSeasonColorPalette | null) {
+        this._color = color ? color as NGXSeasonColorPalette : 'default';
     }
 
-    get color(): NGXSeasonButtonColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
@@ -45,7 +46,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._disabled;
     }
 
-    @Input('btnSize') 
+    @Input('btnSize')
     set size(size: NGXSeasonButtonSize | null) {
         this._size = size ? size : 'lg';
     }
@@ -55,7 +56,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
     }
 
     private _blocked: boolean = false;
-    private _color: NGXSeasonButtonColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
     private _disabled: boolean = false;
     private _size: NGXSeasonButtonSize = 'lg';
 
@@ -75,7 +76,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         for (const name in changes) {
             if (name === 'blocked') this.setupButtonBlocked(coerceBooleanProperty(changes[name].currentValue));
 
-            if (name === 'color') this.changeButtonColor(changes[name].currentValue as NGXSeasonButtonColor);
+            if (name === 'color') this.changeButtonColor(changes[name].currentValue as NGXSeasonColorPalette);
 
             if (name === 'disabled') this.setupButtonDisabled(coerceBooleanProperty(changes[name].currentValue));
 
@@ -94,7 +95,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
 
     protected abstract setupButtonBlocked(blocked: boolean): void;
 
-    protected changeButtonColor(color: NGXSeasonButtonColor): void {
+    protected changeButtonColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-button-color', color);
     }
 

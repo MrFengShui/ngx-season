@@ -1,8 +1,25 @@
-<ngx-sui-alert alertType="success" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
-<ngx-sui-alert alertType="warning" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
-<ngx-sui-alert alertType="failure" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
-<ngx-sui-alert alertType="info" [alertMessage]="shortText" class="m-100"></ngx-sui-alert>
-<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="success" class="m-100"></ngx-sui-tip-alert>
-<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="warning" class="m-100"></ngx-sui-tip-alert>
-<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="failure" class="m-100"></ngx-sui-tip-alert>
-<ngx-sui-tip-alert [alertSubject]="subject" [alertMessage]="shortText + longText" alertType="info" class="m-100"></ngx-sui-tip-alert>
+<div class="flex flex-dir-col gy-100 p-100">
+    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="longText + shortText" alertStyle="flat" ngx-sui-Tooltip [olColor]="color" [ttMsg]="longText + shortText" (alertExtraAction)="flatToastAlertTooltip.dispose()" #flatToastAlertTooltip="NGXSeasonTooltipDirective" *ngFor="let color of colors"></ngx-sui-toast-alert>
+    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="longText + shortText" alertStyle="outline" ngx-sui-Tooltip [olColor]="color" [ttMsg]="longText + shortText" (alertExtraAction)="outlineToastAlertTooltip.dispose()" #outlineToastAlertTooltip="NGXSeasonTooltipDirective" *ngFor="let color of colors"></ngx-sui-toast-alert>
+    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="longText + shortText" alertStyle="solid" ngx-sui-Tooltip [olColor]="color" [ttMsg]="longText + shortText" (alertExtraAction)="solidToastAlertTooltip.dispose()" #solidToastAlertTooltip="NGXSeasonTooltipDirective" *ngFor="let color of colors"></ngx-sui-toast-alert>
+</div>
+<div class="flex flex-dir-col gy-100 p-100">
+    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="shortText" alertStyle="flat" #flatToastAlert *ngFor="let color of colors">
+        <ng-template ngx-sui-AlertActions>
+            <button ngx-sui-FlatTextButton [btnColor]="color" (click)="flatToastAlert.dismiss()">关闭</button>
+        </ng-template>
+    </ngx-sui-toast-alert>
+    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="shortText" alertStyle="outline" #outlineToastAlert *ngFor="let color of colors">
+        <ng-template ngx-sui-AlertActions>
+            <button ngx-sui-FlatTextButton [btnColor]="color" (click)="outlineToastAlert.dismiss()">关闭</button>
+        </ng-template>
+    </ngx-sui-toast-alert>
+    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="shortText" alertStyle="solid" #solidToastAlert *ngFor="let color of colors">
+        <ng-template ngx-sui-AlertActions>
+            <button ngx-sui-SolidTextButton [btnColor]="color" (click)="solidToastAlert.dismiss()">关闭</button>
+        </ng-template>
+    </ngx-sui-toast-alert>
+</div>
+<div class="flex flex-dir-col gy-100 p-100">
+    <ngx-sui-detail-alert [alertColor]="color" [alertSub]="subject" [alertDesc]="description" alertStyle="flat" *ngFor="let color of colors"></ngx-sui-detail-alert>
+</div>

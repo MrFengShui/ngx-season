@@ -1,4 +1,4 @@
-@mixin setup-global-color($theme, $primaryColor, $accentColor) {
+@mixin setup-color-effect($theme, $primaryColor, $accentColor) {
     $colors: (
         "default": "gray",
         "primary": $primaryColor,

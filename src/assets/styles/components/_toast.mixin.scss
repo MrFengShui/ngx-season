@@ -1,0 +1,33 @@
+@mixin setup-toast-theme($theme) {
+    .toast {
+        --toast-bgcolor: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+
+        --toast-height: #{var(--overlay-alert-toast-height)};
+
+        --toast-border-radius: #{calc(var(--toast-height) * 0.5)};
+
+        --toast-padding: #{var(--padding-50)};
+
+        --toast-shadow-blur: #{if($theme == "light", var(--size-pixel-8), var(--size-pixel-16))};
+        --toast-shadow-spread: #{var(--size-pixel-8)};
+        --toast-shadow-color: #{if($theme == "light", rgba(#000, 0.125), rgba(#FFF, 0.375))};
+
+        border-radius: var(--toast-border-radius);
+
+        background-color: var(--toast-bgcolor);
+        box-shadow: 0px 0px var(--toast-shadow-blur) var(--toast-shadow-spread) var(--toast-shadow-color);
+
+        &.toast-top {
+            margin-top: calc(-1 * var(--toast-height)) !important;
+        }
+
+        &.toast-bottom {
+            margin-bottom: calc(-1 * var(--toast-height)) !important;
+        }
+
+        .alert {
+            padding-left: var(--toast-padding);
+            padding-right: var(--toast-padding);
+        }
+    }
+}

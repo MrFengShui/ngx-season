@@ -20,6 +20,7 @@ import { DemoInputPageComponent } from "../page/demo/input.component";
 import { DemoTooltipPageComponent } from "../page/demo/tooltip.component";
 import { DemoComponentPageComponent } from "../page/demo/component.component";
 import { DemoDividerPageComponent } from "../page/demo/divider.component";
+import { DemoToastPageComponent } from "../page/demo/toast.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -43,5 +44,6 @@ export const demoRoutes: Routes = [
     { path: 'component/placeholder', component: DemoPlaceholderPageComponent, title: '占位符' },
     { path: 'component/progress', component: DemoProgressPageComponent, title: '进度' },
     { path: 'component/ribbon', component: DemoRibbonPageComponent, title: '丝带' },
+    { path: 'component/toast', component: DemoToastPageComponent, title: '消息框' },
     { path: 'component/tooltip', component: DemoTooltipPageComponent, title: '提示框' },
 ];
