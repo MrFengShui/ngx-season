@@ -41,29 +41,57 @@ $gaps: (
             .#{$key}-#{$index * 25} {
                 #{$value}: #{$index * 4}px !important;
             }
-    
+
+            .-#{$key}-#{$index * 25} {
+                #{$value}: -#{$index * 4}px !important;
+            }
+
             .#{$key}x-#{$index * 25} {
                 #{$value}: 0px #{$index * 4}px !important;
             }
-    
+
+            .-#{$key}x-#{$index * 25} {
+                #{$value}: 0px -#{$index * 4}px !important;
+            }
+
             .#{$key}y-#{$index * 25} {
                 #{$value}: #{$index * 4}px 0px !important;
             }
-    
+
+            .-#{$key}y-#{$index * 25} {
+                #{$value}: -#{$index * 4}px 0px !important;
+            }
+
             .#{$key}t-#{$index * 25} {
                 #{$value}-top: #{$index * 4}px !important;
             }
-    
+
+            .-#{$key}t-#{$index * 25} {
+                #{$value}-top: -#{$index * 4}px !important;
+            }
+
             .#{$key}b-#{$index * 25} {
                 #{$value}-bottom: #{$index * 4}px !important;
             }
-    
+
+            .-#{$key}b-#{$index * 25} {
+                #{$value}-bottom: -#{$index * 4}px !important;
+            }
+
             .#{$key}l-#{$index * 25} {
                 #{$value}-left: #{$index * 4}px !important;
             }
-    
+
+            .-#{$key}l-#{$index * 25} {
+                #{$value}-left: -#{$index * 4}px !important;
+            }
+
             .#{$key}r-#{$index * 25} {
                 #{$value}-right: #{$index * 4}px !important;
+            }
+
+            .-#{$key}r-#{$index * 25} {
+                #{$value}-right: -#{$index * 4}px !important;
             }
         }
     }

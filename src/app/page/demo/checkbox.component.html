@@ -1,5 +1,5 @@
 <div class="flex gx-100 p-100">
-    <label ngx-sui-CheckBox [(ngModel)]="item.check" [checkColor]="item.color" class="m-100" *ngFor="let item of list">{{ item.label }}</label>
+    <label ngx-sui-CheckBox [(ngModel)]="item.check" [checkColor]="item.color" *ngFor="let item of list">{{ item.label }}</label>
     <label ngx-sui-CheckBox [checkChecked]="checkAll()" [cbIndeterminated]="checkIndeterminated()" cbCheckMark="cross" cbIndetMark="solid" class="m-100" (checkCheckedChange)="listenCheckAllChange($event)">检查状态（全选/全不选）</label>
 </div>
 <form [formGroup]="group" class="flex gx-100 p-100">

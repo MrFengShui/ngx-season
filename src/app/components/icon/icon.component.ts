@@ -11,9 +11,9 @@ export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegist
 export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 
 export type NGXSeasonIconName =
-    'accessibility-1' | 'accessibility-2' | 'add-text' | 'administrator' | 'airplane' | 'alarm-off' | 'alarm-on' | 'alert' | 'align-bottom' | 'align-center' | 'align-left' | 'align-left-text' | 'align-middle' | 'align-right' | 'align-right-text' | 'align-top' | 'analytics' | 'angle-double' | 'angle' | 'animation' | 'application' | 'applications' | 'archive' | 'arrow' | 'assign-user' | 'asterisk' | 'atom' | 'attachment' | 'auto' | 'avatar' | 'axis-chart' |
+    'accessibility-1' | 'accessibility-2' | 'add-text' | 'administrator' | 'airplane' | 'alarm-off' | 'alarm-on' | 'alert' | 'align-bottom' | 'align-center' | 'align-center-text' | 'align-justify-text' | 'align-left' | 'align-left-text' | 'align-middle' | 'align-right' | 'align-right-text' | 'align-top' | 'analytics' | 'angle-double' | 'angle' | 'animation' | 'application' | 'applications' | 'archive' | 'arrow' | 'assign-user' | 'asterisk' | 'atom' | 'attachment' | 'auto' | 'avatar' | 'axis-chart' |
     'backup-restore' | 'backup' | 'balance' | 'ban' | 'bank' | 'bar-chart' | 'bar-code' | 'bars' | 'battery' | 'bell-curve' | 'bell' | 'beta' | 'bicycle' | 'bitcoin' | 'block' | 'blocks-group' | 'bluetooth-off' | 'bluetooth-on' | 'boat' | 'bold' | 'bolt' | 'book' | 'bookmark' | 'box-plot' | 'briefcase' | 'bubble-exclamation' | 'bug' | 'building' | 'bullet-list' | 'bullseye' | 'bundle' |
-    'calculator' | 'calendar' | 'camera' | 'campervan' | 'cancel' | 'capacitor' | 'car' | 'caravan' | 'caret' | 'cddvd' | 'center-text' | 'certificate' | 'chat-bubble' | 'check-circle' | 'check' | 'checkbox-list' | 'child-arrow' | 'cicd' | 'circle-arrow' | 'circle' | 'clipboard' | 'clock' | 'clone' | 'close' | 'cloud-chart' | 'cloud-network' | 'cloud-scale' | 'cloud-traffic' | 'cloud' | 'cluster' | 'code' | 'cog' | 'coin-bag' | 'collapse-card' | 'collapse' | 'color-palette' | 'color-picker' | 'command' | 'compass' | 'computer' | 'connect' | 'container' | 'container-volume' | 'contract' | 'control-lun' | 'copy' | 'copy-to-clipboard' | 'cpu' | 'credit-card' | 'crosshairs' | 'crown' | 'cursor-arrow' | 'cursor-hand-click' | 'cursor-hand-grab' | 'cursor-hand-open' | 'cursor-hand' | 'cursor-move' | 'curve-chart' |
+    'calculator' | 'calendar' | 'camera' | 'campervan' | 'cancel' | 'capacitor' | 'car' | 'caravan' | 'caret' | 'cddvd' | 'certificate' | 'chat-bubble' | 'check-circle' | 'check' | 'checkbox-list' | 'child-arrow' | 'cicd' | 'circle-arrow' | 'circle' | 'clipboard' | 'clock' | 'clone' | 'close' | 'cloud-chart' | 'cloud-network' | 'cloud-scale' | 'cloud-traffic' | 'cloud' | 'cluster' | 'code' | 'cog' | 'coin-bag' | 'collapse-card' | 'collapse' | 'color-palette' | 'color-picker' | 'command' | 'compass' | 'computer' | 'connect' | 'container' | 'container-volume' | 'contract' | 'control-lun' | 'copy' | 'copy-to-clipboard' | 'cpu' | 'credit-card' | 'crosshairs' | 'crown' | 'cursor-arrow' | 'cursor-hand-click' | 'cursor-hand-grab' | 'cursor-hand-open' | 'cursor-hand' | 'cursor-move' | 'curve-chart' |
     'dashboard' | 'data-cluster' | 'date' | 'deploy' | 'design' | 'details' | 'devices' | 'digital-signature' | 'directory' | 'disconnect' | 'display' | 'dna' | 'document' | 'dollar-bill' | 'dollar' | 'dot-circle' | 'download-cloud' | 'download' | 'drag-handle-corner' | 'drag-handle' |
     'edit' | 'ellipsis-horizontal' | 'ellipsis-vertical' | 'email' | 'employee-group' | 'employee' | 'eraser' | 'euro' | 'export' | 'eye-hide' | 'eye-show' | 'eye' |
     'face-happy' | 'face-neutral' | 'face-sad' | 'factory' | 'failure-standard' | 'failure' | 'favorite' | 'file-group' | 'file' | 'filter-off' | 'filter-on' | 'firewall' | 'flag' | 'floppy' | 'form' |
@@ -130,8 +130,8 @@ const rotateAnimation: AnimationReferenceMetadata = animation([
 export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     @Input('iconColor')
-    set color(color: NGXSeasonColorPalette | null) {
-        this._color = color ? color as NGXSeasonColorPalette : 'default';
+    set color(color: NGXSeasonColorPalette | undefined | null) {
+        this._color = color || 'default';
     }
 
     get color(): NGXSeasonColorPalette {
@@ -139,8 +139,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconDegree')
-    set degree(degree: number | string | null) {
-        this._degree = degree ? coerceNumberProperty(degree) : 0;
+    set degree(degree: number | string | undefined | null) {
+        this._degree = coerceNumberProperty(degree);
     }
 
     get degree(): number {
@@ -148,8 +148,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconDegreeStart')
-    set degreeStart(degreeStart: number | string | null) {
-        this._degreeStart = degreeStart ? coerceNumberProperty(degreeStart) : 0;
+    set degreeStart(degreeStart: number | string | undefined | null) {
+        this._degreeStart = coerceNumberProperty(degreeStart);
     }
 
     get degreeStart(): number {
@@ -157,8 +157,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconDegreeFinal')
-    set degreeFinal(degreeFinal: number | string | null) {
-        this._degreeFinal = degreeFinal ? coerceNumberProperty(degreeFinal) : 0;
+    set degreeFinal(degreeFinal: number | string | undefined | null) {
+        this._degreeFinal = coerceNumberProperty(degreeFinal);
     }
 
     get degreeFinal(): number {
@@ -166,8 +166,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconRotateDuration')
-    set rotateDuration(rotateDuration: number | string | null) {
-        this._rotateDuration = rotateDuration ? coerceNumberProperty(rotateDuration) : 0;
+    set rotateDuration(rotateDuration: number | string | undefined | null) {
+        this._rotateDuration = coerceNumberProperty(rotateDuration);
     }
 
     get rotateDuration(): number {
@@ -175,7 +175,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconRotateInfinite')
-    set rotateInfinite(rotateInfinite: boolean | string | null) {
+    set rotateInfinite(rotateInfinite: boolean | string | undefined | null) {
         this._rotateInfinite = coerceBooleanProperty(rotateInfinite);
     }
 
@@ -185,7 +185,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
 
     @Input('iconShape')
     set shape(shape: NGXSeasonIconName | undefined | null) {
-        this._shape = shape ? shape : undefined;
+        this._shape = shape || undefined;
     }
 
     get shape(): NGXSeasonIconName | undefined {
@@ -193,7 +193,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconSolid')
-    set solid(solid: boolean | string | null) {
+    set solid(solid: boolean | string | undefined | null) {
         this._solid = coerceBooleanProperty(solid);
     }
 
@@ -202,8 +202,8 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconSize')
-    set size(size: NGXSeasonIconSize | null) {
-        this._size = size ? size : 'md';
+    set size(size: NGXSeasonIconSize | undefined | null) {
+        this._size = size || 'md';
     }
 
     get size(): NGXSeasonIconSize {

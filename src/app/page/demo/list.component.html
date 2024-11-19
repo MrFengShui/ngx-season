@@ -1,88 +1,64 @@
-<div class="flex gx-100 p-100">
-    <ngx-sui-list class="flex-auto">
-        <ngx-sui-list-item>列表条目一</ngx-sui-list-item>
-        <ngx-sui-list-item>列表条目二</ngx-sui-list-item>
-        <ngx-sui-list-item>列表条目三</ngx-sui-list-item>
-    </ngx-sui-list>
-    <ngx-sui-list class="flex-auto">
-        <ng-template ngx-sui-ListHeader>
-            <label ngx-sui-CheckBox [checkChecked]="checkAll()" [cbIndeterminated]="checkIndeterminated()" checkLabelPos="before" [checkDisabled]="disabled" (checkCheckedChange)="listenCheckAllChange($event)" class="w-100">列表头部（全选/全不选）</label>
-        </ng-template>
-        <ng-template ngx-sui-ListFooter>
-            <label ngx-sui-CheckBox [(checkChecked)]="disabled" checkLabelPos="before" class="w-100">列表脚部（是否失效）</label>
-        </ng-template>
-        <ngx-sui-list-check-item itemCheckMark="cross" [itemCheckColor]="item.color" [(itemChecked)]="item.check" [itemCheckDisabled]="disabled" *ngFor="let item of list">{{ item.label }}</ngx-sui-list-check-item>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="flex gx-100">
+        <ngx-sui-list class="flex-auto">
+            <ng-template ngx-sui-ListHeader>列表头部</ng-template>
+            <ng-template ngx-sui-ListFooter>列表脚部</ng-template>
+            <ngx-sui-list-item *ngFor="let check of checks">{{ check.label }}</ngx-sui-list-item>
+        </ngx-sui-list>
+        <ngx-sui-list class="flex-auto">
+            <ng-template ngx-sui-ListHeader>列表头部</ng-template>
+            <ng-template ngx-sui-ListFooter>列表脚部</ng-template>
+            <ng-container *ngFor="let check of checks; last as isLast">
+                <ngx-sui-list-item>{{ check.label }}</ngx-sui-list-item>
+                <ngx-sui-x-divider divThick="thin" *ngIf="!isLast"></ngx-sui-x-divider>
+            </ng-container>
+        </ngx-sui-list>
+    </div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-center gx-100">
+            <span class="fw-900">色彩选择：</span>
+            <span ngx-sui-RadioButtonGroup rgName="color-select" [(rgSelectedValue)]="colorSelect" #group></span>
+            <label ngx-sui-RadioButton [rbColor]="item.color" [rbGroup]="group" [radioValue]="item.color" *ngFor="let item of colorSelects">{{ item.label }}</label>
+        </div>
+        <div class="flex gx-100">
+            <ngx-sui-check-list [clColor]="colorSelect" [clInitValues]="[2, 3, 4]" class="w-100" (clSelectedChange)="checkSelectedChange = $event" #checkList>
+                <ng-template ngx-sui-ListHeader>
+                    <span class="fs-20 flex-auto">列表头部（全选/全不选）</span>
+                    <label ngx-sui-CheckBox [checkColor]="colorSelect" [checkChecked]="checkAll(checkList.selection)" [cbIndeterminated]="checkIndeterminated(checkList.selection)" checkLabelPos="before" [checkDisabled]="disabled" (checkCheckedChange)="listenCheckAllChange(checkList, $event)"></label>
+                </ng-template>
+                <ng-template ngx-sui-ListFooter>
+                    <span class="fs-20 flex-auto">列表脚部（是否失效）</span>
+                    <label ngx-sui-CheckBox [checkColor]="colorSelect" [(checkChecked)]="disabled" checkLabelPos="before"></label>
+                </ng-template>
+                <ngx-sui-list-check-item [ciValue]="item.value" [ciDisabled]="disabled" *ngFor="let item of checks">{{ item.label }}</ngx-sui-list-check-item>
+            </ngx-sui-check-list>
+            <ngx-sui-radio-list [rlColor]="colorSelect" rlName="list-radio-group" rlInitValue="5" class="w-100" (rlSelectedChange)="radioSelectedChange = $event">
+                <ng-template ngx-sui-ListHeader>列表头部</ng-template>
+                <ng-template ngx-sui-ListFooter>
+                    <span class="fs-20 flex-auto">列表脚部（是否失效）</span>
+                    <label ngx-sui-CheckBox [checkColor]="colorSelect" [(checkChecked)]="disabled" checkLabelPos="before"></label>
+                </ng-template>
+                <ngx-sui-list-radio-item [riValue]="item.value" [riDisabled]="disabled" *ngFor="let item of checks">{{ item.label }}</ngx-sui-list-radio-item>
+            </ngx-sui-radio-list>
+        </div>
+        <span>选择：{{ radioSelectedChange?.value }}</span>
+    </div>
+    <ngx-sui-list class="w-100">
+        <ng-template ngx-sui-ListHeader>列表头部</ng-template>
+        <ng-template ngx-sui-ListFooter>列表脚部</ng-template>
+        <ng-container *ngFor="let item of list; last as isLast">
+            <ngx-sui-list-meta-item [miAvatarSrc]="avatar" [miAvatarAlt]="avatar" [miContent]="contents.join('$$$')" [miTitle]="title" [miSubtitle]="subtitle">
+                <ng-template ngx-sui-ListMetaActions>
+                    <button ngx-sui-FlatTextButton btnIcon="thumbs-up">点赞</button>
+                    <button ngx-sui-FlatTextButton btnIcon="thumbs-down">鄙视</button>
+                    <button ngx-sui-FlatTextButton btnIcon="favorite">收藏</button>
+                    <button ngx-sui-FlatTextButton btnIcon="share">分享</button>
+                </ng-template>
+                <ng-template ngx-sui-ListMetaMedia>
+                    <img src="https://alioss.yystv.cn/doc/8267/cbc58f6ca0f6b7797edf15366981a599.png_mw680water" alt=""/>
+                </ng-template>
+            </ngx-sui-list-meta-item>
+            <ngx-sui-x-divider divThick="thin" *ngIf="!isLast"></ngx-sui-x-divider>
+        </ng-container>
     </ngx-sui-list>
 </div>
-<ngx-sui-list class="m-100">
-    <ngx-sui-list-meta-item>
-        <ng-template ngx-sui-ListItemHeader>
-            <div class="flex align-items-center gx-100">
-                <ngx-sui-avatar avatarSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png"  avatarAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" avatarSize="lg"></ngx-sui-avatar>
-                <div class="inline-flex flex-dir-col gy-25">
-                    <span class="title-3 fw-900">{{ title }}</span>
-                    <span class="subtitle-3 fw-700">{{ subtitle }}</span>
-                </div>
-            </div>
-        </ng-template>
-        <ng-template ngx-sui-ListItemContent>{{ contents[0] }}</ng-template>
-        <ng-template ngx-sui-ListItemFooter>
-            <div class="flex gx-100">
-                <button ngx-sui-FlatTextButton btnIcon="thumbs-up">点赞</button>
-                <button ngx-sui-FlatTextButton btnIcon="thumbs-down">鄙视</button>
-                <button ngx-sui-FlatTextButton btnIcon="favorite">收藏</button>
-                <button ngx-sui-FlatTextButton btnIcon="share">分享</button>
-            </div>
-        </ng-template>
-        <ng-template ngx-sui-ListItemMedia>
-            <img src="https://alioss.yystv.cn/doc/8267/cbc58f6ca0f6b7797edf15366981a599.png_mw680water" alt="" width="100%" height="100%" style="object-fit: contain;"/>
-        </ng-template>
-    </ngx-sui-list-meta-item>
-    <ngx-sui-list-meta-item>
-        <ng-template ngx-sui-ListItemHeader>
-            <div class="flex align-items-center gx-100">
-                <ngx-sui-avatar avatarSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png"  avatarAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" avatarSize="lg"></ngx-sui-avatar>
-                <div class="inline-flex flex-dir-col gy-25">
-                    <span class="title-3 fw-900">{{ title }}</span>
-                    <span class="subtitle-3 fw-700">{{ subtitle }}</span>
-                </div>
-            </div>
-        </ng-template>
-        <ng-template ngx-sui-ListItemContent>{{ contents[0] }}</ng-template>
-        <ng-template ngx-sui-ListItemFooter>
-            <div class="flex gx-100">
-                <button ngx-sui-FlatTextButton btnIcon="thumbs-up">点赞</button>
-                <button ngx-sui-FlatTextButton btnIcon="thumbs-down">鄙视</button>
-                <button ngx-sui-FlatTextButton btnIcon="favorite">收藏</button>
-                <button ngx-sui-FlatTextButton btnIcon="share">分享</button>
-            </div>
-        </ng-template>
-        <ng-template ngx-sui-ListItemMedia>
-            <img src="https://alioss.yystv.cn/doc/8267/cbc58f6ca0f6b7797edf15366981a599.png_mw680water" alt="" width="100%" height="100%" style="object-fit: contain;"/>
-        </ng-template>
-    </ngx-sui-list-meta-item>
-    <ngx-sui-list-meta-item>
-        <ng-template ngx-sui-ListItemHeader>
-            <div class="flex align-items-center gx-100">
-                <ngx-sui-avatar avatarSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png"  avatarAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" avatarSize="lg"></ngx-sui-avatar>
-                <div class="inline-flex flex-dir-col gy-25">
-                    <span class="title-3 fw-900">{{ title }}</span>
-                    <span class="subtitle-3 fw-700">{{ subtitle }}</span>
-                </div>
-            </div>
-        </ng-template>
-        <ng-template ngx-sui-ListItemContent>{{ contents[0] }}</ng-template>
-        <ng-template ngx-sui-ListItemFooter>
-            <div class="flex gx-100">
-                <button ngx-sui-FlatTextButton btnIcon="thumbs-up">点赞</button>
-                <button ngx-sui-FlatTextButton btnIcon="thumbs-down">鄙视</button>
-                <button ngx-sui-FlatTextButton btnIcon="favorite">收藏</button>
-                <button ngx-sui-FlatTextButton btnIcon="share">分享</button>
-            </div>
-        </ng-template>
-        <ng-template ngx-sui-ListItemMedia>
-            <img src="https://alioss.yystv.cn/doc/8267/cbc58f6ca0f6b7797edf15366981a599.png_mw680water" alt="" width="100%" height="100%" style="object-fit: contain;"/>
-        </ng-template>
-    </ngx-sui-list-meta-item>
-</ngx-sui-list>
-

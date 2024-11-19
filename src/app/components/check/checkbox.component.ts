@@ -1,7 +1,10 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { Component, forwardRef, Input, Provider, SimpleChanges } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { NGXSeasonCheckColor, NGXSeasonCheckComponent } from "./check.component";
+
+import { NGXSeasonCheckComponent } from "./check.component";
+
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 export type NGXSeasonCheckboxCheckedMarkShape = 'tick' | 'cross';
 export type NGXSeasonCheckboxIndeterminatedMarkShape = 'dash' | 'solid';
@@ -24,8 +27,8 @@ const NGXSeasonCheckboxValueAccessor: Provider = {
 export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implements ControlValueAccessor {
 
     @Input('cbCheckMark')
-    set checkMark(checkMark: NGXSeasonCheckboxCheckedMarkShape) {
-        this._checkMark = checkMark;
+    set checkMark(checkMark: NGXSeasonCheckboxCheckedMarkShape | null) {
+        this._checkMark = checkMark ? checkMark : 'tick';
     }
 
     get checkMark(): NGXSeasonCheckboxCheckedMarkShape {
@@ -33,8 +36,8 @@ export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implemen
     }
 
     @Input('cbIndetMark')
-    set indetMark(indetMark: NGXSeasonCheckboxIndeterminatedMarkShape) {
-        this._indetMark = indetMark;
+    set indetMark(indetMark: NGXSeasonCheckboxIndeterminatedMarkShape | null) {
+        this._indetMark = indetMark ? indetMark : 'dash';
     }
 
     get indetMark(): NGXSeasonCheckboxIndeterminatedMarkShape {
@@ -96,7 +99,7 @@ export class NGXSeasonCheckboxComponent extends NGXSeasonCheckComponent implemen
         this._renderer.addClass(this._element.nativeElement, 'checkbox');
     }
 
-    protected override changeCheckColor(color: NGXSeasonCheckColor): void {
+    protected override changeCheckColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-checkbox-color', color);
     }
 

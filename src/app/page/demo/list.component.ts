@@ -1,6 +1,11 @@
+import { SelectionModel } from "@angular/cdk/collections";
 import { Component } from "@angular/core";
 
-import { NGXSeasonCheckColor } from "src/app/components/check/check.component";
+import { NGXSeasonListCheckItemComponent } from "src/app/components/list/check-list.component";
+import { NGXSeasonCheckListSelectionChange, NGXSeasonRadioListSelectionChange } from "src/app/components/list/list.component";
+import { NGXSeasonCheckListComponent } from "src/app/components/list/check-list.component";
+
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-list-page',
@@ -8,17 +13,36 @@ import { NGXSeasonCheckColor } from "src/app/components/check/check.component";
 })
 export class DemoListPageComponent {
 
-    protected list: Array<{ check: boolean, color: NGXSeasonCheckColor, label: string }> = [
-        { check: false, color: 'default', label: '列表条目——默认检查框' },
-        { check: false, color: 'primary', label: '列表条目——主要检查框' },
-        { check: false, color: 'accent', label: '列表条目——强调检查框' },
-        { check: false, color: 'success', label: '列表条目——成功检查框' },
-        { check: false, color: 'warning', label: '列表条目——警告检查框' },
-        { check: false, color: 'failure', label: '列表条目——错误检查框' },
-        { check: false, color: 'info', label: '列表条目——信息检查框' }
+    protected list: any[] = new Array(8);
+    protected colorSelects: Array<{ color: NGXSeasonColorPalette, label: string }> = [
+        { color: 'default', label: '默认' },
+        { color: 'primary', label: '主要' },
+        { color: 'accent', label: '强调' },
+        { color: 'success', label: '成功' },
+        { color: 'warning', label: '警告' },
+        { color: 'failure', label: '错误' },
+        { color: 'info', label: '信息' },
+        { color: 'help', label: '帮助' },
     ];
+    protected checks: Array<{ value: number, label: string }> = [
+        { value: 1, label: '列表检查框一' },
+        { value: 2, label: '列表检查框二' },
+        { value: 3, label: '列表检查框三' },
+        { value: 4, label: '列表检查框四' },
+        { value: 5, label: '列表检查框五' },
+        { value: 6, label: '列表检查框六' },
+        { value: 7, label: '列表检查框七' },
+        { value: 8, label: '列表检查框八' },
+        { value: 9, label: '列表检查框九' },
+        { value: 10, label: '列表检查框十' },
+    ];
+    protected colorSelect: NGXSeasonColorPalette = 'default';
     protected disabled: boolean = false;
 
+    protected checkSelectedChange: NGXSeasonCheckListSelectionChange | undefined;
+    protected radioSelectedChange: NGXSeasonRadioListSelectionChange | undefined;
+
+    protected avatar: string = 'https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png';
     protected title: string = '变形金刚：超能勇士';
     protected subtitle: string = '别名：野兽之战、野兽大战、特种变形勇士（港）、猛兽侠';
     protected contents: string[] = [
@@ -29,16 +53,17 @@ export class DemoListPageComponent {
         `斗争更复杂化了，Megatron（霸王龙）发现了坠毁在海洋深处的霸天虎/伪装兽战舰——报应号（Nemesis），并企图用这艘战舰摧毁方舟。千钧一发之际，巨无霸中的犀牛驾驶汽车人的救生飞船撞毁了报应号。装载着超时空程序的飞船再次发射了，巨无霸们踏上了回家的路程。而从报应号中脱身的Megatron（霸王龙）被固定在飞船的外面，和巨无霸们一起返回赛博坦星球……`
     ];
 
-    protected checkIndeterminated(): boolean {
-        return this.list.filter(item => item.check).length > 0 && !this.list.every(item => item.check);
+    protected checkIndeterminated(selection: SelectionModel<NGXSeasonListCheckItemComponent> | undefined): boolean {
+        const array: NGXSeasonListCheckItemComponent[] | undefined = selection?.selected;
+        return array !== undefined && array.length > 0 && array.length < this.checks.length;
     }
 
-    protected checkAll(): boolean {
-        return this.list.every(item => item.check);
+    protected checkAll(selection: SelectionModel<NGXSeasonListCheckItemComponent> | undefined): boolean {
+        return selection !== undefined && selection.selected.length === this.checks.length;
     }
 
-    protected listenCheckAllChange(checked: boolean): void {
-        this.list.forEach(item => item.check = checked);
+    protected listenCheckAllChange(list: NGXSeasonCheckListComponent, checked: boolean): void {
+        if (checked) list.selectAll(); else list.deselectAll();
     }
 
 }

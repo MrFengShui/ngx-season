@@ -1,0 +1,12 @@
+<div class="flex gx-100 p-100">
+    <span ngx-sui-RadioButtonGroup rgName="group_one" [rgDisabled]="disabled" [(rgSelectedValue)]="values[0]" #groupOne></span>
+    <label ngx-sui-RadioButton [rbColor]="item.color" [rbGroup]="groupOne" [radioValue]="item.value" *ngFor="let item of list">{{ item.label }}</label>
+    <span>Selected Value: {{ values[0] }}</span>
+    <label ngx-sui-CheckBox [(checkChecked)]="disabled"></label>
+</div>
+<div class="flex gx-100 p-100">
+    <span ngx-sui-RadioButtonGroup rgName="group_two" [rgDisabled]="disabled" [(ngModel)]="values[1]" #groupTwo></span>
+    <label ngx-sui-RadioButton [rbColor]="item.color" [rbGroup]="groupTwo" [radioValue]="item.value" *ngFor="let item of list">{{ item.label }}</label>
+    <span>Selected Value: {{ values[1] }}</span>
+    <label ngx-sui-CheckBox [(checkChecked)]="disabled"></label>
+</div>

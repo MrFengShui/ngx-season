@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: var(--font-family);
-    font-size: var(--typography-body-1);
+    font-size: var(--font-size-16);
 
     &:not(head, span) {
         display: block;

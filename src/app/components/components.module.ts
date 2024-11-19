@@ -23,6 +23,7 @@ import { NGXSeasonCheckModule } from "./check/check.module";
 import { NGXSeasonInputModule } from "./input/input.module";
 import { NGXSeasonOverlayModule } from "./overlay/overlay.module";
 import { NGXSeasonDividerModule } from "./divider/divider.module";
+import { NGXSeasonRadioModule } from "./radio/radio.module";
 
 @NgModule({
     imports: [
@@ -48,6 +49,7 @@ import { NGXSeasonDividerModule } from "./divider/divider.module";
         NGXSeasonOverlayModule,
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
+        NGXSeasonRadioModule,
         NGXSeasonRibbonModule
     ],
     exports: [
@@ -71,6 +73,7 @@ import { NGXSeasonDividerModule } from "./divider/divider.module";
         NGXSeasonOverlayModule,
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
+        NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
     ],
     providers: [

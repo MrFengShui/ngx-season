@@ -36,7 +36,7 @@ export class DemoIconPageComponent {
         {
             label: '字母A开头',
             names: [
-                'accessibility-1', 'accessibility-2', 'add-text', 'administrator', 'airplane', 'alarm-off', 'alarm-on', 'alert', 'align-bottom', 'align-center', 'align-left', 'align-left-text', 'align-middle', 'align-right', 'align-right-text', 'align-top', 'analytics', 'angle-double', 'angle', 'animation', 'application', 'applications', 'archive', 'arrow', 'assign-user', 'asterisk', 'auto', 'avatar', 'axis-chart'
+                'accessibility-1', 'accessibility-2', 'add-text', 'administrator', 'airplane', 'alarm-off', 'alarm-on', 'alert', 'align-bottom', 'align-center', 'align-center-text', 'align-justify-text', 'align-left', 'align-left-text', 'align-middle', 'align-right', 'align-right-text', 'align-top', 'analytics', 'angle-double', 'angle', 'animation', 'application', 'applications', 'archive', 'arrow', 'assign-user', 'asterisk', 'auto', 'avatar', 'axis-chart'
             ]
         },
         {
@@ -48,7 +48,7 @@ export class DemoIconPageComponent {
         {
             label: '字母C开头',
             names: [
-                'calculator', 'calendar', 'camera', 'campervan', 'cancel', 'capacitor', 'car', 'caravan', 'caret', 'cddvd', 'center-text', 'certificate', 'chat-bubble', 'check-circle', 'check', 'checkbox-list', 'child-arrow', 'cicd', 'circle-arrow', 'circle', 'clipboard', 'clock', 'clone', 'close', 'cloud-chart', 'cloud-network', 'cloud-scale', 'cloud-traffic', 'cloud', 'cluster', 'code', 'cog', 'coin-bag', 'collapse-card', 'collapse', 'color-palette', 'color-picker', 'command', 'compass', 'computer', 'connect', 'container', 'container-volume', 'contract', 'control-lun', 'copy', 'copy-to-clipboard', 'cpu', 'credit-card', 'crosshairs', 'crown', 'cursor-arrow', 'cursor-hand-click', 'cursor-hand-grab', 'cursor-hand-open', 'cursor-hand', 'cursor-move', 'curve-chart'
+                'calculator', 'calendar', 'camera', 'campervan', 'cancel', 'capacitor', 'car', 'caravan', 'caret', 'cddvd', 'certificate', 'chat-bubble', 'check-circle', 'check', 'checkbox-list', 'child-arrow', 'cicd', 'circle-arrow', 'circle', 'clipboard', 'clock', 'clone', 'close', 'cloud-chart', 'cloud-network', 'cloud-scale', 'cloud-traffic', 'cloud', 'cluster', 'code', 'cog', 'coin-bag', 'collapse-card', 'collapse', 'color-palette', 'color-picker', 'command', 'compass', 'computer', 'connect', 'container', 'container-volume', 'contract', 'control-lun', 'copy', 'copy-to-clipboard', 'cpu', 'credit-card', 'crosshairs', 'crown', 'cursor-arrow', 'cursor-hand-click', 'cursor-hand-grab', 'cursor-hand-open', 'cursor-hand', 'cursor-move', 'curve-chart'
             ]
         },
         {

@@ -16,7 +16,7 @@
 @import "../components/navlist.mixin";
 @import "../components/placeholder.mixin";
 @import "../components/progress.mixin";
-@import "../components/ribbon.mixin";
+@import "../components/radio.mixin";
 @import "../components/ripple.mixin";
 @import "../components/scrollbar.mixin";
 @import "../components/toast.mixin";
@@ -24,8 +24,15 @@
 
 @import "../effect/background.mixin";
 @import "../effect/color.mixin";
+@import "../components/ribbon.mixin";
 
 @mixin setup-default-theme($theme) {
+    $colors: (
+        "default": "gray",
+        "primary": "indigo", "accent": "pink",
+        "success": "green", "warning": "yellow", "failure": "red", "info": "blue", "help": "slate"
+    );
+
     &[data-color*="default"] {
         @include setup-accordion-theme($theme, "indigo", "pink");
         @include setup-alert-theme($theme, "indigo");
@@ -35,7 +42,7 @@
         @include setup-button-theme($theme, "indigo", "pink");
         @include setup-card-theme($theme, "indigo");
         @include setup-carousel-theme($theme, "indigo", "pink");
-        @include setup-check-theme($theme, "indigo", "pink");
+        @include setup-check-theme($theme, $colors);
         @include setup-digital-theme($theme, "indigo", "pink");
         @include setup-divider-theme($theme, "indigo", "pink");
         @include setup-icons-theme($theme, "indigo", "pink");
@@ -45,13 +52,14 @@
         @include setup-navlist-theme($theme, "indigo");
         @include setup-placeholder-theme($theme);
         @include setup-progress-theme($theme, "indigo", "pink");
+        @include setup-radio-theme($theme, $colors);
         @include setup-ribbon-theme($theme, "indigo", "pink");
-        @include setup-ripple-theme($theme, "indigo", "pink");
         @include setup-scrollbar-theme($theme, "indigo");
         @include setup-toast-theme($theme);
         @include setup-tooltip-theme($theme, "indigo", "pink");
 
         @include setup-background-effect($theme, "indigo", "pink");
         @include setup-color-effect($theme, "indigo", "pink");
+        @include setup-ripple-theme($theme, "indigo", "pink");
     }
 }

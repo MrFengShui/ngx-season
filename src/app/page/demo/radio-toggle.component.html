@@ -1,0 +1,15 @@
+<div class="flex flex-dir-col gy-100 p-100">
+    <div class="flex gx-100" *ngFor="let color of colors; index as idx">
+        <ngx-sui-radio-toggle-group [rgName]="'toggle-group-' + idx" [rgDisabled]="disabled" [(rgSelectedValue)]="values[idx]" [tgColor]="color">
+            <label ngx-sui-RadioToggle [radioValue]="item.value" *ngFor="let item of items">{{ item.label }}</label>
+        </ngx-sui-radio-toggle-group>
+        <span class="flex-auto" [style.text-align]="values[idx]">Selected Value: {{ values[idx] }}</span>
+    </div>
+    <label ngx-sui-CheckBox [(checkChecked)]="disabled">开关按钮是否失效</label>
+</div>
+<!-- <div class="flex gx-100 p-100">
+    <span ngx-sui-RadioButtonGroup rgName="group_two" [rgDisabled]="disabled" [(ngModel)]="values[1]" #groupTwo></span>
+    <label ngx-sui-RadioButton [radioColor]="item.color" [radioGroup]="groupTwo" [radioValue]="item.value" *ngFor="let item of list">{{ item.label }}</label>
+    <span>Selected Value: {{ values[1] }}</span>
+    <label ngx-sui-CheckBox [(checkChecked)]="disabled"></label>
+</div> -->

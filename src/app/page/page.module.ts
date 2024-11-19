@@ -30,6 +30,8 @@ import { DemoTooltipPageComponent } from "./demo/tooltip.component";
 import { DemoComponentPageComponent } from "./demo/component.component";
 import { DemoDividerPageComponent } from "./demo/divider.component";
 import { DemoToastPageComponent } from "./demo/toast.component";
+import { DemoRadioButtonPageComponent } from "./demo/radiobtn.component";
+import { DemoRadioTogglePageComponent } from "./demo/radio-toggle.component";
 
 @NgModule({
     declarations: [
@@ -55,6 +57,8 @@ import { DemoToastPageComponent } from "./demo/toast.component";
         DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
+        DemoRadioButtonPageComponent,
+        DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
         DemoToastPageComponent,
         DemoTooltipPageComponent
@@ -90,6 +94,8 @@ import { DemoToastPageComponent } from "./demo/toast.component";
         DemoListPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
+        DemoRadioButtonPageComponent,
+        DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
         DemoToastPageComponent,
         DemoTooltipPageComponent

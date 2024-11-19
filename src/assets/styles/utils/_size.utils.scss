@@ -20,6 +20,32 @@ $sizes: (0, 1, 2, 3, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 60, 64, 72
     --overlay-alert-toast-height: #{var(--size-pixel-48)};
 }
 
+@each $size in $sizes {
+    .pw-#{$size} {
+        width: var(--size-pixel-#{$size}) !important;
+    }
+
+    .pw-min-#{$size} {
+        min-width: var(--size-pixel-#{$size}) !important;
+    }
+
+    .pw-max-#{$size} {
+        max-width: var(--size-pixel-#{$size}) !important;
+    }
+
+    .ph-#{$size} {
+        height: var(--size-pixel-#{$size}) !important;
+    }
+
+    .ph-min-#{$size} {
+        min-height: var(--size-pixel-#{$size}) !important;
+    }
+
+    .ph-max-#{$size} {
+        max-height: var(--size-pixel-#{$size}) !important;
+    }
+}
+
 @for $index from 0 through 10 {
     $fstValue: $index * 10;
     $sndValue: $index * 10 + 5;

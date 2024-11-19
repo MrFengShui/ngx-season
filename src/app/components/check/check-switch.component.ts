@@ -3,7 +3,8 @@ import { Component, forwardRef, Input, Provider } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NGXSeasonCheckComponent } from "./check.component";
-import { NGXSeasonCheckColor } from "./check.component";
+
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 const NGXSeasonCheckSwitchValueAccessor: Provider = {
     provide: NG_VALUE_ACCESSOR,
@@ -72,7 +73,7 @@ export class NGXSeasonCheckSwitchComponent extends NGXSeasonCheckComponent imple
         this._renderer.addClass(this._element.nativeElement, 'check-switch');
     }
 
-    protected override changeCheckColor(color: NGXSeasonCheckColor): void {
+    protected override changeCheckColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-check-switch-color', color);
     }
 

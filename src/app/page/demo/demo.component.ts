@@ -7,6 +7,7 @@ import { BehaviorSubject, filter, interval, map, Observable, of, Subject, thrott
 import * as moment from 'moment';
 
 import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
+import { coerceArray, coerceNumberProperty } from "@angular/cdk/coercion";
 
 type NavigationMetainfo = { id: string, icon?: NGXSeasonIconName, type?: 'item' | 'section', text: string, link?: string[], nodes?: NavigationMetainfo[] };
 
@@ -61,13 +62,15 @@ export class DemoPageComponent implements OnInit, OnDestroy {
             id: '3', icon: 'form', type: 'section', text: '表单组件展示',
             nodes: [
                 { id: '2-2', text: '检查框', link: ['/demo', 'form', 'checkbox'] },
-                { id: '2-3', text: '开关', link: ['/demo', 'form', 'check-switch'] },
+                { id: '2-3', text: '检查开关', link: ['/demo', 'form', 'check-switch'] },
                 // { id: '2-3', text: '邮件输入框', link: ['/demo', 'form', 'email'] },
                 // { id: '2-4', text: '输入框', link: ['/demo', 'form', 'number'] },
                 { id: '2-5', text: '密码输入框', link: ['/demo', 'form', 'password'] },
                 // { id: '2-6', text: '电话输入框', link: ['/demo', 'form', 'phone'] },
-                { id: '2-7', text: '搜索输入框', link: ['/demo', 'form', 'search'] },
-                { id: '2-8', text: '文字输入框', link: ['/demo', 'form', 'textfield'] },
+                { id: '2-6', text: '选择框', link: ['/demo', 'form', 'radiobtn'] },
+                { id: '2-7', text: '开关按钮', link: ['/demo', 'form', 'radio-toggle'] },
+                { id: '2-8', text: '搜索输入框', link: ['/demo', 'form', 'search'] },
+                { id: '2-9', text: '文字输入框', link: ['/demo', 'form', 'textfield'] },
             ]
         },
         {
@@ -187,7 +190,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 }));
     }
 
-    ngOnInit(): void {
+    ngOnInit(): void { console.debug(coerceArray(null), coerceArray(undefined), coerceArray([12]));
         moment.locale(this.MOMENT_CHINESE_FORMAT);
         this.datetime$ = interval(100).pipe(map(() => moment().format('LLL')));
 

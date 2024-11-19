@@ -1,9 +1,9 @@
-import { Component, AfterViewInit, ElementRef, Renderer2, Input, Directive, TemplateRef } from "@angular/core";
+import { Directive, TemplateRef } from "@angular/core";
 
 @Directive({
-    selector: '[ngx-sui-ListItemHeader]'
+    selector: '[ngx-sui-ListMetaActions]'
 })
-export class NGXSeasonListItemHeaderDirective {
+export class NGXSeasonListMetaActionsDirective {
 
     constructor(protected _template: TemplateRef<any>) {}
 
@@ -14,9 +14,9 @@ export class NGXSeasonListItemHeaderDirective {
 }
 
 @Directive({
-    selector: '[ngx-sui-ListItemContent]'
+    selector: '[ngx-sui-ListMetaMedia]'
 })
-export class NGXSeasonListItemContentDirective {
+export class NGXSeasonListMetaMediaDirective {
 
     constructor(protected _template: TemplateRef<any>) {}
 
@@ -27,11 +27,11 @@ export class NGXSeasonListItemContentDirective {
 }
 
 @Directive({
-    selector: '[ngx-sui-ListItemFooter]'
+    selector: '[ngx-sui-ListHeader]'
 })
-export class NGXSeasonListItemFooterDirective {
+export class NGXSeasonListHeaderDirective {
 
-    constructor(protected _template: TemplateRef<any>) {}
+    constructor(protected _template: TemplateRef<any>) { }
 
     fetchTemplate(): TemplateRef<any> {
         return this._template;
@@ -40,14 +40,15 @@ export class NGXSeasonListItemFooterDirective {
 }
 
 @Directive({
-    selector: '[ngx-sui-ListItemMedia]'
+    selector: '[ngx-sui-ListFooter]'
 })
-export class NGXSeasonListItemMediaDirective {
+export class NGXSeasonListFooterDirective {
 
-    constructor(protected _template: TemplateRef<any>) {}
+    constructor(protected _template: TemplateRef<any>) { }
 
     fetchTemplate(): TemplateRef<any> {
         return this._template;
     }
 
 }
+

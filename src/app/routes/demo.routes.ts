@@ -21,6 +21,8 @@ import { DemoTooltipPageComponent } from "../page/demo/tooltip.component";
 import { DemoComponentPageComponent } from "../page/demo/component.component";
 import { DemoDividerPageComponent } from "../page/demo/divider.component";
 import { DemoToastPageComponent } from "../page/demo/toast.component";
+import { DemoRadioButtonPageComponent } from "../page/demo/radiobtn.component";
+import { DemoRadioTogglePageComponent } from "../page/demo/radio-toggle.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -35,7 +37,7 @@ export const demoRoutes: Routes = [
     { path: 'component/card', component: DemoCardPageComponent, title: '卡片' },
     { path: 'component/carousel', component: DemoCarouselPageComponent, title: '轮播器' },
     { path: 'form/checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
-    { path: 'form/check-switch', component: DemoCheckSwitchPageComponent, title: '开关' },
+    { path: 'form/check-switch', component: DemoCheckSwitchPageComponent, title: '检查开关' },
     { path: 'component/digital', component: DemoDigitalPageComponent, title: '数码' },
     { path: 'component/divider', component: DemoDividerPageComponent, title: '分割器' },
     { path: 'component/icon', component: DemoIconPageComponent, title: '图标' },
@@ -43,6 +45,8 @@ export const demoRoutes: Routes = [
     { path: 'component/list', component: DemoListPageComponent, title: '列表' },
     { path: 'component/placeholder', component: DemoPlaceholderPageComponent, title: '占位符' },
     { path: 'component/progress', component: DemoProgressPageComponent, title: '进度' },
+    { path: 'form/radiobtn', component: DemoRadioButtonPageComponent, title: '选择框' },
+    { path: 'form/radio-toggle', component: DemoRadioTogglePageComponent, title: '开关按钮' },
     { path: 'component/ribbon', component: DemoRibbonPageComponent, title: '丝带' },
     { path: 'component/toast', component: DemoToastPageComponent, title: '消息框' },
     { path: 'component/tooltip', component: DemoTooltipPageComponent, title: '提示框' },

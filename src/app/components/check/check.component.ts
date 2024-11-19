@@ -1,7 +1,8 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { Component, OnChanges, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ElementRef, Renderer2, SimpleChanges } from "@angular/core";
 
-export type NGXSeasonCheckColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+
 export type NGXSeasonCheckLabelPosition = 'after' | 'before';
 
 @Component({
@@ -11,11 +12,11 @@ export type NGXSeasonCheckLabelPosition = 'after' | 'before';
 export abstract class NGXSeasonCheckComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     @Input('checkColor')
-    set color(color: NGXSeasonCheckColor) {
-        this._color = color;
+    set color(color: NGXSeasonColorPalette | null) {
+        this._color = color ? color : 'default';
     }
 
-    get color(): NGXSeasonCheckColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
@@ -38,15 +39,15 @@ export abstract class NGXSeasonCheckComponent implements OnChanges, OnDestroy, A
     }
 
     @Input('checkLabelPos')
-    set position(position: NGXSeasonCheckLabelPosition) {
-        this._position = position;
+    set position(position: NGXSeasonCheckLabelPosition | null) {
+        this._position = position ? position : 'after';
     }
 
     get position(): NGXSeasonCheckLabelPosition {
         return this._position;
     }
 
-    private _color: NGXSeasonCheckColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
     private _checked: boolean = false;
     private _disabled: boolean = false;
     private _position: NGXSeasonCheckLabelPosition = 'after';
@@ -61,7 +62,7 @@ export abstract class NGXSeasonCheckComponent implements OnChanges, OnDestroy, A
 
     ngOnChanges(changes: SimpleChanges): void {
         for (const name in changes) {
-            if (name === 'color') this.changeCheckColor(changes[name].currentValue as NGXSeasonCheckColor);
+            if (name === 'color') this.changeCheckColor(changes[name].currentValue as NGXSeasonColorPalette);
 
             if (name === 'disabled') this.setupCheckDisabled(coerceBooleanProperty(changes[name].currentValue));
 
@@ -81,7 +82,7 @@ export abstract class NGXSeasonCheckComponent implements OnChanges, OnDestroy, A
 
     protected abstract initialize(): void;
 
-    protected abstract changeCheckColor(color: NGXSeasonCheckColor): void;
+    protected abstract changeCheckColor(color: NGXSeasonColorPalette): void;
 
     protected abstract setupCheckDisabled(disabled: boolean): void;
 
