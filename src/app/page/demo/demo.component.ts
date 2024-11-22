@@ -54,8 +54,6 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-16', text: '占位符', link: ['/demo', 'component', 'placeholder'] },
                 { id: '2-17', text: '进度', link: ['/demo', 'component', 'progress'] },
                 { id: '2-18', text: '丝带', link: ['/demo', 'component', 'ribbon'] },
-                { id: '2-21', text: '消息框', link: ['/demo', 'component', 'toast'] },
-                { id: '2-22', text: '提示框', link: ['/demo', 'component', 'tooltip'] },
             ]
         },
         {
@@ -74,10 +72,21 @@ export class DemoPageComponent implements OnInit, OnDestroy {
             ]
         },
         {
-            id: '4', icon: 'animation', type: 'section', text: '特效展示',
+            id: '4', icon: 'layers', type: 'section', text: '浮动组件展示',
             nodes: [
-                { id: '4-1', text: '背景', link: ['/demo', 'effect', 'background'] },
-                { id: '4-5', text: '波纹', link: ['/demo', 'effect', 'ripple'] },
+                { id: '4-1', text: '抽屉', link: ['/demo', 'overlay', 'drawer'] },
+                { id: '4-2', text: '对话框', link: ['/demo', 'overlay', 'modal'] },
+                { id: '4-3', text: '通知', link: ['/demo', 'overlay', 'notification'] },
+                { id: '4-4', text: '悬浮框', link: ['/demo', 'overlay', 'popover'] },
+                { id: '4-5', text: '消息', link: ['/demo', 'overlay', 'toast'] },
+                { id: '4-6', text: '提示框', link: ['/demo', 'overlay', 'tooltip'] },
+            ]
+        },
+        {
+            id: '5', icon: 'animation', type: 'section', text: '特效展示',
+            nodes: [
+                { id: '5-1', text: '背景', link: ['/demo', 'effect', 'background'] },
+                { id: '5-5', text: '波纹', link: ['/demo', 'effect', 'ripple'] },
             ]
         }
     ];
@@ -190,7 +199,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 }));
     }
 
-    ngOnInit(): void { console.debug(coerceArray(null), coerceArray(undefined), coerceArray([12]));
+    ngOnInit(): void {
         moment.locale(this.MOMENT_CHINESE_FORMAT);
         this.datetime$ = interval(100).pipe(map(() => moment().format('LLL')));
 
@@ -210,7 +219,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
         if (nodes) {
             let flag: boolean = false;
 
-            for (let length = nodes.length, i = 0, j = length - 1; i < j; i++, j--) {
+            for (let length = nodes.length, i = 0, j = length - 1; i <= j; i++, j--) {
                 if (this.checkSelected(nodes[i].link, this.source) || this.checkSelected(nodes[j].link, this.source)) {
                     flag = true;
                     break;

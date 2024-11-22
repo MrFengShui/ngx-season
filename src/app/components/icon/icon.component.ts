@@ -21,18 +21,18 @@ export type NGXSeasonIconName =
     'heart-broken' | 'heart' | 'help-standard' | 'home' |
     'id-badge' | 'image-gallery' | 'image' | 'import' | 'info-standard' | 'info' | 'internet-of-things' |
     'key' | 'keyboard' |
-    'language' | 'library' | 'list-view' | 'list' | 'login' | 'logout' |
-    'minus-circle' | 'minus' | 'mobile' | 'moon' | 'mouse' |
+    'language' | 'layers' | 'library' | 'lightbulb' | 'list-view' | 'list' | 'login' | 'logout' |
+    'map' | 'map-marker' | 'minus-circle' | 'minus' | 'mobile' | 'moon' | 'mouse' | 'music-note' |
     'new' | 'network-globe' | 'no-access' |
     'organization' |
-    'paperclip' | 'pause' | 'phone' | 'pin' | 'play' | 'plugin' | 'plus-circle' | 'plus' | 'pound' | 'power' | 'printer' |
+    'paperclip' | 'pause' | 'peso' | 'phone' | 'pin' | 'play' | 'plugin' | 'plus-circle' | 'plus' | 'pound' | 'power' | 'printer' |
     'qrcode' |
-    'recycle' | 'rewind' | 'router' | 'ruble' | 'rupee' |
-    'savings' | 'search' | 'server' | 'settings' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'slider' | 'star' | 'step-forward' | 'stop' | 'storage' | 'store' | 'success-standard' | 'success' | 'sun' | 'switch' | 'sync' |
+    'recycle' | 'redo' | 'refresh' | 'repeat' | 'replay-all' | 'replay-one' | 'resize-down' | 'resize-up' | 'rewind' | 'router' | 'ruble' | 'rupee' |
+    'savings' | 'search' | 'server' | 'settings' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'shuffle' | 'slider' | 'star' | 'step-forward' | 'stop' | 'storage' | 'store' | 'success-standard' | 'success' | 'sun' | 'switch' | 'sync' |
     'table' | 'tablet' | 'tag' | 'tags' | 'target' | 'terminal' | 'thumbs-down' | 'thumbs-up' | 'times-circle' | 'times' | 'tools' | 'trash' | 'tree-view' |
-    'unlock' | 'upload-cloud' | 'upload' | 'user' | 'users' |
+    'undo' | 'unlock' | 'upload-cloud' | 'upload' | 'user' | 'users' |
     'video-camera' | 'video-gallery' | 'volume-down' | 'volume-mute' | 'volume-up' |
-    'wallet' | 'warning-standard' | 'warning' | 'wifi-off' | 'wifi-on' | 'world';
+    'wallet' | 'warning-standard' | 'warning' | 'wifi-off' | 'wifi-on' | 'window-close' | 'window-max' | 'window-min' | 'window-restore' | 'world';
 
 export type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
 export type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };

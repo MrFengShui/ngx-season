@@ -13,6 +13,7 @@
 @import "../components/input.mixin";
 @import "../components/layout.mixin";
 @import "../components/list.mixin";
+@import "../components/modal.mixin";
 @import "../components/navlist.mixin";
 @import "../components/placeholder.mixin";
 @import "../components/progress.mixin";
@@ -49,6 +50,7 @@
         @include setup-input-theme($theme, "indigo", "pink");
         @include setup-layout-theme($theme);
         @include setup-list-theme($theme);
+        @include setup-modal-theme($theme);
         @include setup-navlist-theme($theme, "indigo");
         @include setup-placeholder-theme($theme);
         @include setup-progress-theme($theme, "indigo", "pink");

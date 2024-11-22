@@ -96,13 +96,13 @@ export class DemoIconPageComponent {
         {
             label: '字母L开头',
             names: [
-                'language', 'library', 'list-view', 'list', 'login', 'logout'
+                'language', 'layers', 'library', 'lightbulb', 'list-view', 'list', 'login', 'logout'
             ]
         },
         {
             label: '字母M开头',
             names: [
-                'minus-circle', 'minus', 'mobile', 'moon', 'mouse'
+                'map-marker', 'map', 'minus-circle', 'minus', 'mobile', 'moon', 'mouse', 'music-note'
             ]
         },
         {
@@ -120,7 +120,7 @@ export class DemoIconPageComponent {
         {
             label: '字母P开头',
             names: [
-                'paperclip', 'pause', 'phone', 'pin', 'play', 'plugin', 'plus-circle', 'plus', 'pound', 'power', 'printer'
+                'paperclip', 'pause', 'peso', 'phone', 'pin', 'play', 'plugin', 'plus-circle', 'plus', 'pound', 'power', 'printer'
             ]
         },
         {
@@ -132,7 +132,7 @@ export class DemoIconPageComponent {
         {
             label: '字母R开头',
             names: [
-                'recycle', 'rewind', 'router', 'ruble', 'rupee'
+                'recycle', 'redo', 'refresh', 'repeat', 'replay-all', 'replay-one', 'resize-down', 'resize-up', 'rewind', 'router', 'ruble', 'rupee'
             ]
         },
         {
@@ -150,7 +150,7 @@ export class DemoIconPageComponent {
         {
             label: '字母U开头',
             names: [
-                'unlock', 'upload-cloud', 'upload', 'user', 'users'
+                'undo', 'unlock', 'upload-cloud', 'upload', 'user', 'users'
             ]
         },
         {
@@ -162,7 +162,7 @@ export class DemoIconPageComponent {
         {
             label: '字母W开头',
             names: [
-                'wallet', 'warning-standard', 'warning', 'wifi-off', 'wifi-on', 'world'
+                'wallet', 'warning-standard', 'warning', 'wifi-off', 'wifi-on', 'window-close', 'window-max', 'window-min', 'window-restore', 'world'
             ]
         },
     ];

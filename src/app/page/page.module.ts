@@ -32,6 +32,7 @@ import { DemoDividerPageComponent } from "./demo/divider.component";
 import { DemoToastPageComponent } from "./demo/toast.component";
 import { DemoRadioButtonPageComponent } from "./demo/radiobtn.component";
 import { DemoRadioTogglePageComponent } from "./demo/radio-toggle.component";
+import { DemoModalContainerComponent, DemoModalPageComponent } from "./demo/modal.component";
 
 @NgModule({
     declarations: [
@@ -55,13 +56,16 @@ import { DemoRadioTogglePageComponent } from "./demo/radio-toggle.component";
         DemoIconPageComponent,
         DemoInputPageComponent,
         DemoListPageComponent,
+        DemoModalPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
         DemoToastPageComponent,
-        DemoTooltipPageComponent
+        DemoTooltipPageComponent,
+
+        DemoModalContainerComponent
     ],
     imports: [
         CommonModule,
@@ -92,6 +96,7 @@ import { DemoRadioTogglePageComponent } from "./demo/radio-toggle.component";
         DemoIconPageComponent,
         DemoInputPageComponent,
         DemoListPageComponent,
+        DemoModalPageComponent,
         DemoPlaceholderPageComponent,
         DemoProgressPageComponent,
         DemoRadioButtonPageComponent,

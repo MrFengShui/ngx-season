@@ -3,6 +3,7 @@
         --scrollbar-width-height: #{var(--size-pixel-12)};
 
         --scrollbar-thumb-border-radius: #{var(--size-pixel-3)};
+
         --scrollbar-thumb-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
         --scrollbar-thumb-bgcolor-hover: #{var(--palette-gray-500-color)};
         --scrollbar-thumb-bgcolor-active: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
@@ -39,6 +40,10 @@
             border-radius: var(--scrollbar-thumb-border-radius);
         }
 
+        &::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
         &:hover {
             &:not(:hover) {
                 &::-webkit-scrollbar-thumb {
@@ -48,11 +53,11 @@
 
             &::-webkit-scrollbar-thumb {
                 background: var(--scrollbar-thumb-bgcolor);
-    
+
                 &:hover {
                     background: var(--scrollbar-thumb-bgcolor-hover);
                 }
-    
+
                 &:active {
                     background: var(--scrollbar-thumb-bgcolor-active);
                 }

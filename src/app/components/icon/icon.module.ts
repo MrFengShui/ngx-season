@@ -24,29 +24,29 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 
                 .addIcon('key').addIcon('keyboard')
 
-                .addIcon('language').addIcon('library').addIcon('list-view').addIcon('list').addIcon('login').addIcon('logout')
+                .addIcon('language').addIcon('layers').addIcon('library').addIcon('lightbulb').addIcon('list-view').addIcon('list').addIcon('login').addIcon('logout')
 
-                .addIcon('minus').addIcon('minus-circle').addIcon('mobile').addIcon('moon').addIcon('mouse')
+                .addIcon('map-marker').addIcon('map').addIcon('minus').addIcon('minus-circle').addIcon('mobile').addIcon('moon').addIcon('mouse').addIcon('music-note')
 
                 .addIcon('new').addIcon('network-globe').addIcon('no-access')
 
                 .addIcon('organization')
 
-                .addIcon('paperclip').addIcon('pause').addIcon('phone').addIcon('pin').addIcon('play').addIcon('plugin').addIcon('plus-circle').addIcon('plus').addIcon('pound').addIcon('power').addIcon('printer')
+                .addIcon('paperclip').addIcon('pause').addIcon('peso').addIcon('phone').addIcon('pin').addIcon('play').addIcon('plugin').addIcon('plus-circle').addIcon('plus').addIcon('pound').addIcon('power').addIcon('printer')
 
                 .addIcon('qrcode')
 
-                .addIcon('recycle').addIcon('rewind').addIcon('router').addIcon('ruble').addIcon('rupee')
+                .addIcon('recycle').addIcon('redo').addIcon('refresh').addIcon('repeat').addIcon('replay-all').addIcon('replay-one').addIcon('resize-down').addIcon('resize-up').addIcon('rewind').addIcon('router').addIcon('ruble').addIcon('rupee')
 
-                .addIcon('savings').addIcon('search').addIcon('server').addIcon('settings').addIcon('share').addIcon('shield-check').addIcon('shield-times').addIcon('shield').addIcon('slider').addIcon('star').addIcon('step-forward').addIcon('stop').addIcon('storage').addIcon('store').addIcon('success-standard').addIcon('success').addIcon('sun').addIcon('switch').addIcon('sync')
+                .addIcon('savings').addIcon('search').addIcon('server').addIcon('settings').addIcon('share').addIcon('shield-check').addIcon('shield-times').addIcon('shield').addIcon('shuffle').addIcon('slider').addIcon('star').addIcon('step-forward').addIcon('stop').addIcon('storage').addIcon('store').addIcon('success-standard').addIcon('success').addIcon('sun').addIcon('switch').addIcon('sync')
 
                 .addIcon('table').addIcon('tablet').addIcon('tag').addIcon('tags').addIcon('target').addIcon('terminal').addIcon('thumbs-up').addIcon('thumbs-down').addIcon('times-circle').addIcon('times').addIcon('tools').addIcon('trash').addIcon('tree-view')
 
-                .addIcon('unlock').addIcon('upload-cloud').addIcon('upload').addIcon('user').addIcon('users')
+                .addIcon('undo').addIcon('unlock').addIcon('upload-cloud').addIcon('upload').addIcon('user').addIcon('users')
 
                 .addIcon('video-camera').addIcon('video-gallery').addIcon('volume-down').addIcon('volume-mute').addIcon('volume-up')
 
-                .addIcon('wallet').addIcon('warning-standard').addIcon('warning').addIcon('wifi-off').addIcon('wifi-on').addIcon('world');
+                .addIcon('wallet').addIcon('warning-standard').addIcon('warning').addIcon('wifi-off').addIcon('wifi-on').addIcon('window-close').addIcon('window-max').addIcon('window-min').addIcon('window-restore').addIcon('world');
 
 @NgModule({
     declarations: [ NGXSeasonIconComponent ],
