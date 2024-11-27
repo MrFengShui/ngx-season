@@ -6,19 +6,20 @@ import { BehaviorSubject, debounceTime, filter, map, Observable, of, Subject, Su
 import { fromFetch } from 'rxjs/fetch';
 
 import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/_size.utils";
 
 export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegister> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
-export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
+export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 
 export type NGXSeasonIconName =
     'accessibility-1' | 'accessibility-2' | 'add-text' | 'administrator' | 'airplane' | 'alarm-off' | 'alarm-on' | 'alert' | 'align-bottom' | 'align-center' | 'align-center-text' | 'align-justify-text' | 'align-left' | 'align-left-text' | 'align-middle' | 'align-right' | 'align-right-text' | 'align-top' | 'analytics' | 'angle-double' | 'angle' | 'animation' | 'application' | 'applications' | 'archive' | 'arrow' | 'assign-user' | 'asterisk' | 'atom' | 'attachment' | 'auto' | 'avatar' | 'axis-chart' |
     'backup-restore' | 'backup' | 'balance' | 'ban' | 'bank' | 'bar-chart' | 'bar-code' | 'bars' | 'battery' | 'bell-curve' | 'bell' | 'beta' | 'bicycle' | 'bitcoin' | 'block' | 'blocks-group' | 'bluetooth-off' | 'bluetooth-on' | 'boat' | 'bold' | 'bolt' | 'book' | 'bookmark' | 'box-plot' | 'briefcase' | 'bubble-exclamation' | 'bug' | 'building' | 'bullet-list' | 'bullseye' | 'bundle' |
-    'calculator' | 'calendar' | 'camera' | 'campervan' | 'cancel' | 'capacitor' | 'car' | 'caravan' | 'caret' | 'cddvd' | 'certificate' | 'chat-bubble' | 'check-circle' | 'check' | 'checkbox-list' | 'child-arrow' | 'cicd' | 'circle-arrow' | 'circle' | 'clipboard' | 'clock' | 'clone' | 'close' | 'cloud-chart' | 'cloud-network' | 'cloud-scale' | 'cloud-traffic' | 'cloud' | 'cluster' | 'code' | 'cog' | 'coin-bag' | 'collapse-card' | 'collapse' | 'color-palette' | 'color-picker' | 'command' | 'compass' | 'computer' | 'connect' | 'container' | 'container-volume' | 'contract' | 'control-lun' | 'copy' | 'copy-to-clipboard' | 'cpu' | 'credit-card' | 'crosshairs' | 'crown' | 'cursor-arrow' | 'cursor-hand-click' | 'cursor-hand-grab' | 'cursor-hand-open' | 'cursor-hand' | 'cursor-move' | 'curve-chart' |
+    'calculator' | 'calendar' | 'camera' | 'campervan' | 'cancel' | 'capacitor' | 'car' | 'caravan' | 'cards-view' | 'caret' | 'cddvd' | 'certificate' | 'chat-bubble' | 'check-circle' | 'check' | 'checkbox-list' | 'child-arrow' | 'cicd' | 'circle-arrow' | 'circle' | 'clipboard' | 'clock' | 'clone' | 'close' | 'cloud-chart' | 'cloud-network' | 'cloud-scale' | 'cloud-traffic' | 'cloud' | 'cluster' | 'code' | 'cog' | 'coin-bag' | 'collapse-card' | 'collapse' | 'color-palette' | 'color-picker' | 'command' | 'compass' | 'computer' | 'connect' | 'container' | 'container-volume' | 'contract' | 'control-lun' | 'copy' | 'copy-to-clipboard' | 'cpu' | 'credit-card' | 'crosshairs' | 'crown' | 'cursor-arrow' | 'cursor-hand-click' | 'cursor-hand-grab' | 'cursor-hand-open' | 'cursor-hand' | 'cursor-move' | 'curve-chart' |
     'dashboard' | 'data-cluster' | 'date' | 'deploy' | 'design' | 'details' | 'devices' | 'digital-signature' | 'directory' | 'disconnect' | 'display' | 'dna' | 'document' | 'dollar-bill' | 'dollar' | 'dot-circle' | 'download-cloud' | 'download' | 'drag-handle-corner' | 'drag-handle' |
-    'edit' | 'ellipsis-horizontal' | 'ellipsis-vertical' | 'email' | 'employee-group' | 'employee' | 'eraser' | 'euro' | 'export' | 'eye-hide' | 'eye-show' | 'eye' |
-    'face-happy' | 'face-neutral' | 'face-sad' | 'factory' | 'failure-standard' | 'failure' | 'favorite' | 'file-group' | 'file' | 'filter-off' | 'filter-on' | 'firewall' | 'flag' | 'floppy' | 'form' |
-    'grid-view' |
-    'heart-broken' | 'heart' | 'help-standard' | 'home' |
+    'e-check' | 'edit' | 'ellipsis-horizontal' | 'ellipsis-vertical' | 'email' | 'employee-group' | 'employee' | 'eraser' | 'euro' | 'event' | 'expand-card' | 'export' | 'eye-hide' | 'eye-show' | 'eye' |
+    'face-happy' | 'face-neutral' | 'face-sad' | 'factory' | 'failure-standard' | 'failure' | 'favorite' | 'file-group' | 'file' | 'filter-off' | 'filter-on' | 'firewall' | 'first-aid-kit' | 'fish' | 'flag' | 'flame' | 'flask' | 'floppy' | 'folder-close' | 'folder-open' | 'font-size' | 'forking' | 'form' | 'fuel' |
+    'gavel' | 'grid-view' | 'group' |
+    'hard-disk' | 'hard-drive' | 'hard-drives' | 'hashtag' | 'heart-broken' | 'heart' | 'heat-map' | 'help-info' | 'help-standard' | 'highlighter' | 'history' | 'home' | 'hourglass' |
     'id-badge' | 'image-gallery' | 'image' | 'import' | 'info-standard' | 'info' | 'internet-of-things' |
     'key' | 'keyboard' |
     'language' | 'layers' | 'library' | 'lightbulb' | 'list-view' | 'list' | 'login' | 'logout' |
@@ -33,9 +34,6 @@ export type NGXSeasonIconName =
     'undo' | 'unlock' | 'upload-cloud' | 'upload' | 'user' | 'users' |
     'video-camera' | 'video-gallery' | 'volume-down' | 'volume-mute' | 'volume-up' |
     'wallet' | 'warning-standard' | 'warning' | 'wifi-off' | 'wifi-on' | 'window-close' | 'window-max' | 'window-min' | 'window-restore' | 'world';
-
-export type NGXSeasonIconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxl' | 'xxxl';
-export type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
 
 type IconsCachePair = { solid: string, outline: string };
 type IconsCache = { [key: string]: IconsCachePair };
@@ -202,11 +200,11 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     }
 
     @Input('iconSize')
-    set size(size: NGXSeasonIconSize | undefined | null) {
+    set size(size: NGXSeasonSizeOption | undefined | null) {
         this._size = size || 'md';
     }
 
-    get size(): NGXSeasonIconSize {
+    get size(): NGXSeasonSizeOption {
         return this._size;
     }
 
@@ -218,7 +216,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
     private _rotateInfinite: boolean = false;
     private _shape: NGXSeasonIconName | undefined;
     private _solid: boolean = false;
-    private _size: NGXSeasonIconSize = 'md';
+    private _size: NGXSeasonSizeOption = 'md';
 
     @ViewChild('svgBox', { read: ElementRef, static: true })
     protected svgElement: ElementRef<SVGElement> | undefined;
@@ -241,7 +239,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
         @Inject(NGX_SEASON_ICONS_REGISTER_TOKEN)
         protected _register: NGXSeasonIconRegister,
         @Inject(NGX_SEASON_ICONS_SIZE_MAP_TOKEN)
-        protected _iconSizeMap: NGXSeasonIconSizeMap
+        protected _iconSizeMap: NGXSeasonSizeMap
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -297,7 +295,7 @@ export class NGXSeasonIconComponent implements OnChanges, OnDestroy, AfterViewIn
             this._sanitizer.bypassSecurityTrustHtml(solid ? pair.solid : pair.outline))) : of();
     }
 
-    protected setupIconSize(size: NGXSeasonIconSize): number {
+    protected setupIconSize(size: NGXSeasonSizeOption): number {
         return this._iconSizeMap[size];
     }
 

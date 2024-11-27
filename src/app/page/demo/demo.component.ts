@@ -57,11 +57,11 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-10', text: '数码', link: ['/demo', 'component', 'digital'] },
                 { id: '2-11', text: '分割器', link: ['/demo', 'component', 'divider'] },
                 { id: '2-12', text: '图标', link: ['/demo', 'component', 'icon'] },
-
-                { id: '2-15', text: '列表', link: ['/demo', 'component', 'list'] },
+                { id: '2-13', text: '列表', link: ['/demo', 'component', 'list'] },
                 { id: '2-16', text: '占位符', link: ['/demo', 'component', 'placeholder'] },
                 { id: '2-17', text: '进度', link: ['/demo', 'component', 'progress'] },
                 { id: '2-18', text: '丝带', link: ['/demo', 'component', 'ribbon'] },
+                { id: '2-19', text: '标签', link: ['/demo', 'component', 'tag'] },
             ]
         },
         {

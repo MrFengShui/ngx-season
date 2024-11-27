@@ -1,7 +1,7 @@
 <ngx-sui-layout>
     <ngx-sui-layout-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
         <ng-template ngx-sui-LayoutHeaderActions="">
-            <button ngx-sui-FlatTextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
+            <button ngx-sui-FlatTextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" btnSize="md" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
         </ng-template>
     </ngx-sui-layout-header>
     <ngx-sui-layout-content [contentToggled]="controlToggled">
@@ -25,8 +25,8 @@
             </button>
             <ng-template #template>
                 <div class="popover-container flex-dir-col row-gap-100">
-                    <ngx-sui-calendar (caleSelectionChange)="selection = $event"></ngx-sui-calendar>
-                    <ngx-sui-calendar-lunar-select [caleYear]="selection?.year" [caleMonth]="selection?.month" [caleDate]="selection?.date"></ngx-sui-calendar-lunar-select>
+                    <ngx-sui-calendar caleColor="primary" (caleSelectionChange)="selection = $event"></ngx-sui-calendar>
+                    <ngx-sui-calendar-lunar-select [lsModel]="selection" class="pw-384"></ngx-sui-calendar-lunar-select>
                 </div>
             </ng-template>
         </div>

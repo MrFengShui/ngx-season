@@ -172,7 +172,6 @@
         --lunar-select-tag-font-size: #{var(--font-size-16)};
         --lunar-select-tag-font-weight: #{var(--font-weight-700)};
         --lunar-select-tag-line-height: #{var(--line-height-100)};
-        --lunar-select-tag-padding: #{var(--padding-50)};
 
         --lunar-select-label-good-bgcolor: #{if($theme == "light", var(--palette-red-600-color), var(--palette-red-400-color))};
         --lunar-select-label-bad-bgcolor: #{if($theme == "light", var(--palette-green-600-color), var(--palette-green-400-color))};
@@ -185,6 +184,7 @@
 
         display: inline-flex;
         flex-direction: column;
+        row-gap: var(--lunar-select-gap);
 
         .select {
             display: flex;
@@ -219,18 +219,15 @@
             }
 
             .align {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(calc(var(--lunar-select-tag-font-size) * 2 + var(--lunar-select-tag-padding) * 2), 1fr));
-                grid-auto-flow: row;
-
+                display: flex;
+                flex-wrap: wrap;
                 flex: 1 1 auto;
+                gap: var(--lunar-select-gap);
 
                 .tag {
                     font-size: var(--lunar-select-tag-font-size);
                     font-weight: var(--lunar-select-tag-font-weight);
                     line-height: var(--lunar-select-tag-line-height);
-
-                    padding: var(--lunar-select-tag-padding);
                 }
             }
 

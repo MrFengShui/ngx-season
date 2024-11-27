@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonButtonSize } from "src/app/components/button/button.component";
 import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 
 import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonSizeOption } from "src/app/utils/_size.utils";
 
 @Component({
     selector: 'ngx-sui-demo-button-page',
@@ -21,7 +21,7 @@ export class DemoButtonPageComponent {
         { color: 'info', label: '信息按钮' },
         { color: 'help', label: '帮助按钮' }
     ];
-    protected sizes: NGXSeasonButtonSize[] = ['sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
+    protected sizes: NGXSeasonSizeOption[] = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
 
     protected readonly DEMO_ICON: NGXSeasonIconName = 'users';
 

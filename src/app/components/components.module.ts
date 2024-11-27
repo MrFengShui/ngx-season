@@ -26,6 +26,7 @@ import { NGXSeasonDividerModule } from "./divider/divider.module";
 import { NGXSeasonRadioModule } from "./radio/radio.module";
 import { NGXSeasonModalModule } from "./modal/modal.module";
 import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
+import { NGXSeasonTagModule } from "./tag/tag.module";
 
 @NgModule({
     imports: [
@@ -54,7 +55,8 @@ import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
-        NGXSeasonRibbonModule
+        NGXSeasonRibbonModule,
+        NGXSeasonTagModule,
     ],
     exports: [
         NGXSeasonAccordionModule,
@@ -81,6 +83,7 @@ import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonTagModule
     ],
     providers: [
         provideHttpClient(withInterceptorsFromDi()),

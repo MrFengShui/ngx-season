@@ -1,0 +1,71 @@
+@mixin setup-tag-theme($theme, $colors) {
+    .tag-group {
+        --tag-group-gap: #{var(--col-gap-50)} #{var(--row-gap-50)};
+
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: var(--tag-group-gap);
+    }
+
+    .tag {
+        --tag-border-radius: #{var(--size-pixel-14)};
+        --tag-font-size: #{var(--font-size-12)};
+        --tag-font-weight: #{var(--font-weight-700)};
+        --tag-line-height: #{var(--line-height-100)};
+        --tag-height: #{var(--size-pixel-28)};
+        --tag-gap: #{var(--size-pixel-8)};
+
+        @each $key, $value in $colors {
+            --tag-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --tag-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --tag-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+            --tag-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+        }
+
+        display: inline-flex;
+        align-items: center;
+
+        border-radius: var(--tag-border-radius);
+
+        padding-left: var(--tag-padding-left);
+        padding-right: var(--tag-padding-right);
+
+        width: fit-content;
+        height: var(--tag-height);
+
+        user-select: none;
+
+        > :nth-child(n) {
+            &:not(:last-child) {
+                margin-right: var(--tag-gap);
+            }
+        }
+
+        .tag-text {
+            font-size: var(--tag-font-size);
+            font-weight: var(--tag-font-weight);
+            line-height: var(--tag-line-height);
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-tag-color=#{$color}] {
+                background-color: var(--tag-bgcolor-#{$color});
+
+                &.link-tag {
+                    &:hover {
+                        background-color: var(--tag-bgcolor-hover-#{$color});
+                    }
+
+                    &:active {
+                        background-color: var(--tag-bgcolor-active-#{$color});
+                    }
+                }
+
+                .tag-text {
+                    color: var(--tag-color-#{$color});
+                }
+            }
+        }
+    }
+}

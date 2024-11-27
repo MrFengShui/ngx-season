@@ -1,17 +1,16 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, Input, OnChanges, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
 
-import { NGX_SEASON_ICONS_SIZE_MAP_TOKEN, NGXSeasonIconSizeMap } from "../icon/icon.component";
+import { NGX_SEASON_ICONS_SIZE_MAP_TOKEN } from "../icon/icon.component";
 
 import { NGXSeasonColorPalette } from 'src/app/utils/_palette.utils';
+import { NGXSeasonSizeMap, NGXSeasonSizeOption } from 'src/app/utils/_size.utils';
 
-export const NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonButtonBorderSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
-export const NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonButtonFontSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
+export const NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
+export const NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
 
-export type NGXSeasonButtonSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
-
-export type NGXSeasonButtonBorderSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
-export type NGXSeasonButtonFontSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
+// export type NGXSeasonButtonBorderSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
+// export type NGXSeasonButtonFontSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
 
 @Component({
     selector: '',
@@ -47,29 +46,29 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
     }
 
     @Input('btnSize')
-    set size(size: NGXSeasonButtonSize | undefined | null) {
-        this._size = size || 'lg';
+    set size(size: NGXSeasonSizeOption | undefined | null) {
+        this._size = size || 'md';
     }
 
-    get size(): NGXSeasonButtonSize {
+    get size(): NGXSeasonSizeOption {
         return this._size;
     }
 
     private _blocked: boolean = false;
     private _color: NGXSeasonColorPalette = 'default';
     private _disabled: boolean = false;
-    private _size: NGXSeasonButtonSize = 'lg';
+    private _size: NGXSeasonSizeOption = 'md';
 
     constructor(
         protected _element: ElementRef,
         protected _renderer: Renderer2,
 
         @Inject(NGX_SEASON_ICONS_SIZE_MAP_TOKEN)
-        protected _iconSizeMap: NGXSeasonIconSizeMap,
+        protected _iconSizeMap: NGXSeasonSizeMap,
         @Inject(NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN)
-        protected _borderSizeMap: NGXSeasonButtonBorderSizeMap,
+        protected _borderSizeMap: NGXSeasonSizeMap,
         @Inject(NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN)
-        protected _fontSizeMap: NGXSeasonButtonFontSizeMap
+        protected _fontSizeMap: NGXSeasonSizeMap
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -80,7 +79,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
 
             if (name === 'disabled') this.setupButtonDisabled(coerceBooleanProperty(changes[name].currentValue));
 
-            if (name === 'size') this.changeButtonSize(changes[name].currentValue as NGXSeasonButtonSize);
+            if (name === 'size') this.changeButtonSize(changes[name].currentValue as NGXSeasonSizeOption);
         }
     }
 
@@ -109,7 +108,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         }
     }
 
-    protected changeButtonSize(size: NGXSeasonButtonSize): void {
+    protected changeButtonSize(size: NGXSeasonSizeOption): void {
         const borderSize: number = this._borderSizeMap[size];
         const contentSize: number = this._iconSizeMap[size];
         const fontSize: number = this._fontSizeMap[size];

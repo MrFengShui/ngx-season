@@ -25,6 +25,7 @@ import { DemoRadioButtonPageComponent } from "../page/demo/radiobtn.component";
 import { DemoRadioTogglePageComponent } from "../page/demo/radio-toggle.component";
 import { DemoModalPageComponent } from "../page/demo/modal.component";
 import { DemoPopoverPageComponent } from "../page/demo/popover.component";
+import { DemoTagPageComponent } from "../page/demo/tag.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -44,6 +45,7 @@ export const demoRoutes: Routes = [
     { path: 'component/placeholder', component: DemoPlaceholderPageComponent, title: '占位符' },
     { path: 'component/progress', component: DemoProgressPageComponent, title: '进度' },
     { path: 'component/ribbon', component: DemoRibbonPageComponent, title: '丝带' },
+    { path: 'component/tag', component: DemoTagPageComponent, title: '标签' },
 
     { path: 'form/checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
     { path: 'form/check-switch', component: DemoCheckSwitchPageComponent, title: '检查开关' },

@@ -8,17 +8,17 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 
                 .addIcon('backup').addIcon('backup-restore').addIcon('balance').addIcon('ban').addIcon('bank').addIcon('bar-chart').addIcon('bar-code').addIcon('bars').addIcon('battery').addIcon('bell').addIcon('bell-curve').addIcon('beta').addIcon('bicycle').addIcon('bitcoin').addIcon('block').addIcon('blocks-group').addIcon('bluetooth-off').addIcon('bluetooth-on').addIcon('boat').addIcon('bold').addIcon('bolt').addIcon('book').addIcon('bookmark').addIcon('box-plot').addIcon('briefcase').addIcon('bubble-exclamation').addIcon('bug').addIcon('building').addIcon('bullet-list').addIcon('bullseye').addIcon('bundle')
 
-                .addIcon('calculator').addIcon('calendar').addIcon('camera').addIcon('campervan').addIcon('cancel').addIcon('capacitor').addIcon('car').addIcon('caret').addIcon('caravan').addIcon('cddvd').addIcon('certificate').addIcon('chat-bubble').addIcon('check-circle').addIcon('check').addIcon('checkbox-list').addIcon('child-arrow').addIcon('cicd').addIcon('circle-arrow').addIcon('circle').addIcon('clipboard').addIcon('clock').addIcon('clone').addIcon('close').addIcon('cloud-chart').addIcon('cloud-network').addIcon('cloud-scale').addIcon('cloud-traffic').addIcon('cloud').addIcon('cluster').addIcon('code').addIcon('cog').addIcon('coin-bag').addIcon('collapse-card').addIcon('collapse').addIcon('color-palette').addIcon('color-picker').addIcon('command').addIcon('compass').addIcon('computer').addIcon('connect').addIcon('container-volume').addIcon('container').addIcon('contract').addIcon('control-lun').addIcon('copy-to-clipboard').addIcon('copy').addIcon('cpu').addIcon('credit-card').addIcon('crosshairs').addIcon('crown').addIcon('cursor-arrow').addIcon('cursor-hand-click').addIcon('cursor-hand-grab').addIcon('cursor-move').addIcon('cursor-hand-open').addIcon('cursor-hand').addIcon('curve-chart')
+                .addIcon('calculator').addIcon('calendar').addIcon('camera').addIcon('campervan').addIcon('cancel').addIcon('capacitor').addIcon('car').addIcon('caravan').addIcon('cards-view').addIcon('caret').addIcon('cddvd').addIcon('certificate').addIcon('chat-bubble').addIcon('check-circle').addIcon('check').addIcon('checkbox-list').addIcon('child-arrow').addIcon('cicd').addIcon('circle-arrow').addIcon('circle').addIcon('clipboard').addIcon('clock').addIcon('clone').addIcon('close').addIcon('cloud-chart').addIcon('cloud-network').addIcon('cloud-scale').addIcon('cloud-traffic').addIcon('cloud').addIcon('cluster').addIcon('code').addIcon('cog').addIcon('coin-bag').addIcon('collapse-card').addIcon('collapse').addIcon('color-palette').addIcon('color-picker').addIcon('command').addIcon('compass').addIcon('computer').addIcon('connect').addIcon('container-volume').addIcon('container').addIcon('contract').addIcon('control-lun').addIcon('copy-to-clipboard').addIcon('copy').addIcon('cpu').addIcon('credit-card').addIcon('crosshairs').addIcon('crown').addIcon('cursor-arrow').addIcon('cursor-hand-click').addIcon('cursor-hand-grab').addIcon('cursor-move').addIcon('cursor-hand-open').addIcon('cursor-hand').addIcon('curve-chart')
 
                 .addIcon('dashboard').addIcon('data-cluster').addIcon('date').addIcon('deploy').addIcon('design').addIcon('details').addIcon('devices').addIcon('digital-signature').addIcon('directory').addIcon('disconnect').addIcon('display').addIcon('dna').addIcon('document').addIcon('dollar-bill').addIcon('dollar').addIcon('dot-circle').addIcon('download-cloud').addIcon('download').addIcon('drag-handle-corner').addIcon('drag-handle')
 
-                .addIcon('edit').addIcon('ellipsis-horizontal').addIcon('ellipsis-vertical').addIcon('email').addIcon('employee-group').addIcon('employee').addIcon('eraser').addIcon('euro').addIcon('export').addIcon('eye-hide').addIcon('eye-show').addIcon('eye')
+                .addIcon('e-check').addIcon('edit').addIcon('ellipsis-horizontal').addIcon('ellipsis-vertical').addIcon('email').addIcon('employee-group').addIcon('employee').addIcon('eraser').addIcon('euro').addIcon('event').addIcon('expand-card').addIcon('export').addIcon('eye-hide').addIcon('eye-show').addIcon('eye')
 
-                .addIcon('face-happy').addIcon('face-neutral').addIcon('face-sad').addIcon('factory').addIcon('failure-standard').addIcon('failure').addIcon('favorite').addIcon('file-group').addIcon('file').addIcon('filter-off').addIcon('filter-on').addIcon('firewall').addIcon('flag').addIcon('floppy').addIcon('form')
+                .addIcon('face-happy').addIcon('face-neutral').addIcon('face-sad').addIcon('factory').addIcon('failure-standard').addIcon('failure').addIcon('favorite').addIcon('file-group').addIcon('file').addIcon('filter-off').addIcon('filter-on').addIcon('firewall').addIcon('first-aid-kit').addIcon('fish').addIcon('flag').addIcon('flame').addIcon('flask').addIcon('floppy').addIcon('folder-close').addIcon('folder-open').addIcon('font-size').addIcon('forking').addIcon('form').addIcon('fuel')
 
-                .addIcon('grid-view')
+                .addIcon('gavel').addIcon('grid-view').addIcon('group')
 
-                .addIcon('heart-broken').addIcon('heart').addIcon('help-standard').addIcon('home')
+                .addIcon('hard-disk').addIcon('hard-drive').addIcon('hard-drives').addIcon('hashtag').addIcon('heart-broken').addIcon('heart').addIcon('heat-map').addIcon('help-info').addIcon('help-standard').addIcon('highlighter').addIcon('history').addIcon('home').addIcon('hourglass')
 
                 .addIcon('id-badge').addIcon('image-gallery').addIcon('image').addIcon('import').addIcon('info-standard').addIcon('info').addIcon('internet-of-things')
 
@@ -54,7 +54,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
     exports: [ NGXSeasonIconComponent ],
     providers: [
         { provide: NGX_SEASON_ICONS_REGISTER_TOKEN, useValue: register },
-        { provide: NGX_SEASON_ICONS_SIZE_MAP_TOKEN, useValue: { sm: 12, md: 16, lg: 24, xl: 32, xxl: 48, xxxl: 64 } },
+        { provide: NGX_SEASON_ICONS_SIZE_MAP_TOKEN, useValue: { xs: 12, sm: 16, md: 20, lg: 28, xl: 44, xxl: 56, xxxl: 64 } },
     ]
 })
 export class NGXSeasonIconModule {}

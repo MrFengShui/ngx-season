@@ -34,8 +34,8 @@ import { NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN, NGX_SEASON_BUTTON_FONT_SIZE_MA
         NGXSeasonSolidTextButtonComponent
     ],
     providers: [
-        { provide: NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN, useValue: { sm: 1, md: 1, lg: 2, xl: 2, xxl: 3, xxxl: 4 } },
-        { provide: NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN, useValue: { sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 } }
+        { provide: NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN, useValue: { xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 3, xxxl: 4 } },
+        { provide: NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN, useValue: { xs: 8, sm: 12, md: 16, lg: 24, xl: 36, xxl: 48, xxxl: 56 } }
     ]
 })
 export class NGXSeasonButtonModule {}

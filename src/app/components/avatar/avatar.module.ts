@@ -7,8 +7,8 @@ import { NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, NGXSeasonAvatarComponent } from "./av
     declarations: [ NGXSeasonAvatarComponent ],
     imports: [ CommonModule ],
     exports: [ NGXSeasonAvatarComponent ],
-    providers: [ 
-        { provide: NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, useValue: { sm: 16, md: 32, lg: 48, xl: 56, xxl: 64, xxxl: 72 } } 
+    providers: [
+        { provide: NGX_SEASON_AVATAR_SIZE_MAP_TOKEN, useValue: { xs: 8, sm: 16, md: 24, lg: 36, xl: 48, xxl: 56, xxxl: 64 } }
     ]
 })
 export class NGXSeasonAvatarModule {}

@@ -1,23 +1,22 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, InjectionToken, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges } from "@angular/core";
 import { BehaviorSubject, debounceTime, map, Observable, Subject } from "rxjs";
 
-export type NGXSeasonAvatarColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
-export type NGXSeasonAvatarSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/_size.utils";
+
 export type NGXSeasonAvatarShape = 'circle' | 'round';
 
-export const NGX_SEASON_AVATAR_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonIconSizeMap> = new InjectionToken('NGX_SEASON_AVATAR_SIZE_MAP_TOKEN');
-
-type NGXSeasonIconSizeMap = { sm: number, md: number, lg: number, xl: number, xxl: number, xxxl: number };
+export const NGX_SEASON_AVATAR_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_AVATAR_SIZE_MAP_TOKEN');
 
 @Component({
     selector: 'ngx-sui-avatar',
     template: `<img [attr.src]="srcURL" [attr.alt]="altText" [attr.width]="size$ | async" [attr.height]="size$ | async"/>`
 })
 export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterViewInit {
-    
+
     @Input('avatarAlt')
-    set altText(altText: string | undefined) {
-        this._altText = altText;
+    set altText(altText: string | undefined | null) {
+        this._altText = altText || undefined;
     }
 
     get altText(): string | undefined {
@@ -25,50 +24,50 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
     }
 
     @Input('avatarColor')
-    set color(color: NGXSeasonAvatarColor) {
-        this._color = color;
+    set color(color: NGXSeasonColorPalette | undefined | null) {
+        this._color = color || 'default';
     }
 
-    get color(): NGXSeasonAvatarColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
-    
+
     @Input('avatarSrc')
-    set srcURL(srcURL: string | undefined) {
-        this._srcURL = srcURL;
+    set srcURL(srcURL: string | undefined | null) {
+        this._srcURL = srcURL || undefined;
     }
 
     get srcURL(): string | undefined {
         return this._srcURL;
     }
-    
+
     @Input('avatarShape')
-    set shape(shape: NGXSeasonAvatarShape) {
-        this._shape = shape;
+    set shape(shape: NGXSeasonAvatarShape | undefined | null) {
+        this._shape = shape || 'circle';
     }
 
     get shape(): NGXSeasonAvatarShape {
         return this._shape;
     }
-    
+
     @Input('avatarSize')
-    set size(size: NGXSeasonAvatarSize) {
-        this._size = size;
+    set size(size: NGXSeasonSizeOption | undefined | null) {
+        this._size = size || 'md';
     }
 
-    get size(): NGXSeasonAvatarSize {
+    get size(): NGXSeasonSizeOption {
         return this._size;
     }
-    
+
     private _altText: string | undefined;
-    private _color: NGXSeasonAvatarColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
     private _srcURL: string | undefined;
     private _shape: NGXSeasonAvatarShape = 'circle';
-    private _size: NGXSeasonAvatarSize = 'md';
+    private _size: NGXSeasonSizeOption = 'md';
 
     protected size$: Observable<number> | undefined;
 
-    private subject$: Subject<NGXSeasonAvatarSize> = new BehaviorSubject(this.size);
+    private subject$: Subject<NGXSeasonSizeOption> = new BehaviorSubject(this.size);
 
     constructor(
         protected _cdr: ChangeDetectorRef,
@@ -76,22 +75,22 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
         protected _renderer: Renderer2,
 
         @Inject(NGX_SEASON_AVATAR_SIZE_MAP_TOKEN)
-        protected _sizeMap: NGXSeasonIconSizeMap
+        protected _sizeMap: NGXSeasonSizeMap
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
         let keys: string[] | null = Object.keys(changes);
-        
+
         if (keys.includes('color')) {
-            this.changeAvatarColor(changes['color'].currentValue as NGXSeasonAvatarColor);
+            this.changeAvatarColor(changes['color'].currentValue as NGXSeasonColorPalette);
         }
 
         if (keys.includes('shape')) {
             this.changeAvatarShape(changes['shape'].currentValue as NGXSeasonAvatarShape);
         }
-        
+
         if (keys.includes('size')) {
-            this.changeAvatarSize(changes['size'].currentValue as NGXSeasonAvatarSize);
+            this.changeAvatarSize(changes['size'].currentValue as NGXSeasonSizeOption);
         }
 
         keys.splice(0);
@@ -111,7 +110,7 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
         this.changeAvatarSize(this.size);
     }
 
-    protected changeAvatarColor(color: NGXSeasonAvatarColor): void {
+    protected changeAvatarColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-avatar-color', `${color}`);
     }
 
@@ -119,22 +118,11 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
         this._renderer.setAttribute(this._element.nativeElement, 'data-avatar-shape', `${shape}`);
     }
 
-    protected changeAvatarSize(size: NGXSeasonAvatarSize): void {
+    protected changeAvatarSize(size: NGXSeasonSizeOption): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-avatar-size', `${size}`);
 
         this.subject$.next(size);
         this.size$ = this.subject$.asObservable().pipe(map(size => this._sizeMap[size]), debounceTime(100));
     }
-
-    // protected formatAltText(altText: string | undefined): string {
-    //     if (altText) {
-    //         return altText;
-    //     } else {
-    //         const message: string = 'alternate-text-crypto-password';
-    //         const salt: string = `${message}_${moment().format('X')}`;
-    //         const key: string = PBKDF2(window.btoa(message), salt, { keySize: 256, iterations: 1000 }).toString();
-    //         return HmacSHA256(message, key).toString();
-    //     }
-    // }
 
 }

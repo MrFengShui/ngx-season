@@ -1,4 +1,4 @@
-import { coerceBooleanProperty, coerceNumberProperty, coerceStringArray } from "@angular/cdk/coercion";
+import { coerceBooleanProperty, coerceStringArray } from "@angular/cdk/coercion";
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChanges } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
 import { Lunar } from "lunar-typescript";
@@ -148,7 +148,7 @@ export class NGXSeasonCalendarControlComponent implements OnChanges, AfterViewIn
     selector: 'ngx-sui-calendar-content',
     template: `
         <span class="label" *ngFor="let label of labels">{{ label }}</span>
-        <button class="date" [disabled]="item.masked" [class.mask]="item.masked" [class.mark]="isToday(year, month, item.solar)" (click)="selectionChange.emit({ year, month, date: item.solar })" *ngFor="let item of list">
+        <button class="date" [disabled]="item.masked" [class.mask]="item.masked" [class.mark]="isToday(year, month, item.solar) && !item.masked" (click)="selectionChange.emit({ year, month, date: item.solar })" *ngFor="let item of list">
             <span class="solar">{{ item.solar }}</span>
             <span class="lunar" *ngIf="showLunar">{{ item.lunar }}</span>
         </button>
@@ -241,39 +241,19 @@ export class NGXSeasonCalendarContentComponent implements AfterViewInit {
 })
 export class NGXSeasonCalendarLunarSelectionComponent implements OnChanges, AfterViewInit {
 
-    @Input('caleYear')
-    set year(year: number | undefined | null) {
-        this._year = coerceNumberProperty(year);
+    @Input('lsModel')
+    set model(model: NGXSeasonCalendarSelectionModel | undefined | null) {
+        this._model = model || undefined;
     }
 
-    get year(): number {
-        return this._year;
+    get model(): NGXSeasonCalendarSelectionModel | undefined {
+        return this._model;
     }
 
-    @Input('caleMonth')
-    set month(month: number | undefined | null) {
-        this._month = coerceNumberProperty(month);
-    }
+    private _model: NGXSeasonCalendarSelectionModel | undefined;
 
-    get month(): number {
-        return this._month;
-    }
-
-    @Input('caleDate')
-    set date(date: number | undefined | null) {
-        this._date = coerceNumberProperty(date);
-    }
-
-    get date(): number {
-        return this._date;
-    }
-
-    private _year: number = 0;
-    private _month: number = 0;
-    private _date: number = 0;
-
-    protected goodSelects: string[] | undefined;
-    protected badSelects: string[] | undefined;
+    protected goodSelects: string[] = [];
+    protected badSelects: string[] = [];
 
     constructor(
         protected _element: ElementRef,
@@ -281,24 +261,31 @@ export class NGXSeasonCalendarLunarSelectionComponent implements OnChanges, Afte
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (Object.keys(changes).length === 3 && !Object.values(changes).every(item => item.firstChange)) {
-            const year: number = coerceNumberProperty(changes['year'].currentValue);
-            const month: number = coerceNumberProperty(changes['month'].currentValue);
-            const date: number = coerceNumberProperty(changes['date'].currentValue);
-            this.setupLunarSelection(year, month, date);
+        for (const name in changes) {
+            if (name === 'model') {
+                const model: NGXSeasonCalendarSelectionModel = changes[name].currentValue as NGXSeasonCalendarSelectionModel;
+                this.setupLunarSelection(model);
+            }
         }
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'lunar-select');
 
-        this.setupLunarSelection(this.year, this.month, this.date);
+        this.setupLunarSelection(this.model);
     }
 
-    protected setupLunarSelection(year: number, month: number, date: number): void {
+    protected setupLunarSelection(model: NGXSeasonCalendarSelectionModel | undefined): void {
+        const datetime = moment(Date.now());
+        const year: number = model?.year || datetime.year(), month: number = model?.month || datetime.month(), date: number = model?.date || datetime.date();
         const lunar = Lunar.fromDate(new Date(year, month, date));
-        this.goodSelects = lunar.getDayYi();
-        this.badSelects = lunar.getDayJi();
+
+        if (this.goodSelects.length > 0) this.goodSelects.splice(0);
+
+        if (this.badSelects.length > 0) this.badSelects.splice(0);
+
+        this.goodSelects = this.goodSelects.concat(...lunar.getDayYi());
+        this.badSelects = this.badSelects.concat(...lunar.getDayJi());
     }
 
 }

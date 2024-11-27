@@ -22,6 +22,7 @@
 @import "../components/radio.mixin";
 @import "../components/ripple.mixin";
 @import "../components/scrollbar.mixin";
+@import "../components/tag.mixin";
 @import "../components/toast.mixin";
 @import "../components/tooltip.mixin";
 
@@ -39,7 +40,7 @@
     &[data-color*="default"] {
         @include setup-accordion-theme($theme, "indigo", "pink");
         @include setup-alert-theme($theme, "indigo");
-        @include setup-avatar-theme($theme, "indigo", "pink");
+        @include setup-avatar-theme($theme, $colors);
         @include setup-badge-theme($theme, "indigo", "pink");
         @include setup-breadcrumb-theme($theme);
         @include setup-button-theme($theme, $colors);
@@ -61,6 +62,7 @@
         @include setup-radio-theme($theme, $colors);
         @include setup-ribbon-theme($theme, "indigo", "pink");
         @include setup-scrollbar-theme($theme, "indigo");
+        @include setup-tag-theme($theme, $colors);
         @include setup-toast-theme($theme);
         @include setup-tooltip-theme($theme, $colors);
 

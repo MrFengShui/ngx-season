@@ -48,7 +48,7 @@ export class DemoIconPageComponent {
         {
             label: '字母C开头',
             names: [
-                'calculator', 'calendar', 'camera', 'campervan', 'cancel', 'capacitor', 'car', 'caravan', 'caret', 'cddvd', 'certificate', 'chat-bubble', 'check-circle', 'check', 'checkbox-list', 'child-arrow', 'cicd', 'circle-arrow', 'circle', 'clipboard', 'clock', 'clone', 'close', 'cloud-chart', 'cloud-network', 'cloud-scale', 'cloud-traffic', 'cloud', 'cluster', 'code', 'cog', 'coin-bag', 'collapse-card', 'collapse', 'color-palette', 'color-picker', 'command', 'compass', 'computer', 'connect', 'container', 'container-volume', 'contract', 'control-lun', 'copy', 'copy-to-clipboard', 'cpu', 'credit-card', 'crosshairs', 'crown', 'cursor-arrow', 'cursor-hand-click', 'cursor-hand-grab', 'cursor-hand-open', 'cursor-hand', 'cursor-move', 'curve-chart'
+                'calculator', 'calendar', 'camera', 'campervan', 'cancel', 'capacitor', 'car', 'caravan', 'cards-view', 'caret', 'cddvd', 'certificate', 'chat-bubble', 'check-circle', 'check', 'checkbox-list', 'child-arrow', 'cicd', 'circle-arrow', 'circle', 'clipboard', 'clock', 'clone', 'close', 'cloud-chart', 'cloud-network', 'cloud-scale', 'cloud-traffic', 'cloud', 'cluster', 'code', 'cog', 'coin-bag', 'collapse-card', 'collapse', 'color-palette', 'color-picker', 'command', 'compass', 'computer', 'connect', 'container', 'container-volume', 'contract', 'control-lun', 'copy', 'copy-to-clipboard', 'cpu', 'credit-card', 'crosshairs', 'crown', 'cursor-arrow', 'cursor-hand-click', 'cursor-hand-grab', 'cursor-hand-open', 'cursor-hand', 'cursor-move', 'curve-chart'
             ]
         },
         {
@@ -60,25 +60,25 @@ export class DemoIconPageComponent {
         {
             label: '字母E开头',
             names: [
-                'edit', 'ellipsis-horizontal', 'ellipsis-vertical', 'email', 'employee-group', 'employee', 'eraser', 'euro', 'export', 'eye-hide', 'eye-show', 'eye'
+                'e-check', 'edit', 'ellipsis-horizontal', 'ellipsis-vertical', 'email', 'employee-group', 'employee', 'eraser', 'euro', 'event', 'expand-card', 'export', 'eye-hide', 'eye-show', 'eye'
             ]
         },
         {
             label: '字母F开头',
             names: [
-                'face-happy', 'face-neutral', 'face-sad', 'factory', 'failure-standard', 'failure', 'favorite', 'file-group', 'file', 'filter-off', 'filter-on', 'firewall', 'flag', 'floppy', 'form'
+                'face-happy', 'face-neutral', 'face-sad', 'factory', 'failure-standard', 'failure', 'favorite', 'file-group', 'file', 'filter-off', 'filter-on', 'firewall', 'first-aid-kit', 'fish', 'flag', 'flame', 'flask', 'floppy', 'folder-close', 'folder-open', 'font-size', 'forking', 'form', 'fuel',
             ]
         },
         {
             label: '字母G开头',
             names: [
-                'grid-view'
+                'gavel', 'grid-view', 'group'
             ]
         },
         {
             label: '字母H开头',
             names: [
-                'heart-broken', 'heart', 'help-standard', 'home'
+                'hard-disk', 'hard-drive', 'hard-drives', 'hashtag', 'heart-broken', 'heart', 'heat-map', 'help-info', 'help-standard', 'highlighter', 'history', 'home', 'hourglass',
             ]
         },
         {
