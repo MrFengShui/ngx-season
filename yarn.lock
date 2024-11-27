@@ -4858,6 +4858,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lunar-typescript@^1.7.6:
+  version "1.7.6"
+  resolved "https://registry.npmmirror.com/lunar-typescript/-/lunar-typescript-1.7.6.tgz"
+  integrity sha512-vrNRgzJ6UgK++P81jaOykV7YBCLemC8l/XDbsXE7MinojXolOKiIHm6sOZg5wdDMbJxCWP1ERAaqcBV9mhw2Bg==
+
 lunisolar@^2.5.1:
   version "2.5.1"
   resolved "https://registry.npmmirror.com/lunisolar/-/lunisolar-2.5.1.tgz"

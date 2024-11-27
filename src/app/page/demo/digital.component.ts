@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnDestroy } from "@angular/core";
 import { interval, map, Observable, Subscription } from "rxjs";
 
-import * as moment from "moment";
+import moment from "moment";
 
 import { NGXSeasonDigitalColor, NGXSeasonDigitalValue } from "src/app/components/digital/digial.component";
 
@@ -56,7 +56,7 @@ export class DemoDigitalPageComponent implements OnDestroy, AfterViewInit {
                     this.sndYear = Math.floor(moment.year() % 1000 / 100) as NGXSeasonDigitalValue;
                     this.trdYear = Math.floor(moment.year() % 100 / 10) as NGXSeasonDigitalValue;
                     this.fthYear = Math.floor(moment.year() % 10) as NGXSeasonDigitalValue;
-                    
+
                     this.fstMonth = Math.floor((moment.month() + 1) / 10) as NGXSeasonDigitalValue;
                     this.sndMonth = Math.floor((moment.month() + 1) % 10) as NGXSeasonDigitalValue;
 

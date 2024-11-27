@@ -1,0 +1,242 @@
+@mixin setup-calendar-theme($theme, $colors) {
+    .calendar {
+        --calendar-control-font-size: #{var(--font-size-16)};
+        --calendar-control-font-weight: #{var(--font-weight-900)};
+        --calendar-control-line-height: #{var(--line-height-200)};
+        --calendar-control-gap: #{var(--margin-50)};
+
+        --calendar-content-size: #{var(--size-pixel-48)};
+        --calendar-content-gap: #{var(--size-pixel-8)};
+        --calendar-content-label-font-size: #{var(--font-size-20)};
+        --calendar-content-label-font-weight: #{var(--font-weight-900)};
+        --calendar-content-label-line-height: #{var(--line-height-300)};
+        --calendar-content-date-border-radius: #{var(--size-pixel-8)};
+        --calendar-content-date-gap: #{var(--row-gap-25)};
+        --calendar-content-date-solar-font-size: #{var(--font-size-20)};
+        --calendar-content-date-solar-font-weight: #{var(--font-weight-900)};
+        --calendar-content-date-solar-line-height: #{var(--line-height-100)};
+        --calendar-content-date-lunar-font-size: #{var(--font-size-12)};
+        --calendar-content-date-lunar-font-weight: #{var(--font-weight-500)};
+        --calendar-content-date-lunar-line-height: #{var(--line-height-100)};
+
+        --calendar-content-control-color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
+
+        --calendar-content-label-color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
+
+        --calendar-content-date-bgcolor: transparent;
+        --calendar-content-date-color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
+
+        --calendar-content-date-bgcolor-disabled: transparent;
+        --calendar-content-date-color-disabled: #{var(--palette-gray-color-50)};
+
+        @each $key, $value in $colors {
+            --calendar-content-date-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+            --calendar-content-date-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --calendar-content-date-color-hover-#{$key}: #{var(--palette-#{$value}-50-color)};
+            --calendar-content-date-color-active-#{$key}: #{var(--palette-#{$value}-50-color)};
+
+            --calendar-content-date-bgcolor-mark-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --calendar-content-date-color-mark-#{$key}: #{var(--palette-#{$value}-50-color)};
+        }
+
+        display: inline-flex;
+        flex-direction: column;
+
+        row-gap: var(--row-gap-50);
+
+        .control {
+            display: flex;
+            align-items: center;
+
+            .text {
+                flex: 1 1 auto;
+
+                color: var(--calendar-content-control-color);
+
+                font-size: var(--calendar-control-font-size);
+                font-weight: var(--calendar-control-font-weight);
+                line-height: var(--calendar-control-line-height);
+
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            > :nth-child(n) {
+                &:not(:last-child) {
+                    margin-right: var(--calendar-control-gap);
+                }
+            }
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(7, var(--calendar-content-size));
+            grid-template-rows: repeat(7, var(--calendar-content-size));
+            column-gap: var(--calendar-content-gap);
+            row-gap: var(--calendar-content-gap);
+
+            .label {
+                color: var(--calendar-content-label-color);
+
+                font-size: var(--calendar-content-label-font-size);
+                font-weight: var(--calendar-content-label-font-weight);
+                line-height: var(--calendar-content-label-line-height);
+
+                text-align: center;
+                vertical-align: middle;
+
+                width: var(--size-percent-100);
+                height: var(--size-percent-100);
+            }
+
+            .date {
+                appearance: none;
+                outline: none;
+                border: none;
+                cursor: pointer;
+
+                border-radius: var(--calendar-content-date-border-radius);
+
+                background-color: var(--calendar-content-date-bgcolor);
+                color: var(--calendar-content-date-color);
+
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                row-gap: var(--calendar-content-date-gap);
+
+                width: var(--size-percent-100);
+                height: var(--size-percent-100);
+
+                &:disabled {
+                    cursor: not-allowed;
+
+                    background-color: var(--calendar-content-date-bgcolor-disabled);
+                    color: var(--calendar-content-date-color-disabled);
+
+                    &:hover, &:active {
+                        background-color: var(--calendar-content-date-bgcolor-disabled) !important;
+                        color: var(--calendar-content-date-color-disabled) !important;
+                    }
+                }
+
+                .solar {
+                    font-size: var(--calendar-content-date-solar-font-size);
+                    font-weight: var(--calendar-content-date-solar-font-weight);
+                    line-height: var(--calendar-content-date-solar-line-height);
+                }
+
+                .lunar {
+                    font-size: var(--calendar-content-date-lunar-font-size);
+                    font-weight: var(--calendar-content-date-lunar-font-weight);
+                    line-height: var(--calendar-content-date-lunar-line-height);
+                }
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-calendar-color=#{$color}] {
+                .content {
+                    .date {
+                        &.mark {
+                            background-color: var(--calendar-content-date-bgcolor-mark-#{$color});
+                            color: var(--calendar-content-date-color-mark-#{$color});
+                        }
+
+                        &:hover {
+                            background-color: var(--calendar-content-date-bgcolor-hover-#{$color});
+                            color: var(--calendar-content-date-color-hover-#{$color});
+                        }
+
+                        &:active {
+                            background-color: var(--calendar-content-date-bgcolor-active-#{$color});
+                            color: var(--calendar-content-date-color-active-#{$color});
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .lunar-select {
+        --lunar-select-gap: #{var(--margin-50)};
+
+        --lunar-select-label-border-radius: #{var(--size-pixel-4)};
+        --lunar-select-label-font-size: #{var(--font-size-16)};
+        --lunar-select-label-font-weight: #{var(--font-weight-900)};
+        --lunar-select-label-line-height: #{var(--line-height-100)};
+        --lunar-select-label-padding: #{var(--padding-50)};
+
+        --lunar-select-tag-font-size: #{var(--font-size-16)};
+        --lunar-select-tag-font-weight: #{var(--font-weight-700)};
+        --lunar-select-tag-line-height: #{var(--line-height-100)};
+        --lunar-select-tag-padding: #{var(--padding-50)};
+
+        --lunar-select-label-good-bgcolor: #{if($theme == "light", var(--palette-red-600-color), var(--palette-red-400-color))};
+        --lunar-select-label-bad-bgcolor: #{if($theme == "light", var(--palette-green-600-color), var(--palette-green-400-color))};
+
+        --lunar-select-label-good-color: #{var(--palette-red-50-color)};
+        --lunar-select-label-bad-color: #{var(--palette-green-50-color)};
+
+        --lunar-select-tag-good-color: #{if($theme == "light", var(--palette-red-600-color), var(--palette-red-400-color))};
+        --lunar-select-tag-bad-color: #{if($theme == "light", var(--palette-green-600-color), var(--palette-green-400-color))};
+
+        display: inline-flex;
+        flex-direction: column;
+
+        .select {
+            display: flex;
+            align-items: baseline;
+
+            &.good {
+                color: var(--lunar-select-tag-good-color);
+
+                .label {
+                    background-color: var(--lunar-select-label-good-bgcolor);
+                    color: var(--lunar-select-label-good-color);
+                }
+            }
+
+            &.bad {
+                color: var(--lunar-select-tag-bad-color);
+
+                .label {
+                    background-color: var(--lunar-select-label-bad-bgcolor);
+                    color: var(--lunar-select-label-bad-color);
+                }
+            }
+
+            .label {
+                border-radius: var(--lunar-select-label-border-radius);
+
+                font-size: var(--lunar-select-label-font-size);
+                font-weight: var(--lunar-select-label-font-weight);
+                line-height: var(--lunar-select-label-line-height);
+
+                padding: var(--lunar-select-label-padding);
+            }
+
+            .align {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(calc(var(--lunar-select-tag-font-size) * 2 + var(--lunar-select-tag-padding) * 2), 1fr));
+                grid-auto-flow: row;
+
+                flex: 1 1 auto;
+
+                .tag {
+                    font-size: var(--lunar-select-tag-font-size);
+                    font-weight: var(--lunar-select-tag-font-weight);
+                    line-height: var(--lunar-select-tag-line-height);
+
+                    padding: var(--lunar-select-tag-padding);
+                }
+            }
+
+            > :first-child {
+                margin-right: var(--lunar-select-gap);
+            }
+        }
+    }
+}

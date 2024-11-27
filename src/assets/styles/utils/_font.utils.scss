@@ -50,6 +50,12 @@ $font-sizes: (8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 96,
     }
 }
 
+@for $i from 100 through 500 {
+    .lh-#{$i} {
+        line-height: var(--line-height-#{$i}) !important;
+    }
+}
+
 @each $key, $value in $typography {
     .#{$key} {
         font-size: #{$value} !important;
@@ -58,7 +64,7 @@ $font-sizes: (8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 96,
 
 @each $size in $font-sizes {
     .fs-#{$size} {
-        font-size: #{var(--font-size-#{$size})};
+        font-size: #{var(--font-size-#{$size})} !important;
     }
 }
 

@@ -25,6 +25,7 @@ import { NGXSeasonOverlayModule } from "./overlay/overlay.module";
 import { NGXSeasonDividerModule } from "./divider/divider.module";
 import { NGXSeasonRadioModule } from "./radio/radio.module";
 import { NGXSeasonModalModule } from "./modal/modal.module";
+import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { NGXSeasonModalModule } from "./modal/modal.module";
         NGXSeasonBadgeModule,
         NGXSeasonBreadcrumbModule,
         NGXSeasonButtonModule,
+        NGXSeasonCalendarModule,
         NGXSeasonCardModule,
         NGXSeasonCarouselModule,
         NGXSeasonCheckModule,
@@ -61,6 +63,7 @@ import { NGXSeasonModalModule } from "./modal/modal.module";
         NGXSeasonBadgeModule,
         NGXSeasonBreadcrumbModule,
         NGXSeasonButtonModule,
+        NGXSeasonCalendarModule,
         NGXSeasonCardModule,
         NGXSeasonCarouselModule,
         NGXSeasonCheckModule,

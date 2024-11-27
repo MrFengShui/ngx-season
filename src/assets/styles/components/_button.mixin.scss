@@ -1,14 +1,4 @@
-@mixin setup-button-theme($theme, $primaryColor, $accentColor) {
-    $colors: (
-        "default": "gray",
-        "primary": $primaryColor,
-        "accent": $accentColor,
-        "success": "green",
-        "warning": "yellow",
-        "failure": "red",
-        "info": "blue",
-        "help": "gray",
-    );
+@mixin setup-button-theme($theme, $colors) {
     $styles: ("flat", "outline", "solid");
     $alphaBoxShadow: 25;
     $alphaBTextShadow: 75;
@@ -30,17 +20,17 @@
 
         @each $style in $styles {
             @each $colorKey, $colorValue in $colors {
-                --button-#{$style}-bdcolor-#{$colorKey}: #{if($style == "flat", transparent, var(--palette-#{$colorValue}-500-color))};
-                --button-#{$style}-bdcolor-hover-#{$colorKey}: #{if($style == "flat", transparent, var(--palette-#{$colorValue}-600-color))};
-                --button-#{$style}-bdcolor-active-#{$colorKey}: #{if($style == "flat", transparent, var(--palette-#{$colorValue}-400-color))};
+                --button-#{$style}-bdcolor-#{$colorKey}: #{if($style == "flat", transparent, if($style == "outline", if($theme == "light", var(--palette-#{$colorValue}-800-color), var(--palette-#{$colorValue}-200-color)), var(--palette-#{$colorValue}-500-color)))};
+                --button-#{$style}-bdcolor-hover-#{$colorKey}: #{if($style == "flat", transparent, if($style == "outline", if($theme == "light", var(--palette-#{$colorValue}-900-color), var(--palette-#{$colorValue}-100-color)), var(--palette-#{$colorValue}-600-color)))};
+                --button-#{$style}-bdcolor-active-#{$colorKey}: #{if($style == "flat", transparent, if($style == "outline", if($theme == "light", var(--palette-#{$colorValue}-700-color), var(--palette-#{$colorValue}-300-color)), var(--palette-#{$colorValue}-400-color)))};
 
                 --button-#{$style}-bgcolor-#{$colorKey}: #{if($style == "flat" or $style == "outline", transparent, var(--palette-#{$colorValue}-500-color))};
                 --button-#{$style}-bgcolor-hover-#{$colorKey}: #{if($style == "flat" or $style == "outline", transparent, var(--palette-#{$colorValue}-600-color))};
                 --button-#{$style}-bgcolor-active-#{$colorKey}: #{if($style == "flat" or $style == "outline", transparent, var(--palette-#{$colorValue}-400-color))};
 
-                --button-#{$style}-color-#{$colorKey}: #{if($style == "flat" or $style == "outline", var(--palette-#{$colorValue}-500-color), var(--palette-#{$colorValue}-50-color))};
-                --button-#{$style}-color-hover-#{$colorKey}: #{if($style == "flat" or $style == "outline", var(--palette-#{$colorValue}-600-color), var(--palette-#{$colorValue}-50-color))};
-                --button-#{$style}-color-active-#{$colorKey}: #{if($style == "flat" or $style == "outline", var(--palette-#{$colorValue}-400-color), var(--palette-#{$colorValue}-50-color))};
+                --button-#{$style}-color-#{$colorKey}: #{if($style == "flat" or $style == "outline", if($theme == "light", var(--palette-#{$colorValue}-800-color), var(--palette-#{$colorValue}-200-color)), var(--palette-#{$colorValue}-50-color))};
+                --button-#{$style}-color-hover-#{$colorKey}: #{if($style == "flat" or $style == "outline", if($theme == "light", var(--palette-#{$colorValue}-900-color), var(--palette-#{$colorValue}-100-color)), var(--palette-#{$colorValue}-50-color))};
+                --button-#{$style}-color-active-#{$colorKey}: #{if($style == "flat" or $style == "outline", if($theme == "light", var(--palette-#{$colorValue}-700-color), var(--palette-#{$colorValue}-300-color)), var(--palette-#{$colorValue}-50-color))};
 
                 @if $style == "outline" {
                     @if $colorKey == "default" {

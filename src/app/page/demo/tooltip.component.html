@@ -1,20 +1,20 @@
-<div class="flex flex-dir-col gy-500 p-100">
-    <div class="flex justify-content-start gx-100">
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="top">顶部显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="bottom">底部显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="left">左边显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="right">右边显示</button>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-20 fw-900">基本提示框</div>
+    <div ngx-sui-Tooltip [ttMsg]="contents.join('$$$')" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">将光标移动到此：{{ contents.join('$$$') }}</div>
+    <div class="fs-20 fw-900">延迟显示提示框</div>
+    <div ngx-sui-Tooltip ttShowDelay="1000" [ttMsg]="contents.join('$$$')" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">将光标移动到此：{{ contents.join('$$$') }}</div>
+    <div class="fs-20 fw-900">延迟隐藏提示框</div>
+    <div ngx-sui-Tooltip ttHideDelay="1000" [ttMsg]="contents.join('$$$')" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">将光标移动到此：{{ contents.join('$$$') }}</div>
+    <div class="fs-20 fw-900">不同位置提示框</div>
+    <div class="flex gx-100">
+        <button ngx-sui-SolidTextButton btnBlocked="true" ngx-sui-Tooltip olPos="auto" [ttMsg]="message">自动选择位置</button>
+        <button ngx-sui-SolidTextButton btnBlocked="true" ngx-sui-Tooltip olPos="top" [ttMsg]="message">在上方显示</button>
+        <button ngx-sui-SolidTextButton btnBlocked="true" ngx-sui-Tooltip olPos="bottom" [ttMsg]="message">在下方显示</button>
+        <button ngx-sui-SolidTextButton btnBlocked="true" ngx-sui-Tooltip olPos="right" [ttMsg]="message">在右边显示</button>
+        <button ngx-sui-SolidTextButton btnBlocked="true" ngx-sui-Tooltip olPos="left" [ttMsg]="message">在左边显示</button>
     </div>
-    <div class="flex justify-content-center gx-100">
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttShowDelay]="showDelay" [ttHideDelay]="hideDelay" [ttMsg]="message" ttPos="top">顶部显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttShowDelay]="showDelay" [ttHideDelay]="hideDelay" [ttMsg]="message" ttPos="bottom">底部显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttShowDelay]="showDelay" [ttHideDelay]="hideDelay" [ttMsg]="message" ttPos="left">左边显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttShowDelay]="showDelay" [ttHideDelay]="hideDelay" [ttMsg]="message" ttPos="right">右边显示</button>
-    </div>
-    <div class="flex justify-content-end gx-100">
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="top">顶部显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="bottom">底部显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="left">左边显示</button>
-        <button ngx-sui-SolidTextButton ngx-sui-Tooltip [ttMsg]="message" ttPos="right">右边显示</button>
+    <div class="fs-20 fw-900">不同颜色提示框</div>
+    <div class="flex gx-100">
+        <button ngx-sui-SolidTextButton [btnColor]="item.color" btnBlocked="true" ngx-sui-Tooltip [olColor]="item.color" [ttMsg]="contents.join('$$$')" *ngFor="let item of list">{{ item.label }}</button>
     </div>
 </div>

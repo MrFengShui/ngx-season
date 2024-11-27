@@ -1,0 +1,8 @@
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="flex gx-100">
+        <button ngx-sui-SolidTextButton [btnColor]="item.color" ngx-sui-Popover [olColor]="item.color" [olTemp]="template" class="flex-auto" *ngFor="let item of list">{{ item.label }}</button>
+    </div>
+</div>
+<ng-template #template>
+    <div class="popover-container"><div class="vw-50 vh-50"></div></div>
+</ng-template>

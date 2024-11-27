@@ -1,8 +1,39 @@
-<button ngx-sui-SolidTextButton class="m-100" (click)="handleOpenModalEvent()">对话框</button>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-SolidTextButton (click)="handleOpenModalEvent('sm')">小型对话框</button>
-    <button ngx-sui-SolidTextButton (click)="handleOpenModalEvent('md')">中型对话框</button>
-    <button ngx-sui-SolidTextButton (click)="handleOpenModalEvent('lg')">大型对话框</button>
-    <button ngx-sui-SolidTextButton (click)="handleOpenModalEvent('xl')">特大对话框</button>
-    <button ngx-sui-SolidTextButton (click)="handleOpenModalEvent('fs')">全屏对话框</button>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-20 fw-900">组件对话框</div>
+    <button ngx-sui-SolidTextButton class="w-fit" (click)="handleOpenComponentModalEvent()">点我一下</button>
+    <div class="fs-20 fw-900">模板对话框</div>
+    <button ngx-sui-SolidTextButton class="w-fit" (click)="handleOpenTemplateModalEvent()">点我一下</button>
+    <div class="fs-20 fw-900">不同尺寸对话框</div>
+    <div class="flex gx-100">
+        <button ngx-sui-SolidTextButton (click)="handleOpenDiffSizeModalEvent('sm')">小型对话框</button>
+        <button ngx-sui-SolidTextButton (click)="handleOpenDiffSizeModalEvent('md')">中型对话框</button>
+        <button ngx-sui-SolidTextButton (click)="handleOpenDiffSizeModalEvent('lg')">大型对话框</button>
+        <button ngx-sui-SolidTextButton (click)="handleOpenDiffSizeModalEvent('xl')">特大对话框</button>
+        <button ngx-sui-SolidTextButton (click)="handleOpenDiffSizeModalEvent('fs')">全屏对话框</button>
+    </div>
+    <div class="fs-20 fw-900">拖拽对话框</div>
+    <div class="flex gx-100">
+        <button ngx-sui-SolidTextButton class="w-fit" (click)="handleOpenDraggableModalEvent('component')">组件对话框</button>
+        <button ngx-sui-SolidTextButton class="w-fit" (click)="handleOpenDraggableModalEvent('template')">模板对话框</button>
+    </div>
 </div>
+
+
+<ng-template let-title="title" let-subtitle="subtitle" let-contents="contents" #template>
+    <div class="modal-container">
+        <div ngx-sui-ModalHeader>
+            <ngx-sui-icon iconShape="document" iconSize="xxl"></ngx-sui-icon>
+            <div class="flex flex-dir-col ml-50">
+                <span class="fs-16 fw-900">{{ title }}</span>
+                <span class="fs-12 fw-500">{{ subtitle }}</span>
+            </div>
+        </div>
+        <div ngx-sui-ModalContent ngx-sui-Scrollbar scrollBarAxis="xy-axis" class="gy-100">
+            <div *ngFor="let content of contents">{{ content }}</div>
+        </div>
+        <div ngx-sui-ModalFooter>
+            <button ngx-sui-SolidTextButton btnColor="primary" btnIcon="check">确定</button>
+            <button ngx-sui-SolidTextButton btnColor="accent" btnIcon="times">取消</button>
+        </div>
+    </div>
+</ng-template>

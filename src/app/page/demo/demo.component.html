@@ -20,7 +20,15 @@
     <ngx-sui-layout-footer>
         <div class="flex justify-content-between align-items-center w-100 h-100">
             <span class="fs-16 fw-900">在此进行版权声明&nbsp;&nbsp;&nbsp;&copy;2024-2034</span>
-            <span class="fs-16 fw-900">{{ datetime$ | async }}</span>
+            <button ngx-sui-FlatTextButton btnIcon="calendar" ngx-sui-Popover [olTemp]="template">
+                <span class="ml-50">{{ datetime$ | async }}</span>
+            </button>
+            <ng-template #template>
+                <div class="popover-container flex-dir-col row-gap-100">
+                    <ngx-sui-calendar (caleSelectionChange)="selection = $event"></ngx-sui-calendar>
+                    <ngx-sui-calendar-lunar-select [caleYear]="selection?.year" [caleMonth]="selection?.month" [caleDate]="selection?.date"></ngx-sui-calendar-lunar-select>
+                </div>
+            </ng-template>
         </div>
     </ngx-sui-layout-footer>
 </ngx-sui-layout>

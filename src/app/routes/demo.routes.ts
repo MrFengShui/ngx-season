@@ -24,6 +24,7 @@ import { DemoToastPageComponent } from "../page/demo/toast.component";
 import { DemoRadioButtonPageComponent } from "../page/demo/radiobtn.component";
 import { DemoRadioTogglePageComponent } from "../page/demo/radio-toggle.component";
 import { DemoModalPageComponent } from "../page/demo/modal.component";
+import { DemoPopoverPageComponent } from "../page/demo/popover.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -50,6 +51,7 @@ export const demoRoutes: Routes = [
     { path: 'form/radiobtn', component: DemoRadioButtonPageComponent, title: '选择框' },
     { path: 'form/radio-toggle', component: DemoRadioTogglePageComponent, title: '开关按钮' },
 
+    { path: 'overlay/popover', component: DemoPopoverPageComponent, title: '悬浮框' },
     { path: 'overlay/modal', component: DemoModalPageComponent, title: '对话框' },
     { path: 'overlay/toast', component: DemoToastPageComponent, title: '消息框' },
     { path: 'overlay/tooltip', component: DemoTooltipPageComponent, title: '提示框' },

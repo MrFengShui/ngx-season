@@ -1,6 +1,6 @@
 import { PBKDF2, HmacSHA256 } from "crypto-js";
 
-import * as moment from "moment";
+import moment from "moment";
 
 export class NGXSeasonIDUtils {
 

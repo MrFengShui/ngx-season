@@ -16,6 +16,9 @@
         --modal-footer-padding: #{var(--padding-100)};
 
         --modal-content-border-width: #{var(--size-pixel-1)};
+        --modal-content-font-size: #{var(--font-size-14)};
+        --modal-content-font-weight: #{var(--font-weight-500)};
+        --modal-content-line-height: #{var(--line-height-150)};
         --modal-content-padding: #{var(--padding-100)};
 
         --modal-bgcolor: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
@@ -53,6 +56,8 @@
                 padding-right: var(--modal-header-padding);
 
                 .header-wrapper {
+                    display: flex;
+                    align-items: center;
                     flex: 1 1 auto;
                 }
 
@@ -90,10 +95,14 @@
                 border-bottom-width: var(--modal-content-border-width);
                 border-style: solid none;
 
+                font-size: var(--modal-content-font-size);
+                font-weight: var(--modal-content-font-weight);
+                line-height: var((--modal-content-line-height));
+                text-align: justify;
+
                 height: calc(var(--size-percent-100) - var(--modal-header-height) - var(--modal-footer-height) - var(--modal-content-border-width) * 2);
 
-                padding-left: var(--modal-content-padding);
-                padding-right: var(--modal-content-padding);
+                padding: var(--modal-content-padding);
             }
         }
     }

@@ -1,8 +1,8 @@
 import { DragDrop, DragRef } from "@angular/cdk/drag-drop";
 import { BlockScrollStrategy, GlobalPositionStrategy, Overlay, OverlayConfig, OverlayRef } from "@angular/cdk/overlay";
-import { ComponentPortal, ComponentType } from "@angular/cdk/portal";
+import { ComponentPortal, ComponentType, TemplatePortal } from "@angular/cdk/portal";
 import { animate, animation, AnimationBuilder, AnimationPlayer, style, useAnimation } from "@angular/animations";
-import { ComponentRef, Inject, Injectable, InjectionToken, Injector } from "@angular/core";
+import { ComponentRef, Inject, Injectable, InjectionToken, Injector, TemplateRef, ViewContainerRef } from "@angular/core";
 import { AsyncSubject, BehaviorSubject, debounceTime, map, Observable, Subject, Subscription } from "rxjs";
 
 import { NGXSeasonModalContainerComponent } from "./modal.component";
@@ -124,7 +124,7 @@ export class NGXSeasonModalConfigBuilder {
 }
 
 @Injectable({ providedIn: 'root' })
-export class NGXSeasonModalService<D = any> {
+export class NGXSeasonModalService {
 
     private readonly GLOBAL_POSITION_STRATEGY: GlobalPositionStrategy = this._overlay.position().global().centerHorizontally().centerVertically();
     private readonly BLOCK_SCROLL_STRATEGY: BlockScrollStrategy = this._overlay.scrollStrategies.block();
@@ -145,16 +145,32 @@ export class NGXSeasonModalService<D = any> {
         return this.builder;
     }
 
-    display<T extends NGXSeasonModalContainerComponent, R = unknown>(component: ComponentType<T>, config?: NGXSeasonModalConfig, data?: D): NGXSeasonModalRef<T, D, R> {
+    display<T = unknown, D = unknown, R = unknown>(template: TemplateRef<D>, config?: NGXSeasonModalConfig, vcr?: ViewContainerRef, data?: D): NGXSeasonModalRef<T, D, R>;
+    display<T = unknown, D = any, R = unknown>(component: ComponentType<T>, config?: NGXSeasonModalConfig, vcr?: ViewContainerRef, data?: D): NGXSeasonModalRef<T, D, R>
+
+    display<T = unknown, D = any, R = unknown>(templateOrComponent: TemplateRef<D> | ComponentType<T>, config?: NGXSeasonModalConfig, vcr?: ViewContainerRef, data?: D): NGXSeasonModalRef<T, D, R> {
         const modalConfig = config ? this.builder.initial().mixin(config).build() : this.builder.initial().build();
         const overlayConfig: OverlayConfig = {
             positionStrategy: this.GLOBAL_POSITION_STRATEGY, scrollStrategy: this.BLOCK_SCROLL_STRATEGY,
             backdropClass: modalConfig.backdropClass, panelClass: modalConfig.panelClass, hasBackdrop: modalConfig.hasBackdrop, width: modalConfig.width, height: modalConfig.height
         };
-        return this.createOverlayRef(component, data, overlayConfig, modalConfig);
+        return templateOrComponent instanceof TemplateRef ? this.createTemplateOverlayRef(templateOrComponent, overlayConfig, modalConfig, vcr, data) : this.createComponentOverlayRef(templateOrComponent, overlayConfig, modalConfig, vcr, data);
     }
 
-    private createOverlayRef<T, R>(component: ComponentType<T>, data: D | undefined, config: OverlayConfig, modalConfig: NGXSeasonModalConfig): NGXSeasonModalRef<T, D, R> {
+    private createTemplateOverlayRef<C, R>(template: TemplateRef<C>, config: OverlayConfig, modalConfig: NGXSeasonModalConfig, vcr?: ViewContainerRef, data?: C): NGXSeasonModalRef<any, C, R> {
+        const overlayRef: OverlayRef = this._overlay.create(config);
+        const modalRef: NGXSeasonModalRef<any, C, R> = new NGXSeasonModalRef(this._builder, this._dragdrop, overlayRef, modalConfig);
+        const injector: Injector = Injector.create({
+            parent: this._injector,
+            providers: [{ provide: NGXSeasonModalRef, useValue: modalRef }]
+        });
+        const portal: TemplatePortal = new TemplatePortal(template, vcr as ViewContainerRef, data, injector);
+        const element: HTMLElement = overlayRef.attach(portal).rootNodes[0];
+        modalRef.display(element.children);
+        return modalRef;
+    }
+
+    private createComponentOverlayRef<T, D, R>(component: ComponentType<T>, config: OverlayConfig, modalConfig: NGXSeasonModalConfig, vcr?: ViewContainerRef, data?: D): NGXSeasonModalRef<T, D, R> {
         const overlayRef: OverlayRef = this._overlay.create(config);
         const modalRef: NGXSeasonModalRef<T, D, R> = new NGXSeasonModalRef(this._builder, this._dragdrop, overlayRef, modalConfig);
         const injector: Injector = Injector.create({
@@ -164,11 +180,11 @@ export class NGXSeasonModalService<D = any> {
                 { provide: NGXSeasonModalRef, useValue: modalRef }
             ]
         });
-        const portal: ComponentPortal<T> = new ComponentPortal(component, null, injector);
+        const portal: ComponentPortal<T> = new ComponentPortal(component, vcr, injector);
         const componentRef: ComponentRef<T> = overlayRef.attach(portal);
         const container: NGXSeasonModalContainerComponent = componentRef.instance as NGXSeasonModalContainerComponent;
         container.setupModalContainerClass();
-        modalRef.display(componentRef);
+        modalRef.display(container.fetchChildNodes());
         return modalRef;
     }
 
@@ -187,7 +203,7 @@ type ResizeAnimationParams = { widthStart?: number | string, widthFinal?: number
 
 export class NGXSeasonModalRef<T = unknown, D = unknown, R = unknown> {
 
-    protected opened$: Subject<ComponentRef<T>> = new AsyncSubject();
+    protected opened$: Subject<HTMLCollection> = new AsyncSubject();
     protected closed$: Subject<R | undefined> = new AsyncSubject();
 
     private resizeChange$: Subject<boolean> = new BehaviorSubject(false);
@@ -227,10 +243,10 @@ export class NGXSeasonModalRef<T = unknown, D = unknown, R = unknown> {
         return this.resizeChange$.asObservable();
     }
 
-    display(componentRef: ComponentRef<T>): void {
+    display(elements: HTMLCollection): void {
         this.createFadeInOutAnimation(this._overlayRef.overlayElement, 0.5, 1, 0, 1, this._config.animateDuration as number)
             .then(() => {
-                this.opened$.next(componentRef);
+                this.opened$.next(elements);
                 this.opened$.complete();
             });
     }
@@ -259,20 +275,6 @@ export class NGXSeasonModalRef<T = unknown, D = unknown, R = unknown> {
 
     handleModalStrikeEvent(): Observable<KeyboardEvent> {
         return this._overlayRef.keydownEvents();
-    }
-
-    private drageHandlerEnableDisable(component: NGXSeasonModalContainerComponent, dragRef: DragRef): void {
-        const list: HTMLCollection = component.fetchChildNodes();
-
-        for (let i = 0; i < list.length; i++) {
-            const element: HTMLElement = list.item(i) as HTMLElement;
-
-            if (element.classList.contains('modal-header')) {
-                dragRef.enableHandle(element);
-            } else {
-                dragRef.disableHandle(element);
-            }
-        }
     }
 
     private listenModalResizeChange(): void {
@@ -314,13 +316,17 @@ export class NGXSeasonModalRef<T = unknown, D = unknown, R = unknown> {
 
     private listenModalOpenedChange(): void {
         let subscription$: Subscription = this.opened$.asObservable().pipe(debounceTime(10))
-            .subscribe(componentRef => {
-                if (this._config.allowDragDrop && !this.checkFullScreen() && componentRef) {
+            .subscribe(elements => {
+                if (this._config.allowDragDrop && !this.checkFullScreen()) {
                     const dragRef = this._dragdrop.createDrag(this._overlayRef.overlayElement);
                     dragRef.dragStartDelay = { touch: this._config.dragDelay as number, mouse: this._config.dragDelay as number };
                     dragRef.withBoundaryElement(this._overlayRef.hostElement);
 
-                    this.drageHandlerEnableDisable(componentRef.instance as NGXSeasonModalContainerComponent, dragRef);
+                    for (let i = 0; i < elements.length; i++) {
+                        const element = elements.item(0);
+
+                        if (element && element.classList.contains('modal-header')) dragRef.withHandles([ element as HTMLElement ]);
+                    }
 
                     this.listenDragDropBeforeStartedChange(dragRef);
                     this.listenDragDropStartedChange(dragRef);

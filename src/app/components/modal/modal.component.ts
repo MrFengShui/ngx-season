@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, Directive, ElementRef, Input, OnChanges, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
 
 import { NGXSeasonModalRef } from "./modal.service";
 

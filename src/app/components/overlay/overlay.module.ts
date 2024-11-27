@@ -4,9 +4,11 @@ import { NgModule } from "@angular/core";
 
 import { NGXSeasonTooltipDirective } from './tooltip.directive';
 import { NGXSeasonToastService } from './toast.service';
+import { NGXSeasonPopoverDirective } from './popover.directive';
 
 @NgModule({
     declarations: [
+        NGXSeasonPopoverDirective,
         NGXSeasonTooltipDirective
     ],
     imports: [
@@ -14,6 +16,7 @@ import { NGXSeasonToastService } from './toast.service';
         OverlayModule
     ],
     exports: [
+        NGXSeasonPopoverDirective,
         NGXSeasonTooltipDirective
     ],
     providers: [NGXSeasonToastService]

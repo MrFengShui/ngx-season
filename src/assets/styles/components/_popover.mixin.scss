@@ -1,0 +1,45 @@
+@mixin setup-popover-theme($theme, $colors) {
+    .popover {
+        --popover-border-radius: #{var(--size-pixel-4)};
+        --popover-padding: #{var(--padding-100)};
+        --popover-font-size: #{var(--font-size-12)};
+        --popover-font-weight: #{var(--font-weight-500)};
+        --popover-line-height: #{var(--line-height-150)};
+
+        --popover-shadow-blur: #{var(--size-pixel-8)};
+        --popover-shadow-color: #{var(--palette-gray-color-50)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --popover-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --popover-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+            } @else {
+                --popover-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --popover-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+            }
+        }
+
+        user-select: none;
+
+        filter: drop-shadow(0 0 var(--popover-shadow-blur) var(--popover-shadow-color));
+
+        .popover-container {
+            display: inline-flex;
+
+            border-radius: var(--popover-border-radius);
+
+            padding: var(--popover-padding);
+
+            width: var(--size-percent-100);
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-overlay-color=#{$color}] {
+                .popover-container {
+                    background-color: var(--popover-bgcolor-#{$color});
+                    color: var(--popover-color-#{$color});
+                }
+            }
+        }
+    }
+}
