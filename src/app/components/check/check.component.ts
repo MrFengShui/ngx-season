@@ -47,10 +47,20 @@ export abstract class NGXSeasonCheckComponent implements OnChanges, OnDestroy, A
         return this._position;
     }
 
+    @Input('checkShowLabel')
+    set showLabel(showLabel: boolean | string | undefined | null) {
+        this._showLabel = coerceBooleanProperty(showLabel);
+    }
+
+    get showLabel(): boolean {
+        return this._showLabel;
+    }
+
     private _color: NGXSeasonColorPalette = 'default';
     private _checked: boolean = false;
     private _disabled: boolean = false;
     private _position: NGXSeasonCheckLabelPosition = 'after';
+    private _showLabel: boolean = true;
 
     @Output('checkCheckedChange')
     checkedChange: EventEmitter<boolean> = new EventEmitter(true);

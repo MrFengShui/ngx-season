@@ -62,6 +62,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-17', text: '进度', link: ['/demo', 'component', 'progress'] },
                 { id: '2-18', text: '丝带', link: ['/demo', 'component', 'ribbon'] },
                 { id: '2-19', text: '标签', link: ['/demo', 'component', 'tag'] },
+                { id: '2-20', text: '树形列表', link: ['/demo', 'component', 'tree'] },
             ]
         },
         {

@@ -35,6 +35,8 @@ import { DemoRadioTogglePageComponent } from "./demo/radio-toggle.component";
 import { DemoModalContainerComponent, DemoModalPageComponent } from "./demo/modal.component";
 import { DemoPopoverPageComponent } from "./demo/popover.component";
 import { DemoTagPageComponent } from "./demo/tag.component";
+import { DemoTreePageComponent } from "./demo/tree.component";
+import { NGXSeasonTreeModule } from "../components/tree/tree.module";
 
 @NgModule({
     declarations: [
@@ -68,17 +70,18 @@ import { DemoTagPageComponent } from "./demo/tag.component";
         DemoTagPageComponent,
         DemoToastPageComponent,
         DemoTooltipPageComponent,
+        DemoTreePageComponent,
 
         DemoModalContainerComponent
     ],
     imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-
-        NGXSeasonComponentsModule
-    ],
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    NGXSeasonComponentsModule,
+    NGXSeasonTreeModule
+],
     exports: [
         HomePageComponent,
         DemoPageComponent,
@@ -109,7 +112,8 @@ import { DemoTagPageComponent } from "./demo/tag.component";
         DemoRibbonPageComponent,
         DemoTagPageComponent,
         DemoToastPageComponent,
-        DemoTooltipPageComponent
+        DemoTooltipPageComponent,
+        DemoTreePageComponent
     ]
 })
 export class PageModule {}

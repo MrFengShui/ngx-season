@@ -21,7 +21,7 @@ const NGXSeasonCheckSwitchValueAccessor: Provider = {
                 <span class="check-switch-thumb"></span>
             </span>
         </span>
-        <span class="check-switch-wrapper"><ng-content></ng-content></span>
+        <span class="check-switch-wrapper" *ngIf="showLabel"><ng-content></ng-content></span>
     `,
     providers: [NGXSeasonCheckSwitchValueAccessor]
 })

@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { Component, forwardRef, Input, Provider, SimpleChanges } from "@angular/core";
+import { Component, forwardRef, Input, Output, Provider, SimpleChanges } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NGXSeasonCheckComponent } from "./check.component";
@@ -20,7 +20,7 @@ const NGXSeasonCheckboxValueAccessor: Provider = {
     template: `
         <input type="checkbox" [checked]="checked" [indeterminate]="indeterminated" [disabled]="disabled" (change)="writeValue(checkbox.checked)" #checkbox/>
         <span class="checkbox-mark"></span>
-        <span class="checkbox-wrapper"><ng-content></ng-content></span>
+        <span class="checkbox-wrapper" *ngIf="showLabel"><ng-content></ng-content></span>
     `,
     providers: [NGXSeasonCheckboxValueAccessor]
 })

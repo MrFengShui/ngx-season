@@ -1,0 +1,45 @@
+@mixin setup-tree-theme($theme, $colors) {
+    .tree {
+        --tree-node-font-size: #{var(--font-size-16)};
+        --tree-node-font-weight: #{var(--font-weight-700)};
+        --tree-node-line-height: #{var(--line-height-225)};
+        --tree-node-height: #{var(--size-pixel-36)};
+        --tree-node-gap: #{var(--col-gap-50)};
+
+        display: inline-flex;
+        flex-direction: column;
+
+        .tree-node {
+            display: inline-flex;
+            flex-direction: column;
+
+            .node-control {
+                display: flex;
+                align-items: center;
+                column-gap: var(--tree-node-gap);
+
+                height: var(--tree-node-height);
+
+                user-select: none;
+
+                .node-text {
+                    font-size: var(--tree-node-font-size);
+                    font-weight: var(--tree-node-font-weight);
+                    line-height: var(--tree-node-line-height);
+                }
+            }
+
+            .node-content {
+                display: inline-flex;
+                flex-direction: column;
+                overflow: hidden;
+                height: calc-size(max-content, size);
+                transition: var(--tree-node-duration) ease-in-out;
+
+                &.hidden {
+                    height: 0 !important;
+                }
+            }
+        }
+    }
+}
