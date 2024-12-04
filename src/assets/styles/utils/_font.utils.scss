@@ -11,20 +11,24 @@
 }
 
 $typography: (
-    "display-3": 64px,
-    "display-2": 56px,
-    "display-1": 48px,
-    "headline": 36px,
-    "title-1": 28px,
-    "title-2": 24px,
-    "title-3": 16px,
-    "subtitle-1": 20px,
-    "subtitle-2": 18px,
-    "subtitle-3": 12px,
-    "body-1": 16px,
-    "body-2": 14px,
-    "body-3": 12px,
-    "caption": 8px
+    "display-4": ("size": 72px, "weight": 900, "height": 2.0),
+    "display-3": ("size": 64px, "weight": 900, "height": 2.0),
+    "display-2": ("size": 56px, "weight": 900, "height": 2.0),
+    "display-1": ("size": 48px, "weight": 900, "height": 2.0),
+    "headline": ("size": 48px, "weight": 1000, "height": 2.0),
+    "title-1": ("size": 36px, "wegiht": 900, "height": 1.75),
+    "title-2": ("size": 28px, "weight": 800, "height": 1.5),
+    "title-3": ("size": 20px, "weight": 700, "height": 1.25),
+    "subtitle-1": ("size": 20px, "weight": 700, "height": 1.75),
+    "subtitle-2": ("size": 16px, "weight": 700, "height": 1.5),
+    "subtitle-3": ("size": 12px, "weight": 600, "height": 1.25),
+    "heading": ("size": 20px, "weight": 900, "height": 1.5),
+    "subheading": ("size": 16px, "weight": 700, "height": 1.5),
+    "body-1": ("size": 16px, "weight": 500, "height": 1.5),
+    "body-2": ("size": 14px, "weight": 400, "height": 1.5),
+    "body-3": ("size": 12px, "weight": 300, "height": 1.25),
+    "caption": ("size": 8px, "weight": 100, "height": 1.0),
+    "reference": ("size": 12px, "weight": 100, "height": 2.0),
 );
 
 $font-sizes: (8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 96, 128, 192, 256, 384, 512);
@@ -36,8 +40,9 @@ $font-sizes: (8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 96,
         --line-height-#{$i}: #{calc($i * 0.01)};
     }
 
-    @each $key, $value in $typography {
-        --typography-#{$key}: #{$value};
+    @each $key, $values in $typography {
+        --typography-#{$key}: #{map-get($values, "size")};
+        --typography-#{$key}-size: #{calc(map-get($values, "size") * map-get($values, "height"))};
     }
 
     @each $size in $font-sizes {
@@ -56,9 +61,43 @@ $font-sizes: (8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 96,
     }
 }
 
-@each $key, $value in $typography {
+@each $key, $values in $typography {
     .#{$key} {
-        font-size: #{$value} !important;
+        @if $key == "reference" {
+            ul {
+                li {
+                    &, &::before {
+                        font-size: map-get($values, "size") !important;
+                        font-weight: map-get($values, "weight") !important;
+                        line-height: map-get($values, "height") !important;
+                    }
+
+                    * {
+                        font-size: map-get($values, "size") !important;
+                        font-weight: map-get($values, "weight") !important;
+                        line-height: map-get($values, "height") !important;
+                    }
+                }
+            }
+        } @else {
+            font-size: map-get($values, "size") !important;
+            font-weight: map-get($values, "weight") !important;
+            line-height: map-get($values, "height") !important;
+        }
+
+        @if $key == "heading" or $key == "subheading" {
+            text-align: start !important;
+        } @else if $key == "body-1" or $key == "reference" {
+            text-align: justify !important;
+        } @else {
+            text-align: center !important;
+        }
+
+        @if $key == "body-1" {
+            margin-block: 0 map-get($values, "size") !important;
+        } @else {
+            margin-block: 0 calc(map-get($values, "size") * 0.5) !important;
+        }
     }
 }
 

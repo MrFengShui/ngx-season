@@ -23,7 +23,7 @@ export class NGXSeasonAlertActionsDirective {
         <ngx-sui-icon [iconColor]="color" [iconShape]="iconShape$.asObservable() | async" iconSize="lg" iconSolid="true"></ngx-sui-icon>
         <span class="alert-text-wrapper">{{ message }}</span>
         <div class="alert-action-wrapper" *ngIf="template"><ng-container [cdkPortalOutlet]="portal"></ng-container></div>
-        <button ngx-sui-FlatIconButton [btnColor]="color" btnCircled="true" btnIcon="close" btnSize="md" (click)="handleAlertDismissEvent()" *ngIf="showClose && !template"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnCircled="true" btnIcon="close" btnSize="md" btnStyle="flat" (click)="handleAlertDismissEvent()" *ngIf="showClose && !template"></button>
         <ng-template><ng-content select="[ngx-sui-AlertActions]"></ng-content></ng-template>
     `
 })

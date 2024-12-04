@@ -27,6 +27,7 @@ import { NGXSeasonRadioModule } from "./radio/radio.module";
 import { NGXSeasonModalModule } from "./modal/modal.module";
 import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
 import { NGXSeasonTagModule } from "./tag/tag.module";
+import { NGXSeasonArticleModule } from "./article/article.module";
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import { NGXSeasonTagModule } from "./tag/tag.module";
 
         NGXSeasonAccordionModule,
         NGXSeasonAlertModule,
+        NGXSeasonArticleModule,
         NGXSeasonAvatarModule,
         NGXSeasonBadgeModule,
         NGXSeasonBreadcrumbModule,
@@ -61,6 +63,7 @@ import { NGXSeasonTagModule } from "./tag/tag.module";
     exports: [
         NGXSeasonAccordionModule,
         NGXSeasonAlertModule,
+        NGXSeasonArticleModule,
         NGXSeasonAvatarModule,
         NGXSeasonBadgeModule,
         NGXSeasonBreadcrumbModule,

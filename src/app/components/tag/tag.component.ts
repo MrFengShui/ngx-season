@@ -127,7 +127,7 @@ export class NGXSeasonTextTagComponent extends NGXSeasonTagComponent {
     template: `
         <ngx-sui-avatar [avatarColor]="color" [avatarSrc]="imageSrc" [avatarAlt]="imageAlt" avatarShape="circle" avatarSize="sm" *ngIf="showImage && imageSrc"></ngx-sui-avatar>
         <div class="tag-text">{{ text }}</div>
-        <button ngx-sui-FlatIconButton [btnColor]="color" btnCircled="true" btnIcon="close" btnSize="xs" (click)="handleDismissEvent($event)" *ngIf="showClose"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnCircled="true" btnIcon="close" btnSize="xs" btnStyle="flat" (click)="handleDismissEvent($event)" *ngIf="showClose"></button>
     `
 })
 export class NGXSeasonLinkTagComponent extends NGXSeasonTagComponent {

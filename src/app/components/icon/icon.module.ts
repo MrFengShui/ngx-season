@@ -16,15 +16,15 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 
                 .addIcon('face-happy').addIcon('face-neutral').addIcon('face-sad').addIcon('factory').addIcon('failure-standard').addIcon('failure').addIcon('favorite').addIcon('file-group').addIcon('file').addIcon('filter-off').addIcon('filter-on').addIcon('firewall').addIcon('first-aid-kit').addIcon('fish').addIcon('flag').addIcon('flame').addIcon('flask').addIcon('floppy').addIcon('folder-close').addIcon('folder-open').addIcon('font-size').addIcon('forking').addIcon('form').addIcon('fuel')
 
-                .addIcon('gavel').addIcon('grid-view').addIcon('group')
+                .addIcon('gavel').addIcon('grid-chart').addIcon('grid-view').addIcon('group')
 
                 .addIcon('hard-disk').addIcon('hard-drive').addIcon('hard-drives').addIcon('hashtag').addIcon('heart-broken').addIcon('heart').addIcon('heat-map').addIcon('help-info').addIcon('help-standard').addIcon('highlighter').addIcon('history').addIcon('home').addIcon('hourglass')
 
-                .addIcon('id-badge').addIcon('image-gallery').addIcon('image').addIcon('import').addIcon('info-standard').addIcon('info').addIcon('internet-of-things')
+                .addIcon('id-badge').addIcon('image-gallery').addIcon('image').addIcon('import').addIcon('inbox').addIcon('indent').addIcon('inductor').addIcon('info-standard').addIcon('info').addIcon('install').addIcon('internet-of-things').addIcon('italic')
 
                 .addIcon('key').addIcon('keyboard')
 
-                .addIcon('language').addIcon('layers').addIcon('library').addIcon('lightbulb').addIcon('list-view').addIcon('list').addIcon('login').addIcon('logout')
+                .addIcon('landscape').addIcon('language').addIcon('launchpad').addIcon('layers').addIcon('library').addIcon('lightbulb').addIcon('link').addIcon('list-view').addIcon('list').addIcon('login').addIcon('logout')
 
                 .addIcon('map-marker').addIcon('map').addIcon('minus').addIcon('minus-circle').addIcon('mobile').addIcon('moon').addIcon('mouse').addIcon('music-note')
 
@@ -32,7 +32,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 
                 .addIcon('organization')
 
-                .addIcon('paperclip').addIcon('pause').addIcon('peso').addIcon('phone').addIcon('pin').addIcon('play').addIcon('plugin').addIcon('plus-circle').addIcon('plus').addIcon('pound').addIcon('power').addIcon('printer')
+                .addIcon('paperclip').addIcon('pause').addIcon('peso').addIcon('phone').addIcon('pin').addIcon('play').addIcon('plugin').addIcon('plus-circle').addIcon('plus').addIcon('portrait').addIcon('pound').addIcon('power').addIcon('printer')
 
                 .addIcon('qrcode')
 

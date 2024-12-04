@@ -12,55 +12,78 @@
         --button-gap: #{calc(var(--button-font-size) * 0.25)};
         --button-padding: #{calc(var(--button-font-size) * 0.5)};
 
-        --button-content-gap: #{var(--margin-50)};
+        --button-content-gap: #{var(--col-gap-25)};
         --button-content-font-weight: #{var(--font-weight-900)};
-        --button-content-line-height: #{var(--line-height-100)};
 
         --button-icon-only-padding: #{calc(var(--button-content-size) * 0.25)};
 
+        --button-link-line-height: auto;
+        --button-link-underline-offset: #{var(--size-pixel-2)};
+        --button-link-underline-thick: #{var(--size-pixel-2)};
+
+        --button-text-line-height: #{var(--line-height-100)};
+
         @each $style in $styles {
-            @each $colorKey, $colorValue in $colors {
-                --button-#{$style}-bdcolor-#{$colorKey}: #{if($style == "flat", transparent, if($style == "outline", if($theme == "light", var(--palette-#{$colorValue}-800-color), var(--palette-#{$colorValue}-200-color)), var(--palette-#{$colorValue}-500-color)))};
-                --button-#{$style}-bdcolor-hover-#{$colorKey}: #{if($style == "flat", transparent, if($style == "outline", if($theme == "light", var(--palette-#{$colorValue}-900-color), var(--palette-#{$colorValue}-100-color)), var(--palette-#{$colorValue}-600-color)))};
-                --button-#{$style}-bdcolor-active-#{$colorKey}: #{if($style == "flat", transparent, if($style == "outline", if($theme == "light", var(--palette-#{$colorValue}-700-color), var(--palette-#{$colorValue}-300-color)), var(--palette-#{$colorValue}-400-color)))};
+            &[data-button-style=#{$style}] {
+                @each $key, $value in $colors {
+                    @if $style == "outline" {
+                        --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                        --button-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                        --button-bdcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
 
-                --button-#{$style}-bgcolor-#{$colorKey}: #{if($style == "flat" or $style == "outline", transparent, var(--palette-#{$colorValue}-500-color))};
-                --button-#{$style}-bgcolor-hover-#{$colorKey}: #{if($style == "flat" or $style == "outline", transparent, var(--palette-#{$colorValue}-600-color))};
-                --button-#{$style}-bgcolor-active-#{$colorKey}: #{if($style == "flat" or $style == "outline", transparent, var(--palette-#{$colorValue}-400-color))};
+                        --button-bgcolor-#{$key}: transparent;
+                        --button-bgcolor-hover-#{$key}: transparent;
+                        --button-bgcolor-active-#{$key}: transparent;
 
-                --button-#{$style}-color-#{$colorKey}: #{if($style == "flat" or $style == "outline", if($theme == "light", var(--palette-#{$colorValue}-800-color), var(--palette-#{$colorValue}-200-color)), var(--palette-#{$colorValue}-50-color))};
-                --button-#{$style}-color-hover-#{$colorKey}: #{if($style == "flat" or $style == "outline", if($theme == "light", var(--palette-#{$colorValue}-900-color), var(--palette-#{$colorValue}-100-color)), var(--palette-#{$colorValue}-50-color))};
-                --button-#{$style}-color-active-#{$colorKey}: #{if($style == "flat" or $style == "outline", if($theme == "light", var(--palette-#{$colorValue}-700-color), var(--palette-#{$colorValue}-300-color)), var(--palette-#{$colorValue}-50-color))};
+                        --button-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+                        --button-color-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                        --button-color-active-#{$key}: #{var(--palette-#{$value}-400-color)};
 
-                @if $style == "outline" {
-                    @if $colorKey == "default" {
-                        --button-outline-bdcolor-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
-                        --button-outline-bgcolor-disabled-#{$colorKey}: transparent;
-                        --button-outline-color-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
+                        --button-bdcolor-disabled-#{$key}: #{var(--palette-#{$value}-color-25)};
+                        --button-color-disabled-#{$key}: #{var(--palette-#{$value}-color-25)};
+                    } @else if $style == "solid" {
+                        --button-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                        --button-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                        --button-bdcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+                        --button-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                        --button-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                        --button-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+                        --button-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+                        --button-color-hover-#{$key}: #{var(--palette-#{$value}-50-color)};
+                        --button-color-active-#{$key}: #{var(--palette-#{$value}-50-color)};
+
+                        --button-bdcolor-disabled-#{$key}: #{var(--palette-#{$value}-color-25)};
+                        --button-bgcolor-disabled-#{$key}: #{var(--palette-#{$value}-color-75)};
+                        --button-color-disabled-#{$key}: #{var(--palette-#{$value}-color-50)};
                     } @else {
-                        --button-outline-bdcolor-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
-                        --button-outline-bgcolor-disabled-#{$colorKey}: transparent;
-                        --button-outline-color-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
-                    }
-                } @else if $style == "solid" {
-                    @if $colorKey == "default" {
-                        --button-solid-bdcolor-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
-                        --button-solid-bgcolor-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
-                        --button-solid-color-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
-                    } @else {
-                        --button-solid-bdcolor-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
-                        --button-solid-bgcolor-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
-                        --button-solid-color-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-50-color)};
-                    }
-                } @else {
-                    @if $colorKey == "default" {
-                        --button-flat-bdcolor-disabled-#{$colorKey}: transparent;
-                        --button-flat-bgcolor-disabled-#{$colorKey}: transparent;
-                        --button-flat-color-disabled-#{$colorKey}: #{if($theme == "light", var(--palette-#{$colorValue}-300-color), var(--palette-#{$colorValue}-700-color))};
-                    } @else {
-                        --button-flat-bdcolor-disabled-#{$colorKey}: transparent;
-                        --button-flat-bgcolor-disabled-#{$colorKey}: transparent;
-                        --button-flat-color-disabled-#{$colorKey}: #{var(--palette-#{$colorValue}-200-color)};
+                        --button-bdcolor-#{$key}: transparent;
+                        --button-bdcolor-hover-#{$key}: transparent;
+                        --button-bdcolor-active-#{$key}: transparent;
+
+                        --button-bgcolor-#{$key}: transparent;
+                        --button-bgcolor-hover-#{$key}: transparent;
+                        --button-bgcolor-active-#{$key}: transparent;
+
+                        @if $key == "default" {
+                            --button-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                            --button-color-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-900-color), var(--palette-#{$value}-100-color))};
+                            --button-color-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+
+                            --button-link-underline-color-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-900-color), var(--palette-#{$value}-100-color))};
+                            --button-link-underline-color-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+                        } @else {
+                            --button-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+                            --button-color-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                            --button-color-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+
+                            --button-link-underline-color-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                            --button-link-underline-color-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+                        }
+
+                        --button-bdcolor-disabled-#{$key}: transparent;
+                        --button-color-disabled-#{$key}: #{var(--palette-#{$value}-color-25)};
                     }
                 }
             }
@@ -90,21 +113,63 @@
 
         cursor: pointer;
 
-        @each $style in $styles {
-            &.#{$style}-icon-button {
-                padding: var(--button-icon-only-padding);
+        &.icon-button {
+            padding: var(--button-icon-only-padding);
 
-                $size: calc(var(--button-content-size) + var(--button-icon-only-padding) * 2);
-                min-width: $size;
-                max-width: $size;
-                min-height: $size;
-                max-height: $size;
-                width: $size;
-                height: $size;
+            $size: calc(var(--button-content-size) + var(--button-icon-only-padding) * 2);
+            min-width: $size;
+            max-width: $size;
+            min-height: $size;
+            max-height: $size;
+            width: $size;
+            height: $size;
 
-                &.button-circle {
-                    border-radius: 50%;
+            &.button-circle {
+                border-radius: 50%;
+            }
+        }
+
+        &.link-button, &.text-button {
+            $size: calc(var(--button-content-size) + var(--button-icon-only-padding) * 2);
+
+            column-gap: var(--button-content-gap);
+
+            min-height: $size;
+            max-height: $size;
+            height: $size;
+
+            .button-wrapper {
+                display: inline-flex;
+
+                font-size: var(--button-font-size);
+                font-weight: var(--button-content-font-weight);
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        &.link-button {
+            &:not(:disabled) {
+                &:hover {
+                    &, .button-wrapper {
+                        text-decoration-line: underline;
+                        text-decoration-style: solid;
+                        text-decoration-thickness: var(--button-link-underline-thick);
+                        text-underline-offset: var(--button-link-underline-offset);
+                    }
                 }
+            }
+
+            .button-wrapper {
+                line-height: var(--button-link-line-height);
+            }
+        }
+
+        .text-button {
+            .button-wrapper {
+                line-height: var(--button-text-line-height);
             }
         }
 
@@ -122,71 +187,95 @@
             }
         }
 
-        .button-wrapper {
-            display: inline-flex;
-
-            font-size: var(--button-font-size);
-            font-weight: var(--button-content-font-weight);
-            line-height: var(--button-content-line-height);
-
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
         @each $style in $styles {
-            @each $color in map-keys($colors) {
-                &.#{$style}-icon-button, &.#{$style}-text-button {
+            &[data-button-style=#{$style}] {
+                @each $color in map-keys($colors) {
                     &[data-button-color=#{$color}] {
-                        border-color: var(--button-#{$style}-bdcolor-#{$color});
-                        background-color: var(--button-#{$style}-bgcolor-#{$color});
-                        color: var(--button-#{$style}-color-#{$color});
+                        background-color: var(--button-bgcolor-#{$color});
+                        border-color: var(--button-bdcolor-#{$color});
+                        color: var(--button-color-#{$color});
 
                         .icon {
                             svg {
-                                color: var(--button-#{$style}-color-#{$color});
+                                color: var(--button-color-#{$color});
                             }
                         }
 
                         &:hover {
-                            border-color: var(--button-#{$style}-bdcolor-hover-#{$color});
-                            background-color: var(--button-#{$style}-bgcolor-hover-#{$color});
-                            color: var(--button-#{$style}-color-hover-#{$color});
+                            background-color: var(--button-bgcolor-hover-#{$color});
+                            border-color: var(--button-bdcolor-hover-#{$color});
+                            color: var(--button-color-hover-#{$color});
 
                             .icon {
                                 svg {
-                                    color: var(--button-#{$style}-color-hover-#{$color});
+                                    color: var(--button-color-hover-#{$color});
                                 }
                             }
                         }
 
                         &:active {
-                            border-color: var(--button-#{$style}-bdcolor-active-#{$color});
-                            background-color: var(--button-#{$style}-bgcolor-active-#{$color});
-                            color: var(--button-#{$style}-color-active-#{$color});
+                            background-color: var(--button-bgcolor-active-#{$color});
+                            border-color: var(--button-bdcolor-active-#{$color});
+                            color: var(--button-color-active-#{$color});
 
                             .icon {
                                 svg {
-                                    color: var(--button-#{$style}-color-active-#{$color});
+                                    color: var(--button-color-active-#{$color});
                                 }
                             }
                         }
 
                         &:disabled {
                             &, &:hover, &:active {
-                                border-color: var(--button-#{$style}-bdcolor-disabled-#{$color});
-                                background-color: var(--button-#{$style}-bgcolor-disabled-#{$color});
-                                color: var(--button-#{$style}-color-disabled-#{$color});
+                                background-color: var(--button-bgcolor-disabled-#{$color});
+                                border-color: var(--button-bdcolor-disabled-#{$color});
+                                color: var(--button-color-disabled-#{$color});
 
                                 .icon {
                                     svg {
-                                        color: var(--button-#{$style}-color-disabled-#{$color});
+                                        color: var(--button-color-disabled-#{$color});
+                                    }
+                                }
+                            }
+                        }
+
+                        @if $style == "flat" {
+                            &.link-button {
+                                &:hover {
+                                    &, .button-wrapper {
+                                        text-decoration-color: var(--button-link-underline-color-hover-#{$color});
+                                    }
+                                }
+
+                                &:active {
+                                    &, .button-wrapper {
+                                        text-decoration-color: var(--button-link-underline-color-active-#{$color});
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .button-group {
+        display: inline-flex;
+
+        width: fit-content;
+        height: fit-content;
+
+        .button {
+            &:not(:last-child) {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right: none;
+            }
+
+            &:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
             }
         }
     }

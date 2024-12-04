@@ -1,0 +1,16 @@
+<div class="flex justify-content-center p-100">
+    <article ngx-sui-Article style="width: 1280px;">
+        <ng-container *ngFor="let item of list">
+            <h2 ngx-sui-Title *ngIf="item.type === 'title'">{{ item.text }}</h2>
+            <h3 ngx-sui-Subtitle *ngIf="item.type === 'subtitle'">{{ item.text }}</h3>
+            <h4 ngx-sui-Heading *ngIf="item.type === 'heading'">{{ item.text }}</h4>
+            <h5 ngx-sui-Subheading *ngIf="item.type === 'subheading'">{{ item.text }}</h5>
+            <p ngx-sui-Paragraph paraIndent="2rem" *ngIf="item.type === 'paragraph'">{{ item.text }}</p>
+            <div ngx-sui-FigureGroup *ngIf="item.type === 'figure'">
+                <figure ngx-sui-Figure [figImageSrc]="figure?.figSrc" [figImageAlt]="figure?.figAlt" [figCaption]="figure?.caption" figImageWidth="360" figImageHeight="270" *ngFor="let figure of item.figures"></figure>
+            </div>
+            <div ngx-sui-Reference [referHeading]="item.text" [referItems]="item.list" *ngIf="item.type === 'reference'"></div>
+        </ng-container>
+        <div ngx-sui-Reference></div>
+    </article>
+</div>

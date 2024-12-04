@@ -37,6 +37,7 @@ import { DemoPopoverPageComponent } from "./demo/popover.component";
 import { DemoTagPageComponent } from "./demo/tag.component";
 import { DemoTreePageComponent } from "./demo/tree.component";
 import { NGXSeasonTreeModule } from "../components/tree/tree.module";
+import { DemoArticlePageComponent } from "./demo/article.component";
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { NGXSeasonTreeModule } from "../components/tree/tree.module";
         DemoComponentPageComponent,
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
+        DemoArticlePageComponent,
         DemoAvatarPageComponent,
         DemoBackgroundPageComponent,
         DemoBadgePageComponent,
@@ -89,6 +91,7 @@ import { NGXSeasonTreeModule } from "../components/tree/tree.module";
         DemoComponentPageComponent,
         DemoAccordionPageComponent,
         DemoAlertPageComponent,
+        DemoArticlePageComponent,
         DemoAvatarPageComponent,
         DemoBackgroundPageComponent,
         DemoBadgePageComponent,

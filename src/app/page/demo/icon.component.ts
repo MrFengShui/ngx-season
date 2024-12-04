@@ -36,7 +36,7 @@ export class DemoIconPageComponent {
         {
             label: '字母A开头',
             names: [
-                'accessibility-1', 'accessibility-2', 'add-text', 'administrator', 'airplane', 'alarm-off', 'alarm-on', 'alert', 'align-bottom', 'align-center', 'align-center-text', 'align-justify-text', 'align-left', 'align-left-text', 'align-middle', 'align-right', 'align-right-text', 'align-top', 'analytics', 'angle-double', 'angle', 'animation', 'application', 'applications', 'archive', 'arrow', 'assign-user', 'asterisk', 'auto', 'avatar', 'axis-chart'
+                'accessibility-1', 'accessibility-2', 'add-text', 'administrator', 'airplane', 'alarm-off', 'alarm-on', 'alert', 'align-bottom', 'align-center', 'align-center-text', 'align-justify-text', 'align-left', 'align-left-text', 'align-middle', 'align-right', 'align-right-text', 'align-top', 'analytics', 'angle-double', 'angle', 'animation', 'application', 'applications', 'archive', 'arrow', 'assign-user', 'asterisk', 'atom', 'attachment', 'auto', 'avatar', 'axis-chart'
             ]
         },
         {
@@ -72,7 +72,7 @@ export class DemoIconPageComponent {
         {
             label: '字母G开头',
             names: [
-                'gavel', 'grid-view', 'group'
+                'gavel', 'grid-chart', 'grid-view', 'group'
             ]
         },
         {
@@ -84,7 +84,7 @@ export class DemoIconPageComponent {
         {
             label: '字母I开头',
             names: [
-                'id-badge', 'image-gallery', 'image', 'import', 'info-standard', 'info', 'internet-of-things'
+                'id-badge', 'image-gallery', 'image', 'import', 'inbox', 'indent', 'inductor', 'info-standard', 'info', 'install', 'internet-of-things', 'italic'
             ]
         },
         {
@@ -96,7 +96,7 @@ export class DemoIconPageComponent {
         {
             label: '字母L开头',
             names: [
-                'language', 'layers', 'library', 'lightbulb', 'list-view', 'list', 'login', 'logout'
+                'landscape', 'language', 'launchpad', 'layers', 'library', 'lightbulb', 'link', 'list-view', 'list', 'login', 'logout'
             ]
         },
         {
@@ -120,7 +120,7 @@ export class DemoIconPageComponent {
         {
             label: '字母P开头',
             names: [
-                'paperclip', 'pause', 'peso', 'phone', 'pin', 'play', 'plugin', 'plus-circle', 'plus', 'pound', 'power', 'printer'
+                'paperclip', 'pause', 'peso', 'phone', 'pin', 'play', 'plugin', 'plus-circle', 'plus', 'portrait', 'pound', 'power', 'printer'
             ]
         },
         {

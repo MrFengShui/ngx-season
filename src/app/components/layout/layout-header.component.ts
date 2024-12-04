@@ -34,7 +34,7 @@ export class NGXSeasonLayoutHeaderActionsDirective {
 @Component({
     selector: 'ngx-sui-layout-header',
     template: `
-        <button ngx-sui-FlatIconButton btnIcon="bars" (click)="handleControlToggledEvent()" *ngIf="showCtrl"></button>
+        <button ngx-sui-IconButton btnIcon="bars" btnStyle="flat" (click)="handleControlToggledEvent()" *ngIf="showCtrl"></button>
         <a [attr.href]="logoHref" class="header-logo">
             <img [attr.src]="this.logoImageChange$.asObservable() | async" [attr.alt]="" height="100%"/>
         </a>
@@ -138,9 +138,9 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, Aft
     }
 
     private fetchImageAsBase64(url: string): void {
-        this._ngZone.runOutsideAngular(() => 
+        this._ngZone.runOutsideAngular(() =>
             this.logoImage$ = this._http.get(url, { responseType: 'blob' }).subscribe({
-                next: blob => 
+                next: blob =>
                     this._ngZone.run(() => {
                         let reader: FileReader | null = new FileReader();
                         reader.onload = event => this.logoImageChange$.next(event.target?.result as string);

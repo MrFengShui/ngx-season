@@ -1,5 +1,6 @@
 @import "../components/accordion.mixin";
 @import "../components/alert.mixin";
+@import "../components/article.mixin";
 @import "../components/avatar.mixin";
 @import "../components/badge.mixin";
 @import "../components/breadcrumb.mixin";
@@ -41,6 +42,7 @@
     &[data-color*="default"] {
         @include setup-accordion-theme($theme, "indigo", "pink");
         @include setup-alert-theme($theme, "indigo");
+        @include setup-article-theme($theme);
         @include setup-avatar-theme($theme, $colors);
         @include setup-badge-theme($theme, "indigo", "pink");
         @include setup-breadcrumb-theme($theme);

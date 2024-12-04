@@ -27,12 +27,14 @@ import { DemoModalPageComponent } from "../page/demo/modal.component";
 import { DemoPopoverPageComponent } from "../page/demo/popover.component";
 import { DemoTagPageComponent } from "../page/demo/tag.component";
 import { DemoTreePageComponent } from "../page/demo/tree.component";
+import { DemoArticlePageComponent } from "../page/demo/article.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
     { path: 'component', component: DemoComponentPageComponent, title: '组件一览' },
     { path: 'component/accordion', component: DemoAccordionPageComponent, title: '手风琴' },
     { path: 'component/alert', component: DemoAlertPageComponent, title: '警示框' },
+    { path: 'component/article', component: DemoArticlePageComponent, title: '文章' },
     { path: 'component/avatar', component: DemoAvatarPageComponent, title: '头像' },
     { path: 'component/badge', component: DemoBadgePageComponent, title: '徽章' },
     { path: 'component/breadcrumb', component: DemoBreadcrumbPageComponent, title: '面包屑' },

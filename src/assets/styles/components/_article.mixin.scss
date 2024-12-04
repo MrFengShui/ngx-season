@@ -1,0 +1,82 @@
+@mixin setup-article-theme($theme) {
+    .article {
+        --article-figure-group-gap: #{var(--row-gap-100)};
+
+        --article-figure-border-radius: #{var(--size-pixel-4)};
+        --article-figure-gap: #{var(--row-gap-50)};
+        --article-figure-margin: #{var(--margin-0)};
+        --article-figure-padding: #{var(--padding-100)};
+
+        --article-reference-size: #{var(--typography-reference-size)};
+        --article-reference-gap: #{var(--col-gap-50)};
+
+        --article-reference-link-underline-color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
+
+        .figure-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            row-gap: var(--article-figure-group-gap);
+
+            .figure {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+
+                row-gap: var(--article-figure-gap);
+                margin: var(--article-figure-margin);
+                padding: var(--article-figure-padding);
+
+                width: fit-content;
+                height: fit-content;
+
+                img {
+                    border-radius: var(--article-figure-border-radius);
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .reference {
+            .refer-list {
+                counter-reset: refer-order 0;
+
+                display: inline-flex;
+                flex-direction: column;
+
+                margin: 0;
+                padding: 0;
+
+                .refer-item {
+                    display: inline-flex;
+                    align-items: center;
+                    column-gap: var(--article-reference-gap);
+
+                    &::before {
+                        counter-increment: refer-order 1;
+                        content: "[" counter(refer-order) "]";
+
+                        display: inline-block;
+
+                        text-align: right;
+
+                        width: var(--article-reference-size);
+                        height: var(--article-reference-size);
+                    }
+
+                    .item-link {
+                        display: inline-flex;
+                        align-items: center;
+
+                        &:hover {
+                            text-decoration-color: var(--article-reference-link-underline-color);
+                            text-decoration-line: underline;
+                            text-decoration-style: solid;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

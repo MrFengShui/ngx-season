@@ -1,42 +1,219 @@
-<div class="flex gx-100 p-100">
-    <button ngx-sui-FlatIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
-    <button ngx-sui-OutlineIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
-    <button ngx-sui-SolidIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
-</div>
-<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
-    <button ngx-sui-FlatIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list"></button>
-    <button ngx-sui-OutlineIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list"></button>
-    <button ngx-sui-SolidIconButton [btnColor]="item.color" btnCircled="true" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list"></button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-FlatIconButton [btnColor]="item.color" btnCircled="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
-    <button ngx-sui-OutlineIconButton [btnColor]="item.color" btnCircled="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
-    <button ngx-sui-SolidIconButton [btnColor]="item.color" btnCircled="true" btnDisabled="true" [btnIcon]="DEMO_ICON" *ngFor="let item of list"></button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-FlatTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-FlatTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" btnDisabled="true" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
-    <button ngx-sui-FlatTextButton [btnColor]="item.color" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-OutlineTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-OutlineTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" btnDisabled="true" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
-    <button ngx-sui-OutlineTextButton [btnColor]="item.color" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-SolidTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex gx-100 p-100">
-    <button ngx-sui-SolidTextButton btnBlocked="true" [btnColor]="item.color" [btnIcon]="DEMO_ICON" btnDisabled="true" *ngFor="let item of list">{{ item.label }}</button>
-</div>
-<div class="flex flex-wrap row-gap-100 gx-100 p-100" *ngFor="let size of sizes">
-    <button ngx-sui-SolidTextButton [btnColor]="item.color" [btnIcon]="DEMO_ICON" [btnSize]="size" *ngFor="let item of list">{{ item.label }}</button>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-900">基本按钮</div>
+    <div class="flex col-gap-100">
+        <button ngx-sui-TextButton btnText="基本按钮"></button>
+    </div>
+    <div class="fs-24 fw-900">按钮样式</div>
+    <div class="flex col-gap-100">
+        <button ngx-sui-TextButton btnStyle="flat" btnText="平面按钮"></button>
+        <button ngx-sui-TextButton btnStyle="outline" btnText="空心按钮"></button>
+        <button ngx-sui-TextButton btnStyle="solid" btnText="实心按钮"></button>
+    </div>
+    <div class="fs-24 fw-900">块状按钮</div>
+    <div class="flex col-gap-100">
+        <button ngx-sui-TextButton btnBlocked btnStyle="flat" btnText="平面按钮"></button>
+        <button ngx-sui-TextButton btnBlocked btnStyle="outline" btnText="空心按钮"></button>
+        <button ngx-sui-TextButton btnBlocked btnStyle="solid" btnText="实心按钮"></button>
+    </div>
+    <div class="fs-24 fw-900">图标按钮</div>
+    <div class="flex col-gap-100">
+        <button ngx-sui-IconButton btnIcon="world" btnStyle="flat"></button>
+        <button ngx-sui-IconButton btnCircled="true" btnIcon="world" btnStyle="flat"></button>
+        <button ngx-sui-IconButton btnIcon="world" btnStyle="outline"></button>
+        <button ngx-sui-IconButton btnCircled="true" btnIcon="world" btnStyle="outline"></button>
+        <button ngx-sui-IconButton btnIcon="world" btnStyle="solid"></button>
+        <button ngx-sui-IconButton btnCircled="true" btnIcon="world" btnStyle="solid"></button>
+    </div>
+    <div class="fs-24 fw-900">混合按钮</div>
+    <div class="flex col-gap-100">
+        <button ngx-sui-TextButton btnIcon="world" btnStyle="flat" btnText="平面按钮"></button>
+        <button ngx-sui-TextButton btnIcon="world" btnStyle="outline" btnText="空心按钮"></button>
+        <button ngx-sui-TextButton btnIcon="world" btnStyle="solid" btnText="实心按钮"></button>
+    </div>
+    <div class="fs-24 fw-900">按钮色彩</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="fs-16 fw-700">平面按钮</span>
+            <div class="flex flex-wrap col-gap-100 row-gap-100">
+                <ng-container *ngFor="let item of colorList">
+                    <button ngx-sui-IconButton [btnColor]="item.color" btnIcon="world" btnStyle="flat"></button>
+                    <button ngx-sui-TextButton [btnColor]="item.color" [btnText]="item.label" btnStyle="flat"></button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="fs-16 fw-700">空心按钮</span>
+            <div class="flex flex-wrap col-gap-100 row-gap-100">
+                <ng-container *ngFor="let item of colorList">
+                    <button ngx-sui-IconButton [btnColor]="item.color" btnIcon="world" btnStyle="outline"></button>
+                    <button ngx-sui-TextButton [btnColor]="item.color" [btnText]="item.label" btnStyle="outline"></button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="fs-16 fw-700">实心按钮</span>
+            <div class="flex flex-wrap col-gap-100 row-gap-100">
+                <ng-container *ngFor="let item of colorList">
+                    <button ngx-sui-IconButton [btnColor]="item.color" btnIcon="world" btnStyle="solid"></button>
+                    <button ngx-sui-TextButton [btnColor]="item.color" [btnText]="item.label" btnStyle="solid"></button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">按钮大小</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-baseline col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">平面按钮</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <button ngx-sui-IconButton btnIcon="world" [btnSize]="item.size" btnStyle="flat" *ngFor="let item of sizeList"></button>
+                <button ngx-sui-TextButton btnIcon="world" [btnSize]="item.size" btnStyle="flat" [btnText]="item.text" *ngFor="let item of sizeList"></button>
+            </div>
+        </div>
+        <div class="flex align-items-baseline col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">空心按钮</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <button ngx-sui-IconButton btnIcon="world" [btnSize]="item.size" btnStyle="outline" *ngFor="let item of sizeList"></button>
+                <button ngx-sui-TextButton btnIcon="world" [btnSize]="item.size" btnStyle="outline" [btnText]="item.text" *ngFor="let item of sizeList"></button>
+            </div>
+        </div>
+        <div class="flex align-items-baseline col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">实心按钮</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <button ngx-sui-IconButton btnIcon="world" [btnSize]="item.size" btnStyle="solid" *ngFor="let item of sizeList"></button>
+                <button ngx-sui-TextButton btnIcon="world" [btnSize]="item.size" btnStyle="solid" [btnText]="item.text" *ngFor="let item of sizeList"></button>
+            </div>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">按钮失效</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">平面按钮</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <button ngx-sui-IconButton btnIcon="world" btnDisabled [btnColor]="item.color" btnStyle="flat" *ngFor="let item of colorList"></button>
+                <button ngx-sui-TextButton btnIcon="world" btnDisabled [btnColor]="item.color" btnStyle="flat" [btnText]="item.label" *ngFor="let item of colorList"></button>
+            </div>
+        </div>
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">空心按钮</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <button ngx-sui-IconButton btnIcon="world" btnDisabled [btnColor]="item.color" btnStyle="outline" *ngFor="let item of colorList"></button>
+                <button ngx-sui-TextButton btnIcon="world" btnDisabled [btnColor]="item.color" btnStyle="outline" [btnText]="item.label" *ngFor="let item of colorList"></button>
+            </div>
+        </div>
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">实心按钮</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <button ngx-sui-IconButton btnIcon="world" btnDisabled [btnColor]="item.color" btnStyle="solid" *ngFor="let item of colorList"></button>
+                <button ngx-sui-TextButton btnIcon="world" btnDisabled [btnColor]="item.color" btnStyle="solid" [btnText]="item.label" *ngFor="let item of colorList"></button>
+            </div>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">链接按钮</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex flex-wrap col-gap-100 row-gap-100">
+            <a ngx-sui-LinkButton [btnColor]="item.color" [btnText]="'链接' + item.label" *ngFor="let item of colorList"></a>
+        </div>
+        <div class="flex flex-wrap col-gap-100 row-gap-100">
+            <a ngx-sui-LinkButton btnIcon="link" [btnColor]="item.color" [btnText]="'带图标的链接' + item.label" *ngFor="let item of colorList"></a>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">按钮组</div>
+    <div class="flex col-gap-100">
+        <ngx-sui-button-group>
+            <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+        </ngx-sui-button-group>
+    </div>
+    <div class="fs-24 fw-900">按钮组样式</div>
+    <div class="flex col-gap-100">
+        <ngx-sui-button-group bgStyle="flat">
+            <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+        </ngx-sui-button-group>
+        <ngx-sui-button-group bgStyle="outline">
+            <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+        </ngx-sui-button-group>
+        <ngx-sui-button-group bgStyle="solid">
+            <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+        </ngx-sui-button-group>
+    </div>
+    <div class="fs-24 fw-900">按钮组色彩</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">平面按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgColor]="item.color" bgStyle="flat" *ngFor="let item of colorList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">空心按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgColor]="item.color" bgStyle="outline" *ngFor="let item of colorList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">实心按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgColor]="item.color" bgStyle="solid" *ngFor="let item of colorList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">按钮组大小</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">平面按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgSize]="item.size" bgStyle="flat" *ngFor="let item of sizeList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">空心按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgSize]="item.size" bgStyle="outline" *ngFor="let item of sizeList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">实心按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgSize]="item.size" bgStyle="solid" *ngFor="let item of sizeList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">按钮组失效</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">平面按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgColor]="item.color" bgDisabled bgStyle="flat" *ngFor="let item of colorList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">空心按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgColor]="item.color" bgDisabled bgStyle="outline" *ngFor="let item of colorList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+        <div class="flex align-items-start col-gap-100 row-gap-100">
+            <span class="text-nowrap fs-16 fw-700">实心按钮组</span>
+            <div class="flex flex-wrap align-items-center col-gap-100 row-gap-100">
+                <ngx-sui-button-group [bgColor]="item.color" bgDisabled bgStyle="solid" *ngFor="let item of colorList">
+                    <button ngx-sui-TextButton [btnIcon]="item.icon" [btnText]="item.text" *ngFor="let item of groupList"></button>
+                </ngx-sui-button-group>
+            </div>
+        </div>
+    </div>
 </div>

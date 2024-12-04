@@ -18,15 +18,15 @@ export type NGXSeasonIconName =
     'dashboard' | 'data-cluster' | 'date' | 'deploy' | 'design' | 'details' | 'devices' | 'digital-signature' | 'directory' | 'disconnect' | 'display' | 'dna' | 'document' | 'dollar-bill' | 'dollar' | 'dot-circle' | 'download-cloud' | 'download' | 'drag-handle-corner' | 'drag-handle' |
     'e-check' | 'edit' | 'ellipsis-horizontal' | 'ellipsis-vertical' | 'email' | 'employee-group' | 'employee' | 'eraser' | 'euro' | 'event' | 'expand-card' | 'export' | 'eye-hide' | 'eye-show' | 'eye' |
     'face-happy' | 'face-neutral' | 'face-sad' | 'factory' | 'failure-standard' | 'failure' | 'favorite' | 'file-group' | 'file' | 'filter-off' | 'filter-on' | 'firewall' | 'first-aid-kit' | 'fish' | 'flag' | 'flame' | 'flask' | 'floppy' | 'folder-close' | 'folder-open' | 'font-size' | 'forking' | 'form' | 'fuel' |
-    'gavel' | 'grid-view' | 'group' |
+    'gavel' | 'grid-chart' | 'grid-view' | 'group' |
     'hard-disk' | 'hard-drive' | 'hard-drives' | 'hashtag' | 'heart-broken' | 'heart' | 'heat-map' | 'help-info' | 'help-standard' | 'highlighter' | 'history' | 'home' | 'hourglass' |
-    'id-badge' | 'image-gallery' | 'image' | 'import' | 'info-standard' | 'info' | 'internet-of-things' |
+    'id-badge' | 'image-gallery' | 'image' | 'import' | 'inbox' | 'indent' | 'inductor' | 'info-standard' | 'info' | 'install' | 'internet-of-things' | 'italic' |
     'key' | 'keyboard' |
-    'language' | 'layers' | 'library' | 'lightbulb' | 'list-view' | 'list' | 'login' | 'logout' |
+    'landscape' | 'language' | 'launchpad' | 'layers' | 'library' | 'lightbulb' | 'link' | 'list-view' | 'list' | 'login' | 'logout' |
     'map' | 'map-marker' | 'minus-circle' | 'minus' | 'mobile' | 'moon' | 'mouse' | 'music-note' |
     'new' | 'network-globe' | 'no-access' |
     'organization' |
-    'paperclip' | 'pause' | 'peso' | 'phone' | 'pin' | 'play' | 'plugin' | 'plus-circle' | 'plus' | 'pound' | 'power' | 'printer' |
+    'paperclip' | 'pause' | 'peso' | 'phone' | 'pin' | 'play' | 'plugin' | 'plus-circle' | 'plus' | 'portrait' | 'pound' | 'power' | 'printer' |
     'qrcode' |
     'recycle' | 'redo' | 'refresh' | 'repeat' | 'replay-all' | 'replay-one' | 'resize-down' | 'resize-up' | 'rewind' | 'router' | 'ruble' | 'rupee' |
     'savings' | 'search' | 'server' | 'settings' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'shuffle' | 'slider' | 'star' | 'step-forward' | 'stop' | 'storage' | 'store' | 'success-standard' | 'success' | 'sun' | 'switch' | 'sync' |

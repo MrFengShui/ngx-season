@@ -15,6 +15,6 @@
     </div>
     <div class="fs-20 fw-900">不同颜色提示框</div>
     <div class="flex gx-100">
-        <button ngx-sui-SolidTextButton [btnColor]="item.color" btnBlocked="true" ngx-sui-Tooltip [olColor]="item.color" [ttMsg]="contents.join('$$$')" *ngFor="let item of list">{{ item.label }}</button>
+        <button ngx-sui-TextButton [btnColor]="item.color" btnBlocked="true" ngx-sui-Tooltip [olColor]="item.color" [ttMsg]="contents.join('$$$')" *ngFor="let item of list">{{ item.label }}</button>
     </div>
 </div>

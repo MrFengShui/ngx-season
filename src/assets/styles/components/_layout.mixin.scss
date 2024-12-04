@@ -103,6 +103,14 @@
 
             .content-area {
                 flex: 1 1 auto;
+
+                > * {
+                    &:not(router-outlet) {
+                        min-width: fit-content;
+                        max-width: var(--size-percent-100);
+                        width: var(--size-percent-100);
+                    }
+                }
             }
         }
 

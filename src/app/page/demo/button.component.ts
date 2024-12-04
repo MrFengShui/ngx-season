@@ -11,7 +11,7 @@ import { NGXSeasonSizeOption } from "src/app/utils/_size.utils";
 })
 export class DemoButtonPageComponent {
 
-    protected list: Array<{ color: NGXSeasonColorPalette, label: string }> = [
+    protected colorList: Array<{ color: NGXSeasonColorPalette, label: string }> = [
         { color: 'default', label: '默认按钮' },
         { color: 'primary', label: '主要按钮' },
         { color: 'accent', label: '强调按钮' },
@@ -21,8 +21,20 @@ export class DemoButtonPageComponent {
         { color: 'info', label: '信息按钮' },
         { color: 'help', label: '帮助按钮' }
     ];
-    protected sizes: NGXSeasonSizeOption[] = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
-
-    protected readonly DEMO_ICON: NGXSeasonIconName = 'users';
+    protected sizeList: Array<{ size: NGXSeasonSizeOption, text: string }> = [
+        { size: 'xs', text: '特小号按钮' },
+        { size: 'sm', text: '小号按钮' },
+        { size: 'md', text: '普通按钮' },
+        { size: 'lg', text: '大号按钮' },
+        { size: 'xl', text: '特大号按钮' },
+        { size: 'xxl', text: '极大号按钮' },
+        { size: 'xxxl', text: '最大号按钮' },
+    ];
+    protected groupList: Array<{ icon: NGXSeasonIconName, text: string }> = [
+        { icon: 'align-left-text', text: '居左对齐' },
+        { icon: 'align-center-text', text: '居中对齐' },
+        { icon: 'align-right-text', text: '居右对齐' },
+        { icon: 'align-justify-text', text: '两端对齐' }
+    ];
 
 }

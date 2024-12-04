@@ -12,13 +12,13 @@ import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 @Component({
     selector: 'ngx-sui-calendar-control',
     template: `
-        <button ngx-sui-SolidIconButton [btnColor]="color" btnIcon="minus" (click)="yearDecrement()"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnIcon="minus" btnStyle="solid" (click)="yearDecrement()"></button>
         <span class="text">{{ year }}</span>
-        <button ngx-sui-SolidIconButton [btnColor]="color" btnIcon="plus" (click)="yearIncrement()"></button>
-        <button ngx-sui-SolidIconButton [btnColor]="color" btnIcon="minus" (click)="monthDecrement()"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnIcon="plus" btnStyle="solid" (click)="yearIncrement()"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnIcon="minus" btnStyle="solid" (click)="monthDecrement()"></button>
         <span class="text">{{ month$.asObservable() | async }}</span>
-        <button ngx-sui-SolidIconButton [btnColor]="color" btnIcon="plus" (click)="monthIncrement()"></button>
-        <button ngx-sui-SolidIconButton [btnColor]="color" btnIcon="target" btnCircled="true" (click)="today()"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnIcon="plus" btnStyle="solid" (click)="monthIncrement()"></button>
+        <button ngx-sui-IconButton [btnColor]="color" btnIcon="target" btnCircled="true" btnStyle="solid" (click)="today()"></button>
     `
 })
 export class NGXSeasonCalendarControlComponent implements OnChanges, AfterViewInit {

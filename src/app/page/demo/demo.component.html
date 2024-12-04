@@ -1,7 +1,7 @@
 <ngx-sui-layout>
     <ngx-sui-layout-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
         <ng-template ngx-sui-LayoutHeaderActions="">
-            <button ngx-sui-FlatTextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" btnSize="md" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false">{{ themeFlag ? '黑夜模式' : '白昼模式' }}</button>
+            <button ngx-sui-TextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" btnSize="md" btnStyle="flat" [btnText]="themeFlag ? '黑夜模式' : '白昼模式'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false"></button>
         </ng-template>
     </ngx-sui-layout-header>
     <ngx-sui-layout-content [contentToggled]="controlToggled">
@@ -20,9 +20,7 @@
     <ngx-sui-layout-footer>
         <div class="flex justify-content-between align-items-center w-100 h-100">
             <span class="fs-16 fw-900">在此进行版权声明&nbsp;&nbsp;&nbsp;&copy;2024-2034</span>
-            <button ngx-sui-FlatTextButton btnIcon="calendar" ngx-sui-Popover [olTemp]="template">
-                <span class="ml-50">{{ datetime$ | async }}</span>
-            </button>
+            <button ngx-sui-TextButton btnIcon="calendar" btnStyle="flat" [btnText]="datetime$ | async" ngx-sui-Popover [olTemp]="template"></button>
             <ng-template #template>
                 <div class="popover-container flex-dir-col row-gap-100">
                     <ngx-sui-calendar caleColor="primary" (caleSelectionChange)="selection = $event"></ngx-sui-calendar>

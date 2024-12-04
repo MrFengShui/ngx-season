@@ -37,7 +37,7 @@ export class NGXSeasonLayoutContentAreaDirective {
         <div class="content-side" ngx-sui-Scrollbar [scrollBarAxis]="toggled ? 'xy-axis' : 'y-axis'" #sideBox>
             <ng-container [cdkPortalOutlet]="sidePortal"></ng-container>
         </div>
-        <div class="content-area" ngx-sui-Scrollbar scrollBarAxis="y-axis" #areaBox>
+        <div class="content-area" ngx-sui-Scrollbar scrollBarAxis="xy-axis" #areaBox>
             <ng-container [cdkPortalOutlet]="areaPortal"></ng-container>
         </div>
         <ng-template><ng-content select="[ngx-sui-LayoutContentSide], [ngx-sui-LayoutContentArea]"></ng-content></ng-template>
@@ -144,13 +144,13 @@ export class NGXSeasonLayoutContentComponent implements OnChanges, AfterContentI
         if (this.sideExpandSize < 0 || !this.sideBox || !this.areaBox) throw new Error();
 
         const element: HTMLElement = this.sideBox.nativeElement;
-        
+
         if (!this.player) {
-            this.player = toggled 
+            this.player = toggled
             ? this._builder.build(useAnimation(horizontalExtraCollapsionExpanionAnimation, { params: { start, final, duration } })).create(element)
             : this._builder.build(useAnimation(horizontalExtraCollapsionExpanionAnimation, { params: { start: final, final: start, duration } })).create(element);
         }
-        
+
         this.player.onDone(() => {
             this.changeContentSideSize(toggled ? final : start);
 

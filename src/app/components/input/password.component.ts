@@ -44,7 +44,7 @@ const NGXSeasonPasswordValueAccessor: Provider = {
     `
 })
 export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDestroy, AfterViewInit {
-    
+
     @Input('color')
     set color(color: NGXSeasonInputColor | null) {
         this._color = color ? color : 'default';
@@ -102,9 +102,9 @@ export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDes
     protected extraMatch$: Subject<boolean> = new BehaviorSubject(false);
 
     private readonly DEFAULT_PATTERNS: string[] = [
-        '^.{8,}$', 
-        '^(?=.*[0-9])(?=.*[a-z]).{8,}$', 
-        '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$', 
+        '^.{8,}$',
+        '^(?=.*[0-9])(?=.*[a-z]).{8,}$',
+        '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$',
         '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$'
     ];
     private readonly DEFAULT_SUGGESTS: string[] = ['字符长度至少为8字符', '字符中至少包含一个数字', '字符中至少包含一个小写字母', '字符中至少包含一个大写字母', '字符中至少包含一个特殊符号'];
@@ -172,7 +172,7 @@ export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDes
         if (text && this.sheet.length > 0) {
             for (const item of this.sheet) item.flag = item.expr.test(text);
         }
-        
+
         score = this.sheet.filter(item => item.flag).length;
         score = Math.pow(2, score) - 1;
 
@@ -195,8 +195,8 @@ export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDes
                 </div>
                 <div class="entry-wrapper">
                     <input [attr.type]="visible ? 'text' : 'password'" [attr.placeholder]="placeholder" [attr.value]="text" (input)="writeValue(field.value)" #field/>
-                    <button ngx-sui-FlatIconButton btnCircled="true" [btnColor]="color" btnIcon="times-circle" btnIconOnly="true" (click)="clearText()" *ngIf="showClear"></button>
-                    <button ngx-sui-FlatIconButton btnCircled="true" [btnColor]="color" [btnIcon]="visible ? 'eye-hide' : 'eye-show'" btnIconOnly="true" (click)="visible = !visible" *ngIf="showVisible"></button>
+                    <button ngx-sui-IconButton btnCircled="true" [btnColor]="color" btnIcon="times-circle" btnIconOnly="true" btnStyle="flat" (click)="clearText()" *ngIf="showClear"></button>
+                    <button ngx-sui-IconButton btnCircled="true" [btnColor]="color" [btnIcon]="visible ? 'eye-hide' : 'eye-show'" btnIconOnly="true" btnStyle="flat" (click)="visible = !visible" *ngIf="showVisible"></button>
                 </div>
                 <div class="postfix-wrapper" *ngIf="showSuffix || suffixTemplate">
                     <ng-container [cdkPortalOutlet]="suffixPortal"></ng-container>
@@ -268,7 +268,7 @@ export class NGXSeasonPasswordComponent extends NGXSeasonInputComponent implemen
     private _checkSubject: string | undefined;
     private _checkSuggests: string[] | undefined;
     private _showCheck: boolean = false;
-    private _showVisible: boolean = true;    
+    private _showVisible: boolean = true;
 
     @ViewChild('wrapper', { read: ElementRef, static: true })
     protected wrapper: ElementRef<HTMLElement> | undefined;

@@ -21,7 +21,7 @@ const NGXSeasonTextfieldValueAccessor: Provider = {
                 </div>
                 <div class="entry-wrapper">
                     <input type="text" [attr.placeholder]="placeholder" [attr.value]="text" (input)="writeValue(field.value)" #field/>
-                    <button ngx-sui-FlatIconButton btnCircled="true" [btnColor]="color" btnIcon="times-circle" btnIconOnly="true" (click)="clearText()" *ngIf="showClear"></button>
+                    <button ngx-sui-IconButton btnCircled="true" [btnColor]="color" btnIcon="times-circle" btnIconOnly="true" btnStyle="flat" (click)="clearText()" *ngIf="showClear"></button>
                 </div>
                 <div class="postfix-wrapper" *ngIf="showSuffix || suffixTemplate">
                     <ng-container [cdkPortalOutlet]="suffixPortal"></ng-container>

@@ -30,7 +30,7 @@ export abstract class NGXSeasonModalContainerComponent {
     selector: 'div[ngx-sui-ModalHeader]',
     template:  `
         <div class="header-wrapper"><ng-content></ng-content></div>
-        <button ngx-sui-SolidIconButton btnColor="success" btnCircled="true" [btnIcon]="(_modalRef.resized() | async) ? 'window-restore' : 'window-max'" btnSize="md" (click)="_modalRef.resize()" *ngIf="!_modalRef.isFullScreen() && showResizeBtn"></button>
+        <button ngx-sui-IconButton btnColor="success" btnCircled="true" btnStyle="solid" [btnIcon]="(_modalRef.resized() | async) ? 'window-restore' : 'window-max'" btnSize="md" (click)="_modalRef.resize()" *ngIf="!_modalRef.isFullScreen() && showResizeBtn"></button>
         <button ngx-sui-SolidIconButton btnColor="failure" btnCircled="true" btnIcon="window-close" btnSize="md" (click)="_modalRef.dismiss()" *ngIf="showCloseBtn"></button>
     `
 })
