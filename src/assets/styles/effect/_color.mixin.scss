@@ -1,14 +1,4 @@
-@mixin setup-color-effect($theme, $primaryColor, $accentColor) {
-    $colors: (
-        "default": "gray",
-        "primary": $primaryColor,
-        "accent": $accentColor,
-        "success": "green",
-        "warning": "yellow",
-        "failure": "red",
-        "info": "blue"
-    );
-
+@mixin setup-color-effect($theme, $colors) {
     @each $key, $value in $colors {
         @if $key == "default" {
             --bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
@@ -36,5 +26,10 @@
 
     .bgcolor-white {
         background-color: var(--bgcolor-white);
+    }
+
+    .bgcolor-contrast {
+        background-color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
+        color: if($theme == "light", var(--palette-gray-100-color), var(--palette-gray-900-color));
     }
 }

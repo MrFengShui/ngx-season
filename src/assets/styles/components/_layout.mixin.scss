@@ -74,8 +74,11 @@
                 align-items: center;
                 height: 100%;
 
-                .btn {
-                    height: var(--layout-header-height);
+                .button {
+                    &.text-button {
+                        min-height: var(--size-percent-100);
+                        max-height: var(--size-percent-100);
+                    }
                 }
             }
 

@@ -38,6 +38,7 @@ import { DemoTagPageComponent } from "./demo/tag.component";
 import { DemoTreePageComponent } from "./demo/tree.component";
 import { NGXSeasonTreeModule } from "../components/tree/tree.module";
 import { DemoArticlePageComponent } from "./demo/article.component";
+import { DemoTabbedPageComponent } from "./demo/tabbed.component";
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { DemoArticlePageComponent } from "./demo/article.component";
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
+        DemoTabbedPageComponent,
         DemoTagPageComponent,
         DemoToastPageComponent,
         DemoTooltipPageComponent,
@@ -113,6 +115,7 @@ import { DemoArticlePageComponent } from "./demo/article.component";
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
+        DemoTabbedPageComponent,
         DemoTagPageComponent,
         DemoToastPageComponent,
         DemoTooltipPageComponent,

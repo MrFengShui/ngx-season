@@ -23,6 +23,7 @@
 @import "../components/radio.mixin";
 @import "../components/ripple.mixin";
 @import "../components/scrollbar.mixin";
+@import "../components/tabbed.mixin";
 @import "../components/tag.mixin";
 @import "../components/toast.mixin";
 @import "../components/tooltip.mixin";
@@ -53,7 +54,7 @@
         @include setup-check-theme($theme, $colors);
         @include setup-digital-theme($theme, "indigo", "pink");
         @include setup-divider-theme($theme, "indigo", "pink");
-        @include setup-icons-theme($theme, "indigo", "pink");
+        @include setup-icons-theme($theme, $colors);
         @include setup-input-theme($theme, "indigo", "pink");
         @include setup-layout-theme($theme);
         @include setup-list-theme($theme);
@@ -64,14 +65,15 @@
         @include setup-progress-theme($theme, "indigo", "pink");
         @include setup-radio-theme($theme, $colors);
         @include setup-ribbon-theme($theme, "indigo", "pink");
-        @include setup-scrollbar-theme($theme, "indigo");
+        @include setup-tabbed-theme($theme, $colors);
         @include setup-tag-theme($theme, $colors);
         @include setup-toast-theme($theme);
         @include setup-tooltip-theme($theme, $colors);
         @include setup-tree-theme($theme, $colors);
 
         @include setup-background-effect($theme, "indigo", "pink");
-        @include setup-color-effect($theme, "indigo", "pink");
+        @include setup-color-effect($theme, $colors);
+        @include setup-scrollbar-theme($theme, $colors);
         @include setup-ripple-theme($theme, "indigo", "pink");
     }
 }

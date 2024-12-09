@@ -28,6 +28,7 @@ import { NGXSeasonModalModule } from "./modal/modal.module";
 import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
 import { NGXSeasonTagModule } from "./tag/tag.module";
 import { NGXSeasonArticleModule } from "./article/article.module";
+import { NGXSeasonTabbedModule } from "./tabbed/tabbed.module";
 
 @NgModule({
     imports: [
@@ -58,6 +59,7 @@ import { NGXSeasonArticleModule } from "./article/article.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonTabbedModule,
         NGXSeasonTagModule,
     ],
     exports: [
@@ -86,6 +88,7 @@ import { NGXSeasonArticleModule } from "./article/article.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonTabbedModule,
         NGXSeasonTagModule
     ],
     providers: [

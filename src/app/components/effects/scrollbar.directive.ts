@@ -1,24 +1,45 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
+import { coerceNumberProperty } from "@angular/cdk/coercion";
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
 
-type ScrollbarDirection = 'x-axis' | 'y-axis' | 'xy-axis' | 'none-axis';
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+
+export type NGXSeasonScrollbarDirection = 'x-axis' | 'y-axis' | 'xy-axis' | 'none-axis';
 
 @Directive({
     selector: '[ngx-sui-Scrollbar]'
 })
 export class NGXSeasonScrollbarDirective implements OnChanges, AfterViewInit {
 
-    @Input('scrollBarAxis')
-    set axis(axis: ScrollbarDirection) {
-        this._axis = axis;
+    @Input({ alias: 'sbAxis'})
+    set axis(axis: NGXSeasonScrollbarDirection | undefined | null) {
+        this._axis = axis || 'xy-axis';
     }
 
-    get axis(): ScrollbarDirection {
+    get axis(): NGXSeasonScrollbarDirection {
         return this._axis;
     }
 
-    private _axis: ScrollbarDirection = 'none-axis';
+    @Input({ alias: 'sbColor'})
+    set color(color: NGXSeasonColorPalette | undefined | null) {
+        this._color = color || 'default';
+    }
 
-    private readonly DIRECTIONS: ScrollbarDirection[] = ['xy-axis', 'x-axis', 'y-axis', 'none-axis'];
+    get color(): NGXSeasonColorPalette {
+        return this._color;
+    }
+
+    @Input({ alias: 'sbSize' })
+    set size(size: number | string | undefined | null) {
+        this._size = coerceNumberProperty(size);
+    }
+
+    get size(): number {
+        return this._size;
+    }
+
+    private _axis: NGXSeasonScrollbarDirection = 'xy-axis';
+    private _color: NGXSeasonColorPalette = 'default';
+    private _size: number = 16;
 
     constructor(
         protected _element: ElementRef,
@@ -26,32 +47,40 @@ export class NGXSeasonScrollbarDirective implements OnChanges, AfterViewInit {
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let keys: string[] | null = Object.keys(changes);
+        for (const name in changes) {
+            if (name === 'axis') this.changeScrollbarDirection(changes[name].currentValue as NGXSeasonScrollbarDirection);
 
-        if (keys.includes('axis')) {
-            this.setupScrollbarDirection(changes['axis'].currentValue as ScrollbarDirection);
+            if (name === 'color') this.changeScrollbarColor(changes[name].currentValue as NGXSeasonColorPalette);
+
+            if (name === 'size') this.changeScrollbarSize(coerceNumberProperty(changes[name].currentValue));
         }
-
-        keys.splice(0);
-        keys = null;
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'scrollbar');
-        this.setupScrollbarDirection(this.axis);
+
+        this.changeScrollbarColor(this.color);
+        this.changeScrollbarDirection(this.axis);
+        this.changeScrollbarSize(this.size);
     }
 
-    protected setupScrollbarDirection(axis: ScrollbarDirection): void {
+    protected changeScrollbarColor(color: NGXSeasonColorPalette): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-scrollbar-color', color);
+    }
+
+    protected changeScrollbarDirection(axis: NGXSeasonScrollbarDirection): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-scrollbar-axis', axis);
+    }
+
+    protected changeScrollbarSize(size: number): void {
+        const padding: number = Math.floor(size * 0.125), radius: number = Math.floor(size * 0.25);
+
+        if (padding === 0 || radius === 0) throw new Error();
+
         const element: HTMLElement = this._element.nativeElement;
-        let value: string;
-
-        for (const item of this.DIRECTIONS) {
-            value = `scrollbar-${item}`;
-
-            if (element.classList.contains(value)) this._renderer.removeClass(element, value);
-        }
-
-        Promise.resolve().then(() => this._renderer.addClass(element, `scrollbar-${axis}`));
+        this._renderer.setStyle(element, '--scrollbar-size', `${size}px`, RendererStyleFlags2.DashCase);
+        this._renderer.setStyle(element, '--scrollbar-thumb-padding', `${padding}px`, RendererStyleFlags2.DashCase);
+        this._renderer.setStyle(element, '--scrollbar-thumb-radius', `${radius}px`, RendererStyleFlags2.DashCase);
     }
 
 }

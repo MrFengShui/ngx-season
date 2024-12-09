@@ -54,7 +54,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
     exports: [ NGXSeasonIconComponent ],
     providers: [
         { provide: NGX_SEASON_ICONS_REGISTER_TOKEN, useValue: register },
-        { provide: NGX_SEASON_ICONS_SIZE_MAP_TOKEN, useValue: { xs: 12, sm: 16, md: 20, lg: 28, xl: 44, xxl: 56, xxxl: 64 } },
+        { provide: NGX_SEASON_ICONS_SIZE_MAP_TOKEN, useValue: { xs: 8, sm: 16, md: 24, lg: 36, xl: 48, xxl: 56, xxxl: 64, xxxxl: 72 } },
     ]
 })
 export class NGXSeasonIconModule {}

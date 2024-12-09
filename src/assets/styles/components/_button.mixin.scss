@@ -3,25 +3,21 @@
     $alphaBoxShadow: 25;
     $alphaBTextShadow: 75;
 
-    a {
-        color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
-    }
-
     .button {
         --button-border-radius: #{var(--size-pixel-4)};
-        --button-gap: #{calc(var(--button-font-size) * 0.25)};
-        --button-padding: #{calc(var(--button-font-size) * 0.5)};
 
-        --button-content-gap: #{var(--col-gap-25)};
-        --button-content-font-weight: #{var(--font-weight-900)};
+        --button-icon-padding: #{calc(var(--button-content-size) * 0.125)};
 
-        --button-icon-only-padding: #{calc(var(--button-content-size) * 0.25)};
+        --button-text-content-gap: #{calc(var(--button-content-size) * 0.25)};
+        --button-text-font-size: #{calc(var(--button-content-size) * 2 / 3)};
+        --button-text-font-weight: #{var(--font-weight-700)};
+        --button-text-line-height: #{var(--line-height-100)};
+        --button-text-height: #{calc(var(--button-content-size) * 1.5)};
+        --button-text-padding: #{calc(var(--button-content-size) * 0.5)};
 
         --button-link-line-height: auto;
         --button-link-underline-offset: #{var(--size-pixel-2)};
         --button-link-underline-thick: #{var(--size-pixel-2)};
-
-        --button-text-line-height: #{var(--line-height-100)};
 
         @each $style in $styles {
             &[data-button-style=#{$style}] {
@@ -100,23 +96,12 @@
         border-radius: var(--button-border-radius);
         border-style: solid;
 
-        height: calc(var(--button-content-size) + var(--button-padding) * 2);
-
-        padding-left: calc(var(--button-padding) * 2);
-        padding-right: calc(var(--button-padding) * 2);
-
-        > :nth-child(n) {
-            &:not(:last-child) {
-                margin-right: var(--button-gap);
-            }
-        }
-
         cursor: pointer;
 
         &.icon-button {
-            padding: var(--button-icon-only-padding);
+            padding: var(--button-icon-padding);
 
-            $size: calc(var(--button-content-size) + var(--button-icon-only-padding) * 2);
+            $size: calc(var(--button-content-size) + var(--button-icon-padding) * 2);
             min-width: $size;
             max-width: $size;
             min-height: $size;
@@ -130,19 +115,21 @@
         }
 
         &.link-button, &.text-button {
-            $size: calc(var(--button-content-size) + var(--button-icon-only-padding) * 2);
+            column-gap: var(--button-text-content-gap);
 
-            column-gap: var(--button-content-gap);
+            min-height: var(--button-text-height);
+            max-height: var(--button-text-height);
+            height: var(--button-text-height);
 
-            min-height: $size;
-            max-height: $size;
-            height: $size;
+            padding-left: var(--button-text-padding);
+            padding-right: var(--button-text-padding);
 
             .button-wrapper {
                 display: inline-flex;
 
-                font-size: var(--button-font-size);
-                font-weight: var(--button-content-font-weight);
+                font-size: var(--button-text-font-size);
+                font-weight: var(--button-text-font-weight);
+                line-height: var(--button-text-line-height);
 
                 overflow: hidden;
                 text-overflow: ellipsis;

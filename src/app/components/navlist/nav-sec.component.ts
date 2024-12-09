@@ -14,7 +14,7 @@ import { NGX_SEASON_NAVLIST_TOKEN, NGXSeasonNavlistComponent } from "./nav-list.
     template: `
         <a class="section-header" (click)="handleToggleEvent(content)">
             <span class="section-icon">
-                <ngx-sui-icon [iconShape]="folded ? foldIcon : icon" [iconSolid]="isLinkHover" iconSize="lg" [iconRotateDuration]="duration" [iconDegreeStart]="folded ? 0 : (expanded ? 90 : 180)" [iconDegreeFinal]="folded ? 0 : (expanded ? 180 : 90)" *ngIf="icon"></ngx-sui-icon>
+                <ngx-sui-icon [iconShape]="folded ? foldIcon : icon" [iconSolid]="isLinkHover" [iconRotateDuration]="duration" [iconDegreeStart]="folded ? 0 : (expanded ? 90 : 180)" [iconDegreeFinal]="folded ? 0 : (expanded ? 180 : 90)" *ngIf="icon"></ngx-sui-icon>
             </span>
             <span class="section-text">{{ label }}</span>
         </a>
@@ -194,10 +194,10 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
                 this.close();
             } else {
                 this.expanded = this.expandCache;
-    
+
                 if (this.expanded) this.open(); else this.close();
             }
-            
+
             this.execute(this.content?.nativeElement);
         }
     }
@@ -225,17 +225,17 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         if (!element) throw new Error();
 
         const value: string | null = element.getAttribute('data-navlist-content-size');
-        
+
         if (value) this.executeAnimation(element, this.expanded, 0, value, this.duration);
     }
 
     private executeAnimation(element: HTMLElement, expanded: boolean, start: string | number, final: string | number, duration: number): void {
         if (!this.player) {
-            this.player = expanded 
+            this.player = expanded
                 ? this._builder.build(useAnimation(verticalCollapsionExpanionAnimation, { params: { start, final, duration } })).create(element)
                 : this._builder.build(useAnimation(verticalCollapsionExpanionAnimation, { params: { start: final, final: start, duration } })).create(element);
         }
-        
+
         this.player.onDone(() => {
             this._renderer.setStyle(element, 'height', expanded ? `${final}px`: `${start}px`);
 
@@ -247,8 +247,8 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
     }
 
     private listenNavlistSectionFoldedChange(): void {
-        this._ngZone.runOutsideAngular(() => 
-            this.folded$ = this.foldedChange$.asObservable().subscribe(value => 
+        this._ngZone.runOutsideAngular(() =>
+            this.folded$ = this.foldedChange$.asObservable().subscribe(value =>
                 this._ngZone.run(() => this.setupNavlistSectionFolded(value))));
     }
 

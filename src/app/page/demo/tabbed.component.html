@@ -1,0 +1,27 @@
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-900">基本用法</div>
+    <ngx-sui-tabbed-group>
+        <ngx-sui-tabbed-panel [tabPanelText]="tab.tabLabel" *ngFor="let tab of tabs">
+            <div class="flex justify-content-center align-items-center bgcolor-contrast fs-96 fw-1000 w-100 vh-25">{{ tab.tabContent }}</div>
+        </ngx-sui-tabbed-panel>
+    </ngx-sui-tabbed-group>
+    <div class="fs-24 fw-900">选项卡色彩</div>
+    <ngx-sui-tabbed-group [tabGroupColor]="item.color" *ngFor="let item of list">
+        <ngx-sui-tabbed-panel [tabPanelText]="tab.tabLabel" *ngFor="let tab of tabs">
+            <div class="flex justify-content-center align-items-center bgcolor-{{item.color}} fs-96 fw-1000 w-100 vh-25">{{ item.label }}——{{ tab.tabContent }}</div>
+        </ngx-sui-tabbed-panel>
+    </ngx-sui-tabbed-group>
+    <div class="fs-24 fw-900">选项卡控制条位置</div>
+    <div class="flex col-gap-100 w-100">
+        <ngx-sui-tabbed-group tabGroupCtrlPos="top">
+            <ngx-sui-tabbed-panel [tabPanelText]="tab.tabLabel" *ngFor="let tab of tabs">
+                <div class="flex justify-content-center align-items-center bgcolor-contrast fs-48 fw-1000 w-100 vh-25">{{ tab.tabContent }}</div>
+            </ngx-sui-tabbed-panel>
+        </ngx-sui-tabbed-group>
+        <ngx-sui-tabbed-group tabGroupCtrlPos="bottom">
+            <ngx-sui-tabbed-panel [tabPanelText]="tab.tabLabel" *ngFor="let tab of tabs">
+                <div class="flex justify-content-center align-items-center bgcolor-contrast fs-48 fw-1000 w-100 vh-25">{{ tab.tabContent }}</div>
+            </ngx-sui-tabbed-panel>
+        </ngx-sui-tabbed-group>
+    </div>
+</div>

@@ -26,9 +26,10 @@ export class DemoButtonPageComponent {
         { size: 'sm', text: '小号按钮' },
         { size: 'md', text: '普通按钮' },
         { size: 'lg', text: '大号按钮' },
-        { size: 'xl', text: '特大号按钮' },
-        { size: 'xxl', text: '极大号按钮' },
-        { size: 'xxxl', text: '最大号按钮' },
+        { size: 'xl', text: '加大号按钮' },
+        { size: 'xxl', text: '特大号按钮' },
+        { size: 'xxxl', text: '极大号按钮' },
+        { size: 'xxxxl', text: '最大号按钮' },
     ];
     protected groupList: Array<{ icon: NGXSeasonIconName, text: string }> = [
         { icon: 'align-left-text', text: '居左对齐' },

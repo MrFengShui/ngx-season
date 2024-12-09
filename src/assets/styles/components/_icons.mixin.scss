@@ -1,15 +1,4 @@
-@mixin setup-icons-theme($theme, $primaryColor, $accentColor) {
-    $colors: (
-        "default": "gray",
-        "primary": $primaryColor,
-        "accent": $accentColor,
-        "success": "green",
-        "warning": "yellow",
-        "failure": "red",
-        "info": "blue",
-        "help": "gray"
-    );
-
+@mixin setup-icons-theme($theme, $colors) {
     .icon {
         @each $key, $value in $colors {
             @if $key == "default" {

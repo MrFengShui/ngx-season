@@ -2,6 +2,7 @@ import { AnimationBuilder, AnimationPlayer, useAnimation } from "@angular/animat
 import { coerceNumberProperty, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TemplatePortal } from "@angular/cdk/portal";
 import { Component, OnChanges, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, SimpleChanges, Directive, TemplateRef, ContentChild, AfterContentInit, ViewContainerRef } from "@angular/core";
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 import { horizontalExtraCollapsionExpanionAnimation } from "src/app/utils/animate.utils";
 
@@ -34,10 +35,10 @@ export class NGXSeasonLayoutContentAreaDirective {
 @Component({
     selector: 'ngx-sui-layout-content',
     template: `
-        <div class="content-side" ngx-sui-Scrollbar [scrollBarAxis]="toggled ? 'xy-axis' : 'y-axis'" #sideBox>
+        <div class="content-side" ngx-sui-Scrollbar [sbColor]="color" [sbAxis]="toggled ? 'xy-axis' : 'y-axis'" #sideBox>
             <ng-container [cdkPortalOutlet]="sidePortal"></ng-container>
         </div>
-        <div class="content-area" ngx-sui-Scrollbar scrollBarAxis="xy-axis" #areaBox>
+        <div class="content-area" ngx-sui-Scrollbar [sbColor]="color" sbAxis="xy-axis" #areaBox>
             <ng-container [cdkPortalOutlet]="areaPortal"></ng-container>
         </div>
         <ng-template><ng-content select="[ngx-sui-LayoutContentSide], [ngx-sui-LayoutContentArea]"></ng-content></ng-template>
@@ -45,7 +46,16 @@ export class NGXSeasonLayoutContentAreaDirective {
 })
 export class NGXSeasonLayoutContentComponent implements OnChanges, AfterContentInit, AfterViewInit {
 
-    @Input('contentDuration')
+    @Input({ alias: 'lcColor' })
+    set color(color: NGXSeasonColorPalette | undefined | null) {
+        this._color = color || 'default';
+    }
+
+    get color(): NGXSeasonColorPalette {
+        return this._color;
+    }
+
+    @Input({ alias: 'lcDuration' })
     set duration(duration: number | string | null) {
         this._duration = duration ? coerceNumberProperty(duration) : 250;
     }
@@ -54,7 +64,7 @@ export class NGXSeasonLayoutContentComponent implements OnChanges, AfterContentI
         return this._duration;
     }
 
-    @Input('contentSideShrinkSize')
+    @Input({ alias: 'lcSideShrinkSize' })
     set sideShrinkSize(sideShrinkSize: number | string | null) {
         this._sideShrinkSize = sideShrinkSize ? coerceNumberProperty(sideShrinkSize) : 64;
     }
@@ -63,7 +73,7 @@ export class NGXSeasonLayoutContentComponent implements OnChanges, AfterContentI
         return this._sideShrinkSize;
     }
 
-    @Input('contentSideExpandSize')
+    @Input({ alias: 'lcSideExpandSize' })
     set sideExpandSize(sideExpandSize: number | string | null) {
         this._sideExpandSize = sideExpandSize ? coerceNumberProperty(sideExpandSize) : 256;
     }
@@ -72,7 +82,7 @@ export class NGXSeasonLayoutContentComponent implements OnChanges, AfterContentI
         return this._sideExpandSize;
     }
 
-    @Input('contentToggled')
+    @Input({ alias: 'lcToggled' })
     set toggled(sideToggled: boolean | string | null) {
         this._toggled = coerceBooleanProperty(sideToggled);
     }
@@ -93,6 +103,7 @@ export class NGXSeasonLayoutContentComponent implements OnChanges, AfterContentI
     @ViewChild('areaBox', { read: ElementRef, static: true })
     protected areaBox: ElementRef<HTMLDivElement> | undefined;
 
+    private _color: NGXSeasonColorPalette = 'default';
     private _duration: number = 250;
     private _sideShrinkSize: number = 64;
     private _sideExpandSize: number = 256;

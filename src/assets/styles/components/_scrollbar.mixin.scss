@@ -1,29 +1,36 @@
-@mixin setup-scrollbar-theme($theme, $color) {
+@mixin setup-scrollbar-theme($theme, $colors) {
+    $alphas: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100);
+
     .scrollbar {
-        --scrollbar-width-height: #{var(--size-pixel-12)};
+        --scrollbar-thumb-radius: #{var(--size-pixel-4)};
 
-        --scrollbar-thumb-border-radius: #{var(--size-pixel-3)};
+        @each $key, $value in $colors {
+            --scrollbar-thumb-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            --scrollbar-thumb-bgcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+            --scrollbar-thumb-bgcolor-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+        }
 
-        --scrollbar-thumb-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-        --scrollbar-thumb-bgcolor-hover: #{var(--palette-gray-500-color)};
-        --scrollbar-thumb-bgcolor-active: #{if($theme == "light", var(--palette-gray-400-color), var(--palette-gray-600-color))};
+        scroll-behavior: smooth;
 
-        &.scrollbar-x-axis {
+        &[data-scrollbar-axis="x-axis"] {
             overflow-x: auto;
             overflow-y: hidden;
+            scroll-snap-type: x mandatory;
         }
 
-        &.scrollbar-y-axis {
+        &[data-scrollbar-axis="y-axis"] {
             overflow-x: hidden;
             overflow-y: auto;
+            scroll-snap-type: y mandatory;
         }
 
-        &.scrollbar-xy-axis {
+        &[data-scrollbar-axis="xy-axis"] {
             overflow-x: auto;
             overflow-y: auto;
+            scroll-snap-type: both mandatory;
         }
 
-        &.scrollbar-none-axis {
+        &[data-scrollbar-axis="none-axis"] {
             overflow-x: hidden;
             overflow-y: hidden;
         }
@@ -32,36 +39,40 @@
             appearance: none;
             outline: none;
 
-            width: var(--scrollbar-width-height);
-            height: var(--scrollbar-width-height);
+            width: var(--scrollbar-size);
+            height: var(--scrollbar-size);
         }
 
         &::-webkit-scrollbar-thumb {
-            border-radius: var(--scrollbar-thumb-border-radius);
+            background-clip: padding-box;
+
+            border-color: transparent;
+            border-radius: var(--scrollbar-thumb-radius);
+            border-width: var(--scrollbar-thumb-padding);
+            border-style: solid;
         }
 
         &::-webkit-scrollbar-corner {
             background: transparent;
         }
 
-        &:hover {
-            &:not(:hover) {
-                &::-webkit-scrollbar-thumb {
-                    background: transparent;
-                }
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background: var(--scrollbar-thumb-bgcolor);
-
+        @each $color in map-keys($colors) {
+            &[data-scrollbar-color=#{$color}] {
                 &:hover {
-                    background: var(--scrollbar-thumb-bgcolor-hover);
-                }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: var(--scrollbar-thumb-bgcolor-#{$color});
 
-                &:active {
-                    background: var(--scrollbar-thumb-bgcolor-active);
+                        &:hover {
+                            background-color: var(--scrollbar-thumb-bgcolor-hover-#{$color});
+                        }
+
+                        &:active {
+                            background-color: var(--scrollbar-thumb-bgcolor-active-#{$color});
+                        }
+                    }
                 }
             }
         }
     }
 }
+

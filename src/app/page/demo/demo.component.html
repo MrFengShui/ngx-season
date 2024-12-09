@@ -1,10 +1,10 @@
 <ngx-sui-layout>
-    <ngx-sui-layout-header [headerLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" headerLogoHref="http://localhost:5200/ngx-season/" headerShowCtrl="true" [(headerToggled)]="controlToggled">
+    <ngx-sui-layout-header [lhLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" lhLogoHref="http://localhost:5200/ngx-season/" lhShowCtrl="true" [(lhToggled)]="controlToggled">
         <ng-template ngx-sui-LayoutHeaderActions="">
             <button ngx-sui-TextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" btnSize="md" btnStyle="flat" [btnText]="themeFlag ? '黑夜模式' : '白昼模式'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false"></button>
         </ng-template>
     </ngx-sui-layout-header>
-    <ngx-sui-layout-content [contentToggled]="controlToggled">
+    <ngx-sui-layout-content [lcToggled]="controlToggled">
         <ng-template ngx-sui-LayoutContentSide>
             <ngx-sui-navlist>
                 <ng-container *ngFor="let item of NAV_META_INFO_LIST; index as idx">

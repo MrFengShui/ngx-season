@@ -45,7 +45,7 @@ export class NGXSeasonLayoutHeaderActionsDirective {
 })
 export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
 
-    @Input('headerLogoHref')
+    @Input({ alias: 'lhLogoHref' })
     set logoHref(logoHref: string) {
         this._logoHref = logoHref;
     }
@@ -54,7 +54,7 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, Aft
         return this._sanitizer.bypassSecurityTrustUrl(this._logoHref);
     }
 
-    @Input('headerLogoIcon')
+    @Input({ alias: 'lhLogoIcon' })
     set logoIcon(logoIcon: string) {
         this._logoIcon = logoIcon;
     }
@@ -63,7 +63,7 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, Aft
         return this._logoIcon;
     }
 
-    @Input('headerShowCtrl')
+    @Input({ alias: 'lhShowCtrl' })
     set showCtrl(showCtrl: boolean | string) {
         this._showCtrl = coerceBooleanProperty(showCtrl);
     }
@@ -72,7 +72,7 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, Aft
         return this._showCtrl;
     }
 
-    @Input('headerToggled')
+    @Input({ alias: 'lhToggled' })
     set toggled(toggled: boolean | string) {
         this._toggled = coerceBooleanProperty(toggled);
     }
@@ -86,7 +86,7 @@ export class NGXSeasonLayoutHeaderComponent implements OnChanges, OnDestroy, Aft
     private _showCtrl: boolean = true;
     private _toggled: boolean = false;
 
-    @Output('headerToggledChange')
+    @Output('lhToggledChange')
     protected toggledChange: EventEmitter<boolean> = new EventEmitter(true);
 
     @ContentChild(NGXSeasonLayoutHeaderContentDirective)

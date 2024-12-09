@@ -140,9 +140,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         @Inject(NGX_SEASON_ICONS_SIZE_MAP_TOKEN)
         protected _iconSizeMap: NGXSeasonSizeMap,
         @Inject(NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN)
-        protected _borderSizeMap: NGXSeasonSizeMap,
-        @Inject(NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN)
-        protected _fontSizeMap: NGXSeasonSizeMap
+        protected _borderSizeMap: NGXSeasonSizeMap
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -166,6 +164,10 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         this.changeButtonStyle(this.style);
     }
 
+    fetchHostElement(): HTMLElement {
+        return this._element.nativeElement;
+    }
+
     protected changeButtonColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-button-color', color);
     }
@@ -183,10 +185,8 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
     protected changeButtonSize(size: NGXSeasonSizeOption): void {
         const borderSize: number = this._borderSizeMap[size];
         const contentSize: number = this._iconSizeMap[size];
-        const fontSize: number = this._fontSizeMap[size];
         this._renderer.setStyle(this._element.nativeElement, '--button-border-size', `${borderSize}px`, RendererStyleFlags2.DashCase);
         this._renderer.setStyle(this._element.nativeElement, '--button-content-size', `${contentSize}px`, RendererStyleFlags2.DashCase);
-        this._renderer.setStyle(this._element.nativeElement, '--button-font-size', `${fontSize}px`, RendererStyleFlags2.DashCase);
     }
 
     protected changeButtonStyle(style: NGXSeasonButtonStyle): void {

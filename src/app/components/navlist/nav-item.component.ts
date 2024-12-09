@@ -7,7 +7,7 @@ import { NGXSeasonIconName } from "../icon/icon.component";
     selector: 'a[ngx-sui-NavListItem]',
     template: `
         <span class="list-item-icon">
-            <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'" iconSize="lg"></ngx-sui-icon>
+            <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'"></ngx-sui-icon>
         </span>
         <div class="list-item-wrapper"><ng-content></ng-content></div>
     `
