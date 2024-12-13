@@ -6,25 +6,19 @@ import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
     templateUrl: './icon.component.html',
     styles: `
         :host {
-            .wrapper {
-                position: relative;
+            .toolbar {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
 
-                .toolbar {
-                    position: sticky;
-                    top: 0;
-                    z-index: 10;
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-auto-flow: row;
 
-                    margin: -1rem -1rem 0 -1rem;
-                }
-
-                .grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                    grid-auto-flow: row;
-
-                    a {
-                        text-wrap: nowrap
-                    }
+                a {
+                    text-wrap: nowrap
                 }
             }
         }
@@ -66,7 +60,7 @@ export class DemoIconPageComponent {
         {
             label: '字母F开头',
             names: [
-                'face-happy', 'face-neutral', 'face-sad', 'factory', 'failure-standard', 'failure', 'favorite', 'file-group', 'file', 'filter-off', 'filter-on', 'firewall', 'first-aid-kit', 'fish', 'flag', 'flame', 'flask', 'floppy', 'folder-close', 'folder-open', 'font-size', 'forking', 'form', 'fuel',
+                'face-happy', 'face-neutral', 'face-sad', 'factory', 'failure-standard', 'failure', 'favorite', 'file-group', 'file', 'film-strip', 'filter-off', 'filter-on', 'firewall', 'first-aid-kit', 'fish', 'flag', 'flame', 'flask', 'floppy', 'folder-close', 'folder-open', 'font-size', 'forking', 'form', 'fuel',
             ]
         },
         {

@@ -23,9 +23,9 @@ import { NGX_SEASON_NAVLIST_TOKEN, NGXSeasonNavlistComponent } from "./nav-list.
         </div>
     `
 })
-export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDestroy, AfterViewInit {
+export class NGXSeasonNavlistSectionComponent implements OnChanges, OnDestroy, AfterViewInit {
 
-    @Input('navSecFoldHref')
+    @Input({ alias: 'nsFoldHref' })
     set foldHref(foldHref: string | string[] | undefined | null) {
         this._foldHref = foldHref ? foldHref : undefined;
     }
@@ -34,7 +34,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         return this._foldHref;
     }
 
-    @Input('navSecFoldIcon')
+    @Input({ alias: 'nsFoldIcon' })
     set foldIcon(foldIcon: NGXSeasonIconName | undefined | null) {
         this._foldIcon = foldIcon ? foldIcon : undefined;
     }
@@ -43,7 +43,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         return this._foldIcon;
     }
 
-    @Input('navSecIcon')
+    @Input({ alias: 'nsIcon' })
     set icon(icon: NGXSeasonIconName | null) {
         this._icon = icon ? icon : 'angle';
     }
@@ -52,7 +52,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         return this._icon;
     }
 
-    @Input('navSecDuration')
+    @Input({ alias: 'nsDuration' })
     set duration(duration: boolean | string | null) {
         this._duration = coerceNumberProperty(duration);
     }
@@ -61,7 +61,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         return this._duration;
     }
 
-    @Input('navSecExpanded')
+    @Input({ alias: 'nsExpanded' })
     set expanded(expanded: boolean | string | null) {
         this._expanded = coerceBooleanProperty(expanded);
     }
@@ -70,7 +70,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         return this._expanded;
     }
 
-    @Input('navSecFolded')
+    @Input({ alias: 'nsFolded' })
     set folded(folded: boolean | string | null) {
         this._folded = coerceBooleanProperty(folded);
     }
@@ -79,7 +79,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         return this._folded;
     }
 
-    @Input('navSecLabel')
+    @Input({ alias: 'nsLabel' })
     set label(label: string | undefined | null) {
         this._label = label ? label : undefined;
     }
@@ -96,8 +96,8 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
     private _folded: boolean = false;
     private _label: string | undefined;
 
-    @Output('blockExpandedChange')
-    protected expandedChange: EventEmitter<boolean> = new EventEmitter(true);
+    // @Output('blockExpandedChange')
+    // expandedChange: EventEmitter<boolean> = new EventEmitter(true);
 
     @ViewChild('content', { read: ElementRef, static: true })
     protected content: ElementRef<HTMLElement> | undefined;
@@ -117,6 +117,7 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
 
     protected isLinkHover: boolean = false;
 
+    private expandedChange$: Subject<boolean> = new BehaviorSubject(this.expanded);
     private foldedChange$: Subject<boolean> = new BehaviorSubject(this.folded);
 
     private player: AnimationPlayer | undefined;
@@ -143,14 +144,11 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
         }
     }
 
-    ngOnInit(): void {
-        this.expandedChange.emit(this.expanded);
-    }
-
     ngOnDestroy(): void {
-        this.expandedChange.complete();
-        this.foldedChange$.complete();
         this.folded$.unsubscribe();
+
+        this.foldedChange$.complete();
+        this.expandedChange$.complete();
     }
 
     ngAfterViewInit(): void {
@@ -172,17 +170,17 @@ export class NGXSeasonNavlistSectionComponent implements OnChanges, OnInit, OnDe
 
     open(): void {
         this.expanded = true;
-        this.expandedChange.emit(this.expanded);
+        this.expandedChange$.next(this.expanded);
     }
 
     close(): void {
         this.expanded = false;
-        this.expandedChange.emit(this.expanded);
+        this.expandedChange$.next(this.expanded);
     }
 
     toggle(): void {
         this.expanded = !this.expanded;
-        this.expandedChange.emit(this.expanded);
+        this.expandedChange$.next(this.expanded);
     }
 
     protected setupNavlistSectionFolded(folded: boolean): void {

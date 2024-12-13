@@ -1,0 +1,35 @@
+<div class="toolbar bgcolor-default flex flex-dir-col row-gap-100 p-100">
+    <div class="flex col-gap-100">
+        <span class="fs-16 fw-1000">变化色彩：</span>
+        <span ngx-sui-RadioButtonGroup rgName="group_color" [(rgSelectedValue)]="color" #groupColor></span>
+        <label ngx-sui-RadioButton [rbGroup]="groupColor" [radioValue]="item.color" *ngFor="let item of colorList">{{ item.label }}</label>
+    </div>
+    <div class="flex col-gap-100">
+        <span class="fs-16 fw-1000">变化方式：</span>
+        <span ngx-sui-RadioButtonGroup rgName="group_manner" [(rgSelectedValue)]="manner" #groupManner></span>
+        <label ngx-sui-RadioButton [rbGroup]="groupManner" radioValue="alternate">交替往返</label>
+        <label ngx-sui-RadioButton [rbGroup]="groupManner" radioValue="fade">若隐若现</label>
+        <div class="flex-auto"></div>
+        <span class="fs-16 fw-1000">变化速度：</span>
+        <span ngx-sui-RadioButtonGroup rgName="group_speed" [(rgSelectedValue)]="speed" #groupSpeed></span>
+        <label ngx-sui-RadioButton [rbGroup]="groupSpeed" [radioValue]="item.speed" *ngFor="let item of speedList">{{ item.label }}</label>
+        <div class="flex-auto"></div>
+        <label ngx-sui-CheckSwitch checkLabelPos="before" [(checkChecked)]="showShadow">是否显示阴影</label>
+    </div>
+</div>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-900">媒体占位符</div>
+    <div class="flex col-gap-100">
+        <div ngx-sui-MediaBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow" mbType="image" mbHeight="480"></div>
+        <div ngx-sui-MediaBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow" mbType="audio" mbHeight="480"></div>
+        <div ngx-sui-MediaBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow" mbType="video" mbHeight="480"></div>
+    </div>
+    <div class="fs-24 fw-900">元信息占位符</div>
+    <div ngx-sui-MetainfoBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow"></div>
+    <div class="fs-24 fw-900">段落占位符</div>
+    <div class="flex flex-dir-col row-gap-150">
+        <div ngx-sui-ParagraphBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow"></div>
+        <div ngx-sui-ParagraphBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow"></div>
+        <div ngx-sui-ParagraphBanner [banColor]="color" [banManner]="manner" [banSpeed]="speed" [banShowShadow]="showShadow"></div>
+    </div>
+</div>

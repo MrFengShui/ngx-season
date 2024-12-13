@@ -1,4 +1,4 @@
-@mixin setup-navlist-theme($theme, $color) {
+@mixin setup-navlist-theme($theme, $colors) {
     .nav-list {
         --navlist-collapsed-size: #{var(--layout-content-side-collapsed-size)};
 
@@ -9,21 +9,42 @@
         --navlist-section-header-icon-width: #{var(--navlist-collapsed-size)};
         --navlist-section-header-icon-height: #{var(--navlist-section-header-height)};
 
-        --navlist-item-height: #{var(--size-pixel-42)};
-        --navlist-item-font-size: #{var(--font-size-16)};
-        --navlist-item-font-weight: #{var(--font-weight-500)};
-        --navlist-item-line-height: #{var(--line-height-100)};
-        --navlist-item-icon-width: #{var(--navlist-collapsed-size)};
-        --navlist-item-icon-height: #{var(--navlist-item-height)};
+        --navitem-height: #{var(--size-pixel-42)};
+        --navitem-font-size: #{var(--font-size-16)};
+        --navitem-font-weight: #{var(--font-weight-500)};
+        --navitem-selected-font-weight: #{var(--font-weight-1000)};
+        --navitem-line-height: #{var(--line-height-100)};
+        --navitem-icon-width: #{var(--navlist-collapsed-size)};
+        --navitem-icon-height: #{var(--navitem-height)};
+        --navitem-mark-width: #{var(--size-pixel-16)};
+        --navitem-mark-height: #{var(--navitem-height)};
 
-        --navlist-item-bgcolor-hover: #{var(--palette-#{$color}-600-color)};
-        --navlist-item-bgcolor-active: #{var(--palette-#{$color}-400-color)};
-        --navlist-item-bgcolor-selected: #{var(--palette-#{$color}-500-color)};
+        --navitem-bgcolor: transparent;
+        --navitem-color: #{if($theme == "light", var(--palette-gray-900-color), var(--palette-gray-100-color))};
 
-        --navlist-item-color: #{if($theme == "light", var(--palette-gray-800-color), var(--palette-gray-200-color))};
-        --navlist-item-color-hover: #{var(--palette-gray-300-color)};
-        --navlist-item-color-active: #{var(--palette-gray-100-color)};
-        --navlist-item-color-selected: #{var(--palette-gray-100-color)};
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --navitem-bgcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --navitem-bgcolor-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+                --navitem-bgcolor-selected-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --navitem-mark-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+
+                --navitem-color-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+                --navitem-color-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-600-color), var(--palette-#{$value}-400-color))};
+                --navitem-color-selected-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+            } @else {
+                --navitem-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                --navitem-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+                --navitem-bgcolor-selected-#{$key}: #{var(--palette-#{$value}-color-50)};
+
+                --navitem-mark-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --navitem-color-hover-#{$key}: #{var(--palette-gray-50-color)};
+                --navitem-color-active-#{$key}: #{var(--palette-gray-50-color)};
+                --navitem-color-selected-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+            }
+        }
 
         display: inline-flex;
         flex-direction: column;
@@ -62,7 +83,7 @@
             .section-content {
                 display: inline-flex;
                 flex-direction: column;
-                
+
                 overflow: hidden;
             }
         }
@@ -71,42 +92,78 @@
             display: flex;
             align-items: center;
 
-            font-size: var(--navlist-item-font-size);
-            font-weight: var(--navlist-item-font-weight);
-            line-height: var(--navlist-item-line-height);
+            font-size: var(--navitem-font-size);
+            font-weight: var(--navitem-font-weight);
+            line-height: var(--navitem-line-height);
 
             white-space: nowrap;
 
-            height: var(--navlist-item-height);
+            height: var(--navitem-height);
+
+            &.selected {
+                font-weight: var(--navitem-selected-font-weight);
+            }
 
             .list-item-icon {
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
 
-                width: var(--navlist-item-icon-width);
-                height: var(--navlist-item-icon-height);
+                width: var(--navitem-icon-width);
+                height: var(--navitem-icon-height);
             }
 
-            color: var(--navlist-item-color);
+            .list-item-wrapper {
+                display: flex;
+                flex: 1 1 auto;
+                align-items: center;
 
-            &:hover {
-                background-color: var(--navlist-item-bgcolor-hover);
-                color: var(--navlist-item-color-hover);
-            }
+                .text {
+                    flex: 1 1 auto;
+                }
 
-            &:active {
-                background-color: var(--navlist-item-bgcolor-active);
-                color: var(--navlist-item-color-active);
-            }
+                .mark {
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
 
-            &.selected {
-                background-color: var(--navlist-item-bgcolor-selected);
-                color: var(--navlist-item-color-selected);
+                    display: inline-block;
+
+                    width: var(--navitem-mark-width);
+                    height: var(--navitem-mark-height);
+                }
             }
 
             .icon {
                 margin-right: var(--navlink-icon-margin);
+            }
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-navlist-color=#{$color}] {
+                .nav-list-item {
+                    background-color: var(--navitem-bgcolor);
+                    color: var(--navitem-color);
+
+                    &:hover {
+                        background-color: var(--navitem-bgcolor-hover-#{$color});
+                        color: var(--navitem-color-hover-#{$color});
+                    }
+
+                    &:active {
+                        background-color: var(--navitem-bgcolor-active-#{$color});
+                        color: var(--navitem-color-active-#{$color});
+                    }
+
+                    &.selected {
+                        background-color: var(--navitem-bgcolor-selected-#{$color});
+                        color: var(--navitem-color-selected-#{$color});
+
+                        .list-item-wrapper {
+                            .mark {
+                                background-color: var(--navitem-mark-bgcolor-#{$color});
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,40 +1,38 @@
+import { PortalModule } from "@angular/cdk/portal";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { NGXSeasonAvatarModule } from "../avatar/avatar.module";
+import { NGXSeasonButtonModule } from "../button/button.module";
 
 import { NGXSeasonCardComponent } from "./card.component";
-import { NGXSeasonCardHeaderComponent, NGXSeasonCardHeaderDirective } from "./card-header.component";
-import { NGXSeasonCardFooterComponent, NGXSeasonCardFooterDirective } from "./card-footer.component";
-import { NGXSeasonCardActionBlockComponent, NGXSeasonCardMediaBlockComponent } from "./card-block.component";
-import { NGXSeasonCardContentComponent } from "./card-content.component";
-import { NGXSeasonCardImageDirective } from "./card-image.component";
+import { NGXSeasonCardHeaderComponent } from "./card-widget.component";
+import { NGXSeasonCardFooterComponent } from "./card-widget.component";
+import { NGXSeasonCardContentComponent } from "./card-widget.component";
+import { NGXSeasonCardMediaComponent, NGXSeasonCardMediaDirective } from "./card-media.component";
 
 @NgModule({
     declarations: [
         NGXSeasonCardComponent,
         NGXSeasonCardHeaderComponent,
-        NGXSeasonCardHeaderDirective,
         NGXSeasonCardFooterComponent,
-        NGXSeasonCardFooterDirective,
-        NGXSeasonCardActionBlockComponent,
-        NGXSeasonCardMediaBlockComponent,
-        NGXSeasonCardImageDirective,
+        NGXSeasonCardMediaComponent,
+        NGXSeasonCardMediaDirective,
         NGXSeasonCardContentComponent,
     ],
     imports: [
         CommonModule,
-        NGXSeasonAvatarModule
+        PortalModule,
+
+        NGXSeasonAvatarModule,
+        NGXSeasonButtonModule
     ],
     exports: [
         NGXSeasonCardComponent,
         NGXSeasonCardHeaderComponent,
-        NGXSeasonCardHeaderDirective,
         NGXSeasonCardFooterComponent,
-        NGXSeasonCardFooterDirective,
-        NGXSeasonCardActionBlockComponent,
-        NGXSeasonCardMediaBlockComponent,
-        NGXSeasonCardImageDirective,
+        NGXSeasonCardMediaComponent,
+        NGXSeasonCardMediaDirective,
         NGXSeasonCardContentComponent,
     ]
 })

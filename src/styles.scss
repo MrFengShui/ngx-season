@@ -18,6 +18,10 @@ $themes: ("default", "spring", "summer", "autumn", "winter");
     background-color: var(--palette-gray-900-color);
     color: var(--palette-gray-100-color);
 
+    a {
+        color: var(--palette-gray-100-color);
+    }
+
     @each $theme in $themes {
         @if $theme == "spring" {
 
@@ -30,6 +34,10 @@ $themes: ("default", "spring", "summer", "autumn", "winter");
 [data-theme*="light"] {
     background-color: var(--palette-gray-100-color);
     color: var(--palette-gray-900-color);
+
+    a {
+        color: var(--palette-gray-900-color);
+    }
 
     @each $theme in $themes {
         @if $theme == "spring" {

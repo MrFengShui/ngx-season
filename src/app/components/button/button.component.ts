@@ -90,6 +90,15 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._disabled;
     }
 
+    @Input('btnShadow')
+    set shadow(shadow: boolean | string | undefined | null) {
+        this._shadow = coerceBooleanProperty(shadow);
+    }
+
+    get shadow(): boolean {
+        return this._shadow;
+    }
+
     @Input('btnSize')
     set size(size: NGXSeasonSizeOption | undefined | null) {
         this._size = size || 'md';
@@ -116,6 +125,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
     private _rotateDuration: number = 0;
     private _rotateInfinite: boolean = false;
     private _disabled: boolean = false;
+    private _shadow: boolean = false;
     private _size: NGXSeasonSizeOption = 'md';
     private _style: NGXSeasonButtonStyle = 'outline';
 
@@ -149,6 +159,8 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
 
             if (name === 'disabled') this.setupButtonDisabled(coerceBooleanProperty(changes[name].currentValue));
 
+            if (name === 'shadow') this.setupButtonShadow(coerceBooleanProperty(changes[name].currentValue));
+
             if (name === 'size') this.changeButtonSize(changes[name].currentValue as NGXSeasonSizeOption);
 
             if (name === 'style') this.changeButtonStyle(changes[name].currentValue as NGXSeasonButtonStyle);
@@ -160,6 +172,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
 
         this.changeButtonColor(this.color);
         this.setupButtonDisabled(this.disabled);
+        this.setupButtonShadow(this.shadow);
         this.changeButtonSize(this.size);
         this.changeButtonStyle(this.style);
     }
@@ -191,6 +204,13 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
 
     protected changeButtonStyle(style: NGXSeasonButtonStyle): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-button-style', style);
+    }
+
+    protected setupButtonShadow(shadow: boolean): void {
+        const element: HTMLElement = this._element.nativeElement;
+
+        if (shadow) this._renderer.addClass(element, 'button-shadow');
+        else this._renderer.removeClass(element, 'button-shadow');
     }
 
 }

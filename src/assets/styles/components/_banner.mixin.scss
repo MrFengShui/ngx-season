@@ -1,0 +1,86 @@
+@mixin setup-banner-theme($theme, $colors) {
+    $alphas: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100);
+
+    .banner {
+        --banner-shadow-blur: #{var(--size-pixel-4)};
+
+        --banner-media-border-radius: #{var(--size-pixel-4)};
+
+        --banner-paragraph-gap: #{var(--row-gap-50)};
+        --banner-paragraph-item-height: #{var(--size-pixel-16)};
+
+        --banner-profile-gap: #{var(--col-gap-100)};
+        --banner-profile-circle-radius: #{var(--size-pixel-64)};
+        --banner-profile-stick-border-radius: #{var(--size-pixel-4)};
+        --banner-profile-stick-width: #{var(--size-percent-100)};
+        --banner-profile-stick-height: #{var(--size-pixel-24)};
+
+        @each $key, $value in $colors {
+            @each $alpha in $alphas {
+                --banner-bgcolor-#{$key}-#{$alpha}: #{var(--palette-#{$value}-color-#{$alpha})};
+            }
+        }
+
+        &.banner-shadow {
+            filter: drop-shadow(0 0 var(--banner-shadow-blur) if($theme == "light", var(--palette-black-color-50), var(--palette-white-color-50)));
+        }
+
+        &.media-banner {
+            border-radius: var(--banner-media-border-radius);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &.paragraph-banner {
+            display: inline-flex;
+            flex-direction: column;
+
+            row-gap: var(--banner-paragraph-gap);
+
+            .banner-item {
+                border-radius: var(--banner-media-border-radius);
+
+                height: var(--banner-paragraph-item-height);
+            }
+        }
+
+        &.profile-banner {
+            display: flex;
+
+            column-gap: var(--banner-profile-gap);
+
+            .banner-circle {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+
+                border-radius: 50%;
+
+                width: var(--banner-profile-circle-radius);
+                height: var(--banner-profile-circle-radius);
+            }
+
+            .banner-wrapper {
+                display: inline-flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+
+                row-gap: var(--banner-profile-gap);
+
+                .banner-stick {
+                    border-radius: var(--banner-profile-stick-border-radius);
+
+                    width: var(--banner-profile-stick-width);
+                    height: var(--banner-profile-stick-height);
+                }
+
+                .banner-stick-wrapper {
+                    display: flex;
+                    column-gap: var(--banner-profile-gap);
+                }
+            }
+        }
+    }
+}

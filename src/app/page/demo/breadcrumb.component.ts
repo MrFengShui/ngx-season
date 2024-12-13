@@ -14,6 +14,6 @@ export class DemoBreadcrumbPageComponent {
         { icon: 'computer', text: '计算机' },
         { icon: 'cpu', text: '中央处理器' },
     ];
-    protected marks: NGXSeasonBreadcrumbMark[] = ['arrow', 'chevron', 'circle', 'point', 'rabbet', 'rhombus'];
+    protected marks: NGXSeasonBreadcrumbMark[] = ['arrow', 'double-arrow', 'triple-arrow', 'point', 'sign', 'slash', 'triangle'];
 
 }

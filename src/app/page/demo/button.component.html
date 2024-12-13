@@ -60,6 +60,36 @@
             </div>
         </div>
     </div>
+    <div class="fs-24 fw-900">按钮阴影</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="fs-16 fw-700">平面按钮</span>
+            <div class="flex flex-wrap col-gap-100 row-gap-100">
+                <ng-container *ngFor="let item of colorList">
+                    <button ngx-sui-IconButton [btnColor]="item.color" btnIcon="world" btnShadow btnStyle="flat"></button>
+                    <button ngx-sui-TextButton [btnColor]="item.color" [btnText]="item.label" btnShadow btnStyle="flat"></button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="fs-16 fw-700">空心按钮</span>
+            <div class="flex flex-wrap col-gap-100 row-gap-100">
+                <ng-container *ngFor="let item of colorList">
+                    <button ngx-sui-IconButton [btnColor]="item.color" btnIcon="world" btnShadow btnStyle="outline"></button>
+                    <button ngx-sui-TextButton [btnColor]="item.color" [btnText]="item.label" btnShadow btnStyle="outline"></button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="flex align-items-center col-gap-100 row-gap-100">
+            <span class="fs-16 fw-700">实心按钮</span>
+            <div class="flex flex-wrap col-gap-100 row-gap-100">
+                <ng-container *ngFor="let item of colorList">
+                    <button ngx-sui-IconButton [btnColor]="item.color" btnIcon="world" btnShadow btnStyle="solid"></button>
+                    <button ngx-sui-TextButton [btnColor]="item.color" [btnText]="item.label" btnShadow btnStyle="solid"></button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
     <div class="fs-24 fw-900">按钮大小</div>
     <div class="flex flex-dir-col row-gap-100">
         <div class="flex align-items-baseline col-gap-100 row-gap-100">

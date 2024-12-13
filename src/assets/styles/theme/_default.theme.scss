@@ -3,6 +3,7 @@
 @import "../components/article.mixin";
 @import "../components/avatar.mixin";
 @import "../components/badge.mixin";
+@import "../components/banner.mixin";
 @import "../components/breadcrumb.mixin";
 @import "../components/button.mixin";
 @import "../components/calendar.mixin";
@@ -17,7 +18,6 @@
 @import "../components/list.mixin";
 @import "../components/modal.mixin";
 @import "../components/navlist.mixin";
-@import "../components/placeholder.mixin";
 @import "../components/popover.mixin";
 @import "../components/progress.mixin";
 @import "../components/radio.mixin";
@@ -46,6 +46,7 @@
         @include setup-article-theme($theme);
         @include setup-avatar-theme($theme, $colors);
         @include setup-badge-theme($theme, "indigo", "pink");
+        @include setup-banner-theme($theme, $colors);
         @include setup-breadcrumb-theme($theme);
         @include setup-button-theme($theme, $colors);
         @include setup-calendar-theme($theme, $colors);
@@ -59,8 +60,7 @@
         @include setup-layout-theme($theme);
         @include setup-list-theme($theme);
         @include setup-modal-theme($theme);
-        @include setup-navlist-theme($theme, "indigo");
-        @include setup-placeholder-theme($theme);
+        @include setup-navlist-theme($theme, $colors);
         @include setup-popover-theme($theme, $colors);
         @include setup-progress-theme($theme, "indigo", "pink");
         @include setup-radio-theme($theme, $colors);

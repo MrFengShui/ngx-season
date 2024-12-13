@@ -1,8 +1,8 @@
-<div class="wrapper flex flex-dir-col gy-100 p-100">
-    <div class="toolbar bgcolor-default flex gx-100 p-100">
-        <span class="flex-auto"></span>
-        <label ngx-sui-CheckSwitch [(checkChecked)]="iconSolid" checkLabelPos="before">实心/空心</label>
-    </div>
+<div class="toolbar bgcolor-default flex gx-100 p-100">
+    <span class="flex-auto"></span>
+    <label ngx-sui-CheckSwitch [(checkChecked)]="iconSolid" checkLabelPos="before">实心/空心</label>
+</div>
+<div class="flex flex-dir-col gy-100 p-100">
     <ng-container *ngFor="let item of list">
         <div class="fs-24 fw-900">{{ item.label }}</div>
         <ngx-sui-x-divider></ngx-sui-x-divider>

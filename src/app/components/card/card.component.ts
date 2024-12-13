@@ -1,20 +1,28 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { TemplatePortal } from "@angular/cdk/portal";
-import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, Input, OnChanges, Renderer2, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
+import { DomPortal } from "@angular/cdk/portal";
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges, ViewContainerRef } from "@angular/core";
 
-import { NGXSeasonCardHeaderDirective } from "./card-header.component";
-import { NGXSeasonCardFooterDirective } from "./card-footer.component";
-import { NGXSeasonCardActionBlockComponent, NGXSeasonCardMediaBlockComponent } from "./card-block.component";
+import { NGXSeasonCardFooterComponent, NGXSeasonCardHeaderComponent } from "./card-widget.component";
 
 @Component({
     selector: 'ngx-sui-card',
     template: `
-        <ngx-sui-card-header #cardHeader *ngIf="headerTemplate || mediaBlockComponent"><ng-template [cdkPortalOutlet]="headerPortal"></ng-template></ngx-sui-card-header>
-        <ng-content select="ngx-sui-card-content, img[ngx-sui-CardImage], ng-container"></ng-content>
-        <ngx-sui-card-footer #cardFooter *ngIf="footerTemplate || actionBlockComponent"><ng-template [cdkPortalOutlet]="footerPortal"></ng-template></ngx-sui-card-footer>
+        <ng-container *ngIf="customized; then custom else native"></ng-container>
+        <ng-template #custom><ng-content></ng-content></ng-template>
+        <ng-template #native><ng-content select="ngx-sui-card-media, ngx-sui-card-content"></ng-content></ng-template>
+        <ng-template><ng-content select="ngx-sui-card-header, ngx-sui-card-footer"></ng-content></ng-template>
     `
 })
-export class NGXSeasonCardComponent implements OnChanges, AfterViewInit, AfterContentInit {
+export class NGXSeasonCardComponent implements OnChanges, AfterContentInit, AfterViewInit {
+
+    @Input({ alias: 'cardCustom' })
+    set customized(customized: boolean | string | undefined | null) {
+        this._customized = coerceBooleanProperty(customized);
+    }
+
+    get customized(): boolean {
+        return this._customized;
+    }
 
     @Input('cardShadow')
     set shadow(shadow: boolean | string) {
@@ -25,28 +33,22 @@ export class NGXSeasonCardComponent implements OnChanges, AfterViewInit, AfterCo
         return this._shadow;
     }
 
+    private _customized: boolean = false;
     private _shadow: boolean = false;
 
-    @ViewChild('cardHeader', { read: ElementRef, static: false })
-    protected cardHeader: ElementRef<HTMLElement> | undefined;
+    @HostListener('contextmenu')
+    protected listenHostContextEvent(): boolean {
+        return true;
+    }
 
-    @ViewChild('cardFooter', { read: ElementRef, static: false })
-    protected cardFooter: ElementRef<HTMLElement> | undefined;
+    @ContentChild(NGXSeasonCardHeaderComponent)
+    protected header: NGXSeasonCardHeaderComponent | undefined;
 
-    @ContentChild(NGXSeasonCardHeaderDirective, { read: TemplateRef, static: true })
-    protected headerTemplate: TemplateRef<any> | undefined;
+    @ContentChild(NGXSeasonCardFooterComponent)
+    protected footer: NGXSeasonCardFooterComponent | undefined;
 
-    @ContentChild(NGXSeasonCardFooterDirective, { read: TemplateRef, static: true })
-    protected footerTemplate: TemplateRef<any> | undefined;
-
-    @ContentChild(NGXSeasonCardMediaBlockComponent, { read: ElementRef, static: true })
-    protected mediaBlockComponent: ElementRef<HTMLElement> | undefined;
-
-    @ContentChild(NGXSeasonCardActionBlockComponent, { read: ElementRef, static: true })
-    protected actionBlockComponent: ElementRef<HTMLElement> | undefined;
-
-    protected headerPortal: TemplatePortal | null = null;
-    protected footerPortal: TemplatePortal | null = null;
+    protected headerPortal: DomPortal | undefined;
+    protected footerPortal: DomPortal | undefined;
 
     constructor(
         protected _element: ElementRef,
@@ -55,71 +57,49 @@ export class NGXSeasonCardComponent implements OnChanges, AfterViewInit, AfterCo
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let keys: string[] | null = Object.keys(changes);
+        for (const name in changes) {
+            if (name === 'customized') this.setupCardPadding(coerceBooleanProperty(changes[name].currentValue));
 
-        if (keys.includes('shadow')) {
-            this.setupCardShadow(changes['shadow'].currentValue as boolean);
+            if (name === 'shadow') this.setupCardShadow(coerceBooleanProperty(changes[name].currentValue));
         }
+    }
 
-        keys.splice(0);
-        keys = null;
+    ngAfterContentInit(): void {
+        const element: HTMLElement = this._element.nativeElement;
+
+        if (this.header) this._renderer.insertBefore(element, this.header.fetchHostElement(), element.firstChild);
+
+        if (this.footer) this._renderer.appendChild(element, this.footer.fetchHostElement());
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'card');
+
+        this.setupCardPadding(this.customized);
         this.setupCardShadow(this.shadow);
     }
 
-    ngAfterContentInit(): void {
-        if (this.headerTemplate) {
-            if (this.mediaBlockComponent) throw new Error();
+    protected setupCardPadding(customized: boolean): void {
+        const element: HTMLElement = this._element.nativeElement;
 
-            this.headerPortal = new TemplatePortal(this.headerTemplate, this._vcr);
-        }
-
-        if (this.footerTemplate) {
-            if (this.actionBlockComponent) throw new Error();
-
-            this.footerPortal = new TemplatePortal(this.footerTemplate, this._vcr);
-        }
-
-        if (this.mediaBlockComponent) { 
-            if (this.headerTemplate) throw new Error();
-
-            let task = setTimeout(() => {
-                clearTimeout(task);
-
-                const parentElement: HTMLElement = this.cardHeader?.nativeElement as HTMLElement;
-                const blockElement: HTMLElement = this.mediaBlockComponent?.nativeElement as HTMLElement;
-                this._renderer.appendChild(parentElement, blockElement);
-            });
-        }
-
-        if (this.actionBlockComponent) { 
-            if (this.footerTemplate) throw new Error();
-
-            let task = setTimeout(() => {
-                clearTimeout(task);
-
-                const parentElement: HTMLElement = this.cardFooter?.nativeElement as HTMLElement;
-                const blockElement: HTMLElement = this.actionBlockComponent?.nativeElement as HTMLElement;
-                this._renderer.appendChild(parentElement, blockElement);
-            });
+        if (customized) {
+            this._renderer.setStyle(element, 'justify-content', 'center');
+            this._renderer.setStyle(element, 'min-height', 'var(--card-min-height)');
+            this._renderer.setStyle(element, 'padding-left', 'var(--card-padding)');
+            this._renderer.setStyle(element, 'padding-right', 'var(--card-padding)');
+        } else {
+            this._renderer.removeStyle(element, 'justify-content');
+            this._renderer.removeStyle(element, 'min-height');
+            this._renderer.removeStyle(element, 'padding-left');
+            this._renderer.removeStyle(element, 'padding-right');
         }
     }
 
     protected setupCardShadow(shadow: boolean): void {
         const element: HTMLElement = this._element.nativeElement;
 
-        let task = setTimeout(() => {
-            clearTimeout(task);
-
-            if (shadow) {
-                this._renderer.addClass(element, 'card-shadow');
-            } else {
-                this._renderer.removeClass(element, 'card-shadow');
-            }
-        });
+        if (shadow) this._renderer.addClass(element, 'card-shadow');
+        else this._renderer.removeClass(element, 'card-shadow');
     }
 
 }

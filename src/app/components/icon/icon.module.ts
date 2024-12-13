@@ -14,7 +14,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 
                 .addIcon('e-check').addIcon('edit').addIcon('ellipsis-horizontal').addIcon('ellipsis-vertical').addIcon('email').addIcon('employee-group').addIcon('employee').addIcon('eraser').addIcon('euro').addIcon('event').addIcon('expand-card').addIcon('export').addIcon('eye-hide').addIcon('eye-show').addIcon('eye')
 
-                .addIcon('face-happy').addIcon('face-neutral').addIcon('face-sad').addIcon('factory').addIcon('failure-standard').addIcon('failure').addIcon('favorite').addIcon('file-group').addIcon('file').addIcon('filter-off').addIcon('filter-on').addIcon('firewall').addIcon('first-aid-kit').addIcon('fish').addIcon('flag').addIcon('flame').addIcon('flask').addIcon('floppy').addIcon('folder-close').addIcon('folder-open').addIcon('font-size').addIcon('forking').addIcon('form').addIcon('fuel')
+                .addIcon('face-happy').addIcon('face-neutral').addIcon('face-sad').addIcon('factory').addIcon('failure-standard').addIcon('failure').addIcon('favorite').addIcon('file-group').addIcon('file').addIcon('film-strip').addIcon('filter-off').addIcon('filter-on').addIcon('firewall').addIcon('first-aid-kit').addIcon('fish').addIcon('flag').addIcon('flame').addIcon('flask').addIcon('floppy').addIcon('folder-close').addIcon('folder-open').addIcon('font-size').addIcon('forking').addIcon('form').addIcon('fuel')
 
                 .addIcon('gavel').addIcon('grid-chart').addIcon('grid-view').addIcon('group')
 

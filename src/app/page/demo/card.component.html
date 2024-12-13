@@ -1,59 +1,67 @@
-
-<div class="flex">
-    <div class="flex flex-dir-col gy-100 p-100 w-25">
-        <ngx-sui-card>
-            <ngx-sui-card-media-block [cardAvatarSrc]="avatar" [cardAvatarAlt]="avatar" [cardTitle]="title" [cardSubtitle]="subtitle">
-                <button ngx-sui-Button btnCircled="true" btnIcon="bars" btnIconOnly="true"></button>
-            </ngx-sui-card-media-block>
-            <ngx-sui-card-action-block>
-                <button ngx-sui-SolidButton btnIcon="thumbs-up">点赞</button>
-                <span class="flex-auto"></span>
-                <button ngx-sui-SolidButton btnIcon="share">分享</button>
-                <button ngx-sui-SolidButton btnIcon="favorite">收藏</button>
-            </ngx-sui-card-action-block>
-            
-            <ngx-sui-card-content>{{ paragraphs[0] }}</ngx-sui-card-content>
-            <img ngx-sui-CardImage [attr.src]="bgimage" [attr.alt]="bgimage"/>
-            <ng-container *ngFor="let paragraph of paragraphs; first as isFirst">
-                <ngx-sui-card-content *ngIf="!isFirst">{{ paragraph }}</ngx-sui-card-content>
-            </ng-container>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-1000">基本用法</div>
+    <ngx-sui-card cardCustom>这是一个卡片</ngx-sui-card>
+    <div class="fs-24 fw-1000">卡片头部</div>
+    <div class="flex col-gap-100">
+        <ngx-sui-card class="flex-auto">
+            <ngx-sui-card-header [chAvatarSrc]="metainfo.avatar" [chAvatarAlt]="metainfo.avatar" [chSubject]="metainfo.subject" [chDescription]="metainfo.description"></ngx-sui-card-header>
+        </ngx-sui-card>
+        <ngx-sui-card class="flex-auto">
+            <ngx-sui-card-header chCustom>
+                <ngx-sui-avatar [avatarSrc]="metainfo.avatar" [avatarAlt]="metainfo.avatar" avatarSize="lg"></ngx-sui-avatar>
+                <div class="header-wrapper">
+                    <span class="header-subject">{{ metainfo.subject }}</span>
+                    <span class="header-description">{{ metainfo.description }}</span>
+                </div>
+                <div class="flex col-gap-100">
+                    <button ngx-sui-IconButton btnCircled btnIcon="ellipsis-vertical" btnShadow btnStyle="solid"></button>
+                </div>
+            </ngx-sui-card-header>
         </ngx-sui-card>
     </div>
-    <div class="flex flex-dir-col gy-100 p-100 w-25">
-        <ngx-sui-card>
-            <img ngx-sui-CardImage [attr.src]="bgimage" [attr.alt]="bgimage"/>
+    <div class="fs-24 fw-1000">卡片脚部</div>
+    <ngx-sui-card class="w-100">
+        <ngx-sui-card-footer>
+            <button ngx-sui-TextButton btnIcon="thumbs-up" btnStyle="flat" btnText="喜欢"></button>
+            <button ngx-sui-TextButton btnIcon="thumbs-down" btnStyle="flat" btnText="讨厌"></button>
+            <button ngx-sui-TextButton btnIcon="share" btnStyle="flat" btnText="分享"></button>
+            <button ngx-sui-TextButton btnIcon="favorite" btnStyle="flat" btnText="收藏"></button>
+            <span class="flex-auto"></span>
+            <button ngx-sui-TextButton btnColor="primary" btnIcon="favorite" btnShadow btnStyle="solid" btnText="确定"></button>
+            <button ngx-sui-TextButton btnColor="accent" btnIcon="favorite" btnShadow btnStyle="solid" btnText="取消"></button>
+        </ngx-sui-card-footer>
+    </ngx-sui-card>
+    <div class="fs-24 fw-1000">卡片内容——文字</div>
+    <ngx-sui-card class="w-100">
+        <ngx-sui-card-content *ngFor="let paragraph of metainfo.first">{{ paragraph }}</ngx-sui-card-content>
+        <ngx-sui-card-content *ngFor="let paragraph of metainfo.second">{{ paragraph }}</ngx-sui-card-content>
+    </ngx-sui-card>
+    <div class="fs-24 fw-1000">卡片内容——媒体</div>
+    <div class="flex justify-content-center col-gap-100">
+        <ngx-sui-card class="w-100">
+            <ngx-sui-card-media><img [cmSrc]="metainfo.image" [alt]="metainfo.image" ngx-sui-CardMedia></ngx-sui-card-media>
         </ngx-sui-card>
-        <ngx-sui-card>
-            <ngx-sui-card-media-block [cardAvatarSrc]="avatar" [cardAvatarAlt]="avatar" [cardTitle]="title" [cardSubtitle]="subtitle">
-                <button ngx-sui-Button btnCircled="true" btnIcon="bars" btnIconOnly="true"></button>
-            </ngx-sui-card-media-block>
-            <ngx-sui-card-action-block>
-                <button ngx-sui-SolidButton btnIcon="thumbs-up">点赞</button>
-                <span class="flex-auto"></span>
-                <button ngx-sui-SolidButton btnIcon="share">分享</button>
-                <button ngx-sui-SolidButton btnIcon="favorite">收藏</button>
-            </ngx-sui-card-action-block>
-            
-            <ngx-sui-card-content *ngFor="let paragraph of paragraphs; first as isFirst">{{ paragraph }}</ngx-sui-card-content>
+        <ngx-sui-card class="w-100">
+            <ngx-sui-card-media><video [cmSrc]="metainfo.video" ngx-sui-CardMedia></video></ngx-sui-card-media>
         </ngx-sui-card>
-    </div>
-    <div class="flex flex-dir-col gy-100 p-100 w-25">
-        <ngx-sui-card>
-            <ngx-sui-card-media-block [cardAvatarSrc]="avatar" [cardAvatarAlt]="avatar" [cardTitle]="title" [cardSubtitle]="subtitle">
-                <button ngx-sui-Button btnCircled="true" btnIcon="bars" btnIconOnly="true"></button>
-            </ngx-sui-card-media-block>
-            <ngx-sui-card-action-block>
-                <button ngx-sui-SolidButton btnIcon="thumbs-up">点赞</button>
-                <span class="flex-auto"></span>
-                <button ngx-sui-SolidButton btnIcon="share">分享</button>
-                <button ngx-sui-SolidButton btnIcon="favorite">收藏</button>
-            </ngx-sui-card-action-block>
-            
-            <ngx-sui-card-content>{{ paragraphs[0] }}</ngx-sui-card-content>
-            <img ngx-sui-CardImage [attr.src]="bgimage" [attr.alt]="bgimage"/>
+        <ngx-sui-card class="w-100">
+            <ngx-sui-card-media><iframe [cmSrc]="metainfo.frame" framespacing="0" allowfullscreen="false" ngx-sui-CardMedia></iframe></ngx-sui-card-media>
         </ngx-sui-card>
     </div>
-    <div class="flex flex-dir-col gy-100 w-25">
-
+    <div class="fs-24 fw-1000">复合卡片</div>
+    <div class="flex justify-content-center col-gap-100">
+        <ngx-sui-card cardShadow class="w-50">
+            <ngx-sui-card-header [chAvatarSrc]="metainfo.avatar" [chAvatarAlt]="metainfo.avatar" [chSubject]="metainfo.subject" [chDescription]="metainfo.description"></ngx-sui-card-header>
+            <ngx-sui-card-content *ngFor="let paragraph of metainfo.first">{{ paragraph }}</ngx-sui-card-content>
+            <ngx-sui-card-media><img [cmSrc]="metainfo.image" [alt]="metainfo.image" ngx-sui-CardMedia></ngx-sui-card-media>
+            <ngx-sui-card-content *ngFor="let paragraph of metainfo.second">{{ paragraph }}</ngx-sui-card-content>
+            <ngx-sui-card-media><iframe [cmSrc]="metainfo.frame" framespacing="0" allowfullscreen="false" ngx-sui-CardMedia></iframe></ngx-sui-card-media>
+            <ngx-sui-card-footer>
+                <button ngx-sui-TextButton btnIcon="thumbs-up" btnStyle="flat" btnText="喜欢"></button>
+                <button ngx-sui-TextButton btnIcon="thumbs-down" btnStyle="flat" btnText="讨厌"></button>
+                <button ngx-sui-TextButton btnIcon="share" btnStyle="flat" btnText="分享"></button>
+                <button ngx-sui-TextButton btnIcon="favorite" btnStyle="flat" btnText="收藏"></button>
+            </ngx-sui-card-footer>
+        </ngx-sui-card>
     </div>
 </div>

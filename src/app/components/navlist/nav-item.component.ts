@@ -7,14 +7,17 @@ import { NGXSeasonIconName } from "../icon/icon.component";
     selector: 'a[ngx-sui-NavListItem]',
     template: `
         <span class="list-item-icon">
-            <ngx-sui-icon [iconShape]="icon" [iconSolid]="isLinkHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'"></ngx-sui-icon>
+            <ngx-sui-icon [iconShape]="icon" [iconSolid]="isHover || selected" [style.visibility]="icon ? 'visible' : 'hidden'"></ngx-sui-icon>
         </span>
-        <div class="list-item-wrapper"><ng-content></ng-content></div>
+        <div class="list-item-wrapper">
+            <span class="text"><ng-content></ng-content></span>
+            <span class="mark"></span>
+        </div>
     `
 })
 export class NGXSeasonNavlistItemComponent implements OnChanges, AfterViewInit {
 
-    @Input('navItemIcon')
+    @Input({ alias: 'niIcon' })
     set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
@@ -23,7 +26,7 @@ export class NGXSeasonNavlistItemComponent implements OnChanges, AfterViewInit {
         return this._icon;
     }
 
-    @Input('navItemSelected')
+    @Input({ alias: 'niSelected' })
     set selected(selected: boolean | string | null) {
         this._selected = coerceBooleanProperty(selected);
     }
@@ -37,15 +40,15 @@ export class NGXSeasonNavlistItemComponent implements OnChanges, AfterViewInit {
 
     @HostListener('mouseenter')
     protected handleHostMouseEnterEvent(): void {
-        this.isLinkHover = true;
+        this.isHover = true;
     }
 
     @HostListener('mouseleave')
     protected handleHostMouseLeaveEvent(): void {
-        this.isLinkHover = false;
+        this.isHover = false;
     }
 
-    protected isLinkHover: boolean = false;
+    protected isHover: boolean = false;
 
     constructor(
         protected _element: ElementRef,

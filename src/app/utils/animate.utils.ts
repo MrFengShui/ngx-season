@@ -1,5 +1,7 @@
 import { animate, animation, style } from "@angular/animations";
 
+export type NGXSeasonAnimationSpeed = 'xs' | 'sl' | 'md' | 'fa' | 'xf';
+
 export const horizontalCollapsionExpanionAnimation = animation([
     style({ width: '{{ start }}px' }),
     animate('{{ duration }}ms', style({ width: '{{ final }}px' }))

@@ -1,10 +1,32 @@
 <div class="flex flex-dir-col gy-100 p-100">
-    <div class="flex justify-content-between" *ngFor="let mark of marks">
-        <ngx-sui-breadcrumb [bcSplitIcon]="mark">
-            <ngx-sui-breadcrumb-item [bcIcon]="item.icon" [bcText]="item.text" *ngFor="let item of items"></ngx-sui-breadcrumb-item>
+    <div class="fs-24 fw-1000">基本用法</div>
+    <ngx-sui-breadcrumb>
+        <a ngx-sui-BreadcrumbItem  [bcText]="item.text" *ngFor="let item of items"></a>
+    </ngx-sui-breadcrumb>
+    <div class="fs-24 fw-1000">面包屑可点击</div>
+    <ngx-sui-breadcrumb bcClickable>
+        <a ngx-sui-BreadcrumbItem [bcText]="item.text" *ngFor="let item of items"></a>
+    </ngx-sui-breadcrumb>
+    <div class="fs-24 fw-1000">面包屑图文</div>
+    <ngx-sui-breadcrumb>
+        <a ngx-sui-BreadcrumbItem [bcIcon]="item.icon" [bcText]="item.text" *ngFor="let item of items"></a>
+    </ngx-sui-breadcrumb>
+    <div class="fs-24 fw-1000">面包屑尺寸</div>
+    <div class="flex align-items-end col-gap-100">
+        <ngx-sui-breadcrumb>
+            <a ngx-sui-BreadcrumbItem [bcIcon]="item.icon" [bcText]="item.text" *ngFor="let item of items"></a>
         </ngx-sui-breadcrumb>
-        <ngx-sui-breadcrumb [bcSplitIcon]="mark" bcTextOnly="true">
-            <ngx-sui-breadcrumb-item [bcIcon]="item.icon" [bcText]="item.text" *ngFor="let item of items"></ngx-sui-breadcrumb-item>
+        <ngx-sui-breadcrumb bcLarge>
+            <a ngx-sui-BreadcrumbItem [bcIcon]="item.icon" [bcText]="item.text" *ngFor="let item of items"></a>
         </ngx-sui-breadcrumb>
+    </div>
+    <div class="fs-24 fw-1000">面包屑隔断</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div *ngFor="let mark of marks">
+            <span class="fs-16 fw-500">[{{ mark }}]样式：</span>
+            <ngx-sui-breadcrumb bcClickable [bcMark]="mark">
+                <a ngx-sui-BreadcrumbItem [bcIcon]="item.icon" [bcText]="item.text" *ngFor="let item of items"></a>
+            </ngx-sui-breadcrumb>
+        </div>
     </div>
 </div>

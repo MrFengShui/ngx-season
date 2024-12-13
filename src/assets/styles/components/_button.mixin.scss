@@ -1,10 +1,9 @@
 @mixin setup-button-theme($theme, $colors) {
     $styles: ("flat", "outline", "solid");
-    $alphaBoxShadow: 25;
-    $alphaBTextShadow: 75;
 
     .button {
         --button-border-radius: #{var(--size-pixel-4)};
+        --button-shadow: 0 0 #{var(--size-pixel-4)} #{if($theme == "light", var(--palette-black-color-50), var(--palette-white-color-50))};
 
         --button-icon-padding: #{calc(var(--button-content-size) * 0.125)};
 
@@ -97,6 +96,10 @@
         border-style: solid;
 
         cursor: pointer;
+
+        &.button-shadow {
+            filter: drop-shadow(var(--button-shadow));
+        }
 
         &.icon-button {
             padding: var(--button-icon-padding);

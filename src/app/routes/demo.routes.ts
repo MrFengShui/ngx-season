@@ -9,7 +9,7 @@ import { DemoRibbonPageComponent } from "../page/demo/ribbon.component";
 import { DemoCarouselPageComponent } from "../page/demo/carousel.component";
 import { DemoProgressPageComponent } from "../page/demo/progress.component";
 import { DemoDigitalPageComponent } from "../page/demo/digital.component";
-import { DemoPlaceholderPageComponent } from "../page/demo/placeholder.component";
+import { DemoBannerPageComponent } from "../page/demo/banner.component";
 import { DemoBreadcrumbPageComponent } from "../page/demo/breadcrumb.component";
 import { DemoBackgroundPageComponent } from "../page/demo/background.component";
 import { DemoListPageComponent } from "../page/demo/list.component";
@@ -29,6 +29,7 @@ import { DemoTagPageComponent } from "../page/demo/tag.component";
 import { DemoTreePageComponent } from "../page/demo/tree.component";
 import { DemoArticlePageComponent } from "../page/demo/article.component";
 import { DemoTabbedPageComponent } from "../page/demo/tabbed.component";
+import { DemoStatusPageComponent } from "../page/demo/status.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -38,6 +39,7 @@ export const demoRoutes: Routes = [
     { path: 'component/article', component: DemoArticlePageComponent, title: '文章' },
     { path: 'component/avatar', component: DemoAvatarPageComponent, title: '头像' },
     { path: 'component/badge', component: DemoBadgePageComponent, title: '徽章' },
+    { path: 'component/banner', component: DemoBannerPageComponent, title: '占位符' },
     { path: 'component/breadcrumb', component: DemoBreadcrumbPageComponent, title: '面包屑' },
     { path: 'component/button', component: DemoButtonPageComponent, title: '按钮' },
     { path: 'component/card', component: DemoCardPageComponent, title: '卡片' },
@@ -46,9 +48,9 @@ export const demoRoutes: Routes = [
     { path: 'component/divider', component: DemoDividerPageComponent, title: '分割器' },
     { path: 'component/icon', component: DemoIconPageComponent, title: '图标' },
     { path: 'component/list', component: DemoListPageComponent, title: '列表' },
-    { path: 'component/placeholder', component: DemoPlaceholderPageComponent, title: '占位符' },
     { path: 'component/progress', component: DemoProgressPageComponent, title: '进度' },
     { path: 'component/ribbon', component: DemoRibbonPageComponent, title: '丝带' },
+    { path: 'component/status', component: DemoStatusPageComponent, title: '状态' },
     { path: 'component/tabbed', component: DemoTabbedPageComponent, title: '选项卡' },
     { path: 'component/tag', component: DemoTagPageComponent, title: '标签' },
     { path: 'component/tree', component: DemoTreePageComponent, title: '树形列表' },

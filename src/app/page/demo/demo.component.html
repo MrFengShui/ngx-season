@@ -1,6 +1,11 @@
 <ngx-sui-layout>
     <ngx-sui-layout-header [lhLogoIcon]="themeFlag ? LIGHT_MODE_LOGO : DARK_MODE_LOGO" lhLogoHref="http://localhost:5200/ngx-season/" lhShowCtrl="true" [(lhToggled)]="controlToggled">
-        <ng-template ngx-sui-LayoutHeaderActions="">
+        <ng-template ngx-sui-LayoutHeaderContent>
+            <ngx-sui-breadcrumb bcClickable>
+                <a ngx-sui-BreadcrumbItem [routerLink]="item.link" [bcText]="item.text" *ngFor="let item of breadcrumb$.asObservable() | async"></a>
+            </ngx-sui-breadcrumb>
+        </ng-template>
+        <ng-template ngx-sui-LayoutHeaderActions>
             <button ngx-sui-TextButton [btnIcon]="themeFlag ? 'moon' : 'sun'" btnSize="md" btnStyle="flat" [btnText]="themeFlag ? '黑夜模式' : '白昼模式'" (click)="handleChangeThemeEvent()" (mouseenter)="themeHoverFlag = true" (mouseleave)="themeHoverFlag = false"></button>
         </ng-template>
     </ngx-sui-layout-header>
@@ -8,10 +13,10 @@
         <ng-template ngx-sui-LayoutContentSide>
             <ngx-sui-navlist>
                 <ng-container *ngFor="let item of NAV_META_INFO_LIST; index as idx">
-                    <ngx-sui-navlist-section [navSecFoldHref]="item.link" [navSecFolded]="!controlToggled" [navSecFoldIcon]="item.icon" [navSecLabel]="item.text" [navSecExpanded]="checkSectionExpanded(item.nodes) | async" *ngIf="item.type === 'section'">
-                        <a ngx-sui-NavListItem [navItemSelected]="checkRouteSelected(node.link) | async" [routerLink]="node.link" *ngFor="let node of item.nodes">{{ node.text }}</a>
+                    <ngx-sui-navlist-section [nsFoldHref]="item.link" [nsFolded]="!controlToggled" [nsFoldIcon]="item.icon" [nsLabel]="item.text" [nsExpanded]="checkSectionExpanded(item.nodes) | async" *ngIf="item.type === 'section'">
+                        <a ngx-sui-NavListItem [niSelected]="checkRouteSelected(node.link) | async" [routerLink]="node.link" *ngFor="let node of item.nodes">{{ node.text }}</a>
                     </ngx-sui-navlist-section>
-                    <a ngx-sui-NavListItem [navItemIcon]="item.icon" [navItemSelected]="checkRouteSelected(item.link) | async" [routerLink]="item.link" *ngIf="item.type === 'item'">{{ item.text }}</a>
+                    <a ngx-sui-NavListItem [niIcon]="item.icon" [niSelected]="checkRouteSelected(item.link) | async" [routerLink]="item.link" *ngIf="item.type === 'item'">{{ item.text }}</a>
                 </ng-container>
             </ngx-sui-navlist>
         </ng-template>
@@ -23,7 +28,7 @@
             <button ngx-sui-TextButton btnIcon="calendar" btnStyle="flat" [btnText]="datetime$ | async" ngx-sui-Popover [olTemp]="template"></button>
             <ng-template #template>
                 <div class="popover-container flex-dir-col row-gap-100">
-                    <ngx-sui-calendar caleColor="primary" (caleSelectionChange)="selection = $event"></ngx-sui-calendar>
+                    <ngx-sui-calendar (caleSelectionChange)="selection = $event"></ngx-sui-calendar>
                     <ngx-sui-calendar-lunar-select [lsModel]="selection" class="pw-384"></ngx-sui-calendar-lunar-select>
                 </div>
             </ng-template>

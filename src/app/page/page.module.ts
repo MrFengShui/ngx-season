@@ -18,7 +18,7 @@ import { DemoRibbonPageComponent } from "./demo/ribbon.component";
 import { DemoCarouselPageComponent } from "./demo/carousel.component";
 import { DemoProgressPageComponent } from "./demo/progress.component";
 import { DemoDigitalPageComponent } from "./demo/digital.component";
-import { DemoPlaceholderPageComponent } from "./demo/placeholder.component";
+import { DemoBannerPageComponent } from "./demo/banner.component";
 import { DemoBreadcrumbPageComponent } from "./demo/breadcrumb.component";
 import { DemoBackgroundPageComponent } from "./demo/background.component";
 import { DemoListPageComponent } from "./demo/list.component";
@@ -39,6 +39,7 @@ import { DemoTreePageComponent } from "./demo/tree.component";
 import { NGXSeasonTreeModule } from "../components/tree/tree.module";
 import { DemoArticlePageComponent } from "./demo/article.component";
 import { DemoTabbedPageComponent } from "./demo/tabbed.component";
+import { DemoStatusPageComponent } from "./demo/status.component";
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import { DemoTabbedPageComponent } from "./demo/tabbed.component";
         DemoAvatarPageComponent,
         DemoBackgroundPageComponent,
         DemoBadgePageComponent,
+        DemoBannerPageComponent,
         DemoBreadcrumbPageComponent,
         DemoButtonPageComponent,
         DemoCardPageComponent,
@@ -64,12 +66,12 @@ import { DemoTabbedPageComponent } from "./demo/tabbed.component";
         DemoInputPageComponent,
         DemoListPageComponent,
         DemoModalPageComponent,
-        DemoPlaceholderPageComponent,
         DemoPopoverPageComponent,
         DemoProgressPageComponent,
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
+        DemoStatusPageComponent,
         DemoTabbedPageComponent,
         DemoTagPageComponent,
         DemoToastPageComponent,
@@ -97,6 +99,7 @@ import { DemoTabbedPageComponent } from "./demo/tabbed.component";
         DemoAvatarPageComponent,
         DemoBackgroundPageComponent,
         DemoBadgePageComponent,
+        DemoBannerPageComponent,
         DemoBreadcrumbPageComponent,
         DemoButtonPageComponent,
         DemoCardPageComponent,
@@ -109,12 +112,12 @@ import { DemoTabbedPageComponent } from "./demo/tabbed.component";
         DemoInputPageComponent,
         DemoListPageComponent,
         DemoModalPageComponent,
-        DemoPlaceholderPageComponent,
         DemoPopoverPageComponent,
         DemoProgressPageComponent,
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
+        DemoStatusPageComponent,
         DemoTabbedPageComponent,
         DemoTagPageComponent,
         DemoToastPageComponent,

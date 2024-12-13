@@ -16,7 +16,7 @@ import { NGXSeasonRibbonModule } from './ribbon/ribbon.module';
 import { NGXSeasonNavlistModule } from './navlist/navlist.module';
 import { NGXSeasonProgressModule } from './progress/progress.module';
 import { NGXSeasonDigitalModule } from './digital/digital.module';
-import { NGXSeasonPlaceholderModule } from "./placeholder/placeholder.module";
+import { NGXSeasonPlaceholderModule } from "./banner/banner.module";
 import { NGXSeasonBreadcrumbModule } from "./breadcrumb/breadcrumb.module";
 import { NGXSeasonListModule } from "./list/list.module";
 import { NGXSeasonCheckModule } from "./check/check.module";
@@ -29,6 +29,7 @@ import { NGXSeasonCalendarModule } from "./calendar/calendar.module";
 import { NGXSeasonTagModule } from "./tag/tag.module";
 import { NGXSeasonArticleModule } from "./article/article.module";
 import { NGXSeasonTabbedModule } from "./tabbed/tabbed.module";
+import { NGXSeasonStatusModule } from "./status/status.module";
 
 @NgModule({
     imports: [
@@ -59,6 +60,7 @@ import { NGXSeasonTabbedModule } from "./tabbed/tabbed.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonStatusModule,
         NGXSeasonTabbedModule,
         NGXSeasonTagModule,
     ],
@@ -88,6 +90,7 @@ import { NGXSeasonTabbedModule } from "./tabbed/tabbed.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonStatusModule,
         NGXSeasonTabbedModule,
         NGXSeasonTagModule
     ],

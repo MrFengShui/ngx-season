@@ -1,94 +1,158 @@
 @mixin setup-breadcrumb-theme($theme) {
     .breadcrumb {
-        --breadcrumb-item-padding: #{var(--size-pixel-16)};
-        --breadcrumb-item-height: #{var(--size-pixel-48)};
-        --breadcrumb-item-font-size: #{var(--font-size-14)};
-        --breadcrumb-item-font-weight: #{var(--font-weight-700)};
+        --breadcrumb-item-gap: #{var(--col-gap-50)};
+        --breadcrumb-item-font-extra-size: #{var(--font-size-24)};
+        --breadcrumb-item-font-size: #{var(--font-size-16)};
+        --breadcrumb-item-font-weight: #{var(--font-weight-500)};
         --breadcrumb-item-line-height: #{var(--line-height-100)};
-        --breadcrumb-item-text-wrapper-gap: #{var(--size-pixel-8)};
+        --breadcrumb-item-underline-offset: #{var(--margin-25)};
 
-        --breadcrumb-split-mark-size: #{var(--size-pixel-24)};
+        --breadcrumb-split-mark-margin-left: #{var(--margin-25)};
+        --breadcrumb-split-mark-margin-right: #{var(--margin-75)};
+        --breadcrumb-split-mark-extra-size: #{var(--size-pixel-16)};
+        --breadcrumb-split-mark-size: #{var(--size-pixel-12)};
 
-        --breadcrumb-item-link-bgcolor-hover: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-        --breadcrumb-item-link-bgcolor-active: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
-
-        --breadcrumb-split-mark-bgcolor: #{if($theme == "light", var(--palette-gray-800-color), var(--palette-gray-200-color))};
+        --breadcrumb-split-mark-color: #{if($theme == "light", var(--palette-gray-800-color), var(--palette-gray-200-color))};
 
         display: inline-flex;
         align-items: center;
+
+        width: fit-content;
+        height: fit-content;
 
         .breadcrumb-item {
             display: inline-flex;
             align-items: center;
 
+            cursor: default;
+
+            column-gap: var(--breadcrumb-item-gap);
+
+            color: var(--breadcrumb-split-mark-color);
+
+            pointer-events: none;
             user-select: none;
+            white-space: nowrap;
 
-            font-size: var(--breadcrumb-item-font-size);
-            font-weight: var(--breadcrumb-item-font-weight);
-            line-height: var(--breadcrumb-item-line-height);
-
-            height: var(--breadcrumb-item-height);
-
-            padding-left: var(--breadcrumb-item-padding);
-            padding-right: var(--breadcrumb-item-padding);
-
-            .item-text-wrapper {
-                margin-left: var(--breadcrumb-item-text-wrapper-gap);
+            .text {
+                font-size: var(--breadcrumb-item-font-size);
+                font-weight: var(--breadcrumb-item-font-weight);
+                line-height: var(--breadcrumb-item-line-height);
             }
 
-            &.link {
-                &:hover {
-                    background-color: var(--breadcrumb-item-link-bgcolor-hover);
-                }
+            &:not(:last-child) {
+                &::after {
+                    background-color: var(--breadcrumb-split-mark-color);
 
-                &:active {
-                    background-color: var(--breadcrumb-item-link-bgcolor-active);
+                    content: "";
+
+                    display: inline-block;
+
+                    margin-left: var(--breadcrumb-split-mark-margin-left);
+                    margin-right: var(--breadcrumb-split-mark-margin-right);
+
+                    width: var(--breadcrumb-split-mark-size);
+                    height: var(--breadcrumb-split-mark-size);
                 }
             }
         }
 
-        .split-mark {
-            background-color: var(--breadcrumb-split-mark-bgcolor);
+        &.breadcrumb-extra {
+            .breadcrumb-item {
+                .text {
+                    font-size: var(--breadcrumb-item-font-extra-size);;
+                }
 
-            display: inline-block;
+                &:not(:last-child) {
+                    &::after {
+                        width: var(--breadcrumb-split-mark-extra-size);
+                        height: var(--breadcrumb-split-mark-extra-size);
+                    }
+                }
+            }
+        }
 
-            width: var(--breadcrumb-split-mark-size);
-            height: var(--breadcrumb-split-mark-size);
+        &.breadcrumb-link {
+            .breadcrumb-item {
+                cursor: pointer;
+                pointer-events: all;
+
+                &:hover {
+                    text-decoration-line: underline;
+                    text-decoration-style: solid;
+
+                    text-underline-offset: var(--breadcrumb-item-underline-offset);
+                }
+            }
         }
 
         &[data-breadcrumb-split-mark="arrow"] {
-            .split-mark {
-                clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+                    }
+                }
             }
         }
 
-        &[data-breadcrumb-split-mark="chevron"] {
-            .split-mark {
-                clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+        &[data-breadcrumb-split-mark="double-arrow"] {
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(0% 0%, 30% 0%, 40% 50%, 70% 50%, 60% 0%, 90% 0%, 100% 50%, 90% 100%, 60% 100%, 70% 50%, 40% 50%, 30% 100%, 0% 100%, 10% 50%);
+                    }
+                }
             }
         }
 
-        &[data-breadcrumb-split-mark="circle"] {
-            .split-mark {
-                clip-path: circle(50% at 50% 50%);
+        &[data-breadcrumb-split-mark="triple-arrow"] {
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(0% 0%, 20% 0%, 40% 50%, 50% 50%, 30% 0%, 50% 0%, 70% 50%, 80% 50%, 60% 0%, 80% 0%, 100% 50%, 80% 100%, 60% 100%, 80% 50%, 70% 50%, 50% 100%, 30% 100%, 50% 50%, 40% 50%, 20% 100%, 0% 100%, 20% 50%);
+                    }
+                }
             }
         }
 
         &[data-breadcrumb-split-mark="point"] {
-            .split-mark {
-                clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+                    }
+                }
             }
         }
 
-        &[data-breadcrumb-split-mark="rabbet"] {
-            .split-mark {
-                clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+        &[data-breadcrumb-split-mark="sign"] {
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(0% 10%, 30% 10%, 40% 30%, 60% 30%, 60% 0%, 100% 50%, 60% 100%, 60% 70%, 40% 70%, 30% 90%, 0% 90%, 10% 50%);
+                    }
+                }
             }
         }
 
-        &[data-breadcrumb-split-mark="rhombus"] {
-            .split-mark {
-                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        &[data-breadcrumb-split-mark="slash"] {
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(20% 100%, 40% 100%, 80% 0%, 60% 0%);
+                    }
+                }
+            }
+        }
+
+        &[data-breadcrumb-split-mark="triangle"] {
+            .breadcrumb-item {
+                &:not(:last-child) {
+                    &::after {
+                        clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 100% 50%);
+                    }
+                }
             }
         }
     }

@@ -1,15 +1,101 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, Input, OnChanges, QueryList, Renderer2, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
 
 import { NGXSeasonIconName } from "../icon/icon.component";
 
-export type NGXSeasonBreadcrumbMark = 'arrow' | 'chevron' | 'circle' | 'point' | 'rabbet' | 'rhombus';
+export type NGXSeasonBreadcrumbMark = 'arrow' | 'double-arrow' | 'triple-arrow' | 'point' | 'sign' | 'slash' | 'triangle';
+
+const NGX_SEASON_BREADCRUMB_TOKEN: InjectionToken<NGXSeasonBreadcrumbComponent> = new InjectionToken('NGX_SEASON_BREADCRUMB_TOKEN');
 
 @Component({
-    selector: 'ngx-sui-breadcrumb-item',
-    template: ''
+    selector: 'ngx-sui-breadcrumb',
+    template: `<ng-content select="a[ngx-sui-BreadcrumbItem]"></ng-content>`,
+    providers: [{ provide: NGX_SEASON_BREADCRUMB_TOKEN, useExisting: NGXSeasonBreadcrumbComponent }]
 })
-export class NGXSeasonBreadcrumbItem {
+export class NGXSeasonBreadcrumbComponent implements OnChanges, AfterViewInit {
+
+    @Input('bcMark')
+    set mark(mark: NGXSeasonBreadcrumbMark | undefined | null) {
+        this._mark = mark || 'triple-arrow';
+    }
+
+    get mark(): NGXSeasonBreadcrumbMark {
+        return this._mark;
+    }
+
+    @Input('bcClickable')
+    set clickable(clickable: boolean | string | undefined | null) {
+        this._clickable = coerceBooleanProperty(clickable);
+    }
+
+    get clickable(): boolean {
+        return this._clickable;
+    }
+
+    @Input('bcLarge')
+    set large(large: boolean | string | undefined | null) {
+        this._large = coerceBooleanProperty(large);
+    }
+
+    get large(): boolean {
+        return this._large;
+    }
+
+    private _mark: NGXSeasonBreadcrumbMark = 'triple-arrow';
+    private _clickable: boolean = false;
+    private _large: boolean = false;
+
+    constructor(
+        protected _element: ElementRef,
+        protected _renderer: Renderer2
+    ) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        for (const name in changes) {
+            if (name === 'mark') this.changeBreadcrumbSplitMark(changes[name].currentValue as NGXSeasonBreadcrumbMark);
+
+            if (name === 'clickable') this.setupBreadcrumbClickable(coerceBooleanProperty(changes[name].currentValue));
+
+            if (name === 'large') this.setupBreadcrumbLarge(coerceBooleanProperty(changes[name].currentValue));
+        }
+    }
+
+    ngAfterViewInit(): void {
+        this._renderer.addClass(this._element.nativeElement, 'breadcrumb');
+
+        this.changeBreadcrumbSplitMark(this.mark);
+        this.setupBreadcrumbClickable(this.clickable);
+        this.setupBreadcrumbLarge(this.large);
+    }
+
+    protected changeBreadcrumbSplitMark(mark: NGXSeasonBreadcrumbMark): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-breadcrumb-split-mark', mark);
+    }
+
+    protected setupBreadcrumbClickable(clickable: boolean): void {
+        const element: HTMLElement = this._element.nativeElement;
+
+        if (clickable) this._renderer.addClass(element, 'breadcrumb-link');
+        else this._renderer.removeClass(element, 'breadcrumb-link');
+    }
+
+    protected setupBreadcrumbLarge(large: boolean): void {
+        const element: HTMLElement = this._element.nativeElement;
+
+        if (large) this._renderer.addClass(element, 'breadcrumb-extra');
+        else this._renderer.removeClass(element, 'breadcrumb-extra');
+    }
+
+}
+
+@Component({
+    selector: 'a[ngx-sui-BreadcrumbItem]',
+    template: `
+        <ngx-sui-icon [iconShape]="icon" [iconSize]="_breadcrumb.large ? 'lg' : 'sm'" *ngIf="icon"></ngx-sui-icon>
+        <span class="text" *ngIf="text">{{ text }}</span>
+    `
+})
+export class NGXSeasonBreadcrumbItem implements AfterViewInit {
 
     @Input('bcIcon')
     set icon(icon: NGXSeasonIconName | undefined | null) {
@@ -18,15 +104,6 @@ export class NGXSeasonBreadcrumbItem {
 
     get icon(): NGXSeasonIconName | undefined {
         return this._icon;
-    }
-
-    @Input('bcLink')
-    set link(link: string | undefined) {
-        this._link = link;
-    }
-
-    get link(): string | undefined {
-        return this._link;
     }
 
     @Input('bcText')
@@ -39,84 +116,18 @@ export class NGXSeasonBreadcrumbItem {
     }
 
     private _icon: NGXSeasonIconName | undefined;
-    private _link: string | undefined;
     private _text: string | undefined;
-
-}
-
-@Component({
-    selector: 'ngx-sui-breadcrumb',
-    template: `
-        <ng-container *ngFor="let item of items; index as idx; last as isLast">
-            <ng-container *ngIf="textOnly; then textBlock else linkBlock"></ng-container>
-            <ng-template #linkBlock>
-                <a [routerLink]="item.link" (mouseover)="flags[idx] = true" (mouseleave)="flags[idx] = false" class="breadcrumb-item link">
-                    <ngx-sui-icon [iconShape]="item.icon" [iconSolid]="flags[idx]" iconSize="lg" *ngIf="item.icon"></ngx-sui-icon>
-                    <span class="item-text-wrapper">{{ item.text }}</span>
-                </a>
-            </ng-template>
-            <ng-template #textBlock>
-                <span class="breadcrumb-item">
-                    <ngx-sui-icon [iconShape]="item.icon" iconSolid="true" iconSize="lg" *ngIf="item.icon"></ngx-sui-icon>
-                    <span class="item-text-wrapper">{{ item.text }}</span>
-                </span>
-            </ng-template>
-            <span class="split-mark" *ngIf="!isLast"></span>
-        </ng-container>
-        <ng-template><ng-content select="ngx-sui-breadcrumb-item"></ng-content></ng-template>
-    `
-})
-export class NGXSeasonBreadcrumbComponent implements OnChanges, AfterContentInit, AfterViewInit {
-
-    @Input('bcSplitIcon')
-    set mark(mark: NGXSeasonBreadcrumbMark | null) {
-        this._mark = mark ? mark : 'chevron';
-    }
-
-    get mark(): NGXSeasonBreadcrumbMark {
-        return this._mark;
-    }
-
-    @Input('bcTextOnly')
-    set textOnly(textOnly: boolean | string | null) {
-        this._textOnly = coerceBooleanProperty(textOnly);
-    }
-
-    get textOnly(): boolean {
-        return this._textOnly;
-    }
-
-    private _mark: NGXSeasonBreadcrumbMark = 'chevron';
-    private _textOnly: boolean = false;
-
-    @ContentChildren(NGXSeasonBreadcrumbItem)
-    protected items: QueryList<NGXSeasonBreadcrumbItem> | undefined;
-
-    protected flags: boolean[] = [];
 
     constructor(
         protected _element: ElementRef,
-        protected _renderer: Renderer2
+        protected _renderer: Renderer2,
+
+        @Inject(NGX_SEASON_BREADCRUMB_TOKEN)
+        protected _breadcrumb: NGXSeasonBreadcrumbComponent
     ) {}
 
-    ngOnChanges(changes: SimpleChanges): void {
-        for (const name in changes) {
-            if (name === 'mark') this.changeBreadcrumbSplitMark(changes[name].currentValue as NGXSeasonBreadcrumbMark);
-        }
-    }
-
-    ngAfterContentInit(): void {
-        if (this.items) this.flags = this.items.map(() => false);
-    }
-
     ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'breadcrumb');
-
-        this.changeBreadcrumbSplitMark(this.mark);
-    }
-
-    protected changeBreadcrumbSplitMark(mark: NGXSeasonBreadcrumbMark): void {
-        this._renderer.setAttribute(this._element.nativeElement, 'data-breadcrumb-split-mark', mark);
+        this._renderer.addClass(this._element.nativeElement, 'breadcrumb-item');
     }
 
 }

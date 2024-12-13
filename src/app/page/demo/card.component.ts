@@ -1,20 +1,42 @@
 import { Component } from "@angular/core";
 
+interface CardMetaInfo {
+
+    avatar: string;
+    subject: string;
+    description: string;
+
+    image: string;
+    video: string;
+    frame: string;
+
+    first: string[];
+    second: string[];
+
+};
+
 @Component({
     selector: 'ngx-sui-demo-card-page',
     templateUrl: './card.component.html'
 })
 export class DemoCardPageComponent {
 
-    protected avatar: string = 'https://img.phb123.com/uploads/220822/813-220R2102054Y4.jpg';
-    protected bgimage: string = 'https://pic.vjshi.com/2022-02-14/a673db4042d64b8a95e46cb533a4d3dc/00001.jpg?x-oss-process=style/watermark';
-    protected title: string = '松鼠';
-    protected subtitle: string = '松鼠科物种的统称';
-    protected paragraphs: string[] = [
-        `松鼠（学名：Sciuridae）是松鼠科物种的统称。有63属285种。松鼠的体形细长，后肢更长；前后肢间无皮翼，四肢强健；眼大而明亮，耳朵长，耳尖有一束毛，冬季尤其显著；夏毛一般为黑褐色或赤棕色，冬毛多呈灰色、烟灰色或灰褐色，腹毛为白色；指、趾端有尖锐的钩爪，尾毛多而且蓬松，常朝向背部反卷。松鼠雌性个体比雄性个体稍重一些。因为松鼠的样子像老鼠，而且大多数喜欢啃食松果之类的坚果，习惯生活在树木尤其是松树上，故名。`,
-        `松鼠分布遍及南极以外的各大洲（在大洋洲为引入种）。栖息地多种多样，松鼠在白天活动，清晨频繁，视觉和听觉发达，不冬眠，有贮存食物的习性。松鼠是杂食动物，吃多种植物，包括坚果、种子、松球、水果、菌类和绿色植物，也吃昆虫。松鼠1-2月发情，孕期35-40天，1年繁殖2次，一般每胎4-6仔，寿命4-10年。`,
-        `松鼠肉可食，有松子的清香味。松鼠身价以毛皮为贵，是狩猎业中重要的资源动物，其毛皮拼制的轻裘，在市场上价值高。松鼠也常被人们养在铁丝转笼中，以供观赏。松鼠在中国传统文化中，招人喜爱，从艺术装饰中就能看出来，最为常见的是葡萄松鼠纹。`,
-        `巨松鼠列入《国家重点保护野生动物名录》（2021年）——二级。分布于中国的19种松鼠列入《有重要生态、科学、社会价值的陆生野生动物名录》（2023年）。全部列入《世界自然保护联盟濒危物种红色名录》（IUCN）。`
-    ];
+    protected metainfo: CardMetaInfo = {
+        avatar: 'assets/test/card-avatar.png', subject: `赤色要塞`, description: `KONAMI出品的FC游戏`,
+        image: 'assets/test/card-image.jpg', video: 'assets/test/card-video.mp4',
+        frame: '//player.bilibili.com/player.html?isOutside=true&aid=113495869888154&bvid=BV1wpUzYGErk&cid=26800751376&p=1',
+        first: [
+            `《赤色要塞》（Jackal）是由日本KONAMI公司研发并发行的一款动作射击游戏，于1988年9月在中国大陆发售。`,
+            `游戏设定在敌对阵营的严密防线中，玩家扮演勇敢的战士，驾驶吉普车解救被关押的战友，对抗强大的敌军火力。游戏剧情紧张刺激，玩法多样，从丛林基地到核心基地，每一关都充满挑战。除了丰富的关卡设计，游戏还提供了多种武器和升级系统。`,
+            `该游戏与《魂斗罗》、《绿色兵团》、《沙罗曼蛇》并誉为“四强”，风靡整个80年代。`
+        ],
+        second: [
+            `当初名为“Jackal”（豺狼部队）的游戏被翻译成“赤色要塞”，是因为同年发售的日本任天堂磁碟机版的名字是“FINAL COMMAND:red fortress”（最终命令:赤色要塞）。于是，“赤色要塞”这个我们耳熟能详的名字就这样被保留下来了，并传入了国内，成为了许许多多人童年时难忘的一段记忆。`,
+            `剧情中，玩家的战友被关押在敌方战线，你是他们重获自由的唯一希望。然而，要解救他们，你要面对的火力非常密集。解救敌方大楼里关押的战俘！你需要用豺狼般的凶猛（the ferocity of a wild Jackal）来创造奇迹！解救人质的勇士有：Decker上校、Bob中尉、Quint军士、Grey下士。这是一场让你热血沸腾的战斗！此游戏不仅在红白机平台，在后来的街机平台上也推出了更新的版本，游戏难度更为加大。`,
+            `游戏中玩家开着一辆吉普车与敌人作战，可以进行解救人质。游戏过程中，玩家开战车驶入敌方，与敌方作战，遇见牢房，则解救人质，在指定直升机场将人质送到接应直升机。每一关的末尾都要经过一场激烈的战斗才能进入下一关。有多个场景与不同的武器，解救人质或者获取积分宝物时，火力会增强，游戏紧张好玩。赤色要塞是风靡20世纪90年代的一个经典游戏。`
+        ]
+    };
 
 }
+// <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113495869888154&bvid=BV1wpUzYGErk&cid=26800751376&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="false"></iframe>
+// <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=955090413&bvid=BV1uW4y1D7Kh&cid=1170284140&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>

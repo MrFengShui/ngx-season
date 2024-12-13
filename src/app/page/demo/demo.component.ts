@@ -2,7 +2,7 @@ import { DOCUMENT } from "@angular/common";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
-import { BehaviorSubject, filter, interval, map, Observable, of, Subject, throttleTime } from "rxjs";
+import { BehaviorSubject, filter, interval, map, Observable, Subject, throttleTime } from "rxjs";
 
 import moment from 'moment';
 
@@ -50,20 +50,21 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-3', text: '文章', link: ['/demo', 'component', 'article'] },
                 { id: '2-4', text: '头像', link: ['/demo', 'component', 'avatar'] },
                 { id: '2-5', text: '徽章', link: ['/demo', 'component', 'badge'] },
-                { id: '2-6', text: '面包屑', link: ['/demo', 'component', 'breadcrumb'] },
-                { id: '2-7', text: '按钮', link: ['/demo', 'component', 'button'] },
-                { id: '2-8', text: '卡片', link: ['/demo', 'component', 'card'] },
-                { id: '2-9', text: '轮播器', link: ['/demo', 'component', 'carousel'] },
-                { id: '2-10', text: '数码', link: ['/demo', 'component', 'digital'] },
-                { id: '2-11', text: '分割器', link: ['/demo', 'component', 'divider'] },
-                { id: '2-12', text: '图标', link: ['/demo', 'component', 'icon'] },
-                { id: '2-13', text: '列表', link: ['/demo', 'component', 'list'] },
-                { id: '2-16', text: '占位符', link: ['/demo', 'component', 'placeholder'] },
+                { id: '2-6', text: '占位符', link: ['/demo', 'component', 'banner'] },
+                { id: '2-7', text: '面包屑', link: ['/demo', 'component', 'breadcrumb'] },
+                { id: '2-8', text: '按钮', link: ['/demo', 'component', 'button'] },
+                { id: '2-9', text: '卡片', link: ['/demo', 'component', 'card'] },
+                { id: '2-10', text: '轮播器', link: ['/demo', 'component', 'carousel'] },
+                { id: '2-11', text: '数码', link: ['/demo', 'component', 'digital'] },
+                { id: '2-12', text: '分割器', link: ['/demo', 'component', 'divider'] },
+                { id: '2-13', text: '图标', link: ['/demo', 'component', 'icon'] },
+                { id: '2-14', text: '列表', link: ['/demo', 'component', 'list'] },
                 { id: '2-17', text: '进度', link: ['/demo', 'component', 'progress'] },
                 { id: '2-18', text: '丝带', link: ['/demo', 'component', 'ribbon'] },
-                { id: '2-19', text: '选项卡', link: ['/demo', 'component', 'tabbed'] },
-                { id: '2-20', text: '标签', link: ['/demo', 'component', 'tag'] },
-                { id: '2-21', text: '树形列表', link: ['/demo', 'component', 'tree'] },
+                { id: '2-19', text: '状态', link: ['/demo', 'component', 'status'] },
+                { id: '2-20', text: '选项卡', link: ['/demo', 'component', 'tabbed'] },
+                { id: '2-25', text: '标签', link: ['/demo', 'component', 'tag'] },
+                { id: '2-28', text: '树形列表', link: ['/demo', 'component', 'tree'] },
             ]
         },
         {
@@ -106,6 +107,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
     protected controlToggled: boolean = true;
 
     protected datetime$: Observable<string> | undefined;
+    protected breadcrumb$: Subject<Array<{ link: string[], text: string }>> = new BehaviorSubject<Array<{ link: string[], text: string }>>([]);
 
     protected selection: NGXSeasonCalendarSelectionModel | undefined;
 
@@ -129,27 +131,27 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 filter(events => events instanceof NavigationEnd),
                 map(() => {
                     const parent: ActivatedRouteSnapshot = this._route.snapshot;
-                    const parentPath: string = parent.routeConfig?.path as string;
-                    const parentTitle: string = parent.routeConfig?.title as string;
+                    const parentPath: string = parent.routeConfig?.path || '';
+                    const parentTitle: string = parent.routeConfig?.title?.toString() || '';
 
                     const child: ActivatedRouteSnapshot = parent.children[0];
-                    const childPath: string = child.routeConfig?.path as string;
-                    const childTitle: string = child.routeConfig?.title as string;
+                    const childPaths: string[] = (child.routeConfig?.path || '').split('/');
+                    const childTitle: string = child.routeConfig?.title?.toString() || '';
 
-                    return { route: [`/${parentPath}`, `${childPath}`], title: `${parentTitle}——${childTitle}` };
+                    return { label: [parentTitle, childTitle], route: [`/${parentPath}`, ...childPaths] };
                 })
             ))
             .subscribe(result =>
-                this._ngZone.run(() => {
-                    this.source = result.route;
-
-                    let task = setTimeout(() => {
-                        clearTimeout(task);
-
-                        this._title.setTitle(result.title);
-                        this._cdr.markForCheck();
-                    });
-                }));
+                Promise.resolve()
+                    .then(() => {
+                        this.source = result.route;
+                        return result;
+                    })
+                    .then(metainfo => {
+                        this.breadcrumb$.next(metainfo.label.map((value, index) => ({ link: index === 0 ? metainfo.route.slice(0, 1) : metainfo.route, text: value })));
+                        return metainfo;
+                    })
+                    .then(metainfo => this._title.setTitle(metainfo.label.join('——'))));
     }
 
     ngOnInit(): void {
