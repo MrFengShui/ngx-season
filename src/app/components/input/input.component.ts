@@ -2,7 +2,7 @@ import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TemplatePortal } from "@angular/cdk/portal";
 import { Component, OnChanges, AfterViewInit, Input, ElementRef, Renderer2, SimpleChanges, Directive, TemplateRef, ContentChild, ViewContainerRef, Output, EventEmitter, ViewChild } from "@angular/core";
 
-export type NGXSeasonInputColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 @Directive({
     selector: '[ngx-sui-InputPrefix]'
@@ -37,11 +37,11 @@ export class NGXSeasonInputSuffixDirective {
 export abstract class NGXSeasonInputComponent implements OnChanges, AfterViewInit {
 
     @Input('inputColor')
-    set color(color: NGXSeasonInputColor) {
+    set color(color: NGXSeasonColorPalette) {
         this._color = color;
     }
 
-    get color(): NGXSeasonInputColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
@@ -135,7 +135,7 @@ export abstract class NGXSeasonInputComponent implements OnChanges, AfterViewIni
         return this._text;
     }
 
-    private _color: NGXSeasonInputColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
     private _disabled: boolean = false;
     private _label: string | undefined;
     private _placeholder: string | undefined;
@@ -149,7 +149,7 @@ export abstract class NGXSeasonInputComponent implements OnChanges, AfterViewIni
 
     @Output('inputTextChange')
     textChange: EventEmitter<string> = new EventEmitter(true);
-    
+
     @ContentChild(NGXSeasonInputPrefixDirective)
     protected prefixTemplate: NGXSeasonInputPrefixDirective | undefined;
 
@@ -170,7 +170,7 @@ export abstract class NGXSeasonInputComponent implements OnChanges, AfterViewIni
 
     ngOnChanges(changes: SimpleChanges): void {
         for (const name in changes) {
-            if (name === 'color') this.changeInputColor(changes[name].currentValue as NGXSeasonInputColor);
+            if (name === 'color') this.changeInputColor(changes[name].currentValue as NGXSeasonColorPalette);
         }
     }
 
@@ -183,7 +183,7 @@ export abstract class NGXSeasonInputComponent implements OnChanges, AfterViewIni
         if (this.field) this._renderer.setProperty(this.field.nativeElement, 'value', null);
     }
 
-    protected changeInputColor(color: NGXSeasonInputColor): void {
+    protected changeInputColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-input-color', color);
     }
 

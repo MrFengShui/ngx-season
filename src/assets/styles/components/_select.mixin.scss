@@ -1,0 +1,137 @@
+@mixin setup-select-theme($theme, $colors) {
+    .select {
+        --select-border-radius: #{var(--size-pixel-3)};
+        --select-gap: #{var(--col-gap-100)};
+        --select-padding: #{var(--padding-50)};
+        --select-min-width: #{var(--size-pixel-64)};
+        --select-height: #{var(--size-pixel-36)};
+
+        --select-label-font-size: #{var(--font-size-16)};
+        --select-label-font-weight: #{var(--font-weight-500)};
+        --select-label-line-height: #{var(--line-height-150)};
+
+        --select-arrow-size: #{var(--size-pixel-6)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --select-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+
+                --select-label-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+
+                --select-arrow-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+            } @else {
+                --select-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --select-label-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+                --select-arrow-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            }
+        }
+
+        border-radius: var(--select-border-radius);
+        border-style: solid;
+        border-width: var(--select-border-width);
+
+        display: flex;
+        align-items: center;
+
+        column-gap: var(--select-gap);
+        cursor: pointer;
+
+        min-width: var(--select-min-width);
+        height: var(--select-height);
+
+        padding-left: var(--select-padding);
+        padding-right: var(--select-padding);
+
+        .label {
+            flex: 1 1 auto;
+
+            font-size: var(--select-label-font-size);
+            font-weight: var(--select-label-font-weight);
+            line-height: var(--select-label-line-height);
+        }
+
+        .arrow {
+            display: inline-block;
+
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+
+            width: calc(var(--select-arrow-size) * 2);
+            height: var(--select-arrow-size);
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-select-color=#{$color}] {
+                border-color: var(--select-bdcolor-#{$color});
+
+                .label {
+                    color: var(--select-label-color-#{$color});
+                }
+
+                .arrow {
+                    background-color: var(--select-arrow-bgcolor-#{$color});
+                }
+            }
+        }
+    }
+
+    .select-drop-menu {
+        --select-drop-menu-padding: #{var(--padding-50)};
+        --select-drop-menu-shadow-blur: #{if($theme == "light", var(--size-pixel-4), var(--size-pixel-12))};
+
+        --select-option-font-size: #{var(--font-size-16)};
+        --select-option-font-weight: #{var(--font-weight-500)};
+        --select-option-line-height: #{var(--line-height-300)};
+        --select-option-padding: #{var(--padding-100)};
+
+        --select-drop-menu-bgcolor: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+        --select-drop-menu-shadow: #{if($theme == "light", var(--palette-black-color-10), var(--palette-white-color-40))};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --select-option-bgcolor-selected-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --select-option-color-selected-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+            } @else {
+                --select-option-bgcolor-selected-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --select-option-color-selected-#{$key}: #{var(--palette-#{$value}-50-color)};
+            }
+        }
+
+        background-color: var(--select-drop-menu-bgcolor);
+        filter: drop-shadow(0 0 var(--select-drop-menu-shadow-blur) var(--select-drop-menu-shadow));
+
+        display: inline-flex;
+        flex-direction: column;
+
+        padding-top: var(--select-drop-menu-padding);
+        padding-bottom: var(--select-drop-menu-padding);
+
+        width: var(--size-percent-100);
+
+        .select-option {
+            display: flex;
+            align-items: center;
+
+            font-size: var(--select-option-font-size);
+            font-weight: var(--select-option-font-weight);
+            line-height: var(--select-option-line-height);
+
+            min-width: var(--select-option-min-width);
+
+            padding-left: var(--select-option-padding);
+            padding-right: var(--select-option-padding);
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-drop-menu-color=#{$color}] {
+                .select-option {
+                    &.selected {
+                        background-color: var(--select-option-bgcolor-selected-#{$color});
+                        color: var(--select-option-color-selected-#{$color});
+                    }
+                }
+            }
+        }
+    }
+}

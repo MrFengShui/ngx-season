@@ -4,7 +4,8 @@ import { AfterContentInit, AfterViewInit, Component, ElementRef, forwardRef, Inj
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { BehaviorSubject, Subject } from "rxjs";
 
-import { NGXSeasonInputColor, NGXSeasonInputComponent } from "./input.component";
+import { NGXSeasonInputComponent } from "./input.component";
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 export const NGX_SEASON_PASSWORD_STRENGTH_LABEL_TOKEN: InjectionToken<NGXSeasonPasswordStrengthLabel> = new InjectionToken('NGX_SEASON_PASSWORD_STRENGTH_LABEL_TOKEN');
 
@@ -46,11 +47,11 @@ const NGXSeasonPasswordValueAccessor: Provider = {
 export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     @Input('color')
-    set color(color: NGXSeasonInputColor | null) {
+    set color(color: NGXSeasonColorPalette | null) {
         this._color = color ? color : 'default';
     }
 
-    get color(): NGXSeasonInputColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
@@ -90,7 +91,7 @@ export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDes
         return this._text;
     }
 
-    private _color: NGXSeasonInputColor = 'default';
+    private _color: NGXSeasonColorPalette = 'default';
     private _patterns: string[] | undefined;
     private _subject: string | undefined;
     private _suggests: string[] | undefined;
@@ -121,7 +122,7 @@ export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDes
 
     ngOnChanges(changes: SimpleChanges): void {
         for (const name in changes) {
-            if (name === 'color') this.changeCheckColor(changes[name].currentValue as NGXSeasonInputColor);
+            if (name === 'color') this.changeCheckColor(changes[name].currentValue as NGXSeasonColorPalette);
 
             if (name === 'patterns') this.changeCheckPatterns(changes[name].currentValue);
 
@@ -148,7 +149,7 @@ export class NGXSeasonPasswordStrengthCheckComponent implements OnChanges, OnDes
         this.matchText(this.text);
     }
 
-    private changeCheckColor(color: NGXSeasonInputColor): void {
+    private changeCheckColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-check-color', color);
     }
 

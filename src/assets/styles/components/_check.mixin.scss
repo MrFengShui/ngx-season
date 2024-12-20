@@ -38,6 +38,7 @@
 
         display: inline-flex;
         align-items: center;
+        column-gap: var(--checkbox-gap);
 
         &[data-check-label-position="before"] {
             flex-direction: row-reverse;
@@ -133,21 +134,21 @@
             font-weight: var(--font-weight-900);
         }
 
-        &[data-check-label-position="after"] {
-            > :nth-child(n) {
-                &:not(:last-child) {
-                    margin-right: var(--checkbox-gap);
-                }
-            }
-        }
+        // &[data-check-label-position="after"] {
+        //     > :nth-child(n) {
+        //         &:not(:last-child) {
+        //             margin-right: var(--checkbox-gap);
+        //         }
+        //     }
+        // }
 
-        &[data-check-label-position="before"] {
-            > :nth-child(n) {
-                &:not(:last-child) {
-                    margin-left: var(--checkbox-gap);
-                }
-            }
-        }
+        // &[data-check-label-position="before"] {
+        //     > :nth-child(n) {
+        //         &:not(:last-child) {
+        //             margin-left: var(--checkbox-gap);
+        //         }
+        //     }
+        // }
 
         @each $color in map-keys($colors) {
             &[data-checkbox-color=#{$color}] {

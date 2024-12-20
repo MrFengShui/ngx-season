@@ -30,6 +30,7 @@ import { DemoTreePageComponent } from "../page/demo/tree.component";
 import { DemoArticlePageComponent } from "../page/demo/article.component";
 import { DemoTabbedPageComponent } from "../page/demo/tabbed.component";
 import { DemoStatusPageComponent } from "../page/demo/status.component";
+import { DemoTablePageComponent } from "../page/demo/table.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -52,12 +53,14 @@ export const demoRoutes: Routes = [
     { path: 'component/ribbon', component: DemoRibbonPageComponent, title: '丝带' },
     { path: 'component/status', component: DemoStatusPageComponent, title: '状态' },
     { path: 'component/tabbed', component: DemoTabbedPageComponent, title: '选项卡' },
+    { path: 'component/table', component: DemoTablePageComponent, title: '表格' },
     { path: 'component/tag', component: DemoTagPageComponent, title: '标签' },
     { path: 'component/tree', component: DemoTreePageComponent, title: '树形列表' },
 
     { path: 'form/checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
     { path: 'form/check-switch', component: DemoCheckSwitchPageComponent, title: '检查开关' },
     { path: 'form/input', component: DemoInputPageComponent, title: '输入框' },
+    { path: 'form/textfield', component: DemoInputPageComponent, title: '输入框' },
     { path: 'form/radiobtn', component: DemoRadioButtonPageComponent, title: '选择框' },
     { path: 'form/radio-toggle', component: DemoRadioTogglePageComponent, title: '开关按钮' },
 

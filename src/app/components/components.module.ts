@@ -30,6 +30,9 @@ import { NGXSeasonTagModule } from "./tag/tag.module";
 import { NGXSeasonArticleModule } from "./article/article.module";
 import { NGXSeasonTabbedModule } from "./tabbed/tabbed.module";
 import { NGXSeasonStatusModule } from "./status/status.module";
+import { NGXSeasonTableModule } from "./table/table.module";
+import { NGXSeasonPaginatorModule } from "./paginator/paginator.module";
+import { NGXSeasonSelectModule } from "./select/select.module";
 
 @NgModule({
     imports: [
@@ -56,12 +59,15 @@ import { NGXSeasonStatusModule } from "./status/status.module";
         NGXSeasonModalModule,
         NGXSeasonNavlistModule,
         NGXSeasonOverlayModule,
+        NGXSeasonPaginatorModule,
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonSelectModule,
         NGXSeasonStatusModule,
         NGXSeasonTabbedModule,
+        NGXSeasonTableModule,
         NGXSeasonTagModule,
     ],
     exports: [
@@ -86,12 +92,15 @@ import { NGXSeasonStatusModule } from "./status/status.module";
         NGXSeasonModalModule,
         NGXSeasonNavlistModule,
         NGXSeasonOverlayModule,
+        NGXSeasonPaginatorModule,
         NGXSeasonPlaceholderModule,
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonSelectModule,
         NGXSeasonStatusModule,
         NGXSeasonTabbedModule,
+        NGXSeasonTableModule,
         NGXSeasonTagModule
     ],
     providers: [

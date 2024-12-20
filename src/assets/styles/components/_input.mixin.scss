@@ -1,13 +1,4 @@
-@mixin setup-input-theme($theme, $primaryColor, $accentColor) {
-    $colors: (
-        "default": "gray",
-        "primary": $primaryColor,
-        "accent": $accentColor,
-        "success": "green",
-        "warning": "yellow",
-        "failure": "red",
-        "info": "blue"
-    );
+@mixin setup-input-theme($theme, $colors) {
     $meterColors: (
         "weak": "red",
         "medium": "yellow",
@@ -71,7 +62,7 @@
                 --input-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
 
                 --input-label-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
-                
+
                 --input-field-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
                 --input-field-placeholder-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
 
@@ -234,74 +225,74 @@
                     display: inline-flex;
                     flex-direction: column;
                     row-gap: var(--check-gap);
-    
+
                     padding: var(--check-padding);
 
                     min-width: var(--check-min-width);
                     max-width: max(var(--check-max-width), var(--size-percent-75));
                     width: var(--size-percent-100);
-    
+
                     .check-subject {
                         font-size: var(--check-subject-font-size);
                         font-weight: var(--check-subject-font-weight);
                         line-height: var(--check-subject-line-height);
                         text-align: center;
                     }
-    
+
                     .check-meter-wrapper {
                         display: flex;
-    
+
                         .check-meter {
                             display: inline-flex;
                             flex-direction: column;
                             align-items: center;
                             row-gap: calc(var(--check-meter-gap) * 2);
-    
+
                             width: var(--size-percent-100);
-    
+
                             .meter-mark {
                                 display: inline-block;
-    
+
                                 width: var(--check-meter-mark-width);
                                 height: var(--check-meter-mark-height);
                             }
-    
+
                             .meter-text {
                                 font-size: var(--check-meter-text-font-size);
                                 font-weight: var(--check-meter-text-font-weight);
                             }
                         }
-    
+
                         > :nth-child(-n + 4) {
                             margin-right: var(--check-meter-gap);
                         }
                     }
-    
+
                     .check-suggest {
                         display: inline-flex;
                         flex-direction: column;
-    
+
                         list-style: none;
-    
+
                         margin: var(--check-suggest-list-margin);
                         padding: var(--check-suggest-list-padding);
-                        
+
                         .check-suggest-item {
                             display: inline-flex;
                             align-items: center;
-    
+
                             font-size: var(--check-suggest-list-font-size);
                             font-weight: var(--check-suggest-list-font-weight);
                             line-height: var(--check-suggest-list-line-height);
-    
+
                             &:before {
                                 content: '';
                                 clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-    
+
                                 display: inline-block;
-    
+
                                 margin-right: var(--check-suggest-list-mark-gap);
-    
+
                                 width: var(--check-suggest-list-mark-size);
                                 height: var(--check-suggest-list-mark-size);
                             }
@@ -309,38 +300,38 @@
                     }
                 }
             }
-            
+
 
             @each $color in map-keys($colors) {
                 &[data-input-color=#{$color}] {
                     border-color: var(--input-bdcolor-#{$color});
-    
+
                     &:hover {
                         border-color: var(--input-bdcolor-hover-#{$color});
-    
+
                         .input-divider {
                             border-color: var(--input-divider-bdcolor-hover-#{$color});
                         }
                     }
-    
+
                     &:focus-within {
                         border-color: var(--input-bdcolor-focus-#{$color});
-    
+
                         .input-divider {
                             border-color: var(--input-divider-bdcolor-focus-#{$color});
                         }
                     }
-    
+
                     .input-field {
                         .label {
                             color: var(--input-label-color-#{$color});
                         }
-    
+
                         .field {
                             .entry-wrapper {
                                 input[type=text], input[type=password] {
                                     color: var(--input-field-color-#{$color});
-    
+
                                     &::placeholder {
                                         color: var(--input-field-placeholder-color-#{$color});
                                     }
@@ -348,18 +339,18 @@
                             }
                         }
                     }
-    
+
                     .input-divider {
                         border-color: var(--input-divider-bdcolor-#{$color});
                     }
-                    
+
                     .input-prompt {
                         color: var(--input-prompt-color-#{$color});
                     }
                 }
             }
         }
-        
+
         .password-strength-check {
             @each $color in map-keys($colors) {
                 &[data-check-color=#{$color}] {
@@ -371,7 +362,7 @@
                         .meter-mark {
                             background-color: var(--check-meter-mark-bgcolor-#{$color});
                         }
-    
+
                         .meter-text {
                             color: var(--check-meter-text-color-#{$color});
                         }
@@ -381,7 +372,7 @@
                                 .meter-mark {
                                     background-color: var(--palette-#{$value}-500-color);
                                 }
-            
+
                                 .meter-text {
                                     color: var(--palette-#{$value}-500-color);
                                 }

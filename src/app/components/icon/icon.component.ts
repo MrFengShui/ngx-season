@@ -29,7 +29,7 @@ export type NGXSeasonIconName =
     'paperclip' | 'pause' | 'peso' | 'phone' | 'pin' | 'play' | 'plugin' | 'plus-circle' | 'plus' | 'portrait' | 'pound' | 'power' | 'printer' |
     'qrcode' |
     'recycle' | 'redo' | 'refresh' | 'repeat' | 'replay-all' | 'replay-one' | 'resize-down' | 'resize-up' | 'rewind' | 'router' | 'ruble' | 'rupee' |
-    'savings' | 'search' | 'server' | 'settings' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'shuffle' | 'slider' | 'star' | 'step-forward' | 'stop' | 'storage' | 'store' | 'success-standard' | 'success' | 'sun' | 'switch' | 'sync' |
+    'savings' | 'search' | 'server' | 'settings' | 'share' | 'shield-check' | 'shield-times' | 'shield' | 'shuffle' | 'slider' | 'star' | 'step-forward' | 'step' | 'stop' | 'storage' | 'store' | 'success-standard' | 'success' | 'sun' | 'switch' | 'sync' |
     'table' | 'tablet' | 'tag' | 'tags' | 'target' | 'terminal' | 'thumbs-down' | 'thumbs-up' | 'times-circle' | 'times' | 'tools' | 'trash' | 'tree-view' |
     'undo' | 'unlock' | 'upload-cloud' | 'upload' | 'user' | 'users' |
     'video-camera' | 'video-gallery' | 'volume-down' | 'volume-mute' | 'volume-up' |

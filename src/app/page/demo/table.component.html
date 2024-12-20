@@ -1,0 +1,44 @@
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <ngx-sui-table [tbColor]="color" tbShowFilter="true" tbInputPrompt="关键字" tbHeaderSticky="true" tbFooterSticky="true" tbShowRows="0" [tbDataSrc]="dataSrc" class="w-100">
+        <tr ngx-sui-THeadRow *ngx-sui-THeadRowDef="let item; names: theadValues">
+            <th ngx-sui-THeadCell tbcAlign="center" tbhColSize="shrink">
+                <label ngx-sui-CheckBox [checkColor]="color" checkShowLabel="false" [checkChecked]="isAllChecked()" [cbIndeterminated]="isIndeterminated()" (checkCheckedChange)="handleSelectOrDeselectEvent($event)"></label>
+            </th>
+            <th ngx-sui-THeadCell tbcAlign="right" tbhColSize="shrink">{{ item.position }}</th>
+            <th ngx-sui-THeadCell tbcAlign="left">{{ item.name }}</th>
+            <th ngx-sui-THeadCell tbcAlign="right" tbhColSize="shrink">{{ item.metal }}</th>
+            <th ngx-sui-THeadCell tbcAlign="center" tbhColSize="shrink">{{ item.phase }}</th>
+            <th ngx-sui-THeadCell tbcAlign="left" tbhColSize="shrink">{{ item.symbol }}</th>
+            <th ngx-sui-THeadCell tbcAlign="right" tbhColSize="shrink">{{ item.weight }}</th>
+        </tr>
+        <tr ngx-sui-TBodyRow *ngx-sui-TBodyRowDef="let row">
+            <td ngx-sui-TBodyCell tbcAlign="center">
+                <label ngx-sui-CheckBox [checkColor]="color" checkShowLabel="false" [checkChecked]="selection.isSelected(row)" (checkCheckedChange)="listenTableRowSelectedChange(row)"></label>
+            </td>
+            <td ngx-sui-TBodyCell tbcAlign="right">{{ row.position }}</td>
+            <td ngx-sui-TBodyCell tbcAlign="left">{{ row.name }}</td>
+            <td ngx-sui-TBodyCell tbcAlign="right">{{ row.metal }}</td>
+            <td ngx-sui-TBodyCell tbcAlign="center">{{ row.phase }}</td>
+            <td ngx-sui-TBodyCell tbcAlign="left">{{ row.symbol }}</td>
+            <td ngx-sui-TBodyCell tbcAlign="right">{{ row.weight }}</td>
+        </tr>
+        <tr ngx-sui-TFootRow *ngx-sui-TFootRowDef="let item; values: tfootValues">
+            <th ngx-sui-TFootCell tbcAlign="left" colspan="3">元素周期表——数据统计</th>
+            <th ngx-sui-TFootCell tbcAlign="left" colspan="3">
+                <div class="inline-flex flex-dir-col row-gap-50 w-100">
+                    <div class="flex justify-content-between">
+                        <span class="fs-12">金属：{{item.metal.metal}}</span>
+                        <span class="fs-12">非金属：{{item.metal.nonmetal}}</span>
+                    </div>
+                    <div class="flex justify-content-between">
+                        <span class="fs-12">液态：{{item.phase.liquid}}</span>
+                        <span class="fs-12">固态：{{item.phase.solid}}</span>
+                        <span class="fs-12">气态：{{item.phase.gas}}</span>
+                    </div>
+                </div>
+            </th>
+            <th ngx-sui-TFootCell tbcAlign="right">{{ item.weight | number }}</th>
+        </tr>
+        <!-- <caption ngx-sui-TableCaption>{{ caption }}</caption> -->
+    </ngx-sui-table>
+</div>

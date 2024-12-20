@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonInputColor } from "src/app/components/input/input.component";
+import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-input-page',
@@ -8,7 +8,7 @@ import { NGXSeasonInputColor } from "src/app/components/input/input.component";
 })
 export class DemoInputPageComponent {
 
-    protected colors: NGXSeasonInputColor[] = ['default', 'primary', 'accent', 'success', 'warning', 'failure', 'info'];
+    protected colors: NGXSeasonColorPalette[] = ['default', 'primary', 'accent', 'success', 'warning', 'failure', 'info'];
     protected text: string = '';
 
 }

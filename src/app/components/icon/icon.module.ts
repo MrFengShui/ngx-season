@@ -38,7 +38,7 @@ const register: NGXSeasonIconRegister = NGXSeasonIconRegister.newInstance()
 
                 .addIcon('recycle').addIcon('redo').addIcon('refresh').addIcon('repeat').addIcon('replay-all').addIcon('replay-one').addIcon('resize-down').addIcon('resize-up').addIcon('rewind').addIcon('router').addIcon('ruble').addIcon('rupee')
 
-                .addIcon('savings').addIcon('search').addIcon('server').addIcon('settings').addIcon('share').addIcon('shield-check').addIcon('shield-times').addIcon('shield').addIcon('shuffle').addIcon('slider').addIcon('star').addIcon('step-forward').addIcon('stop').addIcon('storage').addIcon('store').addIcon('success-standard').addIcon('success').addIcon('sun').addIcon('switch').addIcon('sync')
+                .addIcon('savings').addIcon('search').addIcon('server').addIcon('settings').addIcon('share').addIcon('shield-check').addIcon('shield-times').addIcon('shield').addIcon('shuffle').addIcon('slider').addIcon('star').addIcon('step-forward').addIcon('step').addIcon('stop').addIcon('storage').addIcon('store').addIcon('success-standard').addIcon('success').addIcon('sun').addIcon('switch').addIcon('sync')
 
                 .addIcon('table').addIcon('tablet').addIcon('tag').addIcon('tags').addIcon('target').addIcon('terminal').addIcon('thumbs-up').addIcon('thumbs-down').addIcon('times-circle').addIcon('times').addIcon('tools').addIcon('trash').addIcon('tree-view')
 

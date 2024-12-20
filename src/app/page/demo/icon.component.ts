@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+
 import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 
 @Component({
@@ -132,7 +133,7 @@ export class DemoIconPageComponent {
         {
             label: '字母S开头',
             names: [
-                'savings', 'search', 'server', 'settings', 'share', 'shield-check', 'shield-times', 'shield', 'slider', 'star', 'step-forward', 'stop', 'storage', 'store', 'success-standard', 'success', 'sun', 'switch', 'sync'
+                'savings', 'search', 'server', 'settings', 'share', 'shield-check', 'shield-times', 'shield', 'slider', 'star', 'step-forward', 'step', 'stop', 'storage', 'store', 'success-standard', 'success', 'sun', 'switch', 'sync'
             ]
         },
         {

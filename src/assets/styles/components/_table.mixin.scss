@@ -1,0 +1,182 @@
+@mixin setup-table-theme($theme, $colors) {
+    .table-container {
+        --table-border-width: #{var(--size-pixel-1)};
+        --table-gap: #{var(--row-gap-50)};
+
+        --table-cell-padding: #{var(--padding-100)};
+
+        --table-thead-font-size: #{var(--font-size-16)};
+        --table-thead-font-weight: #{var(--font-weight-900)};
+        --table-thead-line-height: #{var(--line-height-100)};
+        --table-thead-row-height: #{var(--size-pixel-56)};
+
+        --table-tbody-font-size: #{var(--font-size-14)};
+        --table-tbody-font-weight: #{var(--font-weight-500)};
+        --table-tbody-line-height: #{var(--line-height-100)};
+        --table-tbody-row-height: #{var(--size-pixel-48)};
+
+        --table-tfoot-font-size: #{var(--font-size-16)};
+        --table-tfoot-font-weight: #{var(--font-weight-700)};
+        --table-tfoot-line-height: #{var(--line-height-100)};
+        --table-tfoot-row-height: #{var(--size-pixel-56)};
+
+        --table-caption-font-size: #{var(--font-size-12)};
+        --table-caption-font-weight: #{var(--font-weight-700)};
+        --table-caption-line-height: #{var(--line-height-100)};
+        --table-caption-padding: #{var(--padding-100)};
+
+        @each $key, $value in $colors {
+            --table-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --table-color-hover-#{$key}: #{var(--palette-#{$value}-50-color)};
+
+            @if $key == "default" {
+                --table-thead-bgcolor: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+                --table-tfoot-bgcolor: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+                --table-tbody-bgcolor: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+                --table-bdcolor: #{if($theme == "light", var(--palette-#{$value}-color-15), var(--palette-#{$value}-color-35))};
+            }
+        }
+
+        display: inline-flex;
+        flex-direction: column;
+
+        row-gap: var(--table-gap);
+
+        .table {
+            border-collapse: collapse;
+            display: table;
+            // table-layout: fixed;
+
+            width: var(--size-percent-100);
+
+            caption {
+                display: table-caption;
+            }
+
+            thead {
+                background-color: var(--table-thead-bgcolor);
+
+                display: table-header-group;
+            }
+
+            tbody {
+                background-color: var(--table-tbody-bgcolor);
+
+                display: table-row-group;
+            }
+
+            tfoot {
+                background-color: var(--table-tfoot-bgcolor);
+
+                display: table-footer-group;
+            }
+
+            tr {
+                display: table-row;
+
+                > th, > td {
+                    display: table-cell;
+
+                    padding-left: var(--table-cell-padding);
+                    padding-right: var(--table-cell-padding);
+
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+
+            > .table-header {
+                &.header-sticky {
+                    position: sticky;
+                    top: 0;
+                }
+
+                > .table-header-row {
+                    height: var(--table-thead-row-height);
+
+                    > .table-header-cell {
+                        border-bottom-color: var(--table-bdcolor);
+                        border-bottom-style: solid;
+                        border-bottom-width: var(--table-border-width);
+
+                        font-size: var(--table-thead-font-size);
+                        font-weight: var(--table-thead-font-weight);
+                        line-height: var(--table-thead-line-height);
+                    }
+                }
+            }
+
+            > .table-content {
+                > .table-content-row {
+                    height: var(--table-tbody-row-height);
+
+                    > .table-content-cell {
+                        font-size: var(--table-tbody-font-size);
+                        font-weight: var(--table-tbody-font-weight);
+                        line-height: var(--table-tbody-line-height);
+                    }
+
+                    &:not(:last-child) {
+                        > td {
+                            border-bottom-color: var(--table-bdcolor);
+                            border-bottom-style: solid;
+                            border-bottom-width: var(--table-border-width);
+                        }
+                    }
+                }
+            }
+
+            > .table-footer {
+                &.footer-sticky {
+                    position: sticky;
+                    bottom: 0;
+                }
+
+                > .table-footer-row {
+                    height: var(--table-tfoot-row-height);
+
+                    > .table-footer-cell {
+                        border-top-color: var(--table-bdcolor);
+                        border-top-style: solid;
+                        border-top-width: var(--table-border-width);
+
+                        font-size: var(--table-tfoot-font-size);
+                        font-weight: var(--table-tfoot-font-weight);
+                        line-height: var(--table-tfoot-line-height);
+                    }
+                }
+            }
+
+            > .table-caption {
+                font-size: var(--table-caption-font-size);
+                font-weight: var(--table-caption-font-weight);
+                line-height: var(--table-caption-line-height);
+
+                padding: var(--table-caption-padding);
+
+                overflow: hidden;
+                text-wrap: nowrap;
+                text-overflow: ellipsis;
+
+                &.caption-sticky {
+                    position: sticky;
+                    bottom: calc(var(--table-caption-font-size) + var(--table-caption-padding) * 2);
+                }
+            }
+
+            @each $color in map-keys($colors) {
+                &[data-table-color=#{$color}] {
+                    > .table-content {
+                        > .table-content-row {
+                            &:hover {
+                                background-color: var(--table-bgcolor-hover-#{$color});
+                                color: var(--table-color-hover-#{$color});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
