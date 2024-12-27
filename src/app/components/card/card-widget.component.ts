@@ -25,7 +25,7 @@ export abstract class NGXSeasonCardWidgetComponent {
     template: `
         <ng-container *ngIf="customized; then custom else native"></ng-container>
         <ng-template #native>
-            <ngx-sui-avatar [avatarSrc]="avatarSrc" [avatarAlt]="avatarAlt" avatarSize="lg"></ngx-sui-avatar>
+            <img ngx-sui-Avatar [avatarSrc]="avatarSrc" [avatarAlt]="avatarAlt" avatarSize="lg"/>
             <div class="header-wrapper">
                 <span class="header-subject">{{ subject }}</span>
                 <span class="header-description">{{ description }}</span>

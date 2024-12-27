@@ -4,8 +4,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { NGXSeasonEffectsModule } from "../effects/effects.module";
-import { NGXSeasonInputModule } from "../input/input.module";
 import { NGXSeasonPaginatorModule } from "../paginator/paginator.module";
+import { NGXSeasonSearchModule } from "../search/search.module";
 
 import { NGXSeasonTableComponent } from "./table.component";
 import { NGXSeasonTHeadCellDirective, NGXSeasonTHeadRowDefDirective, NGXSeasonTHeadRowDirective } from "./table-head.directive";
@@ -33,8 +33,8 @@ import { NGXSeasonTableCaptionDirective } from "./table.directive";
         ScrollingModule,
 
         NGXSeasonEffectsModule,
-        NGXSeasonInputModule,
-        NGXSeasonPaginatorModule
+        NGXSeasonPaginatorModule,
+        NGXSeasonSearchModule
     ],
     exports: [
         NGXSeasonTableComponent,

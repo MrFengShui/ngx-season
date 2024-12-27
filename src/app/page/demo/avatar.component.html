@@ -1,7 +1,19 @@
-<div class="flex align-items-end gx-100 p-100">
-    <ngx-sui-avatar [avatarSrc]="srcURL" [avatarAlt]="srcURL" [avatarSize]="size" *ngFor="let size of sizes"></ngx-sui-avatar>
-</div>
-<div class="flex align-items-end gx-100 p-100">
-    <ngx-sui-avatar [avatarSrc]="srcURL" [avatarColor]="color" avatarShape="circle" *ngFor="let color of colors"></ngx-sui-avatar>
-    <ngx-sui-avatar [avatarSrc]="srcURL" [avatarColor]="color" avatarShape="round" *ngFor="let color of colors"></ngx-sui-avatar>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-1000">基本用法</div>
+    <img ngx-sui-Avatar [avatarSrc]="srcURL" [avatarAlt]="srcURL"/>
+    <div class="fs-24 fw-1000">头像形状</div>
+    <div class="flex col-gap-100">
+        <img ngx-sui-Avatar avatarShape="circle" [avatarSrc]="srcURL" [avatarAlt]="srcURL"/>
+        <img ngx-sui-Avatar avatarShape="square" [avatarSrc]="srcURL" [avatarAlt]="srcURL"/>
+    </div>
+    <div class="fs-24 fw-1000">头像尺寸</div>
+    <div class="flex col-gap-100">
+        <img ngx-sui-Avatar avatarShape="circle" [avatarSrc]="srcURL" [avatarAlt]="srcURL" [avatarSize]="size" *ngFor="let size of sizes"/>
+        <img ngx-sui-Avatar avatarShape="square" [avatarSrc]="srcURL" [avatarAlt]="srcURL" [avatarSize]="size" *ngFor="let size of sizes"/>
+    </div>
+    <div class="fs-24 fw-1000">头像色彩</div>
+    <div class="flex flex-wrap col-gap-100 row-gap-100" *ngFor="let size of sizes">
+        <img ngx-sui-Avatar avatarShape="circle" [avatarColor]="color" [avatarSrc]="srcURL" [avatarAlt]="srcURL" [avatarSize]="size" *ngFor="let color of colors"/>
+        <img ngx-sui-Avatar avatarShape="square" [avatarColor]="color" [avatarSrc]="srcURL" [avatarAlt]="srcURL" [avatarSize]="size" *ngFor="let color of colors"/>
+    </div>
 </div>

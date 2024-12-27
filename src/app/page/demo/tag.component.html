@@ -1,16 +1,57 @@
 <div class="flex flex-dir-col row-gap-100 p-100">
-    <div class="flex flex-wrap gx-100 row-gap-100">
-        <span ngx-sui-TextTag tagImageSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" tagImageAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" [tagColor]="item.color" [tagText]="item.label" *ngFor="let item of list"></span>
-        <span ngx-sui-TextTag tagImageSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" tagImageAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" [tagColor]="item.color" [tagText]="item.label" tagShowImage="true" *ngFor="let item of list"></span>
+    <div class="fs-24 fw-900">基本用法</div>
+    <ngx-sui-tag-grid [tgEmptyText]="emptyText"><ngx-sui-tag tagLabel="标签"></ngx-sui-tag></ngx-sui-tag-grid>
+    <div class="fs-24 fw-1000">带头像标签</div>
+    <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+        <ngx-sui-tag tagLabel="标签">
+            <img ngx-sui-Avatar [avatarAlt]="avatar" [avatarSrc]="avatar">
+        </ngx-sui-tag>
+    </ngx-sui-tag-grid>
+    <div class="fs-24 fw-900">可关闭标签</div>
+    <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+        <ngx-sui-tag tagDeletable tagLabel="标签"></ngx-sui-tag>
+    </ngx-sui-tag-grid>
+    <div class="fs-24 fw-900">标签大小</div>
+    <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+        <ngx-sui-tag tagDeletable tagLabel="标签" tagSize="sm">
+            <img ngx-sui-Avatar [avatarAlt]="avatar" [avatarSrc]="avatar">
+        </ngx-sui-tag>
+        <ngx-sui-tag tagDeletable tagLabel="标签" tagSize="md">
+            <img ngx-sui-Avatar [avatarAlt]="avatar" [avatarSrc]="avatar">
+        </ngx-sui-tag>
+        <ngx-sui-tag tagDeletable tagLabel="标签" tagSize="lg">
+            <img ngx-sui-Avatar [avatarAlt]="avatar" [avatarSrc]="avatar">
+        </ngx-sui-tag>
+    </ngx-sui-tag-grid>
+    <div class="fs-24 fw-900">标签色彩</div>
+    <div class="flex flex-dir-col row-gap-100">
+        <div class="flex align-items-center col-gap-100">
+            <span class="fs-16 fw-700">小型标签</span>
+            <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+                <ngx-sui-tag tagDeletable [tagColor]="tag.color" [tagLabel]="tag.label" tagSize="sm" *ngFor="let tag of tags"></ngx-sui-tag>
+            </ngx-sui-tag-grid>
+        </div>
+        <div class="flex align-items-center col-gap-100">
+            <span class="fs-16 fw-700">中型标签</span>
+            <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+                <ngx-sui-tag tagDeletable [tagColor]="tag.color" [tagLabel]="tag.label" tagSize="md" *ngFor="let tag of tags"></ngx-sui-tag>
+            </ngx-sui-tag-grid>
+        </div>
+        <div class="flex align-items-center col-gap-100">
+            <span class="fs-16 fw-700">大型标签</span>
+            <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+                <ngx-sui-tag tagDeletable [tagColor]="tag.color" [tagLabel]="tag.label" tagSize="lg" *ngFor="let tag of tags"></ngx-sui-tag>
+            </ngx-sui-tag-grid>
+        </div>
     </div>
-    <div class="flex col-gap-100">
-        <button ngx-sui-SolidTextButton btnColor="success" btnIcon="plus" (click)="handleAddNewTagEvent()">添加</button>
-        <button ngx-sui-SolidTextButton btnColor="failure" btnIcon="trash" (click)="tagGroup.dismissAll()">全部删除</button>
+    <div class="flex align-items-center col-gap-100">
+        <span class="fs-24 fw-900">标签操作</span>
+        <span class="flex-auto"></span>
+        <button ngx-sui-TextButton btnColor="primary" btnIcon="plus" btnShadow btnStyle="solid" btnText="添加" (click)="handleInsertTagEvent()"></button>
+        <button ngx-sui-TextButton btnColor="accent" btnIcon="trash" btnShadow btnStyle="solid" btnText="清空" (click)="list.splice(0)"></button>
     </div>
-    <ngx-sui-tag-group #tagGroup>
-        <!-- <a ngx-sui-LinkTag tagImageSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" tagImageAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" [tagColor]="item.color" [tagText]="item.label" *ngFor="let item of list"></a>
-        <a ngx-sui-LinkTag tagImageSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" tagImageAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" [tagColor]="item.color" [tagText]="item.label" tagShowClose="true" tagShowImage="true" *ngFor="let item of list"></a> -->
-        <a ngx-sui-LinkTag tagImageSrc="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" tagImageAlt="https://cdn3.iconfinder.com/data/icons/iconka-buddy-set/128/alien_128.png" [tagColor]="tag.color" [tagText]="tag.label" tagShowClose="true" tagShowImage="true" *ngFor="let tag of group"></a>
-    </ngx-sui-tag-group>
+    <ngx-sui-tag-grid [tgEmptyText]="emptyText">
+        <a ngx-sui-Tag tagDeletable [tagColor]="item.color" [tagLabel]="item.label" (tagDeleteEvent)="handleDeleteTagEvent(item)" *ngFor="let item of list"></a>
+    </ngx-sui-tag-grid>
 </div>
 

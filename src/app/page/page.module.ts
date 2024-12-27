@@ -41,6 +41,7 @@ import { DemoArticlePageComponent } from "./demo/article.component";
 import { DemoTabbedPageComponent } from "./demo/tabbed.component";
 import { DemoStatusPageComponent } from "./demo/status.component";
 import { DemoTablePageComponent } from "./demo/table.component";
+import { DemoSearchPageComponent } from "./demo/search.component";
 
 @NgModule({
     declarations: [
@@ -72,6 +73,7 @@ import { DemoTablePageComponent } from "./demo/table.component";
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
+        DemoSearchPageComponent,
         DemoStatusPageComponent,
         DemoTabbedPageComponent,
         DemoTablePageComponent,
@@ -83,13 +85,13 @@ import { DemoTablePageComponent } from "./demo/table.component";
         DemoModalContainerComponent
     ],
     imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    NGXSeasonComponentsModule,
-    NGXSeasonTreeModule
-],
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NGXSeasonComponentsModule,
+        NGXSeasonTreeModule
+    ],
     exports: [
         HomePageComponent,
         DemoPageComponent,
@@ -119,6 +121,7 @@ import { DemoTablePageComponent } from "./demo/table.component";
         DemoRadioButtonPageComponent,
         DemoRadioTogglePageComponent,
         DemoRibbonPageComponent,
+        DemoSearchPageComponent,
         DemoStatusPageComponent,
         DemoTabbedPageComponent,
         DemoTablePageComponent,

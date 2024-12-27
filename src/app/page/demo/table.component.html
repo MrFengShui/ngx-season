@@ -1,5 +1,5 @@
 <div class="flex flex-dir-col row-gap-100 p-100">
-    <ngx-sui-table [tbColor]="color" tbShowFilter="true" tbInputPrompt="关键字" tbHeaderSticky="true" tbFooterSticky="true" tbShowRows="0" [tbDataSrc]="dataSrc" class="w-100">
+    <ngx-sui-table [tbColor]="color" tbSearchBtnLabel="筛选" tbSearchShowBtn tbShowFilter="true" tbInputPrompt="关键字" tbHeaderSticky="true" tbFooterSticky="true" tbShowRows="0" [tbDataSrc]="dataSrc" class="w-100">
         <tr ngx-sui-THeadRow *ngx-sui-THeadRowDef="let item; names: theadValues">
             <th ngx-sui-THeadCell tbcAlign="center" tbhColSize="shrink">
                 <label ngx-sui-CheckBox [checkColor]="color" checkShowLabel="false" [checkChecked]="isAllChecked()" [cbIndeterminated]="isIndeterminated()" (checkCheckedChange)="handleSelectOrDeselectEvent($event)"></label>

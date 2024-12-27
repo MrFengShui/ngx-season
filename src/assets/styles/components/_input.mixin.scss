@@ -1,39 +1,41 @@
 @mixin setup-input-theme($theme, $colors) {
-    $meterColors: (
-        "weak": "red",
-        "medium": "yellow",
-        "strong": "green",
-        "very": "blue"
+    $levels: (
+        "weak": red,
+        "medium": yellow,
+        "strong": green,
+        "stronger": blue
     );
 
     .input {
-        --input-border-radius: #{var(--size-pixel-4)};
-        --input-border-width: #{var(--size-pixel-1)};
-        --input-border-width-focus: #{var(--size-pixel-2)};
-        --input-padding: #{var(--padding-50)};
-        --input-gap: #{var(--row-gap-50)};
-        --input-min-size: #{var(--size-pixel-384)};
+        --input-field-border-radius: #{var(--size-pixel-3)};
+        --input-field-border-width: #{var(--size-pixel-1)};
+        --input-field-focus-border-width: #{var(--size-pixel-2)};
+        --input-field-height: #{var(--size-pixel-48)};
+        --input-field-padding: #{var(--padding-50)};
 
-        --input-label-font-size: #{var(--font-size-12)};
-        --input-label-font-weight: #{var(--font-weight-700)};
+        --input-label-font-size: #{var(--font-size-20)};
+        --input-label-font-weight: #{var(--font-weight-900)};
         --input-label-line-height: #{var(--line-height-100)};
+        --input-label-padding: #{var(--padding-50)};
+        --input-label-scale: 0.6;
 
-        --input-field-gap: #{calc(var(--input-gap) * 2)};
-        --input-field-border-width: #{var(--input-border-width)};
-        --input-field-border-width-focus: #{var(--input-border-width-focus)};
-        --input-field-wrapper-gap: #{var(--margin-50)};
-        --input-field-entry-height: #{var(--size-pixel-32)};
-        --input-field-entry-placeholder-font-size: #{var(--font-size-16)};
-        --input-field-entry-placeholder-font-weight: #{var(--font-weight-700)};
-        --input-field-entry-placeholder-font-style: italic;
-        --input-field-prefix-suffix-font-size: #{var(--font-size-12)};
-        --input-field-prefix-suffix-font-weight: #{var(--font-weight-500)};
+        --input-field-wrapper-gap: #{var(--col-gap-50)};
+        --input-field-wrapper-height: #{var(--size-percent-100)};
 
-        --input-divider-border-width: #{var(--size-pixel-1)};
+        --input-font-size: #{var(--font-size-16)};
+        --input-font-weight: #{var(--font-size-500)};
+        --input-line-height: #{var(--line-height-100)};
+        --input-min-size: #{var(--size-pixel-128)};
+        --input-placeholder-font-size: #{var(--font-size-16)};
+        --input-placeholder-font-weight: #{var(--font-size-900)};
+        --input-placeholder-font-style: italic;
+        --input-placeholder-line-height: #{var(--line-height-100)};
 
+        --input-prompt-gap: #{var(--col-gap-300)};
         --input-prompt-font-size: #{var(--font-size-12)};
         --input-prompt-font-weight: #{var(--font-weight-500)};
-        --input-prompt-alert-size: #{var(--size-percent-75)};
+        --input-prompt-line-height: #{var(--line-height-200)};
+        --input-prompt-padding: #{var(--padding-50)};
 
         --check-padding: #{var(--padding-0)};
         --check-gap: #{var(--row-gap-100)};
@@ -57,338 +59,343 @@
 
         @each $key, $value in $colors {
             @if $key == "default" {
-                --input-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
-                --input-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
-                --input-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --input-label-bgcolor: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
 
-                --input-label-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --input-field-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+                --input-field-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --input-field-bdcolor-focus-#{$key}: #{if($theme == "light", var(--palette-#{$value}-600-color), var(--palette-#{$value}-400-color))};
 
-                --input-field-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
-                --input-field-placeholder-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --input-label-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-900-color), var(--palette-#{$value}-100-color))};
 
-                --input-divider-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
-                --input-divider-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
-                --input-divider-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --input-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
 
-                --input-divider-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
-                --input-divider-bdcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
-                --input-divider-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-500-color)};
-
-                --input-prompt-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
-
-                --check-meter-mark-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color-25), var(--palette-#{$value}-200-color-25))};
-                --check-meter-text-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color-25), var(--palette-#{$value}-200-color-25))};
+                --input-prompt-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
             } @else {
-                --input-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --input-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
-                --input-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-400-color)};
+                --input-field-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+                --input-field-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
+                --input-field-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-400-color)};
 
                 --input-label-color-#{$key}: #{var(--palette-#{$value}-500-color)};
 
-                --input-field-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --input-field-placeholder-color-#{$key}: #{var(--palette-#{$value}-color-50)};
-
-                --input-divider-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --input-divider-bdcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
-                --input-divider-bdcolor-focus-#{$key}: #{var(--palette-#{$value}-400-color)};
+                --input-color-#{$key}: #{var(--palette-#{$value}-500-color)};
 
                 --input-prompt-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-
-                --check-meter-mark-bgcolor-#{$key}: #{var(--palette-#{$value}-color-25)};
-                --check-meter-text-color-#{$key}: #{var(--palette-#{$value}-color-25)};
             }
+
+            --input-placeholder-color-#{$key}: #{var(--palette-#{$value}-color-50)};
 
             --check-subject-color-#{$key}: #{var(--palette-#{$value}-500-color)};
             --check-suggest-color-#{$key}: #{var(--palette-#{$value}-500-color)};
         }
 
-        @each $key, $value in $meterColors {
-            --password-strong-meter-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --password-strong-meter-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-        }
-
-        &.textfield, &.password, &.search {
-            display: inline-flex;
+        &.input-field-container {
+            display: flex;
             flex-direction: column;
-            row-gap: var(--input-gap);
-
-            border-radius: var(--input-border-radius);
-            border-style: solid;
-            border-width: var(--input-border-width);
-
-            &:focus-within {
-                border-width: var(--input-border-width-focus);
-            }
-
-            padding: var(--input-padding);
-
-            min-width: var(--input-min-size);
 
             .input-field {
                 display: inline-flex;
-                flex-direction: column;
-                row-gap: var(--input-field-gap);
+                align-items: center;
 
-                width: var(--size-percent-100);
+                border-radius: var(--input-field-border-radius);
+                border-style: solid;
+                border-width: var(--input-field-border-width);
 
-                .label {
-                    display: inline-block;
+                height: var(--input-field-height);
+
+                padding-left: var(--input-field-padding);
+                padding-right: var(--input-field-padding);
+
+                position: relative;
+
+                .input-label {
+                    background-color: var(--input-label-bgcolor);
 
                     font-size: var(--input-label-font-size);
                     font-weight: var(--input-label-font-weight);
                     line-height: var(--input-label-line-height);
 
-                    margin-bottom: var(--input-lable-margin);
+                    position: absolute;
+
+                    padding-left: var(--input-label-padding);
+                    padding-right: var(--input-label-padding);
+
+                    transition:
+                        transform var(--input-duration) ease-in-out,
+                        left var(--input-duration) ease-in-out;
                 }
 
-                .field {
+                .input-field-wrapper {
                     display: flex;
                     align-items: center;
+                    flex: 1 1 auto;
 
-                    > :nth-child(n) {
-                        &:not(:last-child) {
-                            margin-right: var(--input-field-wrapper-gap);
+                    column-gap: var(--input-field-wrapper-gap);
+
+                    height: var(--input-field-wrapper-height);
+
+                    input[type=text], input[type=password] {
+                        appearance: none;
+                        background: none;
+                        border: none;
+                        outline: none;
+
+                        font-size: var(--input-font-size);
+                        font-weight: var(--input-font-weight);
+                        line-height: var(--input-line-height);
+
+                        padding: var(--padding-0);
+
+                        min-width: var(--input-min-size);
+                        width: var(--size-percent-100);
+                        height: var(--size-percent-100);
+
+                        &::placeholder {
+                            font-size: var(--input-placeholder-font-size);
+                            font-weight: var(--input-placeholder-font-weight);
+                            font-style: var(--input-placeholder-font-style);
+                            line-height: var(--input-placeholder-line-height);
+
+                            opacity: 0;
+
+                            transition: opacity var(--input-duration) ease-in-out;
                         }
                     }
 
-                    .prefix-wrapper, .suffix-wrapper {
+                    .prefix, .postfix {
                         display: inline-flex;
-
-                        font-size: var(--input-field-prefix-suffix-font-size);
-                        font-weight: var(--input-field-prefix-suffix-font-weight);
-                    }
-
-                    .entry-wrapper {
-                        display: flex;
-                        align-items: center;
-                        flex: 1 1 auto;
-
-                        input[type=text], input[type=password] {
-                            appearance: none;
-                            background: none;
-                            border: none;
-                            outline: none;
-
-                            flex: 1 1 auto;
-
-                            padding: var(--padding-0);
-
-                            min-width: var(--size-percent-0);
-                            max-width: var(--size-percent-100);
-                            width: var(--size-percent-100);
-                            height: var(--size-percent-100);
-
-                            &::placeholder {
-                                font-size: var(--input-field-entry-placeholder-font-size);
-                                font-weight: var(--input-field-entry-placeholder-font-weight);
-                                font-style: var(--input-field-entry-placeholder-font-style);
-                            }
-                        }
-
-                        height: var(--input-field-entry-height);
+                        width: fit-content;
+                        height: fit-content;
                     }
                 }
-            }
-
-            .input-divider {
-                border-bottom-style: solid;
-                border-bottom-width: var(--input-divider-border-width);
             }
 
             .input-prompt {
-                display: inline-flex;
-                justify-content: space-between;
-                align-items: center;
+                display: flex;
 
-                .alert-text, .tip-text {
+                column-gap: var(--input-prompt-gap);
+
+                padding-left: var(--input-prompt-padding);
+                padding-right: var(--input-prompt-padding);
+
+                > span {
                     display: inline-block;
 
                     font-size: var(--input-prompt-font-size);
                     font-weight: var(--input-prompt-font-weight);
+                    line-height: var(--input-prompt-line-height);
 
-                    user-select: none;
-                }
+                    &.message {
+                        flex: 1 0 auto;
 
-                .alert-text {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
 
-                    width: var(--input-prompt-alert-size);
-                }
-            }
-
-            .input-check {
-                text-align: center;
-
-                .password-strength-check {
-                    display: inline-flex;
-                    flex-direction: column;
-                    row-gap: var(--check-gap);
-
-                    padding: var(--check-padding);
-
-                    min-width: var(--check-min-width);
-                    max-width: max(var(--check-max-width), var(--size-percent-75));
-                    width: var(--size-percent-100);
-
-                    .check-subject {
-                        font-size: var(--check-subject-font-size);
-                        font-weight: var(--check-subject-font-weight);
-                        line-height: var(--check-subject-line-height);
-                        text-align: center;
-                    }
-
-                    .check-meter-wrapper {
-                        display: flex;
-
-                        .check-meter {
-                            display: inline-flex;
-                            flex-direction: column;
-                            align-items: center;
-                            row-gap: calc(var(--check-meter-gap) * 2);
-
-                            width: var(--size-percent-100);
-
-                            .meter-mark {
-                                display: inline-block;
-
-                                width: var(--check-meter-mark-width);
-                                height: var(--check-meter-mark-height);
-                            }
-
-                            .meter-text {
-                                font-size: var(--check-meter-text-font-size);
-                                font-weight: var(--check-meter-text-font-weight);
-                            }
-                        }
-
-                        > :nth-child(-n + 4) {
-                            margin-right: var(--check-meter-gap);
-                        }
-                    }
-
-                    .check-suggest {
-                        display: inline-flex;
-                        flex-direction: column;
-
-                        list-style: none;
-
-                        margin: var(--check-suggest-list-margin);
-                        padding: var(--check-suggest-list-padding);
-
-                        .check-suggest-item {
-                            display: inline-flex;
-                            align-items: center;
-
-                            font-size: var(--check-suggest-list-font-size);
-                            font-weight: var(--check-suggest-list-font-weight);
-                            line-height: var(--check-suggest-list-line-height);
-
-                            &:before {
-                                content: '';
-                                clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-
-                                display: inline-block;
-
-                                margin-right: var(--check-suggest-list-mark-gap);
-
-                                width: var(--check-suggest-list-mark-size);
-                                height: var(--check-suggest-list-mark-size);
-                            }
-                        }
+                        width: var(--size-pixel-0);
                     }
                 }
             }
 
+            &.input-label-float {
+                .input-field {
+                    border-width: var(--input-field-focus-border-width);
 
-            @each $color in map-keys($colors) {
-                &[data-input-color=#{$color}] {
-                    border-color: var(--input-bdcolor-#{$color});
-
-                    &:hover {
-                        border-color: var(--input-bdcolor-hover-#{$color});
-
-                        .input-divider {
-                            border-color: var(--input-divider-bdcolor-hover-#{$color});
-                        }
+                    .input-label {
+                        transform: scale(var(--input-label-scale)) translate(calc(0% - var(--input-label-padding) * 2), calc(-100% - var(--input-label-font-size)));
                     }
 
-                    &:focus-within {
-                        border-color: var(--input-bdcolor-focus-#{$color});
-
-                        .input-divider {
-                            border-color: var(--input-divider-bdcolor-focus-#{$color});
-                        }
-                    }
-
-                    .input-field {
-                        .label {
-                            color: var(--input-label-color-#{$color});
-                        }
-
-                        .field {
-                            .entry-wrapper {
-                                input[type=text], input[type=password] {
-                                    color: var(--input-field-color-#{$color});
-
-                                    &::placeholder {
-                                        color: var(--input-field-placeholder-color-#{$color});
-                                    }
-                                }
+                    .input-field-wrapper {
+                        input[type=text], input[type=password] {
+                            &::placeholder {
+                                opacity: 1;
                             }
                         }
-                    }
-
-                    .input-divider {
-                        border-color: var(--input-divider-bdcolor-#{$color});
-                    }
-
-                    .input-prompt {
-                        color: var(--input-prompt-color-#{$color});
                     }
                 }
             }
         }
 
-        .password-strength-check {
-            @each $color in map-keys($colors) {
-                &[data-check-color=#{$color}] {
-                    .check-subject {
-                        color: var(--check-subject-color-#{$color});
+        @each $color in map-keys($colors) {
+            &[data-input-color=#{$color}] {
+                .input-field {
+                    border-color: var(--input-field-bdcolor-#{$color});
+
+                    &:hover {
+                        border-color: var(--input-field-bdcolor-hover-#{$color});
                     }
 
-                    .check-meter {
-                        .meter-mark {
-                            background-color: var(--check-meter-mark-bgcolor-#{$color});
-                        }
+                    .input-label {
+                        color: var(--input-label-color-#{$color});
+                    }
 
-                        .meter-text {
-                            color: var(--check-meter-text-color-#{$color});
-                        }
-
-                        @each $key, $value in $meterColors {
-                            &.#{$key} {
-                                .meter-mark {
-                                    background-color: var(--palette-#{$value}-500-color);
-                                }
-
-                                .meter-text {
-                                    color: var(--palette-#{$value}-500-color);
-                                }
+                    .input-field-wrapper {
+                        .addon {
+                            &, .icon > svg {
+                                color: var(--input-label-color-#{$color});
                             }
                         }
                     }
 
-                    .check-suggest {
-                        .check-suggest-item {
-                            color: var(--check-suggest-color-#{$color});
+                    input[type=text], input[type=password] {
+                        color: var(--input-color-#{$color});
 
+                        &::placeholder {
+                            color: var(--input-placeholder-color-#{$color});
+                        }
+                    }
+                }
+
+                .input-prompt {
+                    > span {
+                        color: var(--input-prompt-color-#{$color});
+                    }
+                }
+
+                &.input-label-float {
+                    .input-field {
+                        border-color: var(--input-field-bdcolor-focus-#{$color});
+                    }
+                }
+            }
+        }
+    }
+
+    .password-checker {
+        --checker-gap: #{var(--row-gap-200)};
+        --checker-padding: #{var(--padding-200)};
+
+        --checker-subject-font-size: #{var(--font-size-24)};
+        --checker-subject-font-weight: #{var(--font-weight-900)};
+        --checker-subject-line-height: #{var(--line-height-200)};
+
+        --checker-indicator-gap: #{var(--col-gap-100)};
+        --checker-indicator-size: #{var(--size-pixel-8)};
+        --checker-indicator-bar-font-size: #{var(--font-size-12)};
+        --checker-indicator-bar-font-weight: #{var(--font-weight-900)};
+        --checker-indicator-bar-line-height: #{var(--line-height-100)};
+        --checker-indicator-bar-margin: #{var(--margin-75)};
+
+        --checker-description-font-size: #{var(--font-size-12)};
+        --checker-description-font-weight: #{var(--font-weight-500)};
+        --checker-description-line-height: #{var(--line-height-200)};
+        --checker-description-margin: #{var(--margin-100)};
+
+        --checker-description-mark-font-size: #{var(--font-size-16)};
+        --checker-description-mark-margin: #{var(--margin-50)};
+
+        --checker-bgcolor: #{if($theme == "light", var(--palette-gray-200-color), var(--palette-gray-800-color))};
+        --checker-indicator-bar-bgcolor: #{if($theme == "light", var(--palette-gray-700-color), var(--palette-gray-300-color))};
+
+        --checker-subject-color: #{if($theme == "light", var(--palette-gray-700-color), var(--palette-gray-300-color))};
+        --checker-indicator-bar-color: #{if($theme == "light", var(--palette-gray-700-color), var(--palette-gray-300-color))};
+
+        background-color: var(--checker-bgcolor);
+
+        display: inline-flex;
+        flex-direction: column;
+
+        row-gap: var(--checker-gap);
+
+        padding: var(--checker-padding);
+
+        width: var(--size-percent-100);
+
+        .subject {
+            color: var(--checker-subject-color);
+
+            font-size: var(--checker-subject-font-size);
+            font-weight: var(--checker-subject-font-weight);
+            line-height: var(--checker-subject-line-height);
+
+            text-align: center;
+        }
+
+        .indicator {
+            display: flex;
+
+            column-gap: var(--checker-indicator-gap);
+
+            height: var(--checker-indicator-size);
+
+            .bar {
+                background-color: var(--checker-indicator-bar-bgcolor);
+                color: var(--checker-indicator-bar-color);
+
+                display: inline-flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+
+                position: relative;
+
+                &::before {
+                    content: "";
+
+                    display: inline-block;
+
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: var(--size-percent-100);
+                    height: var(--checker-indicator-size);
+                }
+
+                &::after {
+                    display: inline-block;
+
+                    font-size: var(--checker-indicator-bar-font-size);
+                    font-weight: var(--checker-indicator-bar-font-weight);
+                    line-height: var(--checker-indicator-bar-line-height);
+
+                    margin-top: var(--checker-indicator-bar-margin);
+
+                    text-align: center;
+                }
+
+                @each $level in map-keys($levels) {
+                    &.#{$level} {
+                        &::after {
+                            content: attr(data-check-level) "";
+                        }
+                    }
+                }
+
+                @each $key, $value in $levels {
+                    &.#{$key} {
+                        &.active {
                             &::before {
-                                background-color: var(--check-suggest-color-#{$color});
+                                background-color: $value;
+                            }
+
+                            &::after {
+                                color: $value;
                             }
                         }
                     }
+                }
+            }
+        }
+
+        .desc-list {
+            margin: var(--margin-0);
+            margin-top: var(--checker-description-margin);
+            padding: var(--padding-0);
+
+            list-style-type: '\2739';
+            list-style-position: inside;
+
+            .desc-item {
+                display: list-item;
+
+                > span {
+                    font-size: var(--checker-description-font-size);
+                    font-weight: var(--checker-description-font-weight);
+                    line-height: var(--checker-description-line-height);
+
+                    margin-left: var(--checker-description-mark-margin);
+                }
+
+                &::marker {
+                    font-size: var(--checker-description-mark-font-size);
                 }
             }
         }

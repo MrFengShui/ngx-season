@@ -1,27 +1,19 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, InjectionToken, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges } from "@angular/core";
-import { BehaviorSubject, debounceTime, map, Observable, Subject } from "rxjs";
+import { coerceCssPixelValue } from "@angular/cdk/coercion";
+import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, Inject, InjectionToken, Input, OnChanges, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
+import { Subscription } from "rxjs";
 
+import { fetchFile } from "src/app/utils/_fetch.utils";
 import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
 import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/_size.utils";
 
-export type NGXSeasonAvatarShape = 'circle' | 'round';
+export type NGXSeasonAvatarShape = 'circle' | 'square';
 
 export const NGX_SEASON_AVATAR_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_AVATAR_SIZE_MAP_TOKEN');
 
-@Component({
-    selector: 'ngx-sui-avatar',
-    template: `<img [attr.src]="srcURL" [attr.alt]="altText" [attr.width]="size$ | async" [attr.height]="size$ | async"/>`
+@Directive({
+    selector: 'img[ngx-sui-Avatar]'
 })
-export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterViewInit {
-
-    @Input('avatarAlt')
-    set altText(altText: string | undefined | null) {
-        this._altText = altText || undefined;
-    }
-
-    get altText(): string | undefined {
-        return this._altText;
-    }
+export class NGXSeasonAvatarComponent implements OnChanges, AfterViewInit {
 
     @Input('avatarColor')
     set color(color: NGXSeasonColorPalette | undefined | null) {
@@ -32,13 +24,22 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
         return this._color;
     }
 
-    @Input('avatarSrc')
-    set srcURL(srcURL: string | undefined | null) {
-        this._srcURL = srcURL || undefined;
+    @Input('avatarAlt')
+    set imgAlt(imgAlt: string | undefined | null) {
+        this._imgAlt = imgAlt || undefined;
     }
 
-    get srcURL(): string | undefined {
-        return this._srcURL;
+    get imgAlt(): string | undefined {
+        return this._imgAlt;
+    }
+
+    @Input('avatarSrc')
+    set imgSrc(imgSrc: string | undefined | null) {
+        this._imgSrc = imgSrc || undefined;
+    }
+
+    get imgSrc(): string | undefined {
+        return this._imgSrc;
     }
 
     @Input('avatarShape')
@@ -59,15 +60,11 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
         return this._size;
     }
 
-    private _altText: string | undefined;
     private _color: NGXSeasonColorPalette = 'default';
-    private _srcURL: string | undefined;
+    private _imgAlt: string | undefined;
+    private _imgSrc: string | undefined;
     private _shape: NGXSeasonAvatarShape = 'circle';
     private _size: NGXSeasonSizeOption = 'md';
-
-    protected size$: Observable<number> | undefined;
-
-    private subject$: Subject<NGXSeasonSizeOption> = new BehaviorSubject(this.size);
 
     constructor(
         protected _cdr: ChangeDetectorRef,
@@ -79,33 +76,24 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let keys: string[] | null = Object.keys(changes);
+        for (const name in changes) {
+            if (name === 'color') this.changeAvatarColor(changes['color'].currentValue as NGXSeasonColorPalette);
 
-        if (keys.includes('color')) {
-            this.changeAvatarColor(changes['color'].currentValue as NGXSeasonColorPalette);
+            if (name === 'imgAlt') this.setupAvatarImageAlt(changes['imgAlt'].currentValue);
+
+            if (name === 'imgSrc') this.setupAvatarImageSrc(changes['imgSrc'].currentValue);
+
+            if (name === 'shape') this.changeAvatarShape(changes['shape'].currentValue as NGXSeasonAvatarShape);
+
+            if (name === 'size') this.changeAvatarSize(changes['size'].currentValue as NGXSeasonSizeOption);
         }
-
-        if (keys.includes('shape')) {
-            this.changeAvatarShape(changes['shape'].currentValue as NGXSeasonAvatarShape);
-        }
-
-        if (keys.includes('size')) {
-            this.changeAvatarSize(changes['size'].currentValue as NGXSeasonSizeOption);
-        }
-
-        keys.splice(0);
-        keys = null;
-    }
-
-    ngOnDestroy(): void {
-        this.subject$.complete();
-
-        this.size$ = undefined;
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'avatar');
         this.changeAvatarColor(this.color);
+        this.setupAvatarImageAlt(this.imgAlt);
+        this.setupAvatarImageSrc(this.imgSrc);
         this.changeAvatarShape(this.shape);
         this.changeAvatarSize(this.size);
     }
@@ -114,15 +102,25 @@ export class NGXSeasonAvatarComponent implements OnChanges, OnDestroy, AfterView
         this._renderer.setAttribute(this._element.nativeElement, 'data-avatar-color', `${color}`);
     }
 
+    protected setupAvatarImageAlt(imgAlt: string | undefined): void {
+        this._renderer.setProperty(this._element.nativeElement, 'alt', window.btoa(imgAlt || this.imgSrc || `${Date.now()}`).toLowerCase());
+    }
+
+    protected setupAvatarImageSrc(imgSrc: string | undefined): void {
+        if (imgSrc) {
+            let subscription: Subscription = fetchFile(imgSrc).subscribe({
+                next: value => this._renderer.setProperty(this._element.nativeElement, 'src', value),
+                complete: () => subscription.unsubscribe()
+            });
+        }
+    }
+
     protected changeAvatarShape(shape: NGXSeasonAvatarShape): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-avatar-shape', `${shape}`);
     }
 
     protected changeAvatarSize(size: NGXSeasonSizeOption): void {
-        this._renderer.setAttribute(this._element.nativeElement, 'data-avatar-size', `${size}`);
-
-        this.subject$.next(size);
-        this.size$ = this.subject$.asObservable().pipe(map(size => this._sizeMap[size]), debounceTime(100));
+        this._renderer.setStyle(this._element.nativeElement, '--avatar-size', coerceCssPixelValue(this._sizeMap[size]), RendererStyleFlags2.DashCase);
     }
 
 }

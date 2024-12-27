@@ -33,6 +33,7 @@ import { NGXSeasonStatusModule } from "./status/status.module";
 import { NGXSeasonTableModule } from "./table/table.module";
 import { NGXSeasonPaginatorModule } from "./paginator/paginator.module";
 import { NGXSeasonSelectModule } from "./select/select.module";
+import { NGXSeasonSearchModule } from "./search/search.module";
 
 @NgModule({
     imports: [
@@ -64,6 +65,7 @@ import { NGXSeasonSelectModule } from "./select/select.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonSearchModule,
         NGXSeasonSelectModule,
         NGXSeasonStatusModule,
         NGXSeasonTabbedModule,
@@ -97,6 +99,7 @@ import { NGXSeasonSelectModule } from "./select/select.module";
         NGXSeasonProgressModule,
         NGXSeasonRadioModule,
         NGXSeasonRibbonModule,
+        NGXSeasonSearchModule,
         NGXSeasonSelectModule,
         NGXSeasonStatusModule,
         NGXSeasonTabbedModule,

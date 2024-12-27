@@ -1,0 +1,22 @@
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-900">基本用法</div>
+    <label ngx-sui-Search></label>
+    <div class="fs-24 fw-900">搜索框按钮</div>
+    <label ngx-sui-Search searchShowBtn searchBtnLabel="搜索"></label>
+    <div class="fs-24 fw-900">搜索框带搜索记录</div>
+    <label ngx-sui-Search [(searchText)]="keyword" searchShowIcon searchShowBtn searchBtnLabel="搜索" searchPlaceholder="这是一个搜索框">
+        <ngx-sui-search-history [shClearLabel]="history.clearLabel" [shEditLabel]="history.editLabel" [shEmptyLabel]="history.emptyLabel" [shLabel]="history.label" [shText]="keyword" (shSelectedChange)="keyword = $event"></ngx-sui-search-history>
+    </label>
+    <div class="fs-24 fw-900">搜索框带额外内容</div>
+    <label ngx-sui-Search [(searchText)]="keyword" searchShowIcon searchShowBtn searchBtnLabel="搜索" searchPlaceholder="这是一个搜索框">
+        <ngx-sui-search-recommend srLabel="推荐" srEmptyText="目前没有可推荐的" srChangeLabel="换一换" [srValues]="recommends"></ngx-sui-search-recommend>
+    </label>
+    <div class="fs-24 fw-900">搜索框色彩</div>
+    <div class="grid col-gap-100 row-gap-100">
+        <label ngx-sui-Search [(searchText)]="keyword" [searchColor]="item.color" searchShowIcon searchShowBtn searchBtnLabel="搜索" [searchPlaceholder]="'这是一个' + item.label" *ngFor="let item of list">
+            <ngx-sui-search-history [shColor]="item.color" [shClearLabel]="history.clearLabel" [shEditLabel]="history.editLabel" [shEmptyLabel]="history.emptyLabel" [shLabel]="history.label" [shText]="keyword" (shSelectedChange)="keyword = $event"></ngx-sui-search-history>
+            <ngx-sui-search-recommend [srColor]="item.color" srLabel="推荐" srEmptyText="目前没有可推荐的" srChangeLabel="换一换" [srValues]="recommends"></ngx-sui-search-recommend>
+        </label>
+    </div>
+</div>
+<span class="px-100">{{ keyword }}</span>

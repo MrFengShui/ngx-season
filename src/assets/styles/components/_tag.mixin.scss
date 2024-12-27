@@ -1,69 +1,151 @@
 @mixin setup-tag-theme($theme, $colors) {
-    .tag-group {
-        --tag-group-gap: #{var(--col-gap-50)} #{var(--row-gap-50)};
-
-        display: inline-flex;
-        flex-wrap: wrap;
-        gap: var(--tag-group-gap);
-    }
+    $sizes: ("sm": 12, "md": 16, "lg": 20);
 
     .tag {
-        --tag-border-radius: #{var(--size-pixel-14)};
-        --tag-font-size: #{var(--font-size-12)};
-        --tag-font-weight: #{var(--font-weight-700)};
-        --tag-line-height: #{var(--line-height-100)};
-        --tag-height: #{var(--size-pixel-28)};
-        --tag-gap: #{var(--size-pixel-8)};
+        --tag-border-width: #{var(--size-pixel-1)};
+        --tag-gap: #{var(--col-gap-25)};
+
+        --tag-label-font-weight: #{var(--font-weight-500)};
+        --tag-label-line-height: #{var(--line-height-100)};
 
         @each $key, $value in $colors {
-            --tag-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-            --tag-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
-            --tag-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
+            --tag-bdcolor-#{$key}: var(--palette-#{$value}-500-color);
+            --tag-bdcolor-hover-#{$key}: var(--palette-#{$value}-600-color);
+            --tag-bdcolor-active-#{$key}: var(--palette-#{$value}-400-color);
 
-            --tag-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+            --tag-color-#{$key}: var(--palette-#{$value}-500-color);
+            --tag-color-hover-#{$key}: var(--palette-#{$value}-600-color);
+            --tag-color-active-#{$key}: var(--palette-#{$value}-400-color);
         }
+
+        border-style: solid;
+        border-width: var(--tag-border-width);
 
         display: inline-flex;
         align-items: center;
 
-        border-radius: var(--tag-border-radius);
-
-        padding-left: var(--tag-padding-left);
-        padding-right: var(--tag-padding-right);
-
-        width: fit-content;
-        height: var(--tag-height);
+        column-gap: var(--tag-gap);
 
         user-select: none;
 
-        > :nth-child(n) {
-            &:not(:last-child) {
-                margin-right: var(--tag-gap);
-            }
+        &.link-tag {
+            cursor: pointer;
         }
 
-        .tag-text {
-            font-size: var(--tag-font-size);
-            font-weight: var(--tag-font-weight);
-            line-height: var(--tag-line-height);
+        &[data-tag-shape=square] {
+            border-radius: var(--size-pixel-4);
+        }
+
+        .avatar {
+            border: none;
+        }
+
+        .label {
+            font-weight: var(--tag-label-font-weight);
+            line-height: var(--tag-label-line-height);
+
+            white-space: nowrap;
         }
 
         @each $color in map-keys($colors) {
             &[data-tag-color=#{$color}] {
-                background-color: var(--tag-bgcolor-#{$color});
+                border-color: var(--tag-bdcolor-#{$color});
+
+                .label {
+                    color: var(--tag-color-#{$color});
+                }
 
                 &.link-tag {
                     &:hover {
-                        background-color: var(--tag-bgcolor-hover-#{$color});
+                        border-color: var(--tag-bdcolor-hover-#{$color});
+
+                        .label {
+                            color: var(--tag-color-hover-#{$color});
+                        }
                     }
 
                     &:active {
-                        background-color: var(--tag-bgcolor-active-#{$color});
+                        border-color: var(--tag-bdcolor-active-#{$color});
+
+                        .label {
+                            color: var(--tag-color-active-#{$color});
+                        }
                     }
                 }
+            }
+        }
 
-                .tag-text {
-                    color: var(--tag-color-#{$color});
+        @each $key, $value in $sizes {
+            $size: var(--size-pixel-#{$value});
+
+            &[data-tag-size=#{$key}] {
+                height: calc($size * 1.5);
+
+                padding-left: calc($size * 0.25);
+                padding-right: calc($size * 0.25);
+
+                &[data-tag-shape=circle] {
+                    border-radius: calc($size * 1.5);
+                }
+
+                .avatar {
+                    width: $size;
+                    height: $size;
+                }
+
+                .label {
+                    font-size: var(--font-size-#{$value});
+                }
+
+                .close {
+                    min-width: var(--size-pixel-#{$value});
+                    max-width: var(--size-pixel-#{$value});
+                    min-height: var(--size-pixel-#{$value});
+                    max-height: var(--size-pixel-#{$value});
+
+                    .icon svg {
+                        width: var(--size-pixel-#{$value});
+                        height: var(--size-pixel-#{$value});
+                    }
+                }
+            }
+        }
+    }
+
+    .tag-grid {
+        --tag-grid-empty-border-width: #{var(--size-pixel-1)};
+        --tag-grid-empty-font-size: #{var(--font-size-14)};
+        --tag-grid-empty-font-weight: #{var(--font-weight-900)};
+        --tag-grid-empty-line-height: #{var(--line-height-200)};
+
+        @each $key, $value in $colors {
+            --tag-grid-empty-bdcolor-#{$key}: #{var(--palette-#{$value}-color-50)};
+            --tag-grid-empty-color-#{$key}: #{var(--palette-#{$value}-color-50)};
+        }
+
+        display: inline-flex;
+        flex-wrap: wrap;
+
+        .empty {
+            border-style: dashed;
+            border-width: var(--tag-grid-empty-border-width);
+
+            font-size: var(--tag-grid-empty-font-size);
+            font-style: italic;
+            font-weight: var(--tag-grid-empty-font-weight);
+            line-height: var(--tag-grid-empty-line-height);
+
+            text-align: center;
+            user-select: none;
+
+            width: var(--size-percent-100);
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-tag-grid-color=#{$color}] {
+                .empty {
+                    border-color: var(--tag-grid-empty-bdcolor-#{$color});
+                    color: var(--tag-grid-empty-color-#{$color});
                 }
             }
         }

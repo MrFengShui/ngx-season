@@ -31,6 +31,7 @@ import { DemoArticlePageComponent } from "../page/demo/article.component";
 import { DemoTabbedPageComponent } from "../page/demo/tabbed.component";
 import { DemoStatusPageComponent } from "../page/demo/status.component";
 import { DemoTablePageComponent } from "../page/demo/table.component";
+import { DemoSearchPageComponent } from "../page/demo/search.component";
 
 export const demoRoutes: Routes = [
     { path: '', redirectTo: 'component/accordion', pathMatch: 'full' },
@@ -59,10 +60,10 @@ export const demoRoutes: Routes = [
 
     { path: 'form/checkbox', component: DemoCheckboxPageComponent, title: '检查框' },
     { path: 'form/check-switch', component: DemoCheckSwitchPageComponent, title: '检查开关' },
-    { path: 'form/input', component: DemoInputPageComponent, title: '输入框' },
-    { path: 'form/textfield', component: DemoInputPageComponent, title: '输入框' },
+    { path: 'form/input-field', component: DemoInputPageComponent, title: '输入框' },
     { path: 'form/radiobtn', component: DemoRadioButtonPageComponent, title: '选择框' },
     { path: 'form/radio-toggle', component: DemoRadioTogglePageComponent, title: '开关按钮' },
+    { path: 'form/search', component: DemoSearchPageComponent, title: '搜索框' },
 
     { path: 'overlay/popover', component: DemoPopoverPageComponent, title: '悬浮框' },
     { path: 'overlay/modal', component: DemoModalPageComponent, title: '对话框' },

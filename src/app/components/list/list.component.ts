@@ -74,7 +74,7 @@ export class NGXSeasonListItemComponent implements AfterViewInit {
     template: `
         <div class="text-wrapper">
             <div class="header">
-                <ngx-sui-avatar [avatarSrc]="avatarSrc"  [avatarAlt]="avatarAlt" avatarSize="lg"></ngx-sui-avatar>
+                <img ngx-sui-Avatar [avatarSrc]="avatarSrc"  [avatarAlt]="avatarAlt" avatarSize="lg"/>
                 <div class="header-text-wrapper">
                     <span class="title">{{ title }}</span>
                     <span class="subtitle">{{ subtitle }}</span>

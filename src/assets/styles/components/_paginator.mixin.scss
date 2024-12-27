@@ -1,4 +1,4 @@
-@mixin setup-paginator-theme($theme, $colors) {
+@mixin setup-paginator-theme($theme, $color) {
     .paginator {
         --paginator-height: #{var(--size-pixel-56)};
         --paginator-gap: #{var(--col-gap-100)};
@@ -8,13 +8,7 @@
         --paginator-label-font-weight: #{var(--font-weight-900)};
         --paginator-label-line-height: #{var(--line-height-100)};
 
-        @each $key, $value in $colors {
-            @if $key == "default" {
-                --paginator-label-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
-            } @else {
-                --paginator-label-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-            }
-        }
+        --paginator-label-color: #{if($theme == "light", var(--palette-#{$color}-800-color), var(--palette-#{$color}-200-color))};
 
         display: flex;
         align-items: center;
@@ -29,17 +23,11 @@
         user-select: none;
 
         .label {
+            color: var(--paginator-label-color);
+
             font-size: var(--paginator-label-font-size);
             font-weight: var(--paginator-label-font-weight);
             line-height: var(--paginator-label-line-height);
-        }
-
-        @each $color in map-keys($colors) {
-            &[data-paginator-color=#{$color}] {
-                .label {
-                    color: var(--paginator-label-color-#{$color});
-                }
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { AfterViewInit, Component, ElementRef, HostListener, Inject, InjectionToken, Input, OnChanges, OnDestroy, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Inject, InjectionToken, Input, OnChanges, OnDestroy, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
 import { BehaviorSubject, Subject } from 'rxjs';
 
 import { NGX_SEASON_ICONS_SIZE_MAP_TOKEN, NGXSeasonIconName } from "../icon/icon.component";

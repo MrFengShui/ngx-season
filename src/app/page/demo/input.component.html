@@ -1,24 +1,24 @@
-<div class="flex flex-dir-col gy-100 p-100">
+<!-- <div class="flex flex-dir-col gy-100 p-100">
     <div class="flex gx-100" *ngFor="let color of colors">
         <label ngx-sui-Search [(ngModel)]="text" [inputColor]="color" inputPlaceholder="请在此输入关键词" searchIconPos="after" class="flex-auto"></label>
         <label ngx-sui-Search [(ngModel)]="text" [inputColor]="color" inputPlaceholder="请在此输入关键词" searchIconPos="before" class="flex-auto"></label>
     </div>
-</div>
+</div> -->
 <div class="flex flex-dir-col row-gap-100 p-100">
-    <label ngx-sui-Textfield [(ngModel)]="text" inputLabel="账号" inputPlaceholder="请在此输入您的帐号" inputShowClearBtn="true" [inputPromptAlert]="'错误：'.repeat(200)" [inputPromptTip]="text.length +  '/100'" class="w-100">
+    <label ngx-sui-InputField [(ngModel)]="text" inputLabel="账号" inputColor="success" inputPlaceholder="请在此输入您的帐号" inputShowClear inputShowPrompt [inputPromptMsg]="'错误：'" [inputPromptTip]="text.length +  '/100'">
         <ng-template ngx-sui-InputPrefix>
-            <ngx-sui-icon iconShape="user" iconSize="lg"></ngx-sui-icon>
+            <ngx-sui-icon iconShape="user"></ngx-sui-icon>
         </ng-template>
         <ng-template ngx-sui-InputSuffix>
-            <ngx-sui-icon iconShape="shield-check" iconSize="lg"></ngx-sui-icon>
+            <ngx-sui-icon iconShape="shield-check"></ngx-sui-icon>
         </ng-template>
     </label>
-    <label ngx-sui-Password [(ngModel)]="text" inputLabel="密码" inputPlaceholder="请在此输入您的密码" pwdShowCheck="true" [inputPromptAlert]="'错误：'.repeat(100)" [inputPromptTip]="text.length +  '/100'" class="w-100">
+    <label ngx-sui-InputField [(ngModel)]="text" ifType="pwd" inputColor="failure" inputLabel="密码" inputPlaceholder="请在此输入您的密码" inputShowClear inputShowPrompt [inputPromptMsg]="'错误：'" [inputPromptTip]="text.length +  '/100'">
         <ng-template ngx-sui-InputPrefix>
-            <ngx-sui-icon iconShape="shield" iconSize="lg"></ngx-sui-icon>
+            <ngx-sui-icon iconShape="shield"></ngx-sui-icon>
         </ng-template>
         <ng-template ngx-sui-InputSuffix>
-            <ngx-sui-icon iconShape="shield-times" iconSize="lg"></ngx-sui-icon>
+            <ngx-sui-icon iconShape="shield-times"></ngx-sui-icon>
         </ng-template>
     </label>
 </div>

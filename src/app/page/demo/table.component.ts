@@ -101,7 +101,7 @@ export class DemoTablePageComponent implements AfterViewInit {
         symbol: undefined, weight: PERIODIC_ELEMENTS.length === 0 ? 0 : PERIODIC_ELEMENTS.map(item => item.weight).reduce((prevItem, currItem) => prevItem + currItem)
     };
     protected dataSrc: NGXSeasonTableDataSource<PeriodicElement> = new NGXSeasonTableDataSource(PERIODIC_ELEMENTS);
-    protected color: NGXSeasonColorPalette = 'success';
+    protected color: NGXSeasonColorPalette = 'primary';
 
     protected caption: string = '表格———元素周期表';
 

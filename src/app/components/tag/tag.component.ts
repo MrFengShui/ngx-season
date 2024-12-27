@@ -1,231 +1,148 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, Component, ContentChildren, ElementRef, Inject, InjectionToken, Input, OnChanges, QueryList, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
+import { UniqueSelectionDispatcher } from "@angular/cdk/collections";
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostListener, Inject, Input, OnChanges, Output, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 
 import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
-import { NGXSeasonIDUtils } from "src/app/utils/id.utils";
 
-export const NGX_SEASON_TAG_GROUP_TOKEN: InjectionToken<NGXSeasonTagGroupComponent> = new InjectionToken('NGX_SEASON_TAG_GROUP_TOKEN');
+import { NGXSeasonAvatarComponent } from "../avatar/avatar.component";
+import { NGX_SEASON_TAG_GRID_TOKEN, NGXSeasonTagGridComponent } from "./tag-grid.component";
+
+export type NGXSeasonTagShape = 'circle' | 'square';
+export type NGXSeasonTagSize = 'sm' | 'md' | 'lg';
 
 @Component({
-    selector: '',
-    template: ''
+    selector: 'ngx-sui-tag, a[ngx-sui-Tag]',
+    template: `
+        <span class="label" #ref>{{ label }}</span>
+        <button ngx-sui-IconButton [btnColor]="color" [btnCircled]="shape === 'circle'" btnIcon="close" btnStyle="solid" class="close" (click)="handleTagDeleteEvent($event)" *ngIf="deletable"></button>
+        <ng-template><ng-content select="img[ngx-sui-Avatar]"></ng-content></ng-template>
+    `
 })
-export abstract class NGXSeasonTagComponent implements OnChanges, AfterViewInit {
+export class NGXSeasonTagComponent implements OnChanges, AfterContentInit, AfterViewInit {
 
-    @Input('tagColor')
+    @Input({ alias: 'tagColor' })
     set color(color: NGXSeasonColorPalette | undefined | null) {
-        this._color = color || 'default';
+        this._color = color || undefined;
     }
 
-    get color(): NGXSeasonColorPalette {
+    get color(): NGXSeasonColorPalette | undefined {
         return this._color;
     }
 
-    @Input('tagImageAlt')
-    set imageAlt(imageAlt: string | undefined | null) {
-        this._imageAlt = imageAlt || undefined;
+    @Input({ alias: 'tagDeletable' })
+    set deletable(deletable: boolean | string | undefined | null) {
+        this._deletable = coerceBooleanProperty(deletable);
     }
 
-    get imageAlt(): string | undefined {
-        return this._imageAlt;
+    get deletable(): boolean {
+        return this._deletable;
     }
 
-    @Input('tagImageSrc')
-    set imageSrc(imageSrc: string | undefined | null) {
-        this._imageSrc = imageSrc || undefined;
+    @Input({ alias: 'tagLabel', required: true })
+    set label(label: string | undefined | null) {
+        this._label = label || undefined;
     }
 
-    get imageSrc(): string | undefined {
-        return this._imageSrc;
+    get label(): string | undefined {
+        return this._label;
     }
 
-    @Input('tagShowImage')
-    set showImage(showImage: boolean | string | undefined | null) {
-        this._showImage = coerceBooleanProperty(showImage);
+    @Input({ alias: 'tagShape' })
+    set shape(shape: NGXSeasonTagShape | undefined | null) {
+        this._shape = shape || 'circle';
     }
 
-    get showImage(): boolean {
-        return this._showImage;
+    get shape(): NGXSeasonTagShape {
+        return this._shape;
     }
 
-    @Input('tagText')
-    set text(text: string | undefined | null) {
-        this._text = text || undefined;
+    @Input({ alias: 'tagSize' })
+    set size(size: NGXSeasonTagSize | undefined | null) {
+        this._size = size || 'md';
     }
 
-    get text(): string | undefined {
-        return this._text;
+    get size(): NGXSeasonTagSize {
+        return this._size;
     }
 
-    private _color: NGXSeasonColorPalette = 'default';
-    private _imageAlt: string | undefined;
-    private _imageSrc: string | undefined;
+    private _color: NGXSeasonColorPalette | undefined;
+    private _deletable: boolean = false;
+    private _label: string | undefined;
+    private _shape: NGXSeasonTagShape = 'circle';
+    private _size: NGXSeasonTagSize = 'md';
 
-    readonly id: string = NGXSeasonIDUtils.generateHashID('ngx-sui-tag');
+    @Output('tagDeleteEvent')
+    deleteEvent: EventEmitter<void> = new EventEmitter(true);
 
-    private _showImage: boolean = false;
-    private _text: string | undefined;
+    @ContentChild(NGXSeasonAvatarComponent, { read: ElementRef })
+    protected avatar: ElementRef<HTMLElement> | undefined;
+
+    @ViewChild('ref', { read: ElementRef, static: true })
+    protected ref: ElementRef<HTMLElement> | undefined;
+
+    @HostListener('click', ['$event'])
+    protected handleHostClickEvent(event: MouseEvent): void {
+        event.preventDefault();
+        this._tagGrid.tagSelectedChange.emit({ value: this.label, source: this });
+    }
+
+    readonly id: string = `ngx-sui-tag-${this._tagGrid.tagIndex++}`;
 
     constructor(
         protected _element: ElementRef,
-        protected _renderer: Renderer2
+        protected _renderer: Renderer2,
+
+        protected _usd: UniqueSelectionDispatcher,
+
+        @Inject(NGX_SEASON_TAG_GRID_TOKEN)
+        protected _tagGrid: NGXSeasonTagGridComponent
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
         for (const name in changes) {
-            if (name === 'color') this.changeTagColor(changes[name].currentValue as NGXSeasonColorPalette);
+            if (name === 'color') this.changeTagColor(changes[name].currentValue as NGXSeasonColorPalette || this._tagGrid.color);
 
-            if (name === 'showImage') this.setupLeftPadding(coerceBooleanProperty(changes[name].currentValue));
+            if (name === 'shape') this.changeTagShape(changes[name].currentValue as NGXSeasonTagShape);
+
+            if (name === 'size') this.changeTagSize(changes[name].currentValue as NGXSeasonTagSize);
         }
     }
 
-    ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'tag');
+    ngAfterContentInit(): void {
+        if (this.avatar && this.ref) this._renderer.insertBefore(this._element.nativeElement, this.avatar.nativeElement, this.ref.nativeElement);
+    }
 
-        this.changeTagColor(this.color);
-        this.setupLeftPadding(this.showImage);
+    ngAfterViewInit(): void {
+        const element = this._element.nativeElement;
+        this._renderer.addClass(element, 'tag');
+
+        if (element instanceof HTMLAnchorElement) this._renderer.addClass(element, 'link-tag');
+
+        this.changeTagColor(this.color || this._tagGrid.color);
+        this.changeTagShape(this.shape);
+        this.changeTagSize(this.size);
+    }
+
+    fetchHostElement(): HTMLElement {
+        return this._element.nativeElement;
     }
 
     protected changeTagColor(color: NGXSeasonColorPalette): void {
         this._renderer.setAttribute(this._element.nativeElement, 'data-tag-color', color);
     }
 
-    protected abstract setupLeftPadding(showImage?: boolean): void;
-
-    protected abstract setupRightPadding(showClose?: boolean): void;
-
-}
-
-@Component({
-    selector: 'span[ngx-sui-TextTag]',
-    template: `
-        <ngx-sui-avatar [avatarColor]="color" [avatarSrc]="imageSrc" [avatarAlt]="imageAlt" avatarShape="circle" avatarSize="sm" *ngIf="showImage && imageSrc"></ngx-sui-avatar>
-        <div class="tag-text">{{ text }}</div>
-    `
-})
-export class NGXSeasonTextTagComponent extends NGXSeasonTagComponent {
-
-    override ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-
-        this._renderer.addClass(this._element.nativeElement, 'text-tag');
-        this.setupRightPadding();
+    protected changeTagShape(shape: NGXSeasonTagShape): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-tag-shape', shape);
     }
 
-    protected override setupLeftPadding(showImage?: boolean): void {
-        this._renderer.setStyle(this._element.nativeElement, '--tag-padding-left', showImage ? 'var(--padding-25)' : 'var(--padding-50)', RendererStyleFlags2.DashCase);
+    protected changeTagSize(size: NGXSeasonTagSize): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-tag-size', size);
     }
 
-    protected override setupRightPadding(showClose?: boolean): void {
-        this._renderer.setStyle(this._element.nativeElement, '--tag-padding-right', 'var(--padding-50)', RendererStyleFlags2.DashCase);
-    }
-
-}
-
-@Component({
-    selector: 'a[ngx-sui-LinkTag]',
-    template: `
-        <ngx-sui-avatar [avatarColor]="color" [avatarSrc]="imageSrc" [avatarAlt]="imageAlt" avatarShape="circle" avatarSize="sm" *ngIf="showImage && imageSrc"></ngx-sui-avatar>
-        <div class="tag-text">{{ text }}</div>
-        <button ngx-sui-IconButton [btnColor]="color" btnCircled="true" btnIcon="close" btnSize="xs" btnStyle="flat" (click)="handleDismissEvent($event)" *ngIf="showClose"></button>
-    `
-})
-export class NGXSeasonLinkTagComponent extends NGXSeasonTagComponent {
-
-    @Input('tagShowClose')
-    set showClose(showClose: boolean | string | undefined | null) {
-        this._showClose = coerceBooleanProperty(showClose);
-    }
-
-    get showClose(): boolean {
-        return this._showClose;
-    }
-
-    private _showClose: boolean = false;
-
-    constructor(
-        protected override _element: ElementRef,
-        protected override _renderer: Renderer2,
-
-        @Inject(NGX_SEASON_TAG_GROUP_TOKEN)
-        protected _tagGroup: NGXSeasonTagGroupComponent
-    ) {
-        super(_element, _renderer);
-    }
-
-    override ngOnChanges(changes: SimpleChanges): void {
-        super.ngOnChanges(changes);
-
-        for (const name in changes) {
-            if (name === 'showClose') this.setupRightPadding(coerceBooleanProperty(changes[name].currentValue));
-        }
-    }
-
-    override ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-
-        const element: HTMLElement = this._element.nativeElement;
-        this._renderer.addClass(element, 'link-tag');
-        this._renderer.setAttribute(element, 'data-tag-belong', this._tagGroup.id);
-
-        this.setupRightPadding(this.showClose);
-    }
-
-    dismiss(): void {
-        const pid: string | null = this._element.nativeElement.getAttribute('data-tag-belong');
-
-        if (pid && this._tagGroup.id === pid) {
-            const element: HTMLElement = this._element.nativeElement;
-            const parentElement = this._renderer.parentNode(element);
-            this._renderer.removeChild(parentElement, element);
-        }
-    }
-
-    protected override setupLeftPadding(showImage?: boolean): void {
-        this._renderer.setStyle(this._element.nativeElement, '--tag-padding-left', showImage ? 'var(--padding-25)' : 'var(--padding-50)', RendererStyleFlags2.DashCase);
-    }
-
-    protected override setupRightPadding(showClose?: boolean): void {
-        this._renderer.setStyle(this._element.nativeElement, '--tag-padding-right', showClose ? 'var(--padding-25)' : 'var(--padding-50)', RendererStyleFlags2.DashCase);
-    }
-
-    protected handleDismissEvent(event: MouseEvent): void {
+    protected handleTagDeleteEvent(event: MouseEvent): void {
         event.stopPropagation();
-        this.dismiss();
+        this._usd.notify(this.id, this._tagGrid.id);
     }
 
 }
 
-@Component({
-    selector: 'ngx-sui-tag-group',
-    template: `<ng-content select="a[ngx-sui-LinkTag]"></ng-content>`,
-    providers: [{ provide: NGX_SEASON_TAG_GROUP_TOKEN, useExisting: NGXSeasonTagGroupComponent }]
-})
-export class NGXSeasonTagGroupComponent implements AfterViewInit {
-
-    @ContentChildren(NGXSeasonLinkTagComponent)
-    protected tags: QueryList<NGXSeasonLinkTagComponent> | undefined;
-
-    readonly id: string = NGXSeasonIDUtils.generateHashID('ngx-sui-tag-group');
-
-    constructor(
-        protected _element: ElementRef,
-        protected _renderer: Renderer2
-    ) {}
-
-    ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'tag-group');
-    }
-
-    dismiss(id: string): void {
-        if (this.tags) {
-            const tag: NGXSeasonLinkTagComponent | undefined = this.tags.find(tag => tag.id === id);
-            tag?.dismiss();
-        }
-    }
-
-    dismissAll(): void {
-        if (this.tags) this.tags.forEach(tag => tag.dismiss());
-    }
-
-}

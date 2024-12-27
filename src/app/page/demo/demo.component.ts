@@ -75,12 +75,11 @@ export class DemoPageComponent implements OnInit, OnDestroy {
                 { id: '2-3', text: '检查开关', link: ['/demo', 'form', 'check-switch'] },
                 // { id: '2-3', text: '邮件输入框', link: ['/demo', 'form', 'email'] },
                 // { id: '2-4', text: '输入框', link: ['/demo', 'form', 'number'] },
-                { id: '2-5', text: '密码输入框', link: ['/demo', 'form', 'password'] },
+                { id: '2-5', text: '输入框', link: ['/demo', 'form', 'input-field'] },
                 // { id: '2-6', text: '电话输入框', link: ['/demo', 'form', 'phone'] },
                 { id: '2-6', text: '选择框', link: ['/demo', 'form', 'radiobtn'] },
                 { id: '2-7', text: '开关按钮', link: ['/demo', 'form', 'radio-toggle'] },
-                { id: '2-8', text: '搜索输入框', link: ['/demo', 'form', 'search'] },
-                { id: '2-9', text: '文字输入框', link: ['/demo', 'form', 'textfield'] },
+                { id: '2-8', text: '搜索框', link: ['/demo', 'form', 'search'] },
             ]
         },
         {

@@ -23,6 +23,7 @@
 @import "../components/progress.mixin";
 @import "../components/radio.mixin";
 @import "../components/ripple.mixin";
+@import "../components/search.mixin";
 @import "../components/select.mixin";
 @import "../components/scrollbar.mixin";
 @import "../components/tabbed.mixin";
@@ -64,11 +65,12 @@
         @include setup-list-theme($theme);
         @include setup-modal-theme($theme);
         @include setup-navlist-theme($theme, $colors);
-        @include setup-paginator-theme($theme, $colors);
+        @include setup-paginator-theme($theme, "default");
         @include setup-popover-theme($theme, $colors);
         @include setup-progress-theme($theme, "indigo", "pink");
         @include setup-radio-theme($theme, $colors);
         @include setup-ribbon-theme($theme, "indigo", "pink");
+        @include setup-search-theme($theme, $colors);
         @include setup-select-theme($theme, $colors);
         @include setup-tabbed-theme($theme, $colors);
         @include setup-table-theme($theme, $colors);

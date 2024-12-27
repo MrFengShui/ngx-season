@@ -19,7 +19,7 @@ export type NGXSeasonTableObjectType = { [key: NGXSeasonGeneralType]: any };
 @Component({
     selector: 'ngx-sui-table',
     template: `
-        <label ngx-sui-Search [inputColor]="color" [inputPlaceholder]="inputPrompt" searchIconPos="after" class="flex-auto" (inputTextChange)="inputChange$.next($event)" *ngIf="showFilter"></label>
+        <label ngx-sui-Search [searchColor]="color" [searchPlaceholder]="searchPlaceholder" [searchShowBtn]="showSearchBtn" [searchBtnLabel]="searchBtnLabel" (searchTextChange)="inputChange$.next($event)" *ngIf="showFilter"></label>
         <div cdkScrollable ngx-sui-Scrollbar [sbAxis]="showRows === 0 ? 'none-axis' : 'xy-axis'" (sbScrollChange)="listenScrollMetainfoChange($event)" #scrollBox>
             <table class="table" [attr.data-table-color]="color">
                 <thead class="table-header" #thead><ng-content select="[ngx-sui-THeadRow], [ngx-sui-THeadRowDef]"></ng-content></thead>
@@ -52,22 +52,31 @@ export class NGXSeasonTableComponent<T = any> implements OnChanges, OnDestroy, A
         return this._dataSrc;
     }
 
-    @Input({ alias: 'tbInputDelay' })
-    set inputDelay(inputDelay: number | string | undefined | null) {
-        this._inputDelay = coerceNumberProperty(inputDelay);
+    @Input({ alias: 'tbSearchPlaceholder' })
+    set searchPlaceholder(searchPlaceholder: string | undefined | null) {
+        this._searchPlaceholder = searchPlaceholder || undefined;
     }
 
-    get inputDelay(): number {
-        return this._inputDelay;
+    get searchPlaceholder(): string | undefined {
+        return this._searchPlaceholder;
     }
 
-    @Input({ alias: 'tbInputPrompt' })
-    set inputPrompt(inputPrompt: string | undefined | null) {
-        this._inputPrompt = inputPrompt || undefined;
+    @Input({ alias: 'tbSearchBtnLabel' })
+    set searchBtnLabel(searchBtnLabel: string | undefined | null) {
+        this._searchBtnLabel = searchBtnLabel || undefined;
     }
 
-    get inputPrompt(): string | undefined {
-        return this._inputPrompt;
+    get searchBtnLabel(): string | undefined {
+        return this._searchBtnLabel;
+    }
+
+    @Input({ alias: 'tbSearchShowBtn' })
+    set showSearchBtn(showSearchBtn: boolean | string | undefined | null) {
+        this._showSearchBtn = coerceBooleanProperty(showSearchBtn);
+    }
+
+    get showSearchBtn(): boolean {
+        return this._showSearchBtn;
     }
 
     @Input({ alias: 'tbShowPageHRBtn' })
@@ -126,8 +135,9 @@ export class NGXSeasonTableComponent<T = any> implements OnChanges, OnDestroy, A
 
     private _color: NGXSeasonColorPalette = 'default';
     private _dataSrc: NGXSeasonTableDataSource<T> | undefined;
-    private _inputDelay: number = 1000;
-    private _inputPrompt: string | undefined;
+    private _searchPlaceholder: string | undefined;
+    private _searchBtnLabel: string | undefined;
+    private _showSearchBtn: boolean = false;
     private _showPageHRBtn: boolean = true;
     private _showPagePNBtn: boolean = true;
     private _showFilter: boolean = false;
@@ -174,7 +184,7 @@ export class NGXSeasonTableComponent<T = any> implements OnChanges, OnDestroy, A
         this.setupTableHeaderSticky(this.theadSticky);
         this.setupTableFooterSticky(this.tfootSticky);
         this.setupScrollBoxSize(this.showRows);
-        this.listenTableFilterInputChange(this.inputDelay);
+        this.listenTableFilterInputChange();
     }
 
     protected setupTableHeaderSticky(sticky: boolean): void {
@@ -207,9 +217,9 @@ export class NGXSeasonTableComponent<T = any> implements OnChanges, OnDestroy, A
         }
     }
 
-    private listenTableFilterInputChange(delay: number): void {
+    private listenTableFilterInputChange(): void {
         this._ngZone.runOutsideAngular(() =>
-            this.input$ = this.inputChange$.asObservable().pipe(debounceTime(delay))
+            this.input$ = this.inputChange$.asObservable().pipe(debounceTime(250))
                 .subscribe(value => this.dataSrc?.filter(value)));
     }
 
