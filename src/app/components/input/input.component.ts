@@ -3,7 +3,7 @@ import { TemplatePortal } from "@angular/cdk/portal";
 import { Component, OnChanges, AfterViewInit, Input, ElementRef, Renderer2, SimpleChanges, Directive, TemplateRef, ContentChild, ViewContainerRef, Output, EventEmitter, ViewChild, NgZone, OnDestroy, RendererStyleFlags2 } from "@angular/core";
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Directive({
     selector: '[ngx-sui-InputPrefix]'

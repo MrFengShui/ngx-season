@@ -1,7 +1,7 @@
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { Component, OnChanges, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ElementRef, Renderer2, SimpleChanges } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export type NGXSeasonCheckLabelPosition = 'after' | 'before';
 

@@ -5,7 +5,7 @@ import { Subscription } from "rxjs";
 import { NGXSeasonIconName } from "../icon/icon.component";
 
 import { NGXSeasonTreeDataSource, NGXSeasonTreeNodeModel } from "./tree.utils";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export const NGX_SEASON_TREE_TOKEN: InjectionToken<NGXSeasonTreeComponent> = new InjectionToken('NGX_SEASON_TREE_TOKEN');
 

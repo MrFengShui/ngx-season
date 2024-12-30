@@ -6,7 +6,7 @@ import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { BehaviorSubject, Subscription } from "rxjs";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 const NGX_SEASON_SELECT_TOKEN: InjectionToken<NGXSeasonSelectComponent> = new InjectionToken('NGX_SEASON_SELECT_TOKEN');
 

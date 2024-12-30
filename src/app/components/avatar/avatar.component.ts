@@ -2,9 +2,9 @@ import { coerceCssPixelValue } from "@angular/cdk/coercion";
 import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, Inject, InjectionToken, Input, OnChanges, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
 import { Subscription } from "rxjs";
 
-import { fetchFile } from "src/app/utils/_fetch.utils";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
-import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/_size.utils";
+import { fetchFile } from "src/app/utils/fetch.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
+import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/size.utils";
 
 export type NGXSeasonAvatarShape = 'circle' | 'square';
 

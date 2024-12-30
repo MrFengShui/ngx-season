@@ -1,7 +1,7 @@
 import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
 import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, InjectionToken, Input, OnChanges, Output, Renderer2, SimpleChanges } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export const NGX_SEASON_PAGINATOR_LOCALIZATION_TOKEN: InjectionToken<NGXSeasonPaginatorLocalization> = new InjectionToken('NGX_SEASON_PAGINATOR_LOCALIZATION_TOKEN');
 

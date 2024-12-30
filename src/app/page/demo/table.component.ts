@@ -2,7 +2,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { AfterViewInit, Component } from "@angular/core";
 
 import { NGXSeasonTableDataSource } from "src/app/components/table/table.utils";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 interface PeriodicElement {
 

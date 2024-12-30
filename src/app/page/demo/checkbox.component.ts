@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-check-page',

@@ -2,7 +2,7 @@
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, Component, ElementRef, InjectionToken, Input, NgZone, OnChanges, OnDestroy, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 import { NGXSeasonGeneralType } from "src/app/utils/type.utils";
 import { NGXSeasonTableDataSource } from 'src/app/components/table/table.utils';
 

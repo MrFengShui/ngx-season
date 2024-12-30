@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NGXSeasonAlertColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonAlertColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-alert-page',
@@ -8,10 +8,12 @@ import { NGXSeasonAlertColorPalette } from "src/app/utils/_palette.utils";
 export class DemoAlertPageComponent {
 
     protected colors: NGXSeasonAlertColorPalette[] = [ 'success', 'warning', 'failure', 'info', 'help' ];
-
-    protected subject: string = `变形金刚：超能勇士（野兽之战、野兽大战、特种变形勇士（港）、猛兽侠）`;
-    protected description: string = `在赛博坦星球内战结束约数世纪后，汽车人（Autobot）和霸天虎（Decepticon）分别演化为巨无霸（Maximal）和原始兽（Predacon）。一位与霸天虎领袖同名的原始兽将军——威震天（Megatron）和其他5个原始兽成员偷走了能指出主要能源所在地的金盘，并驾驶飞船（黑暗星舰）追随金盘上的信息，运用超时空跳跃来到金盘指定的时空，威震天（Megatron）希望有足够的能量能使原始兽称霸宇宙，以擎天圣（Optimus Primal）为首的巨无霸科学探索小队接到命令进行拦截。威震天不顾星际法律，强行进行超时空跳跃，双方坠落在史前地球（起初双方都不知道这个星球就是地球）。双方都探测到了这个星球拥有很强的原生能量，但这种能量对他们有害。因为记载中没有提到这些能量，所以他们没有意识到这里是地球。为了抵抗能量的干扰，他们扫描地球生物，并以生物形态为变形形态。而这个星球的能量也导致了威震天的野心进一步膨胀，他开始率众原始兽掠夺能量。为了安全和生存，以擎天圣为首的巨无霸小队展开了反击。`;
-    protected longText: string = `《变形金刚：超能勇士》（Transformers：Beast Wars）是变形金刚系列的动画电视系列剧之一，是早期利用全3D电脑动画所绘制的电视系列剧先驱之一，美版《变形金刚G1》的续作。共三季五十二集，于1996年8月6日在加拿大播出 [1]。`;
-    protected shortText: string = `该作品讲述了巨无霸和原始兽斗争的故事。`;
+    protected message: string = `《绿色兵团》是一款由日本KONAMI（科乐美）公司推出的任天堂FC（俗称红白机，由日本任天堂公司开发的8位游戏机）游戏，与魂斗罗、赤色要塞、沙罗曼蛇并誉为“四强”，风靡整个八十年代，为诸多80后玩家们所津津乐道。对于初上手的玩家来讲，这个游戏的难度偏大。`;
+    protected notice: string = `本站已添加《绿色兵团》，点击右边“下载“按钮下载该游戏`;
+    protected subject: string = `绿色兵团`;
+    protected description: string = `《绿色兵团》是一款由日本KONAMI（科乐美）公司推出的任天堂FC红白机游戏，发行日期为1987年4月10日。游戏的背景设定在冷战时期，玩家扮演一名特种兵，目标是穿越敌人防线，通过六个关卡，最终炸毁敌方的核武器装置。玩家在游戏中使用的主要武器是一把刺刀，可以与敌人进行近战。游戏的核心玩法包括战斗、潜行和解谜，玩家需要在不同的关卡中利用各种策略和技巧来击败敌人。关卡设计包括雪地、军事基地和丛林等，每个关卡都有其独特的敌人和挑战。游戏不论是人物设定、场景设定以及是任务等等都有着深厚的冷战时代色彩（比如第二关、第四关、第六关敌人的红军毡帽；第一关背景的雪山以及第四关、第五关背雪松，这些都有着鲜明的苏联特色。而最后要摧毁的那座核弹装置，更是折射冷战时代美苏双方争端的焦点——核武器）。游戏中你肩负摧毁敌人秘密武器的使命，随身携带一把刺刀（匕首），深入敌军内部，与敌人周旋作战。正因为具有这个特征，中国大陆很多资深玩家曾冠名该游戏为“拼刀子”。`;
+    protected closible: boolean = false;
+    protected disabled: boolean = true;
+    protected indented: boolean = false;
 
 }

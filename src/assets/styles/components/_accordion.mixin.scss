@@ -1,163 +1,166 @@
-@mixin setup-accordion-theme($theme, $primaryColor, $accentColor) {
+@mixin setup-accordion-theme($theme, $colors) {
     .accordion {
-        $colors: (
-            "default": "gray",
-            "primary": $primaryColor,
-            "accent": $accentColor,
-            "success": "green",
-            "warning": "yellow",
-            "failure": "red",
-            "info": "blue"
-        );
-
         --accordion-panel-header-border-width: #{var(--size-pixel-1)};
-        --accordion-panel-header-gap: #{var(--size-pixel-16)};
-        --accordion-panel-header-x-axis-padding: #{var(--size-pixel-16)};
-        --accordion-panel-header-y-axis-padding: #{var(--size-pixel-8)};
-        --accordion-panel-header-wrapper-x-axis-margin: #{var(--size-pixel-16)};
-        --accordion-panel-header-wrapper-y-axis-margin: #{var(--size-pixel-0)};
-        --accordion-panel-header-subject-font-size: #{var(--typography-body-2)};
-        --accordion-panel-header-description-font-size: #{var(--typography-body-3)};
+        --accordion-panel-header-selected-border-width: #{var(--size-pixel-0)};
+        --accordion-panel-header-font-size: #{var(--font-size-16)};
+        --accordion-panel-header-font-weight: #{var(--font-weight-900)};
+        --accordion-panel-header-line-height: #{var(--line-height-100)};
+        --accordion-panel-header-gap: #{var(--col-gap-100)};
+        --accordion-panel-header-padding: #{var(--padding-100)};
+        --accordion-panel-header-height: #{var(--size-pixel-48)};
+
+        --accordion-panel-content-font-size: #{var(--font-size-14)};
+        --accordion-panel-content-font-weight: #{var(--font-weight-500)};
+        --accordion-panel-content-line-height: #{var(--line-height-150)};
+        --accordion-panel-content-padding: #{var(--padding-100)};
 
         --accordion-panel-footer-border-width: #{var(--size-pixel-1)};
-        --accordion-panel-footer-padding: #{var(--size-pixel-16)};
+        --accordion-panel-footer-padding: #{var(--padding-50)} #{var(--padding-100)};
 
         @each $key, $value in $colors {
             @if ($key == "default") {
-                --accordion-panel-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+                --accordion-panel-bdcolor: #{if($theme == "light", var(--palette-#{$value}-color-35), var(--palette-#{$value}-color-55))};
 
-                --accordion-panel-header-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
+                --accordion-panel-bgcolor: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+                --accordion-panel-header-bgcolor: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
 
-                --accordion-panel-header-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --accordion-panel-header-color: #{if($theme == "light", var(--palette-#{$value}-700-color), var(--palette-#{$value}-300-color))};
+
                 --accordion-panel-header-bgcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
                 --accordion-panel-header-bgcolor-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
 
-                --accordion-panel-header-color-#{$key}: #{if($theme == "light", var(--palette-#{$value}-800-color), var(--palette-#{$value}-200-color))};
+                --accordion-panel-header-color-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-600-color), var(--palette-#{$value}-400-color))};
+                --accordion-panel-header-color-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
 
-                --accordion-panel-footer-bdcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --accordion-panel-footer-bdcolor: #{var(--palette-#{$value}-color-15)};
             } @else {
-                --accordion-panel-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+                --accordion-panel-header-bgcolor-hover-#{$key}: #{if($theme == "light", var(--palette-#{$value}-600-color), var(--palette-#{$value}-400-color))};
+                --accordion-panel-header-bgcolor-active-#{$key}: #{if($theme == "light", var(--palette-#{$value}-400-color), var(--palette-#{$value}-600-color))};
 
-                --accordion-panel-header-bdcolor-#{$key}: #{var(--palette-#{$value}-color-25)};
-
-                --accordion-panel-header-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --accordion-panel-header-bgcolor-hover-#{$key}: #{var(--palette-#{$value}-600-color)};
-                --accordion-panel-header-bgcolor-active-#{$key}: #{var(--palette-#{$value}-400-color)};
-
-                --accordion-panel-header-color-#{$key}: #{var(--palette-#{$value}-50-color)};
-
-                --accordion-panel-footer-bdcolor-#{$key}: #{var(--palette-#{$value}-color-25)};
+                --accordion-panel-header-color-hover-#{$key}: #{var(--palette-#{$value}-50-color)};
+                --accordion-panel-header-color-active-#{$key}: #{var(--palette-#{$value}-50-color)};
             }
+
+            --accordion-panel-header-bgcolor-selected-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --accordion-panel-header-color-selected-#{$key}: #{var(--palette-#{$value}-50-color)};
         }
 
-        display: flex;
+        display: inline-flex;
         flex-direction: column;
 
         .accordion-panel {
-            .accordion-panel-header {
-                cursor: pointer;
+            display: inline-flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+
+            background-color: var(--accordion-panel-bgcolor);
+
+            overflow: hidden;
+
+            transition: height var(--accordion-panel-duration) ease-in-out;
+
+            &.panel-disabled {
+                filter: #{if($theme == "light", opacity(0.3), opacity(0.7))};
+
+                .panel-header {
+                    cursor: not-allowed !important;
+
+                    &:hover, &:active {
+                        background-color: var(--accordion-panel-header-bgcolor) !important;
+                        color: var(--accordion-panel-header-color) !important;
+                    }
+                }
+            }
+
+            .panel-header {
                 display: flex;
                 align-items: center;
+
+                background-color: var(--accordion-panel-header-bgcolor);
+                color: var(--accordion-panel-header-color);
+
+                cursor: pointer;
+
+                min-height: var(--accordion-panel-header-height);
+                max-height: var(--accordion-panel-header-height);
+
+                padding-left: var(--accordion-panel-header-padding);
+                padding-right: var(--accordion-panel-header-padding);
+
                 user-select: none;
 
-                padding: var(--accordion-panel-header-y-axis-padding) var(--accordion-panel-header-x-axis-padding);
-                
-                .panel-header-wrapper {
-                    display: inline-flex;
-                    flex-direction: column;
+                .label {
                     flex: 1 1 auto;
-                    overflow: hidden;
 
-                    margin: var(--accordion-panel-header-wrapper-y-axis-margin) var(--accordion-panel-header-wrapper-x-axis-margin);
-
-                    &.no-icon {
-                        margin-left: var(--size-pixel-0) !important;
-                    }
-
-                    &.no-toggle {
-                        margin-right: var(--size-pixel-0) !important;
-                    }
-
-                    .panel-header-subject {
-                        font-size: var(--accordion-panel-header-subject-font-size);
-                        font-weight: 900;
-
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                    }
-    
-                    .panel-header-description {
-                        font-size: var(--accordion-panel-header-description-font-size);
-                        font-weight: 600;
-
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                    }
+                    font-size: var(--accordion-panel-header-font-size);
+                    font-weight: var(--accordion-panel-header-font-weight);
+                    line-height: var(--accordion-panel-header-line-height);
                 }
             }
 
-            .accordion-panel-container {
-                overflow: hidden;
+            .panel-content {
+                display: inline-flex;
+                flex-direction: column;
 
-                .accordion-panel-wrapper {
-                    .accordion-panel-footer {
-                        border-top-width: var(--accordion-panel-footer-border-width);
-                        border-top-style: solid;
-    
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-    
-                        padding: var(--accordion-panel-footer-padding);
-                    }
+                text-align: justify;
+
+                padding: var(--accordion-panel-content-padding);
+
+                &, > * {
+                    font-size: var(--accordion-panel-content-font-size);
+                    font-weight: var(--accordion-panel-content-font-weight);
+                    line-height: var(--accordion-panel-content-line-height);
                 }
             }
-            
+
+            .panel-footer {
+                display: inline-flex;
+                align-items: center;
+
+                border-top-color: var(--accordion-panel-footer-bdcolor);
+                border-top-style: solid;
+                border-top-width: var(--accordion-panel-footer-border-width);
+
+                padding: var(--accordion-panel-footer-padding);
+            }
+
+
             &:not(:last-child) {
-                .accordion-panel-header {
-                    border-bottom-width: var(--accordion-panel-header-border-width);
-                    border-bottom-style: solid;
+                border-bottom-color: var(--accordion-panel-bdcolor);
+                border-bottom-style: solid;
+                border-bottom-width: var(--accordion-panel-header-border-width);
+
+                &.selected {
+                    border-bottom-width: var(--accordion-panel-header-selected-border-width);
                 }
             }
         }
-        
+
         @each $color in map-keys($colors) {
             &[data-accordion-color=#{$color}] {
                 .accordion-panel {
-                    background-color: var(--accordion-panel-bgcolor-#{$color});
-
-                    .accordion-panel-header {
-                        background-color: var(--accordion-panel-header-bgcolor-#{$color});
-                        color: var(--accordion-panel-header-color-#{$color});
-
+                    .panel-header {
                         &:hover {
                             background-color: var(--accordion-panel-header-bgcolor-hover-#{$color});
+                            color: var(--accordion-panel-header-color-hover-#{$color});
                         }
 
                         &:active {
                             background-color: var(--accordion-panel-header-bgcolor-active-#{$color});
-                        }
-
-                        .btn {
-                            color: var(--accordion-panel-header-color-#{$color});
+                            color: var(--accordion-panel-header-color-active-#{$color});
                         }
                     }
 
-                    .accordion-panel-footer {
-                        border-top-color: var(--accordion-panel-footer-bdcolor-#{$color});
-                    }
+                    &.selected {
+                        .panel-header {
+                            background-color: var(--accordion-panel-header-bgcolor-selected-#{$color});
+                            color: var(--accordion-panel-header-color-selected-#{$color});
 
-                    &[data-accordion-panel-state="collapsed"] {
-                        .accordion-panel-header {
-                            border-bottom-color: var(--accordion-panel-header-bdcolor-#{$color});
-                        }
-                    }
-
-                    &[data-accordion-panel-state="expanded"] {
-                        .accordion-panel-header {
-                            border-bottom-color: transparent;
+                            > .icon {
+                                svg {
+                                    color: var(--accordion-panel-header-color-selected-#{$color});
+                                }
+                            }
                         }
                     }
                 }

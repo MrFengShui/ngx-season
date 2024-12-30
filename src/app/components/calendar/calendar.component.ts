@@ -5,7 +5,7 @@ import { I18n, Lunar, Solar } from "lunar-typescript";
 import moment from "moment";
 
 import { LUNAR_ZHS_CONFIG, LUNAR_ZHT_CONFIG } from "./calendar-config.utils";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export type NGXSeasonCalendarLocaleName = 'en' | 'es' | 'fr' | 'it' | 'jp' | 'kr' | 'zhs' | 'zht';
 export type NGXSeasonCalendarLocalePair = { name: NGXSeasonCalendarLocaleName, config: moment.LocaleSpecification };

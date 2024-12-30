@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 
 import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-radio-page',

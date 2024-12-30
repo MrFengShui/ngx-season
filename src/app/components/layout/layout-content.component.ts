@@ -2,7 +2,7 @@ import { AnimationBuilder, AnimationPlayer, useAnimation } from "@angular/animat
 import { coerceNumberProperty, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { TemplatePortal } from "@angular/cdk/portal";
 import { Component, OnChanges, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, SimpleChanges, Directive, TemplateRef, ContentChild, AfterContentInit, ViewContainerRef } from "@angular/core";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { horizontalExtraCollapsionExpanionAnimation } from "src/app/utils/animate.utils";
 

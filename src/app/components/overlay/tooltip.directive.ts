@@ -1,5 +1,5 @@
-import { coerceNumberProperty } from "@angular/cdk/coercion";
-import { CloseScrollStrategy, FlexibleConnectedPositionStrategy } from "@angular/cdk/overlay";
+import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
+import { BlockScrollStrategy, CloseScrollStrategy, FlexibleConnectedPositionStrategy } from "@angular/cdk/overlay";
 import { ComponentPortal, ComponentType, TemplatePortal } from "@angular/cdk/portal";
 import { AfterViewInit, Component, Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2, TemplateRef } from "@angular/core";
 import { debounceTime, Subject, Subscription } from "rxjs";
@@ -11,6 +11,15 @@ import { NGXSeasonOverlayDirective, NGXSeasonOverlayPosition } from "./overlay.d
     exportAs: 'NGXSeasonTooltipDirective'
 })
 export class NGXSeasonTooltipDirective extends NGXSeasonOverlayDirective implements OnDestroy, AfterViewInit {
+
+    @Input({ alias: 'ttDisabled' })
+    set disabled(disabled: boolean | string | undefined | null) {
+        this._disabled = coerceBooleanProperty(disabled);
+    }
+
+    get disabled(): boolean {
+        return this._disabled;
+    }
 
     @Input('ttHideDelay')
     set hideDelay(hideDelay: number | string | null) {
@@ -39,6 +48,7 @@ export class NGXSeasonTooltipDirective extends NGXSeasonOverlayDirective impleme
         return this._showDelay;
     }
 
+    private _disabled: boolean = false;
     private _hideDelay: number = 0;
     private _message: string | undefined;
     private _showDelay: number = 0;
@@ -97,32 +107,34 @@ export class NGXSeasonTooltipDirective extends NGXSeasonOverlayDirective impleme
     override display(templateOrComponent: TemplateRef<any> | ComponentType<any> | undefined, element: HTMLElement, position: NGXSeasonOverlayPosition): void {
         if (this.overlayRef?.hasAttached()) return;
 
-        this.positionStrategy = this._overlay.position()
+        if (!this.disabled) {
+            this.positionStrategy = this._overlay.position()
             .flexibleConnectedTo(element)
             .withPositions(this.createOverlayConnectedPosition(position))
             .withFlexibleDimensions(false)
             .withPush(false);
-        const scrollStrategy: CloseScrollStrategy = this._overlay.scrollStrategies.close();
-        this.overlayRef = this._overlay.create({
-            positionStrategy: this.positionStrategy, scrollStrategy, panelClass: ['tooltip'],
-            width: 'fit-content', height: 'fit-content'
-        });
+            const scrollStrategy: CloseScrollStrategy = this._overlay.scrollStrategies.close({ threshold: 0 });
+            this.overlayRef = this._overlay.create({
+                positionStrategy: this.positionStrategy, scrollStrategy, panelClass: ['tooltip'],
+                width: 'fit-content', height: 'fit-content'
+            });
 
-        if (!templateOrComponent)  {
-            const portal = new ComponentPortal(NGXSeasonTooltipMessageComponent);
-            const component = this.overlayRef.attach(portal);
-            component.setInput('ttMsg', this.message);
-        } else if (templateOrComponent instanceof TemplateRef) {
-            const portal = new TemplatePortal(templateOrComponent, this._vcr);
-            this.overlayRef.attach(portal);
-        } else {
-            const portal = new ComponentPortal(templateOrComponent);
-            this.overlayRef.attach(portal);
+            if (!templateOrComponent)  {
+                const portal = new ComponentPortal(NGXSeasonTooltipMessageComponent);
+                const component = this.overlayRef.attach(portal);
+                component.setInput('ttMsg', this.message);
+            } else if (templateOrComponent instanceof TemplateRef) {
+                const portal = new TemplatePortal(templateOrComponent, this._vcr);
+                this.overlayRef.attach(portal);
+            } else {
+                const portal = new ComponentPortal(templateOrComponent);
+                this.overlayRef.attach(portal);
+            }
         }
     }
 
     override dismiss(): void {
-        if (this.overlayRef) {
+        if (this.overlayRef && !this.disabled) {
             this.overlayRef.detach();
             this.overlayRef.dispose();
 

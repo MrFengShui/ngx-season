@@ -7,7 +7,7 @@ import moment from "moment";
 
 import { LOCALE_ZHS_CONFIG, NGXSeasonCalendarDate, NGXSeasonCalendarSelectionModel } from "./calendar.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-calendar-control',

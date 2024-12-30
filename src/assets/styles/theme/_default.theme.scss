@@ -43,10 +43,11 @@
         "primary": "indigo", "accent": "pink",
         "success": "green", "warning": "yellow", "failure": "red", "info": "blue", "help": "slate"
     );
+    $alertColors: ("success": "green", "warning": "yellow", "failure": "red", "info": "blue", "help": "slate");
 
     &[data-color*="default"] {
-        @include setup-accordion-theme($theme, "indigo", "pink");
-        @include setup-alert-theme($theme, "indigo");
+        @include setup-accordion-theme($theme, $colors);
+        @include setup-alert-theme($theme, $alertColors);
         @include setup-article-theme($theme);
         @include setup-avatar-theme($theme, $colors);
         @include setup-badge-theme($theme, "indigo", "pink");

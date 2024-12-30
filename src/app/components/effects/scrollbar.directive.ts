@@ -2,7 +2,7 @@ import { coerceNumberProperty } from "@angular/cdk/coercion";
 import { CdkScrollable, ScrollDispatcher } from "@angular/cdk/scrolling";
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, NgZone, OnChanges, Output, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export type NGXSeasonScrollbarDirection = 'x-axis' | 'y-axis' | 'xy-axis' | 'none-axis';
 export type NGXSeasonScrollbarMetainfo = { direction: NGXSeasonScrollbarDirection, x: number, y: number, offsetWidth: number, offsetHeight: number, scrollWidth: number, scrollHeight: number, top: boolean, bottom: boolean, left: boolean, right: boolean };

@@ -1,6 +1,6 @@
 import { Component, OnChanges, AfterViewInit, Input, Output, EventEmitter, ElementRef, Renderer2, Inject, SimpleChanges } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGX_SEASON_SEARCH_TOKEN, NGXSeasonSearchComponent, SearchDroppedMetainfo } from "./search.component";
 

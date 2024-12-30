@@ -157,9 +157,17 @@
             }
         }
 
-        .text-button {
+        &.text-button {
             .button-wrapper {
                 line-height: var(--button-text-line-height);
+            }
+
+            &[data-button-icon-position=after] {
+                flex-direction: row-reverse;
+            }
+
+            &[data-button-icon-position=before] {
+                flex-direction: row;
             }
         }
 

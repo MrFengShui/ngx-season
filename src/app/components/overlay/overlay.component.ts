@@ -2,7 +2,7 @@ import { Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
 import { Component, ElementRef, Injector, Input, NgZone, Renderer2, ViewContainerRef } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: '',

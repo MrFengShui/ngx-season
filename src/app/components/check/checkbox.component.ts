@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NGXSeasonCheckComponent } from "./check.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export type NGXSeasonCheckboxCheckedMarkShape = 'tick' | 'cross';
 export type NGXSeasonCheckboxIndeterminatedMarkShape = 'dash' | 'solid';

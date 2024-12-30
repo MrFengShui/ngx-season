@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, InjectionToken, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export const NGX_SEASON_NAVLIST_TOKEN: InjectionToken<NGXSeasonNavlistComponent> = new InjectionToken('NGX_SEASON_NAVLIST_TOKEN');
 

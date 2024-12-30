@@ -3,7 +3,7 @@ import { ComponentPortal, ComponentType } from "@angular/cdk/portal";
 import { Directive, Input, ElementRef, Injector, Renderer2, ViewContainerRef, NgZone, TemplateRef } from "@angular/core";
 import { debounceTime, map, Subscription } from "rxjs";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export type NGXSeasonOverlayPosition = 'auto' | 'top' | 'bottom' | 'left' | 'right';
 

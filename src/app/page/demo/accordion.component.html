@@ -1,29 +1,116 @@
-<div class="flex gx-100 p-100">
-    <div class="flex flex-dir-col gy-100 w-50">
-        <ngx-sui-accordion [accdinColor]="color" accdinShowIcon="true" accdinShowToggle="true" accdinToggleIcon="angle" accdinMultiple="true" class="w-100" #accordion *ngFor="let color of colors; index as outerIndex">
-            <ngx-sui-accordion-panel [accdinIcon]="item.icon" [accdinSubject]="item.subject.repeat(20)" [accdinDescText]="item.description.repeat(20)" [accdinToggled]="innerIndex === selectedIndexList[outerIndex]" (opened)="handleSelectedIndexEvent(innerIndex, outerIndex)" *ngFor="let item of list; index as innerIndex; first as isFirst; last as isLast">
-                <ng-template ngx-sui-AccordionPanelContent>
-                    <div class="vh-50"></div>
-                </ng-template>
-                <ng-template ngx-sui-AccordionPanelFooter>
-                    <button ngx-sui-TextButton [btnColor]="color" (click)="handleTogglePreviousPanelEvent(outerIndex)" *ngIf="!isFirst">上一个</button>
-                    <span class="flex-auto"></span>
-                    <button ngx-sui-TextButton [btnColor]="color" (click)="handleToggleCurrentPanelEvent(outerIndex)" *ngIf="!isLast">下一个</button>
-                </ng-template>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-900">基本用法</div>
+    <ngx-sui-accordion>
+        <ngx-sui-accordion-panel *ngFor="let item of list">
+            <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+            <ngx-sui-accordion-panel-content class="row-gap-100">
+                <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+            </ngx-sui-accordion-panel-content>
+        </ngx-sui-accordion-panel>
+    </ngx-sui-accordion>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">手风琴展开于收缩</span>
+        <button ngx-sui-TextButton btnIcon="resize-up" btnText="全部展开" (click)="accordion.openAll()"></button>
+        <button ngx-sui-TextButton btnIcon="resize-down" btnText="全部收缩" (click)="accordion.closeAll()"></button>
+    </div>
+    <ngx-sui-accordion #accordion>
+        <ngx-sui-accordion-panel *ngFor="let item of list">
+            <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+            <ngx-sui-accordion-panel-content class="row-gap-100">
+                <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+            </ngx-sui-accordion-panel-content>
+        </ngx-sui-accordion-panel>
+    </ngx-sui-accordion>
+    <div class="fs-24 fw-900">手风琴单选与多选</div>
+    <div class="flex align-items-baseline col-gap-100">
+        <ngx-sui-accordion accdMulti="true" class="flex-auto">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
+            </ngx-sui-accordion-panel>
+        </ngx-sui-accordion>
+        <ngx-sui-accordion accdMulti="false" class="flex-auto">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
             </ngx-sui-accordion-panel>
         </ngx-sui-accordion>
     </div>
-    <div class="flex flex-dir-col gy-100 w-50">
-        <ngx-sui-accordion [accdinColor]="color" accdinShowIcon="true" accdinShowToggle="true" accdinToggleIcon="angle" class="w-100" #accordion *ngFor="let color of colors; index as outerIndex">
-            <ngx-sui-accordion-panel [accdinIcon]="item.icon" [accdinSubject]="item.subject.repeat(20)" [accdinDescText]="item.description.repeat(20)" [accdinToggled]="innerIndex === selectedIndexList[outerIndex]" (opened)="handleSelectedIndexEvent(innerIndex, outerIndex)" *ngFor="let item of list; index as innerIndex; first as isFirst; last as isLast">
-                <ng-template ngx-sui-AccordionPanelContent>
-                    <div class="vh-50"></div>
-                </ng-template>
-                <ng-template ngx-sui-AccordionPanelFooter>
-                    <button ngx-sui-TextButton [btnColor]="color" (click)="handleTogglePreviousPanelEvent(outerIndex)" *ngIf="!isFirst">上一个</button>
-                    <span class="flex-auto"></span>
-                    <button ngx-sui-TextButton [btnColor]="color" (click)="handleToggleCurrentPanelEvent(outerIndex)" *ngIf="!isLast">下一个</button>
-                </ng-template>
+    <div class="fs-24 fw-900">手风琴失效</div>
+    <div class="flex align-items-baseline col-gap-100">
+        <ngx-sui-accordion accdDisabled class="flex-auto">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
+            </ngx-sui-accordion-panel>
+        </ngx-sui-accordion>
+        <ngx-sui-accordion class="flex-auto">
+            <ngx-sui-accordion-panel apDisabled *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
+            </ngx-sui-accordion-panel>
+        </ngx-sui-accordion>
+    </div>
+    <div class="fs-24 fw-900">手风琴切换</div>
+    <ngx-sui-accordion accdMulti="false">
+        <ngx-sui-accordion-panel [apToggled]="selectedIndex === idx" (apClickEvent)="handleSelectPanelEvent(idx)" *ngFor="let item of list; index as idx; first as fst; last as lst">
+            <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+            <ngx-sui-accordion-panel-content class="row-gap-100">
+                <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+            </ngx-sui-accordion-panel-content>
+            <ngx-sui-accordion-panel-footer>
+                <button ngx-sui-TextButton btnIcon="step-forward" btnIconDegree="-180" btnIconPos="before" btnStyle="solid" btnText="上一个" (click)="handlePrevNextStepEvent('dec')" *ngIf="!fst"></button>
+                <span class="flex-auto"></span>
+                <button ngx-sui-TextButton btnIcon="step-forward" btnIconDegree="0" btnIconPos="after" btnStyle="solid" btnText="下一个" (click)="handlePrevNextStepEvent('inc')" *ngIf="!lst"></button>
+            </ngx-sui-accordion-panel-footer>
+        </ngx-sui-accordion-panel>
+    </ngx-sui-accordion>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">手风琴图标</span>
+        <button ngx-sui-TextButton [btnIcon]="showToggleIcon ? 'eye-hide' : 'eye-show'" [btnText]="showToggleIcon ? '隐藏' : '显示'" (click)="showToggleIcon = !showToggleIcon"></button>
+    </div>
+    <div class="flex align-items-baseline col-gap-100">
+        <ngx-sui-accordion class="flex-auto">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphShowToggleIcon]="showToggleIcon" aphCollapseIcon="plus-circle" aphExpandIcon="minus-circle" [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
+            </ngx-sui-accordion-panel>
+        </ngx-sui-accordion>
+        <ngx-sui-accordion class="flex-auto">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphShowToggleIcon]="showToggleIcon" aphCollapseIcon="folder-open" aphExpandIcon="folder-close" [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
+            </ngx-sui-accordion-panel>
+        </ngx-sui-accordion>
+        <ngx-sui-accordion class="flex-auto">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphShowToggleIcon]="showToggleIcon" aphCollapseIcon="collapse-card" aphExpandIcon="expand-card" [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
+            </ngx-sui-accordion-panel>
+        </ngx-sui-accordion>
+    </div>
+    <div class="fs-24 fw-900">手风琴色彩</div>
+    <div class="grid align-items-baseline col-gap-100 row-gap-100">
+        <ngx-sui-accordion [accdColor]="color" *ngFor="let color of colors">
+            <ngx-sui-accordion-panel *ngFor="let item of list">
+                <ngx-sui-accordion-panel-header [aphLabel]="item.title"></ngx-sui-accordion-panel-header>
+                <ngx-sui-accordion-panel-content class="row-gap-100">
+                    <p class="m-0 p-0" *ngFor="let content of item.contents">{{ content }}</p>
+                </ngx-sui-accordion-panel-content>
             </ngx-sui-accordion-panel>
         </ngx-sui-accordion>
     </div>

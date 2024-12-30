@@ -1,68 +1,39 @@
-@mixin setup-alert-theme($theme, $color) {
-    $colors: (
-        "success": "green",
-        "warning": "yellow",
-        "failure": "red",
-        "info": "blue",
-        "help": "gray"
-    );
+@mixin setup-alert-theme($theme, $colors) {
     $styles: ("flat", "outline", "solid");
 
     .alert {
         --alert-border-radius: #{var(--size-pixel-4)};
         --alert-border-width: #{var(--size-pixel-2)};
 
-        --alert-toast-font-size: #{var(--font-size-14)};
-        --alert-toast-font-weight: #{var(--font-weight-500)};
-        --alert-toast-line-height: #{var(--line-height-100)};
-        --alert-toast-gap: #{var(--margin-100)};
-        --alert-toast-padding: #{var(--padding-100)};
+        --alert-toast-gap: #{var(--col-gap-50)};
+        --alert-toast-padding: #{var(--padding-50)};
         --alert-toast-height: #{var(--overlay-alert-toast-height)};
 
+        --alert-notice-font-size: #{var(--font-size-12)};
+        --alert-notice-font-weight: #{var(--font-weight-500)};
+        --alert-notice-line-height: #{var(--line-height-200)};
+        --alert-notice-gap: #{var(--col-gap-50)};
+
         --alert-detail-border-width: #{var(--size-pixel-8)};
-        --alert-detail-gap: #{var(--margin-100)};
-        --alert-detail-padding: #{var(--size-pixel-16)};
-        --alert-detail-subject-font-size: #{var(--font-size-18)};
-        --alert-detail-subject-font-weight: #{var(--font-weight-900)};
-        --alert-detail-subject-line-height: #{var(--line-height-100)};
-        --alert-detail-description-font-size: #{var(--font-size-14)};
-        --alert-detail-description-font-weight: #{var(--font-weight-500)};
-        --alert-detail-description-line-height: #{var(--line-height-150)};
+        --alert-detail-gap: #{var(--col-gap-50)};
+        --alert-detail-padding: #{var(--padding-100)};
 
         @each $key, $value in $colors {
-            @if $key == "help" {
-                --alert-flat-bdcolor-#{$key}: transparent;
-                --alert-flat-bgcolor-#{$key}: transparent;
-                --alert-flat-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-flat-bdcolor-#{$key}: transparent;
+            --alert-flat-bgcolor-#{$key}: transparent;
+            --alert-flat-color-#{$key}: #{var(--palette-#{$value}-500-color)};
 
-                --alert-outline-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-outline-bgcolor-#{$key}: transparent;
-                --alert-outline-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-outline-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-outline-bgcolor-#{$key}: transparent;
+            --alert-outline-color-#{$key}: #{var(--palette-#{$value}-500-color)};
 
-                --alert-solid-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-solid-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-solid-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+            --alert-solid-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-solid-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-solid-color-#{$key}: #{var(--palette-#{$value}-50-color)};
 
-                --alert-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
-                --alert-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-            } @else {
-                --alert-flat-bdcolor-#{$key}: transparent;
-                --alert-flat-bgcolor-#{$key}: transparent;
-                --alert-flat-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-
-                --alert-outline-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-outline-bgcolor-#{$key}: transparent;
-                --alert-outline-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-
-                --alert-solid-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-solid-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-solid-color-#{$key}: #{var(--palette-#{$value}-50-color)};
-
-                --alert-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-                --alert-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
-                --alert-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-            }
+            --alert-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --alert-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+            --alert-color-#{$key}: #{var(--palette-#{$value}-500-color)};
         }
 
         border-radius: #{var(--alert-border-radius)};
@@ -78,24 +49,40 @@
             display: inline-flex;
             align-items: center;
 
+            column-gap: var(--alert-toast-gap);
+
             height: var(--alert-toast-height);
 
-            .alert-text-wrapper {
+            .alert-message {
                 flex: 1 1 auto;
-
-                font-size: var(--alert-toast-font-size);
-                font-weight: var(--alert-toast-font-weight);
-                line-height: var(--alert-toast-line-height);
 
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
 
+            &.notice-alert {
+                border-radius: #{var(--size-pixel-0)};
 
-            > :nth-child(n) {
-                &:not(:last-child) {
-                    margin-right: var(--alert-toast-gap);
+                height: fit-content;
+
+                padding: var(--padding-0);
+
+                .alert-wrapper {
+                    display: flex;
+                    flex: 1 1 auto;
+                    justify-content: center;
+                    align-items: center;
+
+                    column-gap: var(--alert-notice-gap);
+
+                    .alert-message {
+                        flex: 0 1 auto;
+
+                        font-size: var(--alert-notice-font-size);
+                        font-weight: var(--alert-notice-font-weight);
+                        line-height: var(--alert-notice-line-height);
+                    }
                 }
             }
         }
@@ -106,30 +93,57 @@
 
             border-left-width: var(--alert-detail-border-width);
 
+            row-gap: var(--alert-detail-gap);
+
             padding: var(--alert-detail-padding);
 
-            .alert-header {
+            .toolbar {
                 display: flex;
                 align-items: center;
 
-                margin-bottom: var(--alert-detail-gap);
-
-                .icon {
-                    margin-right: var(--alert-detail-gap);
-                }
-
-                .alert-text-wrapper {
-                    font-size: var(--alert-detail-subject-font-size);
-                    font-weight: var(--alert-detail-subject-font-weight);
-                    line-height: var(--alert-detail-subject-line-height);
-                }
+                column-gap: var(--alert-detail-gap);
             }
+        }
 
-            .alert-content {
-                font-size: var(--alert-detail-description-font-size);
-                font-weight: var(--alert-detail-description-font-weight);
-                line-height: var(--alert-detail-description-line-height);
-            }
+        .alert-addon {
+            --alert-addon-gap: #{var(--col-gap-50)};
+
+            display: inline-flex;
+            flex-wrap: nowrap;
+
+            column-gap: var(--alert-addon-gap);
+        }
+
+        .alert-message {
+            --alert-message-font-size: #{var(--font-size-14)};
+            --alert-message-font-weight: #{var(--font-weight-500)};
+            --alert-message-line-height: #{var(--line-height-100)};
+
+            font-size: var(--alert-message-font-size);
+            font-weight: var(--alert-message-font-weight);
+            line-height: var(--alert-message-line-height);
+        }
+
+        .alert-subject {
+            --alert-subject-font-size: #{var(--font-size-20)};
+            --alert-subject-font-weight: #{var(--font-weight-900)};
+            --alert-subject-line-height: #{var(--line-height-100)};
+
+            font-size: var(--alert-subject-font-size);
+            font-weight: var(--alert-subject-font-weight);
+            line-height: var(--alert-subject-line-height);
+        }
+
+        .alert-description {
+            --alert-description-font-size: #{var(--font-size-14)};
+            --alert-description-font-weight: #{var(--font-weight-500)};
+            --alert-description-line-height: #{var(--line-height-150)};
+
+            font-size: var(--alert-description-font-size);
+            font-weight: var(--alert-description-font-weight);
+            line-height: var(--alert-description-line-height);
+
+            text-align: justify;
         }
 
         @each $color in map-keys($colors) {

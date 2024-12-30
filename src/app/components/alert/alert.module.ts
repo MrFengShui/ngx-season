@@ -4,28 +4,35 @@ import { NgModule } from "@angular/core";
 
 import { NGXSeasonButtonModule } from "../button/button.module";
 import { NGXSeasonIconModule } from "../icon/icon.module";
+import { NGXSeasonOverlayModule } from "../overlay/overlay.module";
 
-import { NGX_SEASON_ALERT_ICON_MAP_TOKEN } from "./alert.component";
-import { NGXSeasonDetailAlertComponent } from "./alert-detail.component";
-import { NGXSeasonToastAlertComponent, NGXSeasonAlertActionsDirective } from "./alert-toast.component";
+import { NGX_SEASON_ALERT_ICON_MAP_TOKEN, NGXSeasonAlertAddonComponent, NGXSeasonDetailAlertComponent, NGXSeasonNoticeAlertComponent, NGXSeasonToastAlertComponent } from "./alert.component";
+import { NGXSeasonAlertDiscriptionDirective, NGXSeasonAlertMessageDirective, NGXSeasonAlertSubjectDirective } from "./alert.directive";
 
 @NgModule({
     declarations: [
-        NGXSeasonAlertActionsDirective,
         NGXSeasonToastAlertComponent,
-        NGXSeasonDetailAlertComponent
+        NGXSeasonNoticeAlertComponent,
+        NGXSeasonDetailAlertComponent,
+        NGXSeasonAlertMessageDirective,
+        NGXSeasonAlertAddonComponent,
+        NGXSeasonAlertSubjectDirective,
+        NGXSeasonAlertDiscriptionDirective
     ],
     imports: [
         CommonModule,
         PortalModule,
 
         NGXSeasonButtonModule,
-        NGXSeasonIconModule
+        NGXSeasonIconModule,
+        NGXSeasonOverlayModule
     ],
     exports: [
-        NGXSeasonAlertActionsDirective,
         NGXSeasonToastAlertComponent,
-        NGXSeasonDetailAlertComponent
+        NGXSeasonNoticeAlertComponent,
+        NGXSeasonDetailAlertComponent,
+        NGXSeasonAlertAddonComponent,
+        NGXSeasonAlertMessageDirective
     ],
     providers: [
         {

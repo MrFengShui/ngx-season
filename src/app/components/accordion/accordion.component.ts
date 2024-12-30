@@ -1,34 +1,53 @@
-import { CDK_ACCORDION, CdkAccordion } from '@angular/cdk/accordion';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { AfterViewInit, Component, ContentChildren, ElementRef, Input, NgZone, OnChanges, OnDestroy, QueryList, Renderer2, SimpleChanges } from "@angular/core";
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, InjectionToken, Input, NgZone, OnChanges, OnDestroy, QueryList, Renderer2, RendererStyleFlags2, SimpleChanges } from "@angular/core";
+import { Subscription } from 'rxjs';
+
+import { NGXSeasonColorPalette } from 'src/app/utils/palette.utils';
+
+import { NGXSeasonAccordionSelectionService } from './accordion.service';
 
 import { NGXSeasonAccordionPanelComponent } from './accordion-panel.component';
 
-import { NGXSeasonUniqueSelectionIDDispatcher } from 'src/app/utils/services/switch-select.service';
-import { NGXSeasonIconName } from '../icon/icon.component';
+export const NGX_SEASON_ACCORDION_TOKEN: InjectionToken<NGXSeasonAccordionComponent> = new InjectionToken('NGX_SEASON_ACCORDION_TOKEN');
 
-export type NGXSeasonAccordionColor = 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'failure' | 'info';
-
-let orderIndex: number = 0;
+let accordionIndex: number = 0;
 
 @Component({
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'ngx-sui-accordion',
     template: `<ng-content select="ngx-sui-accordion-panel"></ng-content>`,
-    providers: [{ provide: CDK_ACCORDION, useExisting: NGXSeasonAccordionComponent }]
+    providers: [{ provide: NGX_SEASON_ACCORDION_TOKEN, useExisting: NGXSeasonAccordionComponent }]
 })
-export class NGXSeasonAccordionComponent extends CdkAccordion implements OnChanges, OnDestroy, AfterViewInit {
+export class NGXSeasonAccordionComponent implements OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
 
-    @Input('accdinColor')
-    set color(color: NGXSeasonAccordionColor) {
+    @Input({ alias: 'accdColor' })
+    set color(color: NGXSeasonColorPalette) {
         this._color = color;
     }
 
-    get color(): NGXSeasonAccordionColor {
+    get color(): NGXSeasonColorPalette {
         return this._color;
     }
 
-    @Input('accdinMultiple')
+    @Input({ alias: 'accdDisabled' })
+    set disabled(disabled: boolean | string | undefined | null) {
+        this._disabled = coerceBooleanProperty(disabled);
+    }
+
+    get disabled(): boolean {
+        return this._disabled;
+    }
+
+    @Input({ alias: 'accdDuration' })
+    set duration(duration: number | string | undefined | null) {
+        this._duration = coerceNumberProperty(duration);
+    }
+
+    get duration(): number {
+        return this._duration;
+    }
+
+    @Input({ alias: 'accdMulti' })
     set multiple(multiple: boolean | string) {
         this._multiple = coerceBooleanProperty(multiple);
     }
@@ -37,114 +56,96 @@ export class NGXSeasonAccordionComponent extends CdkAccordion implements OnChang
         return this._multiple;
     }
 
-    @Input('accdinShowIcon')
-    set showIcon(showIcon: boolean | string) {
-        this._showIcon = coerceBooleanProperty(showIcon);
-    }
-
-    get showIcon(): boolean {
-        return this._showIcon;
-    }
-
-    @Input('accdinShowToggle')
-    set showToggle(showToggle: boolean | string) {
-        this._showToggle = coerceBooleanProperty(showToggle);
-    }
-
-    get showToggle(): boolean {
-        return this._showToggle;
-    }
-
-    @Input('accdinToggleIcon')
-    set toggleIcon(toggleIcon: NGXSeasonIconName | undefined) {
-        this._toggleIcon = toggleIcon;
-    }
-
-    get toggleIcon(): NGXSeasonIconName | undefined {
-        return this._toggleIcon;
-    }
-
-    private _color: NGXSeasonAccordionColor = 'default';
-    private _multiple: boolean = false;
-    private _showIcon: boolean = true;
-    private _showToggle: boolean = true;
-    private _toggleIcon: NGXSeasonIconName | undefined;
+    private _color: NGXSeasonColorPalette = 'default';
+    private _disabled: boolean = false;
+    private _duration: number = 250;
+    private _multiple: boolean = true;
 
     @ContentChildren(NGXSeasonAccordionPanelComponent)
     panels: QueryList<NGXSeasonAccordionPanelComponent> | undefined;
 
-    toggleIcon$: Subject<NGXSeasonIconName | undefined> = new BehaviorSubject(this.toggleIcon);
+    readonly id: string = `ngx-sui-accordion-id-${accordionIndex++}`;
 
-    // override readonly id: string = NGXSeasonIDUtils.generateHashID('ngx-sui-accordion');
-    override readonly id: string = `ngx-sui-accordion-${orderIndex++}`;
+    panelIndex: number = 0;
 
-    orderIndex: number = 0;
-
-    private dispatcher$: Subscription = Subscription.EMPTY;
+    private model$: Subscription = Subscription.EMPTY;
 
     constructor(
         protected _element: ElementRef,
         protected _renderer: Renderer2,
         protected _ngZone: NgZone,
 
-        protected _dispatcher: NGXSeasonUniqueSelectionIDDispatcher,
-    ) {
-        super();
+        protected _service: NGXSeasonAccordionSelectionService
+    ) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        for (const name in changes) {
+            if (name === 'color') this.changeAccordionColor(changes[name].currentValue as NGXSeasonColorPalette);
+
+            if (name === 'duration') this.setupAccordionDuration(coerceNumberProperty(changes[name].currentValue));
+        }
     }
 
-    override ngOnChanges(changes: SimpleChanges): void {
-        super.ngOnChanges(changes);
-
-        let keys: string[] | null = Object.keys(changes);
-
-        if (keys.includes('color')) {
-            this.changeAccordionColor(changes['color'].currentValue as NGXSeasonAccordionColor);
-        }
-
-        if (keys.includes('toggleIcon')) {
-            this.toggleIcon$.next(changes['toggleIcon'].currentValue);
-        }
-
-        keys.splice(0);
-        keys = null;
+    ngOnDestroy(): void {
+        this.model$.unsubscribe();
     }
 
-    override ngOnDestroy(): void {
-        super.ngOnDestroy();
+    ngAfterContentInit(): void {
+        if (this.multiple) {
+            this.panels?.forEach(panel => panel.toggle(panel.toggled));
+        } else {
+            let flag: boolean = false, panel: NGXSeasonAccordionPanelComponent | undefined;
 
-        this.toggleIcon$.complete();
-        this.dispatcher$.unsubscribe();
+            for (let length = coerceNumberProperty(this.panels?.length), i = length - 1; i >= 0; i--) {
+                panel = this.panels?.get(i);
+
+                if (!flag && panel?.toggled) {
+                    panel.toggle(true);
+                    flag = true;
+                } else {
+                    panel?.toggle(false);
+                }
+            }
+        }
     }
 
     ngAfterViewInit(): void {
         this._renderer.addClass(this._element.nativeElement, 'accordion');
-        this._renderer.setAttribute(this._element.nativeElement, 'data-accordion-id', this.id);
+
         this.changeAccordionColor(this.color);
-        this.listenDispatcherChange();
+        this.setupAccordionDuration(this.duration);
+        this.listenAccordioonPanelSelectedChange();
     }
 
-    override openAll(): void {
-        this.panels?.filter(panel => !panel.toggled).forEach(panel => panel.open());
+    openAll(): void {
+        if (this.multiple && this.panels) this.panels.forEach(panel => panel.open());
     }
 
-    override closeAll(): void {
-        this.panels?.filter(panel => panel.toggled).forEach(panel => panel.close());
+    closeAll(): void {
+        if (this.multiple && this.panels) this.panels.forEach(panel => panel.close());
     }
 
-    protected changeAccordionColor(color: NGXSeasonAccordionColor): void {
-        this._renderer.setAttribute(this._element.nativeElement, 'data-accordion-color', `${color}`);
+    protected changeAccordionColor(color: NGXSeasonColorPalette): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-accordion-color', color);
     }
 
-    private listenDispatcherChange(): void {
-        this._ngZone.runOutsideAngular(() => 
-            this._dispatcher.listen().subscribe(model => 
-                this._ngZone.run(() => {
-                    if (model.pid === this.id) {
-                        if (!this.multiple) this.closeAll();
-                        
-                        this.panels?.find(panel => panel.id === model.id)?.open();
+    protected setupAccordionDuration(duration: number): void {
+        this._renderer.setStyle(this._element.nativeElement, '--accordion-panel-duration', `${duration}ms`, RendererStyleFlags2.DashCase);
+    }
+
+    private listenAccordioonPanelSelectedChange(): void {
+        this._ngZone.runOutsideAngular(() =>
+            this.model$ = this._service.listen(100).subscribe(model => {
+                if (model.pid === this.id && this.panels) {
+                    if (this.multiple) {
+                        const panel = this.panels.find(panel => panel.id === model.id);
+                        panel?.toggle(model.toggled);
+                    } else {
+                        this.panels.forEach(panel => panel.toggle(false));
+                        this.panels.find(panel => panel.id === model.id)?.toggle(true);
                     }
-                })));
+                }
+            }));
     }
 
 }

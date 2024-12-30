@@ -2,8 +2,8 @@ import { Component } from "@angular/core";
 
 import { NGXSeasonIconName } from "src/app/components/icon/icon.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
-import { NGXSeasonSizeOption } from "src/app/utils/_size.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
+import { NGXSeasonSizeOption } from "src/app/utils/size.utils";
 
 @Component({
     selector: 'ngx-sui-demo-button-page',

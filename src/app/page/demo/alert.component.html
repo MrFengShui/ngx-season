@@ -1,25 +1,70 @@
-<div class="flex flex-dir-col gy-100 p-100">
-    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="longText + shortText" alertStyle="flat" ngx-sui-Tooltip [olColor]="color" [ttMsg]="longText + shortText" (alertExtraAction)="flatToastAlertTooltip.dismiss()" #flatToastAlertTooltip="NGXSeasonTooltipDirective" *ngFor="let color of colors"></ngx-sui-toast-alert>
-    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="longText + shortText" alertStyle="outline" ngx-sui-Tooltip [olColor]="color" [ttMsg]="longText + shortText" (alertExtraAction)="outlineToastAlertTooltip.dismiss()" #outlineToastAlertTooltip="NGXSeasonTooltipDirective" *ngFor="let color of colors"></ngx-sui-toast-alert>
-    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="longText + shortText" alertStyle="solid" ngx-sui-Tooltip [olColor]="color" [ttMsg]="longText + shortText" (alertExtraAction)="solidToastAlertTooltip.dismiss()" #solidToastAlertTooltip="NGXSeasonTooltipDirective" *ngFor="let color of colors"></ngx-sui-toast-alert>
-</div>
-<div class="flex flex-dir-col gy-100 p-100">
-    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="shortText" alertStyle="flat" #flatToastAlert *ngFor="let color of colors">
-        <ng-template ngx-sui-AlertActions>
-            <button ngx-sui-TextButton [btnColor]="color" (click)="flatToastAlert.dismiss()">关闭</button>
-        </ng-template>
-    </ngx-sui-toast-alert>
-    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="shortText" alertStyle="outline" #outlineToastAlert *ngFor="let color of colors">
-        <ng-template ngx-sui-AlertActions>
-            <button ngx-sui-TextButton [btnColor]="color" (click)="outlineToastAlert.dismiss()">关闭</button>
-        </ng-template>
-    </ngx-sui-toast-alert>
-    <ngx-sui-toast-alert [alertColor]="color" [alertMessage]="shortText" alertStyle="solid" #solidToastAlert *ngFor="let color of colors">
-        <ng-template ngx-sui-AlertActions>
-            <button ngx-sui-TextButton [btnColor]="color" (click)="solidToastAlert.dismiss()">关闭</button>
-        </ng-template>
-    </ngx-sui-toast-alert>
-</div>
-<div class="flex flex-dir-col gy-100 p-100">
-    <ngx-sui-detail-alert [alertColor]="color" [alertSub]="subject" [alertDesc]="description" alertStyle="flat" *ngFor="let color of colors"></ngx-sui-detail-alert>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">消息警示框</span>
+        <button ngx-sui-TextButton [btnText]="closible ? '隐藏关闭按钮' : '显示关闭按钮'" (click)="closible = !closible"></button>
+        <button ngx-sui-TextButton [btnText]="disabled ? '隐藏提示框' : '显示提示框'" (click)="disabled = !disabled"></button>
+    </div>
+    <div class="flex col-gap-100 w-100">
+        <span class="text-nowrap fs-16 fw-700 my-75">平面警示框</span>
+        <div class="flex flex-dir-col row-gap-100 w-0" style="flex: 1 0 auto;">
+            <ngx-sui-toast-alert [alertColor]="color" [taClosible]="closible" [taTTDisabled]="disabled" [taMsg]="message" taStyle="flat" *ngFor="let color of colors"></ngx-sui-toast-alert>
+        </div>
+    </div>
+    <div class="flex col-gap-100">
+        <span class="text-nowrap fs-16 fw-700 my-75">空心警示框</span>
+        <div class="flex flex-dir-col row-gap-100 w-0" style="flex: 1 0 auto;">
+            <ngx-sui-toast-alert [alertColor]="color" [taClosible]="closible" [taTTDisabled]="disabled" [taMsg]="message" taStyle="outline" *ngFor="let color of colors"></ngx-sui-toast-alert>
+        </div>
+    </div>
+    <div class="flex col-gap-100">
+        <span class="text-nowrap fs-16 fw-700 my-75">实心警示框</span>
+        <div class="flex flex-dir-col row-gap-100 w-0" style="flex: 1 0 auto;width: 0;">
+            <ngx-sui-toast-alert [alertColor]="color" [taClosible]="closible" [taTTDisabled]="disabled" [taMsg]="message" taStyle="solid" *ngFor="let color of colors"></ngx-sui-toast-alert>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">自定义消息警示框</div>
+    <div class="flex col-gap-100 w-100">
+        <span class="text-nowrap fs-16 fw-700 my-75">平面警示框</span>
+        <div class="flex flex-dir-col row-gap-100 w-0" style="flex: 1 0 auto;">
+            <ngx-sui-toast-alert [alertColor]="color" [taMsg]="message" taStyle="flat" *ngFor="let color of colors">
+                <ngx-sui-alert-addon>
+                    <button ngx-sui-TextButton [btnColor]="color" btnIcon="check" btnStyle="flat" btnText="确认"></button>
+                    <button ngx-sui-TextButton [btnColor]="color" btnIcon="close" btnStyle="flat" btnText="取消"></button>
+                </ngx-sui-alert-addon>
+            </ngx-sui-toast-alert>
+        </div>
+    </div>
+    <div class="flex col-gap-100 w-100">
+        <span class="text-nowrap fs-16 fw-700 my-75">空心警示框</span>
+        <div class="flex flex-dir-col row-gap-100 w-0" style="flex: 1 0 auto;">
+            <ngx-sui-toast-alert [alertColor]="color" [taMsg]="message" taStyle="outline" *ngFor="let color of colors">
+                <ngx-sui-alert-addon>
+                    <button ngx-sui-TextButton [btnColor]="color" btnIcon="check" btnStyle="flat" btnText="确认"></button>
+                    <button ngx-sui-TextButton [btnColor]="color" btnIcon="close" btnStyle="flat" btnText="取消"></button>
+                </ngx-sui-alert-addon>
+            </ngx-sui-toast-alert>
+        </div>
+    </div>
+    <div class="flex col-gap-100 w-100">
+        <span class="text-nowrap fs-16 fw-700 my-75">实心警示框</span>
+        <div class="flex flex-dir-col row-gap-100 w-0" style="flex: 1 0 auto;">
+            <ngx-sui-toast-alert [alertColor]="color" [taMsg]="message" taStyle="solid" *ngFor="let color of colors">
+                <ngx-sui-alert-addon>
+                    <button ngx-sui-TextButton [btnColor]="color" btnIcon="check" btnStyle="solid" btnText="确认"></button>
+                    <button ngx-sui-TextButton [btnColor]="color" btnIcon="close" btnStyle="solid" btnText="取消"></button>
+                </ngx-sui-alert-addon>
+            </ngx-sui-toast-alert>
+        </div>
+    </div>
+    <div class="fs-24 fw-900">通知警示框</div>
+    <ngx-sui-notice-alert [alertColor]="color" [taMsg]="notice" taStyle="flat" *ngFor="let color of colors">
+        <ngx-sui-alert-addon>
+            <button ngx-sui-IconButton [btnColor]="color" btnIcon="download" btnSize="sm" btnStyle="solid"></button>
+        </ngx-sui-alert-addon>
+    </ngx-sui-notice-alert>
+    <div class="flex justify-content-between">
+        <span class="fs-24 fw-900">详细警示框</span>
+        <button ngx-sui-TextButton [btnText]="indented ? '退回' : '缩进'" (click)="indented = !indented"></button>
+    </div>
+    <ngx-sui-detail-alert [alertColor]="color" [daSubject]="subject" [daDescription]="description" [daIndent]="indented ? 2 : 0" *ngFor="let color of colors"></ngx-sui-detail-alert>
 </div>

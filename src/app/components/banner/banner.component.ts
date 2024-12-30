@@ -5,7 +5,7 @@ import { BehaviorSubject, debounceTime, Subject, Subscription } from "rxjs";
 
 import { NGXSeasonIconName } from "../icon/icon.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 import { NGXSeasonAnimationSpeed } from "src/app/utils/animate.utils";
 
 export const NGX_SEASON_BANNER_SPEED_MAP_TOKEN: InjectionToken<NGXSeasonBannerSpeedMap> = new InjectionToken('NGX_SEASON_BANNER_SPEED_MAP_TOKEN');

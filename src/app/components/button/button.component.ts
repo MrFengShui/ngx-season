@@ -4,13 +4,14 @@ import { BehaviorSubject, Subject } from 'rxjs';
 
 import { NGX_SEASON_ICONS_SIZE_MAP_TOKEN, NGXSeasonIconName } from "../icon/icon.component";
 
-import { NGXSeasonColorPalette } from 'src/app/utils/_palette.utils';
-import { NGXSeasonSizeMap, NGXSeasonSizeOption } from 'src/app/utils/_size.utils';
+import { NGXSeasonColorPalette } from 'src/app/utils/palette.utils';
+import { NGXSeasonSizeMap, NGXSeasonSizeOption } from 'src/app/utils/size.utils';
 
 export const NGX_SEASON_BUTTON_BORDER_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
 export const NGX_SEASON_BUTTON_FONT_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_BUTTON_BORDER_SIZE_TOKEN');
 
 export type NGXSeasonButtonStyle = 'flat' | 'outline' | 'solid';
+export type NGXSeasonButtonIconPosition = 'after' | 'before';
 
 @Component({
     selector: '',
@@ -18,7 +19,7 @@ export type NGXSeasonButtonStyle = 'flat' | 'outline' | 'solid';
 })
 export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewInit {
 
-    @Input('btnColor')
+    @Input({ alias: 'btnColor' })
     set color(color: NGXSeasonColorPalette | undefined | null) {
         this._color = color || 'default';
     }
@@ -27,7 +28,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._color;
     }
 
-    @Input('btnIconDegree')
+    @Input({ alias: 'btnIconDegree' })
     set degree(degree: number | string) {
         this._degree = coerceNumberProperty(degree);
     }
@@ -36,7 +37,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._degree;
     }
 
-    @Input('btnIconDegreeStart')
+    @Input({ alias: 'btnIconDegreeStart' })
     set degreeStart(degreeStart: number | string) {
         this._degreeStart = coerceNumberProperty(degreeStart);
     }
@@ -45,7 +46,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._degreeStart;
     }
 
-    @Input('btnIconDegreeFinal')
+    @Input({ alias: 'btnIconDegreeFinal' })
     set degreeFinal(degreeFinal: number | string) {
         this._degreeFinal = coerceNumberProperty(degreeFinal);
     }
@@ -54,7 +55,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._degreeFinal;
     }
 
-    @Input('btnIcon')
+    @Input({ alias: 'btnIcon' })
     set icon(icon: NGXSeasonIconName | undefined) {
         this._icon = icon;
     }
@@ -63,7 +64,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._icon;
     }
 
-    @Input('btnIconRotateDuration')
+    @Input({ alias: 'btnIconRotateDuration' })
     set rotateDuration(rotateDuration: number | string) {
         this._rotateDuration = coerceNumberProperty(rotateDuration);
     }
@@ -72,7 +73,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._rotateDuration;
     }
 
-    @Input('btnIconRotateInfinite')
+    @Input({ alias: 'btnIconRotateInfinite' })
     set rotateInfinite(rotateInfinite: boolean | string) {
         this._rotateInfinite = coerceBooleanProperty(rotateInfinite);
     }
@@ -81,7 +82,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._rotateInfinite;
     }
 
-    @Input('btnDisabled')
+    @Input({ alias: 'btnDisabled' })
     set disabled(disabled: boolean | string | undefined | null) {
         this._disabled = coerceBooleanProperty(disabled);
     }
@@ -90,7 +91,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._disabled;
     }
 
-    @Input('btnShadow')
+    @Input({ alias: 'btnShadow' })
     set shadow(shadow: boolean | string | undefined | null) {
         this._shadow = coerceBooleanProperty(shadow);
     }
@@ -99,7 +100,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._shadow;
     }
 
-    @Input('btnSize')
+    @Input({ alias: 'btnSize' })
     set size(size: NGXSeasonSizeOption | undefined | null) {
         this._size = size || 'md';
     }
@@ -108,7 +109,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
         return this._size;
     }
 
-    @Input('btnStyle')
+    @Input({ alias: 'btnStyle' })
     set style(style: NGXSeasonButtonStyle | undefined | null) {
         this._style = style || 'outline';
     }
@@ -221,7 +222,7 @@ export abstract class NGXSeasonButtonComponent implements OnChanges, AfterViewIn
 })
 export class NGXSeasonIconButtonComponent extends NGXSeasonButtonComponent {
 
-    @Input('btnCircled')
+    @Input({ alias: 'btnCircled' })
     set circled(circled: boolean | string) {
         this._circled = coerceBooleanProperty(circled);
     }
@@ -269,7 +270,7 @@ export class NGXSeasonIconButtonComponent extends NGXSeasonButtonComponent {
 })
 export class NGXSeasonTextButtonComponent extends NGXSeasonButtonComponent implements OnDestroy {
 
-    @Input('btnBlocked')
+    @Input({ alias: 'btnBlocked' })
     set blocked(blocked: boolean | string | undefined | null) {
         this._blocked = coerceBooleanProperty(blocked);
     }
@@ -278,7 +279,16 @@ export class NGXSeasonTextButtonComponent extends NGXSeasonButtonComponent imple
         return this._blocked;
     }
 
-    @Input('btnText')
+    @Input({ alias: 'btnIconPos' })
+    set position(position: NGXSeasonButtonIconPosition | undefined | null) {
+        this._position = position || 'before';
+    }
+
+    get position(): NGXSeasonButtonIconPosition {
+        return this._position;
+    }
+
+    @Input({ alias: 'btnText' })
     set text(text: string | undefined | null) {
         this._text = text || undefined;
     }
@@ -288,6 +298,7 @@ export class NGXSeasonTextButtonComponent extends NGXSeasonButtonComponent imple
     }
 
     private _blocked: boolean = false;
+    private _position: NGXSeasonButtonIconPosition = 'before';
     private _text: string | undefined;
 
     protected disabled$: Subject<boolean> = new BehaviorSubject(this.disabled);
@@ -298,6 +309,8 @@ export class NGXSeasonTextButtonComponent extends NGXSeasonButtonComponent imple
 
         for (const name in changes) {
             if (name === 'blocked') this.setupButtonBlocked(coerceBooleanProperty(changes[name].currentValue));
+
+            if (name === 'position') this.changeButtonIconPosition(changes[name].currentValue);
         }
     }
 
@@ -310,6 +323,7 @@ export class NGXSeasonTextButtonComponent extends NGXSeasonButtonComponent imple
         super.ngAfterViewInit();
 
         this.setupButtonBlocked(this.blocked);
+        this.changeButtonIconPosition(this.position);
 
         this._renderer.addClass(this._element.nativeElement, 'text-button');
     }
@@ -329,6 +343,10 @@ export class NGXSeasonTextButtonComponent extends NGXSeasonButtonComponent imple
         } else {
             this._renderer.removeClass(element, 'button-block');
         }
+    }
+
+    protected changeButtonIconPosition(position: NGXSeasonButtonIconPosition): void {
+        this._renderer.setAttribute(this._element.nativeElement, 'data-button-icon-position', position);
     }
 
     protected override changeButtonSize(size: NGXSeasonSizeOption): void {

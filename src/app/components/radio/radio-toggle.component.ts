@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NGXSeasonRadioComponent, NGXSeasonRadioGroupComponent } from "./radio.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 export const NGX_SEASON_RADIO_TOGGLE_GROUP_TOKEN: InjectionToken<NGXSeasonRadioToggleGroupComponent> = new InjectionToken('NGX_SEASON_RADIO_TOGGLE_GROUP_TOKEN');
 

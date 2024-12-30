@@ -4,9 +4,9 @@ import { ComponentPortal } from "@angular/cdk/portal";
 import { ComponentRef, Injectable, Injector } from "@angular/core";
 import { AsyncSubject, debounceTime, delay, Observable, Subject, Subscription } from "rxjs";
 
-import { NGXSeasonToastAlertComponent } from "../alert/alert-toast.component";
+import { NGXSeasonToastAlertComponent } from "../alert/alert.component";
 
-import { NGXSeasonAlertColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonAlertColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonOverlayService } from "./overlay.service";
 
@@ -135,13 +135,13 @@ export class NGXSeasonToastRef {
         this.portal = new ComponentPortal(NGXSeasonToastAlertComponent);
 
         const component: ComponentRef<NGXSeasonToastAlertComponent> = this.overlayRef.attach(this.portal);
-        component.setInput('alertMessage', message);
-        component.setInput('alertShowClose', showClose);
+        component.setInput('taMsg', message);
+        component.setInput('taClosible', showClose);
         component.setInput('alertColor', color);
-        component.setInput('alertStyle', 'flat');
-        component.setInput('alertAllowed', true);
+        component.setInput('taStyle', 'flat');
+        component.setInput('taAllowed', true);
 
-        this.moveOut$ = component.instance.otherAction.subscribe(() => this.moveOut(overlayRef, delay, position));
+        this.moveOut$ = component.instance.overlayExtraEvent.subscribe(() => this.moveOut(overlayRef, delay, position));
 
         if (change) {
             const prevCache: ToastOverlayCache = { overlayRef: change.currCache.overlayRef, position: change.currCache.position  };

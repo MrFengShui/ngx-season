@@ -5,8 +5,8 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { BehaviorSubject, debounceTime, filter, map, Observable, of, Subject, Subscription, switchMap, zip } from "rxjs";
 import { fromFetch } from 'rxjs/fetch';
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
-import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/_size.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
+import { NGXSeasonSizeMap, NGXSeasonSizeOption } from "src/app/utils/size.utils";
 
 export const NGX_SEASON_ICONS_REGISTER_TOKEN: InjectionToken<NGXSeasonIconRegister> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');
 export const NGX_SEASON_ICONS_SIZE_MAP_TOKEN: InjectionToken<NGXSeasonSizeMap> = new InjectionToken('NGX_SEASON_ICONS_REGISTER_TOKEN');

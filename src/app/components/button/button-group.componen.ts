@@ -4,8 +4,8 @@ import { BehaviorSubject, debounceTime, Subject, Subscription } from "rxjs";
 
 import { NGXSeasonButtonStyle, NGXSeasonTextButtonComponent } from "./button.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
-import { NGXSeasonSizeOption } from "src/app/utils/_size.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
+import { NGXSeasonSizeOption } from "src/app/utils/size.utils";
 
 type NGXSeasonButtonGroupMetainfo = { color: NGXSeasonColorPalette, disabled: boolean, size: NGXSeasonSizeOption, style: NGXSeasonButtonStyle };
 

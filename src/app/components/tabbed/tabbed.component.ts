@@ -2,7 +2,7 @@ import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coerci
 import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Inject, InjectionToken, Input, NgZone, OnChanges, Output, QueryList, Renderer2, RendererStyleFlags2, SimpleChanges, TemplateRef, ViewChild } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonIconName } from "../icon/icon.component";
 import { NGXSeasonTabbedContentBoxComponent } from "./tabbed-widget.component";

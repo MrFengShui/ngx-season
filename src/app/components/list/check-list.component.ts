@@ -3,7 +3,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { Component, OnChanges, OnInit, OnDestroy, Input, Output, EventEmitter, ContentChildren, QueryList, SimpleChanges, ElementRef, Inject, NgZone, Renderer2 } from "@angular/core";
 import { Subject, BehaviorSubject, map, Observable } from "rxjs";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonCheckLabelPosition } from "../check/check.component";
 import { NGXSeasonCheckboxCheckedMarkShape } from "../check/checkbox.component";

@@ -4,7 +4,7 @@ import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, E
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { BehaviorSubject, Subject, Subscription } from "rxjs";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonIconName } from "../icon/icon.component";
 import { NGXSeasonSearchHistoryComponent } from "./search-history.component";

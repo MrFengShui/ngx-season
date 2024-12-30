@@ -2,7 +2,7 @@ import { coerceCssPixelValue, coerceNumberProperty } from "@angular/cdk/coercion
 import { UniqueSelectionDispatcher } from "@angular/cdk/collections";
 import { AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, InjectionToken, Input, OnChanges, OnDestroy, Output, QueryList, Renderer2, SimpleChanges } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonTagComponent } from "./tag.component";
 

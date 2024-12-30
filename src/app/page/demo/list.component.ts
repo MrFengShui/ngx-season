@@ -5,7 +5,7 @@ import { NGXSeasonListCheckItemComponent } from "src/app/components/list/check-l
 import { NGXSeasonCheckListSelectionChange, NGXSeasonRadioListSelectionChange } from "src/app/components/list/list.component";
 import { NGXSeasonCheckListComponent } from "src/app/components/list/check-list.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-list-page',

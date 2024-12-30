@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 
 import { NGXSeasonToastPosition, NGXSeasonToastRef, NGXSeasonToastService } from "src/app/components/overlay/toast.service";
 
-import { NGXSeasonAlertColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonAlertColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-toast-page',

@@ -1,109 +1,98 @@
-import { CDK_ACCORDION } from "@angular/cdk/accordion";
-import { coerceBooleanProperty, coerceNumberProperty } from "@angular/cdk/coercion";
-import { AfterViewInit, Component, Directive, ElementRef, EventEmitter, HostListener, Inject, Input, Output, Renderer2, TemplateRef } from "@angular/core";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, Renderer2 } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
-import { NGXSeasonAccordionComponent } from "./accordion.component";
 import { NGXSeasonIconName } from "../icon/icon.component";
+
+@Component({
+    selector: 'ngx-sui-base-accordion-panel',
+    template: ''
+})
+export abstract class NGXSeasonBaseAccordionPanelComponent {
+
+    constructor(
+        protected _element: ElementRef,
+        protected _renderer: Renderer2
+    ) { }
+
+    fetchHostElement(): HTMLElement {
+        return this._element.nativeElement;
+    }
+
+}
 
 @Component({
     selector: 'ngx-sui-accordion-panel-header',
     template: `
-        <span #iconBox *ngIf="icon && _accordion.showIcon"><ngx-sui-icon [iconShape]="icon" iconSize="lg"></ngx-sui-icon></span>
-        <div class="panel-header-wrapper" [class.no-icon]="!icon || !_accordion.showIcon" [class.no-toggle]="!_accordion.showToggle">
-            <span class="panel-header-subject" *ngIf="subject">{{ subject }}</span>
-            <span class="panel-header-description" *ngIf="subject && description">{{ description }}</span>
-        </div>
-        <span #btnBox *ngIf="_accordion.showToggle">
-            <button ngx-sui-IconButton btnIconDegree="-90" [btnColor]="_accordion.color" [btnIcon]="toggleIcon" btnIconOnly="true" btnCircled="true" [btnIconDegreeStart]="toggled ? -90 : -180" [btnIconDegreeFinal]="toggled ? -180 : -90" btnIconRotateDuration="1000" btnStyle="flat" (click)="handleToggleEvent($event)"></button>
-        </span>
+        <ng-container *ngIf="custom; then customTemplate else nativeTemplate"></ng-container>
+        <ng-template #nativeTemplate>
+            <div class="label">{{ label }}</div>
+            <ngx-sui-icon [iconShape]="(toggled$.asObservable() | async) ? expandIcon : collapseIcon" iconSolid *ngIf="showToggleIcon"></ngx-sui-icon>
+        </ng-template>
+        <ng-template #customTemplate><ng-content></ng-content></ng-template>
     `
 })
-export class NGXSeasonAccordionPanelHeaderComponent implements AfterViewInit {
+export class NGXSeasonAccordionPanelHeaderComponent extends NGXSeasonBaseAccordionPanelComponent implements OnDestroy, AfterViewInit {
 
-    @Input('description')
-    set description(description: string | undefined) {
-        this._description = description;
+    @Input({ alias: 'aphCustom' })
+    set custom(custom: boolean | string | undefined | null) {
+        this._custom = coerceBooleanProperty(custom);
     }
 
-    get description(): string | undefined {
-        return this._description;
+    get custom(): boolean {
+        return this._custom;
     }
 
-    @Input('duration')
-    set duration(duration: number | string) {
-        this._duration = coerceNumberProperty(duration);
+    @Input({ alias: 'aphCollapseIcon' })
+    set collapseIcon(collapseIcon: NGXSeasonIconName | undefined | null) {
+        this._collapseIcon = collapseIcon || 'resize-up';
     }
 
-    get duration(): number {
-        return this._duration;
+    get collapseIcon(): NGXSeasonIconName {
+        return this._collapseIcon;
     }
 
-    @Input('icon')
-    set icon(icon: NGXSeasonIconName | undefined) {
-        this._icon = icon;
+    @Input({ alias: 'aphExpandIcon' })
+    set expandIcon(expandIcon: NGXSeasonIconName | undefined | null) {
+        this._expandIcon = expandIcon || 'resize-down';
     }
 
-    get icon(): NGXSeasonIconName | undefined {
-        return this._icon;
+    get expandIcon(): NGXSeasonIconName {
+        return this._expandIcon;
     }
 
-    @Input('subject')
-    set subject(subject: string | undefined) {
-        this._subject = subject;
+    @Input({ alias: 'aphLabel', required: true })
+    set label(label: string | undefined | null) {
+        this._label = label || undefined;
     }
 
-    get subject(): string | undefined {
-        return this._subject;
+    get label(): string | undefined {
+        return this._label;
     }
 
-    @Input('toggled')
-    set toggled(toggled: boolean | string | null) {
-        this._toggled = coerceBooleanProperty(toggled);
+    @Input({ alias: 'aphShowToggleIcon' })
+    set showToggleIcon(showToggleIcon: boolean | string | undefined | null) {
+        this._showToggleIcon = coerceBooleanProperty(showToggleIcon);
     }
 
-    get toggled(): boolean {
-        return this._toggled;
+    get showToggleIcon(): boolean {
+        return this._showToggleIcon;
     }
 
-    @Input('toggleIcon')
-    set toggleIcon(toggleIcon: NGXSeasonIconName) {
-        this._toggleIcon = toggleIcon;
+    private _custom: boolean = false;
+    private _collapseIcon: NGXSeasonIconName = 'resize-up';
+    private _expandIcon: NGXSeasonIconName = 'resize-down';
+    private _label: string | undefined;
+    private _showToggleIcon: boolean = true;
+
+    toggled$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    ngOnDestroy(): void {
+        this.toggled$.complete();
     }
-
-    get toggleIcon(): NGXSeasonIconName {
-        return this._toggleIcon;
-    }
-
-    private _description: string | undefined;
-    private _duration: number = 1000;
-    private _icon: NGXSeasonIconName | undefined;
-    private _subject: string | undefined;
-    private _toggled: boolean = false;
-    private _toggleIcon: NGXSeasonIconName = 'angle-double';
-
-    @Output('toggleEvent')
-    event: EventEmitter<void> = new EventEmitter(true);
-
-    @HostListener('click')
-    protected listenHostToggleEvent(): void {
-        this.event.emit();
-    }
-
-    constructor(
-        protected _element: ElementRef,
-        protected _renderer: Renderer2,
-
-        @Inject(CDK_ACCORDION)
-        protected _accordion: NGXSeasonAccordionComponent
-    ) {}
 
     ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'accordion-panel-header');
-    }
-
-    protected handleToggleEvent(event: MouseEvent): void {
-        event.stopPropagation();
-        this.event.emit();
+        this._renderer.addClass(this._element.nativeElement, 'panel-header');
     }
 
 }
@@ -112,28 +101,10 @@ export class NGXSeasonAccordionPanelHeaderComponent implements AfterViewInit {
     selector: 'ngx-sui-accordion-panel-content',
     template: `<ng-content></ng-content>`
 })
-export class NGXSeasonAccordionPanelContentComponent implements AfterViewInit {
-
-    constructor(
-        protected _element: ElementRef,
-        protected _renderer: Renderer2
-    ) {}
+export class NGXSeasonAccordionPanelContentComponent extends NGXSeasonBaseAccordionPanelComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'accordion-panel-content');
-    }
-
-}
-
-@Directive({
-    selector: '[ngx-sui-AccordionPanelContent]'
-})
-export class NGXSeasonAccordionPanelContentDirective {
-
-    constructor(protected _template: TemplateRef<any>) {}
-
-    fetchTemplate(): TemplateRef<any> {
-        return this._template;
+        this._renderer.addClass(this._element.nativeElement, 'panel-content');
     }
 
 }
@@ -142,28 +113,11 @@ export class NGXSeasonAccordionPanelContentDirective {
     selector: 'ngx-sui-accordion-panel-footer',
     template: `<ng-content></ng-content>`
 })
-export class NGXSeasonAccordionPanelFooterComponent implements AfterViewInit {
-
-    constructor(
-        protected _element: ElementRef,
-        protected _renderer: Renderer2
-    ) {}
+export class NGXSeasonAccordionPanelFooterComponent extends NGXSeasonBaseAccordionPanelComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
-        this._renderer.addClass(this._element.nativeElement, 'accordion-panel-footer');
+        this._renderer.addClass(this._element.nativeElement, 'panel-footer');
     }
 
 }
 
-@Directive({
-    selector: '[ngx-sui-AccordionPanelFooter]'
-})
-export class NGXSeasonAccordionPanelFooterDirective {
-
-    constructor(protected _template: TemplateRef<any>) {}
-
-    fetchTemplate(): TemplateRef<any> {
-        return this._template;
-    }
-
-}

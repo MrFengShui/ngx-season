@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { NGXSeasonTreeControlStyle, NGXSeasonTreeSelectionModel } from "src/app/components/tree/tree.component";
 
 import { NGXSeasonTreeDataSource, NGXSeasonTreeNodeModel } from "src/app/components/tree/tree.utils";
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-tree-page',

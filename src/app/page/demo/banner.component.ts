@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 
 import { NGXSeasonBannerManner } from "src/app/components/banner/banner.component";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 import { NGXSeasonAnimationSpeed } from "src/app/utils/animate.utils";
 
 @Component({

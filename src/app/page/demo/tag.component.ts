@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 import { NGXSeasonIDUtils } from "src/app/utils/id.utils";
 
 type TagMetaInfo = { id: string, color: NGXSeasonColorPalette, label: string };

@@ -3,7 +3,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { Component, OnChanges, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ContentChildren, QueryList, SimpleChanges, ElementRef, Inject, NgZone, Renderer2 } from "@angular/core";
 import { Subject, BehaviorSubject, map, Observable, Subscription } from "rxjs";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonRadioButtonCheckedMarkShape, NGXSeasonRadioButtonLabelPosition, NGXSeasonRadioButtonGroupComponent } from "../radio/radio-button.component";
 import { NGX_SEASON_RADIO_LIST_TOKEN, NGXSeasonListComponent, NGXSeasonListItemComponent, NGXSeasonRadioListSelectionChange } from "./list.component";

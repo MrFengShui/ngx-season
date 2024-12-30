@@ -2,7 +2,7 @@ import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { UniqueSelectionDispatcher } from "@angular/cdk/collections";
 import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, EventEmitter, HostListener, Inject, Input, OnChanges, Output, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 
-import { NGXSeasonColorPalette } from "src/app/utils/_palette.utils";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 import { NGXSeasonAvatarComponent } from "../avatar/avatar.component";
 import { NGX_SEASON_TAG_GRID_TOKEN, NGXSeasonTagGridComponent } from "./tag-grid.component";

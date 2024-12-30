@@ -7,11 +7,11 @@ import { NgModule } from "@angular/core";
 import { NGXSeasonButtonModule } from "../button/button.module";
 import { NGXSeasonIconModule } from "../icon/icon.module";
 
+import { NGXSeasonAccordionSelectionService } from "./accordion.service";
+
 import { NGXSeasonAccordionComponent } from "./accordion.component";
 import { NGXSeasonAccordionPanelComponent } from "./accordion-panel.component";
-import { NGXSeasonAccordionPanelContentComponent, NGXSeasonAccordionPanelContentDirective, NGXSeasonAccordionPanelFooterComponent, NGXSeasonAccordionPanelFooterDirective, NGXSeasonAccordionPanelHeaderComponent } from "./accordion-widget.component";
-
-import { NGXSeasonUniqueSelectionIDDispatcher } from "src/app/utils/services/switch-select.service";
+import { NGXSeasonAccordionPanelHeaderComponent, NGXSeasonAccordionPanelContentComponent, NGXSeasonAccordionPanelFooterComponent } from "./accordion-widget.component";
 
 @NgModule({
     declarations: [
@@ -19,9 +19,7 @@ import { NGXSeasonUniqueSelectionIDDispatcher } from "src/app/utils/services/swi
         NGXSeasonAccordionPanelComponent,
         NGXSeasonAccordionPanelHeaderComponent,
         NGXSeasonAccordionPanelContentComponent,
-        NGXSeasonAccordionPanelFooterComponent,
-        NGXSeasonAccordionPanelContentDirective,
-        NGXSeasonAccordionPanelFooterDirective
+        NGXSeasonAccordionPanelFooterComponent
     ],
     imports: [
         CommonModule,
@@ -34,9 +32,10 @@ import { NGXSeasonUniqueSelectionIDDispatcher } from "src/app/utils/services/swi
     exports: [
         NGXSeasonAccordionComponent,
         NGXSeasonAccordionPanelComponent,
-        NGXSeasonAccordionPanelContentDirective,
-        NGXSeasonAccordionPanelFooterDirective
+        NGXSeasonAccordionPanelHeaderComponent,
+        NGXSeasonAccordionPanelContentComponent,
+        NGXSeasonAccordionPanelFooterComponent
     ],
-    providers: [ NGXSeasonUniqueSelectionIDDispatcher ]
+    providers: [ NGXSeasonAccordionSelectionService ]
 })
 export class NGXSeasonAccordionModule {}
