@@ -1,118 +1,89 @@
-@use "sass:math";
-
-@mixin setup-progress-theme($theme, $primaryColor, $accentColor) {
-    $colors: (
-        "default": "gray",
-        "primary": $primaryColor,
-        "accent": $accentColor,
-        "success": "green",
-        "warning": "yellow",
-        "failure": "red",
-        "info": "blue"
-    );
-    $thickness: (
-        "sm": 4,
-        "md": 8,
-        "lg": 16,
-        "xl": 24
-    );
-    $radius: (
-        "sm": 96,
-        "md": 128,
-        "lg": 192,
-        "xl": 256
-    );
-    $stroke: (
-        "sm": 6,
-        "md": 8,
-        "lg": 12,
-        "xl": 16
-    );
-    $font-sizes: (
-        "sm": 12px,
-        "md": 16px,
-        "lg": 24px,
-        "xl": 32px
-    );
-    $keys: ("sm", "md", "lg", "xl");
-
-    @each $key, $value in $thickness {
-        --progress-bar-thickness-#{$key}: #{$value}px;
-    }
-
-    --progress-bar-await-size: #{percentage(math.div(1, 3))};
-
-    --progress-bar-label-text-font-size: #{var(--typography-body-3)};
-    --progress-bar-label-text-line-height: #{var(--line-height-200)};
-    --progress-bar-label-text-width: #{calc(var(--progress-bar-label-text-font-size) * 4 + var(--size-pixel-8))};
-    --progress-bar-label-text-border-radius: #{var(--size-pixel-3)};
-
-    --progress-bar-label-arrow-size: #{calc(var(--progress-bar-label-text-font-size) * 0.5)};
-
-    --progress-bar-label-above: #{calc(0px - var(--progress-bar-label-text-font-size) * 2 - var(--progress-bar-label-arrow-size))};
-    --progress-bar-label-below: #{calc(0px - var(--progress-bar-label-text-font-size) * 2 - var(--progress-bar-label-arrow-size))};
-
-    @each $key, $value in $radius {
-        --progress-ring-size-#{$key}: #{$value}px;
-        --progress-ring-x-axis-#{$key}: #{calc(var(--progress-ring-size-#{$key}) * 0.5)};
-        --progress-ring-y-axis-#{$key}: #{calc(var(--progress-ring-size-#{$key}) * 0.5)};
-    }
-
-    @each $key, $value in $stroke {
-        --progress-ring-stroke-width-#{$key}: #{$value}px;
-        --progress-ring-radius-#{$key}: #{calc(var(--progress-ring-size-#{$key}) * 0.5 - var(--progress-ring-stroke-width-#{$key}))};
-        --progress-ring-dasharray-gap-#{$key}: #{calc(2 * 3.1415926 * var(--progress-ring-radius-#{$key}))};
-    }
-
-    @each $key, $value in $colors {
-        @if $key == "default" {
-            --progress-track-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
-        } @else {
-            --progress-track-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
-        }
-        
-        --progress-thumb-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-        --progress-await-bgcolor-#{$key}: #{var(--palette-#{$value}-color-50)};
-        // --progress-await-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-
-        --progress-bar-label-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
-        --progress-bar-label-color-#{$key}: #{var(--palette-#{$value}-50-color)};
-
-        --progress-ring-label-color-#{$key}: #{var(--palette-#{$value}-500-color)};
-    }
-
+@mixin setup-progress-theme($theme, $colors) {
     .progress {
+        --progress-duration: 1000ms;
+
+        --progress-bar-label-border-radius: #{var(--size-pixel-2)};
+        --progress-bar-label-font-size: #{var(--font-size-12)};
+        --progress-bar-label-font-weight: #{var(--font-weight-500)};
+        --progress-bar-label-line-height: #{var(--line-height-100)};
+        --progress-bar-label-padding: #{var(--padding-25)};
+        --progress-bar-label-size: #{var(--size-pixel-36)};
+
+        --progress-bar-label-arrow-size: #{calc(var(--progress-bar-label-font-size) * 0.5)};
+
+        --progress-bar-await-size: #{percentage(calc(1 / 3))};
+        --progress-bar-await-delay: 1000ms;
+        --progress-bar-await-duration: 10000ms;
+
+        --progress-ring-label-font-weight: #{var(--font-weight-900)};
+        --progress-ring-label-line-height: #{var(--line-height-100)};
+
+        --progress-ring-await-delay: 1000ms;
+        --progress-ring-await-duration: 10000ms;
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --progress-track-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            } @else {
+                --progress-track-bgcolor-#{$key}: #{var(--palette-#{$value}-50-color)};
+            }
+
+            --progress-thumb-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --progress-await-bgcolor-#{$key}: #{var(--palette-#{$value}-color-50)};
+
+            --progress-bar-label-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --progress-bar-label-arrow-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+            --progress-bar-label-color-#{$key}: #{var(--palette-#{$value}-50-color)};
+            --progress-ring-label-color-#{$key}: #{var(--palette-#{$value}-500-color)};
+        }
+
         display: inline-block;
 
         &.progress-bar {
-            @each $item in map-keys($thickness) {
-                &[data-progress-size=#{$item}] {
-                    height: var(--progress-bar-thickness-#{$item});
-                }
-            }
+            height: var(--progress-bar-thickness);
 
             position: relative;
 
+            > svg {
+                rect {
+                    transition: all var(--progress-duration) linear;
+                }
+            }
+
+            &.progress-round {
+                > svg {
+                    rect {
+                        rx: var(--progress-bar-radius);
+                        ry: var(--progress-bar-radius);
+                    }
+                }
+            }
+
             .progress-label {
                 position: absolute;
-                
-                display: inline-flex;                
+
+                display: inline-flex;
                 align-items: center;
 
+                transform: translateX(calc(-1 * var(--size-percent-50)));
+                transition: all var(--progress-duration) linear;
+
                 .progress-label-text {
-                    border-radius: var(--progress-bar-label-text-border-radius);
-    
-                    font-size: var(--progress-bar-label-text-font-size);
-                    font-weight: bold;
-    
-                    line-height: var(--progress-bar-label-text-line-height);
-    
+                    border-radius: var(--progress-bar-label-border-radius);
+
+                    font-size: var(--progress-bar-label-font-size);
+                    font-weight: var(--progress-bar-label-font-weight);
+                    line-height: var(--progress-bar-label-line-height);
+
                     text-align: center;
                     vertical-align: middle;
-    
-                    width: var(--progress-bar-label-text-width);
+
+                    padding: var(--progress-bar-label-padding);
+
+                    min-width: var(--progress-bar-label-size);
                 }
-                
+
                 .progress-label-arrow {
                     width: 0;
                     height: 0;
@@ -121,11 +92,10 @@
             }
 
             .progress-await {
-                // animation: name duration timing-function delay iteration-count direction fill-mode;
                 animation-name: progress-bar-await-animation;
-                animation-duration: 2500ms;
+                animation-duration: var(--progress-bar-await-duration);
                 animation-timing-function: linear;
-                animation-delay: 500ms;
+                animation-delay: var(--progress-bar-await-delay);
                 animation-iteration-count: infinite;
                 animation-direction: normal;
                 animation-fill-mode: both;
@@ -134,34 +104,20 @@
 
                 @keyframes progress-bar-await-animation {
                     0% {
-                        filter: brightness(125%);
                         transform: translateX(calc(var(--progress-bar-await-size) * -1));
                     }
 
-                    25% {
-                        filter: brightness(75%);
-                    }
-
-                    50% {
-                        filter: brightness(125%);
-                    }
-
-                    75% {
-                        filter: brightness(75%);
-                    }
-
                     100% {
-                        filter: brightness(125%);
                         transform: translateX(100%);
                     }
                 }
             }
 
-            &[data-progress-bar-label-pos="above"] {
+            &[data-progress-bar-label-position=above] {
                 .progress-label {
                     flex-direction: column;
 
-                    top: var(--progress-bar-label-above);
+                    top: calc(-100% - var(--progress-bar-label-font-size) - var(--progress-bar-label-padding) * 0.5);
 
                     .progress-label-arrow {
                         border-width: var(--progress-bar-label-arrow-size) var(--progress-bar-label-arrow-size) 0 var(--progress-bar-label-arrow-size);
@@ -169,7 +125,7 @@
                 }
             }
 
-            &[data-progress-bar-label-pos="below"] {
+            &[data-progress-bar-label-position=below] {
                 .progress-label {
                     flex-direction: column-reverse;
 
@@ -183,74 +139,70 @@
         }
 
         &.progress-ring {
-            @each $key in $keys {
-                &[data-progress-size=#{$key}] {
-                    width: var(--progress-ring-size-#{$key});
-                    height: var(--progress-ring-size-#{$key});
-        
-                    .progress-track, .progress-thumb, .progress-await {
-                        r: var(--progress-ring-radius-#{$key});
-                        cx: var(--progress-ring-x-axis-#{$key});
-                        cy: var(--progress-ring-x-axis-#{$key});
-        
+            width: var(--progress-ring-size);
+            height: var(--progress-ring-size);
+
+            > svg {
+                circle {
+                    r: var(--progress-ring-radius);
+                    cx: var(--progress-ring-axis);
+                    cy: var(--progress-ring-axis);
+
+                    stroke-linecap: square;
+                    stroke-dashoffset: 0;
+                    stroke-width: var(--progress-ring-stroke-width);
+
+                    transform-origin: center;
+                    transform: rotateX(180deg) rotateY(0deg) rotateZ(-270deg);
+
+                    transition: all var(--progress-duration) linear;
+                }
+            }
+
+            &.progress-round {
+                > svg {
+                    circle {
                         stroke-linecap: round;
-                        stroke-width: var(--progress-ring-stroke-width-#{$key});
-                    }
-
-                    .progress-thumb, .progress-await {
-                        transform-origin: center;
-                        transform: rotateX(180deg) rotateY(0deg) rotateZ(-270deg);
-                    }
-
-                    .progress-await {
-                        animation-name: progress-ring-await-animation;
-                        animation-duration: 2500ms;
-                        animation-timing-function: linear;
-                        animation-delay: 500ms;
-                        animation-iteration-count: infinite;
-                        animation-direction: normal;
-                        animation-fill-mode: both;
-
-                        @keyframes progress-ring-await-animation {
-                            0% {
-                                filter: brightness(125%);
-                                transform: rotate(0deg);
-                            }
-
-                            25% {
-                                filter: brightness(75%);
-                            }
-
-                            50% {
-                                filter: brightness(125%);
-                            }
-
-                            75% {
-                                filter: brightness(75%);
-                            }
-
-                            100% {
-                                filter: brightness(125%);
-                                transform: rotate(-360deg);
-                            }
-                        }
-                    }
-
-                    .progress-label {
-                        font-size: map-get($font-sizes, $key);
-                        font-weight: bold;
                     }
                 }
-            }            
+            }
+
+            .progress-await {
+                animation-name: progress-ring-await-animation;
+                animation-duration: var(--progress-ring-await-duration);
+                animation-timing-function: linear;
+                animation-delay: var(--progress-ring-await-delay);
+                animation-iteration-count: infinite;
+                animation-direction: normal;
+                animation-fill-mode: both;
+
+                @keyframes progress-ring-await-animation {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    100% {
+                        transform: rotate(-360deg);
+                    }
+                }
+            }
+
+            .progress-label {
+                font-size: var(--progress-ring-label-font-size);
+                font-weight: var(--progress-ring-label-font-weight);
+                line-height: var(--progress-ring-label-line-height);
+
+                user-select: none;
+            }
         }
-        
+
         @each $color in map-keys($colors) {
             &[data-progress-color=#{$color}] {
                 &.progress-bar {
                     .progress-track {
                         fill: var(--progress-track-bgcolor-#{$color});
                     }
-        
+
                     .progress-thumb {
                         fill: var(--progress-thumb-bgcolor-#{$color});
                     }
@@ -266,18 +218,18 @@
                         }
                     }
 
-                    &[data-progress-bar-label-pos="above"] {
+                    &[data-progress-bar-label-position="above"] {
                         .progress-label {
                             .progress-label-arrow {
-                                border-color: var(--progress-bar-label-bgcolor-#{$color}) transparent transparent transparent;
+                                border-color: var(--progress-bar-label-arrow-bgcolor-#{$color}) transparent transparent transparent;
                             }
                         }
                     }
 
-                    &[data-progress-bar-label-pos="below"] {
+                    &[data-progress-bar-label-position="below"] {
                         .progress-label {
                             .progress-label-arrow {
-                                border-color: transparent transparent var(--progress-bar-label-bgcolor-#{$color}) transparent;
+                                border-color: transparent transparent var(--progress-bar-label-arrow-bgcolor-#{$color}) transparent;
                             }
                         }
                     }

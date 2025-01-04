@@ -56,7 +56,7 @@
         @include setup-button-theme($theme, $colors);
         @include setup-calendar-theme($theme, $colors);
         @include setup-card-theme($theme, "indigo");
-        @include setup-carousel-theme($theme, "indigo", "pink");
+        @include setup-carousel-theme($theme);
         @include setup-check-theme($theme, $colors);
         @include setup-digital-theme($theme, "indigo", "pink");
         @include setup-divider-theme($theme, "indigo", "pink");
@@ -68,7 +68,7 @@
         @include setup-navlist-theme($theme, $colors);
         @include setup-paginator-theme($theme, "default");
         @include setup-popover-theme($theme, $colors);
-        @include setup-progress-theme($theme, "indigo", "pink");
+        @include setup-progress-theme($theme, $colors);
         @include setup-radio-theme($theme, $colors);
         @include setup-ribbon-theme($theme, "indigo", "pink");
         @include setup-search-theme($theme, $colors);

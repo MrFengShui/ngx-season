@@ -1,6 +1,15 @@
+$textAligns: ("left", "right", "center", "justify");
+
 :root {
 
 }
+
+@each $item in $textAligns {
+    .text-#{$item} {
+        text-align: #{$item} !important;
+    }
+}
+
 
 .text-ellipsis {
     text-overflow: ellipsis !important;

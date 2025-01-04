@@ -50,42 +50,17 @@
     flex-direction: column-reverse !important;
 }
 
-.justify-content-baseline {
-    justify-content: baseline !important;
-}
+$aligns: (
+    "justify-content": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around),
+    "justify-items": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around),
+    "align-content": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "stretch": stretch),
+    "align-items": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "stretch": stretch)
+);
 
-.justify-content-center {
-    justify-content: center !important;
-}
-
-.justify-content-start {
-    justify-content: flex-start !important;
-}
-
-.justify-content-end {
-    justify-content: flex-end !important;
-}
-
-.justify-content-between {
-    justify-content: space-between !important;
-}
-
-.justify-content-around {
-    justify-content: space-around !important;
-}
-
-.align-items-baseline {
-    align-items: baseline!important;
-}
-
-.align-items-center {
-    align-items: center !important;
-}
-
-.align-items-start {
-    align-items: flex-start !important;
-}
-
-.align-items-end {
-    align-items: flex-end !important;
+@each $outerKey, $outerValue in $aligns {
+    @each $innerKey, $innerValue in $outerValue {
+        .#{$outerKey}-#{$innerKey} {
+            #{$outerKey}: #{$innerValue} !important;
+        }
+    }
 }

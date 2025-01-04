@@ -24,7 +24,7 @@
             "prefix": "ngx-sui",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:browser-esbuild",
                     "options": {
                         "allowedCommonJsDependencies": [
                             "lodash", "moment", "crypto-js"

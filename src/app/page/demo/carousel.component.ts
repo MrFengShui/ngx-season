@@ -1,21 +1,50 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 
-import { NGXSeasonCarouselColor } from "src/app/components/carousel/carousel.component";
+import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
 @Component({
     selector: 'ngx-sui-demo-carousel-page',
-    templateUrl: './carousel.component.html'
+    templateUrl: './carousel.component.html',
+    styles: `
+        :host {
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-flow: row;
+                justify-items: stretch;
+            }
+        }
+    `
 })
 export class DemoCarouselPageComponent {
 
-    protected colors: NGXSeasonCarouselColor[] = ['default', 'primary', 'accent', 'success', 'warning', 'failure', 'info'];
-    protected list: Array<{ url: string, text: string }> = [
-        { url: 'assets/test/image_001.jpg', text: '轮播面板一' }, { url: 'assets/test/image_002.jpg', text: '轮播面板二' },
-        { url: 'assets/test/image_003.jpg', text: '轮播面板三' }, { url: 'assets/test/image_004.jpg', text: '轮播面板四' },
-        // { url: 'assets/test/image_005.jpg', text: '轮播面板五' }, { url: 'assets/test/image_006.jpg', text: '轮播面板六' },
-    ];
-    protected width: number = 960;
+    @ViewChild('cellBox', { read: ElementRef, static: false })
+    protected cellBox: ElementRef<HTMLElement> | undefined;
 
-    protected change: any[] = [];
+    protected list: Array<{ color: NGXSeasonColorPalette, label: string }> = [
+        { color: 'default', label: '默认面板' },
+        { color: 'primary', label: '主要面板' },
+        { color: 'accent', label: '强调面板' },
+        { color: 'success', label: '成功面板' },
+        { color: 'warning', label: '警告面板' },
+        { color: 'failure', label: '失败面板' },
+        { color: 'info', label: '信息面板' },
+        { color: 'help', label: '帮助面板' },
+    ];
+    protected options: Array<{ label: string, value: number }> = [
+        { label: '1:1', value: 1 }, { label: '4:3', value: 4 / 3 }, { label: '21:9', value: 21 / 9 },
+        { label: '16:9', value: 16 / 9 }, { label: '16:10', value: 16 / 10 }
+
+    ];
+    protected showCtrl: boolean = true;
+    protected showOrbit: boolean = true;
+    protected showProg: boolean = true;
+    protected scale: number = 4 / 3;
+    protected size: number = 360;
+
+    protected calculateDimension(size: number): [number, number] {
+        const width: number = (size - 48) * 0.25, height: number = width * 0.75;
+        return [width, height];
+    }
 
 }

@@ -1,8 +1,51 @@
-<div class="flex flex-dir-col gy-100">
-    <ng-container *ngFor="let color of colors; index as idx">
-        <ngx-sui-carousel [carslColor]="color" [carslWidth]="width" (carslSelectedIndexChange)="change[idx] = $event">
-            <ngx-sui-carousel-item [carslImageSrc]="item.url" [carslImageAlt]="item.url" [carslImageDesc]="item.text" *ngFor="let item of list"></ngx-sui-carousel-item>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="fs-24 fw-900">基本用法</div>
+    <ngx-sui-carousel [caroList]="list">
+        <ng-template let-model ngx-sui-CarouselPanelTemplate>
+            <div ngx-sui-CarouselPanel>
+                <span class="panel-label">{{ model.label }}</span>
+                <div ngx-sui-MediaBanner [banColor]="model.color" mbType="image"></div>
+            </div>
+        </ng-template>
+    </ngx-sui-carousel>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">轮播器显示与隐藏</span>
+        <label ngx-sui-CheckBox [(checkChecked)]="showCtrl">显示/隐藏控制器</label>
+        <label ngx-sui-CheckBox [(checkChecked)]="showOrbit">显示/隐藏控制条</label>
+        <label ngx-sui-CheckBox [(checkChecked)]="showProg">显示/隐藏进度条</label>
+    </div>
+    <ngx-sui-carousel [caroList]="list" [caroShowCtrl]="showCtrl" [caroShowOrbit]="showOrbit" [caroShowProg]="showProg">
+        <ng-template let-model ngx-sui-CarouselPanelTemplate>
+            <div ngx-sui-CarouselPanel>
+                <span class="panel-label">{{ model.label }}</span>
+                <div ngx-sui-MediaBanner [banColor]="model.color" mbType="image"></div>
+            </div>
+        </ng-template>
+    </ngx-sui-carousel>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">轮播器尺寸</span>
+        <span ngx-sui-RadioButtonGroup rgName="dimension-group" [(rgSelectedValue)]="scale" #dimension></span>
+        <label ngx-sui-RadioButton [rbGroup]="dimension" [radioValue]="option.value" *ngFor="let option of options">{{ option.label }}</label>
+    </div>
+    <div class="flex" #wrapper>
+        <ngx-sui-carousel [caroDimension]="[wrapper.offsetWidth, wrapper.offsetWidth / scale]" [caroList]="list">
+            <ng-template let-model ngx-sui-CarouselPanelTemplate>
+                <div ngx-sui-CarouselPanel>
+                    <span class="panel-label">{{ model.label }}</span>
+                    <div ngx-sui-MediaBanner [banColor]="model.color" mbType="image"></div>
+                </div>
+            </ng-template>
         </ngx-sui-carousel>
-        <span>change: {{ change[idx] | json }}</span>
-    </ng-container>
+    </div>
+    <div class="fs-24 fw-900">轮播器色彩</div>
+    <div class="grid col-gap-100 row-gap-100">
+        <ngx-sui-carousel [caroColor]="item.color" [caroDimension]="calculateDimension(wrapper.offsetWidth)" [caroList]="list" caroShowOrbit caroShowProg *ngFor="let item of list">
+            <ng-template let-model ngx-sui-CarouselPanelTemplate>
+                <div ngx-sui-CarouselPanel>
+                    <span class="panel-label">{{ model.label }}</span>
+                    <div ngx-sui-MediaBanner [banColor]="model.color" mbType="image"></div>
+                </div>
+            </ng-template>
+        </ngx-sui-carousel>
+    </div>
 </div>

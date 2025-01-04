@@ -1,32 +1,36 @@
+import { PortalModule } from "@angular/cdk/portal";
+import { DEFAULT_SCROLL_TIME, ScrollingModule } from "@angular/cdk/scrolling";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { NGXSeasonButtonModule } from "../button/button.module";
+import { NGXSeasonProgressModule } from "../progress/progress.module";
 
-import { NGX_SEASON_CAROUSEL_METAINFO_FORMAT_TOKEN, NGXSeasonCarouselContentComponent, NGXSeasonCarouselContentItemComponent } from "./carousel-content.component";
-import { NGXSeasonCarouselComponent, NGXSeasonCarouselItemComponent } from "./carousel.component";
-import { NGXSeasonCarouselControlComponent, NGXSeasonCarouselControlItemComponent } from "./carousel-control.component";
+import { NGXSeasonCarouselComponent, NGXSeasonCarouselOrbitComponent } from "./carousel.component";
+import { NGXSeasonCarouselPanelDirective, NGXSeasonCarouselPanelTemplateDirective } from "./carousel.directive";
+import { NGXSeasonWhileDirective } from "src/app/utils/directives/while.directive";
 
 @NgModule({
     declarations: [
         NGXSeasonCarouselComponent,
-        NGXSeasonCarouselItemComponent,
-        NGXSeasonCarouselContentComponent,
-        NGXSeasonCarouselContentItemComponent,
-        NGXSeasonCarouselControlComponent,
-        NGXSeasonCarouselControlItemComponent,
+        NGXSeasonCarouselOrbitComponent,
+        NGXSeasonCarouselPanelDirective,
+        NGXSeasonCarouselPanelTemplateDirective,
+        NGXSeasonWhileDirective
     ],
-    imports: [ 
+    imports: [
         CommonModule,
-        NGXSeasonButtonModule
+        PortalModule,
+        ScrollingModule,
+
+        NGXSeasonButtonModule,
+        NGXSeasonProgressModule
     ],
     exports: [
         NGXSeasonCarouselComponent,
-        NGXSeasonCarouselItemComponent
+        NGXSeasonCarouselPanelDirective,
+        NGXSeasonCarouselPanelTemplateDirective
     ],
-    providers: [
-        
-        { provide: NGX_SEASON_CAROUSEL_METAINFO_FORMAT_TOKEN, useValue: '第${index}页，共${total}页' }
-    ]
+    providers: [{ provide: DEFAULT_SCROLL_TIME, useValue: 5000 }]
 })
 export class NGXSeasonCarouselModule {}

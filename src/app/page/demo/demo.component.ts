@@ -157,7 +157,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         moment.updateLocale('zhs', LOCALE_ZHS_CONFIG);
 
-        this.datetime$ = interval(100).pipe(map(() => moment().format('LLL')));
+        this.datetime$ = interval(250).pipe(map(() => moment().format('LLL')));
 
         this.changeThemeMode();
     }

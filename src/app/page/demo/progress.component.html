@@ -1,15 +1,33 @@
-<div class="flex flex-dir-col align-items-center gy-100 p-100" *ngFor="let size of sizes">
-    <ngx-sui-progress-bar [pgsColor]="color" [pgsSize]="size" [pgsValue]="value$ | async" [pgsThreshold]="threshold" class="w-75" *ngFor="let color of colors"></ngx-sui-progress-bar>
-</div>
-<div class="flex flex-dir-col align-items-center p-100">
-    <ngx-sui-progress-bar [pgsColor]="color" pgsReady="true" pgsLabelPos="above" [pgsLabelShow]="true" [pgsValue]="value$ | async" [pgsThreshold]="threshold" class="w-75 mt-200" *ngFor="let color of colors"></ngx-sui-progress-bar>
-</div>
-<div class="flex flex-dir-col align-items-center p-100">
-    <ngx-sui-progress-bar [pgsColor]="color" pgsReady="true" pgsLabelPos="below" [pgsLabelShow]="true" [pgsValue]="value$ | async" [pgsThreshold]="threshold" class="w-75 mb-200" *ngFor="let color of colors"></ngx-sui-progress-bar>
-</div>
-<div class="flex flex-wrap justify-content-center gx-100 p-100" *ngFor="let size of sizes">
-    <ngx-sui-progress-ring [pgsColor]="color" [pgsValue]="value$ | async" [pgsThreshold]="threshold" [pgsSize]="size" *ngFor="let color of colors"></ngx-sui-progress-ring>
-</div>
-<div class="flex flex-wrap justify-content-center gx-100 p-100" *ngFor="let size of sizes">
-    <ngx-sui-progress-ring [pgsColor]="color" pgsReady="true" [pgsValue]="value$ | async" [pgsThreshold]="threshold" [pgsSize]="size" *ngFor="let color of colors"></ngx-sui-progress-ring>
+<div class="flex flex-dir-col row-gap-100 p-100">
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">进度条状态</span>
+        <button ngx-sui-TextButton [btnDisabled]="progressBar.disabled" btnIcon="play" btnText="运行" (click)="handleProgressRunEvent('bar')"></button>
+        <button ngx-sui-TextButton [btnDisabled]="progressBar.disabled" btnIcon="refresh" btnText="重置" (click)="handleProgressResetEvent('bar')"></button>
+    </div>
+    <ngx-sui-progress-bar [progReady]="progressBar.already" [progValue]="progressBar.progress" [progThreshold]="PROGRESS_THRESHOLD" [pbShowLabel]="progressBar.already"></ngx-sui-progress-bar>
+    <div class="fs-24 fw-900">进度条标签</div>
+    <div class="flex col-gap-100">
+        <ngx-sui-progress-bar progReady [progValue]="progress$ | async" [progThreshold]="PROGRESS_THRESHOLD" pbShowLabel pbLabelPos="above" class="flex-auto"></ngx-sui-progress-bar>
+        <ngx-sui-progress-bar progReady [progValue]="progress$ | async" [progThreshold]="PROGRESS_THRESHOLD" pbShowLabel pbLabelPos="below" class="flex-auto"></ngx-sui-progress-bar>
+    </div>
+    <div class="fs-24 fw-900">进度条尺寸</div>
+    <ngx-sui-progress-bar progReady [progSize]="size" [progValue]="progress$ | async" [progThreshold]="PROGRESS_THRESHOLD" *ngFor="let size of sizes"></ngx-sui-progress-bar>
+    <div class="fs-24 fw-900">进度条色彩</div>
+    <div class="grid col-gap-100 row-gap-100">
+        <ngx-sui-progress-bar [progColor]="item.color" progReady [progValue]="item.value | async" [progThreshold]="PROGRESS_THRESHOLD" *ngFor="let item of list"></ngx-sui-progress-bar>
+    </div>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">进度环状态</span>
+        <button ngx-sui-TextButton [btnDisabled]="progressRing.disabled" btnIcon="play" btnText="运行" (click)="handleProgressRunEvent('ring')"></button>
+        <button ngx-sui-TextButton [btnDisabled]="progressRing.disabled" btnIcon="refresh" btnText="重置" (click)="handleProgressResetEvent('ring')"></button>
+    </div>
+    <ngx-sui-progress-ring [progReady]="progressRing.already" [progValue]="progressRing.progress" [progThreshold]="PROGRESS_THRESHOLD"></ngx-sui-progress-ring>
+    <div class="fs-24 fw-900">进度环尺寸</div>
+    <div class="flex col-gap-100">
+        <ngx-sui-progress-ring progReady [progSize]="size" [progValue]="progress$ | async" [progThreshold]="PROGRESS_THRESHOLD" *ngFor="let size of sizes"></ngx-sui-progress-ring>
+    </div>
+    <div class="fs-24 fw-900">进度环色彩</div>
+    <div class="grid justify-items-center col-gap-100 row-gap-100">
+        <ngx-sui-progress-ring [progColor]="item.color" progReady [progValue]="item.value | async" [progThreshold]="PROGRESS_THRESHOLD"  *ngFor="let item of list"></ngx-sui-progress-ring>
+    </div>
 </div>
