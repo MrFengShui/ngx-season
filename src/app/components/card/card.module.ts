@@ -2,8 +2,8 @@ import { PortalModule } from "@angular/cdk/portal";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
-import { NGXSeasonAvatarModule } from "../avatar/avatar.module";
 import { NGXSeasonButtonModule } from "../button/button.module";
+import { NGXSeasonImageModule } from "../image/image.module";
 
 import { NGXSeasonCardComponent } from "./card.component";
 import { NGXSeasonCardHeaderComponent } from "./card-widget.component";
@@ -24,8 +24,8 @@ import { NGXSeasonCardMediaComponent, NGXSeasonCardMediaDirective } from "./card
         CommonModule,
         PortalModule,
 
-        NGXSeasonAvatarModule,
-        NGXSeasonButtonModule
+        NGXSeasonButtonModule,
+        NGXSeasonImageModule
     ],
     exports: [
         NGXSeasonCardComponent,

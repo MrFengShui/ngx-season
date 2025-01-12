@@ -25,7 +25,7 @@ export abstract class NGXSeasonCardWidgetComponent {
     template: `
         <ng-container *ngIf="customized; then custom else native"></ng-container>
         <ng-template #native>
-            <img ngx-sui-Avatar [avatarSrc]="avatarSrc" [avatarAlt]="avatarAlt" avatarSize="lg"/>
+            <img ngx-sui-ImageAvatar [imgSrc]="imgSrc" [imgAlt]="imgAlt" iaSize="lg"/>
             <div class="header-wrapper">
                 <span class="header-subject">{{ subject }}</span>
                 <span class="header-description">{{ description }}</span>
@@ -37,21 +37,21 @@ export abstract class NGXSeasonCardWidgetComponent {
 export class NGXSeasonCardHeaderComponent extends NGXSeasonCardWidgetComponent implements AfterViewInit {
 
     @Input({ alias: 'chAvatarAlt' })
-    set avatarAlt(avatarAlt: string | undefined | null) {
-        this._avatarAlt = avatarAlt || undefined;
+    set imgAlt(imgAlt: string | undefined | null) {
+        this._imgAlt = imgAlt || undefined;
     }
 
-    get avatarAlt(): string | undefined {
-        return this._avatarAlt;
+    get imgAlt(): string | undefined {
+        return this._imgAlt;
     }
 
     @Input({ alias: 'chAvatarSrc' })
-    set avatarSrc(avatarSrc: string | undefined | null) {
-        this._avatarSrc = avatarSrc || undefined;
+    set imgSrc(imgSrc: string | undefined | null) {
+        this._imgSrc = imgSrc || undefined;
     }
 
-    get avatarSrc(): string | undefined {
-        return this._avatarSrc;
+    get imgSrc(): string | undefined {
+        return this._imgSrc;
     }
 
     @Input({ alias: 'chCustom' })
@@ -81,8 +81,8 @@ export class NGXSeasonCardHeaderComponent extends NGXSeasonCardWidgetComponent i
         return this._description;
     }
 
-    private _avatarAlt: string | undefined;
-    private _avatarSrc: string | undefined;
+    private _imgAlt: string | undefined;
+    private _imgSrc: string | undefined;
     private _customized: boolean = false;
     private _subject: string | undefined;
     private _description: string | undefined;

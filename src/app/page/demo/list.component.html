@@ -1,64 +1,195 @@
 <div class="flex flex-dir-col row-gap-100 p-100">
-    <div class="flex gx-100">
-        <ngx-sui-list class="flex-auto">
-            <ng-template ngx-sui-ListHeader>列表头部</ng-template>
-            <ng-template ngx-sui-ListFooter>列表脚部</ng-template>
-            <ngx-sui-list-item *ngFor="let check of checks">{{ check.label }}</ngx-sui-list-item>
-        </ngx-sui-list>
-        <ngx-sui-list class="flex-auto">
-            <ng-template ngx-sui-ListHeader>列表头部</ng-template>
-            <ng-template ngx-sui-ListFooter>列表脚部</ng-template>
-            <ng-container *ngFor="let check of checks; last as isLast">
-                <ngx-sui-list-item>{{ check.label }}</ngx-sui-list-item>
-                <ngx-sui-x-divider divThick="thin" *ngIf="!isLast"></ngx-sui-x-divider>
-            </ng-container>
-        </ngx-sui-list>
+    <div class="fs-24 fw-900">基本用法</div>
+    <ul ngx-sui-List class="w-100">
+        <li ngx-sui-ListItem *ngFor="let item of items">{{ item.subject }}（{{ item.nation }}/{{ item.found }}/{{ item.score | number: '0.1-1' }}）</li>
+    </ul>
+    <div class="fs-24 fw-900">列表条纹</div>
+    <div class="grid col-gap-100 row-gap-100">
+        <ul ngx-sui-List [listColor]="item.color" listStriped class="w-100" *ngFor="let item of list">
+            <li ngx-sui-ListItem *ngFor="let item of items">{{ item.subject }}（{{ item.nation }}/{{ item.found }}/{{ item.score | number: '0.1-1' }}）</li>
+        </ul>
     </div>
-    <div class="flex flex-dir-col row-gap-100">
-        <div class="flex align-items-center gx-100">
-            <span class="fw-900">色彩选择：</span>
-            <span ngx-sui-RadioButtonGroup rgName="color-select" [(rgSelectedValue)]="colorSelect" #group></span>
-            <label ngx-sui-RadioButton [rbColor]="item.color" [rbGroup]="group" [radioValue]="item.color" *ngFor="let item of colorSelects">{{ item.label }}</label>
-        </div>
-        <div class="flex gx-100">
-            <ngx-sui-check-list [clColor]="colorSelect" [clInitValues]="[2, 3, 4]" class="w-100" (clSelectedChange)="checkSelectedChange = $event" #checkList>
-                <ng-template ngx-sui-ListHeader>
-                    <span class="fs-20 flex-auto">列表头部（全选/全不选）</span>
-                    <label ngx-sui-CheckBox [checkColor]="colorSelect" [checkChecked]="checkAll(checkList.selection)" [cbIndeterminated]="checkIndeterminated(checkList.selection)" checkLabelPos="before" [checkDisabled]="disabled" (checkCheckedChange)="listenCheckAllChange(checkList, $event)"></label>
-                </ng-template>
-                <ng-template ngx-sui-ListFooter>
-                    <span class="fs-20 flex-auto">列表脚部（是否失效）</span>
-                    <label ngx-sui-CheckBox [checkColor]="colorSelect" [(checkChecked)]="disabled" checkLabelPos="before"></label>
-                </ng-template>
-                <ngx-sui-list-check-item [ciValue]="item.value" [ciDisabled]="disabled" *ngFor="let item of checks">{{ item.label }}</ngx-sui-list-check-item>
-            </ngx-sui-check-list>
-            <ngx-sui-radio-list [rlColor]="colorSelect" rlName="list-radio-group" rlInitValue="5" class="w-100" (rlSelectedChange)="radioSelectedChange = $event">
-                <ng-template ngx-sui-ListHeader>列表头部</ng-template>
-                <ng-template ngx-sui-ListFooter>
-                    <span class="fs-20 flex-auto">列表脚部（是否失效）</span>
-                    <label ngx-sui-CheckBox [checkColor]="colorSelect" [(checkChecked)]="disabled" checkLabelPos="before"></label>
-                </ng-template>
-                <ngx-sui-list-radio-item [riValue]="item.value" [riDisabled]="disabled" *ngFor="let item of checks">{{ item.label }}</ngx-sui-list-radio-item>
-            </ngx-sui-radio-list>
-        </div>
-        <span>选择：{{ radioSelectedChange?.value }}</span>
-    </div>
-    <ngx-sui-list class="w-100">
-        <ng-template ngx-sui-ListHeader>列表头部</ng-template>
-        <ng-template ngx-sui-ListFooter>列表脚部</ng-template>
-        <ng-container *ngFor="let item of list; last as isLast">
-            <ngx-sui-list-meta-item [miAvatarSrc]="avatar" [miAvatarAlt]="avatar" [miContent]="contents.join('$$$')" [miTitle]="title" [miSubtitle]="subtitle">
-                <ng-template ngx-sui-ListMetaActions>
-                    <button ngx-sui-FlatTextButton btnIcon="thumbs-up">点赞</button>
-                    <button ngx-sui-FlatTextButton btnIcon="thumbs-down">鄙视</button>
-                    <button ngx-sui-FlatTextButton btnIcon="favorite">收藏</button>
-                    <button ngx-sui-FlatTextButton btnIcon="share">分享</button>
-                </ng-template>
-                <ng-template ngx-sui-ListMetaMedia>
-                    <img src="https://alioss.yystv.cn/doc/8267/cbc58f6ca0f6b7797edf15366981a599.png_mw680water" alt=""/>
-                </ng-template>
-            </ngx-sui-list-meta-item>
-            <ngx-sui-x-divider divThick="thin" *ngIf="!isLast"></ngx-sui-x-divider>
+    <div class="fs-24 fw-900">列表分割器</div>
+    <ul ngx-sui-List class="w-100">
+        <ng-container *ngFor="let item of items; last as last">
+            <li ngx-sui-ListItem>{{ item.subject }}（{{ item.nation }}/{{ item.found }}/{{ item.score | number: '0.1-1' }}）</li>
+            <li ngx-sui-ListDivider *ngIf="!last"></li>
         </ng-container>
-    </ngx-sui-list>
+    </ul>
+    <div class="fs-24 fw-900">列表头部和脚部</div>
+    <ul ngx-sui-List listDynamic listShowHeader listShowFooter class="w-100">
+        <li ngx-sui-ListHeader>
+            <span class="flex-auto fs-20 fw-900">电动工具国内外品牌</span>
+            <ngx-sui-radio-toggle-group rgName="order-group" rgSelectedValue="origin" (rgSelectedValueChange)="listenListItemOrderChange($event)">
+                <label ngx-sui-RadioToggle radioValue="ascent">升序排列</label>
+                <label ngx-sui-RadioToggle radioValue="descent">降序排列</label>
+                <label ngx-sui-RadioToggle radioValue="origin">原序排列</label>
+            </ngx-sui-radio-toggle-group>
+        </li>
+        <li ngx-sui-ListItem *ngFor="let item of items$.asObservable() | async">
+            <img ngx-sui-ImageAvatar [imgSrc]="item.avatar" [imgAlt]="item.avatar">
+            <div class="flex flex-auto flex-dir-col">
+                <span class="fs-16 fw-900">{{ item.subject }}</span>
+                <div class="flex justify-content-between align-items-center">
+                    <span class="fs-12 fw-500">所属国家：{{ item.nation }}</span>
+                    <span class="fs-12 fw-500">创建年份：{{ item.found }}</span>
+                    <span class="fs-12 fw-500">品牌评分：{{ item.score | number: '0.1-1' }}</span>
+                </div>
+            </div>
+        </li>
+        <li ngx-sui-ListFooter lfAlign="end">
+            <button ngx-sui-TextButton btnIcon="refresh" btnStyle="solid" btnText="刷新评分（当前平均评分：{{ calcAvarageOfScore(items$.asObservable() | async) | number: '0.1-1' }}）" (click)="handleRefreshElectronToolScoreEvent()" #scoreButton></button>
+        </li>
+    </ul>
+    <div class="fs-24 fw-900">列表分组</div>
+    <ul ngx-sui-List class="w-100">
+        <ng-container *ngFor="let section of sections">
+            <li ngx-sui-ListSection>{{ section.subject }}</li>
+            <li ngx-sui-ListItem class="col-gap-100" *ngFor="let child of section.children">
+                <img ngx-sui-ImageAvatar [imgSrc]="child.avatar" [imgAlt]="child.avatar">
+                <div class="flex flex-auto flex-dir-col">
+                    <span class="fs-16 fw-900">{{ child.subject }}</span>
+                    <div class="flex justify-content-between align-items-center">
+                        <span class="fs-12 fw-500">所属国家：{{ child.nation }}</span>
+                        <span class="fs-12 fw-500">创建年份：{{ child.found }}</span>
+                        <span class="fs-12 fw-500">品牌评分：{{ child.score | number: '0.1-1' }}</span>
+                    </div>
+                </div>
+            </li>
+        </ng-container>
+    </ul>
+    <div class="flex align-items-center col-gap-100">
+        <span class="flex-auto fs-24 fw-900">列表模板</span>
+        <label ngx-sui-CheckSwitch checkLabelPos="before" #templateDivider>显示/隐藏列表分割线</label>
+        <label ngx-sui-CheckSwitch checkLabelPos="before" #metaListStripe>显示/隐藏列表条纹</label>
+    </div>
+    <ul ngx-sui-MetaList [listStriped]="metaListStripe.checkedChange | async" [mlSplitted]="(templateDivider.checkedChange | async) && !(metaListStripe.checkedChange | async)" [mlDataSrc]="source" class="w-100">
+        <ng-template let-model ngx-sui-ListItemTemplate>
+            <div ngx-sui-GridLayout [layoutGridGap]="[16, 16]" [layoutGridColSizes]="['1fr', 'auto']" [layoutGridRowSizes]="['auto', '1fr', 'auto']" class="flex-auto">
+                <div class="flex align-items-center col-gap-100" style="grid-column: 1 / 2;grid-row: 1 / 1;">
+                    <img ngx-sui-ImageAvatar [imgSrc]="model.avatar" [imgAlt]="model.avatar">
+                    <div class="flex flex-auto flex-dir-col">
+                        <span class="fs-16 fw-900">{{ model.subject }}</span>
+                        <div class="flex justify-content-between align-items-center">
+                            <span class="fs-12 fw-500">所属国家：{{ model.nation }}</span>
+                            <span class="fs-12 fw-500">创建年份：{{ model.found }}</span>
+                            <span class="fs-12 fw-500">品牌评分：{{ model.score | number: '0.1-1' }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="justify-self-stretch align-self-stretch" style="grid-column: 2 / 3;grid-row: 1 / 4;">
+                    <img ngx-sui-ImageFigure [imgSrc]="model.poster" [imgAlt]="model.poster" [ifDimension]="[415, 256]">
+                </div>
+                <div class="mult-line" style="grid-column: 1 / 2;grid-row: 2 / 3;">{{ model.description }}</div>
+                <div class="flex col-gap-100" style="grid-column: 1 / 2;grid-row: 3 / 4;">
+                    <button ngx-sui-TextButton btnIcon="thumbs-up" btnStyle="flat" btnText="点赞"></button>
+                    <button ngx-sui-TextButton btnIcon="thumbs-down" btnStyle="flat" btnText="鄙视"></button>
+                    <button ngx-sui-TextButton btnIcon="share" btnStyle="flat" btnText="分享"></button>
+                    <button ngx-sui-TextButton btnIcon="favorite" btnStyle="flat" btnText="收藏"></button>
+                </div>
+            </div>
+        </ng-template>
+    </ul>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">可拖拽列表</span>
+        <label ngx-sui-CheckSwitch checkLabelPos="before" #dragdrop>是否可拖拽</label>
+        <label ngx-sui-CheckSwitch checkLabelPos="before" #transfer>单一列表/双向列表</label>
+    </div>
+    <ngx-sui-drag-drop-list [ddlDisabled]="!(dragdrop.checkedChange | async)" [ddlSelf]="transfer.checkedChange | async" [ddlCurrList]="items" class="w-100">
+        <ng-template let-model ngx-sui-ListItemTemplate>
+            <img ngx-sui-ImageAvatar [imgSrc]="model.avatar" [imgAlt]="model.avatar">
+            <div class="flex flex-auto flex-dir-col">
+                <span class="fs-16 fw-900">{{ model.subject }}</span>
+                <div class="flex justify-content-between align-items-center">
+                    <span class="fs-12 fw-500">所属国家：{{ model.nation }}</span>
+                    <span class="fs-12 fw-500">创建年份：{{ model.found }}</span>
+                    <span class="fs-12 fw-500">品牌评分：{{ model.score | number: '0.1-1' }}</span>
+                </div>
+            </div>
+        </ng-template>
+    </ngx-sui-drag-drop-list>
+    <div class="fs-24 fw-900">选择列表</div>
+    <ul ngx-sui-SelectionList class="w-100">
+        <li ngx-sui-ListOption [loValue]="item.subject" *ngFor="let item of items">
+            <img ngx-sui-ImageAvatar [imgSrc]="item.avatar" [imgAlt]="item.avatar">
+            <div class="flex flex-auto flex-dir-col">
+                <span class="fs-16 fw-900">{{ item.subject }}</span>
+                <div class="flex justify-content-between align-items-center">
+                    <span class="fs-12 fw-500">所属国家：{{ item.nation }}</span>
+                    <span class="fs-12 fw-500">创建年份：{{ item.found }}</span>
+                    <span class="fs-12 fw-500">品牌评分：{{ item.score | number: '0.1-1' }}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="fs-24 fw-900">选择列表头部和尾部</div>
+    <ul ngx-sui-SelectionList listShowHeader listShowFooter class="w-100" #selectList>
+        <li ngx-sui-ListHeader class="justify-content-between">
+            <span class="fs-20 fw-900">电动工具国内外品牌</span>
+            <label ngx-sui-CheckBox checkLabelPos="before" [checkChecked]="selectList.allSelected()" [cbIndeterminated]="selectList.someSelected()" (checkCheckedChange)="listenCheckedOrUncheckedChange($event, selectList)">全选/全不选</label>
+        </li>
+        <li ngx-sui-ListOption [loValue]="item.subject" #option *ngFor="let item of items">
+            <img ngx-sui-ImageAvatar [imgSrc]="item.avatar" [imgAlt]="item.avatar">
+            <div class="flex flex-auto flex-dir-col">
+                <span class="fs-16 fw-900">{{ item.subject }}</span>
+                <div class="flex justify-content-between align-items-center">
+                    <span class="fs-12 fw-500">所属国家：{{ item.nation }}</span>
+                    <span class="fs-12 fw-500">创建年份：{{ item.found }}</span>
+                    <span class="fs-12 fw-500">品牌评分：{{ item.score | number: '0.1-1' }}</span>
+                </div>
+            </div>
+        </li>
+        <li ngx-sui-ListFooter class="justify-content-end">已选择个数：{{ (selectList.selectedValuesChange | async)?.length }}</li>
+    </ul>
+    <div class="fs-24 fw-900">选择列表色彩</div>
+    <div class="grid col-gap-100 row-gap-100">
+        <ul ngx-sui-SelectionList [slMarkColor]="item.color" listShowHeader class="w-100" *ngFor="let item of list">
+            <li ngx-sui-ListHeader>{{ item.label }}</li>
+            <li ngx-sui-ListOption [loValue]="lessItem.subject" *ngFor="let lessItem of items">
+                <img ngx-sui-ImageAvatar [imgSrc]="lessItem.avatar" [imgAlt]="lessItem.avatar">
+                <div class="flex flex-auto flex-dir-col">
+                    <span class="fs-16 fw-900">{{ lessItem.subject }}</span>
+                    <div class="flex justify-content-between align-items-center" style="overflow: hidden;text-wrap: nowrap;text-overflow: ellipsis;">
+                        <span class="fs-12 fw-500">所属国家：{{ lessItem.nation }}</span>
+                        <span class="fs-12 fw-500">创建年份：{{ lessItem.found }}</span>
+                        <span class="fs-12 fw-500">品牌评分：{{ lessItem.score | number: '0.1-1' }}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="flex col-gap-100">
+        <span class="flex-auto fs-24 fw-900">选择列表多选与单选</span>
+        <button ngx-sui-TextButton btnIcon="refresh" btnText="随机选择" (click)="handleRandomSelectionEvent()"></button>
+    </div>
+    <div class="flex col-gap-100 w-100">
+        <ul ngx-sui-SelectionList slMulti="true" [slSelectedValues]="selection.multResult" class="flex-grow-only w-0" #multSelect>
+            <li ngx-sui-ListOption [loValue]="item.subject" *ngFor="let item of items">
+                <img ngx-sui-ImageAvatar [imgSrc]="item.avatar" [imgAlt]="item.avatar">
+                <div class="flex flex-auto flex-dir-col">
+                    <span class="fs-16 fw-900">{{ item.subject }}</span>
+                    <div class="flex justify-content-between align-items-center">
+                        <span class="fs-12 fw-500">所属国家：{{ item.nation }}</span>
+                        <span class="fs-12 fw-500">创建年份：{{ item.found }}</span>
+                        <span class="fs-12 fw-500">品牌评分：{{ item.score | number: '0.1-1' }}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul ngx-sui-SelectionList slMulti="false" [slSelectedValues]="selection.monoResult" class="flex-grow-only w-0" #monoSelect>
+            <li ngx-sui-ListOption [loValue]="item.subject" *ngFor="let item of items">
+                <img ngx-sui-ImageAvatar [imgSrc]="item.avatar" [imgAlt]="item.avatar">
+                <div class="flex flex-auto flex-dir-col">
+                    <span class="fs-16 fw-900">{{ item.subject }}</span>
+                    <div class="flex justify-content-between align-items-center">
+                        <span class="fs-12 fw-500">所属国家：{{ item.nation }}</span>
+                        <span class="fs-12 fw-500">创建年份：{{ item.found }}</span>
+                        <span class="fs-12 fw-500">品牌评分：{{ item.score | number: '0.1-1' }}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fs-12 fw-500">多选：{{ multSelect.selectedValuesChange | async | json }}</div>
+    <div class="fs-12 fw-500">单选：{{ monoSelect.selectedValuesChange | async | json }}</div>
 </div>

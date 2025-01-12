@@ -1,0 +1,11 @@
+{
+    "/upload/*": {
+        "target": "https://image.cnpp.cn/",
+        "secure": true,
+        "pathRewrite": {
+            "^/upload": ""
+        },
+        "changeOrigin": false,
+        "logLevel": "debug"
+    }
+}

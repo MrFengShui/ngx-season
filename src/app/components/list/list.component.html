@@ -1,0 +1,20 @@
+<ng-template [cdkPortalOutlet]="portal"></ng-template>
+<ng-template #singleTemplate>
+    <ul ngx-sui-List [listColor]="color" cdkDropList [cdkDropListDisabled]="disabled" (cdkDropListDropped)="listenListDragDropChange($event)">
+        <li ngx-sui-ListItem cdkDrag cdkDragLockAxis="y" *ngFor="let item of currList">
+            <ng-template [cdkPortalOutlet]="createTemplatePortal(item)"></ng-template>
+        </li>
+    </ul>
+</ng-template>
+<ng-template #doubleTemplate>
+    <ul ngx-sui-List [listColor]="color" listStriped cdkDropList [cdkDropListData]="currList" [cdkDropListConnectedTo]="[sndList]" [cdkDropListDisabled]="disabled" (cdkDropListDropped)="listenListDragDropChange($event)" #fstList="cdkDropList">
+        <li ngx-sui-ListItem cdkDrag *ngFor="let item of currList">
+            <ng-template [cdkPortalOutlet]="createTemplatePortal(item)"></ng-template>
+        </li>
+    </ul>
+    <ul ngx-sui-List [listColor]="color" listStriped cdkDropList [cdkDropListData]="nextList" [cdkDropListConnectedTo]="[fstList]" [cdkDropListDisabled]="disabled" (cdkDropListDropped)="listenListDragDropChange($event)" #sndList="cdkDropList">
+        <li ngx-sui-ListItem cdkDrag *ngFor="let item of nextList">
+            <ng-template [cdkPortalOutlet]="createTemplatePortal(item)"></ng-template>
+        </li>
+    </ul>
+</ng-template>

@@ -4,7 +4,7 @@ import { AfterContentInit, AfterViewInit, Component, ContentChild, ElementRef, E
 
 import { NGXSeasonColorPalette } from "src/app/utils/palette.utils";
 
-import { NGXSeasonAvatarComponent } from "../avatar/avatar.component";
+import { NGXSeasonImageAvatarDirective } from "../image/image.directive";
 import { NGX_SEASON_TAG_GRID_TOKEN, NGXSeasonTagGridComponent } from "./tag-grid.component";
 
 export type NGXSeasonTagShape = 'circle' | 'square';
@@ -74,7 +74,7 @@ export class NGXSeasonTagComponent implements OnChanges, AfterContentInit, After
     @Output('tagDeleteEvent')
     deleteEvent: EventEmitter<void> = new EventEmitter(true);
 
-    @ContentChild(NGXSeasonAvatarComponent, { read: ElementRef })
+    @ContentChild(NGXSeasonImageAvatarDirective, { read: ElementRef })
     protected avatar: ElementRef<HTMLElement> | undefined;
 
     @ViewChild('ref', { read: ElementRef, static: true })

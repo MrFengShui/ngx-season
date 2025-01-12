@@ -22,6 +22,14 @@
     flex: 1 1 auto !important;
 }
 
+.flex-grow-only {
+    flex: 1 0 auto !important;
+}
+
+.flex-shrink-only {
+    flex: 0 1 auto !important;
+}
+
 .flex-wrap {
     flex-wrap: wrap;
 }
@@ -51,10 +59,12 @@
 }
 
 $aligns: (
-    "justify-content": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around),
-    "justify-items": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around),
+    "justify-content": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around, "stretch": stretch),
+    "justify-items": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around, "stretch": stretch),
+    "justify-self": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "between": space-between, "around": space-around, "stretch": stretch),
     "align-content": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "stretch": stretch),
-    "align-items": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "stretch": stretch)
+    "align-items": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "stretch": stretch),
+    "align-self": ("baseline": baseline, "center": center, "start": flex-start, "end": flex-end, "stretch": stretch)
 );
 
 @each $outerKey, $outerValue in $aligns {

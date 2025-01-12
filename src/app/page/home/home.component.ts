@@ -1,5 +1,8 @@
+import { Platform } from "@angular/cdk/platform";
 import { DOCUMENT } from "@angular/common";
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, Renderer2 } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, Renderer2 } from "@angular/core";
+
+type PlatformSupportInfo = { isBrowser: boolean, isWebkit: boolean };
 
 @Component({
     selector: 'ngx-sui-home-page',
@@ -16,7 +19,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit
         }
     `
 })
-export class HomePageComponent implements OnInit, AfterViewInit {
+export class HomePageComponent implements OnInit {
 
     protected readonly DARK_MODE_LOGO: string = 'assets/logo/angular_wordmark_white.png';
     protected readonly LIGHT_MODE_LOGO: string = 'assets/logo/angular_wordmark_black.png';
@@ -24,21 +27,26 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     protected themeFlag: boolean = false;
     protected themeHoverFlag: boolean = false;
     protected controlToggled: boolean = true;
+    protected gridColSizes: string[] = ['auto', '1fr'];
+    protected gridRowSizes: string[] = Array.from<string>({ length: 8 }).fill('var(--size-pixel-48)');
+    protected gridGap: [number, number] = [16, 8];
+    protected support: PlatformSupportInfo = {
+        isBrowser: this._platform.isBrowser,
+        isWebkit: this._platform.WEBKIT
+    };
 
     constructor(
         private _cdr: ChangeDetectorRef,
-        @Inject(DOCUMENT)
-        private _document: Document,
         private _element: ElementRef,
-        private _renderer: Renderer2
+        private _renderer: Renderer2,
+        private _platform: Platform,
+
+        @Inject(DOCUMENT)
+        private _document: Document
     ) {}
 
     ngOnInit(): void {
         this.changeThemeMode();
-    }
-
-    ngAfterViewInit(): void {
-        
     }
 
     protected handleChangeThemeEvent(): void {

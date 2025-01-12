@@ -1,1 +1,6 @@
-Home Page
+<div ngx-sui-GridLayout [layoutGridColSizes]="gridColSizes" [layoutGridRowSizes]="gridRowSizes" [layoutGridGap]="gridGap">
+    <div>浏览器</div>
+    <div>{{ support.isBrowser }}</div>
+    <div>渲染引擎是否支持Webkit</div>
+    <div>{{ support.isWebkit }}</div>
+</div>

@@ -1,8 +1,60 @@
 {
 	"folders": [
-		{
-			"path": "."
-		}
+		{ "path": "." }
 	],
-	"settings": {}
+	"settings": {
+        "editor.rename.enablePreview": false,
+        "editor.minimap.sectionHeaderFontSize": 12,
+        "editor.wordWrap": "on",
+        "editor.wrappingIndent": "indent",
+        "editor.minimap.showSlider": "always",
+        "editor.fontFamily": "DM Mono, Consolas, 'Courier New', monospace",
+        "editor.tokenColorCustomizations": {
+            "[Default Dark+]": {
+                "comments": "#3F51B5",
+				"functions": "#9C27B0",
+                "keywords": "#00BCD4",
+                "numbers": "#009688",
+                "strings": "#E91E63",
+                "textMateRules": [],
+                "types": "#CDDC39",
+                "variables": "#FF9800"
+            }
+        },
+
+        "git.enableSmartCommit": true,
+        "git.confirmSync": false,
+        "git.autofetch": false,
+
+        "workbench.colorCustomizations": {
+			"[Default Dark+]": {
+				"editor.background": "#424242",
+				"editor.foreground": "#EEEEEE",
+                "scrollbarSlider.background": "#9C27B0",
+                "scrollbarSlider.hoverBackground": "#8E24AA",
+                "scrollbarSlider.activeBackground": "#AB47BC",
+				"sideBar.background": "#424242",
+				"terminal.background": "#FFC107",
+				"terminal.foreground": "#607D8B"
+			},
+        },
+        "workbench.colorTheme": "Default Dark+",
+        "workbench.editor.enablePreview": false,
+        "workbench.editor.wrapTabs": true,
+        "workbench.iconTheme": "pcode-icon-theme-dark",
+        "workbench.startupEditor": "none",
+
+        "terminal.integrated.cursorStyle": "underline",
+        "terminal.integrated.fontSize": 12,
+        "terminal.integrated.fontWeight": "bold",
+        "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+        "terminal.integrated.shellIntegration.enabled": true,
+        "terminal.integrated.shellIntegration.history": 16,
+        "terminal.integrated.shellIntegration.showCommandGuide": true,
+        "terminal.integrated.scrollback": 5000,
+        "terminal.integrated.smoothScrolling": true,
+        "terminal.integrated.automationProfile.windows": {},
+        "terminal.integrated.defaultProfile.windows": "Command Prompt",
+
+    }
 }

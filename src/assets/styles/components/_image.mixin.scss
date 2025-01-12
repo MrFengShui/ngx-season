@@ -1,0 +1,63 @@
+@mixin setup-image-theme($theme, $colors) {
+    .image {
+        --image-avatar-border-radius-circle: #{var(--size-percent-50)};
+        --image-avatar-border-radius-square: #{var(--size-pixel-4)};
+        --image-avatar-border-width: #{var(--size-pixel-2)};
+
+        --image-figure-border-radius: #{var(--size-pixel-4)};
+        --image-figure-border-width: #{var(--size-pixel-2)};
+        --image-figure-padding: #{var(--padding-25)};
+
+        @each $key, $value in $colors {
+            --image-figure-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --image-figure-bgcolor-#{$key}: #{var(--palette-#{$value}-color-50)};
+
+            --image-avatar-bdcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+            --image-avatar-bgcolor-#{$key}: #{var(--palette-#{$value}-color-50)};
+        }
+
+        &.figure {
+            border-radius: var(--image-figure-border-radius);
+
+            &.figure-bordered {
+                border-style: solid;
+                border-width: var(--image-figure-border-width);
+
+                box-sizing: border-box;
+
+                padding: var(--image-figure-padding);
+            }
+        }
+
+        &.avatar {
+            &[data-image-avatar-shape=circle] {
+                border-radius: var(--image-avatar-border-radius-circle);
+            }
+
+            &[data-image-avatar-shape=square] {
+                border-radius: var(--image-avatar-border-radius-square);
+            }
+
+            border-style: solid;
+            border-width: var(--image-avatar-border-width);
+
+            box-sizing: border-box;
+        }
+
+        @each $color in map-keys($colors) {
+            &[data-image-color=#{$color}] {
+                &.figure {
+                    &.figure-bordered {
+                        border-color: var(--image-figure-bdcolor-#{$color});
+                        background-color: var(--image-figure-bgcolor-#{$color});
+                    }
+                }
+
+                &.avatar {
+                    border-color: var(--image-avatar-bdcolor-#{$color});
+                    background-color: var(--image-avatar-bgcolor-#{$color});
+                }
+            }
+        }
+    }
+}

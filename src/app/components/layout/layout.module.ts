@@ -9,6 +9,7 @@ import { NGXSeasonLayoutContentAreaDirective, NGXSeasonLayoutContentComponent, N
 import { NGXSeasonLayoutFooterComponent } from "./layout-footer.component";
 import { NGXSeasonLayoutHeaderActionsDirective, NGXSeasonLayoutHeaderComponent, NGXSeasonLayoutHeaderContentDirective } from "./layout-header.component";
 import { NGXSeasonLayoutComponent } from "./layout.component";
+import { NGXSeasonGridLayoutDirective } from "./layout.directive";
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { NGXSeasonLayoutComponent } from "./layout.component";
         NGXSeasonLayoutFooterComponent,
         NGXSeasonLayoutContentComponent,
         NGXSeasonLayoutContentSideDirective,
-        NGXSeasonLayoutContentAreaDirective
+        NGXSeasonLayoutContentAreaDirective,
+        NGXSeasonGridLayoutDirective
     ],
     imports: [
         CommonModule,
@@ -36,7 +38,8 @@ import { NGXSeasonLayoutComponent } from "./layout.component";
         NGXSeasonLayoutFooterComponent,
         NGXSeasonLayoutContentComponent,
         NGXSeasonLayoutContentSideDirective,
-        NGXSeasonLayoutContentAreaDirective
+        NGXSeasonLayoutContentAreaDirective,
+        NGXSeasonGridLayoutDirective
     ]
 })
 export class NGXSeasonLayoutModule {}

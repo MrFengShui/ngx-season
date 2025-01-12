@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
 import { NGXSeasonComponentsModule } from "../components/components.module";
@@ -89,6 +90,7 @@ import { DemoSearchPageComponent } from "./demo/search.component";
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+
         NGXSeasonComponentsModule,
         NGXSeasonTreeModule
     ],
@@ -129,6 +131,7 @@ import { DemoSearchPageComponent } from "./demo/search.component";
         DemoToastPageComponent,
         DemoTooltipPageComponent,
         DemoTreePageComponent
-    ]
+    ],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class PageModule {}

@@ -8,7 +8,6 @@ import { NGXSeasonIconModule } from './icon/icon.module';
 import { NGXSeasonAccordionModule } from './accordion/accordion.module';
 import { NGXSeasonAlertModule } from './alert/alert.module';
 import { NGXSeasonCardModule } from './card/card.module';
-import { NGXSeasonAvatarModule } from './avatar/avatar.module';
 import { NGXSeasonBadgeModule } from './badge/badge.module';
 import { NGXSeasonLayoutModule } from './layout/layout.module';
 import { NGXSeasonEffectsModule } from './effects/effects.module';
@@ -34,6 +33,7 @@ import { NGXSeasonTableModule } from "./table/table.module";
 import { NGXSeasonPaginatorModule } from "./paginator/paginator.module";
 import { NGXSeasonSelectModule } from "./select/select.module";
 import { NGXSeasonSearchModule } from "./search/search.module";
+import { NGXSeasonImageModule } from "./image/image.module";
 
 @NgModule({
     imports: [
@@ -42,7 +42,6 @@ import { NGXSeasonSearchModule } from "./search/search.module";
         NGXSeasonAccordionModule,
         NGXSeasonAlertModule,
         NGXSeasonArticleModule,
-        NGXSeasonAvatarModule,
         NGXSeasonBadgeModule,
         NGXSeasonBreadcrumbModule,
         NGXSeasonButtonModule,
@@ -54,6 +53,7 @@ import { NGXSeasonSearchModule } from "./search/search.module";
         NGXSeasonDividerModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
+        NGXSeasonImageModule,
         NGXSeasonInputModule,
         NGXSeasonLayoutModule,
         NGXSeasonListModule,
@@ -76,7 +76,6 @@ import { NGXSeasonSearchModule } from "./search/search.module";
         NGXSeasonAccordionModule,
         NGXSeasonAlertModule,
         NGXSeasonArticleModule,
-        NGXSeasonAvatarModule,
         NGXSeasonBadgeModule,
         NGXSeasonBreadcrumbModule,
         NGXSeasonButtonModule,
@@ -88,6 +87,7 @@ import { NGXSeasonSearchModule } from "./search/search.module";
         NGXSeasonDividerModule,
         NGXSeasonEffectsModule,
         NGXSeasonIconModule,
+        NGXSeasonImageModule,
         NGXSeasonInputModule,
         NGXSeasonLayoutModule,
         NGXSeasonListModule,

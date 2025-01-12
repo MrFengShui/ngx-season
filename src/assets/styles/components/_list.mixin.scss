@@ -1,204 +1,255 @@
-@mixin setup-list-theme($theme) {
-    --list-border-color: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-    --list-border-radius: #{var(--size-pixel-3)};
-    --list-border-width: #{var(--size-pixel-1)};
-
-    --list-header-font-size: #{var(--font-size-20)};
-    --list-header-font-weight: #{var(--font-weight-900)};
-    --list-header-line-height: #{var(--line-height-100)};
-    --list-header-height: #{var(--size-pixel-64)};
-    --list-header-padding: #{var(--size-pixel-16)};
-    --list-header-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-
-    --list-footer-font-size: #{var(--font-size-20)};
-    --list-footer-font-weight: #{var(--font-weight-900)};
-    --list-footer-line-height: #{var(--line-height-100)};
-    --list-footer-height: #{var(--size-pixel-64)};
-    --list-footer-padding: #{var(--size-pixel-16)};
-    --list-footer-bgcolor: #{if($theme == "light", var(--palette-gray-300-color), var(--palette-gray-700-color))};
-
-    --list-item-divider-color: #{var(--list-border-color)};
-    --list-item-divider-width: #{var(--list-border-width)};
-    --list-item-min-height: #{var(--size-pixel-48)};
-    --list-item-max-height: #{var(--size-pixel-256)};
-    --list-item-font-size: #{var(--font-size-16)};
-    --list-item-font-weight: #{var(--font-weight-500)};
-    --list-item-line-height: #{var(--line-height-100)};
-    --list-item-padding: #{var(--size-pixel-16)};
-    --list-item-gap: #{var(--size-pixel-16)};
-
-    --list-meta-item-gap: #{var(--size-pixel-16)};
-
-    --list-meta-item-header-title-font-size: #{var(--font-size-20)};
-    --list-meta-item-header-title-font-weight: #{var(--font-weight-900)};
-    --list-meta-item-header-title-line-height: #{var(--line-height-150)};
-    --list-meta-item-header-subtitle-font-size: #{var(--font-size-14)};
-    --list-meta-item-header-subtitle-font-weight: #{var(--font-weight-700)};
-    --list-meta-item-header-subtitle-line-height: #{var(--line-height-150)};
-
-    --list-meta-item-content-font-size: #{var(--font-size-14)};
-    --list-meta-item-content-font-weight: #{var(--font-weight-500)};
-    --list-meta-item-content-line-height: #{var(--line-height-150)};
-    --list-meta-item-content-lines: 5;
-
-    --list-meta-item-media-height: #{var(--list-item-max-height)};
+@mixin setup-list-theme($theme, $colors) {
+    $names: ("header", "footer", "section", "item");
 
     .list {
+        --list-header-font-size: #{var(--font-size-20)};
+        --list-header-font-weight: #{var(--font-weight-900)};
+        --list-header-line-height: #{var(--line-height-100)};
+        --list-header-gap: #{var(--col-gap-100)};
+        --list-header-padding: #{var(--padding-100)};
+        --list-header-size: #{var(--size-pixel-56)};
+
+        --list-footer-font-size: #{var(--font-size-20)};
+        --list-footer-font-weight: #{var(--font-weight-900)};
+        --list-footer-line-height: #{var(--line-height-100)};
+        --list-footer-gap: #{var(--col-gap-100)};
+        --list-footer-padding: #{var(--padding-100)};
+        --list-footer-size: #{var(--size-pixel-56)};
+
+        --list-section-font-size: #{var(--font-size-18)};
+        --list-section-font-weight: #{var(--font-weight-900)};
+        --list-section-line-height: #{var(--line-height-100)};
+        --list-section-gap: #{var(--col-gap-100)};
+        --list-section-padding: #{var(--padding-100)};
+        --list-section-size: #{var(--size-pixel-48)};
+
+        --list-item-font-size: #{var(--font-size-16)};
+        --list-item-font-weight: #{var(--font-weight-500)};
+        --list-item-line-height: #{var(--line-height-150)};
+        --list-item-gap: #{var(--col-gap-100)};
+        --list-item-padding: #{var(--padding-100)};
+        --list-item-size: #{var(--size-pixel-48)};
+
+        --list-option-mark-size: #{var(--size-pixel-16)};
+
+        --list-divider-thickness: #{var(--size-pixel-1)};
+        --list-divider-margin: #{var(--margin-50)};
+
+        --meta-list-gap: #{var(--row-gap-100)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --list-header-bgcolor: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
+                --list-footer-bgcolor: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
+                --list-section-bgcolor: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
+                --list-item-bgcolor: #{if($theme == "light", var(--palette-#{$value}-100-color), var(--palette-#{$value}-900-color))};
+
+                --list-divider-bgcolor: #{if($theme == "light", var(--palette-#{$value}-color-10), var(--palette-#{$value}-color-30))};
+            }
+
+            --list-option-mark-bgcolor-#{$key}: #{var(--palette-#{$value}-500-color)};
+
+            --list-stripe-odd-bgcolor-#{$key}: #{var(--palette-#{$value}-color-85)};
+            --list-stripe-even-bgcolor-#{$key}: #{if($theme == "light", var(--palette-#{$value}-color-15), var(--palette-#{$value}-color-35))};
+        }
+
         display: inline-flex;
         flex-direction: column;
 
-        border-color: var(--list-border-color);
-        border-radius: var(--list-border-radius);
-        border-style: solid;
-        border-width: var(--list-border-width);
+        list-style: none;
+
+        margin: var(--margin-0);
+        padding: var(--padding-0);
 
         width: fit-content;
         height: fit-content;
 
-        .list-header, .list-footer {
-            display: inline-flex;
-            align-items: center;
-        }
+        user-select: none;
 
-        .list-header {
-            background-color: var(--list-header-bgcolor);
-
-            font-size: var(--list-header-font-size);
-            font-weight: var(--list-header-font-weight);
-            line-height: var(--list-header-line-height);
-
-            padding-left: var(--list-header-padding);
-            padding-right: var(--list-header-padding);
-
-            height: var(--list-header-height);
-        }
-
-        .list-footer {
-            background-color: var(--list-footer-bgcolor);
-
-            font-size: var(--list-footer-font-size);
-            font-weight: var(--list-footer-font-weight);
-            line-height: var(--list-footer-line-height);
-
-            padding-left: var(--list-footer-padding);
-            padding-right: var(--list-footer-padding);
-
-            height: var(--list-footer-height);
-        }
-
-        .list-item {
-            display: inline-flex;
-            align-items: center;
-
-            font-size: var(--list-item-font-size);
-            font-weight: var(--list-item-font-weight);
-            line-height: var(--list-item-line-height);
-
-            padding-left: var(--list-item-padding);
-            padding-right: var(--list-item-padding);
-
-            min-height: var(--list-item-min-height);
-            max-height: var(--list-item-max-height);
-
-            &.list-meta-item {
+        @each $name in $names {
+            .list-#{$name} {
                 display: inline-flex;
+                align-items: center;
 
-                padding: var(--list-item-padding);
+                background-color: var(--list-#{$name}-bgcolor);
 
-                .text-wrapper {
-                    display: flex;
-                    flex-direction: column;
+                column-gap: var(--list-#{$name}-gap);
 
-                    > :nth-child(n) {
-                        &:not(:last-child) {
-                            margin-bottom: var(--list-meta-item-gap);
-                        }
-                    }
+                font-size: var(--list-#{$name}-font-size);
+                font-weight: var(--list-#{$name}-font-weight);
+                line-height: var(--list-#{$name}-line-height);
 
-                    .header {
-                        display: flex;
-                        align-items: center;
+                padding-left: var(--list-#{$name}-padding);
+                padding-right: var(--list-#{$name}-padding);
 
-                        .header-text-wrapper {
-                            display: inline-flex;
-                            flex-direction: column;
+                min-height: var(--list-#{$name}-size);
+                max-height: var(--list-#{$name}-size);
+            }
+        }
 
-                            .title {
-                                font-size: var(--list-meta-item-header-title-font-size);
-                                font-weight: var(--list-meta-item-header-title-font-weight);
-                                line-height: var(--list-meta-item-header-title-line-height);
-                            }
+        .list-divider {
+            background-color: var(--list-divider-bgcolor);
 
-                            .subtitle {
-                                font-size: var(--list-meta-item-header-subtitle-font-size);
-                                font-weight: var(--list-meta-item-header-subtitle-font-weight);
-                                line-height: var(--list-meta-item-header-subtitle-line-height);
-                            }
-                        }
+            height: var(--list-divider-thickness);
 
-                        > :nth-child(n) {
-                            &:not(:last-child) {
-                                margin-right: var(--list-meta-item-gap);
-                            }
-                        }
-                    }
+            margin-top: var(--list-divider-margin);
+            margin-bottom: var(--list-divider-margin);
+        }
 
-                    .content {
-                        display: -webkit-box;
-                        line-clamp: var(--list-meta-item-content-lines);
+        &.meta-list {
+            .list-item {
+                max-height: calc(var(--list-item-size) * 6);
 
-                        -webkit-box-orient: vertical;
-                        -webkit-line-clamp: var(--list-meta-item-content-lines);
+                overflow: hidden;
+            }
 
-                        font-size: var(--list-meta-item-content-font-size);
-                        font-weight: var(--list-meta-item-content-font-weight);
-                        line-height: var(--list-meta-item-content-line-height);
-                        text-align: justify;
+            &:not(&.list-splitted) {
+                row-gap: var(--meta-list-gap);
+            }
+        }
 
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
+        &.select-list {
+            .list-option {
+                cursor: pointer;
 
-                    .footer {
-                        display: flex;
+                &:before, &::after {
+                    content: "";
 
-                        > :nth-child(n) {
-                            &:not(:last-child) {
-                                margin-right: var(--list-meta-item-gap);
-                            }
-                        }
+                    display: inline-block;
+
+                    min-width: var(--list-option-mark-size);
+                    max-width: var(--list-option-mark-size);
+                    height: var(--list-option-mark-size);
+                }
+            }
+
+            &[data-select-list-mark=check] {
+                .list-option {
+                    &:before, &::after {
+                        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
                     }
                 }
+            }
 
-                .media-wrapper {
-                    margin-left: var(--list-item-gap);
+            &[data-select-list-mark=cross] {
+                .list-option {
+                    &:before, &::after {
+                        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+                    }
+                }
+            }
 
-                    $size: calc(var(--list-meta-item-media-height) - var(--list-meta-item-gap) * 2);
-                    height: $size;
+            &[data-select-list-mark-position=after] {
+                .list-option {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
 
-                    img {
-                        object-fit: cover;
-                        width: calc($size * 4 / 3);
-                        height: $size;
+            &[data-select-list-mark-position=before] {
+                .list-option {
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+
+            @each $color in map-keys($colors) {
+                &[data-select-list-mark-color=#{$color}] {
+                    .list-option {
+                        &.selected {
+                            &::before, &::after {
+                                background-color: var(--list-option-mark-bgcolor-#{$color});
+                            }
+                        }
                     }
                 }
             }
         }
 
-        &.check-list {
-            .list-check-item {
-                .checkbox {
-                    height: var(--list-item-min-height);
+        @each $color in map-keys($colors) {
+            &[data-list-color=#{$color}] {
+                &.list-striped {
+                    .list-item {
+                        &:nth-child(odd) {
+                            background-color: var(--list-stripe-odd-bgcolor-#{$color});
+                        }
+
+                        &:nth-child(even) {
+                            background-color: var(--list-stripe-even-bgcolor-#{$color});
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .drag-drop-list {
+        --drag-drop-list-border-width: #{var(--size-pixel-1)};
+        --drag-drop-list-gap: #{var(--col-gap-100)};
+
+        --drag-drop-list-placeholder-border-width: #{var(--size-pixel-2)};
+
+        @each $key, $value in $colors {
+            @if $key == "default" {
+                --drag-drop-list-placeholder-bdcolor: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+                --drag-drop-list-placeholder-bgcolor: #{if($theme == "light", var(--palette-#{$value}-200-color), var(--palette-#{$value}-800-color))};
+
+                --drag-drop-list-preview-bgcolor: #{if($theme == "light", var(--palette-#{$value}-300-color), var(--palette-#{$value}-700-color))};
+            }
+
+            --drag-drop-list-bdcolor-#{$key}: #{var(--palette-#{$value}-color-50)};
+        }
+
+        display: inline-flex;
+
+        column-gap: var(--drag-drop-list-gap);
+
+        .list {
+            border-style: solid;
+            border-width: var(--drag-drop-list-border-width);
+
+            width: var(--size-percent-100);
+            height: calc-size(auto, size);
+
+            .cdk-drag-animating {
+                transition: transform var(--drag-drop-list-duration) ease-in-out;
+            }
+
+            .cdk-drag-placeholder {
+                border-color: var(--drag-drop-list-placeholder-bdcolor);
+                border-style: dashed;
+                border-width: var(--drag-drop-list-placeholder-border-width);
+
+                background-color: var(--drag-drop-list-placeholder-bgcolor);
+
+                height: var(--list-item-size);
+
+                transition: transform var(--drag-drop-list-duration) ease-in-out;
+            }
+
+            &.cdk-drop-list-dragging {
+                cursor: move;
+
+                .list-item {
+                    &:not(.cdk-drag-placeholder) {
+                        transition: transform var(--drag-drop-list-duration) ease-in-out;
+                    }
                 }
             }
         }
 
-        &.radio-list {
-            .list-radio-item {
-                .radiobtn {
-                    height: var(--list-item-min-height);
+        @each $color in map-keys($colors) {
+            &[data-drag-drop-list-color=#{$color}] {
+                .list {
+                    border-color: var(--drag-drop-list-bdcolor-#{$color});
                 }
             }
         }
+    }
+
+    .cdk-drag-preview {
+        display: none;
     }
 }
